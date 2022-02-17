@@ -15,6 +15,10 @@ El repositorio estará dividio en **siete** soluciones diferentes
 |  ECS                  |  Arquitectura basada en componentes y escenas para representar la información dentro del juego            |
 |  Utils                |  Elementos de ayuda y herramientas de desarrollo (pe. Time, Gestor de escenas, Math...)                   |
 
+<p align="center">
+  <img src="Recursos/UML_Motor.png" />
+</p>
+
 # Inicialización
 
 Desde el proyecto principal se abrirán el resto de librerías dinámicas del juego, seguido de la preparación del entorno e inicialización inicial del juego.
