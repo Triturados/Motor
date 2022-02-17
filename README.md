@@ -19,6 +19,14 @@ El repositorio estará dividio en **siete** soluciones diferentes
   <img src="Recursos/UML_Motor.png" />
 </p>
 
+<p align="center">
+  <img src="Recursos/UML_Juego.png" />
+</p>
+
+<p align="center">
+  <img src="Recursos/UML_Colisiones.png" />
+</p>
+
 # Inicialización
 
 Desde el proyecto principal se abrirán el resto de librerías dinámicas del juego, seguido de la preparación del entorno e inicialización inicial del juego.
