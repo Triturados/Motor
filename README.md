@@ -59,8 +59,8 @@ remove -> elimina un componente o entidad (las entidades se eliminan al final de
 
 Callbacks de colisión ( es necesario haberse suscrito)
 enterCollision ( collider ) -> se ejecuta al entrar en contacto con un collider
-colliding ( collider ) -> se ejecuta al entrar en contacto con un collider
-exitCollision ( collider ) -> se ejecuta al entrar en contacto con un collider
+colliding ( collider ) -> se ejecuta mientras se encuentre en contacto con un collider
+exitCollision ( collider ) -> se ejecuta al dejar de estar en contacto con un collider
 
 Callbacks de input ( es necesario haberse suscrito )
 keyPressed ( key ) -> tecla mantenida pulsada
