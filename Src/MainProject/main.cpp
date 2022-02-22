@@ -3,7 +3,7 @@
 #include <iostream>
 void main()
 {
+	saluda("meh");
 	int a;
 	std::cin >> a;
-	saluda("meh");
 }
