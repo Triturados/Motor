@@ -27,6 +27,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
+!Dependencies/cmake-3.23.0-rc1-windows-x86_64/bin/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
