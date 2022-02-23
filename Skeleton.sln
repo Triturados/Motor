@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OgreProject", "Project\Ogre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainProject", "Project\MainProject\MainProject.vcxproj", "{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoundProject", "Project\SoundProject\SoundProject.vcxproj", "{1AFB29FF-A508-4251-8A1C-21107615C230}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Debug|x64.Build.0 = Debug|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.ActiveCfg = Release|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.Build.0 = Release|x64
+		{1AFB29FF-A508-4251-8A1C-21107615C230}.Debug|x64.ActiveCfg = Debug|x64
+		{1AFB29FF-A508-4251-8A1C-21107615C230}.Debug|x64.Build.0 = Debug|x64
+		{1AFB29FF-A508-4251-8A1C-21107615C230}.Release|x64.ActiveCfg = Release|x64
+		{1AFB29FF-A508-4251-8A1C-21107615C230}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

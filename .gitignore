@@ -28,6 +28,7 @@ x86/
 bld/
 [Bb]in/
 !Dependencies/cmake-3.23.0-rc1-windows-x86_64/bin/
+Dependencies/FMODStudioAPIWindows/doc/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/

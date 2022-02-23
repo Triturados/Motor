@@ -1,9 +1,9 @@
 //#include "../OgreProject/Saludador.h"
-#include <Saludador.h>
+#include <Sound.h>
 #include <iostream>
 void main()
 {
-	saluda("meh");
+	sound("aaaa");
 	int a;
 	std::cin >> a;
 }
