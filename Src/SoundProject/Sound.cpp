@@ -1,12 +1,10 @@
-#include <iostream>
 #include "Sound.h"
-#include <fmod.hpp>
-#include <fmod_errors.h>// Only if you want error checking
+
 
 SoundSystemClass::SoundSystemClass()
 {
     if (FMOD::System_Create(&m_pSystem) != FMOD_OK)
-    {
+    { 
         // Report Error
         return;
     }
