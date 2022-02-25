@@ -1,6 +1,6 @@
 #pragma once
-#include "..\inc\fmod.hpp"
-#include "..\inc\fmod_errors.h"
+#include <fmod.hpp>
+#include <fmod_errors.h>
 #include <iostream>
 
 typedef FMOD::Sound* SoundClass;
