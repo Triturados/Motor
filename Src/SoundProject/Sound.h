@@ -2,10 +2,13 @@
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <iostream>
+#include <unordered_map>
 
 typedef FMOD::Sound* SoundClass;
 class SoundSystemClass //Clase que maneja el sonido a partir del uso de FMOD
 {
+private:
+	std::unordered_map<int, SoundClass*> soundsMap;
 public:
 	// Pointer to the FMOD instance
 	FMOD::System* m_pSystem;
@@ -13,5 +16,5 @@ public:
 	void createSound(SoundClass* pSound, const char* pFile);
 	void playSound(SoundClass pSound, bool bLoop = false);
 	void releaseSound(SoundClass pSound);
-
+	void pauseSound(SoundClass* pSound);
 };

@@ -69,7 +69,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\studio\inc;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\core\inc;$(SolutionDir)Src\SoundProject\;$(SolutionDir)Project\OgreProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src\SoundProject\;$(SolutionDir)Project\OgreProject\;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\studio\inc;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\core\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -19,10 +19,12 @@ SoundSystemClass::SoundSystemClass()
     // Initialize our Instance with 36 Channels
     m_pSystem->init(36, FMOD_INIT_NORMAL, NULL);
 }
-void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile)
+void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int channel)
 {
-    m_pSystem->createSound(pFile, FMOD_3D, 0, pSound); //El segundo parametro antes era :_HARDWARE pero en la documentacion no etsbaa
+    m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound); //El segundo parametro antes era :_HARDWARE pero en la documentacion no etsbaa
     //Lo unico que me cuadraba de la documentacion es el 3D aunque bastante xd la verdad
+
+    soundsMap.insert(channel, pSound>);
 }
 
 void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
@@ -40,7 +42,13 @@ void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
     m_pSystem->playSound(pSound, 0, false,0); //He cambiado la sintaxis de como venia por que si no daba error
 
 }
-void SoundSystemClass ::releaseSound(SoundClass pSound)
+
+
+void SoundSystemClass::releaseSound(SoundClass pSound)
 {
     pSound->release();
+}
+
+void SoundSystemClass::pauseSound(SoundClass* pSound)
+{
 }
