@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-COMMANDS" "7" "Feb 08, 2022" "3.23.0" "CMake"
+.TH "CMAKE-COMMANDS" "7" "Feb 23, 2022" "3.23.0" "CMake"
 .SH NAME
 cmake-commands \- CMake Language Command Reference
 .
@@ -6620,14 +6620,23 @@ The following syntax applies to the \fBcondition\fP argument of
 the \fBif\fP, \fBelseif\fP and \fBwhile()\fP clauses.
 .sp
 Compound conditions are evaluated in the following order of precedence:
-Innermost parentheses are evaluated first. Next come unary tests such
-as \fI\%EXISTS\fP, \fI\%COMMAND\fP, and \fI\%DEFINED\fP\&.  Then binary tests such as
-\fI\%EQUAL\fP, \fI\%LESS\fP, \fI\%LESS_EQUAL\fP, \fI\%GREATER\fP, \fI\%GREATER_EQUAL\fP,
-\fI\%STREQUAL\fP, \fI\%STRLESS\fP, \fI\%STRLESS_EQUAL\fP, \fI\%STRGREATER\fP,
-\fI\%STRGREATER_EQUAL\fP, \fI\%VERSION_EQUAL\fP, \fI\%VERSION_LESS\fP,
+.INDENT 0.0
+.IP 1. 3
+Parentheses.
+.IP 2. 3
+Unary tests such as \fI\%EXISTS\fP, \fI\%COMMAND\fP, and \fI\%DEFINED\fP\&.
+.IP 3. 3
+Binary tests such as \fI\%EQUAL\fP, \fI\%LESS\fP, \fI\%LESS_EQUAL\fP, \fI\%GREATER\fP,
+\fI\%GREATER_EQUAL\fP, \fI\%STREQUAL\fP, \fI\%STRLESS\fP, \fI\%STRLESS_EQUAL\fP,
+\fI\%STRGREATER\fP, \fI\%STRGREATER_EQUAL\fP, \fI\%VERSION_EQUAL\fP, \fI\%VERSION_LESS\fP,
 \fI\%VERSION_LESS_EQUAL\fP, \fI\%VERSION_GREATER\fP, \fI\%VERSION_GREATER_EQUAL\fP,
-and \fI\%MATCHES\fP\&.  Then the boolean operators in the order \fI\%NOT\fP,  \fI\%AND\fP,
-and finally \fI\%OR\fP\&.
+and \fI\%MATCHES\fP\&.
+.IP 4. 3
+Unary logical operator \fI\%NOT\fP\&.
+.IP 5. 3
+Binary logical operators \fI\%AND\fP and \fI\%OR\fP, from left to right,
+without any short\-circuit.
+.UNINDENT
 .SS Basic Expressions
 .INDENT 0.0
 .TP
@@ -11374,56 +11383,69 @@ turned off.
 See also the \fBadd_test()\fP command.
 .SS export
 .sp
-Export targets from the build tree for use by outside projects.
+Export targets or packages for outside projects to use them directly
+from the current project\(aqs build tree, without installation.
+.sp
+See the \fBinstall(EXPORT)\fP command to export targets from an
+install tree.
+.SS Synopsis
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-export(EXPORT <export\-name> [NAMESPACE <namespace>] [FILE <filename>])
+export(\fI\%TARGETS\fP <target>... [...])
+export(\fI\%EXPORT\fP <export\-name> [...])
+export(\fI\%PACKAGE\fP <PackageName>)
 .ft P
 .fi
 .UNINDENT
 .UNINDENT
-.sp
-Creates a file \fB<filename>\fP that may be included by outside projects to
-import targets from the current project\(aqs build tree.  This is useful
-during cross\-compiling to build utility executables that can run on
-the host platform in one project and then import them into another
-project being compiled for the target platform.  If the \fBNAMESPACE\fP
-option is given the \fB<namespace>\fP string will be prepended to all target
-names written to the file.
-.sp
-Target installations are associated with the export \fB<export\-name>\fP
-using the \fBEXPORT\fP option of the \fBinstall(TARGETS)\fP command.
-.sp
-The file created by this command is specific to the build tree and
-should never be installed.  See the \fBinstall(EXPORT)\fP command to
-export targets from an installation tree.
-.sp
-The properties set on the generated IMPORTED targets will have the
-same values as the final values of the input TARGETS.
+.SS Exporting Targets
 .INDENT 0.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-export(TARGETS [target1 [target2 [...]]] [NAMESPACE <namespace>]
+export(TARGETS <target>... [NAMESPACE <namespace>]
        [APPEND] FILE <filename> [EXPORT_LINK_INTERFACE_LIBRARIES])
 .ft P
 .fi
 .UNINDENT
 .UNINDENT
 .sp
-This signature is similar to the \fBEXPORT\fP signature, but targets are listed
-explicitly rather than specified as an export\-name.  If the APPEND option is
-given the generated code will be appended to the file instead of overwriting it.
-The EXPORT_LINK_INTERFACE_LIBRARIES keyword, if present, causes the
-contents of the properties matching
-\fB(IMPORTED_)?LINK_INTERFACE_LIBRARIES(_<CONFIG>)?\fP to be exported, when
-policy CMP0022 is NEW.  If a library target is included in the export
-but a target to which it links is not included the behavior is
-unspecified.
+Creates a file \fB<filename>\fP that may be included by outside projects to
+import targets named by \fB<target>...\fP from the current project\(aqs build tree.
+This is useful during cross\-compiling to build utility executables that can
+run on the host platform in one project and then import them into another
+project being compiled for the target platform.
+.sp
+The file created by this command is specific to the build tree and
+should never be installed.  See the \fBinstall(EXPORT)\fP command to
+export targets from an install tree.
+.sp
+The options are:
+.INDENT 0.0
+.TP
+.B \fBNAMESPACE <namespace>\fP
+Prepend the \fB<namespace>\fP string to all target names written to the file.
+.TP
+.B \fBAPPEND\fP
+Append to the file instead of overwriting it.  This can be used to
+incrementally export multiple targets to the same file.
+.TP
+.B \fBEXPORT_LINK_INTERFACE_LIBRARIES\fP
+Include the contents of the properties named with the pattern
+\fB(IMPORTED_)?LINK_INTERFACE_LIBRARIES(_<CONFIG>)?\fP
+in the export, even when policy \fBCMP0022\fP is NEW.  This is useful
+to support consumers using CMake versions older than 2.8.12.
+.UNINDENT
+.sp
+This signature requires all targets to be listed explicitly.  If a library
+target is included in the export, but a target to which it links is not
+included, the behavior is unspecified.  See the \fI\%export(EXPORT)\fP signature
+to automatically export the same targets from the build tree as
+\fBinstall(EXPORT)\fP would from an install tree.
 .sp
 \fBNOTE:\fP
 .INDENT 0.0
@@ -11436,6 +11458,51 @@ transitive usage requirements of other targets that link to the
 object libraries in their implementation.
 .UNINDENT
 .UNINDENT
+.SS Exporting Targets to Android.mk
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+export(TARGETS <target>... ANDROID_MK <filename>)
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+New in version 3.7.
+
+.sp
+This signature exports cmake built targets to the android ndk build system
+by creating an \fBAndroid.mk\fP file that references the prebuilt targets. The
+Android NDK supports the use of prebuilt libraries, both static and shared.
+This allows cmake to build the libraries of a project and make them available
+to an ndk build system complete with transitive dependencies, include flags
+and defines required to use the libraries. The signature takes a list of
+targets and puts them in the \fBAndroid.mk\fP file specified by the
+\fB<filename>\fP given. This signature can only be used if policy
+\fBCMP0022\fP is NEW for all targets given. A error will be issued if
+that policy is set to OLD for one of the targets.
+.SS Exporting Targets matching install(EXPORT)
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+export(EXPORT <export\-name> [NAMESPACE <namespace>] [FILE <filename>])
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Creates a file \fB<filename>\fP that may be included by outside projects to
+import targets from the current project\(aqs build tree.  This is the same
+as the \fI\%export(TARGETS)\fP signature, except that the targets are not
+explicitly listed.  Instead, it exports the targets associated with
+the installation export \fB<export\-name>\fP\&.  Target installations may be
+associated with the export \fB<export\-name>\fP using the \fBEXPORT\fP option
+of the \fBinstall(TARGETS)\fP command.
+.SS Exporting Packages
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -11468,30 +11535,6 @@ outside the source and build trees.  Set the
 \fBCMAKE_EXPORT_PACKAGE_REGISTRY\fP variable to add build directories
 to the CMake user package registry.
 
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-export(TARGETS [target1 [target2 [...]]]  [ANDROID_MK <filename>])
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-New in version 3.7.
-
-.sp
-This signature exports cmake built targets to the android ndk build system
-by creating an Android.mk file that references the prebuilt targets. The
-Android NDK supports the use of prebuilt libraries, both static and shared.
-This allows cmake to build the libraries of a project and make them available
-to an ndk build system complete with transitive dependencies, include flags
-and defines required to use the libraries. The signature takes a list of
-targets and puts them in the Android.mk file specified by the \fB<filename>\fP
-given. This signature can only be used if policy CMP0022 is NEW for all
-targets given. A error will be issued if that policy is set to OLD for one
-of the targets.
 .SS fltk_wrap_ui
 .sp
 Create FLTK user interfaces Wrappers.

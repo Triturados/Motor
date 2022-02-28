@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-VARIABLES" "7" "Feb 08, 2022" "3.23.0" "CMake"
+.TH "CMAKE-VARIABLES" "7" "Feb 23, 2022" "3.23.0" "CMake"
 .SH NAME
 cmake-variables \- CMake Variables Reference
 .
@@ -706,16 +706,42 @@ specify details of the instance selection.
 Supported pairs are:
 .INDENT 0.0
 .TP
-.B \fBversion=<major>.<minor>.<MMMDD>.<BBB>\fP
+.B \fBversion=<major>.<minor>.<date>.<build>\fP
 New in version 3.23.
 
 .sp
-Specify the 4\-component VS Build Version.
+Specify the 4\-component VS Build Version, a.k.a. Build Number.
+The components are:
+.sp
+\fB<major>.<minor>\fP
+.INDENT 7.0
+.INDENT 3.5
+The VS major and minor version numbers.
+These are the same as the release version numbers.
+.UNINDENT
 .UNINDENT
 .sp
-New in version 3.23: A portable VS instance may be specified that is not known to the
-Visual Studio Installer tool.  The \fBlocation\fP and \fBversion=\fP
-values must both be provided.
+\fB<date>\fP
+.INDENT 7.0
+.INDENT 3.5
+A build date in the format \fBMMMDD\fP, where \fBMMM\fP is a month index
+since an epoch used by Microsoft, and \fBDD\fP is a day in that month.
+.UNINDENT
+.UNINDENT
+.sp
+\fB<build>\fP
+.INDENT 7.0
+.INDENT 3.5
+A build index on the day represented by \fB<date>\fP\&.
+.UNINDENT
+.UNINDENT
+.sp
+The build number is reported by \fBvswhere\fP as \fBinstallationVersion\fP\&.
+For example, VS 16.11.10 has build number \fB16.11.32126.315\fP\&.
+.UNINDENT
+.sp
+New in version 3.23: A portable VS instance, which is not known to the Visual Studio Installer,
+may be specified by providing both \fBlocation\fP and \fBversion=\fP\&.
 
 .sp
 If the value of \fBCMAKE_GENERATOR_INSTANCE\fP is not specified explicitly
@@ -4585,6 +4611,7 @@ Known toolset version numbers are:
 140       = VS 2015 (14.0)
 141       = VS 2017 (15.0)
 142       = VS 2019 (16.0)
+143       = VS 2022 (17.0)
 .ft P
 .fi
 .UNINDENT
@@ -6176,6 +6203,20 @@ This variable is used to initialize the
 \fBPDB_OUTPUT_DIRECTORY_<CONFIG>\fP
 property on all the targets.  See that target property for additional
 information.
+.SS CMAKE_PLATFORM_NO_VERSIONED_SONAME
+.sp
+New in version 3.1.
+
+.sp
+This variable is used to globally control whether the
+\fBVERSION\fP and \fBSOVERSION\fP target
+properties should be used for shared libraries.
+When set to true, adding version information to each
+shared library target is disabled.
+.sp
+By default this variable is set only on platforms where
+CMake knows it is needed.   On other platforms, the
+specified properties will be used for shared libraries.
 .SS CMAKE_POSITION_INDEPENDENT_CODE
 .sp
 Default value for \fBPOSITION_INDEPENDENT_CODE\fP of targets.

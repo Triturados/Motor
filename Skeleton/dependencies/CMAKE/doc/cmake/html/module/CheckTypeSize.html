@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-  <title>CheckTypeSize &mdash; CMake 3.23.0-rc1 Documentation</title>
+  <title>CheckTypeSize &mdash; CMake 3.23.0-rc2 Documentation</title>
 
     <link rel="stylesheet" href="../_static/cmake.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -44,7 +44,7 @@
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
 
           <li class="nav-item nav-item-1"><a href="../manual/cmake-modules.7.html" accesskey="U">cmake-modules(7)</a> &#187;</li> 
@@ -61,38 +61,49 @@
 <p>Check sizeof a type</p>
 <dl class="command">
 <dt id="command:check_type_size">
-<code class="sig-name descname">CHECK_TYPE_SIZE</code><a class="headerlink" href="#command:check_type_size" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">CHECK_TYPE_SIZE(</span><span class="no">TYPE</span><span class="w"> </span><span class="no">VARIABLE</span><span class="w"> </span><span class="p">[</span><span class="no">BUILTIN_TYPES_ONLY</span><span class="p">]</span><span class="w"></span>
-<span class="w">                              </span><span class="p">[</span><span class="no">LANGUAGE</span><span class="w"> </span><span class="nv">&lt;language&gt;</span><span class="p">]</span><span class="nf">)</span><span class="w"></span>
+<code class="sig-name descname">check_type_size</code><a class="headerlink" href="#command:check_type_size" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">check_type_size(</span><span class="nv">&lt;type&gt;</span><span class="w"> </span><span class="nv">&lt;variable&gt;</span><span class="w"> </span><span class="p">[</span><span class="no">BUILTIN_TYPES_ONLY</span><span class="p">]</span><span class="w"></span>
+<span class="w">                                  </span><span class="p">[</span><span class="no">LANGUAGE</span><span class="w"> </span><span class="nv">&lt;language&gt;</span><span class="p">]</span><span class="nf">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Check if the type exists and determine its size.  On return,
-<code class="docutils literal notranslate"><span class="pre">HAVE_${VARIABLE}</span></code> holds the existence of the type, and <code class="docutils literal notranslate"><span class="pre">${VARIABLE}</span></code>
-holds one of the following:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;size&gt; = type has non-zero size &lt;size&gt;
-&quot;0&quot;    = type has arch-dependent size (see below)
-&quot;&quot;     = type does not exist
-</pre></div>
-</div>
-<p>Both <code class="docutils literal notranslate"><span class="pre">HAVE_${VARIABLE}</span></code> and <code class="docutils literal notranslate"><span class="pre">${VARIABLE}</span></code> will be created as internal
-cache variables.</p>
-<p>Furthermore, the variable <code class="docutils literal notranslate"><span class="pre">${VARIABLE}_CODE</span></code> holds C preprocessor code
-to define the macro <code class="docutils literal notranslate"><span class="pre">${VARIABLE}</span></code> to the size of the type, or leave
-the macro undefined if the type does not exist.</p>
-<p>The variable <code class="docutils literal notranslate"><span class="pre">${VARIABLE}</span></code> may be <code class="docutils literal notranslate"><span class="pre">0</span></code> when
-<span class="target" id="index-0-variable:CMAKE_OSX_ARCHITECTURES"></span><a class="reference internal" href="../variable/CMAKE_OSX_ARCHITECTURES.html#variable:CMAKE_OSX_ARCHITECTURES" title="CMAKE_OSX_ARCHITECTURES"><code class="xref cmake cmake-variable docutils literal notranslate"><span class="pre">CMAKE_OSX_ARCHITECTURES</span></code></a> has multiple architectures for building
-OS X universal binaries.  This indicates that the type size varies across
-architectures.  In this case <code class="docutils literal notranslate"><span class="pre">${VARIABLE}_CODE</span></code> contains C preprocessor
-tests mapping from each architecture macro to the corresponding type size.
-The list of architecture macros is stored in <code class="docutils literal notranslate"><span class="pre">${VARIABLE}_KEYS</span></code>, and the
-value for each key is stored in <code class="docutils literal notranslate"><span class="pre">${VARIABLE}-${KEY}</span></code>.</p>
-<p>If the <code class="docutils literal notranslate"><span class="pre">BUILTIN_TYPES_ONLY</span></code> option is not given, the macro checks for
-headers <code class="docutils literal notranslate"><span class="pre">&lt;sys/types.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stdint.h&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>, and saves
-results in <code class="docutils literal notranslate"><span class="pre">HAVE_SYS_TYPES_H</span></code>, <code class="docutils literal notranslate"><span class="pre">HAVE_STDINT_H</span></code>, and <code class="docutils literal notranslate"><span class="pre">HAVE_STDDEF_H</span></code>.
-The type size check automatically includes the available headers, thus
-supporting checks of types defined in the headers.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">LANGUAGE</span></code> is set, the specified compiler will be used to perform the
-check. Acceptable values are <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code>.</p>
+<p>Check if the type exists and determine its size.  Results are reported
+in the following variables:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">HAVE_&lt;variable&gt;</span></code></dt><dd><p>Holds a true or false value indicating whether the type exists.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code></dt><dd><p>Holds one of the following values:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code></dt><dd><p>Type has non-zero size <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">0</span></code></dt><dd><p>Type has architecture-dependent size.  This may occur when
+<span class="target" id="index-0-variable:CMAKE_OSX_ARCHITECTURES"></span><a class="reference internal" href="../variable/CMAKE_OSX_ARCHITECTURES.html#variable:CMAKE_OSX_ARCHITECTURES" title="CMAKE_OSX_ARCHITECTURES"><code class="xref cmake cmake-variable docutils literal notranslate"><span class="pre">CMAKE_OSX_ARCHITECTURES</span></code></a> has multiple architectures.
+In this case <code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;_CODE</span></code> contains C preprocessor tests
+mapping from each architecture macro to the corresponding type size.
+The list of architecture macros is stored in <code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;_KEYS</span></code>,
+and the value for each key is stored in <code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;-&lt;key&gt;</span></code>.</p>
+</dd>
+<dt>&quot;&quot; (empty string)</dt><dd><p>Type does not exist.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;_CODE</span></code></dt><dd><p>Holds C preprocessor code to define the macro <code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code> to the size
+of the type, or to leave the macro undefined if the type does not exist.</p>
+</dd>
+</dl>
+<p>The options are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">BUILTIN_TYPES_ONLY</span></code></p>
+<blockquote>
+<div><p>Support only compiler-builtin types.  If <em>not</em> given, the macro checks
+for headers <code class="docutils literal notranslate"><span class="pre">&lt;sys/types.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stdint.h&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>, and
+saves results in <code class="docutils literal notranslate"><span class="pre">HAVE_SYS_TYPES_H</span></code>, <code class="docutils literal notranslate"><span class="pre">HAVE_STDINT_H</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">HAVE_STDDEF_H</span></code>.  The type size check automatically includes the
+available headers, thus supporting checks of types defined in the headers.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LANGUAGE</span> <span class="pre">&lt;language&gt;</span></code></dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">&lt;language&gt;</span></code> compiler to perform the check.
+Acceptable values are <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p>Despite the name of the macro you may use it to check the size of more
@@ -178,7 +189,7 @@ the way the check is run:</p>
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
 
           <li class="nav-item nav-item-1"><a href="../manual/cmake-modules.7.html" >cmake-modules(7)</a> &#187;</li> 

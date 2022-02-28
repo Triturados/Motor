@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-PRESETS" "7" "Feb 08, 2022" "3.23.0" "CMake"
+.TH "CMAKE-PRESETS" "7" "Feb 23, 2022" "3.23.0" "CMake"
 .SH NAME
 cmake-presets \- CMakePresets.json
 .
@@ -750,9 +750,10 @@ the command line.
 An optional string that specifies the package resolve mode. This is
 allowed in preset files specifying version \fB4\fP or above.
 .sp
-This field overwrites the \fB\-\-resolve\-package\-references\fP command line
-parameter. If there are no targets that define package references, this
-option does nothing. Valid values are:
+Package references are used to define dependencies to packages from
+external package managers. Currently only NuGet in combination with the
+Visual Studio generator is supported. If there are no targets that define
+package references, this option does nothing. Valid values are:
 .sp
 \fBon\fP
 .INDENT 0.0
@@ -779,17 +780,16 @@ Only resolve package references, but do not perform a build.
 \fBNOTE:\fP
 .INDENT 0.0
 .INDENT 3.5
-If this setting is not specified in a preset, CMake will instead
-use the setting specified by the \fB\-\-resolve\-package\-references\fP
-command line parameter. If the command line parameter is not
-provided either, an environment\-specific cache variable will be
-evaluated to decide, if package restoration should be performed.
+The command line parameter \fB\-\-resolve\-package\-references\fP will take
+priority over this setting. If the command line parameter is not provided
+and this setting is not specified, an environment\-specific cache variable
+will be evaluated to decide, if package restoration should be performed.
 .sp
-When using the Visual Studio generator, package references are
-defined using the \fBVS_PACKAGE_REFERENCES\fP property.
-Package references are restored using NuGet. It can be disabled
-by setting the \fBCMAKE_VS_NUGET_PACKAGE_RESTORE\fP variable to
-\fBOFF\fP\&. This can also be done from within a configure preset.
+When using the Visual Studio generator, package references are defined
+using the \fBVS_PACKAGE_REFERENCES\fP property. Package references
+are restored using NuGet. It can be disabled by setting the
+\fBCMAKE_VS_NUGET_PACKAGE_RESTORE\fP variable to \fBOFF\fP\&. This can also be
+done from within a configure preset.
 .UNINDENT
 .UNINDENT
 .UNINDENT

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-  <title>Importing and Exporting Guide &mdash; CMake 3.23.0-rc1 Documentation</title>
+  <title>Importing and Exporting Guide &mdash; CMake 3.23.0-rc2 Documentation</title>
 
     <link rel="stylesheet" href="../../_static/cmake.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -44,7 +44,7 @@
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>
@@ -783,10 +783,10 @@ the same time, this function will act as a custom <code class="docutils literal 
 macro to ensure that the downstream only attempts to use supported components.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@PACKAGE_INIT@
 
-set(_supported_components Addition SquareRoot)
+set(_MathFunctions_supported_components Addition SquareRoot)
 
 foreach(_comp ${MathFunctions_FIND_COMPONENTS})
-  if (NOT _comp IN_LIST _supported_components)
+  if (NOT _comp IN_LIST _MathFunctions_supported_components)
     set(MathFunctions_FOUND False)
     set(MathFunctions_NOT_FOUND_MESSAGE &quot;Unsupported component: ${_comp}&quot;)
   endif()
@@ -949,7 +949,7 @@ package components.</p>
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>

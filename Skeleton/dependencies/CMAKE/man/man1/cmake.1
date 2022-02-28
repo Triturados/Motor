@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE" "1" "Feb 08, 2022" "3.23.0" "CMake"
+.TH "CMAKE" "1" "Feb 23, 2022" "3.23.0" "CMake"
 .SH NAME
 cmake \- CMake Command-Line Reference
 .
@@ -435,16 +435,17 @@ error. Output is designed for human consumption and not for parsing.
 See also the \fBCMAKE_FIND_DEBUG_MODE\fP variable for debugging
 a more local part of the project.
 .TP
-.B \fB\-\-debug\-find=<pkg>[,...]\fP
+.B \fB\-\-debug\-find\-pkg=<pkg>[,...]\fP
 Put cmake find commands in a debug mode when running under calls
-to \fBfind_package(<pkg>)\fP, where \fB<pkg>\fP is an entry in the given
-comma\-separated list of case\-sensitive package names.
+to \fBfind_package(<pkg>)\fP, where \fB<pkg>\fP
+is an entry in the given comma\-separated list of case\-sensitive package
+names.
 .sp
 Like \fB\-\-debug\-find\fP, but limiting scope to the specified packages.
 .TP
 .B \fB\-\-debug\-find\-var=<var>[,...]\fP
 Put cmake find commands in a debug mode when called with \fB<var>\fP
-as the return variable, where \fB<var>\fP is an entry in the given
+as the result variable, where \fB<var>\fP is an entry in the given
 comma\-separated list.
 .sp
 Like \fB\-\-debug\-find\fP, but limiting scope to the specified variable names.
@@ -678,21 +679,20 @@ Build target \fBclean\fP first, then build.
 New in version 3.23.
 
 .sp
-Resolve remote package references (e.g. NuGet packages) before build.
-When set to \fBon\fP (default), packages will be restored before building a
-target. When set to \fBonly\fP, the packages will be restored, but no build
-will be performed. When set to \fBoff\fP, no packages will be restored.
+Resolve remote package references from external package managers (e.g. NuGet)
+before build. When set to \fBon\fP (default), packages will be restored before
+building a target. When set to \fBonly\fP, the packages will be restored, but no
+build will be performed. When set to \fBoff\fP, no packages will be restored.
 .sp
-If the target does not define any package references, this option does
-nothing.
+If the target does not define any package references, this option does nothing.
 .sp
 This setting can be specified in a build preset (using
-\fBresolvePackageReferences\fP). In this case, the command line option will
-be ignored.
+\fBresolvePackageReferences\fP). The preset setting will be ignored, if this
+command line option is specified.
 .sp
-If the no command line parameter or preset option is not provided, an
-environment\-specific cache variable will be evaluated to decide, if package
-restoration should be performed.
+If no command line parameter or preset option are provided, an environment\-
+specific cache variable will be evaluated to decide, if package restoration
+should be performed.
 .sp
 When using the Visual Studio generator, package references are defined
 using the \fBVS_PACKAGE_REFERENCES\fP property. Package references

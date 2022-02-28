@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-  <title>CMAKE_GENERATOR_INSTANCE &mdash; CMake 3.23.0-rc1 Documentation</title>
+  <title>CMAKE_GENERATOR_INSTANCE &mdash; CMake 3.23.0-rc2 Documentation</title>
 
     <link rel="stylesheet" href="../_static/cmake.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -44,7 +44,7 @@
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
 
           <li class="nav-item nav-item-1"><a href="../manual/cmake-variables.7.html" accesskey="U">cmake-variables(7)</a> &#187;</li> 
@@ -91,16 +91,32 @@ of the VS installation.</p>
 specify details of the instance selection.
 Supported pairs are:</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">version=&lt;major&gt;.&lt;minor&gt;.&lt;MMMDD&gt;.&lt;BBB&gt;</span></code></dt><dd><div class="versionadded">
+<dt><code class="docutils literal notranslate"><span class="pre">version=&lt;major&gt;.&lt;minor&gt;.&lt;date&gt;.&lt;build&gt;</span></code></dt><dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 3.23.</span></p>
 </div>
-<p>Specify the 4-component VS Build Version.</p>
+<p>Specify the 4-component VS Build Version, a.k.a. Build Number.
+The components are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;major&gt;.&lt;minor&gt;</span></code></p>
+<blockquote>
+<div><p>The VS major and minor version numbers.
+These are the same as the release version numbers.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;date&gt;</span></code></p>
+<blockquote>
+<div><p>A build date in the format <code class="docutils literal notranslate"><span class="pre">MMMDD</span></code>, where <code class="docutils literal notranslate"><span class="pre">MMM</span></code> is a month index
+since an epoch used by Microsoft, and <code class="docutils literal notranslate"><span class="pre">DD</span></code> is a day in that month.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;build&gt;</span></code></p>
+<blockquote>
+<div><p>A build index on the day represented by <code class="docutils literal notranslate"><span class="pre">&lt;date&gt;</span></code>.</p>
+</div></blockquote>
+<p>The build number is reported by <code class="docutils literal notranslate"><span class="pre">vswhere</span></code> as <code class="docutils literal notranslate"><span class="pre">installationVersion</span></code>.
+For example, VS 16.11.10 has build number <code class="docutils literal notranslate"><span class="pre">16.11.32126.315</span></code>.</p>
 </dd>
 </dl>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 3.23: </span>A portable VS instance may be specified that is not known to the
-Visual Studio Installer tool.  The <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">version=</span></code>
-values must both be provided.</p>
+<p><span class="versionmodified added">New in version 3.23: </span>A portable VS instance, which is not known to the Visual Studio Installer,
+may be specified by providing both <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">version=</span></code>.</p>
 </div>
 <p>If the value of <code class="docutils literal notranslate"><span class="pre">CMAKE_GENERATOR_INSTANCE</span></code> is not specified explicitly
 by the user or a toolchain file, CMake queries the Visual Studio Installer
@@ -174,7 +190,7 @@ VS instance is installed we do not define which one is chosen by default.</p>
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
 
           <li class="nav-item nav-item-1"><a href="../manual/cmake-variables.7.html" >cmake-variables(7)</a> &#187;</li> 

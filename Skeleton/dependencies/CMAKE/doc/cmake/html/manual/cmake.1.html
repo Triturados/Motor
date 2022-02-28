@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-  <title>cmake(1) &mdash; CMake 3.23.0-rc1 Documentation</title>
+  <title>cmake(1) &mdash; CMake 3.23.0-rc2 Documentation</title>
 
     <link rel="stylesheet" href="../_static/cmake.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -44,7 +44,7 @@
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>
@@ -353,13 +353,14 @@ error. Output is designed for human consumption and not for parsing.
 See also the <span class="target" id="index-0-variable:CMAKE_FIND_DEBUG_MODE"></span><a class="reference internal" href="../variable/CMAKE_FIND_DEBUG_MODE.html#variable:CMAKE_FIND_DEBUG_MODE" title="CMAKE_FIND_DEBUG_MODE"><code class="xref cmake cmake-variable docutils literal notranslate"><span class="pre">CMAKE_FIND_DEBUG_MODE</span></code></a> variable for debugging
 a more local part of the project.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">--debug-find=&lt;pkg&gt;[,...]</span></code></dt><dd><p>Put cmake find commands in a debug mode when running under calls
-to <code class="docutils literal notranslate"><span class="pre">find_package(&lt;pkg&gt;)</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;pkg&gt;</span></code> is an entry in the given
-comma-separated list of case-sensitive package names.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">--debug-find-pkg=&lt;pkg&gt;[,...]</span></code></dt><dd><p>Put cmake find commands in a debug mode when running under calls
+to <span class="target" id="index-0-command:find_package"></span><a class="reference internal" href="../command/find_package.html#command:find_package" title="find_package"><code class="xref cmake cmake-command docutils literal notranslate"><span class="pre">find_package(&lt;pkg&gt;)</span></code></a>, where <code class="docutils literal notranslate"><span class="pre">&lt;pkg&gt;</span></code>
+is an entry in the given comma-separated list of case-sensitive package
+names.</p>
 <p>Like <code class="docutils literal notranslate"><span class="pre">--debug-find</span></code>, but limiting scope to the specified packages.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">--debug-find-var=&lt;var&gt;[,...]</span></code></dt><dd><p>Put cmake find commands in a debug mode when called with <code class="docutils literal notranslate"><span class="pre">&lt;var&gt;</span></code>
-as the return variable, where <code class="docutils literal notranslate"><span class="pre">&lt;var&gt;</span></code> is an entry in the given
+as the result variable, where <code class="docutils literal notranslate"><span class="pre">&lt;var&gt;</span></code> is an entry in the given
 comma-separated list.</p>
 <p>Like <code class="docutils literal notranslate"><span class="pre">--debug-find</span></code>, but limiting scope to the specified variable names.</p>
 </dd>
@@ -522,18 +523,17 @@ given, separated by spaces.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">--resolve-package-references=&lt;on|off|only&gt;</span></code></dt><dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 3.23.</span></p>
 </div>
-<p>Resolve remote package references (e.g. NuGet packages) before build.
-When set to <code class="docutils literal notranslate"><span class="pre">on</span></code> (default), packages will be restored before building a
-target. When set to <code class="docutils literal notranslate"><span class="pre">only</span></code>, the packages will be restored, but no build
-will be performed. When set to <code class="docutils literal notranslate"><span class="pre">off</span></code>, no packages will be restored.</p>
-<p>If the target does not define any package references, this option does
-nothing.</p>
+<p>Resolve remote package references from external package managers (e.g. NuGet)
+before build. When set to <code class="docutils literal notranslate"><span class="pre">on</span></code> (default), packages will be restored before
+building a target. When set to <code class="docutils literal notranslate"><span class="pre">only</span></code>, the packages will be restored, but no
+build will be performed. When set to <code class="docutils literal notranslate"><span class="pre">off</span></code>, no packages will be restored.</p>
+<p>If the target does not define any package references, this option does nothing.</p>
 <p>This setting can be specified in a build preset (using
-<code class="docutils literal notranslate"><span class="pre">resolvePackageReferences</span></code>). In this case, the command line option will
-be ignored.</p>
-<p>If the no command line parameter or preset option is not provided, an
-environment-specific cache variable will be evaluated to decide, if package
-restoration should be performed.</p>
+<code class="docutils literal notranslate"><span class="pre">resolvePackageReferences</span></code>). The preset setting will be ignored, if this
+command line option is specified.</p>
+<p>If no command line parameter or preset option are provided, an environment-
+specific cache variable will be evaluated to decide, if package restoration
+should be performed.</p>
 <p>When using the Visual Studio generator, package references are defined
 using the <span class="target" id="index-0-prop_tgt:VS_PACKAGE_REFERENCES"></span><a class="reference internal" href="../prop_tgt/VS_PACKAGE_REFERENCES.html#prop_tgt:VS_PACKAGE_REFERENCES" title="VS_PACKAGE_REFERENCES"><code class="xref cmake cmake-prop_tgt docutils literal notranslate"><span class="pre">VS_PACKAGE_REFERENCES</span></code></a> property. Package references
 are restored using NuGet. It can be disabled by setting the
@@ -976,7 +976,7 @@ Windows CE SDK installed in VS2008.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake --find-package <span class="o">[</span>&lt;options&gt;<span class="o">]</span>
 </pre></div>
 </div>
-<p>It searches a package using <span class="target" id="index-0-command:find_package"></span><a class="reference internal" href="../command/find_package.html#command:find_package" title="find_package"><code class="xref cmake cmake-command docutils literal notranslate"><span class="pre">find_package()</span></code></a> and prints the
+<p>It searches a package using <span class="target" id="index-1-command:find_package"></span><a class="reference internal" href="../command/find_package.html#command:find_package" title="find_package"><code class="xref cmake cmake-command docutils literal notranslate"><span class="pre">find_package()</span></code></a> and prints the
 resulting flags to stdout.  This can be used instead of pkg-config
 to find installed libraries in plain Makefile-based projects or in
 autoconf-based projects (via <code class="docutils literal notranslate"><span class="pre">share/aclocal/cmake.m4</span></code>).</p>
@@ -1191,7 +1191,7 @@ found on this web page.</p>
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>

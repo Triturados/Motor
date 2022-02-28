@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-  <title>cmake-packages(7) &mdash; CMake 3.23.0-rc1 Documentation</title>
+  <title>cmake-packages(7) &mdash; CMake 3.23.0-rc2 Documentation</title>
 
     <link rel="stylesheet" href="../_static/cmake.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -44,7 +44,7 @@
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>
@@ -469,10 +469,10 @@ be true. This can be tested with logic in the package configuration file:</p>
 <span class="nf">include(</span><span class="s">&quot;${CMAKE_CURRENT_LIST_DIR}/ClimbingStatsTargets.cmake&quot;</span><span class="nf">)</span><span class="w"></span>
 <span class="nf">include(</span><span class="s">&quot;${CMAKE_CURRENT_LIST_DIR}/ClimbingStatsMacros.cmake&quot;</span><span class="nf">)</span><span class="w"></span>
 
-<span class="nf">set(</span><span class="nb">_supported_components</span><span class="w"> </span><span class="nb">Plot</span><span class="w"> </span><span class="nb">Table</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">set(</span><span class="nb">_ClimbingStats_supported_components</span><span class="w"> </span><span class="nb">Plot</span><span class="w"> </span><span class="nb">Table</span><span class="nf">)</span><span class="w"></span>
 
 <span class="nf">foreach(</span><span class="nb">_comp</span><span class="w"> </span><span class="o">${</span><span class="nt">ClimbingStats_FIND_COMPONENTS</span><span class="o">}</span><span class="nf">)</span><span class="w"></span>
-<span class="w">  </span><span class="nf">if</span> <span class="nf">(</span><span class="no">NOT</span><span class="w"> </span><span class="s">&quot;;${_supported_components};&quot;</span><span class="w"> </span><span class="no">MATCHES</span><span class="w"> </span><span class="s">&quot;;${_comp};&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="nf">if</span> <span class="nf">(</span><span class="no">NOT</span><span class="w"> </span><span class="s">&quot;;${_ClimbingStats_supported_components};&quot;</span><span class="w"> </span><span class="no">MATCHES</span><span class="w"> </span><span class="s">&quot;;${_comp};&quot;</span><span class="nf">)</span><span class="w"></span>
 <span class="w">    </span><span class="nf">set(</span><span class="nb">ClimbingStats_FOUND</span><span class="w"> </span><span class="nb">False</span><span class="nf">)</span><span class="w"></span>
 <span class="w">    </span><span class="nf">set(</span><span class="nb">ClimbingStats_NOT_FOUND_MESSAGE</span><span class="w"> </span><span class="s">&quot;Unsupported component: ${_comp}&quot;</span><span class="nf">)</span><span class="w"></span>
 <span class="w">  </span><span class="nf">endif()</span><span class="w"></span>
@@ -796,7 +796,7 @@ tree then the entry referencing the location will be considered stale.</p>
     <a href="https://cmake.org/">CMake</a> &#187;
   </li>
   <li>
-    <a href="../index.html">3.23.0-rc1 Documentation</a> &#187;
+    <a href="../index.html">3.23.0-rc2 Documentation</a> &#187;
   </li>
  
       </ul>

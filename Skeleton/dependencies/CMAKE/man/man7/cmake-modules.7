@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-MODULES" "7" "Feb 08, 2022" "3.23.0" "CMake"
+.TH "CMAKE-MODULES" "7" "Feb 23, 2022" "3.23.0" "CMake"
 .SH NAME
 cmake-modules \- CMake Modules Reference
 .
@@ -2523,58 +2523,68 @@ check_symbol_exists(fopen "stdio.h" HAVE_FOPEN)
 Check sizeof a type
 .INDENT 0.0
 .TP
-.B CHECK_TYPE_SIZE
+.B check_type_size
 .INDENT 7.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-CHECK_TYPE_SIZE(TYPE VARIABLE [BUILTIN_TYPES_ONLY]
-                              [LANGUAGE <language>])
+check_type_size(<type> <variable> [BUILTIN_TYPES_ONLY]
+                                  [LANGUAGE <language>])
 .ft P
 .fi
 .UNINDENT
 .UNINDENT
 .sp
-Check if the type exists and determine its size.  On return,
-\fBHAVE_${VARIABLE}\fP holds the existence of the type, and \fB${VARIABLE}\fP
-holds one of the following:
+Check if the type exists and determine its size.  Results are reported
+in the following variables:
+.INDENT 7.0
+.TP
+.B \fBHAVE_<variable>\fP
+Holds a true or false value indicating whether the type exists.
+.TP
+.B \fB<variable>\fP
+Holds one of the following values:
+.INDENT 7.0
+.TP
+.B \fB<size>\fP
+Type has non\-zero size \fB<size>\fP\&.
+.TP
+.B \fB0\fP
+Type has architecture\-dependent size.  This may occur when
+\fBCMAKE_OSX_ARCHITECTURES\fP has multiple architectures.
+In this case \fB<variable>_CODE\fP contains C preprocessor tests
+mapping from each architecture macro to the corresponding type size.
+The list of architecture macros is stored in \fB<variable>_KEYS\fP,
+and the value for each key is stored in \fB<variable>\-<key>\fP\&.
+.TP
+.B "" (empty string)
+Type does not exist.
+.UNINDENT
+.TP
+.B \fB<variable>_CODE\fP
+Holds C preprocessor code to define the macro \fB<variable>\fP to the size
+of the type, or to leave the macro undefined if the type does not exist.
+.UNINDENT
+.sp
+The options are:
+.sp
+\fBBUILTIN_TYPES_ONLY\fP
 .INDENT 7.0
 .INDENT 3.5
-.sp
-.nf
-.ft C
-<size> = type has non\-zero size <size>
-"0"    = type has arch\-dependent size (see below)
-""     = type does not exist
-.ft P
-.fi
+Support only compiler\-builtin types.  If \fInot\fP given, the macro checks
+for headers \fB<sys/types.h>\fP, \fB<stdint.h>\fP, and \fB<stddef.h>\fP, and
+saves results in \fBHAVE_SYS_TYPES_H\fP, \fBHAVE_STDINT_H\fP, and
+\fBHAVE_STDDEF_H\fP\&.  The type size check automatically includes the
+available headers, thus supporting checks of types defined in the headers.
 .UNINDENT
 .UNINDENT
-.sp
-Both \fBHAVE_${VARIABLE}\fP and \fB${VARIABLE}\fP will be created as internal
-cache variables.
-.sp
-Furthermore, the variable \fB${VARIABLE}_CODE\fP holds C preprocessor code
-to define the macro \fB${VARIABLE}\fP to the size of the type, or leave
-the macro undefined if the type does not exist.
-.sp
-The variable \fB${VARIABLE}\fP may be \fB0\fP when
-\fBCMAKE_OSX_ARCHITECTURES\fP has multiple architectures for building
-OS X universal binaries.  This indicates that the type size varies across
-architectures.  In this case \fB${VARIABLE}_CODE\fP contains C preprocessor
-tests mapping from each architecture macro to the corresponding type size.
-The list of architecture macros is stored in \fB${VARIABLE}_KEYS\fP, and the
-value for each key is stored in \fB${VARIABLE}\-${KEY}\fP\&.
-.sp
-If the \fBBUILTIN_TYPES_ONLY\fP option is not given, the macro checks for
-headers \fB<sys/types.h>\fP, \fB<stdint.h>\fP, and \fB<stddef.h>\fP, and saves
-results in \fBHAVE_SYS_TYPES_H\fP, \fBHAVE_STDINT_H\fP, and \fBHAVE_STDDEF_H\fP\&.
-The type size check automatically includes the available headers, thus
-supporting checks of types defined in the headers.
-.sp
-If \fBLANGUAGE\fP is set, the specified compiler will be used to perform the
-check. Acceptable values are \fBC\fP and \fBCXX\fP\&.
+.INDENT 7.0
+.TP
+.B \fBLANGUAGE <language>\fP
+Use the \fB<language>\fP compiler to perform the check.
+Acceptable values are \fBC\fP and \fBCXX\fP\&.
+.UNINDENT
 .UNINDENT
 .sp
 Despite the name of the macro you may use it to check the size of more
@@ -25174,7 +25184,7 @@ to the version of CMake that introduced the given API and less
 than the version of CMake that introduced its succeeding API.
 The value of the \fBCMAKE_MINIMUM_REQUIRED_VERSION\fP
 variable is used if no explicit version is specified.
-(As of CMake version 3.23.0\-rc1 there is only one API version.)
+(As of CMake version 3.23.0\-rc2 there is only one API version.)
 .sp
 \fBPROLOG\fP may be specified as text content to write at the start of the
 header. \fBEPILOG\fP may be specified as text content to write at the end
