@@ -5,20 +5,24 @@
 #include <unordered_map>
 
 typedef FMOD::Sound* SoundClass;
+
 class SoundSystemClass //Clase que maneja el sonido a partir del uso de FMOD
 {
 private:
 	std::unordered_map<int, SoundClass> soundsMap;
-	std::unordered_map<int, SoundClass> effectsMap;
-	std::unordered_map<int, SoundClass> voicesMap;
-	std::unordered_map<int, SoundClass> enviormentMap;
+
+	FMOD::Channel* channels[36];
+	std::vector<FMOD::ChannelGroup*> channelGroups;
+	FMOD::ChannelGroup *effects, *voices, *environment, *music, *master;
+
 public:
 	// Pointer to the FMOD instance
 	FMOD::System* m_pSystem;
 	SoundSystemClass();
-	void createSound(SoundClass* pSound, const char* pFile,int channel, int mapType);
+	void createSound(SoundClass* pSound, const char* pFile,int channel);
 	void playSound(SoundClass pSound, bool bLoop = false);
-	void releaseSound(int map, int channel);
-	void setSpeed(int map, int channel,float s);
-	void setVolumeChannel(int map, int channel, float volume);
+	void releaseSound(int channel);
+	void setSpeed(int channel,float s);
+	void setVolumeChannel(int channelGroup, float volume);
+	void pauseSound();
 };
