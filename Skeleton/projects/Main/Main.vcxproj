@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OGRE\OGRE.vcxproj">
+      <Project>{57663220-5e15-4009-92e8-65f60806a5a9}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\SoundProject\SoundProject.vcxproj">
       <Project>{1afb29ff-a508-4251-8a1c-21107615c230}</Project>
     </ProjectReference>
@@ -69,7 +72,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\SoundProject\;$(SolutionDir)src\OgreSrc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\SoundProject\;$(SolutionDir)src\OgreSrc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>

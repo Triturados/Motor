@@ -1,6 +1,6 @@
-//#include "../OgreProject/Saludador.h"
 #include <Sound.h>
 #include <iostream>
+#include <OgreRenderer.h>
 
 void useSystemSound()
 {
@@ -8,7 +8,7 @@ void useSystemSound()
 
 	// Create a sample sound
 	SoundClass soundSample;
-	sound.createSound(&soundSample, "../../../Recursos/Sonidos/sonido.wav",0);
+	sound.createSound(&soundSample, "FMOD/Sonidos/sonido.wav",0);
 
 	// Play the sound, with loop mode
 	sound.playSound(soundSample, true);
@@ -20,6 +20,13 @@ void useSystemSound()
 
 	// Release the sound
 	sound.releaseSound(0);
+
+
+	OgreRenderer main = OgreRenderer();
+	main.exampleScene();
+
+	while (main.update()) {};
+
 }
 
 void main()
