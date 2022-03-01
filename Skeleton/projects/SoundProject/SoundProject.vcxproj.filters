@@ -1,9 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Src\SoundProject\Sound.cpp" />
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{a891fcc4-9c8f-4dd1-a11b-ce2b019961cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{428b0ca7-568d-4508-a1ab-7dc4352f1355}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\SoundProject\Sound.h" />
+    <ClInclude Include="..\..\src\SoundProject\Sound.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\SoundProject\Sound.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

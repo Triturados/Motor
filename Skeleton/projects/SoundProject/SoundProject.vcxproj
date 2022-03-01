@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\SoundProject\Sound.cpp" />
+    <ClInclude Include="..\..\src\SoundProject\Sound.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\SoundProject\Sound.h" />
+    <ClCompile Include="..\..\src\SoundProject\Sound.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
