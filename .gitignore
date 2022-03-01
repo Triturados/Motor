@@ -353,5 +353,5 @@ MigrationBackup/
 
 [Tt]emp/
 [Bb]uild/
-!build/Debug/Ogre
-!build/Release/Ogre
+!Skeleton/build/Debug/Ogre
+!Skeleton/build/Release/Ogre
