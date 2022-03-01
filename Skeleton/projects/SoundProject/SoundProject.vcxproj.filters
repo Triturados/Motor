@@ -15,12 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:Skeleton/projects/Biblioteca/Biblioteca.vcxproj.filters
+    <ClCompile Include="..\..\src\Biblioteca\saludador.cpp">
+=======
     <ClCompile Include="..\..\Src\SoundProject\Sound.cpp">
+>>>>>>> 866a329b7a440e1006ac7be0485b6dc5293c89ca:Project/SoundProject/SoundProject.vcxproj.filters
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:Skeleton/projects/Biblioteca/Biblioteca.vcxproj.filters
+    <ClInclude Include="..\..\src\Biblioteca\saludador.h">
+=======
     <ClInclude Include="..\..\Src\SoundProject\Sound.h">
+>>>>>>> 866a329b7a440e1006ac7be0485b6dc5293c89ca:Project/SoundProject/SoundProject.vcxproj.filters
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
