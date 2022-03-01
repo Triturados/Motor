@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">
+      <Project>{246877cb-9f09-4048-bcbd-e94c03a4ca4d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\OGRE\OGRE.vcxproj">
       <Project>{57663220-5e15-4009-92e8-65f60806a5a9}</Project>
     </ProjectReference>
@@ -72,7 +75,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\BulletPhysics;$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\BulletPhysics;$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
