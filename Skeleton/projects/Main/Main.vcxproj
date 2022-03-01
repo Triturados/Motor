@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\MainProject\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SoundProject\SoundProject.vcxproj">
       <Project>{1afb29ff-a508-4251-8a1c-21107615c230}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Main\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -53,14 +53,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(Configuration)\$(ProjectName)</OutDir>
-    <IntDir>$(SolutionDir)Temp\$(Configuration)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)temp\$(Configuration)\$(ProjectName)</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(Configuration)\$(ProjectName)</OutDir>
-    <IntDir>$(SolutionDir)Temp\$(Configuration)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)temp\$(Configuration)\$(ProjectName)</IntDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -69,7 +69,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src\SoundProject\;$(SolutionDir)Project\OgreProject\;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\studio\inc;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\core\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\SoundProject\;$(SolutionDir)src\OgreSrc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,7 +85,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)Dependencies\FMODStudioAPIWindows\api\studio\inc\;$(SolutionDir)Src\SoundProject\;$(SolutionDir)Src\OgreProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\SoundProject\;$(SolutionDir)src\OgreSrc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
