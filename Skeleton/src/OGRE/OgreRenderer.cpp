@@ -16,10 +16,12 @@ OgreRenderer::OgreRenderer()
 /// Inicializa la raiz
 /// </summary>
 void OgreRenderer::initRoot() {
-	mResourcesCfgPath = "resources.cfg";
-	mPluginsCfgPath = "plugins.cfg";
+	mResourcesCfgPath = "./OGRE/resources.cfg";
+	mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
+	mLogPath = "./OGRE/Ogre.log";
+	mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(mPluginsCfgPath);
+	mRoot = new Ogre::Root(mPluginsCfgPath,mCfgPath,mLogPath);
 	
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
 	if(!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
