@@ -17,7 +17,7 @@ SoundSystemClass::SoundSystemClass()
 		return;
 	}
 	// Initialize our Instance with 36 Channels
-	m_pSystem->init(36, FMOD_INIT_NORMAL, NULL);
+	m_pSystem->init(27, FMOD_INIT_NORMAL, NULL);
 
 	m_pSystem->createChannelGroup("Master", &master);
 	m_pSystem->createChannelGroup("Effects", &effects);
@@ -27,6 +27,8 @@ SoundSystemClass::SoundSystemClass()
 
 	master->addGroup(effects);	master->addGroup(music);
 	master->addGroup(environment); 	master->addGroup(voices);
+
+	for (auto channel : channels) channel->setMute(true);
 }
 
 void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int channel)
@@ -35,11 +37,11 @@ void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int ch
 	//Lo unico que me cuadraba de la documentacion es el 3D aunque bastante xd la verdad
 
 	//Habria que hacer un switch para segun añadamos sonidos a los distintos mapas ,distinguir entre mapas para hacer el insert solo una vez
-	std::pair<int, SoundClass> sound(channel, *pSound);
+	std::pair<FMOD::Channel*, SoundClass> sound(channels[0], *pSound);
 	soundsMap.insert(sound);
 }
 
-void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
+void SoundSystemClass::playSound(SoundClass pSound, int type, bool bLoop)
 {
 	if (!bLoop)
 		pSound->setMode(FMOD_LOOP_OFF);
@@ -51,18 +53,39 @@ void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
 
 	//Los parametros que acepta el metodo son :
 	//Sonido a Reproducir / Grupos de Canales (bastante wtf la verdad) / Si esta o no pausado / Canal por el que se reproduce (por defecto 0)
-	m_pSystem->playSound(pSound, 0, false, 0); //He cambiado la sintaxis de como venia por que si no daba error
+	m_pSystem->playSound(pSound, effects, false, &channels[0]); //He cambiado la sintaxis de como venia por que si no daba error
+	bool playing;
+	/*
+	for (auto channel : channels) {
+		channel->isPlaying(&playing);
+		if (!playing) {
+			switch (type)
+			{
+			case 0:
+				m_pSystem->playSound(pSound, effects, false, &channel);
+				break;
+			default:
+				break;
+			}
+			soundsMap.erase(channel);
+			std::pair<FMOD::Channel*, SoundClass> sound(channel, pSound);
+			soundsMap.insert(sound);
+		}
+	}*/
 
+	SoundClass soundSample;
+	createSound(&soundSample, "../../../Recursos/Sonidos/wii.mp3", 0);
+	m_pSystem->playSound(soundSample, effects, false, &channels[1]);
 }
 
 void SoundSystemClass::releaseSound(int channel)
 {
-	soundsMap.find(channel)->second->release();
+	soundsMap.find(channels[channel])->second->release();
 };
 
 void SoundSystemClass::setSpeed(int channel,float s)
 {
-	soundsMap.find(channel)->second->setMusicSpeed(s);
+	soundsMap.find(channels[channel])->second->setMusicSpeed(s);
 }
 
 void SoundSystemClass::setVolumeChannel(int channelGroup, float volume)
