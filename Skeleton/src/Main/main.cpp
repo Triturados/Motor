@@ -1,7 +1,7 @@
 #include <Sound.h>
 #include <iostream>
 #include <OgreRenderer.h>
-#include <Class.h>
+
 
 void useSystemSound()
 {
