@@ -5,7 +5,7 @@ En este repositorio estará subida la solución del motor **'Grind'**.
 # Arquitectura 
 El repositorio estará dividio en **siete** soluciones diferentes
 
-| Grind                 |                                                                                                           |
+| Love                 |                                                                                                           |
 |-----------------------|:---------------------------------------------------------------------------------------------------------:|
 |  Proyecto principal   |  Inicialización, bucle principal y enlace con otros proyectos                                             |
 |  Físicas              |  Abstracción de bullet physics para implementación de físicas en el motor                                 |
