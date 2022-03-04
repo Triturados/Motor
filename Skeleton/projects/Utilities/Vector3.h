@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "Recta.h"
 
 template<typename T>
 class Vector3 {
@@ -89,7 +90,25 @@ public:
 		int y_ = y * b.y;
 		int z_ = z * b.z;
 
-		return x_ + y_ + z_;
+		return (x_ + y_ + z_);
+	}
+
+	Recta getRecta(Vector3<T> b)
+	{
+		Vector3<T> v = this - b;
+
+		element auxX, auxY, auxZ; 
+		
+		auxX.value = x;
+		auxX.landa = v.x;
+
+		auxY.value = y;
+		auxY.landa = v.y;
+
+		auxZ.value = z;
+		auxZ.landa = v.z;
+
+		return Recta(auxX, auxY, auxZ);
 	}
 
 	Vector3<T> vectorialProduct(Vector3<T> b)
