@@ -1,7 +1,6 @@
 #pragma once
 #include <fmod.hpp>
 #include <fmod_errors.h>
-#include <iostream>
 #include <unordered_map>
 
 typedef FMOD::Sound* SoundClass;
@@ -20,7 +19,7 @@ public:
 	FMOD::System* m_pSystem;
 	SoundSystemClass();
 	void createSound(SoundClass* pSound, const char* pFile,int channel);
-	void playSound(SoundClass pSound, bool bLoop = false);
+	void playSound(SoundClass pSound, int groupChannel, bool bLoop = false);
 	void releaseSound(int channel);
 	void setSpeed(int channel,float s);
 	void setVolumeChannel(int channelGroup, float volume);

@@ -19,27 +19,29 @@ SoundSystemClass::SoundSystemClass()
 	// Initialize our Instance with 36 Channels
 	m_pSystem->init(36, FMOD_INIT_NORMAL, NULL);
 
+	//Creacion de los grupos de canales
 	m_pSystem->createChannelGroup("Master", &master);
 	m_pSystem->createChannelGroup("Effects", &effects);
 	m_pSystem->createChannelGroup("Environment", &environment);
 	m_pSystem->createChannelGroup("Music", &music);
 	m_pSystem->createChannelGroup("Voices", &voices);
 
+	//Añadimos los canales al master que es el que controla todo 
 	master->addGroup(effects);	master->addGroup(music);
 	master->addGroup(environment); 	master->addGroup(voices);
 }
 
 void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int channel)
 {
-	m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound); //El segundo parametro antes era :_HARDWARE pero en la documentacion no etsbaa
-	//Lo unico que me cuadraba de la documentacion es el 3D aunque bastante xd la verdad
+	m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
 
-	//Habria que hacer un switch para segun añadamos sonidos a los distintos mapas ,distinguir entre mapas para hacer el insert solo una vez
+
+	//Añadimos al mapa de sonidos generales un tupla somido canal
 	std::pair<int, SoundClass> sound(channel, *pSound);
 	soundsMap.insert(sound);
 }
 
-void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
+void SoundSystemClass::playSound(SoundClass pSound, int groupChannel, bool bLoop)
 {
 	if (!bLoop)
 		pSound->setMode(FMOD_LOOP_OFF);
@@ -49,10 +51,23 @@ void SoundSystemClass::playSound(SoundClass pSound, bool bLoop)
 		pSound->setLoopCount(-1);
 	}
 
-	//Los parametros que acepta el metodo son :
-	//Sonido a Reproducir / Grupos de Canales (bastante wtf la verdad) / Si esta o no pausado / Canal por el que se reproduce (por defecto 0)
-	m_pSystem->playSound(pSound, 0, false, 0); //He cambiado la sintaxis de como venia por que si no daba error
+	int numOfChans = sizeof(channels);
+	for (int i = 0; i < numOfChans; i++) {
+		bool isPlaying;
+		channels[i]->isPlaying(&isPlaying);
 
+		if (isPlaying) continue;
+
+		switch (groupChannel)
+		{
+		case 1: m_pSystem->playSound(pSound, effects, false, &channels[i]); break;
+		case 3:	m_pSystem->playSound(pSound, environment, false, &channels[i]); break;
+		case 4: m_pSystem->playSound(pSound, voices, false, &channels[i]); break;
+		case 5: m_pSystem->playSound(pSound, music, false, &channels[i]); break;
+		default:
+			break;
+		}
+	}
 }
 
 void SoundSystemClass::releaseSound(int channel)
@@ -60,7 +75,7 @@ void SoundSystemClass::releaseSound(int channel)
 	soundsMap.find(channel)->second->release();
 };
 
-void SoundSystemClass::setSpeed(int channel,float s)
+void SoundSystemClass::setSpeed(int channel, float s)
 {
 	soundsMap.find(channel)->second->setMusicSpeed(s);
 }
@@ -86,5 +101,3 @@ void SoundSystemClass::pauseSound()
 }
 
 
-//Para el de pausar no encuentro como se hace con el enum del FMOD_CHANNEL
-//pero seria llamar con ese enum tanto al setPaused como al get Paused y et devuelven en el estado en el que estan
