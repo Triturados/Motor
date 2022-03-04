@@ -7,6 +7,9 @@
 #include <Scene.h>
 #include <lua.hpp>
 #include <GameTime.h>
+#include <time.h>
+#include "Game.h"
+
 
 class ContadorFrames : public Component {
 
@@ -55,14 +58,7 @@ public:
 
 class Escenadecontar : public SceneCreator {
 
-	Scene* populateScene() override {
 
-		Scene* scene = createScene("Escena");
-		GameObject* go = createGameObject("Nombre");
-		go->addComponent<ContadorFrames>();
-
-		return scene;
-	}
 };
 
 
@@ -70,10 +66,6 @@ class Escenadecontar : public SceneCreator {
 void useSystemSound()
 {
 
-	Time* t = new Time();
-
-
-	delete t;
 
 	lua_State *L = luaL_newstate();
 
@@ -109,35 +101,11 @@ void useSystemSound()
 	// Release the sound
 	sound.releaseSound(0);
 
-	SceneManager* sceneManager = new SceneManager();
-	sceneManager->defineScenesFactories({ new Escenadecontar(), new EscenaDeDani()});
-	sceneManager->initiliseScenes();
+	
 
-	const int numIterations = 60;
-	for (int i = 0; i < numIterations; i++) {
-
-		Scene* currentScene = sceneManager->getCurrentScene();
-
-		if (currentScene == nullptr) {
-			break;
-		}
-
-		//input();
-		currentScene->update();
-		currentScene->stepPhysics();
-		currentScene->render();
-
-		sceneManager->checkChange();
-	}
-
-	delete sceneManager;
-
-
-	new ContadorFrames();
-
-
-
-
+	
+	Game game;
+	game.run();
 
 
 
