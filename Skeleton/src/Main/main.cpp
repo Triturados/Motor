@@ -5,8 +5,8 @@
 #include <Component.h>
 #include <GameObject.h>
 #include <Scene.h>
-
 #include <lua.hpp>
+#include <GameTime.h>
 
 class ContadorFrames : public Component {
 
@@ -69,6 +69,12 @@ class Escenadecontar : public SceneCreator {
 
 void useSystemSound()
 {
+
+	Time* t = new Time();
+
+
+	delete t;
+
 	lua_State *L = luaL_newstate();
 
 	const char* s = "a = 2 + 7";
