@@ -6,6 +6,7 @@
 #include <GameObject.h>
 #include <Scene.h>
 
+#include <lua.hpp>
 
 class ContadorFrames : public Component {
 
@@ -15,7 +16,7 @@ public:
 	void update() override {
 
 		if (cont == 14) {
-			SceneManager::instance->changeScene(0, SceneLoad::PUSH);
+			SceneManager::instance->changeScene(1, SceneLoad::PUSH);
 		}
 		std::cout << cont++ << "\n";
 	}
@@ -23,6 +24,33 @@ public:
 private:
 	int cont = 0;
 };
+
+
+
+
+class ElComponenteDeDani : public Component {
+
+
+public:
+	void update() override {
+		std::cout << "Ivan es muy tonto sinceramente\n";
+	}
+};
+
+
+
+class EscenaDeDani : public SceneCreator {
+
+
+public:
+	Scene* populateScene() override {
+		Scene* scene = createScene("Escena Dani");
+		GameObject* pepe = createGameObject("Pepe");
+		pepe->addComponent<ElComponenteDeDani>();
+		return scene;
+	}
+};
+
 
 
 class Escenadecontar : public SceneCreator {
@@ -41,6 +69,23 @@ class Escenadecontar : public SceneCreator {
 
 void useSystemSound()
 {
+	lua_State *L = luaL_newstate();
+
+	const char* s = "a = 2 + 7";
+	int r = luaL_dostring(L, s);
+
+	if (r == LUA_OK) {
+		lua_getglobal(L, "a");
+		if (lua_isnumber(L, -1)) {
+			float a_in_cpp = (float)lua_tonumber(L, -1);
+			std::cout << "LUA LUA LUA: " << a_in_cpp << "\n";
+		}
+	}
+
+	lua_close(L);
+	
+	
+	
 	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
 
 	// Create a sample sound
@@ -59,7 +104,7 @@ void useSystemSound()
 	sound.releaseSound(0);
 
 	SceneManager* sceneManager = new SceneManager();
-	sceneManager->defineScenesFactories({ new Escenadecontar() });
+	sceneManager->defineScenesFactories({ new Escenadecontar(), new EscenaDeDani()});
 	sceneManager->initiliseScenes();
 
 	const int numIterations = 60;
