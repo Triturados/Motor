@@ -2,10 +2,14 @@
 
 
 
-class Time {
+class GameTime {
 public:
 
-	int numero = 2;
+	float deltaTime;
+	float physicsTime;
+	float timeSinceStart;
+	float timeScale;
 
-
+	unsigned long frameCount;
+	float calculateFrameRate();
 };
