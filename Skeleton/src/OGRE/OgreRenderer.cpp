@@ -129,6 +129,11 @@ Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
 	return parent->createChildSceneNode();
 }
 
+void OgreRenderer::removeNode(Ogre::SceneNode* node)
+{
+	mSceneMgr->destroySceneNode(node);
+}
+
 void OgreRenderer::exampleScene()
 {
 	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
