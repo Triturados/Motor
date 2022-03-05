@@ -39,10 +39,14 @@ private:
 	void setupScenes();
 
 public:
+	static OgreRenderer* instance;
+
 	OgreRenderer();
 
 	void initRoot();
 	bool update();
+	Ogre::SceneNode* createNode();
+	Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
 	void exampleScene();
 
 	~OgreRenderer() { };

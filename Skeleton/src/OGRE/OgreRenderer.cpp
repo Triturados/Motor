@@ -2,6 +2,9 @@
 
 OgreRenderer::OgreRenderer()
 {
+	assert("Ya existe una instancia de Ogre.", instance == nullptr);
+	instance = this;
+
 	initRoot(); 
 	
 	loadResources();
@@ -113,6 +116,17 @@ bool OgreRenderer::update()
 	if (!mRoot->renderOneFrame()) return false;
 
 	return true;
+}
+
+Ogre::SceneNode* OgreRenderer::createNode()
+{
+	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+
+}
+
+Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
+{
+	return parent->createChildSceneNode();
 }
 
 void OgreRenderer::exampleScene()
