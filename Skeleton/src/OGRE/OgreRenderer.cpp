@@ -2,8 +2,8 @@
 
 OgreRenderer::OgreRenderer()
 {
-	initRoot(); 
-	
+	initRoot();
+
 	loadResources();
 
 	setupScenes();
@@ -21,10 +21,10 @@ void OgreRenderer::initRoot() {
 	mLogPath = "./OGRE/Ogre.log";
 	mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(mPluginsCfgPath,mCfgPath,mLogPath);
-	
+	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
+
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
-	if(!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 }
 
 /// <summary>
@@ -128,4 +128,19 @@ void OgreRenderer::exampleScene()
 	Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	lightNode->setPosition(20, 80, 50);
 	lightNode->attachObject(light);
+}
+Ogre::SceneNode* OgreRenderer::createNode()
+{
+	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+
+}
+
+Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
+{
+	return parent->createChildSceneNode();
+}
+
+void OgreRenderer::removeNode(Ogre::SceneNode* node)
+{
+	mSceneMgr->destroySceneNode(node);
 }
