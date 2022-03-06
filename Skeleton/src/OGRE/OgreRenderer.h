@@ -16,6 +16,7 @@
 #include <OgreWindowEventUtilities.h>
 #include <OgreSGTechniqueResolverListener.h>
 
+
 class OgreRenderer
 {
 private:
@@ -39,6 +40,7 @@ private:
 	void setupScenes();
 
 public:
+
 	static OgreRenderer* instance;
 
 	OgreRenderer();

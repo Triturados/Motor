@@ -1,12 +1,14 @@
 #include "OgreRenderer.h"
 
+OgreRenderer* OgreRenderer::instance = nullptr;
+
 OgreRenderer::OgreRenderer()
 {
 	assert("Ya existe una instancia de Ogre.", instance == nullptr);
 	instance = this;
 
-	initRoot(); 
-	
+	initRoot();
+
 	loadResources();
 
 	setupScenes();
@@ -24,10 +26,10 @@ void OgreRenderer::initRoot() {
 	mLogPath = "./OGRE/Ogre.log";
 	mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(mPluginsCfgPath,mCfgPath,mLogPath);
-	
+	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
+
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
-	if(!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 }
 
 /// <summary>
