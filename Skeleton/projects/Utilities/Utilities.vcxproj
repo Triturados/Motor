@@ -16,10 +16,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\GameTime.h" />
+    <ClInclude Include="..\..\src\Utilities\Recta.h" />
     <ClInclude Include="..\..\src\Utilities\Transform.h" />
-    <ClInclude Include="Recta.h" />
-    <ClInclude Include="Vector2.h" />
-    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="..\..\src\Utilities\Vector2.h" />
+    <ClInclude Include="..\..\src\Utilities\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECS\ECS.vcxproj">

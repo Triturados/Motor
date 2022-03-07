@@ -104,6 +104,15 @@ public:
 		return Recta(auxX, auxY, auxZ);
 	}
 
+	Vector3<T> interpolatePoint(Vector3<T> b, float interpolation)
+	{
+		Vector3<T> v = this - b;
+
+		Vector3 aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
+
+		return aux;
+	}
+
 	Vector3<T> vectorialProduct(Vector3<T> b)
 	{
 		Vector3<T> vectorial;
