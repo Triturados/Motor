@@ -5,9 +5,11 @@
 #include <Component.h>
 #include <GameObject.h>
 #include <Scene.h>
+#include <PhysicsManager.h>
 
 #include <lua.hpp>
 
+//Ejemplo Componente
 class ContadorFrames : public Component {
 
 public:
@@ -25,9 +27,7 @@ private:
 	int cont = 0;
 };
 
-
-
-
+//Ejemplo Componente
 class ElComponenteDeDani : public Component {
 
 
@@ -37,8 +37,7 @@ public:
 	}
 };
 
-
-
+//Ejemplo Escena
 class EscenaDeDani : public SceneCreator {
 
 
@@ -51,8 +50,7 @@ public:
 	}
 };
 
-
-
+//Ejemplo Escena
 class Escenadecontar : public SceneCreator {
 
 	Scene* populateScene() override {
@@ -66,9 +64,10 @@ class Escenadecontar : public SceneCreator {
 };
 
 
-
-void useSystemSound()
+//Pruebas de proyectos
+void probandoCosas()
 {
+	//LUA
 	lua_State *L = luaL_newstate();
 
 	const char* s = "a = 2 + 7";
@@ -85,24 +84,26 @@ void useSystemSound()
 	lua_close(L);
 	
 	
-	
-	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
+	////FMOD
+	//SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
 
-	// Create a sample sound
-	SoundClass soundSample;
-	sound.createSound(&soundSample, "FMOD/Sonidos/sonido.wav",0);
+	//// Create a sample sound
+	//SoundClass soundSample;
+	//sound.createSound(&soundSample, "FMOD/Sonidos/sonido.wav",0);
 
-	// Play the sound, with loop mode
-	sound.playSound(soundSample, true);
+	//// Play the sound, with loop mode
+	//sound.playSound(soundSample, true);
 
-	// Do something meanwhile...
+	//// Do something meanwhile...
 
-	int a;
-	std::cin >> a;
+	//int a;
+	//std::cin >> a;
 
-	// Release the sound
-	sound.releaseSound(0);
+	//// Release the sound
+	//sound.releaseSound(0);
 
+
+	//GESTOR DE ESCENAS
 	SceneManager* sceneManager = new SceneManager();
 	sceneManager->defineScenesFactories({ new Escenadecontar(), new EscenaDeDani()});
 	sceneManager->initiliseScenes();
@@ -126,17 +127,12 @@ void useSystemSound()
 
 	delete sceneManager;
 
-
 	new ContadorFrames();
-
-
-
-
-
-
 
 	OgreRenderer main = OgreRenderer();
 	main.exampleScene();
+
+	PhysicsManager* physicsManager = new PhysicsManager();
 
 	while (main.update()) {};
 
@@ -144,7 +140,6 @@ void useSystemSound()
 
 void main()
 {
-	//sound("aaaa");
-	useSystemSound();
+	probandoCosas();
 }
 
