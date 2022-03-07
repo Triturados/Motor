@@ -8,9 +8,9 @@ typedef FMOD::Sound* SoundClass;
 class SoundSystemClass //Clase que maneja el sonido a partir del uso de FMOD
 {
 private:
+	const int MaxCh = 36;
 	std::unordered_map<int, SoundClass> soundsMap;
-
-	FMOD::Channel* channels[36];
+	std::vector<FMOD::Channel*> channels;
 	std::vector<FMOD::ChannelGroup*> channelGroups;
 	FMOD::ChannelGroup *effects, *voices, *environment, *music, *master;
 

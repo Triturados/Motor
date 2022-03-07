@@ -84,23 +84,23 @@ void probandoCosas()
 	lua_close(L);
 	
 	
-	////FMOD
-	//SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
+	//FMOD
+	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
 
-	//// Create a sample sound
-	//SoundClass soundSample;
-	//sound.createSound(&soundSample, "FMOD/Sonidos/sonido.wav",0);
+	// Create a sample sound
+	SoundClass soundSample;
+	sound.createSound(&soundSample, "../../resources/FMOD/Sonidos/sonido.wav",0);
 
-	//// Play the sound, with loop mode
-	//sound.playSound(soundSample, true);
+	// Play the sound, with loop mode
+	sound.playSound(soundSample, true);
 
-	//// Do something meanwhile...
+	// Do something meanwhile...
 
-	//int a;
-	//std::cin >> a;
+	int a;
+	std::cin >> a;
 
-	//// Release the sound
-	//sound.releaseSound(0);
+	// Release the sound
+	sound.releaseSound(0);
 
 
 	//GESTOR DE ESCENAS

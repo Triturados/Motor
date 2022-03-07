@@ -29,6 +29,9 @@ SoundSystemClass::SoundSystemClass()
 	//Añadimos los canales al master que es el que controla todo 
 	master->addGroup(effects);	master->addGroup(music);
 	master->addGroup(environment); 	master->addGroup(voices);
+
+	channels.reserve(MaxCh);
+	for (int i = 0; i < MaxCh; i++) channels.push_back(nullptr);
 }
 
 void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int channel)
