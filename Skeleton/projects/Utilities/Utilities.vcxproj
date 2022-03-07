@@ -20,6 +20,7 @@
     <ClInclude Include="..\..\src\Utilities\Transform.h" />
     <ClInclude Include="..\..\src\Utilities\Vector2.h" />
     <ClInclude Include="..\..\src\Utilities\Vector3.h" />
+    <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECS\ECS.vcxproj">
