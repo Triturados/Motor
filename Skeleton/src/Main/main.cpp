@@ -109,11 +109,6 @@ void useSystemSound()
 
 
 
-	OgreRenderer main = OgreRenderer();
-	main.exampleScene();
-
-	while (main.update()) {};
-
 }
 
 void main()

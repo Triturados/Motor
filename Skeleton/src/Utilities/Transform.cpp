@@ -1,10 +1,18 @@
 #include "Transform.h"
+#include <Ogre.h>
+#include <OgreRenderer.h>
+#include <OgreSceneNode.h>
 
 Transform::Transform(Transform* p)
 {
 
 	//Le pasamos un parent, por defecto es nulo 
-	entityNode = OgreRenderer::instance->createChildNode(p->entityNode);
+
+
+	entityNode = p == nullptr ? 
+		OgreRenderer::instance->createNode() : 
+		OgreRenderer::instance->createChildNode(p->entityNode);
+
 	parent = p;
 
 	//Obtenenos las posiciones a partir de ogre

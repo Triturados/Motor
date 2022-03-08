@@ -1,10 +1,11 @@
 #pragma once
 
 #include <vector>
+#include <Component.h>
 #include <Ogre.h>
 #include <OgreRenderer.h>
-#include <Component.h>
 #include <OgreSceneNode.h>
+
 
 class Transform :  public Component
 {

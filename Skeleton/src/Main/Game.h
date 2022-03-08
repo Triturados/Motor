@@ -2,9 +2,11 @@
 
 class GameTime;
 class SceneManager;
+class OgreRenderer;
 
 struct Game {
 
+	OgreRenderer* renderer;
 	SceneManager* sceneManager;
 	GameTime* time;
 

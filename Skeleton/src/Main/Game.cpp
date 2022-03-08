@@ -8,7 +8,8 @@
 #include <GameTime.h>
 #include <chrono>
 #include <thread>
-
+#include <OgreRenderer.h>
+#include <Transform.h>
 
 using namespace std::chrono;
 
@@ -28,6 +29,7 @@ class Escenadecontar : public SceneCreator {
 
 		Scene* scene = createScene("Escena de contar");
 		GameObject* go = createGameObject("Objeto");
+		//go->addComponent<Transform>();
 		go->addComponent<ContadorFrames>();
 
 		return scene;
@@ -41,6 +43,13 @@ void Game::setup()
 	sceneManager = new SceneManager();
 	sceneManager->defineScenesFactories({ new Escenadecontar() });
 	sceneManager->initiliseScenes();
+
+
+
+	renderer = new OgreRenderer();
+	renderer->exampleScene();
+
+	
 }
 
 
@@ -48,6 +57,7 @@ void Game::quit()
 {
 	delete sceneManager;
 	delete time;
+	delete renderer;
 }
 
 void Game::loop()
@@ -59,10 +69,12 @@ void Game::loop()
 
 	duration uInterval = duration<double>(1.0 / updateFrameRate);
 	duration pInterval = duration<double>(1.0 / physicsFrameRate);
+	duration rInterval = duration<double>(1.0 / updateFrameRate);
 
 	auto applicationStart = high_resolution_clock::now();
 
 	auto initialTime = applicationStart;
+
 	for (int i = 0; i < numIterations; i++) {
 
 		Scene* currentScene = sceneManager->getCurrentScene();
@@ -72,9 +84,13 @@ void Game::loop()
 		}
 
 		//input();
+
 		currentScene->update();
+		
 		currentScene->stepPhysics();
-		currentScene->render();
+		
+		//currentScene->render();
+		renderer->update();
 
 		sceneManager->checkChange();
 
@@ -91,12 +107,11 @@ void Game::loop()
 		time->frameCount++;
 
 		initialTime = currentTime;
+
 		std::this_thread::sleep_for(sleepFor);
 	}
 
 	std::cout << "Frame rate medio: " << time->calculateFrameRate() << " Esperado: " << updateFrameRate << "\n";
-	
-	system("pause");
 }
 
 

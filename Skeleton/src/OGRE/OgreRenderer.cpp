@@ -1,5 +1,7 @@
 #include "OgreRenderer.h"
 
+OgreRenderer* OgreRenderer::instance;
+
 OgreRenderer::OgreRenderer()
 {
 	initRoot();
