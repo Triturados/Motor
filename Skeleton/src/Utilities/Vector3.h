@@ -108,7 +108,7 @@ public:
 	{
 		Vector3<T> v = this - b;
 
-		Vector3 aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
+		Vector3<T> aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
 
 		return aux;
 	}
@@ -129,7 +129,7 @@ public:
 		int x_ = x - b.x;
 		int y_ = y - b.y;
 		int z_ = z - b.z;
-		Vector3 aux = Vector3(x_, y_, z_);
+		Vector3<T> aux = Vector3(x_, y_, z_);
 		return aux.magnitude();
 	}
 
