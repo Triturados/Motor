@@ -52,9 +52,7 @@ public:
 	void removeNode(Ogre::SceneNode* node);
 
 	void exampleScene();
-	Ogre::SceneNode* createNode();
-	Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
-	void removeNode(Ogre::SceneNode* node);
+	
 
 	~OgreRenderer() { };
 };

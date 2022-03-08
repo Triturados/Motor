@@ -120,21 +120,7 @@ bool OgreRenderer::update()
 	return true;
 }
 
-Ogre::SceneNode* OgreRenderer::createNode()
-{
-	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
 
-}
-
-Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
-{
-	return parent->createChildSceneNode();
-}
-
-void OgreRenderer::removeNode(Ogre::SceneNode* node)
-{
-	mSceneMgr->destroySceneNode(node);
-}
 
 void OgreRenderer::exampleScene()
 {
