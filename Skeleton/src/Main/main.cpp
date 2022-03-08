@@ -8,6 +8,10 @@
 #include <PhysicsManager.h>
 
 #include <lua.hpp>
+#include <GameTime.h>
+#include <time.h>
+#include "Game.h"
+
 
 //Ejemplo Componente
 class ContadorFrames : public Component {
@@ -53,21 +57,15 @@ public:
 //Ejemplo Escena
 class Escenadecontar : public SceneCreator {
 
-	Scene* populateScene() override {
 
-		Scene* scene = createScene("Escena");
-		GameObject* go = createGameObject("Nombre");
-		go->addComponent<ContadorFrames>();
-
-		return scene;
-	}
 };
 
 
 //Pruebas de proyectos
 void probandoCosas()
 {
-	//LUA
+
+
 	lua_State *L = luaL_newstate();
 
 	const char* s = "a = 2 + 7";
@@ -102,39 +100,13 @@ void probandoCosas()
 	// Release the sound
 	sound.releaseSound(0);
 
+	
 
-	//GESTOR DE ESCENAS
-	SceneManager* sceneManager = new SceneManager();
-	sceneManager->defineScenesFactories({ new Escenadecontar(), new EscenaDeDani()});
-	sceneManager->initiliseScenes();
+	
+	Game game;
+	game.run();
 
-	const int numIterations = 60;
-	for (int i = 0; i < numIterations; i++) {
 
-		Scene* currentScene = sceneManager->getCurrentScene();
-
-		if (currentScene == nullptr) {
-			break;
-		}
-
-		//input();
-		currentScene->update();
-		currentScene->stepPhysics();
-		currentScene->render();
-
-		sceneManager->checkChange();
-	}
-
-	delete sceneManager;
-
-	new ContadorFrames();
-
-	OgreRenderer main = OgreRenderer();
-	main.exampleScene();
-
-	PhysicsManager* physicsManager = new PhysicsManager();
-
-	while (main.update()) {};
 
 }
 
