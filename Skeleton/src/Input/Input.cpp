@@ -24,7 +24,11 @@ void Input::handleInput()
 	while (SDL_PollEvent(&sdlevent)) {
 		switch (sdlevent.type) {
 		case SDL_KEYDOWN:
+		{
+			int enumvalue = (int)sdlevent.key.keysym.scancode - 4;
+			std::cout << enumvalue << std::endl;
 			break;
+		}
 		case SDL_KEYUP:
 			break;
 		case SDL_MOUSEMOTION:
