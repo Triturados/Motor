@@ -1,6 +1,6 @@
 #include "Transform.h"
 
-Transform::Transform(Transform* p = nullptr)
+Transform::Transform(Transform* p)
 {
 
 	//Le pasamos un parent, por defecto es nulo 
