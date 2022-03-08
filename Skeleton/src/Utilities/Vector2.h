@@ -51,12 +51,12 @@ public:
 
 	T magnitude() //Magnitud 
 	{
-		return sqrt(pow(x, 2) + pow(y, 2));
+		return sqrt(x * x + y * y);
 	}
 
-	T magnitude2() //Magnitud al cuadrado
+	T magnitudeSqr() //Magnitud al cuadrado
 	{
-		return pow(sqrt(pow(x, 2) + pow(y, 2)), 2);
+		return x * x + y * y;
 	}
 
 	void normalize() //normalizar vector
