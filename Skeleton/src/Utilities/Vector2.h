@@ -2,7 +2,7 @@
 #include <math.h>
 #include "Recta.h"
 
-template<typename T>
+template<typename T = float>
 class Vector2 {
 public:
 
@@ -20,19 +20,19 @@ public:
 		y = sec;
 	}
 
-	Vector2 operator+(Vector2 const& v2) const {
+	Vector2<T> operator+(Vector2<T> const& v2) const {
 		return Vector3(x + v2.x, y + v2.y);
 	}
 
-	Vector2 operator-(Vector2 const& v2) const {
+	Vector2<T> operator-(Vector2<T> const& v2) const {
 		return Vector3(x - v2.x, y - v2.y);
 	}
 
-	bool operator==(Vector2 const& b) const {
+	bool operator==(Vector2<T> const& b) const {
 		return (x == v2.x && y == v2.y);
 	}
 
-	bool operator!=(Vector2 const& b) const {
+	bool operator!=(Vector2<T> const& b) const {
 		return (x != v2.x || y != v2.y);
 	}
 
@@ -89,7 +89,7 @@ public:
 	{
 		int x_ = x - b.x;
 		int y_ = y - b.y;
-		Vector2 aux = Vector2(x_, y_);
+		Vector2<T> aux = Vector2(x_, y_);
 
 		return aux.magnitude();
 	}
