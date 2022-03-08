@@ -42,7 +42,6 @@ private:
 public:
 
 	static OgreRenderer* instance;
-
 	OgreRenderer();
 
 	void initRoot();
@@ -53,6 +52,7 @@ public:
 	void removeNode(Ogre::SceneNode* node);
 
 	void exampleScene();
+	
 
 	~OgreRenderer() { };
 };

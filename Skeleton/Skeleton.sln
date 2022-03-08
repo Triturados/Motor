@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Input", "projects\Input\Inp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LUA", "projects\LUA\LUA.vcxproj", "{D5B79B46-5FE1-4EB2-A6B2-CC8CC167FA1C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "projects\Utilities\Utilities.vcxproj", "{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -75,6 +77,12 @@ Global
 		{D5B79B46-5FE1-4EB2-A6B2-CC8CC167FA1C}.Release|x64.ActiveCfg = Release|x64
 		{D5B79B46-5FE1-4EB2-A6B2-CC8CC167FA1C}.Release|x64.Build.0 = Release|x64
 		{D5B79B46-5FE1-4EB2-A6B2-CC8CC167FA1C}.Release|x86.ActiveCfg = Release|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Debug|x64.ActiveCfg = Debug|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Debug|x64.Build.0 = Debug|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Debug|x86.ActiveCfg = Debug|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x64.ActiveCfg = Release|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x64.Build.0 = Release|x64
+		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
