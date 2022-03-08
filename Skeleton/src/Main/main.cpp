@@ -86,7 +86,7 @@ void probandoCosas()
 	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
 
 	// Create a sample sound
-	SoundClass soundSample;
+	FMOD::SoundClass soundSample;
 	sound.createSound(&soundSample, "../../resources/FMOD/Sonidos/sonido.wav",0);
 
 	// Play the sound, with loop mode
@@ -105,9 +105,6 @@ void probandoCosas()
 	
 	Game game;
 	game.run();
-
-
-
 }
 
 void main()

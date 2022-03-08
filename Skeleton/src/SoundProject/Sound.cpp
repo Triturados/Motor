@@ -1,5 +1,6 @@
 #include "Sound.h"
-
+#include <fmod.hpp>
+#include <fmod_errors.h>
 
 SoundSystemClass::SoundSystemClass()
 {
@@ -34,17 +35,17 @@ SoundSystemClass::SoundSystemClass()
 	for (int i = 0; i < MaxCh; i++) channels.push_back(nullptr);
 }
 
-void SoundSystemClass::createSound(SoundClass* pSound, const char* pFile, int channel)
+void SoundSystemClass::createSound(FMOD::SoundClass* pSound, const char* pFile, int channel)
 {
 	m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
 
 
 	//Añadimos al mapa de sonidos generales un tupla somido canal
-	std::pair<int, SoundClass> sound(channel, *pSound);
+	std::pair<int, FMOD::SoundClass> sound(channel, *pSound);
 	soundsMap.insert(sound);
 }
 
-void SoundSystemClass::playSound(SoundClass pSound, int groupChannel, bool bLoop)
+void SoundSystemClass::playSound(FMOD::SoundClass pSound, int groupChannel, bool bLoop)
 {
 	if (!bLoop)
 		pSound->setMode(FMOD_LOOP_OFF);
