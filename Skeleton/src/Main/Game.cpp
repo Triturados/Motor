@@ -19,6 +19,7 @@ class ContadorFrames : public Component {
 public:
 	void update() override {
 		//std::cout << cont++ << "\n";
+
 		cont++;
 	}
 
@@ -108,7 +109,7 @@ void Game::loop()
 
 		initialTime = currentTime;
 
-		std::this_thread::sleep_for(sleepFor);
+		//std::this_thread::sleep_for(sleepFor);
 	}
 
 	std::cout << "Frame rate medio: " << time->calculateFrameRate() << " Esperado: " << updateFrameRate << "\n";
