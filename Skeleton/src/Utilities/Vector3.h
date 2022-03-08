@@ -2,7 +2,7 @@
 #include <math.h>
 #include "Recta.h"
 
-template<typename T>
+template<typename T = float >
 class Vector3 {
 private:
 	float gradosARadianes(double grados)
@@ -28,19 +28,19 @@ public:
 		z = ter;
 	}
 
-	Vector3 operator+(Vector3 const& v2) const {
+	Vector3<T> operator+(Vector3<T> const& v2) const {
 		return Vector3(x + v2.x, y + v2.y, z + v2.z);
 	}
 
-	Vector3 operator-(Vector3 const& v2) const {
+	Vector3<T> operator-(Vector3<T> const& v2) const {
 		return Vector3(x - v2.x, y - v2.y, z - v2.z);
 	}
 
-	bool operator==(Vector3 const& b) const {
+	bool operator==(Vector3<T> const& b) const {
 		return x == v2.x && y == v2.y && z == v2.z;
 	}
 
-	bool operator!=(Vector3 const& b) const {
+	bool operator!=(Vector3<T> const& b) const {
 		return x != v2.x || y != v2.y || z != v2.z;
 	}
 
@@ -133,10 +133,10 @@ public:
 		return aux.magnitude();
 	}
 
-	Vector3 rotateX(double degrees) { //Rotar en el eje x
+	Vector3<T> rotateX(double degrees) { //Rotar en el eje x
 		double rads = gradosARadianes(degrees);
 
-		Vector3 A;
+		Vector3<T> A;
 		A.x = x;
 		A.y = cos(rads) * y + sin(rads) * z;
 		A.z = -sin(rads) * y + cos(rads) * z;
@@ -144,10 +144,10 @@ public:
 		return A;
 	}
 
-	Vector3 rotateY(double degrees) { //Rotar en el eje y
+	Vector3<T> rotateY(double degrees) { //Rotar en el eje y
 		double rads = gradosARadianes(degrees);
 
-		Vector3 A;
+		Vector3<T> A;
 		A.x = (cos(rads) * x) - (sin(rads) * z);
 		A.y = y;
 		A.z = (sin(rads) * x) + (cos(rads) * z);
@@ -155,10 +155,10 @@ public:
 		return A;
 	}
 
-	Vector3 rotateZ(double degrees) { //Rotar en el eje z
+	Vector3<T> rotateZ(double degrees) { //Rotar en el eje z
 		double rads = gradosARadianes(degrees);
 
-		Vector3 A;
+		Vector3<T> A;
 		A.x = (cos(rads) * x) + (sin(rads) * y);
 		A.y = (-sin(rads) * x) + (cos(rads) * y);
 		A.z = info.direction.z;
