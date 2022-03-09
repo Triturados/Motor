@@ -1,6 +1,7 @@
 #include "Sound.h"
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#include <fstream>
 
 SoundSystemClass::SoundSystemClass()
 {
@@ -39,6 +40,7 @@ void SoundSystemClass::createSound(FMOD::SoundClass* pSound, const char* pFile, 
 {
 	m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
 
+	if (!std::ifstream(pFile)) throw std::invalid_argument("Sound file doesn't not exist.");
 
 	//Añadimos al mapa de sonidos generales un tupla somido canal
 	std::pair<int, FMOD::SoundClass> sound(channel, *pSound);
@@ -64,13 +66,14 @@ void SoundSystemClass::playSound(FMOD::SoundClass pSound, int groupChannel, bool
 
 		switch (groupChannel)
 		{
-		case 1: m_pSystem->playSound(pSound, effects, false, &channels[i]); break;
-		case 3:	m_pSystem->playSound(pSound, environment, false, &channels[i]); break;
-		case 4: m_pSystem->playSound(pSound, voices, false, &channels[i]); break;
-		case 5: m_pSystem->playSound(pSound, music, false, &channels[i]); break;
+		case 0: m_pSystem->playSound(pSound, effects, false, &channels[i]); break;
+		case 1:	m_pSystem->playSound(pSound, environment, false, &channels[i]); break;
+		case 2: m_pSystem->playSound(pSound, voices, false, &channels[i]); break;
+		case 3: m_pSystem->playSound(pSound, music, false, &channels[i]); break;
 		default:
 			break;
 		}
+		break;
 	}
 }
 
@@ -90,9 +93,9 @@ void SoundSystemClass::setVolumeChannel(int channelGroup, float volume)
 	{
 	case 0: master->setVolume(volume); break;
 	case 1: effects->setVolume(volume); break;
-	case 3: environment->setVolume(volume); break;
-	case 4: voices->setVolume(volume); break;
-	case 5: music->setVolume(volume); break;
+	case 2: environment->setVolume(volume); break;
+	case 3: voices->setVolume(volume); break;
+	case 4: music->setVolume(volume); break;
 	default:
 		break;
 	}
