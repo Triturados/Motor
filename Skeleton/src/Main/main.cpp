@@ -88,7 +88,7 @@ void probandoCosas()
 	sound.createSound(&soundSample, "../resources/FMOD/Sonidos/sonido.wav",0);
 
 	// Play the sound, with loop mode
-	sound.playSound(soundSample, true);
+	sound.playSound(soundSample, 0, true);
 
 	// Do something meanwhile...
 

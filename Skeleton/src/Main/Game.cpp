@@ -88,9 +88,9 @@ void Game::loop()
 		//input();
 
 		currentScene->update();
-		
+
 		currentScene->stepPhysics();
-		
+
 		//currentScene->render();
 		renderer->update();
 		physics->update();
