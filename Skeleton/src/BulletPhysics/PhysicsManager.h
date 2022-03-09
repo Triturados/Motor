@@ -8,17 +8,10 @@ class btDiscreteDynamicsWorld;
 class btRigidBody;
 class OgreDebugDrawer;
 class btCollisionObject;
+class btVector3;
 
-//Clase placeholder hasta integrar utilities
 template <typename T>
-class Vector3/* {
-public:
-	int x_, y_, z_;
-
-	Vector3(int x, int y, int z) {
-		x_ = x; y_ = y; z_ = z;
-	}
-}*/;
+class Vector3;
 
 class PhysicsManager {
 
@@ -37,15 +30,13 @@ private:
 	//Variable de bullet que hace de solucionador de restricciones 
 	btSequentialImpulseConstraintSolver* constraintSolver = nullptr;
 
-	//Variable de bullet a la que se le pasa todas las variables anteriores como configuracion de la fisica
+	//Variable que representa el entorno dinámico de bullet con las anteriores variables como configuración
 	btDiscreteDynamicsWorld* dynamicsWorld = nullptr;
 
 	OgreDebugDrawer* mDebugDrawer_ = nullptr;
 
 	PhysicsManager();
 	virtual ~PhysicsManager();
-
-	void checkCollision();
 
 public:
 	static PhysicsManager* getInstance();
@@ -56,9 +47,19 @@ public:
 
 	btDiscreteDynamicsWorld* getWorld() const;
 
+	//Crea el un rigidbody de bullet a partir de los siguientes parametros:
+	//Posicion, masa e identificador (el cual determina la forma del collider)
+	btRigidBody* createRB(Vector3<float> pos, float mass, int group = -1, int mask = -1);
+
+	//destruye un rigidbody de bullet
+	void destroyRigidBody(btRigidBody* body);
+
 	void update();
 	void fixedUpdate(float deltaTime);
 
 	void destroyWorld();
 	static void destroy();
+
+	btVector3 btConvert(const Vector3<float>& v3);
+	Vector3<float> v3Convert(const btVector3& v3);
 };

@@ -10,6 +10,7 @@
 #include <thread>
 #include <OgreRenderer.h>
 #include <Transform.h>
+#include <PhysicsManager.h>
 
 using namespace std::chrono;
 
@@ -45,12 +46,12 @@ void Game::setup()
 	sceneManager->defineScenesFactories({ new Escenadecontar() });
 	sceneManager->initiliseScenes();
 
-
+	PhysicsManager::setUpInstance();
+	physics = PhysicsManager::getInstance();
+	physics->init(Vector3<float>(0, -9.8f, 0));
 
 	renderer = new OgreRenderer();
 	renderer->exampleScene();
-
-	
 }
 
 
@@ -63,7 +64,7 @@ void Game::quit()
 
 void Game::loop()
 {
-	const float numIterations = 60;
+	const float numIterations = 360;
 
 	const float updateFrameRate = 60;
 	const float physicsFrameRate = 50;
@@ -92,7 +93,7 @@ void Game::loop()
 		
 		//currentScene->render();
 		renderer->update();
-
+		physics->update();
 		sceneManager->checkChange();
 
 		//Calculo del tiempo

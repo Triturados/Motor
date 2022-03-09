@@ -96,10 +96,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\BulletPhysics\DebugDrawer.cpp" />
     <ClCompile Include="..\..\src\BulletPhysics\PhysicsManager.cpp" />
+    <ClCompile Include="..\..\src\BulletPhysics\RigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\BulletPhysics\DebugDrawer.h" />
     <ClInclude Include="..\..\src\BulletPhysics\PhysicsManager.h" />
+    <ClInclude Include="..\..\src\BulletPhysics\RigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECS\ECS.vcxproj">

@@ -97,11 +97,6 @@ void probandoCosas()
 
 	// Release the sound
 	sound.releaseSound(0);
-
-	PhysicsManager::setUpInstance();
-	PhysicsManager* physicsManager = PhysicsManager::getInstance();
-	physicsManager->init( Vector3<float>(0, -9.8f, 0));
-
 	
 	Game game;
 	game.run();

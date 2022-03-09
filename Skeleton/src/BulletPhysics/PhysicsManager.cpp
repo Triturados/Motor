@@ -49,11 +49,11 @@ void PhysicsManager::init(const Vector3<float> gravity)
 
 	dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-//#ifdef _DEBUG
-//	mDebugDrawer_ = new OgreDebugDrawer(OgreContext::getInstance()->getSceneManager());
-//	mDebugDrawer_->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
-//	dynamicsWorld->setDebugDrawer(mDebugDrawer_);
-//#endif // DEBUG
+#ifdef _DEBUG
+	mDebugDrawer_ = new OgreDebugDrawer(OgreContext::getInstance()->getSceneManager());
+	mDebugDrawer_->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	dynamicsWorld->setDebugDrawer(mDebugDrawer_);
+#endif // DEBUG
 }
 
 btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
@@ -63,21 +63,45 @@ btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
 
 void PhysicsManager::update()
 {
-	dynamicsWorld->stepSimulation(1.f / 60.f, 10);
+	dynamicsWorld->stepSimulation(1.f / 60.f);
 
-	checkCollision();
 
 #ifdef _DEBUG
+	//dynamicsWorld->getDebugDrawer()->drawBox(btVector3(5, 5, 5), btVector3(10, 10, 10), btVector3(1, 0, 0));
+
 	dynamicsWorld->debugDrawWorld();
 #endif // _DEBUG
 }
 
 void PhysicsManager::fixedUpdate(float deltaTime)
 {
-	dynamicsWorld->stepSimulation(deltaTime, 10);
-
-	checkCollision();
+	dynamicsWorld->stepSimulation(deltaTime);
 }
+
+btRigidBody* PhysicsManager::createRB(Vector3<float> pos, float mass, int group, int mask)
+{
+	btTransform transform;
+	transform.setIdentity();
+	transform.setOrigin(btVector3(pos.x, pos.y, pos.z));
+
+	btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), new btBoxShape(btVector3(1.0f, 1.0f, 1.0f)));
+	btRigidBody* rb = new btRigidBody(info);
+
+	rb->forceActivationState(DISABLE_DEACTIVATION);
+
+	dynamicsWorld->addRigidBody(rb, group, mask);
+
+	return rb;
+}
+void PhysicsManager::destroyRigidBody(btRigidBody* body)
+{
+	dynamicsWorld->removeCollisionObject(body);
+	delete body->getCollisionShape();
+	delete body->getMotionState();
+	delete body;
+	body = nullptr;
+}
+
 
 void PhysicsManager::destroyWorld()
 {
@@ -100,7 +124,13 @@ void PhysicsManager::destroy()
 	delete instance_;
 }
 
-void PhysicsManager::checkCollision()
+btVector3 PhysicsManager::btConvert(const Vector3<float>& v3)
 {
-	
+	return btVector3();
 }
+
+Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
+{
+	return Vector3<float>();
+}
+
