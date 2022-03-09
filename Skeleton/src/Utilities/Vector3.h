@@ -36,11 +36,11 @@ public:
 		return Vector3(x - v2.x, y - v2.y, z - v2.z);
 	}
 
-	bool operator==(Vector3<T> const& b) const {
+	bool operator==(Vector3<T> const& v2) const {
 		return x == v2.x && y == v2.y && z == v2.z;
 	}
 
-	bool operator!=(Vector3<T> const& b) const {
+	bool operator!=(Vector3<T> const& v2) const {
 		return x != v2.x || y != v2.y || z != v2.z;
 	}
 
@@ -161,7 +161,7 @@ public:
 		Vector3<T> A;
 		A.x = (cos(rads) * x) + (sin(rads) * y);
 		A.y = (-sin(rads) * x) + (cos(rads) * y);
-		A.z = info.direction.z;
+		A.z = z;
 
 		return A;
 	}

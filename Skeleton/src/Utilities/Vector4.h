@@ -30,11 +30,11 @@ public:
 		return Vector4(x - v2.x, y - v2.y, z - v2.z, w);
 	}
 
-	bool operator==(Vector4<T> const& b) const {
+	bool operator==(Vector4<T> const& v2) const {
 		return (x == v2.x && y == v2.y && z == v2.z && w == v2.w);
 	}
 
-	bool operator!=(Vector4<T> const& b) const {
+	bool operator!=(Vector4<T> const& v2) const {
 		return (x != v2.x || y != v2.y || z != v2.z || w != v2.w);
 	}
 

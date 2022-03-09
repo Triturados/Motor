@@ -28,11 +28,11 @@ public:
 		return Vector3(x - v2.x, y - v2.y);
 	}
 
-	bool operator==(Vector2<T> const& b) const {
+	bool operator==(Vector2<T> const& v2) const {
 		return (x == v2.x && y == v2.y);
 	}
 
-	bool operator!=(Vector2<T> const& b) const {
+	bool operator!=(Vector2<T> const& v2) const {
 		return (x != v2.x || y != v2.y);
 	}
 
