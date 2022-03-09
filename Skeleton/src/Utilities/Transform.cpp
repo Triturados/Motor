@@ -1,7 +1,4 @@
 #include "Transform.h"
-#include <Ogre.h>
-#include <OgreRenderer.h>
-#include <OgreSceneNode.h>
 
 Transform::Transform(Transform* p)
 {
@@ -29,35 +26,61 @@ Transform::~Transform()
 	OgreRenderer::instance->removeNode(entityNode);
 }
 
-Ogre::Vector3 Transform::getPos()
+Vector3<float>Transform::getPos()
 {
-	return position;
+	
+	return transformOgreVector(position);
 }
 
-Ogre::Quaternion Transform::getRot()
+Vector4<float>Transform::getRot()
 {
-	return rotation;
+	return transformOgreQuaternion(rotation);
 }
 
-Ogre::Vector3 Transform::getScale()
+Vector3<float>Transform::getScale()
 {
-	return scale;
+	return transformOgreVector(scale);
 }
 
-void Transform::setRot(Ogre::Quaternion r)
+
+
+void Transform::setRot(Vector4<float> r)
 {
-	rotation = r;
-	entityNode->setOrientation(r);
+	rotation = transformIntoOgreQuaternion(r);
+	entityNode->setOrientation(rotation);
 }
 
-void Transform::setPos(Ogre::Vector3 p)
+void Transform::setPos(Vector3<float> p)
 {
-	position = p;
-	entityNode->setPosition(p);
+	position = transformIntoOgreVector(p);
+	entityNode->setPosition(position);
 }
 
-void Transform::setScale(Ogre::Vector3 s)
+void Transform::setScale(Vector3<float> s)
 {
-	scale = s;
-	entityNode->setScale(s);
+	scale = transformIntoOgreVector(s);
+	entityNode->setScale(scale);
+}
+
+
+//Metodos de converion a unidades de Ogre
+Vector3<float> Transform::transformOgreVector(Ogre::Vector3  v)
+{
+	return Vector3<float>(v.x,v.y,v.z);
+}
+
+Vector4<float> Transform::transformOgreQuaternion(Ogre::Quaternion v)
+{
+	return Vector4<float>(v.x, v.y, v.z,v.w);
+}
+
+//Metodos de conversion de Unidades de Ogre a Vector3 y Vector4 
+Ogre::Vector3 Transform::transformIntoOgreVector(Vector3<float>v)
+{
+	return Ogre::Vector3(v.x, v.y, v.z);
+}
+
+Ogre::Quaternion Transform::transformIntoOgreQuaternion(Vector4<float> v)
+{
+	return Ogre::Quaternion(v.x, v.y, v.z, v.w);
 }

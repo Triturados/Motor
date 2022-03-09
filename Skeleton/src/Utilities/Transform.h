@@ -5,6 +5,8 @@
 #include <Ogre.h>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
+#include "Vector3.h"
+#include "Vector4.h"
 
 
 class Transform :  public Component
@@ -20,14 +22,17 @@ class Transform :  public Component
 public:
 	Transform(Transform* p=nullptr);
 	~Transform();
-	Ogre::Vector3 getPos();
-	Ogre::Quaternion getRot();
-	Ogre::Vector3 getScale();
+	Vector3<float>getPos();
+	Vector4<float> getRot();
+	Vector3<float> getScale();
 
-	void setRot(Ogre::Quaternion r);
-	void setPos(Ogre::Vector3 p);
-	void setScale(Ogre::Vector3 s);
-
+	void setRot(Vector4<float> r);
+	void setPos(Vector3<float> p);
+	void setScale(Vector3<float> s);
+	Vector3<float>transformOgreVector(Ogre::Vector3 v);
+	Vector4<float>transformOgreQuaternion(Ogre::Quaternion v);
+	Ogre::Quaternion transformIntoOgreQuaternion(Vector4<float> v);
+	Ogre::Vector3 transformIntoOgreVector(Vector3<float> v);
 
 };
 
