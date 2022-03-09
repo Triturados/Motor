@@ -3,7 +3,7 @@
 #include <btBulletDynamicsCommon.h>
 #include <GameObject.h>
 #include "PhysicsManager.h"
-
+#include "Vector3.h"
 //#include "DebugDrawer.h"
 
 PhysicsManager* PhysicsManager::instance_ = nullptr;
@@ -27,7 +27,7 @@ bool PhysicsManager::setUpInstance()
 {
 	if (instance_ == nullptr) {
 		instance_ = new PhysicsManager();
-		instance_->init(Vector3(0, -9.8f, 0));
+		instance_->init(Vector3<float>(0, -9.8f, 0));
 		
 		return true;
 	}
@@ -35,7 +35,7 @@ bool PhysicsManager::setUpInstance()
 	return false;
 }
 
-void PhysicsManager::init(const Vector3 gravity)
+void PhysicsManager::init(const Vector3<float> gravity)
 {
 	collConfig = new btDefaultCollisionConfiguration();
 
@@ -47,7 +47,7 @@ void PhysicsManager::init(const Vector3 gravity)
 	dynamicsWorld = new btDiscreteDynamicsWorld(collDispatcher, broadPhaseInterface,
 		constraintSolver, collConfig);
 
-	dynamicsWorld->setGravity(btVector3(gravity.x_, gravity.y_, gravity.z_));
+	dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
 //#ifdef _DEBUG
 //	mDebugDrawer_ = new OgreDebugDrawer(OgreContext::getInstance()->getSceneManager());

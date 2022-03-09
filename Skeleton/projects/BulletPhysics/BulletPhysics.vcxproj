@@ -59,7 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -79,7 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -107,6 +107,9 @@
     </ProjectReference>
     <ProjectReference Include="..\OGRE\OGRE.vcxproj">
       <Project>{57663220-5e15-4009-92e8-65f60806a5a9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
+      <Project>{17c98f4b-91be-4d6c-8ea1-7037992a19b3}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

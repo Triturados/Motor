@@ -6,7 +6,7 @@
 #include <GameObject.h>
 #include <Scene.h>
 #include <PhysicsManager.h>
-
+#include <Vector3.h>
 #include <lua.hpp>
 #include <GameTime.h>
 #include <time.h>
@@ -100,7 +100,7 @@ void probandoCosas()
 
 	PhysicsManager::setUpInstance();
 	PhysicsManager* physicsManager = PhysicsManager::getInstance();
-	physicsManager->init(Vector3(0, -9.8f, 0));
+	physicsManager->init( Vector3<float>(0, -9.8f, 0));
 
 	
 	Game game;

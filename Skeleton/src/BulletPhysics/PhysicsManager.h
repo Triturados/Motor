@@ -10,14 +10,15 @@ class OgreDebugDrawer;
 class btCollisionObject;
 
 //Clase placeholder hasta integrar utilities
-class Vector3 {
+template <typename T>
+class Vector3/* {
 public:
 	int x_, y_, z_;
 
 	Vector3(int x, int y, int z) {
 		x_ = x; y_ = y; z_ = z;
 	}
-};
+}*/;
 
 class PhysicsManager {
 
@@ -51,7 +52,7 @@ public:
 	static bool setUpInstance();
 
 	//Método para inicializar el mundo de bullet con gravedad como parámetro
-	void init(const Vector3 gravity);
+	void init(const Vector3<float> gravity);
 
 	btDiscreteDynamicsWorld* getWorld() const;
 
