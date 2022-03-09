@@ -59,7 +59,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,7 +79,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\ECS;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,6 +100,14 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\BulletPhysics\DebugDrawer.h" />
     <ClInclude Include="..\..\src\BulletPhysics\PhysicsManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ECS\ECS.vcxproj">
+      <Project>{d0e7ff3a-6667-480a-a1df-c5f898597cda}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OGRE\OGRE.vcxproj">
+      <Project>{57663220-5e15-4009-92e8-65f60806a5a9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

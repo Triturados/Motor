@@ -64,8 +64,6 @@ class Escenadecontar : public SceneCreator {
 //Pruebas de proyectos
 void probandoCosas()
 {
-
-
 	lua_State *L = luaL_newstate();
 
 	const char* s = "a = 2 + 7";
@@ -100,7 +98,9 @@ void probandoCosas()
 	// Release the sound
 	sound.releaseSound(0);
 
-	
+	PhysicsManager::setUpInstance();
+	PhysicsManager* physicsManager = PhysicsManager::getInstance();
+	physicsManager->init(Vector3(0, -9.8f, 0));
 
 	
 	Game game;
