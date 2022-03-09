@@ -46,12 +46,11 @@ void Game::setup()
 	sceneManager->defineScenesFactories({ new Escenadecontar() });
 	sceneManager->initiliseScenes();
 
-	PhysicsManager::setUpInstance();
-	physics = PhysicsManager::getInstance();
-	physics->init(Vector3<float>(0, -9.8f, 0));
-
 	renderer = new OgreRenderer();
 	renderer->exampleScene();
+
+	PhysicsManager::setUpInstance();
+	physics = PhysicsManager::getInstance();
 }
 
 
@@ -87,13 +86,18 @@ void Game::loop()
 
 		//input();
 
+		physics->update();
+
 		currentScene->update();
+
+		physics->fixedUpdate(physicsFrameRate);
 
 		currentScene->stepPhysics();
 
 		//currentScene->render();
 		renderer->update();
-		physics->update();
+
+
 		sceneManager->checkChange();
 
 		//Calculo del tiempo

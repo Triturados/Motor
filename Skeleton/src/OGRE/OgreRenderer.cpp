@@ -151,3 +151,8 @@ void OgreRenderer::removeNode(Ogre::SceneNode* node)
 {
 	mSceneMgr->destroySceneNode(node);
 }
+
+Ogre::SceneManager* OgreRenderer::getSceneManager()
+{
+	return mSceneMgr;
+}

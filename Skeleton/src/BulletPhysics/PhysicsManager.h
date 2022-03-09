@@ -33,7 +33,7 @@ private:
 	//Variable que representa el entorno dinámico de bullet con las anteriores variables como configuración
 	btDiscreteDynamicsWorld* dynamicsWorld = nullptr;
 
-	OgreDebugDrawer* mDebugDrawer_ = nullptr;
+	OgreDebugDrawer* mDebugDrawer = nullptr;
 
 	PhysicsManager();
 	virtual ~PhysicsManager();

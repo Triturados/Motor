@@ -77,23 +77,27 @@ void OgreDebugDrawer::drawTriangle(const btVector3& v0, const btVector3& v1, con
 
 void OgreDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color)
 {
+
 }
 
 void OgreDebugDrawer::reportErrorWarning(const char* warningString)
 {
+
 }
 
 void OgreDebugDrawer::draw3dText(const btVector3& location, const char* textString)
 {
+
 }
 
 void OgreDebugDrawer::setDebugMode(int debugMode)
 {
+	mDebugModes = static_cast<DebugDrawModes>(debugMode);
 }
 
 int OgreDebugDrawer::getDebugMode() const
 {
-	return 0;
+	return mDebugModes;
 }
 
 bool OgreDebugDrawer::frameStarted(const Ogre::FrameEvent& evt)

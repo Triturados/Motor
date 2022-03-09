@@ -4,7 +4,8 @@
 #include <GameObject.h>
 #include "PhysicsManager.h"
 #include "Vector3.h"
-//#include "DebugDrawer.h"
+#include "DebugDrawer.h"
+#include <OgreRenderer.h>
 
 PhysicsManager* PhysicsManager::instance_ = nullptr;
 
@@ -49,11 +50,11 @@ void PhysicsManager::init(const Vector3<float> gravity)
 
 	dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-#ifdef _DEBUG
-	mDebugDrawer_ = new OgreDebugDrawer(OgreContext::getInstance()->getSceneManager());
-	mDebugDrawer_->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
-	dynamicsWorld->setDebugDrawer(mDebugDrawer_);
-#endif // DEBUG
+//#ifdef _DEBUG
+//	mDebugDrawer = new OgreDebugDrawer(OgreRenderer::instance->getSceneManager());
+//	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+//	dynamicsWorld->setDebugDrawer(mDebugDrawer);
+//#endif // DEBUG
 }
 
 btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
@@ -113,7 +114,7 @@ void PhysicsManager::destroyWorld()
 
 	delete constraintSolver; constraintSolver = nullptr;
 
-	delete mDebugDrawer_; mDebugDrawer_ = nullptr;
+	delete mDebugDrawer; mDebugDrawer = nullptr;
 
 	delete dynamicsWorld; dynamicsWorld = nullptr;
 }
@@ -126,11 +127,11 @@ void PhysicsManager::destroy()
 
 btVector3 PhysicsManager::btConvert(const Vector3<float>& v3)
 {
-	return btVector3();
+	return btVector3(v3.x, v3.y, v3.z);
 }
 
 Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
 {
-	return Vector3<float>();
+	return Vector3<float>(v3.x(), v3.y(), v3.z());
 }
 

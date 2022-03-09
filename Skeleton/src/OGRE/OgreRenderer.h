@@ -51,6 +51,8 @@ public:
 	Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
 	void removeNode(Ogre::SceneNode* node);
 
+	Ogre::SceneManager* getSceneManager();
+
 	void exampleScene();
 	
 
