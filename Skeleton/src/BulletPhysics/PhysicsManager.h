@@ -11,14 +11,7 @@ class btCollisionObject;
 
 //Clase placeholder hasta integrar utilities
 template <typename T>
-class Vector3/* {
-public:
-	int x_, y_, z_;
-
-	Vector3(int x, int y, int z) {
-		x_ = x; y_ = y; z_ = z;
-	}
-}*/;
+class Vector3;
 
 class PhysicsManager {
 

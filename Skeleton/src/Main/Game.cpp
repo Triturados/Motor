@@ -45,12 +45,9 @@ void Game::setup()
 	sceneManager->defineScenesFactories({ new Escenadecontar() });
 	sceneManager->initiliseScenes();
 
-
-
 	renderer = new OgreRenderer();
 	renderer->exampleScene();
 
-	
 }
 
 
