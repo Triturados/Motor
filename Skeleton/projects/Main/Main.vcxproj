@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,7 +107,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)src\OGRE\;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\SoundProject\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
