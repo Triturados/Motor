@@ -31,6 +31,7 @@ bld/
 [Ll]og/
 [Ll]ogs/
 OgreBuild/
+BulletBuild/
 CMAKE/
 
 # Visual Studio 2015/2017 cache/options directory
