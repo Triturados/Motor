@@ -16,8 +16,7 @@
 #undef main
 
 //Ejemplo Componente
-class ContadorFrames : public Component {
-
+class ContadorFrames : public ComponentTemplate<ContadorFrames> {
 public:
 
 
@@ -34,9 +33,7 @@ private:
 };
 
 //Ejemplo Componente
-class ElComponenteDeDani : public Component {
-
-
+class ElComponenteDeDani : public ComponentTemplate<ElComponenteDeDani> {
 public:
 	void update() override {
 		std::cout << "Ivan es muy tonto sinceramente\n";
