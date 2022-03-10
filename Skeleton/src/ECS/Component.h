@@ -7,12 +7,12 @@ using Key = char;
 
 using uint = unsigned int;
 
-// Componente interfaz, utilizada para listas polimï¿½rficas
+// Componente interfaz, utilizada para listas polimórficas
 class Component {
 	friend GameObject;
 
 public:
-	// Indica el nï¿½mero de subclases de componente que existen. Necesario para calcular IDs.
+	// Indica el número de subclases de componente que existen. Necesario para calcular IDs.
 	static uint numOfComponentClasses;
 
 	Component();
@@ -90,10 +90,10 @@ private:
 
 
 /// <summary>
-/// Calcula el nï¿½mero de componente que le corresponde a una clase concreta de ComponentTemplate.
-/// El nï¿½mero no tiene por quï¿½ ser el mismo en diferentes compilaciones, pero dentro de una misma ejecuciï¿½n
-/// siempre serï¿½ el mismo para todas las instancias de esa clase.
-/// El nï¿½mero de componente solo tiene valor para generar la id, por lo que no tiene getter pï¿½blico.
+/// Calcula el número de componente que le corresponde a una clase concreta de ComponentTemplate.
+/// El número no tiene por qué ser el mismo en diferentes compilaciones, pero dentro de una misma ejecución
+/// siempre será el mismo para todas las instancias de esa clase.
+/// El número de componente solo tiene valor para generar la id, por lo que no tiene getter público.
 /// </summary>
 template<typename T>
 inline static auto calculateComponentNum() {
@@ -106,7 +106,24 @@ class ComponentTemplate : public Component
 {
 private:
 	static uint componentNum;
+	static size_t id;
+
+	void generateComponentID();
+public:
+	inline size_t getId() const { return id; };
 };
 
+template<class T>
+inline void ComponentTemplate<T>::generateComponentID()
+{
+	componentNum = calculateComponentNum<T>();
+	std::hash<ComponentTemplate<T>> myComponentHash;
+	ComponentTemplate<T>::id = myComponentHash(componentNum);
+}
 
 
+template<class T>
+struct std::hash<ComponentTemplate<T>>
+{
+	std::size_t operator()(uint num) const noexcept;
+};
