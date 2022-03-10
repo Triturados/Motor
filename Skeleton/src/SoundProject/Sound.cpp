@@ -57,19 +57,18 @@ void SoundSystemClass::playSound(FMOD::SoundClass pSound, int groupChannel, bool
 		pSound->setLoopCount(-1);
 	}
 
-	int numOfChans = sizeof(channels);
-	for (int i = 0; i < numOfChans; i++) {
+	for (auto channel : channels) {
 		bool isPlaying;
-		channels[i]->isPlaying(&isPlaying);
+		channel->isPlaying(&isPlaying);
 
 		if (isPlaying) continue;
 
 		switch (groupChannel)
 		{
-		case 0: m_pSystem->playSound(pSound, effects, false, &channels[i]); break;
-		case 1:	m_pSystem->playSound(pSound, environment, false, &channels[i]); break;
-		case 2: m_pSystem->playSound(pSound, voices, false, &channels[i]); break;
-		case 3: m_pSystem->playSound(pSound, music, false, &channels[i]); break;
+		case 0: m_pSystem->playSound(pSound, effects, false, &channel); break;
+		case 1:	m_pSystem->playSound(pSound, environment, false, &channel); break;
+		case 2: m_pSystem->playSound(pSound, voices, false, &channel); break;
+		case 3: m_pSystem->playSound(pSound, music, false, &channel); break;
 		default:
 			break;
 		}
