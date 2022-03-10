@@ -13,14 +13,14 @@ bool Input::init()
 {
 	if (_instance == nullptr) {
 		_instance = new Input();
-		
+		_instance->lastPressedKeys = new std::unordered_set<SDL_Scancode>();
 	}
 	else return false;
 
 	return true;
 }
 
-void Input::handleInput()
+bool Input::handleInput()
 {
 	SDL_Event sdlevent;
 	while (SDL_PollEvent(&sdlevent)) {
@@ -38,17 +38,30 @@ void Input::handleInput()
 			std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
 			break;
 		case SDL_MOUSEMOTION:
+			SDL_GetMouseState(&mouseX, &mouseY);
+			std::cout << "Ratón movido: " << mouseX << " " << mouseY << std::endl;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
+			if(sdlevent.button.button == SDL_BUTTON_LEFT)
+				mouseState = MouseState::CLICK_L;
+			else if(sdlevent.button.button == SDL_BUTTON_RIGHT)
+				mouseState = MouseState::CLICK_R;
+			else if (sdlevent.button.button == SDL_BUTTON_MIDDLE)
+				mouseState = MouseState::CLICK_M;
+			std::cout << "Ratón pulsado: " << (int)MouseState::CLICK_M << std::endl;
 			break;
 		case SDL_MOUSEBUTTONUP:
+			mouseState = MouseState::NONE;
+			std::cout << "Ratón soltado." << std::endl;
 			break;
 		case SDL_QUIT:
+			return false;
 			break;
 		default:
 			break;
 		}
 	}
+	return true;
 }
 bool Input::isKeyPressed(InputKeys key)
 {

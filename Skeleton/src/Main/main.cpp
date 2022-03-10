@@ -130,6 +130,7 @@ void probandoInput() {
 
 void main()
 {
-	probandoCosas();
+	probandoInput();
+	//probandoCosas();
 }
 
