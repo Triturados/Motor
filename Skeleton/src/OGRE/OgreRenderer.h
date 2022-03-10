@@ -16,12 +16,15 @@
 #include <OgreWindowEventUtilities.h>
 #include <OgreSGTechniqueResolverListener.h>
 
+
 class OgreRenderer
 {
 private:
 	Ogre::Root* mRoot;
 	Ogre::String mResourcesCfgPath;
 	Ogre::String mPluginsCfgPath;
+	Ogre::String mCfgPath;
+	Ogre::String mLogPath;
 
 	Ogre::RenderWindow* mWindow;
 	Ogre::SceneManager* mSceneMgr;
@@ -37,11 +40,21 @@ private:
 	void setupScenes();
 
 public:
+
+	static OgreRenderer* instance;
 	OgreRenderer();
 
 	void initRoot();
 	bool update();
+
+	Ogre::SceneNode* createNode();
+	Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
+	void removeNode(Ogre::SceneNode* node);
+
+	Ogre::SceneManager* getSceneManager();
+
 	void exampleScene();
+	
 
 	~OgreRenderer() { };
 };

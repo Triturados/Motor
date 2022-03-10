@@ -2,20 +2,20 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{a891fcc4-9c8f-4dd1-a11b-ce2b019961cb}</UniqueIdentifier>
+      <UniqueIdentifier>{11836706-16de-4c7a-9c46-877a08065f5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{428b0ca7-568d-4508-a1ab-7dc4352f1355}</UniqueIdentifier>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{39412beb-9884-4193-836f-0ea1e25a6de7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\SoundProject\Sound.h">
+    <ClInclude Include="..\..\Src\SoundProject\Sound.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\SoundProject\Sound.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\..\Src\SoundProject\Sound.cpp">
+      <Filter>Archivos de recursos</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

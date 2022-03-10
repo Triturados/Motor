@@ -1,9 +1,14 @@
 #include "OgreRenderer.h"
 
+OgreRenderer* OgreRenderer::instance = nullptr;
+
 OgreRenderer::OgreRenderer()
 {
-	initRoot(); 
-	
+	assert("Ya existe una instancia de Ogre.", instance == nullptr);
+	instance = this;
+
+	initRoot();
+
 	loadResources();
 
 	setupScenes();
@@ -16,13 +21,15 @@ OgreRenderer::OgreRenderer()
 /// Inicializa la raiz
 /// </summary>
 void OgreRenderer::initRoot() {
-	mResourcesCfgPath = "resources.cfg";
-	mPluginsCfgPath = "plugins.cfg";
+	mResourcesCfgPath = "./OGRE/resources.cfg";
+	mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
+	mLogPath = "./OGRE/Ogre.log";
+	mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(mPluginsCfgPath);
-	
+	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
+
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
-	if(!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 }
 
 /// <summary>
@@ -49,7 +56,7 @@ void OgreRenderer::loadResources()
 }
 
 /// <summary>
-/// Inicia el sistema de shaders. El método debe llamarse despues de setupScenes
+/// Inicia el sistema de shaders. El mï¿½todo debe llamarse despues de setupScenes
 /// </summary>
 void OgreRenderer::initRTShaderSystem()
 {
@@ -68,7 +75,7 @@ void OgreRenderer::initRTShaderSystem()
 
 
 /// <summary>
-/// Crea la ventana inicial (cámara y viewport) y el manejador de escenas
+/// Crea la ventana inicial (cï¿½mara y viewport) y el manejador de escenas
 /// </summary>
 void OgreRenderer::setupScenes()
 {
@@ -113,6 +120,8 @@ bool OgreRenderer::update()
 	return true;
 }
 
+
+
 void OgreRenderer::exampleScene()
 {
 	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
@@ -126,4 +135,24 @@ void OgreRenderer::exampleScene()
 	Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	lightNode->setPosition(20, 80, 50);
 	lightNode->attachObject(light);
+}
+Ogre::SceneNode* OgreRenderer::createNode()
+{
+	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
+
+}
+
+Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
+{
+	return parent->createChildSceneNode();
+}
+
+void OgreRenderer::removeNode(Ogre::SceneNode* node)
+{
+	mSceneMgr->destroySceneNode(node);
+}
+
+Ogre::SceneManager* OgreRenderer::getSceneManager()
+{
+	return mSceneMgr;
 }
