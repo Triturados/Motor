@@ -56,6 +56,7 @@ public:
 
 	void update();
 	void fixedUpdate(float deltaTime);
+	void testeandoBullet();
 
 	void destroyWorld();
 	static void destroy();
