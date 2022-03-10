@@ -1,6 +1,6 @@
 # Motor
 El código de todo el proyecto estará dividido en dos soluciones. Una solución contará con la implementación del motor, y en la otra estará el código completo del juego.
-En este repositorio estará subida la solución del motor **'Grind'**. 
+En este repositorio estará subida la solución del motor **'Love'**. 
 
 # Arquitectura 
 El repositorio estará dividio en **siete** soluciones diferentes
