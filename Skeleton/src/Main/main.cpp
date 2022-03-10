@@ -8,7 +8,7 @@
 
 #include <lua.hpp>
 
-class ContadorFrames : public Component {
+class ContadorFrames : public ComponentTemplate<ContadorFrames> {
 
 public:
 
@@ -28,7 +28,7 @@ private:
 
 
 
-class ElComponenteDeDani : public Component {
+class ElComponenteDeDani : public ComponentTemplate<ElComponenteDeDani> {
 
 
 public:
