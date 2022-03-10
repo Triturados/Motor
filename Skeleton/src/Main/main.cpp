@@ -90,7 +90,7 @@ void probandoFMOD() {
 
 	// Create a sample sound
 	FMOD::SoundClass soundSample;
-	sound.createSound(&soundSample, "../resources/FMOD/Sonidos/sonido.wav", 0);
+	sound.createSound(&soundSample, "./FMOD/Sonidos/sonido.wav", 0);
 
 	// Play the sound, with loop mode
 	sound.playSound(soundSample, 0, true);
