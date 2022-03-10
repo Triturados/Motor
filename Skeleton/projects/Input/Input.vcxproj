@@ -55,12 +55,14 @@
     <OutDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)\</IntDir>
     <LibraryPath>E:\ESTUDIOS\ii\PROYECTOS III\Motor\Skeleton\dependencies\OgreBuild\SDL2-build\SDL2main.dir\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;%(AdditionalIncludeDirectories);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\$(ProjectName)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;%(AdditionalIncludeDirectories);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

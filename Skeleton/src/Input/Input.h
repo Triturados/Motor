@@ -7,10 +7,14 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include <unordered_set>
+
+
 #include <SDL.h>
 //#include "SDL_keycode.h"
 
 class Component;
+//class SDL_Scancode;
 struct tecla {
     bool pressedLastFrame = false;
     bool beingPressed = false;
@@ -25,15 +29,25 @@ enum class InputKeys {
 class Input {
 public:
     //singleton
+    static void setSDLwithOgreTest();
+    static int initSDLWindowTest();
     static Input* getInstance();
     static bool init();
     void handleInput();
+    bool isKeyPressed(InputKeys key);
+
 
     //static std::unordered_map<SDL_KeyCode, tecla> teclas;
-    void addListener(SDL_KeyCode k, Component* c);
+    /*void addListener(SDL_KeyCode k, Component* c);*/
 private:
-    Input() {};
+    Input() {
+        lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+    };
+
+
+    std::unordered_set<SDL_Scancode>* lastPressedKeys;
     static Input* _instance;
+    
 };
 
 

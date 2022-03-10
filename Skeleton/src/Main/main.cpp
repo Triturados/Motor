@@ -12,6 +12,8 @@
 #include <time.h>
 #include "Game.h"
 
+#include <Input.h>
+#undef main
 
 //Ejemplo Componente
 class ContadorFrames : public Component {
@@ -38,6 +40,17 @@ class ElComponenteDeDani : public Component {
 public:
 	void update() override {
 		std::cout << "Ivan es muy tonto sinceramente\n";
+	}
+};
+
+//Ejemplo Componente con Input
+class ComponenteTestInput : public Component {
+
+
+public:
+	void update() override {
+		if (Input::getInstance()->isKeyPressed(InputKeys::A))
+			std::cout << "Se ha pulsado la tecla A\n";
 	}
 };
 
@@ -100,6 +113,19 @@ void probandoCosas()
 	
 	Game game;
 	game.run();
+}
+
+void probandoInput() {
+
+
+	Input::init();
+	Input::initSDLWindowTest();
+	Input* input = Input::getInstance();
+
+	while (true) {
+		input->handleInput();
+
+	}
 }
 
 void main()
