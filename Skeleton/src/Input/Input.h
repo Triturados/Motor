@@ -26,6 +26,10 @@ enum class InputKeys {
     A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z
 };
 
+enum class MouseState {
+    NONE, CLICK_L, CLICK_R, CLICK_M
+};
+
 class Input {
 public:
     //singleton
@@ -33,7 +37,7 @@ public:
     static int initSDLWindowTest();
     static Input* getInstance();
     static bool init();
-    void handleInput();
+    bool handleInput();
     bool isKeyPressed(InputKeys key);
 
 
@@ -41,12 +45,14 @@ public:
     /*void addListener(SDL_KeyCode k, Component* c);*/
 private:
     Input() {
-        lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+        
     };
 
 
     std::unordered_set<SDL_Scancode>* lastPressedKeys;
     static Input* _instance;
+    int mouseX, mouseY;
+    MouseState mouseState;
     
 };
 
