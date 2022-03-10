@@ -5,11 +5,16 @@ class Scene;
 class GameObject;
 using Key = char;
 
+using uint = unsigned int;
 
+// Componente interfaz, utilizada para listas polim�rficas
 class Component {
 	friend GameObject;
 
 public:
+	// Indica el n�mero de subclases de componente que existen. Necesario para calcular IDs.
+	static uint numOfComponentClasses;
+
 	Component();
 
 	GameObject* gameObject;
@@ -83,6 +88,25 @@ private:
 	void DontUpdate();
 };
 
+
+/// <summary>
+/// Calcula el n�mero de componente que le corresponde a una clase concreta de ComponentTemplate.
+/// El n�mero no tiene por qu� ser el mismo en diferentes compilaciones, pero dentro de una misma ejecuci�n
+/// siempre ser� el mismo para todas las instancias de esa clase.
+/// El n�mero de componente solo tiene valor para generar la id, por lo que no tiene getter p�blico.
+/// </summary>
+template<typename T>
+inline static auto calculateComponentNum() {
+	static auto componentNum = Component::numOfComponentClasses++;;
+	return componentNum;
+}
+
+template <class T>
+class ComponentTemplate : public Component
+{
+private:
+	static uint componentNum;
+};
 
 
 

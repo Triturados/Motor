@@ -3,6 +3,12 @@
 #include "Scene.h"
 #include <string>
 
+
+//Inicializaci�n de atributos est�ticos
+template<class T>
+uint ComponentTemplate<T>::componentNum = 0;
+
+uint Component::numOfComponentClasses = 0;
 Component::Component()
 {
 
