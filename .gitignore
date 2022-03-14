@@ -32,7 +32,6 @@ bld/
 [Ll]ogs/
 OgreBuild/
 BulletBuild/
-CMAKE/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -356,3 +355,4 @@ MigrationBackup/
 [Bb]uild/
 !Skeleton/build/Debug/OGRE
 !Skeleton/build/Release/OGRE
+!Skeleton/dependencies/CMAKE/bin
