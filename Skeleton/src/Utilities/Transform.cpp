@@ -5,24 +5,16 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-Transform::Transform(Transform* p)
+Transform::Transform()
 {
-
-	//Le pasamos un parent, por defecto es nulo 
-
-
-	entityNode = p == nullptr ? 
+	entityNode = parent == nullptr ? 
 		OgreRenderer::instance->createNode() : 
-		OgreRenderer::instance->createChildNode(p->entityNode);
-
-	parent = p;
+		OgreRenderer::instance->createChildNode(parent->entityNode);
 
 	//Obtenenos las posiciones a partir de ogre
 	position = entityNode->getPosition();
 	scale = entityNode->getScale();
 	rotation = entityNode->getOrientation();
-
-
 }
 
 Transform::~Transform()

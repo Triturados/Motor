@@ -1,7 +1,18 @@
 #pragma once
 
 #include <vector>
-#include <Component.h>
+#include <Component.h>/*
+#include <Ogre.h>
+#include <OgreRenderer.h>
+#include <OgreSceneNode.h>
+#include "Vector3.h"
+#include "Vector4.h"*/
+
+namespace Ogre {
+	class SceneNode;
+	class Quaternion;
+	class Vector3;
+}
 
 namespace Ogre {
 	class Quaternion;
@@ -22,10 +33,11 @@ class Transform :  public Component
 
 	Ogre::SceneNode* entityNode;
 	std::vector<Transform*> children;
-	Transform* parent;
 
 public:
-	Transform(Transform* p=nullptr);
+	Transform* parent = nullptr;
+	
+	Transform();
 	~Transform();
 	Utilities::Vector3<float>getPos();
 	Utilities::Vector4<float> getRot();
