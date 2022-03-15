@@ -7,8 +7,10 @@ class GameObject;
 class btRigidBody;
 class Transform;
 
-template <typename T>
-class Vector3;
+namespace Utilities {
+	template <typename T>
+	class Vector3;
+}
 
 enum class ForceMode {
 	FORCE,
@@ -37,9 +39,9 @@ public:
 	void update(float deltaTime);
 	void stepPhysics();
 
-	void setPosition(const Vector3<float>& newPos);
+	void setPosition(const Utilities::Vector3<float>& newPos);
 
-	void setGravity(const Vector3<float>& newGrav);
+	void setGravity(const Utilities::Vector3<float>& newGrav);
 
 	void setTrigger(bool trigger_);
 
@@ -49,17 +51,17 @@ public:
 
 	void setRestitution(float restitution);
 
-	void setLinearVelocity(const Vector3<float>& vel);
+	void setLinearVelocity(const Utilities::Vector3<float>& vel);
 
 	void setFriction(float friction);
 
 	void setCollisionShape(btCollisionShape* newShape);
 
-	void setLinearFactor(const Vector3<float>& axis);
+	void setLinearFactor(const Utilities::Vector3<float>& axis);
 
-	void setAngularFactor(const Vector3<float>& axis);
+	void setAngularFactor(const Utilities::Vector3<float>& axis);
 
-	const Vector3<float>& getLinearVelocity() const;
+	const Utilities::Vector3<float>& getLinearVelocity() const;
 
 	bool isTrigger() const;
 
@@ -73,7 +75,7 @@ public:
 
 	int getMask()const;
 
-	void addForce(const Vector3<float>& force, Vector3<float>& relativePos, int type = (int) ForceMode::FORCE);
+	void addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type = (int) ForceMode::FORCE);
 
 	bool onCollisionEnter(const std::string& id) const;
 };

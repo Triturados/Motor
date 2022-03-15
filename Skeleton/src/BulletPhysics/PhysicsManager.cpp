@@ -28,7 +28,7 @@ bool PhysicsManager::setUpInstance()
 {
 	if (instance_ == nullptr) {
 		instance_ = new PhysicsManager();
-		instance_->init(Vector3<float>(0, -9.8f, 0));
+		instance_->init(Utilities::Vector3<float>(0, -9.8f, 0));
 		
 		return true;
 	}
@@ -36,7 +36,7 @@ bool PhysicsManager::setUpInstance()
 	return false;
 }
 
-void PhysicsManager::init(const Vector3<float> gravity)
+void PhysicsManager::init(const Utilities::Vector3<float> gravity)
 {
 	collConfig = new btDefaultCollisionConfiguration();
 
@@ -79,7 +79,7 @@ void PhysicsManager::fixedUpdate(float deltaTime)
 	dynamicsWorld->stepSimulation(deltaTime);
 }
 
-btRigidBody* PhysicsManager::createRB(Vector3<float> pos, float mass, int group, int mask)
+btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int group, int mask)
 {
 	btTransform transform;
 	transform.setIdentity();
@@ -125,14 +125,14 @@ void PhysicsManager::destroy()
 	delete instance_;
 }
 
-btVector3 PhysicsManager::btConvert(const Vector3<float>& v3)
+btVector3 PhysicsManager::btConvert(const Utilities::Vector3<float>& v3)
 {
 	return btVector3(v3.x, v3.y, v3.z);
 }
 
-Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
+Utilities::Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
 {
-	return Vector3<float>(v3.x(), v3.y(), v3.z());
+	return Utilities::Vector3<float>(v3.x(), v3.y(), v3.z());
 }
 
 void PhysicsManager::testeandoBullet() {

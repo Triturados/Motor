@@ -14,24 +14,24 @@ namespace Ogre {
 	class Vector3;
 }
 
-namespace Ogre {
-	class Quaternion;
-	class SceneNode;
-	class Vector3;
-}
-
-template<typename T>
+class Quaternion;
+class SceneNode;
 class Vector3;
-template<typename T>
-class Vector4;
+
+namespace Utilities {
+	template<typename T>
+	class Vector3;
+	template<typename T>
+	class Vector4;
+}
 
 class Transform :  public Component
 {
-	Ogre::Vector3 position;
-	Ogre::Quaternion rotation;
-	Ogre::Vector3 scale;
+	Vector3* position = nullptr;
+	Quaternion* rotation = nullptr;
+	Vector3* scale = nullptr;
 
-	Ogre::SceneNode* entityNode;
+	SceneNode* entityNode;
 	std::vector<Transform*> children;
 
 public:
@@ -46,10 +46,10 @@ public:
 	void setRot(Utilities::Vector4<float> r);
 	void setPos(Utilities::Vector3<float> p);
 	void setScale(Utilities::Vector3<float> s);
-	Utilities::Vector3<float>transformOgreVector(Ogre::Vector3 v);
-	Utilities::Vector4<float>transformOgreQuaternion(Ogre::Quaternion v);
-	Ogre::Quaternion transformIntoOgreQuaternion(Utilities::Vector4<float> v);
-	Ogre::Vector3 transformIntoOgreVector(Utilities::Vector3<float> v);
+	Utilities::Vector3<float>transformOgreVector(Vector3* v);
+	Utilities::Vector4<float>transformOgreQuaternion(Quaternion* v);
+	Quaternion* transformIntoOgreQuaternion(Utilities::Vector4<float> v);
+	Vector3* transformIntoOgreVector(Utilities::Vector3<float> v);
 
 };
 
