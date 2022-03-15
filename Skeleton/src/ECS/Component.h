@@ -5,15 +5,13 @@ class Scene;
 class GameObject;
 using Key = char;
 
-using uint = unsigned int;
-
 // Componente interfaz, utilizada para listas polimórficas
 class Component {
 	friend GameObject;
 
 public:
 	// Indica el número de subclases de componente que existen. Necesario para calcular IDs.
-	static uint numOfComponentClasses;
+	static unsigned int numOfComponentClasses;
 
 	Component();
 
@@ -133,5 +131,5 @@ inline void ComponentTemplate<T>::generateComponentID()
 template<class T>
 struct std::hash<ComponentTemplate<T>>
 {
-	std::size_t operator()(uint num) const noexcept;
+	std::size_t operator()(unsigned int num) const noexcept;
 };
