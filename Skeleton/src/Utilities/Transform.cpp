@@ -1,4 +1,9 @@
 #include "Transform.h"
+#include <Ogre.h>
+#include <OgreRenderer.h>
+#include <OgreSceneNode.h>
+#include "Vector3.h"
+#include "Vector4.h"
 
 Transform::Transform(Transform* p)
 {
@@ -26,37 +31,37 @@ Transform::~Transform()
 	OgreRenderer::instance->removeNode(entityNode);
 }
 
-Vector3<float>Transform::getPos()
+Utilities::Vector3<float>Transform::getPos()
 {
 	
 	return transformOgreVector(position);
 }
 
-Vector4<float>Transform::getRot()
+Utilities::Vector4<float>Transform::getRot()
 {
 	return transformOgreQuaternion(rotation);
 }
 
-Vector3<float>Transform::getScale()
+Utilities::Vector3<float>Transform::getScale()
 {
 	return transformOgreVector(scale);
 }
 
 
 
-void Transform::setRot(Vector4<float> r)
+void Transform::setRot(Utilities::Vector4<float> r)
 {
 	rotation = transformIntoOgreQuaternion(r);
 	entityNode->setOrientation(rotation);
 }
 
-void Transform::setPos(Vector3<float> p)
+void Transform::setPos(Utilities::Vector3<float> p)
 {
 	position = transformIntoOgreVector(p);
 	entityNode->setPosition(position);
 }
 
-void Transform::setScale(Vector3<float> s)
+void Transform::setScale(Utilities::Vector3<float> s)
 {
 	scale = transformIntoOgreVector(s);
 	entityNode->setScale(scale);
@@ -64,23 +69,23 @@ void Transform::setScale(Vector3<float> s)
 
 
 //Metodos de converion a unidades de Ogre
-Vector3<float> Transform::transformOgreVector(Ogre::Vector3  v)
+Utilities::Vector3<float> Transform::transformOgreVector(Ogre::Vector3  v)
 {
-	return Vector3<float>(v.x,v.y,v.z);
+	return Utilities::Vector3<float>();
 }
 
-Vector4<float> Transform::transformOgreQuaternion(Ogre::Quaternion v)
+Utilities::Vector4<float> Transform::transformOgreQuaternion(Ogre::Quaternion v)
 {
-	return Vector4<float>(v.x, v.y, v.z,v.w);
+	return Utilities::Vector4<float>(v.x, v.y, v.z,v.w);
 }
 
 //Metodos de conversion de Unidades de Ogre a Vector3 y Vector4 
-Ogre::Vector3 Transform::transformIntoOgreVector(Vector3<float>v)
+Ogre::Vector3 Transform::transformIntoOgreVector(Utilities::Vector3<float>v)
 {
 	return Ogre::Vector3(v.x, v.y, v.z);
 }
 
-Ogre::Quaternion Transform::transformIntoOgreQuaternion(Vector4<float> v)
+Ogre::Quaternion Transform::transformIntoOgreQuaternion(Utilities::Vector4<float> v)
 {
 	return Ogre::Quaternion(v.x, v.y, v.z, v.w);
 }

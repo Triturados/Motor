@@ -2,12 +2,17 @@
 
 #include <vector>
 #include <Component.h>
-#include <Ogre.h>
-#include <OgreRenderer.h>
-#include <OgreSceneNode.h>
-#include "Vector3.h"
-#include "Vector4.h"
 
+namespace Ogre {
+	class Quaternion;
+	class SceneNode;
+	class Vector3;
+}
+
+template<typename T>
+class Vector3;
+template<typename T>
+class Vector4;
 
 class Transform :  public Component
 {
@@ -22,17 +27,17 @@ class Transform :  public Component
 public:
 	Transform(Transform* p=nullptr);
 	~Transform();
-	Vector3<float>getPos();
-	Vector4<float> getRot();
-	Vector3<float> getScale();
+	Utilities::Vector3<float>getPos();
+	Utilities::Vector4<float> getRot();
+	Utilities::Vector3<float> getScale();
 
-	void setRot(Vector4<float> r);
-	void setPos(Vector3<float> p);
-	void setScale(Vector3<float> s);
-	Vector3<float>transformOgreVector(Ogre::Vector3 v);
-	Vector4<float>transformOgreQuaternion(Ogre::Quaternion v);
-	Ogre::Quaternion transformIntoOgreQuaternion(Vector4<float> v);
-	Ogre::Vector3 transformIntoOgreVector(Vector3<float> v);
+	void setRot(Utilities::Vector4<float> r);
+	void setPos(Utilities::Vector3<float> p);
+	void setScale(Utilities::Vector3<float> s);
+	Utilities::Vector3<float>transformOgreVector(Ogre::Vector3 v);
+	Utilities::Vector4<float>transformOgreQuaternion(Ogre::Quaternion v);
+	Ogre::Quaternion transformIntoOgreQuaternion(Utilities::Vector4<float> v);
+	Ogre::Vector3 transformIntoOgreVector(Utilities::Vector3<float> v);
 
 };
 

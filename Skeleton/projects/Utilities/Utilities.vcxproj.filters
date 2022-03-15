@@ -38,7 +38,7 @@
     <ClInclude Include="..\..\src\Utilities\Vector3.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Vector4.h">
+    <ClInclude Include="..\..\src\Utilities\Vector4.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
