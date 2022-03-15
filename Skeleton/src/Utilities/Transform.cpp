@@ -29,58 +29,35 @@ Transform::~Transform()
 Vector3<float>Transform::getPos()
 {
 	
-	return transformOgreVector(position);
+	return Vector3<float>(position);
 }
 
 Vector4<float>Transform::getRot()
 {
-	return transformOgreQuaternion(rotation);
+	return Vector4<float>(rotation);
 }
 
 Vector3<float>Transform::getScale()
 {
-	return transformOgreVector(scale);
+	return Vector3<float>(scale);
 }
 
 
 
 void Transform::setRot(Vector4<float> r)
 {
-	rotation = transformIntoOgreQuaternion(r);
+	rotation = r.getOgreQuaternion();
 	entityNode->setOrientation(rotation);
 }
 
 void Transform::setPos(Vector3<float> p)
 {
-	position = transformIntoOgreVector(p);
+	position = p.getOgreVector();
 	entityNode->setPosition(position);
 }
 
 void Transform::setScale(Vector3<float> s)
 {
-	scale = transformIntoOgreVector(s);
+	scale = s.getOgreVector();
 	entityNode->setScale(scale);
-}
-
-
-//Metodos de converion a unidades de Ogre
-Vector3<float> Transform::transformOgreVector(Ogre::Vector3  v)
-{
-	return Vector3<float>(v.x,v.y,v.z);
-}
-
-Vector4<float> Transform::transformOgreQuaternion(Ogre::Quaternion v)
-{
-	return Vector4<float>(v.x, v.y, v.z,v.w);
-}
-
-//Metodos de conversion de Unidades de Ogre a Vector3 y Vector4 
-Ogre::Vector3 Transform::transformIntoOgreVector(Vector3<float>v)
-{
-	return Ogre::Vector3(v.x, v.y, v.z);
-}
-
-Ogre::Quaternion Transform::transformIntoOgreQuaternion(Vector4<float> v)
-{
-	return Ogre::Quaternion(v.x, v.y, v.z, v.w);
 }

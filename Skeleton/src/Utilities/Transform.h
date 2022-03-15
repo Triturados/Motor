@@ -29,10 +29,6 @@ public:
 	void setRot(Vector4<float> r);
 	void setPos(Vector3<float> p);
 	void setScale(Vector3<float> s);
-	Vector3<float>transformOgreVector(Ogre::Vector3 v);
-	Vector4<float>transformOgreQuaternion(Ogre::Quaternion v);
-	Ogre::Quaternion transformIntoOgreQuaternion(Vector4<float> v);
-	Ogre::Vector3 transformIntoOgreVector(Vector3<float> v);
 
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include <math.h>
 #include "Recta.h"
+#include "OgreVector3.h"
+#include "OgreColourValue.h"
 
 template<typename T = float >
 class Vector3 {
@@ -19,6 +21,20 @@ public:
 	Vector3()
 	{
 		x = 0; y = 0; z = 0;
+	}
+
+	Vector3(Ogre::ColourValue v)
+	{
+		x = (T) v.r;
+		y = (T) v.g;
+		z = (T) v.b;
+	}
+
+	Vector3(Ogre::Vector3 v)
+	{
+		x = (T) v.x;
+		y = (T) v.y;
+		z = (T) v.z;
 	}
 
 	Vector3(T prim, T sec, T ter)
@@ -166,5 +182,8 @@ public:
 		return A;
 	}
 
-
+	Ogre::Vector3 getOgreVector()
+	{
+		return Ogre::Vector3(x, y, z);
+	}
 };

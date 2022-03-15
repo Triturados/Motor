@@ -12,15 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Utilities\GameTime.cpp" />
+    <ClCompile Include="..\..\src\Utilities\LightComponent.cpp" />
     <ClCompile Include="..\..\src\Utilities\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\GameTime.h" />
+    <ClInclude Include="..\..\src\Utilities\LightComponent.h" />
     <ClInclude Include="..\..\src\Utilities\Recta.h" />
     <ClInclude Include="..\..\src\Utilities\Transform.h" />
     <ClInclude Include="..\..\src\Utilities\Vector2.h" />
     <ClInclude Include="..\..\src\Utilities\Vector3.h" />
-    <ClInclude Include="Vector4.h" />
+    <ClInclude Include="..\..\src\Utilities\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECS\ECS.vcxproj">

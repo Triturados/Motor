@@ -11,6 +11,7 @@
 #include <OgreRenderer.h>
 #include <Transform.h>
 #include <PhysicsManager.h>
+#include <LightComponent.h>
 
 using namespace std::chrono;
 
@@ -48,6 +49,15 @@ void Game::setup()
 
 	renderer = new OgreRenderer();
 	renderer->exampleScene();
+
+	GameObject* luz = new GameObject("Luz");
+	luz->addComponent<Transform>();
+
+	luz->getComponent<Transform>()->setPos(Vector3<float>(0, 200, 0));
+
+	luz->addComponent<LightComponent>();
+	
+	luz->getComponent<LightComponent>()->sendParameters(lightType::point, "luz", renderer->getSceneManager());
 
 	PhysicsManager::setUpInstance();
 	physics = PhysicsManager::getInstance();
