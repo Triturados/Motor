@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main", "projects\Main\Main.vcxproj", "{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Biblioteca", "projects\Biblioteca\Biblioteca.vcxproj", "{30349241-46D6-45E5-9485-498371E27ED8}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OGRE", "projects\OGRE\OGRE.vcxproj", "{57663220-5E15-4009-92E8-65F60806A5A9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoundProject", "projects\SoundProject\SoundProject.vcxproj", "{1AFB29FF-A508-4251-8A1C-21107615C230}"
@@ -35,12 +33,6 @@ Global
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.ActiveCfg = Release|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.Build.0 = Release|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x86.ActiveCfg = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x64.ActiveCfg = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x64.Build.0 = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x86.ActiveCfg = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x64.ActiveCfg = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x64.Build.0 = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x86.ActiveCfg = Release|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x64.ActiveCfg = Debug|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x64.Build.0 = Debug|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x86.ActiveCfg = Debug|x64

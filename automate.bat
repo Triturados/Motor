@@ -5,47 +5,61 @@ echo Comenzando con la automatizacion!
 
 rem Modulos: 
 rem -MsBuild : Script que encuentra la ruta donde se encuentra el ejecutable de 
-rem Native Tools Command Prompt, necesario para el comando msbuild. Usamos esas tools
+rem x64 Native Tools Command Prompt, necesario para el comando msbuild. Usamos esas tools
 rem para poder compilar facilmente soluciones de Visual Studio.
 
 rem Import-Module Scripts\MsBuild.psm1
 
 rem Parte de OGRE
+echo Compilando OGRE!
 
-cd Skeleton\dependencies\OgreSrc
+cd Skeleton\dependencies
 mkdir OgreBuild
-cd ..\CMAKE\bin
-cmake -D OGRE_BUILD_RENDERSYSTEM_D3D9=FALSE -D OGRE_BUILD_RENDERSYSTEM_GL3PLUS=FALSE -D OGRE_BUILD_RENDERSYSTEM_GL=FALSE -D OGRE_BUILD_RENDERSYSTEM_GLES2=FALSE -D OGRE_BUILD_PLUGIN_ASSIMP=FALSE -D OGRE_BUILD_PLUGIN_BSP=FALSE -D OGRE_BUILD_PLUGIN_OCTREE=FALSE -D OGRE_BUILD_PLUGIN_DOT_SCENE=FALSE -D OGRE_BUILD_PLUGIN_PCZ=FALSE -D OGRE_BUILD_COMPONENT_TERRAIN=FALSE -D OGRE_BUILD_COMPONENT_VOLUME=FALSE -D OGRE_BUILD_COMPONENT_BITES=FALSE -D OGRE_BUILD_COMPONENT_PYTHON=FALSE -D OGRE_BUILD_COMPONENT_JAVA=FALSE -D OGRE_BUILD_COMPONENT_CSHARP=FALSE -D OGRE_INSTALL_CMAKE=FALSE -D OGRE_INSTALL_SAMPLES=FALSE -D OGRE_INSTALL_DOCS=FALSE -D OGRE_INSTALL_PDB=FALSE -D OGRE_BUILD_TOOLS=FALSE -S "..\..\OgreSrc" -B "..\..\OgreBuild"
+dir
+cd CMAKE\bin
+
+cmake -D SDL2_DIR=..\..\OgreBuild\Dependencies\cmake -S "..\..\OgreSrc" -B "..\..\OgreBuild"
+ 
+ rem -D OGRE_INSTALL_SAMPLES=FALSE,
+ rem -D OGRE_INSTALL_DOCS=FALSE,
+ rem -D OGRE_INSTALL_PDB=FALSE,
+ rem -D OGRE_BUILD_TOOLS=FALSE, 
+ rem -D OGRE_BUILD_PLUGIN_OCTREE=FALSE,
+ rem -D OGRE_BUILD_RENDERSYSTEM_GL3PLUS=FALSE,
+ rem -D OGRE_BUILD_RENDERSYSTEM_GL=FALSE,
+
+
 cd ..\..\OgreBuild
-msbuild "OGRE.sln" /p:configuration=Debug
-msbuild "OGRE.sln" /p:configuration=Release
+msbuild "OGRE.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+msbuild "OGRE.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
 rem Parte de Bullet
+echo Compilando BULLET PHYSICS!
 
-cd ..\BulletSrc
+cd ..\
+
 mkdir BulletBuild
-cd ..\CMAKE\bin 
-cmake -D USE_MSVC_RUNTIME_LIBRARY_DLL=TRUE -S "..\..\BulletSrc" -B "..\..\BulletBuild"
-cd ..\..\BulletBuild
-msbuild "OGRE.sln" /p:configuration=Debug
-msbuild "OGRE.sln" /p:configuration=Release
+cd CMAKE\bin
+
+cmake -D USE_MSVC_RUNTIME_LIBRARY_DLL=TRUE -D BUILD_BULLET2_DEMOS=FALSE -D BUILD_BULLET_ROBOTICS_EXTRA=FALSE -D BUILD_BULLET_ROBOTICS_GUI_EXTRA=FALSE -D BUILD_CPU_DEMOS=FALSE -D BUILD_OPENGL3_DEMOS=FALSE -S "..\..\BulletSrc" -B "..\..\BulletBuild"
+
+ cd ..\..\BulletBuild
+
+msbuild "BULLET_PHYSICS.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+msbuild "BULLET_PHYSICS.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
 rem Parte de SDL2
+echo Compilando SDL2!
 
 cd ..\OgreBuild\SDL2-build
-msbuild "SDL2.sln" /p:configuration=Debug
-msbuild "SDL2.sln" /p:configuration=Release
+msbuild "SDL2.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+msbuild "SDL2.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
-rem Ya estan compiladas todas las librerias, ahora toca compilar la solucion del motor para
-rem generan el directorio Skeleton\build\Main donde se van a mover todas las dll necesarias
-
-cd ..\..\..\..\Skeleton
-msbuild "Skeleton.sln" /p:configuration=Debug
-msbuild "Skeleton.sln" /p:configuration=Release
 
 rem Moviendo archivos (dll) necesarios (.bat individual para cada libreria)
+echo Ejecutando Scripts individuales!
 
-cd dependencies\Scripts
+cd ..\..\Scripts
 
 rem OGRE
 call automate-Ogre.bat
@@ -55,6 +69,16 @@ call automate-FMOD.bat
 
 rem SDL2
 call automate-SDL2.bat
+
+rem Compilamos la solucion del motor
+echo Compilando la solucion del motor!
+
+cd ..\..\
+
+msbuild "Skeleton.sln" /p:configuration=Debug /p:Platform=x64
+msbuild "Skeleton.sln" /p:configuration=Release /p:Platform=x64
+
+echo Proceso terminado!
 
 pause
 exit

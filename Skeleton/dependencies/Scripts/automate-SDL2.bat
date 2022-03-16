@@ -1,12 +1,14 @@
+@echo off
+
 rem El directorio actual es Skeleton\dependencies\Scripts
 
-cd ..\OgreBuild\SDL2Build\Debug
+cd ..\OgreBuild\SDL2-build\Debug
 
-xcopy SDL2d.dll ..\..\..\..\build\Debug\Main /y
+xcopy SDL2d.dll ..\..\..\..\exes /y
 
 cd ..\Release
 
-xcopy SDL2.dll ..\..\..\..\build\Release\Main /y
+xcopy SDL2.dll ..\..\..\..\exes /y
 
 rem Devolvemos la ruta de entrada a este archivo
-cd ..\Scripts
+cd ..\..\..\Scripts
