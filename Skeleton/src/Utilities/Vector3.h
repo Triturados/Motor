@@ -1,6 +1,8 @@
 #pragma once
 #include <math.h>
 #include "Recta.h"
+#include "OgreVector3.h"
+#include "OgreColourValue.h"
 
 namespace Utilities
 {
@@ -30,6 +32,20 @@ namespace Utilities
 			z = ter;
 		}
 
+		Vector3(Ogre::ColourValue v)
+		{
+			x = (T) v.r;
+			y = (T) v.g;
+			z = (T) v.b;
+		}
+
+		Vector3(Ogre::Vector3 v)
+		{
+			x = (T) v.x;
+			y = (T) v.y;
+			z = (T) v.z;
+		}
+		
 		Vector3<T> operator+(Vector3<T> const& v2) const {
 			return Vector3(x + v2.x, y + v2.y, z + v2.z);
 		}
@@ -168,6 +184,9 @@ namespace Utilities
 			return A;
 		}
 
-
+		Ogre::Vector3 getOgreVector()
+		{
+			return Ogre::Vector3(x, y, z);
+		}
 	};
 }

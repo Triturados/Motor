@@ -46,10 +46,5 @@ public:
 	void setRot(Utilities::Vector4<float> r);
 	void setPos(Utilities::Vector3<float> p);
 	void setScale(Utilities::Vector3<float> s);
-	Utilities::Vector3<float>transformOgreVector(Vector3* v);
-	Utilities::Vector4<float>transformOgreQuaternion(Quaternion* v);
-	Quaternion* transformIntoOgreQuaternion(Utilities::Vector4<float> v);
-	Vector3* transformIntoOgreVector(Utilities::Vector3<float> v);
-
 };
 

@@ -129,12 +129,7 @@ void OgreRenderer::exampleScene()
 	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	ogreNode->attachObject(ogreEntity);
 
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
-
-	Ogre::Light* light = mSceneMgr->createLight("MainLight");
-	Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	lightNode->setPosition(20, 80, 50);
-	lightNode->attachObject(light);
+	//mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 }
 Ogre::SceneNode* OgreRenderer::createNode()
 {

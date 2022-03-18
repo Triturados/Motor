@@ -47,5 +47,10 @@ namespace Utilities
 			z = -z;
 			w = -w;
 		}
+
+		Ogre::Quaternion getOgreQuaternion()
+		{
+			return Ogre::Quaternion(x, y, z, w);
+		}
 	};
 }
