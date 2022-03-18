@@ -15,10 +15,9 @@ echo Compilando OGRE!
 
 cd Skeleton\dependencies
 mkdir OgreBuild
-dir
 cd CMAKE\bin
 
-cmake -D SDL2_DIR=..\..\OgreBuild\Dependencies\cmake -S "..\..\OgreSrc" -B "..\..\OgreBuild"
+cmake -S "..\..\OgreSrc" -B "..\..\OgreBuild"
  
  rem -D OGRE_INSTALL_SAMPLES=FALSE,
  rem -D OGRE_INSTALL_DOCS=FALSE,
@@ -32,6 +31,11 @@ cmake -D SDL2_DIR=..\..\OgreBuild\Dependencies\cmake -S "..\..\OgreSrc" -B "..\.
 cd ..\..\OgreBuild
 msbuild "OGRE.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
 msbuild "OGRE.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+
+echo Compilacion de OGRE terminada!
+
+
+
 
 rem Parte de Bullet
 echo Compilando BULLET PHYSICS!
@@ -48,12 +52,21 @@ cmake -D USE_MSVC_RUNTIME_LIBRARY_DLL=TRUE -D BUILD_BULLET2_DEMOS=FALSE -D BUILD
 msbuild "BULLET_PHYSICS.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
 msbuild "BULLET_PHYSICS.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
+echo Compilacion de BULLET PHYSICS terminada!
+
+
+
+
 rem Parte de SDL2
 echo Compilando SDL2!
 
 cd ..\OgreBuild\SDL2-build
 msbuild "SDL2.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
 msbuild "SDL2.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+
+echo Compilacion de SDL2 terminada!
+
+
 
 
 rem Moviendo archivos (dll) necesarios (.bat individual para cada libreria)
@@ -70,6 +83,8 @@ call automate-FMOD.bat
 rem SDL2
 call automate-SDL2.bat
 
+
+
 rem Compilamos la solucion del motor
 echo Compilando la solucion del motor!
 
@@ -79,6 +94,8 @@ msbuild "Skeleton.sln" /p:configuration=Debug /p:Platform=x64
 msbuild "Skeleton.sln" /p:configuration=Release /p:Platform=x64
 
 echo Proceso terminado!
+
+
 
 pause
 exit
