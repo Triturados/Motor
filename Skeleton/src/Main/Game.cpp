@@ -53,7 +53,7 @@ void Game::setup()
 	GameObject* luz = new GameObject("Luz");
 	luz->addComponent<Transform>();
 
-	luz->getComponent<Transform>()->setPos(Vector3<float>(0, 200, 0));
+	//luz->getComponent<Transform>()->setPos(Vector3<float>(0, 200, 0));
 
 	luz->addComponent<LightComponent>();
 	
