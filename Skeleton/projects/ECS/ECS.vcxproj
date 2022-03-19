@@ -91,7 +91,6 @@
     <ClCompile Include="..\..\src\ECS\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\ECS\Component.h" />
     <ClInclude Include="..\..\src\ECS\ECS.h" />
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\Scene.h" />

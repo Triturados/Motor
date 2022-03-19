@@ -110,7 +110,7 @@ template <class T>
 class ComponentTemplate : public Component
 {
 private:
-	static uint componentNum;
+	static unsigned int componentNum;
 	static size_t id;
 
 	void generateComponentID();

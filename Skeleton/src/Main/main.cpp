@@ -119,6 +119,57 @@ void probandoLUA() {
 	lua_close(L);
 }
 
+
+struct SceneDefinitions {
+	std::vector<SceneCreator*> escenas;
+	void scenesDefinitions();
+};
+
+
+typedef SceneDefinitions*(*Funct)();
+
+int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
+	SceneManager* manager = new SceneManager();
+
+	HMODULE hModule = LoadLibrary(TEXT("./Game.dll"));
+
+	if (hModule == NULL) {
+		std::cout << "No se encontró el juego\n";
+		delete manager;
+		return 1;
+	}
+
+	Funct escena = (Funct)GetProcAddress(hModule, "quierounaescena");
+
+	if (escena == NULL) {
+		std::cout << "No se encontró inicio del juego\n";
+		delete manager;
+		return 1;
+	}
+
+	const int numFrames = 60;
+
+	SceneDefinitions* creator = escena();
+	
+	manager->defineScenesFactories(creator->escenas);
+	manager->initiliseScenes();
+
+	for (int i = 0; i < 60; i++) {
+
+		Scene* scene = manager->getCurrentScene();
+
+		if (scene == nullptr)
+			break;
+
+		scene->update();
+	}
+
+	FreeLibrary(hModule);
+	delete manager;
+
+	return 0;
+}
+
 //Pruebas de proyectos
 void probandoCosas()
 {
@@ -129,6 +180,7 @@ void probandoCosas()
 	std::cout << "2 - OGRE\n";
 	std::cout << "3 - FMOD\n";
 	std::cout << "4 - Bullet\n";
+	std::cout << "5 - ECS cutre\n";
 	std::cin >> a;
 	
 	switch (a)
@@ -140,6 +192,7 @@ void probandoCosas()
 			game.run(); break;
 		case 3: probandoFMOD(); break;
 		case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
+		case 5:probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico(); break;
 		default:
 			break;
 	}
