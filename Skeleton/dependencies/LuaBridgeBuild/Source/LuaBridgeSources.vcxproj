@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{564C7B8D-9FEC-35CE-8AE6-494F63AE2C31}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>LuaBridgeSources</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc/Source/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc -BC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild --check-stamp-file C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild/Source/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeBuild\Source\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc/Source/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc -BC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild --check-stamp-file C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild/Source/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeBuild\Source\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc/Source/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc -BC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild --check-stamp-file C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild/Source/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeBuild\Source\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc/Source/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeSrc -BC:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild --check-stamp-file C:/Users/Ivan/Desktop/Motor/Skeleton/dependencies/LuaBridgeBuild/Source/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeBuild\Source\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\List.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\LuaBridge.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Map.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\RefCountedObject.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\RefCountedPtr.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\UnorderedMap.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Vector.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Array.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\CFunctions.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\ClassInfo.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Config.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Constructor.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\dump.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\FuncTraits.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Iterator.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaException.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaHelpers.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaRef.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Namespace.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Stack.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\TypeList.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\TypeTraits.h">
+    </None>
+    <None Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Userdata.h">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeBuild\ZERO_CHECK.vcxproj">
+      <Project>{6D93C41C-F111-3EA7-9E11-08279874B34C}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

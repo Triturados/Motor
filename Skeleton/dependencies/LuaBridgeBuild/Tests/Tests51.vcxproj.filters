@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\ArrayTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\ClassTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\IssueTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\IteratorTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\LegacyTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\ListTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\LuaRefTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\MapTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\NamespaceTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\PerformanceTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\RefCountedObjectTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\RefCountedPtrTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\StackTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\Tests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\TestsMain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\UnorderedMapTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\VectorTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\OptionalTests.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\TestBase.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Source\TestTypes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\LuaBridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\RefCountedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\RefCountedPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\UnorderedMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\CFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\ClassInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Constructor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\dump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\FuncTraits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Iterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\LuaRef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Namespace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\TypeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\TypeTraits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Source\LuaBridge\detail\Userdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{CC1238FC-980E-3947-93D5-1F8209377083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{FC0CA69B-FE02-3CCC-9236-95728B9D6EEB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

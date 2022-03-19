@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Lua\LuaLibrary5.1.5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\Lua\LuaLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Ivan\Desktop\Motor\Skeleton\dependencies\LuaBridgeSrc\Tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{CC1238FC-980E-3947-93D5-1F8209377083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{25BAD322-9164-3065-A9C3-2EED6EC54785}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
