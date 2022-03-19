@@ -6,43 +6,48 @@
 Transform::Transform()
 {
 	//Obtenenos las posiciones a partir de ogre
-	position = Utilities::Vector3<float>(0.0, 0.0, 0.0);
-	scale = Utilities::Vector3<float>(0.0, 0.0, 0.0);
-	rotation = Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
+
+
+	//DA ERROR 
+
+	position = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+	scale = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+	rotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0); 
 }
 
 
-Utilities::Vector3<float>Transform::getPos()
+Utilities::Vector3<float>*Transform::getPos()
 {
 
 	return position;
 }
 
-Utilities::Vector4<float>Transform::getRot()
+Utilities::Vector4<float>*Transform::getRot()
 {
 	return rotation;
 }
 
-Utilities::Vector3<float>Transform::getScale()
+Utilities::Vector3<float>*Transform::getScale()
 {
 	return scale;
 }
 
 
+//LA ASIGNACION DA ERROR 
 
-void Transform::setRot(Utilities::Vector4<float> r)
+void Transform::setRot(Utilities::Vector4<float>* r)
 {
 	rotation = r;
 
 }
 
-void Transform::setPos(Utilities::Vector3<float> p)
+void Transform::setPos(Utilities::Vector3<float>* p)
 {
 	position = p;
 
 }
 
-void Transform::setScale(Utilities::Vector3<float> s)
+void Transform::setScale(Utilities::Vector3<float>* s)
 {
 	scale = s;
 
