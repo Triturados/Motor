@@ -47,7 +47,7 @@
     <ClInclude Include="..\..\src\Utilities\Vector4.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
+    <ClInclude Include="..\..\src\Utilities\Singleton.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

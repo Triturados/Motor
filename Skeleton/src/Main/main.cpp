@@ -11,7 +11,6 @@
 #include <GameTime.h>
 #include <time.h>
 #include "Game.h"
-
 #include <Input.h>
 #undef main
 
@@ -129,13 +128,12 @@ struct SceneDefinitions {
 typedef SceneDefinitions*(*Funct)();
 
 int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
-	SceneManager* manager = new SceneManager();
+
 
 	HMODULE hModule = LoadLibrary(TEXT("./Game.dll"));
 
 	if (hModule == NULL) {
 		std::cout << "No se encontró el juego\n";
-		delete manager;
 		return 1;
 	}
 
@@ -143,7 +141,6 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 
 	if (escena == NULL) {
 		std::cout << "No se encontró inicio del juego\n";
-		delete manager;
 		return 1;
 	}
 
@@ -151,17 +148,22 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 
 	SceneDefinitions* creator = escena();
 	
+	SceneManager* manager = new SceneManager();
 	manager->defineScenesFactories(creator->escenas);
 	manager->initiliseScenes();
 
 	for (int i = 0; i < 60; i++) {
-
 		Scene* scene = manager->getCurrentScene();
 
 		if (scene == nullptr)
 			break;
 
 		scene->update();
+
+		if (SceneManager::instance != nullptr) {
+			std::cout << "en verdad si que existe el scene manager\n";
+		}
+
 	}
 
 	FreeLibrary(hModule);

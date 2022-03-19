@@ -19,11 +19,11 @@
     <ClInclude Include="..\..\src\Utilities\GameTime.h" />
     <ClInclude Include="..\..\src\Utilities\LightComponent.h" />
     <ClInclude Include="..\..\src\Utilities\Recta.h" />
+    <ClInclude Include="..\..\src\Utilities\Singleton.h" />
     <ClInclude Include="..\..\src\Utilities\Transform.h" />
     <ClInclude Include="..\..\src\Utilities\Vector2.h" />
     <ClInclude Include="..\..\src\Utilities\Vector3.h" />
     <ClInclude Include="..\..\src\Utilities\Vector4.h" />
-    <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECS\ECS.vcxproj">
