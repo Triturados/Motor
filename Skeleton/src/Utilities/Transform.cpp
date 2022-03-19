@@ -2,59 +2,52 @@
 #include <Ogre.h>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
+#include <OgreSceneManager.h>
 #include "Vector3.h"
 #include "Vector4.h"
+#include <string>
 
 Transform::Transform()
 {
-	entityNode = parent == nullptr ? 
-		OgreRenderer::instance->createNode() : 
-		OgreRenderer::instance->createChildNode(parent->entityNode);
-
 	//Obtenenos las posiciones a partir de ogre
-	position = new Ogre::Vector3(entityNode->getPosition());
-	scale = new Ogre::Vector3(entityNode->getScale());
-	rotation = new Ogre::Quaternion(entityNode->getOrientation());
+	position = Utilities::Vector3(0, 0, 0);
+	scale = Utilities::Vector3(0, 0, 0);
+	rotation = Utilities::Vector4(0, 0, 0, 0);
 }
 
-Transform::~Transform()
-{
-	//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
-	OgreRenderer::instance->removeNode(entityNode);
-}
 
 Utilities::Vector3<float>Transform::getPos()
 {
-	
-	return Vector3<float>(position);
+
+	return position;
 }
 
 Utilities::Vector4<float>Transform::getRot()
 {
-	return Vector4<float>(rotation);
+	return rotation;
 }
 
 Utilities::Vector3<float>Transform::getScale()
 {
-	return Vector3<float>(scale);
+	return scale;
 }
 
 
 
 void Transform::setRot(Utilities::Vector4<float> r)
 {
-	rotation = r.getOgreQuaternion();
-	entityNode->setOrientation(rotation);
+	rotation = r;
+
 }
 
 void Transform::setPos(Utilities::Vector3<float> p)
 {
-	position = p.getOgreVector();
-	entityNode->setPosition(position);
+	position = p;
+
 }
 
 void Transform::setScale(Utilities::Vector3<float> s)
 {
-	scale = s.getOgreVector();
-	entityNode->setScale(scale);
+	scale = s;
+
 }
