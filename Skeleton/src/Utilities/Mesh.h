@@ -13,6 +13,7 @@ namespace Ogre {
 	class SceneNode;
 	class Quaternion;
 	class Vector3;
+	class Entity;
 }
 
 class Transform; 
@@ -20,11 +21,12 @@ class Mesh : public Component
 {
 public:
 
-	//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
+	
 
 	std::string  meshName = "";
 	Ogre::SceneNode* entityNode = nullptr;
 	Ogre::SceneNode* parentNode = nullptr;
+	Ogre::Entity* entity = nullptr;
 	Transform* parent = nullptr;
 	
 private:
