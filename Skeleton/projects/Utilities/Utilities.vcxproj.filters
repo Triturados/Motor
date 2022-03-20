@@ -24,6 +24,9 @@
     <ClCompile Include="..\..\src\Utilities\LightComponent.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Utilities\Mesh.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\GameTime.h">
@@ -45,6 +48,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Utilities\Vector4.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utilities\Mesh.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
