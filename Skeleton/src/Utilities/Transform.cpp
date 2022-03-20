@@ -33,20 +33,16 @@ Utilities::Vector3<float>*Transform::getScale()
 }
 
 
-//LA ASIGNACION DA ERROR 
-
 void Transform::setRot(Utilities::Vector4<float>* r)
 {
 	rotation = r;
 
 }
-
 void Transform::setPos(Utilities::Vector3<float>* p)
 {
 	position = p;
 
 }
-
 void Transform::setScale(Utilities::Vector3<float>* s)
 {
 	scale = s;

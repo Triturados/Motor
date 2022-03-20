@@ -16,9 +16,6 @@ private:
 	Utilities::Vector3<float>* position;
 	Utilities::Vector4<float>* rotation;
 	Utilities::Vector3<float>*  scale;
-
-	
-
 public:
 	
 	Transform();
