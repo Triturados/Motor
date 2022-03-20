@@ -9,6 +9,7 @@
 #include <Ogre.h>
 #include <string>
 
+
 void Mesh::init()
 {
 	if (meshName == "") throw new std::exception("La malla no tiene nombre");
@@ -24,7 +25,7 @@ void Mesh::init()
 
 void Mesh::update()
 {
-	entityNode->setOrientation()
+	entityNode->setOrientation();
 	entityNode->setPos(position.getOgreVector);
 	entityNode->setScale(scale.getOgreVector);
 
@@ -32,8 +33,7 @@ void Mesh::update()
 
 Mesh::~Mesh()
 {
+
 	OgreRenderer::instance->removeNode(entityNode);
-	if (parentNode != nullptr)OgreRenderer::instance->removeNode(parentNode);
-	
 
 }

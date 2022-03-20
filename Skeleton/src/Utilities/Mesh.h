@@ -1,6 +1,7 @@
 #pragma once
 #include <Component.h>
 #include <string>
+#include <Transform.h>
 
 namespace Utilities {
 	template<typename T>
