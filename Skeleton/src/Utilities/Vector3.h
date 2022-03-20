@@ -184,9 +184,5 @@ namespace Utilities
 			return A;
 		}
 
-		Ogre::Vector3 getOgreVector()
-		{
-			return Ogre::Vector3(x, y, z);
-		}
 	};
 }

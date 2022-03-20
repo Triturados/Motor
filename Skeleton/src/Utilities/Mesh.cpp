@@ -29,10 +29,9 @@ void Mesh::init()
 
 void Mesh::update()
 {
-	/* entityNode->setOrientation(parent->getRot());
-	entityNode->setPos(position.getOgreVector);
-	entityNode->setScale(scale.getOgreVector);*/
-
+	entityNode->setOrientation(*getOgreQuaternion(*parent->getRot()));
+	entityNode->setPosition(*getOgreVector(*parent->getPos()));
+	entityNode->setScale(*getOgreVector(*parent->getScale()));
 }
 
 Mesh::~Mesh()
@@ -40,4 +39,14 @@ Mesh::~Mesh()
 
 	OgreRenderer::instance->removeNode(entityNode);
 
+}
+
+Ogre::Vector3* Mesh::getOgreVector(Utilities::Vector3<float> v)
+{
+	return &Ogre::Vector3(v.x, v.y, v.z);
+}
+
+Ogre::Quaternion* Mesh::getOgreQuaternion(Utilities::Vector4<float> v)
+{
+	return &Ogre::Quaternion(v.x, v.y, v.z, v.w);
 }
