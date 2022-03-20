@@ -1,7 +1,7 @@
 #pragma once
 #include <Component.h>
 #include <string>
-#include <Transform.h>
+
 
 namespace Utilities {
 	template<typename T>
@@ -15,7 +15,7 @@ namespace Ogre {
 	class Vector3;
 }
 
-
+class Transform; 
 class Mesh : public Component
 {
 public:

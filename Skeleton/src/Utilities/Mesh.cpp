@@ -1,6 +1,6 @@
 #include "Mesh.h"
+#include "Transform.h"
 #include <stdexcept>
-#include <Transform.h>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
@@ -25,9 +25,9 @@ void Mesh::init()
 
 void Mesh::update()
 {
-	entityNode->setOrientation();
+	 entityNode->setOrientation(parent->getRot());
 	entityNode->setPos(position.getOgreVector);
-	entityNode->setScale(scale.getOgreVector);
+	entityNode->setScale(scale.getOgreVector);*/
 
 }
 
