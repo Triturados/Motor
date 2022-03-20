@@ -9,18 +9,31 @@
 #include <Ogre.h>
 #include <string>
 
-void init()
+void Mesh::init()
 {
-      //if (meshName =="") throw excepción->La malla no tiene nombre
-      //if (transformRef ==nullptr) throw excepción -> No existe un componente transform para esta entidad
-if (parent==nullptr) OgreRenderer::instance->createNode() : 
-else OgreRenderer::instance->createChildNode(parent->entityNode);
-OgreRenderer: instance->getSceneManager()->createEntity(meshName);
+	if (meshName == "") throw new std::exception("La malla no tiene nombre");
+	if (parent == nullptr) throw new std::exception("No existe un componente transform para esta entidad");
+	if (parentNode == nullptr)entityNode = OgreRenderer::instance->createNode();
+	else entityNode = OgreRenderer::instance->createChildNode(parentNode);
+
+	OgreRenderer::instance->getSceneManager()->createEntity(meshName);
 
 
-//ESTO NO SE SI HACE FALTA 
-position/scale = new Utilities::Vector3<float>(0.0,0.0,0.0)
-rotation new Utilities::Vector4<float>(0.0,0.0,0.0,0.0)
 
 }
 
+void Mesh::update()
+{
+	entityNode->setOrientation()
+	entityNode->setPos(position.getOgreVector);
+	entityNode->setScale(scale.getOgreVector);
+
+}
+
+Mesh::~Mesh()
+{
+	OgreRenderer::instance->removeNode(entityNode);
+	if (parentNode != nullptr)OgreRenderer::instance->removeNode(parentNode);
+	
+
+}

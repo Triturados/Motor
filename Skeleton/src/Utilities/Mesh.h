@@ -18,16 +18,20 @@ namespace Ogre {
 class Mesh : public Component
 {
 public:
-	std::string  meshName = "";
-	Transform* transformRef = nullptr;
-	Ogre::SceneNode* entityNode = nullptr;
-	Transform* parent = nullptr;
-	Utilities::Vector3<float>* position;
-	Utilities::Vector3<float>* scale;
-	Utilities::Vector3<float>* rotation;
-private:
-	void init();
 
+	//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
+
+	std::string  meshName = "";
+	Ogre::SceneNode* entityNode = nullptr;
+	Ogre::SceneNode* parentNode = nullptr;
+	Transform* parent = nullptr;
+	
+private:
+
+	Mesh() {};
+	void init();
+	void update();
+	~Mesh();
 
 
 

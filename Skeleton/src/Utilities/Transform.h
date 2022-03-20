@@ -19,6 +19,7 @@ private:
 public:
 	
 	Transform();
+	~Transform();
 	Utilities::Vector3<float>*getPos();
 	Utilities::Vector4<float>*getRot();
 	Utilities::Vector3<float>*getScale();
