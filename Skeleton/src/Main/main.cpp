@@ -12,6 +12,19 @@
 #include <time.h>
 #include "Game.h"
 #include <Input.h>
+
+
+//LUABRIDGE
+extern "C" {
+#include <Lua.5.2.0/src/lua.h>
+#include <Lua.5.2.0/src/lualib.h>
+#include <Lua.5.2.0/src/lauxlib.h>
+}
+
+
+#include <memory>
+
+#include <LuaBridge/LuaBridge.h>
 #undef main
 
 //Ejemplo Componente
@@ -172,6 +185,25 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 	return 0;
 }
 
+void LuaBridge() {
+	// create a lua state
+	lua_State* luastate = luaL_newstate();
+
+	// load standard libs
+	luaL_openlibs(luastate);
+
+	// load some code from lua file
+	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
+
+	// call function defined in lua script
+	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "addAndDouble");
+
+	int x = addanddouble(15, 12);
+
+	std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
+
+}
+
 //Pruebas de proyectos
 void probandoCosas()
 {
@@ -182,21 +214,21 @@ void probandoCosas()
 	std::cout << "2 - OGRE\n";
 	std::cout << "3 - FMOD\n";
 	std::cout << "4 - Bullet\n";
-	std::cout << "5 - ECS cutre\n";
+	std::cout << "5 - LuaBridge\n";
 	std::cin >> a;
-	
+
 	switch (a)
 	{
-		case 0: probandoLUA(); break;
-		case 1: probandoInput(); break;
-		case 2: 	
-			Game game;
-			game.run(); break;
-		case 3: probandoFMOD(); break;
-		case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
-		case 5:probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico(); break;
-		default:
-			break;
+	case 0: probandoLUA(); break;
+	case 1: probandoInput(); break;
+	case 2:
+		Game game;
+		game.run(); break;
+	case 3: probandoFMOD(); break;
+	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
+	case 5: LuaBridge(); break;
+	default:
+		break;
 	}
 
 	std::cout << "Escribe algo para salir.\n";
