@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef GAME_H
+#define GAME_H
+
 class GameTime;
 class SceneManager;
 class OgreRenderer;
@@ -21,3 +24,4 @@ struct Game {
 
 	void loop();
 };
+#endif
