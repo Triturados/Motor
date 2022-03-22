@@ -28,12 +28,12 @@ void Mesh::init()
 void Mesh::update()
 {
 	Utilities::Vector4 rot = *parent->getRot();
-	Utilities::Vector3 pos = *parent->getPos();
-	Utilities::Vector3 scale = *parent->getScale();
+	Utilities::Vector3 position = *parent->getPos();
+	Utilities::Vector3 sc = *parent->getScale();
 
 	entityNode->setOrientation(Ogre::Quaternion(rot.w, rot.x, rot.y, rot.z));
-	entityNode->setPosition(Ogre::Vector3(pos.x, pos.y, pos.z));
-	entityNode->setScale(Ogre::Vector3(scale.x, scale.y, scale.z));
+	entityNode->setPosition(Ogre::Vector3(position.x, position.y, position.z));
+	entityNode->setScale(Ogre::Vector3(sc.x, sc.y, sc.z));
 }
 
 Mesh::~Mesh()

@@ -12,7 +12,7 @@
 #include <time.h>
 #include "Game.h"
 #include <Input.h>
-
+#include <Windows.h>
 
 //LUABRIDGE
 extern "C" {
