@@ -11,8 +11,6 @@ namespace Utilities {
 }
 namespace Ogre {
 	class SceneNode;
-	class Quaternion;
-	class Vector3;
 	class Entity;
 }
 
@@ -36,7 +34,5 @@ private:
 	void update();
 	~Mesh();
 
-	Ogre::Vector3* getOgreVector(Utilities::Vector3<float> v);
-	Ogre::Quaternion* getOgreQuaternion(Utilities::Vector4<float> v);
 };
 
