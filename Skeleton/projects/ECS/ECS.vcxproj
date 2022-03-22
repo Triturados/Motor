@@ -96,6 +96,7 @@
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\ECS\Component.h" />
     <ClInclude Include="..\..\src\ECS\ECS.h" />
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />
