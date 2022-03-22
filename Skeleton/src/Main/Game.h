@@ -2,23 +2,27 @@
 
 #ifndef GAME_H
 #define GAME_H
+#include <Windows.h>
 
-class GameTime;
+namespace LoveEngine {
+	class Time;
+}
 class SceneManager;
 class OgreRenderer;
 class PhysicsManager;
-
 struct Game {
+
+	HMODULE game;
+	HMODULE singleton;
 
 	OgreRenderer* renderer;
 	SceneManager* sceneManager;
-	GameTime* time;
+	LoveEngine::Time* time;
 	PhysicsManager* physics;
 
 	void run();
 
-
-	void setup();
+	int setup();
 
 	void quit();
 

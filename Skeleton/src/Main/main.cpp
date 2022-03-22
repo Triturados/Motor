@@ -178,8 +178,7 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 
 		scene->update();
 
-		if (SceneManager::getInstance() != nullptr) {
-		}
+		manager->checkChange();
 	}
 
 	FreeLibrary(hModule);

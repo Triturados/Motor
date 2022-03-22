@@ -3,25 +3,37 @@
 #include <cassert>
 #include <Windows.h>
 #include "../Singleton/SingletonInfo.h"
+#include <iostream>
+
+SceneManager* SceneManager::instance = nullptr;
 
 SceneManager* SceneManager::getInstance()
 {
-	HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
+	if (instance == nullptr) {
+		HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
 
-	assert(hModule != NULL);
+		assert(hModule != NULL);
 
-	int idx = (int)LoveSingleton::positions::SceneManager;
+		int idx = (int)LoveSingleton::positions::SceneManager;
 
-	LoveSingleton::singletonOUT value = (LoveSingleton::singletonOUT)GetProcAddress(hModule, "getElement");
+		LoveSingleton::singletonOUT value = (LoveSingleton::singletonOUT)GetProcAddress(hModule, "getElement");
 
-	assert(value != NULL);
+		assert(value != NULL);
 
-	FreeLibrary(hModule);
-	return static_cast<SceneManager*>(value(idx));
+		FreeLibrary(hModule);
+		return static_cast<SceneManager*>(value(idx));
+	}
+	return instance;
 }
 
 SceneManager::SceneManager()
 {
+	if (instance != nullptr) {
+		assert(false);
+	}
+
+	SceneManager::instance = this;
+
 	HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
 
 	assert(hModule != NULL);

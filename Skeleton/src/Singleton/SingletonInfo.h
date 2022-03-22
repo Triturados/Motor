@@ -1,9 +1,9 @@
 
 namespace LoveSingleton {
-	const int singletonCount = 3;
+	const int singletonCount = 4;
 
 	enum class positions {
-		SceneManager, Time, Input
+		SceneManager, Time, Input, Component
 	};
 
 	typedef void (*singletonIN)(void*, int);

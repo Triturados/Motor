@@ -11,61 +11,66 @@
 #include <OgreRenderer.h>
 #include <Transform.h>
 #include <PhysicsManager.h>
-#include <LightComponent.h>
+
+
+
+
+
+struct SceneDefinitions {
+	std::vector<SceneCreator*> escenas;
+	void scenesDefinitions();
+};
+
 
 using namespace std::chrono;
+typedef SceneDefinitions* (*Funct)();
 
-class ContadorFrames : public Component {
-
-	int cont = 0;
-public:
-	void update() override {
-		//std::cout << cont++ << "\n";
-
-		cont++;
-	}
-
-};
-
-class Escenadecontar : public SceneCreator {
-	Scene* populateScene() override {
-
-		Scene* scene = createScene("Escena de contar");
-		GameObject* go = createGameObject("Objeto");
-		//go->addComponent<Transform>();
-		go->addComponent<ContadorFrames>();
-
-		return scene;
-	}
-};
-
-
-void Game::setup()
+int Game::setup()
 {
-	time = new GameTime();
+	game = LoadLibrary(TEXT("./Game.dll"));
+	singleton = LoadLibrary(TEXT("Singleton.dll"));
+
+	if (singleton == NULL) {
+		std::cout << "No se encontró la biblioteca de singletons";
+		return 1;
+	}
+
+	if (game == NULL) {
+		std::cout << "No se encontró el juego\n";
+		return 1;
+	}
+
+	Funct escena = (Funct)GetProcAddress(game, "quierounaescena");
+
+	if (escena == NULL) {
+		std::cout << "No se encontró inicio del juego\n";
+		return 1;
+	}
+
+
+	SceneDefinitions* creator = escena();
+
+
+	time = new LoveEngine::Time();
 	sceneManager = new SceneManager();
-	sceneManager->defineScenesFactories({ new Escenadecontar() });
+	sceneManager->defineScenesFactories(creator->escenas);
 	sceneManager->initiliseScenes();
 
 	renderer = new OgreRenderer();
 	renderer->exampleScene();
 
-	//GameObject* luz = new GameObject("Luz");
-	//luz->addComponent<Transform>();
-
-	////luz->getComponent<Transform>()->setPos(Vector3<float>(0, 200, 0));
-
-	//luz->addComponent<LightComponent>();
-	//
-	//luz->getComponent<LightComponent>()->sendParameters(lightType::point, "luz", renderer->getSceneManager());
-
 	PhysicsManager::setUpInstance();
 	physics = PhysicsManager::getInstance();
+
+	return 0;
 }
 
 
 void Game::quit()
 {
+	FreeLibrary(game);
+	FreeLibrary(singleton);
+
 	delete sceneManager;
 	delete time;
 	delete renderer;
@@ -134,7 +139,8 @@ void Game::loop()
 
 void Game::run()
 {
-	setup();
-	loop();
-	quit();
+	if (setup() == 0) {
+		loop();
+		quit();
+	}
 }

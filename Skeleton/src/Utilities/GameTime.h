@@ -1,15 +1,22 @@
 #pragma once
 
 
+namespace LoveEngine {
 
-class GameTime {
-public:
+	class Time {
+		static Time* instance;
+	public:
+		Time();
 
-	float deltaTime;
-	float physicsTime;
-	float timeSinceStart;
-	float timeScale;
+		static Time* getInstance();
 
-	unsigned long frameCount;
-	float calculateFrameRate();
-};
+		float deltaTime;
+		float physicsTime;
+		float timeSinceStart;
+		float timeScale;
+
+		unsigned long frameCount;
+		float calculateFrameRate();
+	};
+
+}
