@@ -2,29 +2,28 @@
 #ifndef OGRERENDERER_H
 #define OGRERENDERER_H
 
-#include <OgreRoot.h>
-#include <OgreConfigFile.h>
-#include <OgreRenderWindow.h>
-#include <OgreTextureManager.h>
-#include <OgreCamera.h>
-#include <OgreSceneManager.h>
-#include "OgreViewport.h"
-#include <OgreEntity.h>
+// Estos dos archivos incluyen clases anidadas (MaterialManagerListener y ShaderGenerator resp.) que se referencian como atributos 
+// de OgreRenderer.
+// Como no se puede hacer forward declaration de las clases anidadas, los archivos tienen que estar incluidos.
+#include <OgreMaterialManager.h>;
 #include <OgreRTShaderSystem.h>
-#include <OgreShaderGenerator.h>
-#include <OgreBitesConfigDialog.h>
-#include <OgreWindowEventUtilities.h>
-#include <OgreSGTechniqueResolverListener.h>
 
+namespace Ogre {
+	class Root;
+	class Camera;
+	class RenderWindow;
+	class SceneManager;
+	class SceneNode;
+}
 
 class OgreRenderer
 {
 private:
 	Ogre::Root* mRoot;
-	Ogre::String mResourcesCfgPath;
-	Ogre::String mPluginsCfgPath;
-	Ogre::String mCfgPath;
-	Ogre::String mLogPath;
+	Ogre::String* mResourcesCfgPath;
+	Ogre::String* mPluginsCfgPath;
+	Ogre::String* mCfgPath;
+	Ogre::String* mLogPath;
 
 	Ogre::RenderWindow* mWindow;
 	Ogre::SceneManager* mSceneMgr;

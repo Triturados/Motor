@@ -1,5 +1,21 @@
 #include "OgreRenderer.h"
 
+#include <OgreVector2.h>
+#include <OgreVector3.h>
+#include <OgreVector4.h>
+#include <OgreRoot.h>
+#include <OgreConfigFile.h>
+#include <OgreRenderWindow.h>
+#include <OgreTextureManager.h>
+#include <OgreCamera.h>
+#include <OgreSceneManager.h>
+#include "OgreViewport.h"
+#include <OgreEntity.h>
+#include <OgreShaderGenerator.h>
+#include <OgreBitesConfigDialog.h>
+#include <OgreWindowEventUtilities.h>
+#include <OgreSGTechniqueResolverListener.h>
+
 OgreRenderer* OgreRenderer::instance = nullptr;
 
 OgreRenderer::OgreRenderer()
@@ -21,12 +37,12 @@ OgreRenderer::OgreRenderer()
 /// Inicializa la raiz
 /// </summary>
 void OgreRenderer::initRoot() {
-	mResourcesCfgPath = "./OGRE/resources.cfg";
-	mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
-	mLogPath = "./OGRE/Ogre.log";
-	mCfgPath = "./OGRE/ogre.cfg";
+	*mResourcesCfgPath = "./OGRE/resources.cfg";
+	*mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
+	*mLogPath = "./OGRE/Ogre.log";
+	*mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
+	mRoot = new Ogre::Root(*mPluginsCfgPath, *mCfgPath, *mLogPath);
 
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
 	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
@@ -38,7 +54,7 @@ void OgreRenderer::initRoot() {
 void OgreRenderer::loadResources()
 {
 	Ogre::ConfigFile cf;
-	cf.load(mResourcesCfgPath);
+	cf.load(*mResourcesCfgPath);
 
 	Ogre::String name, locType;
 	Ogre::ConfigFile::SectionIterator secIt = cf.getSectionIterator();

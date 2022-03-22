@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef TRANSFORM_H
+#define TRANSFORM_H
+
 #include <vector>
 #include "Component.h"
 
@@ -29,3 +32,4 @@ public:
 	void setScale(Utilities::Vector3<float>* s);
 };
 
+#endif
