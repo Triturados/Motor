@@ -1,15 +1,42 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include <cassert>
+#include <Windows.h>
+#include "../Singleton/SingletonInfo.h"
 
+SceneManager* SceneManager::getInstance()
+{
+	HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
 
-SceneManager* SceneManager::instance = nullptr;
+	assert(hModule != NULL);
+
+	int idx = (int)LoveSingleton::positions::SceneManager;
+
+	LoveSingleton::singletonOUT value = (LoveSingleton::singletonOUT)GetProcAddress(hModule, "getElement");
+
+	assert(value != NULL);
+
+	FreeLibrary(hModule);
+	return static_cast<SceneManager*>(value(idx));
+}
 
 SceneManager::SceneManager()
 {
-	assert(instance == nullptr);
-	instance = this;
+	HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
+
+	assert(hModule != NULL);
+
+	int idx = (int)LoveSingleton::positions::SceneManager;
+
+	LoveSingleton::singletonIN value = (LoveSingleton::singletonIN)GetProcAddress(hModule, "createElement");
+
+	assert(value != NULL);
+
+	value(this, idx);
+
 	sceneChangeType = SceneLoad::PUSH;
+
+	FreeLibrary(hModule);
 }
 
 SceneManager::~SceneManager()
@@ -70,7 +97,7 @@ void SceneManager::checkChange()
 void SceneManager::initiliseScenes()
 {
 	initialised = true;
-	assert(("__No hay escenas para crear__" , sceneCount() > 0));
+	assert(("__No hay escenas para crear__", sceneCount() > 0));
 
 	sceneToLoad = 0;
 	createScene();
@@ -78,7 +105,7 @@ void SceneManager::initiliseScenes()
 
 void SceneManager::defineScenesFactories(SceneFactory scenes)
 {
-	assert(("__Ya se han inicializado las escenas" , initialised == false));
+	assert(("__Ya se han inicializado las escenas", initialised == false));
 	for (auto scene : scenes) {
 		scenesTemplates.push_back(scene);
 	}
@@ -86,7 +113,7 @@ void SceneManager::defineScenesFactories(SceneFactory scenes)
 
 void SceneManager::eraseTopScene()
 {
-	assert(("__Niguna escena que eliminar__" , !currentScene.empty()));
+	assert(("__Niguna escena que eliminar__", !currentScene.empty()));
 	Scene* sceneToErase = currentScene.top();
 	currentScene.pop();
 
@@ -95,8 +122,8 @@ void SceneManager::eraseTopScene()
 
 void SceneManager::createScene()
 {
-	assert(("__La escena a crear no es valida__" , sceneToLoad >= 0 && sceneToLoad < sceneCount()));
-	
+	assert(("__La escena a crear no es valida__", sceneToLoad >= 0 && sceneToLoad < sceneCount()));
+
 	Scene* newscene = scenesTemplates[sceneToLoad]->createScene();
 	currentScene.push(newscene);
 }

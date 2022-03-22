@@ -35,7 +35,7 @@ public:
 	void update() override {
 
 		if (cont == 14) {
-			SceneManager::instance->changeScene(1, SceneLoad::PUSH);
+			SceneManager::getInstance()->changeScene(1, SceneLoad::PUSH);
 		}
 		std::cout << cont++ << "\n";
 	}
@@ -141,9 +141,14 @@ struct SceneDefinitions {
 typedef SceneDefinitions*(*Funct)();
 
 int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
-
-
 	HMODULE hModule = LoadLibrary(TEXT("./Game.dll"));
+	HMODULE singletons = LoadLibrary(TEXT("Singleton.dll"));
+
+
+	if (singletons == NULL) {
+		std::cout << "No se encontró la biblioteca de singletons";
+		return 1;
+	}
 
 	if (hModule == NULL) {
 		std::cout << "No se encontró el juego\n";
@@ -173,13 +178,12 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 
 		scene->update();
 
-		if (SceneManager::instance != nullptr) {
-			std::cout << "en verdad si que existe el scene manager\n";
+		if (SceneManager::getInstance() != nullptr) {
 		}
-
 	}
 
 	FreeLibrary(hModule);
+	FreeLibrary(singletons);
 	delete manager;
 
 	return 0;
@@ -215,6 +219,7 @@ void probandoCosas()
 	std::cout << "3 - FMOD\n";
 	std::cout << "4 - Bullet\n";
 	std::cout << "5 - LuaBridge\n";
+	std::cout << "6 - ECS cutre\n";
 	std::cin >> a;
 
 	switch (a)
@@ -227,6 +232,7 @@ void probandoCosas()
 	case 3: probandoFMOD(); break;
 	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
 	case 5: LuaBridge(); break;
+	case 6:probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico(); break;
 	default:
 		break;
 	}

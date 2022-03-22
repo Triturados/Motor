@@ -23,7 +23,7 @@ using SceneFactory = std::vector<SceneCreator*>;
 class SceneManager final {
 
 public:
-	static SceneManager* instance;
+	static SceneManager* getInstance();
 	SceneManager();
 	~SceneManager();
 
