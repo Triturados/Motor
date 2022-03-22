@@ -37,12 +37,12 @@ void RigidBody::stepPhysics()
 
 }
 
-void RigidBody::setPosition(const Vector3<float>& newPos)
+void RigidBody::setPosition(const Utilities::Vector3<float>& newPos)
 {
 	
 }
 
-void RigidBody::setGravity(const Vector3<float>& newGrav)
+void RigidBody::setGravity(const Utilities::Vector3<float>& newGrav)
 {
 
 }
@@ -65,7 +65,7 @@ void RigidBody::setRestitution(float restitution)
 	
 }
 
-void RigidBody::setLinearVelocity(const Vector3<float>& vel)
+void RigidBody::setLinearVelocity(const Utilities::Vector3<float>& vel)
 {
 
 }
@@ -81,9 +81,9 @@ void RigidBody::setCollisionShape(btCollisionShape* newShape)
 }
 
 
-const Vector3<float>& RigidBody::getLinearVelocity() const
+const Utilities::Vector3<float>& RigidBody::getLinearVelocity() const
 {
-	return Vector3<float>();
+	return Utilities::Vector3<float>();
 }
 
 bool RigidBody::isTrigger() const
@@ -116,7 +116,7 @@ int RigidBody::getMask() const
 	return 0;
 }
 
-void RigidBody::addForce(const Vector3<float>& force, Vector3<float>& relativePos, int type)
+void RigidBody::addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
 {
 	
 }

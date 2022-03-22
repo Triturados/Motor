@@ -10,8 +10,10 @@ class OgreDebugDrawer;
 class btCollisionObject;
 class btVector3;
 
-template <typename T>
-class Vector3;
+namespace Utilities {
+	template <typename T>
+	class Vector3;
+}
 
 class PhysicsManager {
 
@@ -43,13 +45,13 @@ public:
 	static bool setUpInstance();
 
 	//Método para inicializar el mundo de bullet con gravedad como parámetro
-	void init(const Vector3<float> gravity);
+	void init(const Utilities::Vector3<float> gravity);
 
 	btDiscreteDynamicsWorld* getWorld() const;
 
 	//Crea el un rigidbody de bullet a partir de los siguientes parametros:
 	//Posicion, masa e identificador (el cual determina la forma del collider)
-	btRigidBody* createRB(Vector3<float> pos, float mass, int group = -1, int mask = -1);
+	btRigidBody* createRB(Utilities::Vector3<float> pos, float mass, int group = -1, int mask = -1);
 
 	//destruye un rigidbody de bullet
 	void destroyRigidBody(btRigidBody* body);
@@ -61,6 +63,6 @@ public:
 	void destroyWorld();
 	static void destroy();
 
-	btVector3 btConvert(const Vector3<float>& v3);
-	Vector3<float> v3Convert(const btVector3& v3);
+	btVector3 btConvert(const Utilities::Vector3<float>& v3);
+	Utilities::Vector3<float> v3Convert(const btVector3& v3);
 };

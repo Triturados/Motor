@@ -1,63 +1,51 @@
 #include "Transform.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include <string>
 
-Transform::Transform(Transform* p)
+Transform::Transform()
 {
-
-	//Le pasamos un parent, por defecto es nulo 
-
-
-	entityNode = p == nullptr ? 
-		OgreRenderer::instance->createNode() : 
-		OgreRenderer::instance->createChildNode(p->entityNode);
-
-	parent = p;
-
-	//Obtenenos las posiciones a partir de ogre
-	position = entityNode->getPosition();
-	scale = entityNode->getScale();
-	rotation = entityNode->getOrientation();
-
-
+	position = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+	scale = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+	rotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
 }
 
+
+Utilities::Vector3<float>* Transform::getPos()
+{
+
+	return position;
+}
+
+Utilities::Vector4<float>* Transform::getRot()
+{
+	return rotation;
+}
+
+Utilities::Vector3<float>* Transform::getScale()
+{
+	return scale;
+}
+
+
+void Transform::setRot(Utilities::Vector4<float>* r)
+{
+	rotation = r;
+
+}
+void Transform::setPos(Utilities::Vector3<float>* p)
+{
+	position = p;
+
+}
+void Transform::setScale(Utilities::Vector3<float>* s)
+{
+	scale = s;
+
+}
 Transform::~Transform()
 {
-	//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
-	OgreRenderer::instance->removeNode(entityNode);
-}
-
-Vector3<float>Transform::getPos()
-{
-	
-	return Vector3<float>(position);
-}
-
-Vector4<float>Transform::getRot()
-{
-	return Vector4<float>(rotation);
-}
-
-Vector3<float>Transform::getScale()
-{
-	return Vector3<float>(scale);
-}
-
-
-
-void Transform::setRot(Vector4<float> r)
-{
-	rotation = r.getOgreQuaternion();
-	entityNode->setOrientation(rotation);
-}
-
-void Transform::setPos(Vector3<float> p)
-{
-	position = p.getOgreVector();
-	entityNode->setPosition(position);
-}
-
-void Transform::setScale(Vector3<float> s)
-{
-	scale = s.getOgreVector();
-	entityNode->setScale(scale);
+	delete position;
+	delete rotation;
+	delete scale;
 }
