@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <Component.h>
+#include "Component.h"
 
 namespace Utilities {
 	template<typename T>

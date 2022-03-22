@@ -1,5 +1,5 @@
 #pragma once
-#include <Component.h>
+#include "Component.h"
 #include <string>
 
 
@@ -18,9 +18,6 @@ class Transform;
 class Mesh : public Component
 {
 public:
-
-	
-
 	std::string  meshName = "";
 	Ogre::SceneNode* entityNode = nullptr;
 	Ogre::SceneNode* parentNode = nullptr;

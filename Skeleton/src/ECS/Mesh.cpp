@@ -3,8 +3,8 @@
 #include <stdexcept>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
-#include "Vector3.h"
-#include "Vector4.h"
+#include <Vector3.h>
+#include <Vector4.h>
 #include <Ogre.h>
 #include <string>
 
