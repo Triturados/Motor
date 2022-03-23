@@ -32,6 +32,8 @@ bld/
 [Ll]ogs/
 OgreBuild/
 BulletBuild/
+LuaBridgeBuild/
+LuaBridgeSrc/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -353,6 +355,7 @@ MigrationBackup/
 
 [Tt]emp/
 [Bb]uild/
+[Ee]xes/
 !Skeleton/build/Debug/OGRE
 !Skeleton/build/Release/OGRE
 !Skeleton/dependencies/CMAKE/bin
