@@ -20,6 +20,9 @@
     <ProjectReference Include="..\Input\Input.vcxproj">
       <Project>{1e18fc5c-60f3-49be-9cb6-31f16f5c1f90}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\LuaBridge\LuaBridge.vcxproj">
+      <Project>{fcd5cadd-0170-4aeb-999b-a5d42d99bb08}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\LUA\LUA.vcxproj">
       <Project>{d5b79b46-5fe1-4eb2-a6b2-cc8cc167fa1c}</Project>
     </ProjectReference>
@@ -91,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)src\OGRE;$(SolutionDir)src\SoundProject;$(SolutionDir)src\Input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;$(SolutionDir)dependencies\LuaBridgeSrc\Tests\Lua;$(SolutionDir)dependencies\LuaBridgeSrc\Source;$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)src\OGRE;$(SolutionDir)src\SoundProject;$(SolutionDir)src\Input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)src\OGRE;$(SolutionDir)src\SoundProject;$(SolutionDir)src\Input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\BulletSrc\src;$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\core\inc\;$(SolutionDir)dependencies\FMODStudioAPIWindows\api\studio\inc\;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;$(SolutionDir)dependencies\LuaBridgeSrc\Tests\Lua;$(SolutionDir)dependencies\LuaBridgeSrc\Source;$(SolutionDir)src\utilities;$(SolutionDir)src\LUA\lua-5.4.4\src;$(SolutionDir)src\ECS;$(SolutionDir)src\BulletPhysics;$(SolutionDir)src\OGRE;$(SolutionDir)src\SoundProject;$(SolutionDir)src\Input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>

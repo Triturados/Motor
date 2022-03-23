@@ -13,19 +13,10 @@
 #include "Game.h"
 #include <Input.h>
 #include <Windows.h>
-
-//LUABRIDGE
-extern "C" {
-#include <Lua.5.2.0/src/lua.h>
-#include <Lua.5.2.0/src/lualib.h>
-#include <Lua.5.2.0/src/lauxlib.h>
-}
-
+#include "LuaBridge/LuaBridge.h"
 
 #include <memory>
 
-#include <LuaBridge/LuaBridge.h>
-#undef main
 
 //Ejemplo Componente
 class ContadorFrames : public ComponentTemplate<ContadorFrames> {
