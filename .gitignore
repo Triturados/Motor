@@ -359,3 +359,4 @@ MigrationBackup/
 !Skeleton/build/Release/OGRE
 !Skeleton/dependencies/CMAKE/bin
 !Skeleton/dependencies/Git/bin
+!Skeleton/exes
