@@ -1,16 +1,13 @@
+@echo off
+
 rem El directorio actual es Skeleton\dependencies\Scripts
 
 cd ..\FMODStudioAPIWindows\dlls
 
-xcopy fmod.dll ..\..\..\..\build\Debug\Main /y
-xcopy fmodL.dll ..\..\..\..\build\Debug\Main /y
-xcopy fmodstudio.dll ..\..\..\..\build\Debug\Main /y
-xcopy fmodstudioL.dll ..\..\..\..\build\Debug\Main /y
-
-xcopy fmod.dll ..\..\..\..\build\Release\Main /y
-xcopy fmodL.dll ..\..\..\..\build\Release\Main /y
-xcopy fmodstudio.dll ..\..\..\..\build\Release\Main /y
-xcopy fmodstudioL.dll ..\..\..\..\build\Release\Main /y
+xcopy fmod.dll ..\..\..\exes /y
+xcopy fmodL.dll ..\..\..\exes /y
+xcopy fmodstudio.dll ..\..\..\exes /y
+xcopy fmodstudioL.dll ..\..\..\exes /y
 
 rem Devolvemos la ruta de entrada a este archivo
-cd ..\Scripts
+cd ..\..\Scripts
