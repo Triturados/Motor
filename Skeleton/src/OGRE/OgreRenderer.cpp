@@ -37,12 +37,14 @@ OgreRenderer::OgreRenderer()
 /// Inicializa la raiz
 /// </summary>
 void OgreRenderer::initRoot() {
-	*mResourcesCfgPath = "./OGRE/resources.cfg";
-	*mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
-	*mLogPath = "./OGRE/Ogre.log";
-	*mCfgPath = "./OGRE/ogre.cfg";
 
-	mRoot = new Ogre::Root(*mPluginsCfgPath, *mCfgPath, *mLogPath);
+
+	mResourcesCfgPath = "./OGRE/resources.cfg";
+	mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
+	mLogPath = "./OGRE/Ogre.log";
+	mCfgPath = "./OGRE/ogre.cfg";
+
+	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
 
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
 	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
@@ -54,7 +56,7 @@ void OgreRenderer::initRoot() {
 void OgreRenderer::loadResources()
 {
 	Ogre::ConfigFile cf;
-	cf.load(*mResourcesCfgPath);
+	cf.load(mResourcesCfgPath);
 
 	Ogre::String name, locType;
 	Ogre::ConfigFile::SectionIterator secIt = cf.getSectionIterator();

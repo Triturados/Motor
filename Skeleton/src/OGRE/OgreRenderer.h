@@ -20,10 +20,10 @@ class OgreRenderer
 {
 private:
 	Ogre::Root* mRoot;
-	Ogre::String* mResourcesCfgPath;
-	Ogre::String* mPluginsCfgPath;
-	Ogre::String* mCfgPath;
-	Ogre::String* mLogPath;
+	Ogre::String mResourcesCfgPath;
+	Ogre::String mPluginsCfgPath;
+	Ogre::String mCfgPath;
+	Ogre::String mLogPath;
 
 	Ogre::RenderWindow* mWindow;
 	Ogre::SceneManager* mSceneMgr;

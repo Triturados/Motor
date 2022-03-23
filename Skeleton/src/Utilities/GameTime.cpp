@@ -9,8 +9,27 @@ namespace LoveEngine {
 
 	Time::Time() {
 
-		instance = this;
 		deltaTime = physicsTime = timeSinceStart = timeScale = frameCount = 0;
+
+		if (instance != nullptr) {
+			assert(false);
+		}
+
+		Time::instance = this;
+
+		HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
+
+		assert(hModule != NULL);
+
+		int idx = (int)LoveSingleton::positions::Time;
+
+		LoveSingleton::singletonIN value = (LoveSingleton::singletonIN)GetProcAddress(hModule, "createElement");
+
+		assert(value != NULL);
+
+		value(this, idx);
+
+		FreeLibrary(hModule);
 	}
 
 	Time* Time::getInstance() {

@@ -124,7 +124,7 @@ void Game::loop()
 
 
 		time->timeSinceStart = timeSinceStart.count();
-		time->deltaTime = timeSinceLastFrame.count();
+		time->deltaTime = timeSinceLastFrame.count() * 0.001;
 		time->frameCount++;
 
 		initialTime = currentTime;
