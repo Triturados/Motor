@@ -1,7 +1,8 @@
 #include "GameTime.h"
 #include <Windows.h>
 #include <cassert>
-#include "../Singleton/SingletonInfo.h"
+#include <SingletonInfo.h>
+
 
 namespace LoveEngine {
 
@@ -17,35 +18,12 @@ namespace LoveEngine {
 
 		Time::instance = this;
 
-		HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
-
-		assert(hModule != NULL);
-
-		int idx = (int)LoveSingleton::positions::Time;
-
-		LoveSingleton::singletonIN value = (LoveSingleton::singletonIN)GetProcAddress(hModule, "createElement");
-
-		assert(value != NULL);
-
-		value(this, idx);
-
-		FreeLibrary(hModule);
+		Singleton::addElement(this, Singleton::positions::Time);
 	}
 
 	Time* Time::getInstance() {
 		if (instance == nullptr) {
-			HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
-
-			assert(hModule != NULL);
-
-			int idx = (int)LoveSingleton::positions::Time;
-
-			LoveSingleton::singletonOUT value = (LoveSingleton::singletonOUT)GetProcAddress(hModule, "getElement");
-
-			assert(value != NULL);
-
-			FreeLibrary(hModule);
-			return static_cast<Time*>(value(idx));
+			instance = static_cast<Time*>(Singleton::getElement(Singleton::positions::Time));
 		}
 		return instance;
 	}

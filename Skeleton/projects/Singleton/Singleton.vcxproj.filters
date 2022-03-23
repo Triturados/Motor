@@ -26,8 +26,5 @@
     <ClInclude Include="..\..\src\Singleton\Singleton.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Singleton\SingletonInfo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

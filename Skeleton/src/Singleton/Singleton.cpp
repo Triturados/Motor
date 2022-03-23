@@ -1,16 +1,23 @@
 #include <Singleton.h>
-#include <SingletonInfo.h>
 
-namespace LoveSingleton {
-	std::vector<void*> Singleton::elementos(singletonCount, nullptr);
+namespace LoveEngine {
+	namespace Singleton {
+		std::vector<void*> Singleton::elementos(1, nullptr);
 
-	void Singleton::createElement(void* elem, int position)
-	{
-		elementos[position] = elem;
-	}
+		void Singleton::createElement(void* elem, int position)
+		{
+			if (position >= elementos.size()) {
+				int dif = position - elementos.size() + 1;
+				for (int i = 0; i < dif; i++)
+					elementos.push_back(nullptr);
+			}
 
-	void* Singleton::getValue(int idx)
-	{
-		return elementos[idx];
+			elementos[position] = elem;
+		}
+
+		void* Singleton::getValue(int idx)
+		{
+			return elementos[idx];
+		}
 	}
 }

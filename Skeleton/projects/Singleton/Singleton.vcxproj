@@ -15,7 +15,6 @@
     <ClCompile Include="..\..\src\Singleton\Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\Singleton\SingletonInfo.h" />
     <ClInclude Include="..\..\src\Singleton\Singleton.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

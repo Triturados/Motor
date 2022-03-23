@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include <cassert>
 #include <Windows.h>
-#include "../Singleton/SingletonInfo.h"
+#include <SingletonInfo.h>
 #include <iostream>
 
 SceneManager* SceneManager::instance = nullptr;
@@ -10,18 +10,10 @@ SceneManager* SceneManager::instance = nullptr;
 SceneManager* SceneManager::getInstance()
 {
 	if (instance == nullptr) {
-		HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
-
-		assert(hModule != NULL);
-
-		int idx = (int)LoveSingleton::positions::SceneManager;
-
-		LoveSingleton::singletonOUT value = (LoveSingleton::singletonOUT)GetProcAddress(hModule, "getElement");
-
-		assert(value != NULL);
-
-		FreeLibrary(hModule);
-		return static_cast<SceneManager*>(value(idx));
+		instance = 
+			static_cast<SceneManager*>(
+				LoveEngine::Singleton::getElement(
+					LoveEngine::Singleton::positions::SceneManager));
 	}
 	return instance;
 }
@@ -31,24 +23,8 @@ SceneManager::SceneManager()
 	if (instance != nullptr) {
 		assert(false);
 	}
-
-	SceneManager::instance = this;
-
-	HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
-
-	assert(hModule != NULL);
-
-	int idx = (int)LoveSingleton::positions::SceneManager;
-
-	LoveSingleton::singletonIN value = (LoveSingleton::singletonIN)GetProcAddress(hModule, "createElement");
-
-	assert(value != NULL);
-
-	value(this, idx);
-
 	sceneChangeType = SceneLoad::PUSH;
-
-	FreeLibrary(hModule);
+	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
 }
 
 SceneManager::~SceneManager()
