@@ -115,6 +115,7 @@ private:
 
 	void generateComponentID();
 public:
+	ComponentTemplate();
 	inline size_t getId() const { return id; };
 };
 
@@ -125,6 +126,12 @@ inline void ComponentTemplate<T>::generateComponentID()
 	componentNum = calculateComponentNum<T>();
 	std::hash<ComponentTemplate<T>> myComponentHash;
 	ComponentTemplate<T>::id = myComponentHash(componentNum);
+}
+
+template<class T>
+inline ComponentTemplate<T>::ComponentTemplate()
+{
+	generateComponentID();
 }
 
 // Un hash genera un número muy grande determinista a partir de un valor
