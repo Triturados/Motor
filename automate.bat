@@ -68,25 +68,6 @@ msbuild "LuaBridge.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
 echo Compilacion de LuaBridge terminada!
 
-
-
-rem Parte de LuaBridge subiendo el codigo fuente al repositorio
-
-@REM cd ..\..\
-
-@REM mkdir LuaBridgeBuild
-@REM cd CMAKE\bin
-@REM cmake -D LUABRIDGE_CXX17=TRUE -S "..\..\LuaBridgeSrc" -B "..\..\LuaBridgeBuild"
-
-@REM cd ..\..\LuaBridgeBuild
-
-@REM msbuild "LuaBridge.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-@REM msbuild "LuaBridge.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
-
-@REM echo Compilacion de LuaBridge terminada!
-
-
-
 rem rem Moviendo archivos (dll) necesarios (.bat individual para cada libreria)
 echo Ejecutando Scripts individuales!
 
