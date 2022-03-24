@@ -10,7 +10,7 @@ namespace LoveEngine {
 
 	Time::Time() {
 
-		deltaTime = physicsTime = timeSinceStart = timeScale = frameCount = 0;
+		deltaTime = physicsTime = timeSinceStart = timeScale = unscaledTime = frameCount = 0;
 
 		if (instance != nullptr) {
 			assert(false);
@@ -32,4 +32,6 @@ namespace LoveEngine {
 	float Time::calculateFrameRate() {
 		return frameCount / timeSinceStart * 1000;
 	}
+
+	
 }
