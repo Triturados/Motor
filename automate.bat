@@ -53,34 +53,32 @@ cd Skeleton\dependencies
 rem Parte de LuaBridge 
 
 rem cd ..\..\
-mkdir LuaBridgeBuild
+@REM mkdir LuaBridgeBuild
 
-cd CMAKE\bin
-cmake -D LUABRIDGE_CXX17=TRUE -S "..\..\LuaBridgeSrc" -B "..\..\LuaBridgeBuild"
+@REM cd CMAKE\bin
+@REM cmake -D LUABRIDGE_CXX17=TRUE -S "..\..\LuaBridgeSrc" -B "..\..\LuaBridgeBuild"
 
-cd ..\..\LuaBridgeBuild
+@REM cd ..\..\LuaBridgeBuild
 
-msbuild "LuaBridge.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild "LuaBridge.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+@REM msbuild "LuaBridge.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+@REM msbuild "LuaBridge.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
-echo Compilacion de LuaBridge terminada!
+@REM echo Compilacion de LuaBridge terminada!
 
 rem rem Moviendo archivos (dll) necesarios (.bat individual para cada libreria)
 echo Ejecutando Scripts individuales!
 
-cd ..\Scripts
+rem cd ..\Scripts
+cd Scripts
 
 rem OGRE
-rem call automate-Ogre.bat
+call automate-Ogre.bat
 
 rem FMOD
-rem call automate-FMOD.bat
-
-rem LuaBridge
-call automate-LuaBridge.bat
+call automate-FMOD.bat
 
 rem SDL2
-rem call automate-SDL2.bat
+call automate-SDL2.bat
 
 
 echo Proceso terminado!
