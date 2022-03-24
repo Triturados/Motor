@@ -1,3 +1,5 @@
+#define SDL_MAIN_HANDLED
+
 #include <Sound.h>
 #include <iostream>
 #include <OgreRenderer.h>
@@ -230,6 +232,7 @@ void probandoCosas()
 	std::cout << "Escribe algo para salir.\n";
 	std::cin >> a;
 }
+
 
 void main()
 {
