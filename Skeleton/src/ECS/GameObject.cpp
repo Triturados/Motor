@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Component.h"
 #include "GameObject.h"
 #include <ComponentFactory.h>
@@ -17,19 +16,6 @@ GameObject::~GameObject()
 	componentsList.clear();
 }
 
-void GameObject::print(std::string mssg, std::string file, int line)
-{
-	if (file.length() > 0) {
-
-		std::cout << "File: " << file << "\n";
-	}
-	if (line >= 0)
-	{
-		std::cout << "Line: " << line << " ";
-	}
-
-	std::cout << name << ": " << mssg << "\n";
-}
 
 Component* GameObject::addComponent(std::string compname)
 {
@@ -40,6 +26,32 @@ Component* GameObject::addComponent(std::string compname)
 	componentsList.push_back(comp);
 
 	return comp;
+}
+
+void GameObject::activate(bool value)
+{
+	enabled = value;
+}
+
+void GameObject::removeGameObject()
+{
+	dead = true;
+}
+
+void GameObject::removeGameObject(GameObject* gO)
+{
+	gO->removeGameObject();
+}
+
+void GameObject::canvelRemove()
+{
+	dead = false;
+}
+
+
+bool GameObject::isEnabled()
+{
+	return enabled;
 }
 
 void GameObject::init()
@@ -55,7 +67,6 @@ void GameObject::postInit()
 		comp->postInit();
 	}
 }
-
 
 
 void GameObject::update()

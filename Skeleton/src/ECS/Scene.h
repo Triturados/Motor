@@ -24,6 +24,7 @@ public:
 	void stepPhysics();
 	void render();
 
+	GameObject* createGameObject(std::string name = "new game object");
 private:
 	std::list<GameObject*> gObjects;
 	std::list<Renderer*> renderers;

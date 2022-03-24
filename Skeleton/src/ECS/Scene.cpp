@@ -30,9 +30,21 @@ void Scene::postInit()
 
 void Scene::update()
 {
-	for (auto gO : gObjects) {
-		if (gO->enabled)
+	std::list<std::list<GameObject*>::iterator> objectsToRemove;
+	
+	for (auto it = gObjects.begin(); it != gObjects.end(); it++) {
+		GameObject* gO = *it;
+
+		if (gO->enabled && !gO->dead)
 			gO->update();
+		if (gO->dead)
+			objectsToRemove.push_back(it);
+	}
+
+
+	for (auto gO : objectsToRemove) {
+		gObjects.erase(gO);
+		delete* gO;
 	}
 }
 
@@ -40,7 +52,7 @@ void Scene::update()
 void Scene::stepPhysics()
 {
 	for (auto gO : gObjects) {
-		if (gO->enabled)
+		if (gO->enabled && !gO->dead)
 			gO->stepPhysics();
 	}
 }
@@ -50,6 +62,13 @@ void Scene::render()
 {
 	//for (auto rend : renderers)
 	//	rend->update();
+}
+
+GameObject* Scene::createGameObject(std::string name)
+{
+	GameObject* gameObject = new GameObject(name);
+	gObjects.push_back(gameObject);
+	return gameObject;
 }
 
 Scene* SceneCreator::createScene() {
@@ -76,6 +95,7 @@ void SceneCreator::push(Scene* scene)
 {
 	for (auto gO : gObjects) {
 		scene->gObjects.push_back(gO);
+		gO->scene = scene;
 	}
 
 	gObjects.clear();

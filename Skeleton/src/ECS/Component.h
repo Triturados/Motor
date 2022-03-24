@@ -29,8 +29,6 @@ protected:
 	/// a un objeto que no tiene todas sus dependencias, se escribe un mensaje de error y no se añande.
 	std::vector<Component*> dependencies;
 
-public:
-	void print(std::string mssg, int line = -1, const char* file = "");
 protected:
 
 	virtual void init() {};
@@ -70,20 +68,21 @@ protected:
 #pragma endregion Physics Callbacks
 
 public:
-	void setActive(bool val);
-	void invertActive();
+	void remove(Component* comp);
+	void remove(GameObject* go);
+	void remove();
 
-	void remove(Component*);
-	void remove(GameObject*);
+	void setActive(bool val);
+	bool isActive();
+	void swapActive();
 
 
 private:
 
+	bool dead = false;
 	std::vector<GameObject*> collisions;
 	void checkCollisionCallbacks();
 
-
-	void DontUpdate();
 };
 
 

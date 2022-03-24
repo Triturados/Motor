@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\src\ECS\Mesh.cpp" />
     <ClCompile Include="..\..\src\ECS\Scene.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneManager.cpp" />
+    <ClCompile Include="..\..\src\ECS\Timer.cpp" />
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +106,7 @@
     <ClInclude Include="..\..\src\ECS\Mesh.h" />
     <ClInclude Include="..\..\src\ECS\Scene.h" />
     <ClInclude Include="..\..\src\ECS\SceneManager.h" />
+    <ClInclude Include="..\..\src\ECS\Timer.h" />
     <ClInclude Include="..\..\src\ECS\Transform.h" />
   </ItemGroup>
   <ItemGroup>

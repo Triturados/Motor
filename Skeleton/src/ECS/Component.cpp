@@ -21,14 +21,40 @@ Component::Component()
 	this->gameObject = nullptr;
 }
 
-void Component::print(std::string mssg, int line, const char* file)
-{
-	gameObject->print(mssg, file, line);
-}
 
 template <class T>
 std::size_t std::hash<ComponentTemplate<T>>::operator()(unsigned int num) const noexcept
 {
 	std::size_t h = std::hash<int>{}(num);
 	return h ^ (h << 1);
+}
+
+void Component::remove(Component* comp)
+{
+	comp->gameObject->removeComponent(comp);
+}
+
+void Component::remove(GameObject* go)
+{
+	go->removeGameObject();
+}
+
+void Component::remove()
+{
+	gameObject->removeComponent(this);
+}
+
+void Component::setActive(bool val)
+{
+	enabled = val;
+}
+
+bool Component::isActive()
+{
+	return enabled;
+}
+
+void Component::swapActive()
+{
+	enabled = !enabled;
 }

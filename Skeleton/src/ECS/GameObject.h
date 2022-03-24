@@ -13,7 +13,7 @@ concept isComponent = std::is_base_of<Component, T>::value;
 class GameObject final {
 
 	friend Scene;
-
+	friend class SceneCreator;
 public:
 
 	GameObject(std::string name);
@@ -25,6 +25,7 @@ private:
 
 	Scene* scene;
 	bool enabled = true;
+	bool dead = false;
 	std::list<Component*> componentsList;
 
 	//Lista de componentes a elimiar al final del ciclo de update
@@ -41,7 +42,6 @@ private:
 	void deActivated();
 
 public:
-	void print(std::string mssg, std::string file, int line);
 
 	template <typename T>
 	requires isComponent<T>
@@ -80,6 +80,20 @@ public:
 		}
 	}
 
+	void removeComponent(Component* comp) {
+		std::list<Component*>::iterator it = componentsList.begin();
+		while (it != componentsList.end()) {
+
+			if (*it == comp)
+			{
+				componentsToErase.push_back(it);
+				return;
+			}
+			it++;
+		}
+	}
+
+
 	template <typename T>
 	requires isComponent<T>
 		T* getComponent() {
@@ -107,4 +121,11 @@ public:
 
 		return vec;
 	}
+
+
+	void activate(bool value);
+	void removeGameObject();
+	void removeGameObject(GameObject* gO);
+	void canvelRemove();
+	bool isEnabled();
 };
