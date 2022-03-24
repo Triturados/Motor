@@ -5,7 +5,7 @@ namespace LoveEngine {
 		const int singletonCount = 4;
 
 		enum class positions {
-			SceneManager, Time, Input, Component
+			SceneManager, Time, Input, ComponentFactory, 
 		};
 
 		typedef void (*singletonIN)(void*, int);

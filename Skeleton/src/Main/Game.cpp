@@ -11,7 +11,7 @@
 #include <OgreRenderer.h>
 #include <Transform.h>
 #include <PhysicsManager.h>
-
+#include <ComponentFactory.h>
 
 
 
@@ -24,12 +24,12 @@ struct SceneDefinitions {
 
 using namespace std::chrono;
 typedef SceneDefinitions* (*Funct)();
+typedef void (*GameComponentDefinition)();
 
 int Game::setup()
 {
 	game = LoadLibrary(TEXT("./Game.dll"));
 	singleton = LoadLibrary(TEXT("Singleton.dll"));
-
 	if (singleton == NULL) {
 		std::cout << "No se encontró la biblioteca de singletons";
 		return 1;
@@ -41,18 +41,25 @@ int Game::setup()
 	}
 
 	Funct escena = (Funct)GetProcAddress(game, "quierounaescena");
-
 	if (escena == NULL) {
 		std::cout << "No se encontró inicio del juego\n";
 		return 1;
 	}
 
-
-	SceneDefinitions* creator = escena();
-
+	GameComponentDefinition gcd = (GameComponentDefinition)GetProcAddress(game, "componentDefinition");
+	if (gcd == NULL) {
+		std::cout << "El juego no define correctamente los componentes\n";
+		return 1;
+	}
 
 	time = new LoveEngine::Time();
 	sceneManager = new SceneManager();
+	compFactory = new ComponentFactory();
+
+	gcd();
+	SceneDefinitions* creator = escena();
+
+
 	sceneManager->defineScenesFactories(creator->escenas);
 	sceneManager->initiliseScenes();
 
@@ -62,6 +69,8 @@ int Game::setup()
 	PhysicsManager::setUpInstance();
 	physics = PhysicsManager::getInstance();
 
+
+	delete creator;
 	return 0;
 }
 
@@ -74,6 +83,7 @@ void Game::quit()
 	delete sceneManager;
 	delete time;
 	delete renderer;
+	delete compFactory;
 }
 
 void Game::loop()
