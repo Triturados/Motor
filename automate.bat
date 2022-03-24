@@ -3,10 +3,11 @@
 title Automatizacion - Proceso de compilacion de librerias
 echo Comenzando con la automatizacion!
 
+cd Skeleton\dependencies
+
 rem Parte de OGRE
 echo Compilando OGRE!
 
-cd Skeleton\dependencies
 mkdir OgreBuild
 cd CMAKE\bin
 
