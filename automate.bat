@@ -5,61 +5,57 @@ echo Comenzando con la automatizacion!
 
 cd Skeleton\dependencies
 
-rem Parte de OGRE
-echo Compilando OGRE!
+@REM rem Parte de OGRE
+@REM echo Compilando OGRE!
 
-mkdir OgreBuild
-cd CMAKE\bin
+@REM mkdir OgreBuild
+@REM cd CMAKE\bin
 
-cmake -S "..\..\OgreSrc" -B "..\..\OgreBuild"
+@REM cmake -S "..\..\OgreSrc" -B "..\..\OgreBuild"
 
-cd ..\..\OgreBuild
-msbuild "OGRE.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild "OGRE.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+@REM cd ..\..\OgreBuild
+@REM msbuild "OGRE.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+@REM msbuild "OGRE.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
-echo Compilacion de OGRE terminada!
-
-
-rem Parte de Bullet
-echo Compilando BULLET PHYSICS!
-
-cd ..\
-
-mkdir BulletBuild
-cd CMAKE\bin
-
-cmake -D USE_MSVC_RUNTIME_LIBRARY_DLL=TRUE -D BUILD_BULLET2_DEMOS=FALSE -D BUILD_BULLET_ROBOTICS_EXTRA=FALSE -D BUILD_BULLET_ROBOTICS_GUI_EXTRA=FALSE -D BUILD_CPU_DEMOS=FALSE -D BUILD_OPENGL3_DEMOS=FALSE -S "..\..\BulletSrc" -B "..\..\BulletBuild"
-
- cd ..\..\BulletBuild
-
-msbuild "BULLET_PHYSICS.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild "BULLET_PHYSICS.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
-
-echo Compilacion de BULLET PHYSICS terminada!
+@REM echo Compilacion de OGRE terminada!
 
 
+@REM rem Parte de Bullet
+@REM echo Compilando BULLET PHYSICS!
 
-rem Parte de SDL2
-echo Compilando SDL2!
+@REM cd ..\
 
-cd ..\OgreBuild\SDL2-build
-msbuild "SDL2.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild "SDL2.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+@REM mkdir BulletBuild
+@REM cd CMAKE\bin
 
-echo Compilacion de SDL2 terminada!
+@REM cmake -D USE_MSVC_RUNTIME_LIBRARY_DLL=TRUE -D BUILD_BULLET2_DEMOS=FALSE -D BUILD_BULLET_ROBOTICS_EXTRA=FALSE -D BUILD_BULLET_ROBOTICS_GUI_EXTRA=FALSE -D BUILD_CPU_DEMOS=FALSE -D BUILD_OPENGL3_DEMOS=FALSE -S "..\..\BulletSrc" -B "..\..\BulletBuild"
+
+@REM  cd ..\..\BulletBuild
+
+@REM msbuild "BULLET_PHYSICS.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+@REM msbuild "BULLET_PHYSICS.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+
+@REM echo Compilacion de BULLET PHYSICS terminada!
 
 
 
-rem Parte de LuaBridge descargando el codigo fuente desde github
+@REM rem Parte de SDL2
+@REM echo Compilando SDL2!
 
-cd ..\..\
+@REM cd ..\OgreBuild\SDL2-build
+@REM msbuild "SDL2.sln" /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+@REM msbuild "SDL2.sln" /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+
+@REM echo Compilacion de SDL2 terminada!
+
+
+
+rem Parte de LuaBridge 
+
+rem cd ..\..\
 mkdir LuaBridgeBuild
 
-cd Git\bin
-
-git clone --recurse-submodules https://github.com/vinniefalco/LuaBridge.git ..\..\LuaBridgeSrc
-
-cd ..\..\CMAKE\bin
+cd CMAKE\bin
 cmake -D LUABRIDGE_CXX17=TRUE -S "..\..\LuaBridgeSrc" -B "..\..\LuaBridgeBuild"
 
 cd ..\..\LuaBridgeBuild
@@ -75,16 +71,16 @@ echo Ejecutando Scripts individuales!
 cd ..\Scripts
 
 rem OGRE
-call automate-Ogre.bat
+rem call automate-Ogre.bat
 
 rem FMOD
-call automate-FMOD.bat
+rem call automate-FMOD.bat
 
 rem LuaBridge
 call automate-LuaBridge.bat
 
 rem SDL2
-call automate-SDL2.bat
+rem call automate-SDL2.bat
 
 
 echo Proceso terminado!
