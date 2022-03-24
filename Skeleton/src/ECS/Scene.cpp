@@ -37,14 +37,15 @@ void Scene::update()
 
 		if (gO->enabled && !gO->dead)
 			gO->update();
-		if (gO->dead)
+		else if (gO->dead)
 			objectsToRemove.push_back(it);
 	}
 
 
-	for (auto gO : objectsToRemove) {
-		gObjects.erase(gO);
-		delete* gO;
+	for (auto it : objectsToRemove) {
+		auto gO = *it;
+		gObjects.erase(it);
+		delete gO;
 	}
 }
 
@@ -68,6 +69,7 @@ GameObject* Scene::createGameObject(std::string name)
 {
 	GameObject* gameObject = new GameObject(name);
 	gObjects.push_back(gameObject);
+	gameObject->scene = this;
 	return gameObject;
 }
 

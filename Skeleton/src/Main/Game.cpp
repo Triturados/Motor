@@ -17,12 +17,12 @@
 
 
 struct SceneDefinitions {
-	~SceneDefinitions() {
-		for (auto sceneCreator : escenas) {
-			delete sceneCreator;
-		}
-		escenas.clear();
-	}
+	//~SceneDefinitions() {
+	//	for (auto sceneCreator : escenas) {
+	//		delete sceneCreator;
+	//	}
+	//	escenas.clear();
+	//}
 
 	std::vector<SceneCreator*> escenas;
 	void scenesDefinitions();

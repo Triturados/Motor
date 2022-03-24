@@ -3,7 +3,7 @@
 #include <GameObject.h>
 #include <SceneManager.h>
 #include <Scene.h>
-void Timer::onTimeUp()
+void Timer::onTimeUp() 
 {
 	funct();
 	gameObject->removeGameObject();
@@ -13,10 +13,13 @@ void Timer::setValue(action f, float t)
 {
 	funct = f;
 	maxTime = t;
-}
+} 
 
+
+#include <iostream>
 void Timer::update()
 {
+	std::cout << timeLeft() << "\n";
 	currentTime += LoveEngine::Time::getInstance()->deltaTime;
 
 	if (currentTime > maxTime) {
@@ -79,10 +82,14 @@ Timer* Timer::repeat(action funct, float initialcall, float interval)
 	return timer;
 }
 
+#include <iostream>
 Timer* Timer::deleteGameObject(GameObject* gameObject, float time)
 {
+	std::cout << "ADASDA";
 	Timer* timer = createObjectWithTimer();
-	auto funct = [&]() {gameObject->removeGameObject(); };
+	auto funct = [&]() {
+		gameObject->removeGameObject(); 
+	};
 	timer->setValue(funct, time);
 	return timer;
 }

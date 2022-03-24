@@ -114,6 +114,9 @@ void SceneManager::createScene()
 
 	Scene* newscene = scenesTemplates[sceneToLoad]->createScene();
 	currentScene.push(newscene);
+
+	newscene->init();
+	newscene->postInit();
 }
 
 void SceneManager::manageScene()
