@@ -31,7 +31,7 @@ int main() {
 	luaL_openlibs(luastate);
 
 	// load some code from lua file
-	int scriptloadstatus = luaL_dofile(luastate, "Example.lua");
+	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
 
 	// define error reporter for any lua error
 	report_errors(luastate, scriptloadstatus);
