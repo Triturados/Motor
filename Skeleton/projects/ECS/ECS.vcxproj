@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ECS\Component.cpp" />
+    <ClCompile Include="..\..\src\ECS\ComponentFactory.cpp" />
     <ClCompile Include="..\..\src\ECS\ECS.cpp" />
     <ClCompile Include="..\..\src\ECS\GameObject.cpp" />
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\Component.h" />
+    <ClInclude Include="..\..\src\ECS\ComponentFactory.h" />
     <ClInclude Include="..\..\src\ECS\ECS.h" />
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />

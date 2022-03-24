@@ -26,7 +26,7 @@ private:
 	Scene* scene;
 	bool enabled = true;
 	std::list<Component*> componentsList;
-	
+
 	//Lista de componentes a elimiar al final del ciclo de update
 	std::list<std::list<Component*>::iterator> componentsToErase;
 
@@ -44,8 +44,8 @@ public:
 	void print(std::string mssg, std::string file, int line);
 
 	template <typename T>
-		requires isComponent<T>
-	T* addComponent() {
+	requires isComponent<T>
+		T* addComponent() {
 
 		T* c = new T();
 		c->gameObject = this;
@@ -56,15 +56,17 @@ public:
 		return c;
 	}
 
+	Component* addComponent(std::string comp);
+
 	template <typename T>
-		requires isComponent<T>
-	bool hasComponent() {
+	requires isComponent<T>
+		bool hasComponent() {
 		return getComponent<T>() != nullptr;
 	}
 
 	template <typename T>
-		requires isComponent<T>
-	void removeComponent() {
+	requires isComponent<T>
+		void removeComponent() {
 
 		std::list<Component*>::iterator it = componentsList.begin();
 		while (it != componentsList.end()) {
@@ -79,8 +81,8 @@ public:
 	}
 
 	template <typename T>
-		requires isComponent<T>
-	T* getComponent() {
+	requires isComponent<T>
+		T* getComponent() {
 
 		for (Component* comp : componentsList) {
 			T* v = dynamic_cast<T*>(comp);
@@ -93,8 +95,8 @@ public:
 	}
 
 	template <typename T>
-		requires isComponent<T>
-	std::vector<T*> getComponents() {
+	requires isComponent<T>
+		std::vector<T*> getComponents() {
 		std::vector<T*> vec;
 		for (Component* comp : componentsList) {
 			T* v = dynamic_cast<T*>(comp);

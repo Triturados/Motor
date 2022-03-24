@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Component.h"
 #include "GameObject.h"
-
+#include <ComponentFactory.h>
 
 GameObject::GameObject(std::string name)
 {
@@ -29,6 +29,17 @@ void GameObject::print(std::string mssg, std::string file, int line)
 	}
 
 	std::cout << name << ": " << mssg << "\n";
+}
+
+Component* GameObject::addComponent(std::string compname)
+{
+	Component* comp = ComponentFactory::getInstance()->createComponent(compname);
+
+	comp->gameObject = this;
+	comp->scene = scene;
+	componentsList.push_back(comp);
+
+	return comp;
 }
 
 void GameObject::init()

@@ -10,6 +10,8 @@ namespace LoveEngine {
 class SceneManager;
 class OgreRenderer;
 class PhysicsManager;
+class ComponentFactory;
+
 struct Game {
 
 	HMODULE game;
@@ -17,6 +19,7 @@ struct Game {
 
 	OgreRenderer* renderer;
 	SceneManager* sceneManager;
+	ComponentFactory* compFactory;
 	LoveEngine::Time* time;
 	PhysicsManager* physics;
 
