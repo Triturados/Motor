@@ -18,7 +18,6 @@ void Timer::setValue(action f, float t)
 	maxTime = t;
 } 
 
-
 void Timer::update()
 {
 	std::cout << timeLeft() << "\n";

@@ -181,6 +181,12 @@ int probandoECScutreParaVerSiRealmenteFuncionaElEnlazadoDinamico() {
 	return 0;
 }
 
+
+static int IvanEsTonto(lua_State* state) {
+	std::cout << "Ivan es tontisimo\n";
+	return 0;
+}
+
 void LuaBridge() {
 	// create a lua state
 	lua_State* luastate = luaL_newstate();
@@ -188,15 +194,17 @@ void LuaBridge() {
 	// load standard libs
 	luaL_openlibs(luastate);
 
+	lua_register(luastate, "IvanTontoTonto", IvanEsTonto);
+
 	// load some code from lua file
-	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
+	int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
 
 	// call function defined in lua script
-	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "addAndDouble");
+	luabridge::LuaRef decirhola = luabridge::getGlobal(luastate, "escenaEjemplo");
 
-	int x = addanddouble(15, 12);
+	decirhola();
 
-	std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
+	//std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
 
 }
 
