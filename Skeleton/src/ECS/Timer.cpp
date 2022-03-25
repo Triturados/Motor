@@ -3,9 +3,12 @@
 #include <GameObject.h>
 #include <SceneManager.h>
 #include <Scene.h>
+#include <iostream>
+
+
 void Timer::onTimeUp() 
 {
-	funct();
+	funct(this);
 	gameObject->removeGameObject();
 }
 
@@ -16,7 +19,6 @@ void Timer::setValue(action f, float t)
 } 
 
 
-#include <iostream>
 void Timer::update()
 {
 	std::cout << timeLeft() << "\n";
@@ -74,7 +76,7 @@ Timer* Timer::invoke(action funct, float time)
 Timer* Timer::repeat(action funct, float initialcall, float interval)
 {
 	Timer* timer = createObjectWithTimer();
-	auto f = [&]() {
+	auto f = [&](Timer* t) {
 		invoke(funct, interval);
 	};
 	timer->setValue(f, initialcall);
@@ -83,13 +85,17 @@ Timer* Timer::repeat(action funct, float initialcall, float interval)
 }
 
 #include <iostream>
-Timer* Timer::deleteGameObject(GameObject* gameObject, float time)
+Timer* Timer::deleteGameObject(GameObject* gObject, float time)
 {
-	std::cout << "ADASDA";
 	Timer* timer = createObjectWithTimer();
-	auto funct = [&]() {
-		gameObject->removeGameObject(); 
+	timer->objectToDelete = gObject;
+	std::cout << gObject->name << " set to dead\n";
+
+	auto funct = [&](Timer* t) {
+		std::cout << t->objectToDelete->name << " set to dead\n";
+		t->objectToDelete->removeGameObject();
 	};
+
 	timer->setValue(funct, time);
 	return timer;
 }
@@ -97,7 +103,11 @@ Timer* Timer::deleteGameObject(GameObject* gameObject, float time)
 Timer* Timer::deleteComponent(Component* component, float time)
 {
 	Timer* timer = createObjectWithTimer();
-	auto funct = [&]() {component->remove(); };
+	timer->componentToDelete = component;
+	auto funct = [&](Timer* t) {
+		t->componentToDelete->remove();
+		t->remove();
+	};
 	timer->setValue(funct, time);
 	return timer;
 }

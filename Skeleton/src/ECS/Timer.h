@@ -2,8 +2,10 @@
 
 #include <Component.h>
 #include <functional>
+
+
 class Timer : public Component {
-	using action = std::function<void()>;
+	using action = std::function<void(Timer* t)>;
 private:
 	float maxTime = 0;
 	float currentTime = 0;
@@ -11,6 +13,9 @@ private:
 	action funct;
 
 	void onTimeUp();
+
+	Component* componentToDelete;
+	GameObject* objectToDelete;
 
 public:
 	void setValue(action f, float t);
