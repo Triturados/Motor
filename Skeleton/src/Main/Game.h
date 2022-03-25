@@ -12,6 +12,11 @@ class OgreRenderer;
 class PhysicsManager;
 class ComponentFactory;
 
+struct SceneDefinitions;
+
+typedef SceneDefinitions* (*Funct)();
+typedef void (*GameComponentDefinition)();
+
 struct Game {
 
 	HMODULE game;
@@ -30,5 +35,10 @@ struct Game {
 	void quit();
 
 	void loop();
+
+private:
+
+	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
+
 };
 #endif
