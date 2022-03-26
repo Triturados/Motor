@@ -194,18 +194,15 @@ void LuaBridge() {
 	// load standard libs
 	luaL_openlibs(luastate);
 
-	lua_register(luastate, "IvanTontoTonto", IvanEsTonto);
-
 	// load some code from lua file
-	int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
+	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
 
 	// call function defined in lua script
-	luabridge::LuaRef decirhola = luabridge::getGlobal(luastate, "escenaEjemplo");
+	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "addAndDouble");
 
-	decirhola();
+	int x = addanddouble(15, 12);
 
-	//std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
-
+	std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
 }
 
 //Pruebas de proyectos

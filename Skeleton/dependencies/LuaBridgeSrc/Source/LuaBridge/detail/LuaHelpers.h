@@ -3,12 +3,6 @@
 // Copyright 2007, Nathan Reed
 // SPDX-License-Identifier: MIT
 
-extern "C" {
-    #include <Lua.5.2.0/src/lauxlib.h>
-    #include <Lua.5.2.0/src/lua.h>
-    #include <Lua.5.2.0/src/lualib.h>
-}
-
 #pragma once
 
 #include <cassert>
