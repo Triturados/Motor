@@ -14,50 +14,35 @@
 #include <ComponentFactory.h>
 
 
-
+using namespace std::chrono;
 
 struct SceneDefinitions {
-	//~SceneDefinitions() {
-	//	for (auto sceneCreator : escenas) {
-	//		delete sceneCreator;
-	//	}
-	//	escenas.clear();
-	//}
 
 	std::vector<SceneCreator*> escenas;
 	void scenesDefinitions();
 };
 
 
-using namespace std::chrono;
-typedef SceneDefinitions* (*Funct)();
-typedef void (*GameComponentDefinition)();
+void Game::run()
+{
+	if (setup() == 0) {
+		loop();
+		quit();
+	}
+}
+
 
 int Game::setup()
 {
-	game = LoadLibrary(TEXT("./Game.dll"));
-	singleton = LoadLibrary(TEXT("Singleton.dll"));
-	if (singleton == NULL) {
-		std::cout << "No se encontró la biblioteca de singletons";
+	Funct escena;
+	GameComponentDefinition gcd;
+
+	int dlls = initialiseDLLs(escena, gcd);
+	if (dlls) {
+		std::cout << "Error DLLs";
 		return 1;
 	}
 
-	if (game == NULL) {
-		std::cout << "No se encontró el juego\n";
-		return 1;
-	}
-
-	Funct escena = (Funct)GetProcAddress(game, "quierounaescena");
-	if (escena == NULL) {
-		std::cout << "No se encontró inicio del juego\n";
-		return 1;
-	}
-
-	GameComponentDefinition gcd = (GameComponentDefinition)GetProcAddress(game, "componentDefinition");
-	if (gcd == NULL) {
-		std::cout << "El juego no define correctamente los componentes\n";
-		return 1;
-	}
 
 	time = new LoveEngine::Time();
 	sceneManager = new SceneManager();
@@ -65,7 +50,6 @@ int Game::setup()
 
 	gcd();
 	SceneDefinitions* creator = escena();
-
 
 	sceneManager->defineScenesFactories(creator->escenas);
 	sceneManager->initiliseScenes();
@@ -76,22 +60,10 @@ int Game::setup()
 	PhysicsManager::setUpInstance();
 	physics = PhysicsManager::getInstance();
 
-
 	delete creator;
 	return 0;
 }
 
-
-void Game::quit()
-{
-	FreeLibrary(game);
-	FreeLibrary(singleton);
-
-	delete sceneManager;
-	delete time;
-	delete renderer;
-	delete compFactory;
-}
 
 void Game::loop()
 {
@@ -154,10 +126,46 @@ void Game::loop()
 
 
 
-void Game::run()
+int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 {
-	if (setup() == 0) {
-		loop();
-		quit();
+
+	game = LoadLibrary(TEXT("./Game.dll"));
+	singleton = LoadLibrary(TEXT("Singleton.dll"));
+	if (singleton == NULL) {
+		std::cout << "No se encontró la biblioteca de singletons";
+		return 1;
 	}
+
+	if (game == NULL) {
+		std::cout << "No se encontró el juego\n";
+		return 1;
+	}
+
+	escena = (Funct)GetProcAddress(game, "quierounaescena");
+	if (escena == NULL) {
+		std::cout << "No se encontró inicio del juego\n";
+		return 1;
+	}
+
+	gcd = (GameComponentDefinition)GetProcAddress(game, "componentDefinition");
+	if (gcd == NULL) {
+		std::cout << "El juego no define correctamente los componentes\n";
+		return 1;
+	}
+
+
+	return 0;
+}
+
+
+
+void Game::quit()
+{
+	FreeLibrary(game);
+	FreeLibrary(singleton);
+
+	delete sceneManager;
+	delete time;
+	delete renderer;
+	delete compFactory;
 }
