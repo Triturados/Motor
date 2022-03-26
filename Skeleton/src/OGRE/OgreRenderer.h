@@ -36,6 +36,7 @@ private:
 
 	void loadResources();
 	void initRTShaderSystem();
+	void destroyRTShaderSystem();
 	void setupScenes();
 
 public:
@@ -55,7 +56,7 @@ public:
 	void exampleScene();
 	
 
-	~OgreRenderer() { };
+	~OgreRenderer();
 };
 
 
