@@ -36,7 +36,15 @@ struct Game {
 
 	void loop();
 
+	void testing();
+
 private:
+
+	//Métodos de testing de funcionamiento de librerías
+	void sdlinput();
+	void fmod();
+	void lua();
+	void luabridge();
 
 	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
 
