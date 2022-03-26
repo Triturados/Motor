@@ -1,12 +1,19 @@
 #pragma once
 
-#include "Component.h"
+//#ifndef LIGHT_H
+//#define LIGHT_H
 
+#include <Component.h>
+
+
+class Transform;
 namespace Ogre {
-	class Light;
 	class SceneNode;
 	class SceneManager;
+	class Light;
 }
+
+enum lightType { point, directional, spot };
 
 namespace Utilities {
 	template<typename T>
@@ -15,11 +22,7 @@ namespace Utilities {
 	class Vector4;
 }
 
-class Transform;
-
-enum lightType{point, directional, spot};
-
-class LightComponent :  public Component
+class LightComponent : public Component
 {
 	Ogre::SceneNode* entityNode;
 	Ogre::SceneManager* scnMgr;
@@ -27,7 +30,7 @@ class LightComponent :  public Component
 	Transform* pos;
 
 	Ogre::Light* light;
-	
+
 	bool visible;
 
 	std::string name;
@@ -47,8 +50,9 @@ public:
 	void setVisibility(bool active);
 	void setPower(float power);
 
-	Utilities::Vector4<float> getDiffuseColor();
-	Utilities::Vector4<float> getSpecularColor();
+	Utilities::Vector3<float> getDiffuseColor();
+	Utilities::Vector3<float> getSpecularColor();
+	Utilities::Vector3<float> getDir();
 	bool getVisibility();
 };
 

@@ -3,7 +3,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "Component.h"
+#include <Component.h>
 #include <string>
 
 
@@ -18,21 +18,26 @@ namespace Ogre {
 	class Entity;
 }
 
-class Transform; 
+class Transform;
 class Mesh : public Component
 {
-public:
+private:
 	std::string  meshName = "";
 	Ogre::SceneNode* entityNode = nullptr;
 	Ogre::SceneNode* parentNode = nullptr;
 	Ogre::Entity* entity = nullptr;
 	Transform* parent = nullptr;
-	
-private:
+	Transform* child = nullptr;
+	Utilities::Vector4<float> *rot;
+	Utilities::Vector3<float> *pos;
+	Utilities::Vector3<float> *scale;
 
+public:
 	Mesh() {};
 	void init();
 	void update();
+	void sendParameters(std::string mN = "", Ogre::SceneNode* eN = nullptr, Ogre::SceneNode* pN = nullptr,
+		Ogre::Entity* e = nullptr, Transform* p = nullptr, Transform* eT = nullptr);
 	~Mesh();
 
 };

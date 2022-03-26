@@ -1,37 +1,39 @@
 #include "LightComponent.h"
-
+#include <iostream>
 #include "OgreLight.h"
 #include "OgreSceneManager.h"
-#include "OgreRenderer.h"
-#include "Component.h"
+#include <Ogre.h>
+#include <OgreRenderer.h>
+#include <OgreSceneNode.h>
 #include "Transform.h"
 #include "GameObject.h"
-#include "Vector3.h"
-#include "Vector4.h"
-#include <iostream>
+#include <Vector3.h>
+#include <Vector4.h>
+
 
 LightComponent::LightComponent()
 {
 
 }
-
 void LightComponent::sendParameters(lightType t, std::string n, Ogre::SceneManager* manager)
 {
 	pos = gameObject->getComponent<Transform>();
 	name = n;
 	type = t;
 	scnMgr = manager;
-	Utilities::Vector3 v;
 
 	if (type == point)
 	{
+		std::cout << std::endl;
 		std::cout << "SOY LUZ POINT";
-		std::cout << "\n";
+		std::cout << std::endl;
+
 	}
 	else
 	{
+		std::cout << std::endl;
 		std::cout << "NO SOY LUZ POINT";
-		std::cout << "\n";
+		std::cout << std::endl;
 	}
 	visible = true;
 
@@ -47,9 +49,7 @@ void LightComponent::sendParameters(lightType t, std::string n, Ogre::SceneManag
 
 		entityNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 		entityNode->attachObject(light);
-
-		v = *pos->getPos();
-		entityNode->setPosition(Ogre::Vector3(v.x, v.y, v.z));
+		entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 		break;
 	case directional:
 		light = scnMgr->createLight(name);
@@ -72,13 +72,12 @@ void LightComponent::sendParameters(lightType t, std::string n, Ogre::SceneManag
 
 		light->setType(Ogre::Light::LT_SPOTLIGHT);
 
-		entityNode = scnMgr->getRootSceneNode()->createChildSceneNode();
+		entityNode = scnMgr->getRootSceneNode()->createChildSceneNode(); //AQUI USO EL NODO DE LA ENTIDAD O UNO NUEVO¿?
 		entityNode->attachObject(light);
 		entityNode->setDirection(-1, -1, 0);
 
 
-		v = *pos->getPos();
-		entityNode->setPosition(Ogre::Vector3(v.x, v.y, v.z));
+		entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z)); //CAMBIAR AL TRANSFORM
 
 		light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 		break;
@@ -91,7 +90,6 @@ void LightComponent::sendParameters(lightType t, std::string n, Ogre::SceneManag
 void LightComponent::init()
 {
 	visible = true;
-	Utilities::Vector3 v;
 
 	switch (type)
 	{
@@ -106,9 +104,7 @@ void LightComponent::init()
 
 		entityNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 		entityNode->attachObject(light);
-		
-		v = *pos->getPos();
-		entityNode->setPosition(Ogre::Vector3(v.x, v.y, v.z));
+		entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 		break;
 	case directional:
 		light = scnMgr->createLight(name);
@@ -136,8 +132,7 @@ void LightComponent::init()
 		entityNode->setDirection(-1, -1, 0);
 
 
-		v = *pos->getPos();
-		entityNode->setPosition(Ogre::Vector3(v.x, v.y, v.z));
+		entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z)); //CAMBIAR AL TRANSFORM
 
 		light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 		break;
@@ -165,10 +160,10 @@ void LightComponent::setPower(float power)
 	light->setPowerScale(power);
 }
 
-Utilities::Vector4<float> LightComponent::getSpecularColor()
+Utilities::Vector3<float> LightComponent::getSpecularColor()
 {
-	return Utilities::Vector4<float>(light->getSpecularColour().r, light->getSpecularColour().g,
-									 light->getSpecularColour().b, light->getSpecularColour().a);
+
+	return Utilities::Vector3<float>(light->getSpecularColour().r, light->getSpecularColour().g, light->getSpecularColour().b);
 }
 
 void LightComponent::diffuseColor(float r, float g, float b)
@@ -176,10 +171,9 @@ void LightComponent::diffuseColor(float r, float g, float b)
 	light->setSpecularColour(r, g, b);
 }
 
-Utilities::Vector4<float> LightComponent::getDiffuseColor()
+Utilities::Vector3<float> LightComponent::getDiffuseColor()
 {
-	return Utilities::Vector4<float>(light->getDiffuseColour().r, light->getDiffuseColour().g,
-					      light->getDiffuseColour().b, light->getDiffuseColour().a);
+	return Utilities::Vector3<float>(light->getDiffuseColour().r, light->getDiffuseColour().g, light->getDiffuseColour().b);
 }
 
 
