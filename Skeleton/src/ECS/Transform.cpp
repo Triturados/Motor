@@ -6,7 +6,7 @@
 Transform::Transform()
 {
 	position = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
-	scale = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+	scale = new Utilities::Vector3<float>(1.0,1.0,1.0);
 	rotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
 }
 
