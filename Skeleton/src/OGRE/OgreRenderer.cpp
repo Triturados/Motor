@@ -17,7 +17,6 @@
 #include <OgreSGTechniqueResolverListener.h>
 #include <OgreGpuProgramManager.h>
 #include <OgreWindowEventUtilities.h>
-#include "../Main/checkML.h"
 
 OgreRenderer* OgreRenderer::instance = nullptr;
 
@@ -48,6 +47,10 @@ void OgreRenderer::initRoot() {
 	mLogPath = "./OGRE/Ogre.log";
 	mCfgPath = "./OGRE/ogre.cfg";
 
+	assert("No se ha encontrado el archivo plugins.cfg", Ogre::FileSystemLayer::fileExists(mPluginsCfgPath));
+	assert("No se ha encontrado el archivo ogre.cfg", Ogre::FileSystemLayer::fileExists(mCfgPath));
+	assert("No se ha encontrado el archivo ogre.log", Ogre::FileSystemLayer::fileExists(mLogPath));
+
 	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
 
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
@@ -59,6 +62,8 @@ void OgreRenderer::initRoot() {
 /// </summary>
 void OgreRenderer::loadResources()
 {
+	assert("No se ha encontrado el archivo resources.cfg", Ogre::FileSystemLayer::fileExists(mResourcesCfgPath));
+
 	Ogre::ConfigFile cf;
 	cf.load(mResourcesCfgPath);
 
