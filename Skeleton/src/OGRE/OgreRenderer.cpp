@@ -15,6 +15,9 @@
 #include <OgreBitesConfigDialog.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreSGTechniqueResolverListener.h>
+#include <OgreGpuProgramManager.h>
+#include <OgreWindowEventUtilities.h>
+#include "../Main/checkML.h"
 
 OgreRenderer* OgreRenderer::instance = nullptr;
 
@@ -27,6 +30,7 @@ OgreRenderer::OgreRenderer()
 
 	loadResources();
 
+	
 	setupScenes();
 
 	initRTShaderSystem();
@@ -78,17 +82,42 @@ void OgreRenderer::loadResources()
 /// </summary>
 void OgreRenderer::initRTShaderSystem()
 {
-	if (Ogre::RTShader::ShaderGenerator::initialize())
-	{
-		mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+	//if (Ogre::RTShader::ShaderGenerator::initialize())
+	//{
+	//	mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
 
-		// Create and register the material manager listener if it doesn't exist yet.
-		if (!mMaterialMgrListener) {
-			mMaterialMgrListener = new OgreBites::SGTechniqueResolverListener(mShaderGenerator);
-			Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
-		}
-	}
-	mShaderGenerator->addSceneManager(mSceneMgr);
+	//	// Create and register the material manager listener if it doesn't exist yet.
+	//	if (!mMaterialMgrListener) {
+	//		mMaterialMgrListener = new OgreBites::SGTechniqueResolverListener(mShaderGenerator);
+	//		Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
+	//	}
+	//}
+	//mShaderGenerator->addSceneManager(mSceneMgr);
+}
+
+void OgreRenderer::destroyRTShaderSystem()
+{
+	//mShaderGenerator->removeAllShaderBasedTechniques();
+	//mShaderGenerator->flushShaderCache();
+
+
+ // // Restore default scheme.
+	//Ogre::MaterialManager::getSingleton().setActiveScheme(Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
+
+	//// Unregister the material manager listener.
+	//if (mMaterialMgrListener != nullptr)
+	//{
+	//	Ogre::MaterialManager::getSingleton().removeListener(mMaterialMgrListener);
+	//	//delete mMaterialMgrListener;
+	//	mMaterialMgrListener = nullptr;
+	//}
+
+	//// Destroy RTShader system.
+	//if (mShaderGenerator != NULL)
+	//{
+	//	Ogre::RTShader::ShaderGenerator::destroy();
+	//	mShaderGenerator = NULL;
+	//}
 }
 
 
@@ -129,11 +158,11 @@ void OgreRenderer::setupScenes()
 /// </summary>
 bool OgreRenderer::update()
 {
-	Ogre::WindowEventUtilities::messagePump();
+	/*Ogre::WindowEventUtilities::messagePump();
 
 	if (mWindow->isClosed()) return false;
 
-	if (!mRoot->renderOneFrame()) return false;
+	if (!mRoot->renderOneFrame()) return false;*/
 
 	return true;
 }
@@ -149,6 +178,24 @@ void OgreRenderer::exampleScene()
 
 	//mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 }
+
+
+OgreRenderer::~OgreRenderer()
+{
+	// Destroy the RT Shader System.
+	destroyRTShaderSystem();
+	mWindow->destroy();
+
+	if (mRoot)
+	{
+		mRoot->saveConfig();
+		OGRE_DELETE mRoot;
+		mRoot = NULL;
+	}
+
+}
+
+
 Ogre::SceneNode* OgreRenderer::createNode()
 {
 	return mSceneMgr->getRootSceneNode()->createChildSceneNode();
