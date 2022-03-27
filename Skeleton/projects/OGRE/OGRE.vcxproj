@@ -59,7 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -69,8 +69,8 @@
       <AdditionalDependencies>OgreBites_d.lib;OgreRTShaderSystem_d.lib;OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\OgreBuild\lib\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreBites_d.lib;OgreRTShaderSystem_d.lib;OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\OgreBuild\lib\$(Configuration);$(SolutionDir)dependencies\OgreBuild\SDL2-build\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreBites_d.lib;OgreRTShaderSystem_d.lib;OgreMain_d.lib;SDL2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -81,7 +81,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -93,8 +93,8 @@
       <AdditionalDependencies>OgreBites.lib;OgreRTShaderSystem.lib;OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\OgreBuild\lib\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreBites.lib;OgreRTShaderSystem.lib;OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\OgreBuild\lib\$(Configuration);$(SolutionDir)dependencies\OgreBuild\SDL2-build\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreBites.lib;OgreRTShaderSystem.lib;OgreMain.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

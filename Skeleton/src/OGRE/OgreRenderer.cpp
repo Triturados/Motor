@@ -17,6 +17,7 @@
 #include <OgreSGTechniqueResolverListener.h>
 #include <OgreGpuProgramManager.h>
 #include <OgreWindowEventUtilities.h>
+#include <SDL.h>
 
 OgreRenderer* OgreRenderer::instance = nullptr;
 
