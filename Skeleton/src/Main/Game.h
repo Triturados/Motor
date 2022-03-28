@@ -2,6 +2,7 @@
 
 #ifndef GAME_H
 #define GAME_H
+
 #include <Windows.h>
 
 namespace LoveEngine {
@@ -28,13 +29,9 @@ struct Game {
 	LoveEngine::Time* time;
 	PhysicsManager* physics;
 
-	void run();
-
-	int setup();
-
-	void quit();
-
+	void setup();
 	void loop();
+	void quit();
 
 	void testing();
 
@@ -47,6 +44,5 @@ private:
 	void luabridge();
 
 	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
-
 };
 #endif

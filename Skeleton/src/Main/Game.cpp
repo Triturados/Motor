@@ -33,23 +33,14 @@ struct SceneDefinitions {
 	void scenesDefinitions();
 };
 
-void Game::run()
-{
-	if (setup() == 0) {
-		loop();
-		quit();
-	}
-}
-
-int Game::setup()
+void Game::setup()
 {
 	Funct escena;
 	GameComponentDefinition gcd;
 
 	int dlls = initialiseDLLs(escena, gcd);
 	if (dlls) {
-		std::cout << "Error DLLs";
-		return 1;
+		throw std::exception("Error en la inicialización de las DLLs\n");
 	}
 
 
@@ -70,7 +61,6 @@ int Game::setup()
 	physics = PhysicsManager::getInstance();
 
 	delete creator;
-	return 0;
 }
 
 
@@ -99,17 +89,12 @@ void Game::loop()
 
 		//input();
 
-		physics->update();
-
 		currentScene->update();
-
-		physics->fixedUpdate(physicsFrameRate);
 
 		currentScene->stepPhysics();
 
 		//currentScene->render();
 		renderer->update();
-
 
 		sceneManager->checkChange();
 
@@ -126,8 +111,6 @@ void Game::loop()
 		time->frameCount++;
 
 		initialTime = currentTime;
-
-		//std::this_thread::sleep_for(sleepFor);
 	}
 
 	std::cout << "Frame rate medio: " << time->calculateFrameRate() << " Esperado: " << updateFrameRate << "\n";
@@ -145,6 +128,7 @@ void Game::quit()
 }
 
 
+//Métodos temporales para testing
 void Game::testing()
 {
 	int a;
@@ -163,7 +147,10 @@ void Game::testing()
 	case 1: sdlinput(); break;
 	case 2:
 		Game game;
-		game.run(); break;
+		game.setup();
+		game.loop();
+		game.quit();
+		break;
 	case 3: fmod(); break;
 	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
 	case 5: luabridge(); break;
@@ -188,7 +175,7 @@ void Game::sdlinput()
 void Game::fmod()
 {
 	//FMOD
-	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
+	SoundManager sound = SoundManager(); //Inicializacion 
 
 	// Create a sample sound
 	FMOD::SoundClass soundSample;
