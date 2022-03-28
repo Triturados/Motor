@@ -88,42 +88,42 @@ void OgreRenderer::loadResources()
 /// </summary>
 void OgreRenderer::initRTShaderSystem()
 {
-	//if (Ogre::RTShader::ShaderGenerator::initialize())
-	//{
-	//	mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+	if (Ogre::RTShader::ShaderGenerator::initialize())
+	{
+		mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
 
-	//	// Create and register the material manager listener if it doesn't exist yet.
-	//	if (!mMaterialMgrListener) {
-	//		mMaterialMgrListener = new OgreBites::SGTechniqueResolverListener(mShaderGenerator);
-	//		Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
-	//	}
-	//}
-	//mShaderGenerator->addSceneManager(mSceneMgr);
+		// Create and register the material manager listener if it doesn't exist yet.
+		if (!mMaterialMgrListener) {
+			mMaterialMgrListener = new OgreBites::SGTechniqueResolverListener(mShaderGenerator);
+			Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
+		}
+	}
+	mShaderGenerator->addSceneManager(mSceneMgr);
 }
 
 void OgreRenderer::destroyRTShaderSystem()
 {
-	//mShaderGenerator->removeAllShaderBasedTechniques();
-	//mShaderGenerator->flushShaderCache();
+	mShaderGenerator->removeAllShaderBasedTechniques();
+	mShaderGenerator->flushShaderCache();
 
 
- // // Restore default scheme.
-	//Ogre::MaterialManager::getSingleton().setActiveScheme(Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
+  // Restore default scheme.
+	Ogre::MaterialManager::getSingleton().setActiveScheme(Ogre::MaterialManager::DEFAULT_SCHEME_NAME);
 
-	//// Unregister the material manager listener.
-	//if (mMaterialMgrListener != nullptr)
-	//{
-	//	Ogre::MaterialManager::getSingleton().removeListener(mMaterialMgrListener);
-	//	//delete mMaterialMgrListener;
-	//	mMaterialMgrListener = nullptr;
-	//}
+	// Unregister the material manager listener.
+	if (mMaterialMgrListener != nullptr)
+	{
+		Ogre::MaterialManager::getSingleton().removeListener(mMaterialMgrListener);
+		//delete mMaterialMgrListener;
+		mMaterialMgrListener = nullptr;
+	}
 
-	//// Destroy RTShader system.
-	//if (mShaderGenerator != NULL)
-	//{
-	//	Ogre::RTShader::ShaderGenerator::destroy();
-	//	mShaderGenerator = NULL;
-	//}
+	// Destroy RTShader system.
+	if (mShaderGenerator != NULL)
+	{
+		Ogre::RTShader::ShaderGenerator::destroy();
+		mShaderGenerator = NULL;
+	}
 }
 
 
@@ -164,11 +164,11 @@ void OgreRenderer::setupScenes()
 /// </summary>
 bool OgreRenderer::update()
 {
-	/*Ogre::WindowEventUtilities::messagePump();
+	Ogre::WindowEventUtilities::messagePump();
 
 	if (mWindow->isClosed()) return false;
 
-	if (!mRoot->renderOneFrame()) return false;*/
+	if (!mRoot->renderOneFrame()) return false;
 
 	return true;
 }
