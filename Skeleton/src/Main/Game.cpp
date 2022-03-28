@@ -44,11 +44,9 @@ void Game::run()
 int Game::setup()
 {
 	Funct escena;
-	GameComponentDefinition gcd;
+	GameComponentDefinition gameComponentDefinitions;
 
-	int dlls = initialiseDLLs(escena, gcd);
-	if (dlls) {
-		std::cout << "Error DLLs";
+	if(initialiseDLLs(escena, gameComponentDefinitions)){
 		return 1;
 	}
 
@@ -57,7 +55,7 @@ int Game::setup()
 	sceneManager = new SceneManager();
 	compFactory = new ComponentFactory();
 
-	gcd();
+	gameComponentDefinitions();
 	SceneDefinitions* creator = escena();
 
 	sceneManager->defineScenesFactories(creator->escenas);
@@ -268,6 +266,23 @@ int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 		std::cout << "El juego no define correctamente los componentes\n";
 		return 1;
 	}
+
+
+	return 0;
+}
+
+int Game::initialiseSceneCreator()
+{
+	luastate = luaL_newstate();
+	luaL_openlibs(luastate);
+	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
+
+
+
+	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "escena0");
+
+
+	sceneManager->
 
 
 	return 0;

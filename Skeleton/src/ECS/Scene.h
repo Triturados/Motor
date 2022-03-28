@@ -12,6 +12,7 @@ class Scene final {
 
 	friend SceneCreator;
 	friend SceneManager;
+	friend class SceneFactory;
 	Scene(std::string name);
 public:
 	~Scene();

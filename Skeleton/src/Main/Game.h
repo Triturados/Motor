@@ -12,22 +12,15 @@ class OgreRenderer;
 class PhysicsManager;
 class ComponentFactory;
 
+
+class lua_State;
+
 struct SceneDefinitions;
 
 typedef SceneDefinitions* (*Funct)();
 typedef void (*GameComponentDefinition)();
 
 struct Game {
-
-	HMODULE game;
-	HMODULE singleton;
-
-	OgreRenderer* renderer;
-	SceneManager* sceneManager;
-	ComponentFactory* compFactory;
-	LoveEngine::Time* time;
-	PhysicsManager* physics;
-
 	void run();
 
 	int setup();
@@ -39,7 +32,15 @@ struct Game {
 	void testing();
 
 private:
+	HMODULE game;
+	HMODULE singleton;
 
+	OgreRenderer* renderer;
+	SceneManager* sceneManager;
+	ComponentFactory* compFactory;
+	LoveEngine::Time* time;
+	PhysicsManager* physics;
+	lua_State* luastate;
 	//Métodos de testing de funcionamiento de librerías
 	void sdlinput();
 	void fmod();
@@ -47,6 +48,6 @@ private:
 	void luabridge();
 
 	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
-
+	int initialiseSceneCreator();
 };
 #endif

@@ -57,6 +57,9 @@
     <ClCompile Include="..\..\src\ECS\SoundComponent.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\SceneFactory.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\SoundComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\SceneFactory.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,13 +14,14 @@ enum class SceneLoad {
 	PUSH, POP, CLEAR, SWAP
 };
 
-
 class Scene;
 class SceneCreator;
+class SceneCreation;
 using SceneFactory = std::vector<SceneCreator*>;
 
 
 class SceneManager final {
+	friend class Game;
 
     static SceneManager* instance;
 public:
@@ -50,7 +51,7 @@ public:
 	void initiliseScenes();
 	//Añade las distintas escenas a la fábrica de escenas
 	void defineScenesFactories(SceneFactory scenes);
-protected:
+private:
 
 	int currentIdx = 0;
 	bool initialised = false;
@@ -67,4 +68,5 @@ protected:
 	SceneFactory scenesTemplates;
 	//Pila con las escenas actuales
 	std::stack<Scene*> currentScene;
+
 };
