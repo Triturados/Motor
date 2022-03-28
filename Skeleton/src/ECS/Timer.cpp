@@ -20,7 +20,6 @@ void Timer::setValue(action f, float t)
 
 void Timer::update()
 {
-	std::cout << timeLeft() << "\n";
 	currentTime += LoveEngine::Time::getInstance()->deltaTime;
 
 	if (currentTime > maxTime) {
@@ -88,10 +87,8 @@ Timer* Timer::deleteGameObject(GameObject* gObject, float time)
 {
 	Timer* timer = createObjectWithTimer();
 	timer->objectToDelete = gObject;
-	std::cout << gObject->name << " set to dead\n";
 
 	auto funct = [&](Timer* t) {
-		std::cout << t->objectToDelete->name << " set to dead\n";
 		t->objectToDelete->removeGameObject();
 	};
 
