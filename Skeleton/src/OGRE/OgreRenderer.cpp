@@ -18,6 +18,8 @@
 #include <OgreGpuProgramManager.h>
 #include <OgreWindowEventUtilities.h>
 #include <SDL.h>
+#include <SDL_syswm.h>
+#include <SDL_events.h>
 
 OgreRenderer* OgreRenderer::instance = nullptr;
 
@@ -27,6 +29,9 @@ OgreRenderer::OgreRenderer()
 	instance = this;
 
 	initRoot();
+
+	initOgreWithSDL();
+	//mWindow = mRoot->initialise(true, "Juego");
 
 	loadResources();
 
@@ -56,6 +61,64 @@ void OgreRenderer::initRoot() {
 
 	//PARA MOSTRAR LA VENTANA DE DIALOGO INICIAL HAY QUE BORRA EL OGRE.CFG.   POR DEFECTO USO GL3+
 	if (!mRoot->restoreConfig())mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+}
+
+/// <summary>
+/// Crea la ventana de OGRE a partir de la de SDL (Input de SDL en OGRE)
+/// </summary>
+void OgreRenderer::initOgreWithSDL() {
+	// Inicializacion SDL
+	assert(SDL_GetError(), SDL_Init(SDL_INIT_VIDEO) != 0);
+	mRoot->restoreConfig();
+
+	// Se pasa el valor false para indiciar que vamos a construir la ventana nosotros, no se hace automaticamente
+	mWindow = mRoot->initialise(false, "Juego");
+
+	// Se accede a las opciones de configuracion del sistema de renderizado escogido
+	Ogre::ConfigOptionMap ropts = mRoot->getRenderSystem()->getConfigOptions();
+	std::istringstream resolution(ropts["Video Mode"].currentValue);
+
+	uint32_t windowHeight, windowWidth;
+	resolution >> windowWidth;
+	std::string x;
+	resolution >> x;
+	resolution >> windowHeight;
+
+	//if (!SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_TIMER))
+	//	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
+	//		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+	//		/*EXCEPCION*/
+	//	}
+
+	// Aqui se pueden establecer flags, algunos que pueden ser de utilidad mas adelante:
+	// SDL_WINDOW_FULLSCREEN_DESKTOP, SDL_WINDOW_BORDERLESS 
+	int flags = 0;
+	std::string appName_;
+
+	// Creacion ventana SDL
+	native = SDL_CreateWindow(appName_.c_str(), SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, flags);
+
+	// Se obtiene informacion de la version de SDL
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (!SDL_GetWindowWMInfo(native, &wmInfo))
+	{
+		assert(SDL_GetError(), false);
+	}
+
+	// Se inicializan parametros segun el sistema de renderizado y la version de SDL
+	Ogre::NameValuePairList miscParams;
+
+	miscParams["FSAA"] = ropts["FSAA"].currentValue;
+	miscParams["vsync"] = ropts["VSync"].currentValue;
+	miscParams["gamma"] = ropts["sRGB Gamma Conversion"].currentValue;
+	miscParams["externalWindowHandle"] =
+		Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
+
+	// Creamos la ventana de OGRE con estos parametros
+	mWindow = mRoot->createRenderWindow(appName_, windowWidth, windowHeight, false, &miscParams);
+
 }
 
 /// <summary>
@@ -132,7 +195,6 @@ void OgreRenderer::destroyRTShaderSystem()
 /// </summary>
 void OgreRenderer::setupScenes()
 {
-	mWindow = mRoot->initialise(true, "Juego");
 	mSceneMgr = mRoot->createSceneManager();
 
 	mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();

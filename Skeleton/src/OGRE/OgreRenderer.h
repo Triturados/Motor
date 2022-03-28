@@ -16,6 +16,8 @@ namespace Ogre {
 	class SceneNode;
 }
 
+class SDL_Window;
+
 class OgreRenderer
 {
 private:
@@ -26,6 +28,7 @@ private:
 	Ogre::String mLogPath;
 
 	Ogre::RenderWindow* mWindow;
+	SDL_Window* native;
 	Ogre::SceneManager* mSceneMgr;
 
 	Ogre::Camera* mCamera;
@@ -35,6 +38,7 @@ private:
 	Ogre::MaterialManager::Listener* mMaterialMgrListener;
 
 	void loadResources();
+	void initOgreWithSDL();
 	void initRTShaderSystem();
 	void destroyRTShaderSystem();
 	void setupScenes();

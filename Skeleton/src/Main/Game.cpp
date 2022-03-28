@@ -64,6 +64,7 @@ int Game::setup()
 	sceneManager->initiliseScenes();
 
 	renderer = new OgreRenderer();
+	Input::init();
 	renderer->exampleScene();
 
 	PhysicsManager::setUpInstance();
@@ -97,7 +98,7 @@ void Game::loop()
 			break;
 		}
 
-		//input();
+		Input::getInstance()->handleInput();
 
 		physics->update();
 
