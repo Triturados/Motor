@@ -37,6 +37,7 @@ private:
 	OgreDebugDrawer* mDebugDrawer = nullptr;
 
 	void destroyWorld();
+	void checkExceptions();
 	
 public:
 	PhysicsManager();

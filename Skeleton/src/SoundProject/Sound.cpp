@@ -1,18 +1,13 @@
 #include "Sound.h"
 #include <fmod_errors.h>
 #include <string.h>
-#include <sstream>
-#include <iostream>
-
 #include <fstream>
-
-//Macro para definir el nombre de un archivo pero solo el nombre, no toda la ruta absoluta
-#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#include <Error_handling.h>
 
 SoundManager::SoundManager()
 {
 	fmod_error = FMOD::System_Create(&m_pSystem);
-	throwFMODError(FMOD_ERR_BADCOMMAND, __LINE__);
+	throwFMODError(fmod_error, __LINE__);
 
 	//Manejo de drivers del ordenador para evitar que se intente reproducir cuando no hay 
 	int driverCount = 0;
@@ -43,7 +38,7 @@ void SoundManager::createSound(FMOD::SoundClass* pSound, const char* pFile, int 
 	fmod_error = m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
 	throwFMODError(fmod_error, __LINE__);
 
-	if (!std::ifstream(pFile)) throw std::exception("[FMOD] : Sound file doesn't not exist.");
+	if (!std::ifstream(pFile)) throw std::exception("[Error en el proyecto SoundProject] : Sound file doesn't not exist.");
 
 	//Añadimos al mapa de sonidos generales un tupla somido canal
 	std::pair<int, FMOD::SoundClass> sound(channel, *pSound);
@@ -141,11 +136,7 @@ void SoundManager::setVolume(FMOD::ChannelGroup* group, float volume) {
 void SoundManager::throwFMODError(FMOD_RESULT result, int errorLine)
 {
 	if (result != FMOD_OK) {
-		std::stringstream ss; ss << "[ERROR FMOD]";
-		ss << "(Linea: " << std::to_string(errorLine) << ", " << "Archivo: " << __FILENAME__ << ") : ";
-		ss << FMOD_ErrorString(result) << '\n';
-
-		throw std::exception(ss.str().c_str());
+		LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, errorLine, __FILENAME__, FMOD_ErrorString(result));
 	}
 }
 

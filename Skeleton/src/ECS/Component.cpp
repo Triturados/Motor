@@ -1,7 +1,6 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"
-#include <string>
 
 
 //Inicialización de atributos estáticos

@@ -57,7 +57,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>
@@ -73,7 +73,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>

@@ -1,11 +1,14 @@
+#include "PhysicsManager.h"
+
 #include <iostream>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <GameObject.h>
-#include "PhysicsManager.h"
+#include <OgreRenderer.h>
+#include <Error_handling.h>
 #include "Vector3.h"
 #include "DebugDrawer.h"
-#include <OgreRenderer.h>
+
 
 PhysicsManager::PhysicsManager()
 {
@@ -36,6 +39,15 @@ void PhysicsManager::init(const Utilities::Vector3<float> gravity)
 //	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 //	dynamicsWorld->setDebugDrawer(mDebugDrawer);
 //#endif // DEBUG
+
+	checkExceptions();
+}
+
+void PhysicsManager::checkExceptions()
+{
+	if (!collConfig || !collDispatcher || !broadPhaseInterface || !constraintSolver || !dynamicsWorld) {
+		LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, __LINE__, __FILENAME__, "Error al inicializar Bullet Physics, alguna de las variables de configuracion del mundo tiene un valor no valido.");
+	}
 }
 
 btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
