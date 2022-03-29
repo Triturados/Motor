@@ -3,129 +3,135 @@
 #include <string>
 #include <list>
 
-class Scene;
-class Component;
 
-//Solo se puede pasar como plantilla una clase que herede de componente
-template <typename T>
-concept isComponent = std::is_base_of<Component, T>::value;
+namespace LoveEngine {
+	namespace ECS {
 
-class GameObject final {
+		class Scene;
+		class Component;
 
-	friend Scene;
-	friend class SceneCreator;
-public:
+		//Solo se puede pasar como plantilla una clase que herede de componente
+		template <typename T>
+		concept isComponent = std::is_base_of<Component, T>::value;
 
-	GameObject(std::string name);
-	GameObject(std::string name, Scene* scene);
-	~GameObject();
-	std::string name;
+		class GameObject final {
 
-private:
+			friend Scene;
+			friend class SceneCreator;
+		public:
 
-	Scene* scene;
-	bool enabled = true;
-	bool dead = false;
-	std::list<Component*> componentsList;
+			GameObject(std::string name);
+			GameObject(std::string name, Scene* scene);
+			~GameObject();
+			std::string name;
 
-	//Lista de componentes a elimiar al final del ciclo de update
-	std::list<std::list<Component*>::iterator> componentsToErase;
+		private:
 
-	void init();
-	void postInit();
+			Scene* scene;
+			bool enabled = true;
+			bool dead = false;
+			std::list<Component*> componentsList;
 
-	void update();
-	void stepPhysics();
-	void preRender();
+			//Lista de componentes a elimiar al final del ciclo de update
+			std::list<std::list<Component*>::iterator> componentsToErase;
 
-	void activated();
-	void deActivated();
+			void init();
+			void postInit();
 
-public:
+			void update();
+			void stepPhysics();
+			void preRender();
 
-	template <typename T>
-	requires isComponent<T>
-		T* addComponent() {
+			void activated();
+			void deActivated();
 
-		T* c = new T();
-		c->gameObject = this;
-		c->scene = scene;
+		public:
 
-		componentsList.push_back(c);
+			template <typename T>
+			requires isComponent<T>
+				T* addComponent() {
 
-		return c;
-	}
+				T* c = new T();
+				c->gameObject = this;
+				c->scene = scene;
 
-	Component* createComponent(std::string comp);
+				componentsList.push_back(c);
 
-	template <typename T>
-	requires isComponent<T>
-		bool hasComponent() {
-		return getComponent<T>() != nullptr;
-	}
-
-	template <typename T>
-	requires isComponent<T>
-		void removeComponent() {
-
-		std::list<Component*>::iterator it = componentsList.begin();
-		while (it != componentsList.end()) {
-
-			if (dynamic_cast<T*>(*it) != nullptr)
-			{
-				componentsToErase.push_back(it);
-				return;
+				return c;
 			}
-			it++;
-		}
-	}
 
-	void removeComponent(Component* comp) {
-		std::list<Component*>::iterator it = componentsList.begin();
-		while (it != componentsList.end()) {
+			Component* createComponent(std::string comp);
 
-			if (*it == comp)
-			{
-				componentsToErase.push_back(it);
-				return;
+			template <typename T>
+			requires isComponent<T>
+				bool hasComponent() {
+				return getComponent<T>() != nullptr;
 			}
-			it++;
-		}
-	}
 
+			template <typename T>
+			requires isComponent<T>
+				void removeComponent() {
 
-	template <typename T>
-	requires isComponent<T>
-		T* getComponent() {
+				std::list<Component*>::iterator it = componentsList.begin();
+				while (it != componentsList.end()) {
 
-		for (Component* comp : componentsList) {
-			T* v = dynamic_cast<T*>(comp);
-			if (v != nullptr) {
-				return v;
+					if (dynamic_cast<T*>(*it) != nullptr)
+					{
+						componentsToErase.push_back(it);
+						return;
+					}
+					it++;
+				}
 			}
-		}
 
-		return nullptr;
-	}
+			void removeComponent(Component* comp) {
+				std::list<Component*>::iterator it = componentsList.begin();
+				while (it != componentsList.end()) {
 
-	template <typename T>
-	requires isComponent<T>
-		std::vector<T*> getComponents() {
-		std::vector<T*> vec;
-		for (Component* comp : componentsList) {
-			T* v = dynamic_cast<T*>(comp);
-			if (v != nullptr) {
-				vec.push_back(v);
+					if (*it == comp)
+					{
+						componentsToErase.push_back(it);
+						return;
+					}
+					it++;
+				}
 			}
-		}
 
-		return vec;
+
+			template <typename T>
+			requires isComponent<T>
+				T* getComponent() {
+
+				for (Component* comp : componentsList) {
+					T* v = dynamic_cast<T*>(comp);
+					if (v != nullptr) {
+						return v;
+					}
+				}
+
+				return nullptr;
+			}
+
+			template <typename T>
+			requires isComponent<T>
+				std::vector<T*> getComponents() {
+				std::vector<T*> vec;
+				for (Component* comp : componentsList) {
+					T* v = dynamic_cast<T*>(comp);
+					if (v != nullptr) {
+						vec.push_back(v);
+					}
+				}
+
+				return vec;
+			}
+
+
+			void activate(bool value);
+			void removeGameObject();
+			void removeGameObject(GameObject* gO);
+			void canvelRemove();
+			bool isEnabled();
+		};
 	}
-
-
-	void activate(bool value);
-	void removeGameObject();
-	void removeGameObject(GameObject* gO);
-	void canvelRemove();
-	bool isEnabled();
-};
+}

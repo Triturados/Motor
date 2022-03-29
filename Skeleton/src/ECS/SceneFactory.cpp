@@ -1,10 +1,13 @@
 #include "SceneFactory.h"
 #include <Scene.h>
 
-
-Scene* SceneFactory::createScene(int idx)
-{
-	Scene* scene = new Scene("Escena");
-	creator(scene, idx);
-	return scene;
+namespace LoveEngine {
+	namespace SceneManagement {
+		ECS::Scene* SceneFactory::createScene(int idx)
+		{
+			ECS::Scene* scene = new ECS::Scene("Escena");
+			creator(scene, idx);
+			return scene;
+		}
+	}
 }

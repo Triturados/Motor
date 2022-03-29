@@ -12,116 +12,122 @@
 
 #include "Vector3.h"
 
-RigidBody::RigidBody() : Component(), rb(nullptr), tr(nullptr), mass(1.0f)
-{
-
-}
-
-RigidBody::~RigidBody()
-{
-	
-}
-
-void RigidBody::init()
-{
-	
-}
-
-void RigidBody::update(float deltaTime)
-{
-	
-}
-
-void RigidBody::stepPhysics()
-{
-
-}
-
-void RigidBody::setPosition(const Utilities::Vector3<float>& newPos)
-{
-	
-}
-
-void RigidBody::setGravity(const Utilities::Vector3<float>& newGrav)
-{
-
-}
-
-void RigidBody::setTrigger(const bool trigger) {
-	
-}
-
-void RigidBody::setKinematic(const bool kinematic) {
-
-}
-
-void RigidBody::setStatic(const bool static) {
-
-	
-}
-
-void RigidBody::setRestitution(float restitution)
-{
-	
-}
-
-void RigidBody::setLinearVelocity(const Utilities::Vector3<float>& vel)
-{
-
-}
-
-void RigidBody::setFriction(float friction)
-{
-
-}
-
-void RigidBody::setCollisionShape(btCollisionShape* newShape)
-{
-
-}
+namespace LoveEngine {
+	namespace ECS {
 
 
-const Utilities::Vector3<float>& RigidBody::getLinearVelocity() const
-{
-	return Utilities::Vector3<float>();
-}
+		RigidBody::RigidBody() : Component(), rb(nullptr), tr(nullptr), mass(1.0f)
+		{
 
-bool RigidBody::isTrigger() const
-{
-	return true;
-}
+		}
 
-bool RigidBody::isKinematic() const
-{
-	return rb->isKinematicObject();
-}
+		RigidBody::~RigidBody()
+		{
 
-bool RigidBody::isStatic() const
-{
-	return rb->isStaticObject();
-}
+		}
 
-btCollisionShape* RigidBody::getShape() const
-{
-	return rb->getCollisionShape();
-}
+		void RigidBody::init()
+		{
 
-btRigidBody* RigidBody::getBtRb() const
-{
-	return rb;
-}
+		}
 
-int RigidBody::getMask() const
-{
-	return 0;
-}
+		void RigidBody::update(float deltaTime)
+		{
 
-void RigidBody::addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
-{
-	
-}
+		}
 
-bool RigidBody::onCollisionEnter(const std::string& id) const
-{
-	return true;
+		void RigidBody::stepPhysics()
+		{
+
+		}
+
+		void RigidBody::setPosition(const Utilities::Vector3<float>& newPos)
+		{
+
+		}
+
+		void RigidBody::setGravity(const Utilities::Vector3<float>& newGrav)
+		{
+
+		}
+
+		void RigidBody::setTrigger(const bool trigger) {
+
+		}
+
+		void RigidBody::setKinematic(const bool kinematic) {
+
+		}
+
+		void RigidBody::setStatic(const bool static) {
+
+
+		}
+
+		void RigidBody::setRestitution(float restitution)
+		{
+
+		}
+
+		void RigidBody::setLinearVelocity(const Utilities::Vector3<float>& vel)
+		{
+
+		}
+
+		void RigidBody::setFriction(float friction)
+		{
+
+		}
+
+		void RigidBody::setCollisionShape(btCollisionShape* newShape)
+		{
+
+		}
+
+
+		const Utilities::Vector3<float>& RigidBody::getLinearVelocity() const
+		{
+			return Utilities::Vector3<float>();
+		}
+
+		bool RigidBody::isTrigger() const
+		{
+			return true;
+		}
+
+		bool RigidBody::isKinematic() const
+		{
+			return rb->isKinematicObject();
+		}
+
+		bool RigidBody::isStatic() const
+		{
+			return rb->isStaticObject();
+		}
+
+		btCollisionShape* RigidBody::getShape() const
+		{
+			return rb->getCollisionShape();
+		}
+
+		btRigidBody* RigidBody::getBtRb() const
+		{
+			return rb;
+		}
+
+		int RigidBody::getMask() const
+		{
+			return 0;
+		}
+
+		void RigidBody::addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
+		{
+
+		}
+
+		bool RigidBody::onCollisionEnter(const std::string& id) const
+		{
+			return true;
+		}
+	}
 }

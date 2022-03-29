@@ -6,7 +6,6 @@
 #include <Component.h>
 
 
-class Transform;
 namespace Ogre {
 	class SceneNode;
 	class SceneManager;
@@ -22,37 +21,43 @@ namespace Utilities {
 	class Vector4;
 }
 
-class LightComponent : public Component
-{
-	Ogre::SceneNode* entityNode;
-	Ogre::SceneManager* scnMgr;
+namespace LoveEngine {
+	namespace ECS {
 
-	Transform* pos;
+		class Transform;
+		class LightComponent : public Component
+		{
+			Ogre::SceneNode* entityNode;
+			Ogre::SceneManager* scnMgr;
 
-	Ogre::Light* light;
+			Transform* pos;
 
-	bool visible;
+			Ogre::Light* light;
 
-	std::string name;
-	lightType type;
-public:
+			bool visible;
 
-	LightComponent();
-	~LightComponent();
+			std::string name;
+			lightType type;
+		public:
 
-	void init();
+			LightComponent();
+			~LightComponent();
 
-	void sendParameters(lightType t, std::string n, Ogre::SceneManager* manager);
-	void specularColor(float r, float g, float b);
-	void diffuseColor(float r, float g, float b);
-	void setDir(Utilities::Vector3<float> direction);
-	void setRange(float startAngle, float endAngle, float desvanecimiento = 1.0);
-	void setVisibility(bool active);
-	void setPower(float power);
+			void init();
 
-	Utilities::Vector3<float> getDiffuseColor();
-	Utilities::Vector3<float> getSpecularColor();
-	Utilities::Vector3<float> getDir();
-	bool getVisibility();
-};
+			void sendParameters(lightType t, std::string n, Ogre::SceneManager* manager);
+			void specularColor(float r, float g, float b);
+			void diffuseColor(float r, float g, float b);
+			void setDir(Utilities::Vector3<float> direction);
+			void setRange(float startAngle, float endAngle, float desvanecimiento = 1.0);
+			void setVisibility(bool active);
+			void setPower(float power);
 
+			Utilities::Vector3<float> getDiffuseColor();
+			Utilities::Vector3<float> getSpecularColor();
+			Utilities::Vector3<float> getDir();
+			bool getVisibility();
+		};
+
+	}
+}

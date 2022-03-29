@@ -1,13 +1,22 @@
 #pragma once
 #include <functional>
 
-class Scene;
+namespace LoveEngine
+{
+	namespace ECS {
+		class Scene;
 
-class SceneFactory {
+	}
+	namespace SceneManagement {
 
-public:
+		class SceneFactory {
 
-	Scene* createScene(int idx);
+		public:
 
-	std::function<void(Scene* scene, int idx)> creator;
-};
+			ECS::Scene* createScene(int idx);
+
+			std::function<void(ECS::Scene* scene, int idx)> creator;
+		};
+	}
+
+}

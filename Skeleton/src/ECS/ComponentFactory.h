@@ -3,10 +3,11 @@
 #include <map>
 #include <string>
 
-class Component;
 
 namespace LoveEngine {
-
+	namespace ECS {
+		class Component;
+	}
 	namespace ComponentDefinitions {
 	class ComponentCreator;
 
@@ -26,7 +27,7 @@ namespace LoveEngine {
 
 			void registerComponent(ComponentCreator* fact);
 
-			Component* createComponent(std::string name);
+			ECS::Component* createComponent(std::string name);
 		};
 
 
@@ -35,7 +36,7 @@ namespace LoveEngine {
 			friend class ComponentCreatorTemplate;
 		public:
 			std::string componentName;
-			virtual Component* createComponent() {
+			virtual ECS::Component* createComponent() {
 				return nullptr;
 			}
 		private:
@@ -52,7 +53,7 @@ namespace LoveEngine {
 			ComponentCreatorTemplate(std::string name) : ComponentCreator(name) {
 			}
 
-			inline virtual Component* createComponent() override {
+			inline virtual ECS::Component* createComponent() override {
 				return new CompType();
 			};
 		};

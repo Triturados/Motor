@@ -11,11 +11,14 @@
 /// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
 /// </summary>
 
-class Scene;
-class SceneFactory;
 
 namespace LoveEngine {
+	namespace ECS {
+		class Scene;
+	}
+
 	namespace SceneManagement {
+		class SceneFactory;
 
 		enum class SceneLoad {
 			PUSH, SWAP, POP, CLEAR,
@@ -33,7 +36,7 @@ namespace LoveEngine {
 			SceneManager();
 			~SceneManager();
 
-			Scene* getCurrentScene();
+			ECS::Scene* getCurrentScene();
 
 			//Número de escenas totales
 			int sceneCount() const;
@@ -56,7 +59,7 @@ namespace LoveEngine {
 			//Añade las distintas escenas a la fábrica de escenas
 
 		private:
-			SceneFactory* sceneFactory;
+			SceneManagement::SceneFactory* sceneFactory;
 
 			int numberOfScenes = 0;
 
@@ -72,7 +75,7 @@ namespace LoveEngine {
 			void manageScene();
 
 			//Pila con las escenas actuales
-			std::stack<Scene*> currentScene;
+			std::stack<ECS::Scene*> currentScene;
 		};
 	}
 }

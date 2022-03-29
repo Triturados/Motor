@@ -7,36 +7,42 @@
 #include <OgreCamera.h>
 #include <OgreRenderWindow.h>
 
-CameraComponent::CameraComponent()
-{
 
-}
+namespace LoveEngine {
+	namespace ECS {
 
-CameraComponent::~CameraComponent()
-{
+		CameraComponent::CameraComponent()
+		{
 
-}
+		}
 
-void CameraComponent::getParameters(Ogre::RenderWindow* window, Ogre::SceneManager* manager)
-{
-	mWindow = window;
-	mSceneMgr = manager;
+		CameraComponent::~CameraComponent()
+		{
 
-	mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	mCameraNode->setPosition(0, 0, 80);
-	mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
+		}
 
-	mCamera = mSceneMgr->createCamera("MainCam");
-	mCamera->setNearClipDistance(5);
+		void CameraComponent::getParameters(Ogre::RenderWindow* window, Ogre::SceneManager* manager)
+		{
+			mWindow = window;
+			mSceneMgr = manager;
 
-	mCameraNode->attachObject(mCamera);
+			mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+			mCameraNode->setPosition(0, 0, 80);
+			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
+
+			mCamera = mSceneMgr->createCamera("MainCam");
+			mCamera->setNearClipDistance(5);
+
+			mCameraNode->attachObject(mCamera);
 
 
-	vp = mWindow->addViewport(mCamera);
+			vp = mWindow->addViewport(mCamera);
 
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+			vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	mCamera->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
+			mCamera->setAspectRatio(
+				Ogre::Real(vp->getActualWidth()) /
+				Ogre::Real(vp->getActualHeight()));
+		}
+	}
 }

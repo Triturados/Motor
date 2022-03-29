@@ -4,7 +4,11 @@
 #include <cassert>
 #include <Timer.h>
 
+
+
 namespace LoveEngine {
+	using namespace ECS;
+
 	namespace ComponentDefinitions {
 
 		ComponentFactory* ComponentFactory::instance = nullptr;

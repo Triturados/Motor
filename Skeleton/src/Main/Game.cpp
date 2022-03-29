@@ -83,7 +83,7 @@ void Game::loop()
 
 	for (int i = 0; i < numIterations; i++) {
 
-		Scene* currentScene = sceneManager->getCurrentScene();
+		LoveEngine::ECS::Scene* currentScene = sceneManager->getCurrentScene();
 
 		if (currentScene == nullptr) {
 			break;
@@ -273,25 +273,25 @@ int Game::initialiseSceneCreator()
 	luaL_openlibs(luastate);
 
 	luabridge::getGlobalNamespace(luastate)
-		.beginClass<GameObject>("GameObject")
-		.addConstructor<void(*)(std::string, Scene*)>()
-		.addFunction("addComponent", &(GameObject::createComponent))
+		.beginClass<LoveEngine::ECS::GameObject>("GameObject")
+		.addConstructor<void(*)(std::string, LoveEngine::ECS::Scene*)>()
+		.addFunction("addComponent", &(LoveEngine::ECS::GameObject::createComponent))
 		.endClass();
 
 	luabridge::getGlobalNamespace(luastate)
-		.beginClass<Scene>("Scene")
-		.addFunction("createObject", &(Scene::createGameObject))
-		.addFunction("name", &(Scene::setName))
+		.beginClass<LoveEngine::ECS::Scene>("Scene")
+		.addFunction("createObject", &(LoveEngine::ECS::Scene::createGameObject))
+		.addFunction("name", &(LoveEngine::ECS::Scene::setName))
 		.endClass();
 
 	luabridge::getGlobalNamespace(luastate)
-		.beginClass<Component>("Component")
+		.beginClass<LoveEngine::ECS::Component>("Component")
 		.endClass();
 
 
 	int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
 
-	sceneManager->sceneFactory->creator = [&](Scene* scene, int idx) {
+	sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
 		luabridge::push(luastate, scene);
 		lua_setglobal(luastate, "scene");

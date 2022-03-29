@@ -18,28 +18,32 @@ namespace Ogre {
 	class Entity;
 }
 
-class Transform;
-class Mesh : public Component
-{
-private:
-	std::string  meshName = "";
-	Ogre::SceneNode* entityNode = nullptr;
-	Ogre::SceneNode* parentNode = nullptr;
-	Ogre::Entity* entity = nullptr;
-	Transform* parent = nullptr;
-	Transform* child = nullptr;
-	Utilities::Vector4<float> *rot;
-	Utilities::Vector3<float> *pos;
-	Utilities::Vector3<float> *scale;
+namespace LoveEngine {
+	namespace ECS {
 
-public:
-	Mesh() {};
-	void init();
-	void update();
-	void sendParameters(std::string mN = "", Ogre::SceneNode* eN = nullptr, Ogre::SceneNode* pN = nullptr,
-		Ogre::Entity* e = nullptr, Transform* p = nullptr, Transform* eT = nullptr);
-	~Mesh();
+		class Transform;
+		class Mesh : public Component
+		{
+		private:
+			std::string  meshName = "";
+			Ogre::SceneNode* entityNode = nullptr;
+			Ogre::SceneNode* parentNode = nullptr;
+			Ogre::Entity* entity = nullptr;
+			Transform* parent = nullptr;
+			Transform* child = nullptr;
+			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* pos;
+			Utilities::Vector3<float>* scale;
 
-};
+		public:
+			Mesh() {};
+			void init();
+			void update();
+			void sendParameters(std::string mN = "", Ogre::SceneNode* eN = nullptr, Ogre::SceneNode* pN = nullptr,
+				Ogre::Entity* e = nullptr, Transform* p = nullptr, Transform* eT = nullptr);
+			~Mesh();
 
+		};
+	}
+}
 #endif

@@ -6,19 +6,23 @@
 
 class OgreSceneManager;
 
+namespace LoveEngine {
+	namespace ECS {
 
-class CameraComponent : public Component
-{
-	Ogre::Camera* mCamera;
-	Ogre::SceneNode* mCameraNode;
-	Ogre::SceneManager* mSceneMgr;
+		class CameraComponent : public Component
+		{
+			Ogre::Camera* mCamera;
+			Ogre::SceneNode* mCameraNode;
+			Ogre::SceneManager* mSceneMgr;
 
-	Ogre::Viewport* vp;
-	Ogre::RenderWindow* mWindow;
-public:
+			Ogre::Viewport* vp;
+			Ogre::RenderWindow* mWindow;
+		public:
 
-	CameraComponent();
-	~CameraComponent();
+			CameraComponent();
+			~CameraComponent();
 
-	void getParameters(Ogre::RenderWindow* window, Ogre::SceneManager* manager);
-};
+			void getParameters(Ogre::RenderWindow* window, Ogre::SceneManager* manager);
+		};
+	}
+}

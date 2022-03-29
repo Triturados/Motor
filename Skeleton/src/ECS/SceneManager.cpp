@@ -28,7 +28,7 @@ namespace LoveEngine {
 			}
 			sceneChangeType = SceneLoad::PUSH;
 
-			sceneFactory = new SceneFactory();
+			sceneFactory = new SceneManagement::SceneFactory();
 
 			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
 		}
@@ -44,7 +44,7 @@ namespace LoveEngine {
 		}
 
 
-		Scene* SceneManager::getCurrentScene() {
+		ECS::Scene* SceneManager::getCurrentScene() {
 			if (!currentScene.empty())
 				return currentScene.top();
 			return nullptr;
@@ -98,7 +98,7 @@ namespace LoveEngine {
 		void SceneManager::eraseTopScene()
 		{
 			assert(("__Niguna escena que eliminar__", !currentScene.empty()));
-			Scene* sceneToErase = currentScene.top();
+			ECS::Scene* sceneToErase = currentScene.top();
 			currentScene.pop();
 
 			delete sceneToErase;
@@ -109,7 +109,7 @@ namespace LoveEngine {
 			assert(("__La escena a crear no es valida__", sceneToLoad >= 0 && sceneToLoad < sceneCount()));
 
 			//Scene* newscene = scenesTemplates[sceneToLoad]->createScene();
-			Scene* newscene = new Scene("new scene");
+			ECS::Scene* newscene = new ECS::Scene("new scene");
 			sceneFactory->creator(newscene, sceneToLoad);
 			currentScene.push(newscene);
 

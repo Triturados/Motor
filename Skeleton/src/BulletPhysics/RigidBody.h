@@ -18,64 +18,70 @@ enum class ForceMode {
 	IMPULSE,
 	VELOCITY_CHANGE
 };
+namespace LoveEngine {
 
-class RigidBody : public Component
-{
-private:
-	//Masa del Rigidbody
-	float mass;
+	namespace ECS {
 
-	//Rigidbody principal
-	btRigidBody* rb;
+		class RigidBody : public Component
+		{
+		private:
+			//Masa del Rigidbody
+			float mass;
 
-	Transform* tr;
+			//Rigidbody principal
+			btRigidBody* rb;
 
-public:
-	RigidBody();
-	virtual ~RigidBody();
+			Transform* tr;
+
+		public:
+			RigidBody();
+			virtual ~RigidBody();
 
 
-	void init();
-	void update(float deltaTime);
-	void stepPhysics();
+			void init();
+			void update(float deltaTime);
+			void stepPhysics();
 
-	void setPosition(const Utilities::Vector3<float>& newPos);
+			void setPosition(const Utilities::Vector3<float>& newPos);
 
-	void setGravity(const Utilities::Vector3<float>& newGrav);
+			void setGravity(const Utilities::Vector3<float>& newGrav);
 
-	void setTrigger(bool trigger_);
+			void setTrigger(bool trigger_);
 
-	void setKinematic(bool kinematic_);
+			void setKinematic(bool kinematic_);
 
-	void setStatic(bool _static);
+			void setStatic(bool _static);
 
-	void setRestitution(float restitution);
+			void setRestitution(float restitution);
 
-	void setLinearVelocity(const Utilities::Vector3<float>& vel);
+			void setLinearVelocity(const Utilities::Vector3<float>& vel);
 
-	void setFriction(float friction);
+			void setFriction(float friction);
 
-	void setCollisionShape(btCollisionShape* newShape);
+			void setCollisionShape(btCollisionShape* newShape);
 
-	void setLinearFactor(const Utilities::Vector3<float>& axis);
+			void setLinearFactor(const Utilities::Vector3<float>& axis);
 
-	void setAngularFactor(const Utilities::Vector3<float>& axis);
+			void setAngularFactor(const Utilities::Vector3<float>& axis);
 
-	const Utilities::Vector3<float>& getLinearVelocity() const;
+			const Utilities::Vector3<float>& getLinearVelocity() const;
 
-	bool isTrigger() const;
+			bool isTrigger() const;
 
-	bool isKinematic() const;
+			bool isKinematic() const;
 
-	bool isStatic() const;
+			bool isStatic() const;
 
-	btCollisionShape* getShape() const;
+			btCollisionShape* getShape() const;
 
-	btRigidBody* getBtRb() const;
+			btRigidBody* getBtRb() const;
 
-	int getMask()const;
+			int getMask()const;
 
-	void addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type = (int) ForceMode::FORCE);
+			void addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type = (int)ForceMode::FORCE);
 
-	bool onCollisionEnter(const std::string& id) const;
-};
+			bool onCollisionEnter(const std::string& id) const;
+		};
+	}
+
+}

@@ -10,19 +10,24 @@ class SoundSystemClass;
 
 enum soundType { effects, environment, voices, music };
 
-class SoundComponent : public Component
-{
-private:
-	FMOD::SoundClass sound;
-	SoundSystemClass* soundMngr;
+namespace LoveEngine {
+	namespace ECS {
 
-	int channel;
-public:
+		class SoundComponent : public Component
+		{
+		private:
+			FMOD::SoundClass sound;
+			SoundSystemClass* soundMngr;
 
-	SoundComponent();
-	~SoundComponent();
-	void createSound(SoundSystemClass* manager, const char* pFile, int channel_);
-	void playSound(soundType groupChannel, bool bLoop = false);
-	void releaseSound();
-	void setSpeed(float s);
-};
+			int channel;
+		public:
+
+			SoundComponent();
+			~SoundComponent();
+			void createSound(SoundSystemClass* manager, const char* pFile, int channel_);
+			void playSound(soundType groupChannel, bool bLoop = false);
+			void releaseSound();
+			void setSpeed(float s);
+		};
+	}
+}

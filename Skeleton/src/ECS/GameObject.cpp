@@ -4,124 +4,131 @@
 #include <ComponentFactory.h>
 #include <iostream>
 
-GameObject::GameObject(std::string name)
-{
-	this->name = name;
-}
 
-GameObject::GameObject(std::string name, Scene* scn)
-{
-	this->name = name;
-	scene = scn;
-	scene->gObjects.push_back(this);
-	std::cout << "CAca de vaca";
-}
+namespace LoveEngine {
+	namespace ECS {
 
+		GameObject::GameObject(std::string name)
+		{
+			this->name = name;
+		}
 
-GameObject::~GameObject()
-{
-	for (auto& comp : componentsList) {
-		delete comp;
-		comp = nullptr;
-	}
-	componentsList.clear();
-}
+		GameObject::GameObject(std::string name, Scene* scn)
+		{
+			this->name = name;
+			scene = scn;
+			scene->gObjects.push_back(this);
+			std::cout << "CAca de vaca";
+		}
 
 
-Component* GameObject::createComponent(std::string compname)
-{
-	Component* comp = LoveEngine::ComponentDefinitions::ComponentFactory::getInstance()->createComponent(compname);
-
-	comp->gameObject = this;
-	comp->scene = scene;
-	componentsList.push_back(comp);
-
-	return comp;
-}
-
-void GameObject::activate(bool value)
-{
-	enabled = value;
-}
-
-void GameObject::removeGameObject()
-{
-	dead = true;
-}
-
-void GameObject::removeGameObject(GameObject* gO)
-{
-	gO->removeGameObject();
-}
-
-void GameObject::canvelRemove()
-{
-	dead = false;
-}
+		GameObject::~GameObject()
+		{
+			for (auto& comp : componentsList) {
+				delete comp;
+				comp = nullptr;
+			}
+			componentsList.clear();
+		}
 
 
-bool GameObject::isEnabled()
-{
-	return enabled;
-}
+		Component* GameObject::createComponent(std::string compname)
+		{
+			Component* comp = LoveEngine::ComponentDefinitions::ComponentFactory::getInstance()->createComponent(compname);
 
-void GameObject::init()
-{
-	for (Component* comp : componentsList) {
-		comp->init();
-	}
-}
+			comp->gameObject = this;
+			comp->scene = scene;
+			componentsList.push_back(comp);
 
-void GameObject::postInit()
-{
-	for (Component* comp : componentsList) {
-		comp->postInit();
-	}
-}
+			return comp;
+		}
+
+		void GameObject::activate(bool value)
+		{
+			enabled = value;
+		}
+
+		void GameObject::removeGameObject()
+		{
+			dead = true;
+		}
+
+		void GameObject::removeGameObject(GameObject* gO)
+		{
+			gO->removeGameObject();
+		}
+
+		void GameObject::canvelRemove()
+		{
+			dead = false;
+		}
 
 
-void GameObject::update()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->update();
-	}
+		bool GameObject::isEnabled()
+		{
+			return enabled;
+		}
 
-	for (auto it : componentsToErase) {
-		delete* it;
-		componentsList.erase(it);
-	}
-	componentsToErase.clear();
-}
+		void GameObject::init()
+		{
+			for (Component* comp : componentsList) {
+				comp->init();
+			}
+		}
 
-void GameObject::stepPhysics()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->stepPhysics();
-	}
-}
+		void GameObject::postInit()
+		{
+			for (Component* comp : componentsList) {
+				comp->postInit();
+			}
+		}
 
-void GameObject::preRender()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->preRender();
-	}
-}
 
-void GameObject::activated()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->activated();
-	}
-}
+		void GameObject::update()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->update();
+			}
 
-void GameObject::deActivated()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->deActivated();
+			for (auto it : componentsToErase) {
+				delete* it;
+				componentsList.erase(it);
+			}
+			componentsToErase.clear();
+		}
+
+		void GameObject::stepPhysics()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->stepPhysics();
+			}
+		}
+
+		void GameObject::preRender()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->preRender();
+			}
+		}
+
+		void GameObject::activated()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->activated();
+			}
+		}
+
+		void GameObject::deActivated()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->deActivated();
+			}
+		}
+
 	}
 }
