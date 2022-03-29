@@ -91,7 +91,7 @@ void SceneManager::initiliseScenes()
 	createScene();
 }
 
-void SceneManager::defineScenesFactories(SceneFactory scenes)
+void SceneManager::defineScenesFactories(SceneFactories scenes)
 {
 	assert(("__Ya se han inicializado las escenas", initialised == false));
 	for (auto scene : scenes) {
@@ -146,4 +146,5 @@ void SceneManager::manageScene()
 		break;
 	}
 }
+	
 

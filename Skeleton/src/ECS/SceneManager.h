@@ -14,13 +14,14 @@ enum class SceneLoad {
 	PUSH, POP, CLEAR, SWAP
 };
 
-
 class Scene;
 class SceneCreator;
-using SceneFactory = std::vector<SceneCreator*>;
+class SceneCreation;
+using SceneFactories = std::vector<SceneCreator*>;
 
 
 class SceneManager final {
+	friend class Game;
 
     static SceneManager* instance;
 public:
@@ -49,8 +50,8 @@ public:
 	//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
 	void initiliseScenes();
 	//Añade las distintas escenas a la fábrica de escenas
-	void defineScenesFactories(SceneFactory scenes);
-protected:
+	void defineScenesFactories(SceneFactories scenes);
+private:
 
 	int currentIdx = 0;
 	bool initialised = false;
@@ -64,7 +65,8 @@ protected:
 	void manageScene();
 
 	//Vector con todas las escenas
-	SceneFactory scenesTemplates;
+	SceneFactories scenesTemplates;
 	//Pila con las escenas actuales
 	std::stack<Scene*> currentScene;
+
 };

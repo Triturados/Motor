@@ -44,11 +44,9 @@ void Game::run()
 int Game::setup()
 {
 	Funct escena;
-	GameComponentDefinition gcd;
+	GameComponentDefinition gameComponentDefinitions;
 
-	int dlls = initialiseDLLs(escena, gcd);
-	if (dlls) {
-		std::cout << "Error DLLs";
+	if(initialiseDLLs(escena, gameComponentDefinitions)){
 		return 1;
 	}
 
@@ -57,10 +55,13 @@ int Game::setup()
 	sceneManager = new SceneManager();
 	compFactory = new ComponentFactory();
 
-	gcd();
+	gameComponentDefinitions();
 	SceneDefinitions* creator = escena();
 
 	sceneManager->defineScenesFactories(creator->escenas);
+
+	initialiseSceneCreator();
+
 	sceneManager->initiliseScenes();
 
 	renderer = new OgreRenderer();
@@ -127,7 +128,6 @@ void Game::loop()
 		time->frameCount++;
 
 		initialTime = currentTime;
-
 		//std::this_thread::sleep_for(sleepFor);
 	}
 
@@ -271,5 +271,19 @@ int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 	}
 
 
+	return 0;
+}
+
+int Game::initialiseSceneCreator()
+{
+	luastate = luaL_newstate();
+	luaL_openlibs(luastate);
+	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
+
+
+
+
+
+	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "escena0");
 	return 0;
 }

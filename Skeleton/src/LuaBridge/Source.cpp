@@ -4,12 +4,10 @@ extern "C" {
 #include <Lua.5.2.0/src/lauxlib.h>
 }
 
-
 #include <memory>
 #include <iostream>
 
 #include <LuaBridge/LuaBridge.h>
-
 
 
 void report_errors(lua_State* luastate, int status) {
