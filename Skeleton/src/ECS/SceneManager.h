@@ -10,60 +10,69 @@
 /// =CLEAR : REMOVES ALL PREVIOUS SCENE AND CREATES THE NEW ONE
 /// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
 /// </summary>
-enum class SceneLoad {
-	PUSH, POP, CLEAR, SWAP
-};
 
 class Scene;
 class SceneFactory;
 
-class SceneManager final {
-	friend class Game;
+namespace LoveEngine {
+	namespace SceneManagement {
 
-    static SceneManager* instance;
-public:
-	static SceneManager* getInstance();
-	SceneManager();
-	~SceneManager();
+		enum class SceneLoad {
+			PUSH, SWAP, POP, CLEAR,
+		};
 
-	Scene* getCurrentScene();
+		void changeScene(int idx, SceneLoad scenechangetype);
+		void changeScene(int idx, int scenechangetype);
 
-	//Número de escenas totales
-	int sceneCount() const;
+		class SceneManager final {
+			friend class Game;
 
-	//Índice o nombre de la escena actual
-	int         currentSceneIdx () const;
-	std::string currentSceneName() const;
+			static SceneManager* instance;
+		public:
+			static SceneManager* getInstance();
+			SceneManager();
+			~SceneManager();
 
-	//Cuántas escenas hay ahora mismo en la pila
-	int stackedScenes() const;
+			Scene* getCurrentScene();
 
-	//Cambiar a una escena dado su índice, indicando el tipo de cambio de escena
-	void changeScene(int SceneIdx, SceneLoad type);
-	
-	//Comprueba si la escena debe cambiar, y la actualiza
-	void checkChange();
+			//Número de escenas totales
+			int sceneCount() const;
 
-	//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
-	void initiliseScenes();
-	//Añade las distintas escenas a la fábrica de escenas
+			//Índice o nombre de la escena actual
+			int         currentSceneIdx() const;
+			std::string currentSceneName() const;
 
-private:
-	SceneFactory* sceneFactory;
+			//Cuántas escenas hay ahora mismo en la pila
+			int stackedScenes() const;
 
-	int numberOfScenes = 0;
+			//Cambiar a una escena dado su índice, indicando el tipo de cambio de escena
+			void changeScene(int SceneIdx, SceneLoad type);
 
-	int currentIdx = 0;
-	bool initialised = false;
+			//Comprueba si la escena debe cambiar, y la actualiza
+			void checkChange();
 
-	bool shouldChange = false;
-	int sceneToLoad = -1;
-	SceneLoad sceneChangeType;
+			//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
+			void initiliseScenes();
+			//Añade las distintas escenas a la fábrica de escenas
 
-	void eraseTopScene();
-	void createScene();
-	void manageScene();
+		private:
+			SceneFactory* sceneFactory;
 
-	//Pila con las escenas actuales
-	std::stack<Scene*> currentScene;
-};
+			int numberOfScenes = 0;
+
+			int currentIdx = 0;
+			bool initialised = false;
+
+			bool shouldChange = false;
+			int sceneToLoad = -1;
+			SceneLoad sceneChangeType;
+
+			void eraseTopScene();
+			void createScene();
+			void manageScene();
+
+			//Pila con las escenas actuales
+			std::stack<Scene*> currentScene;
+		};
+	}
+}

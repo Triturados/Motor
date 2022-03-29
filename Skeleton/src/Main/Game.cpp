@@ -45,8 +45,8 @@ int Game::setup()
 	}
 
 	time = new LoveEngine::Time();
-	sceneManager = new SceneManager();
-	compFactory = new ComponentFactory();
+	sceneManager = new LoveEngine::SceneManagement::SceneManager();
+	compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
 
 	gameComponentDefinitions();
 

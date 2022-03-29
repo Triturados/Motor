@@ -110,7 +110,7 @@ Timer* Timer::deleteComponent(Component* component, float time)
 
 Timer* Timer::createObjectWithTimer()
 {
-	auto gO = SceneManager::getInstance()->getCurrentScene()->createGameObject("Timer object");
+	auto gO = LoveEngine::SceneManagement::SceneManager::getInstance()->getCurrentScene()->createGameObject("Timer object");
 	auto timer = gO->addComponent<Timer>();
 	return timer;
 }

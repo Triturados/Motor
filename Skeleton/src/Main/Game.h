@@ -6,11 +6,15 @@
 
 namespace LoveEngine {
 	class Time;
+	namespace ComponentDefinitions {
+		class ComponentFactory;
+	}
+	namespace SceneManagement {
+		class SceneManager;
+	}
 }
-class SceneManager;
 class OgreRenderer;
 class PhysicsManager;
-class ComponentFactory;
 
 
 class lua_State;
@@ -33,8 +37,8 @@ private:
 	HMODULE singleton;
 
 	OgreRenderer* renderer;
-	SceneManager* sceneManager;
-	ComponentFactory* compFactory;
+	LoveEngine::SceneManagement::SceneManager* sceneManager;
+	LoveEngine::ComponentDefinitions::ComponentFactory* compFactory;
 	LoveEngine::Time* time;
 	PhysicsManager* physics;
 	lua_State* luastate;

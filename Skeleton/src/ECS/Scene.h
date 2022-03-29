@@ -5,13 +5,16 @@
 class Renderer;
 class Component;
 class GameObject;
-class SceneManager;
-class SceneCreator;
+
+namespace LoveEngine {
+	namespace SceneManagement {
+		class SceneManager;
+	}
+}
 
 class Scene final {
 
-	friend SceneCreator;
-	friend SceneManager;
+	friend LoveEngine::SceneManagement::SceneManager;
 	friend class SceneFactory;
 	friend GameObject;
 
@@ -39,19 +42,3 @@ private:
 	std::list<Renderer*> renderers;
 };
 
-
-
-//Clase para añadir cada uno de los elementos a la escena
-class SceneCreator {
-
-public:
-	Scene* createScene();
-protected:
-	virtual Scene* populateScene() { return nullptr; };
-	std::list<GameObject*> gObjects;
-
-	Scene* createScene(std::string name);
-	GameObject* createGameObject(std::string name);
-private:
-	void push(Scene*);
-};
