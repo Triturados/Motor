@@ -59,6 +59,9 @@ int Game::setup()
 	SceneDefinitions* creator = escena();
 
 	sceneManager->defineScenesFactories(creator->escenas);
+
+	initialiseSceneCreator();
+
 	sceneManager->initiliseScenes();
 
 	renderer = new OgreRenderer();
@@ -124,7 +127,6 @@ void Game::loop()
 		time->frameCount++;
 
 		initialTime = currentTime;
-
 		//std::this_thread::sleep_for(sleepFor);
 	}
 
@@ -279,11 +281,8 @@ int Game::initialiseSceneCreator()
 
 
 
+
+
 	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "escena0");
-
-
-	sceneManager->
-
-
 	return 0;
 }
