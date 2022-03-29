@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <SingletonInfo.h>
 #include <iostream>
+#include <SceneFactory.h>
 
 SceneManager* SceneManager::instance = nullptr;
 
@@ -24,6 +25,9 @@ SceneManager::SceneManager()
 		assert(false);
 	}
 	sceneChangeType = SceneLoad::PUSH;
+
+	sceneFactory = new SceneFactory();
+
 	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
 }
 
@@ -38,6 +42,9 @@ SceneManager::~SceneManager()
 		delete sceneTemplate;
 	}
 	scenesTemplates.clear();
+
+
+	delete sceneFactory;
 }
 
 
@@ -112,7 +119,9 @@ void SceneManager::createScene()
 {
 	assert(("__La escena a crear no es valida__", sceneToLoad >= 0 && sceneToLoad < sceneCount()));
 
-	Scene* newscene = scenesTemplates[sceneToLoad]->createScene();
+	//Scene* newscene = scenesTemplates[sceneToLoad]->createScene();
+	Scene* newscene = new Scene("new scene");
+	sceneFactory->creator(newscene, sceneToLoad);
 	currentScene.push(newscene);
 
 	newscene->init();

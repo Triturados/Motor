@@ -56,7 +56,7 @@ public:
 		return c;
 	}
 
-	Component* addComponent(std::string comp);
+	Component* createComponent(std::string comp);
 
 	template <typename T>
 	requires isComponent<T>

@@ -10,6 +10,7 @@
 #include <thread>
 #include <Windows.h>
 #include <time.h>
+#include <SceneFactory.h>
 
 #include <PhysicsManager.h>
 #include <OgreRenderer.h>
@@ -56,9 +57,9 @@ int Game::setup()
 	compFactory = new ComponentFactory();
 
 	gameComponentDefinitions();
-	SceneDefinitions* creator = escena();
+	//SceneDefinitions* creator = escena();
 
-	sceneManager->defineScenesFactories(creator->escenas);
+	//sceneManager->defineScenesFactories(creator->escenas);
 
 	initialiseSceneCreator();
 
@@ -71,7 +72,7 @@ int Game::setup()
 	PhysicsManager::setUpInstance();
 	physics = PhysicsManager::getInstance();
 
-	delete creator;
+	//delete creator;
 	return 0;
 }
 
@@ -282,16 +283,37 @@ int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 	return 0;
 }
 
+
 int Game::initialiseSceneCreator()
 {
 	luastate = luaL_newstate();
 	luaL_openlibs(luastate);
-	int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
+
+	luabridge::getGlobalNamespace(luastate)
+		.beginClass<GameObject>("GameObject")
+		.addConstructor<void(*)(std::string)>()
+		.addFunction("addComponent", &(GameObject::createComponent))
+		.endClass();
+
+	luabridge::getGlobalNamespace(luastate)
+		.beginClass<Scene>("Scene")
+		.addFunction("createObject", &(Scene::createGameObject))
+		.addFunction("name", &(Scene::setName))
+		.endClass();
 
 
+	int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
+
+	sceneManager->sceneFactory->creator = [&](Scene* scene, int idx) {
+
+		luabridge::push(luastate, scene);
+		lua_setglobal(luastate, "scene");
 
 
+		luabridge::LuaRef populatescene = luabridge::getGlobal(luastate, "escena0");
+		populatescene();
+	};
 
-	luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "escena0");
 	return 0;
 }
+
