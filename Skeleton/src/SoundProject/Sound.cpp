@@ -1,32 +1,27 @@
 #include "Sound.h"
 #include <fmod_errors.h>
-#include <string>
+#include <string.h>
 #include <sstream>
+#include <iostream>
 
 #include <fstream>
+
+//Macro para definir el nombre de un archivo pero solo el nombre, no toda la ruta absoluta
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 
 SoundManager::SoundManager()
 {
 	fmod_error = FMOD::System_Create(&m_pSystem);
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 
-	if (fmod_error != FMOD_OK)
-	{
-		throw std::exception(FMOD_ErrorString(fmod_error));
-		return;
-	}
 	//Manejo de drivers del ordenador para evitar que se intente reproducir cuando no hay 
 	int driverCount = 0;
 	fmod_error = m_pSystem->getNumDrivers(&driverCount);
-	throw std::exception(FMOD_ErrorString(fmod_error));
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 
-	if (driverCount == 0)
-	{
-		throw std::exception("[FMOD] : No se encuentran drives de audio en la computadora\n");
-		return;
-	}
 	// Initialize our Instance with 36 Channels
 	fmod_error = m_pSystem->init(36, FMOD_INIT_NORMAL, NULL);
-	throw std::exception(FMOD_ErrorString(fmod_error));
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 
 	//Creacion de los grupos de canales
 	m_pSystem->createChannelGroup("Master", &master);
@@ -45,7 +40,8 @@ SoundManager::SoundManager()
 
 void SoundManager::createSound(FMOD::SoundClass* pSound, const char* pFile, int channel)
 {
-	m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
+	fmod_error = m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 
 	if (!std::ifstream(pFile)) throw std::exception("[FMOD] : Sound file doesn't not exist.");
 
@@ -56,11 +52,15 @@ void SoundManager::createSound(FMOD::SoundClass* pSound, const char* pFile, int 
 
 void SoundManager::playSound(FMOD::SoundClass pSound, int groupChannel, bool bLoop)
 {
-	if (!bLoop)
-		pSound->setMode(FMOD_LOOP_OFF);
+	if (!bLoop) {
+		fmod_error = pSound->setMode(FMOD_LOOP_OFF);
+		throwFMODError(fmod_error, __LINE__, __FILENAME__);
+	}
 	else
 	{
-		pSound->setMode(FMOD_LOOP_NORMAL);
+		fmod_error = pSound->setMode(FMOD_LOOP_NORMAL);
+		throwFMODError(fmod_error, __LINE__, __FILENAME__);
+
 		pSound->setLoopCount(-1);
 	}
 
@@ -72,10 +72,26 @@ void SoundManager::playSound(FMOD::SoundClass pSound, int groupChannel, bool bLo
 
 		switch (groupChannel)
 		{
-		case 0: m_pSystem->playSound(pSound, effects, false, &channel); break;
-		case 1:	m_pSystem->playSound(pSound, environment, false, &channel); break;
-		case 2: m_pSystem->playSound(pSound, voices, false, &channel); break;
-		case 3: m_pSystem->playSound(pSound, music, false, &channel); break;
+		case 0: {
+			fmod_error = m_pSystem->playSound(pSound, effects, false, &channel); 
+			throwFMODError(fmod_error, __LINE__, __FILENAME__);
+			break;
+		}
+		case 1: {
+			m_pSystem->playSound(pSound, environment, false, &channel); 
+			throwFMODError(fmod_error, __LINE__, __FILENAME__);
+			break;
+		}
+		case 2: {
+			m_pSystem->playSound(pSound, voices, false, &channel); 
+			throwFMODError(fmod_error, __LINE__, __FILENAME__);
+			break;
+		}
+		case 3: {
+			m_pSystem->playSound(pSound, music, false, &channel);
+			throwFMODError(fmod_error, __LINE__, __FILENAME__);
+			break;
+		}
 		default:
 			break;
 		}
@@ -85,23 +101,25 @@ void SoundManager::playSound(FMOD::SoundClass pSound, int groupChannel, bool bLo
 
 void SoundManager::releaseSound(int channel)
 {
-	soundsMap.find(channel)->second->release();
+	fmod_error = soundsMap.find(channel)->second->release();
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 };
 
 void SoundManager::setSpeed(int channel, float s)
 {
-	soundsMap.find(channel)->second->setMusicSpeed(s);
+	fmod_error = soundsMap.find(channel)->second->setMusicSpeed(s);
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
 }
 
 void SoundManager::setVolumeChannel(int channelGroup, float volume)
 {
 	switch (channelGroup)
 	{
-	case 0: master->setVolume(volume); break;
-	case 1: effects->setVolume(volume); break;
-	case 2: environment->setVolume(volume); break;
-	case 3: voices->setVolume(volume); break;
-	case 4: music->setVolume(volume); break;
+	case 0: setVolume(master, volume); break;
+	case 1: setVolume(effects, volume); break;
+	case 2: setVolume(environment, volume); break;
+	case 3: setVolume(voices, volume); break;
+	case 4: setVolume(music, volume); break;
 	default:
 		break;
 	}
@@ -109,12 +127,25 @@ void SoundManager::setVolumeChannel(int channelGroup, float volume)
 
 void SoundManager::pauseSound()
 {
-	bool paused; master->getPaused(&paused);
+	bool paused; fmod_error = master->getPaused(&paused);
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
+
 	paused ? master->setPaused(true) : master->setPaused(false);
 }
 
-void SoundManager::throwFMODError(FMOD_RESULT result)
+void SoundManager::setVolume(FMOD::ChannelGroup* group, float volume) {
+	fmod_error = group->setVolume(volume);
+	throwFMODError(fmod_error, __LINE__, __FILENAME__);
+}
+
+void SoundManager::throwFMODError(FMOD_RESULT result, int line, std::string filename)
 {
-	std::stringstream ss; ss << FMOD_ErrorString(result);
+	if (result != FMOD_OK) {
+		std::stringstream ss; ss << "[ERROR FMOD]";
+		ss << "(Linea: " << std::to_string(line) << ", " << "Archivo: " << filename << ") : ";
+		ss << FMOD_ErrorString(result) << '\n';
+
+		throw std::exception(ss.str().c_str());
+	}
 }
 

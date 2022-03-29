@@ -35,6 +35,9 @@ struct SceneDefinitions {
 
 void Game::setup()
 {
+	soundManager = new SoundManager();
+
+
 	Funct escena;
 	GameComponentDefinition gcd;
 
@@ -54,11 +57,11 @@ void Game::setup()
 	sceneManager->defineScenesFactories(creator->escenas);
 	sceneManager->initiliseScenes();
 
-	renderer = new OgreRenderer();
-	renderer->exampleScene();
+	ogreManager = new OgreRenderer();
+	ogreManager->exampleScene();
 
 	PhysicsManager::setUpInstance();
-	physics = PhysicsManager::getInstance();
+	physicsManager = PhysicsManager::getInstance();
 
 	delete creator;
 }
@@ -94,7 +97,7 @@ void Game::loop()
 		currentScene->stepPhysics();
 
 		//currentScene->render();
-		renderer->update();
+		ogreManager->update();
 
 		sceneManager->checkChange();
 
@@ -121,9 +124,11 @@ void Game::quit()
 	FreeLibrary(game);
 	FreeLibrary(singleton);
 
+	physicsManager->destroy();
+
 	delete sceneManager;
 	delete time;
-	delete renderer;
+	delete ogreManager;
 	delete compFactory;
 }
 

@@ -12,6 +12,7 @@ class SceneManager;
 class OgreRenderer;
 class PhysicsManager;
 class ComponentFactory;
+class SoundManager;
 
 struct SceneDefinitions;
 
@@ -23,11 +24,14 @@ struct Game {
 	HMODULE game;
 	HMODULE singleton;
 
-	OgreRenderer* renderer;
+	OgreRenderer* ogreManager;;
 	SceneManager* sceneManager;
+	PhysicsManager* physicsManager;
+	SoundManager* soundManager;
+
 	ComponentFactory* compFactory;
 	LoveEngine::Time* time;
-	PhysicsManager* physics;
+	
 
 	void setup();
 	void loop();
