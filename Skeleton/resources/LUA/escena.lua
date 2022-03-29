@@ -11,7 +11,7 @@ end
 
 
 function scene1()
-    scene:name("Escena de Yojhan")
-    local obj = scene:createObject("Objeto de Dani")
+    scene:name("Escena de Daniel")
+    local obj = scene:createObject("Objeto de Daniel")
     obj:addComponent("FrameRate")
 end
