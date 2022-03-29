@@ -6,7 +6,12 @@ namespace LoveEngine {
 	namespace Singleton {
 		void* getElement(positions pos)
 		{
+
+#ifdef _DEBUG
+			HMODULE hModule = LoadLibrary(TEXT("Singleton_d.dll"));
+#else
 			HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
+#endif
 
 			assert(hModule != NULL);
 
@@ -22,7 +27,11 @@ namespace LoveEngine {
 
 		void addElement(void* elem, positions pos)
 		{
+#ifdef _DEBUG
+			HMODULE hModule = LoadLibrary(TEXT("Singleton_d.dll"));
+#else
 			HMODULE hModule = LoadLibrary(TEXT("Singleton.dll"));
+#endif
 
 			assert(hModule != NULL);
 

@@ -247,8 +247,16 @@ void Game::luabridge()
 
 int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 {
+
+#ifdef _DEBUG
+	game = LoadLibrary(TEXT("./Game_d.dll"));
+	singleton = LoadLibrary(TEXT("Singleton_d.dll"));
+#else
 	game = LoadLibrary(TEXT("./Game.dll"));
 	singleton = LoadLibrary(TEXT("Singleton.dll"));
+#endif
+
+
 	if (singleton == NULL) {
 		std::cout << "No se encontró la biblioteca de singletons";
 		return 1;
