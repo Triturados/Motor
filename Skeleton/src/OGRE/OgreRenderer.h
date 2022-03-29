@@ -2,8 +2,7 @@
 #ifndef OGRERENDERER_H
 #define OGRERENDERER_H
 
-// Estos dos archivos incluyen clases anidadas (MaterialManagerListener y ShaderGenerator resp.) que se referencian como atributos 
-// de OgreRenderer.
+// Estos dos archivos incluyen clases anidadas (MaterialManagerListener y ShaderGenerator resp.) que se referencian como atributos de OgreRenderer.
 // Como no se puede hacer forward declaration de las clases anidadas, los archivos tienen que estar incluidos.
 #include <OgreMaterialManager.h>;
 #include <OgreRTShaderSystem.h>
@@ -38,6 +37,8 @@ private:
 	void initRTShaderSystem();
 	void destroyRTShaderSystem();
 	void setupScenes();
+
+	void throwOgreError(int errorLine, const std::string& errorMsg);
 
 public:
 

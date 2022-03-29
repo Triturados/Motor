@@ -41,6 +41,9 @@ void Game::setup()
 	//PhysicsManager
 	physicsManager = new PhysicsManager();
 
+	//OgreManager
+	ogreManager = new OgreRenderer();
+
 	Funct escena;
 	GameComponentDefinition gcd;
 
@@ -60,7 +63,6 @@ void Game::setup()
 	sceneManager->defineScenesFactories(creator->escenas);
 	sceneManager->initiliseScenes();
 
-	ogreManager = new OgreRenderer();
 	ogreManager->exampleScene();
 
 	delete creator;
