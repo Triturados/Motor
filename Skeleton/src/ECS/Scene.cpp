@@ -65,6 +65,10 @@ void Scene::render()
 	//	rend->update();
 }
 
+void Scene::setName(std::string newname) {
+	name = newname;
+}
+
 GameObject* Scene::createGameObject(std::string name)
 {
 	GameObject* gameObject = new GameObject(name);

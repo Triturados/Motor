@@ -17,7 +17,7 @@ GameObject::~GameObject()
 }
 
 
-Component* GameObject::addComponent(std::string compname)
+Component* GameObject::createComponent(std::string compname)
 {
 	Component* comp = ComponentFactory::getInstance()->createComponent(compname);
 

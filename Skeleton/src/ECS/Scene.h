@@ -25,8 +25,14 @@ public:
 	void stepPhysics();
 	void render();
 
+	void setName(std::string newname);
+
 	GameObject* createGameObject(std::string name = "new game object");
 private:
+
+
+
+
 	std::list<GameObject*> gObjects;
 	std::list<Renderer*> renderers;
 };

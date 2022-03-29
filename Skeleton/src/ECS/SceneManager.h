@@ -17,6 +17,7 @@ enum class SceneLoad {
 class Scene;
 class SceneCreator;
 class SceneCreation;
+class SceneFactory;
 using SceneFactories = std::vector<SceneCreator*>;
 
 
@@ -51,7 +52,9 @@ public:
 	void initiliseScenes();
 	//Añade las distintas escenas a la fábrica de escenas
 	void defineScenesFactories(SceneFactories scenes);
+
 private:
+	SceneFactory* sceneFactory;
 
 	int currentIdx = 0;
 	bool initialised = false;
