@@ -34,8 +34,16 @@ namespace Utilities
 			return Vector3(x + v2.x, y + v2.y, z + v2.z);
 		}
 
+		Vector3<T> operator*(Vector3<T> const& v2) const {
+			return Vector3(x * v2.x, y * v2.y, z * v2.z);
+		}
+
 		Vector3<T> operator-(Vector3<T> const& v2) const {
 			return Vector3(x - v2.x, y - v2.y, z - v2.z);
+		}
+
+		Vector3<T> operator+=(Vector3<T> const& v2) const {
+			return Vector3(x + v2.x, y + v2.y, z + v2.z);
 		}
 
 		bool operator==(Vector3<T> const& v2) const {
