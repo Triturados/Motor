@@ -4,6 +4,7 @@
 #include <string>
 #include <typeinfo>
 class Component;
+
 class ComponentCreator;
 
 class ComponentFactory {
@@ -13,6 +14,7 @@ private:
 
 	std::map<std::string, ComponentCreator*> components;
 
+	void initialiseEngineComponents();
 public:
 
 	static ComponentFactory* getInstance();
@@ -26,14 +28,28 @@ public:
 
 
 class ComponentCreator {
-
+	template<class CompType>
+	friend class ComponentCreatorTemplate;
 public:
 	std::string componentName;
+	virtual Component* createComponent() {
+		return nullptr;
+	}
+private:
 	ComponentCreator(std::string name) {
 		componentName = name;
 	}
+};
 
-	virtual Component* CreateComponent() {
-		return nullptr;
+
+template <class CompType>
+class ComponentCreatorTemplate: public ComponentCreator{
+
+public:
+	ComponentCreatorTemplate(std::string name): ComponentCreator(name) {
+	}
+
+	inline virtual Component* createComponent() override {
+		return new CompType();
 	};
 };

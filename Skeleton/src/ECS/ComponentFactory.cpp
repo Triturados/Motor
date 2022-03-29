@@ -2,6 +2,8 @@
 #include <ComponentFactory.h>
 #include <SingletonInfo.h>
 #include <cassert>
+#include <Timer.h>
+
 
 ComponentFactory* ComponentFactory::instance = nullptr;
 
@@ -21,9 +23,20 @@ ComponentFactory::ComponentFactory()
 	if (instance != nullptr) {
 		assert(false);
 	}
-
+	initialiseEngineComponents();
 	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::ComponentFactory);
 }
+
+
+void ComponentFactory::initialiseEngineComponents()
+{
+	/*
+	*	Aquí se definen los componentes creados desde el propio motor para el desarrollo del juego
+	*/
+
+	registerComponent(new ComponentCreatorTemplate<Timer>("Timer"));
+}
+
 
 ComponentFactory::~ComponentFactory()
 {
@@ -43,6 +56,6 @@ Component* ComponentFactory::createComponent(std::string name)
 	auto elem = components.find(name);
 
 	assert(("El componente no esta definidio", elem != components.end()));
-	return elem->second->CreateComponent();
+	return elem->second->createComponent();
 }
 
