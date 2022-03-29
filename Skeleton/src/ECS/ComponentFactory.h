@@ -2,54 +2,59 @@
 
 #include <map>
 #include <string>
-#include <typeinfo>
+
 class Component;
 
-class ComponentCreator;
+namespace LoveEngine {
 
-class ComponentFactory {
+	namespace ComponentDefinitions {
+	class ComponentCreator;
 
-private:
-	static ComponentFactory* instance;
+		class ComponentFactory {
 
-	std::map<std::string, ComponentCreator*> components;
+		private:
+			static ComponentFactory* instance;
 
-	void initialiseEngineComponents();
-public:
+			std::map<std::string, ComponentCreator*> components;
 
-	static ComponentFactory* getInstance();
-	ComponentFactory();
-	~ComponentFactory();
+			void initialiseEngineComponents();
+		public:
 
-	void registerComponent(ComponentCreator* fact);
+			static ComponentFactory* getInstance();
+			ComponentFactory();
+			~ComponentFactory();
 
-	Component* createComponent(std::string name);
-};
+			void registerComponent(ComponentCreator* fact);
+
+			Component* createComponent(std::string name);
+		};
 
 
-class ComponentCreator {
-	template<class CompType>
-	friend class ComponentCreatorTemplate;
-public:
-	std::string componentName;
-	virtual Component* createComponent() {
-		return nullptr;
+		class ComponentCreator {
+			template<class CompType>
+			friend class ComponentCreatorTemplate;
+		public:
+			std::string componentName;
+			virtual Component* createComponent() {
+				return nullptr;
+			}
+		private:
+			ComponentCreator(std::string name) {
+				componentName = name;
+			}
+		};
+
+
+		template <class CompType>
+		class ComponentCreatorTemplate : public ComponentCreator {
+
+		public:
+			ComponentCreatorTemplate(std::string name) : ComponentCreator(name) {
+			}
+
+			inline virtual Component* createComponent() override {
+				return new CompType();
+			};
+		};
 	}
-private:
-	ComponentCreator(std::string name) {
-		componentName = name;
-	}
-};
-
-
-template <class CompType>
-class ComponentCreatorTemplate: public ComponentCreator{
-
-public:
-	ComponentCreatorTemplate(std::string name): ComponentCreator(name) {
-	}
-
-	inline virtual Component* createComponent() override {
-		return new CompType();
-	};
-};
+}
