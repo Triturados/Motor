@@ -56,7 +56,7 @@ Scene* SceneManager::getCurrentScene() {
 
 int SceneManager::sceneCount() const
 {
-	return scenesTemplates.size();
+	return numberOfScenes;
 }
 
 int SceneManager::currentSceneIdx() const
@@ -69,7 +69,7 @@ std::string SceneManager::currentSceneName() const
 	return currentScene.top()->name;
 }
 
-int SceneManager::currentSceneCount() const
+int SceneManager::stackedScenes() const
 {
 	return currentScene.size();
 }

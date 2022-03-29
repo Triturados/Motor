@@ -17,9 +17,9 @@ class GameObject final {
 public:
 
 	GameObject(std::string name);
+	GameObject(std::string name, Scene* scene);
 	~GameObject();
 	std::string name;
-
 
 private:
 

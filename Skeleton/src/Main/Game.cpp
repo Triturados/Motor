@@ -47,7 +47,7 @@ int Game::setup()
 	Funct escena;
 	GameComponentDefinition gameComponentDefinitions;
 
-	if(initialiseDLLs(escena, gameComponentDefinitions)){
+	if (initialiseDLLs(escena, gameComponentDefinitions)) {
 		return 1;
 	}
 
@@ -291,7 +291,7 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<GameObject>("GameObject")
-		//.addConstructor<void(*)(std::string)>()
+		.addConstructor<void(*)(std::string, Scene*)>()
 		.addFunction("addComponent", &(GameObject::createComponent))
 		.endClass();
 
@@ -299,6 +299,10 @@ int Game::initialiseSceneCreator()
 		.beginClass<Scene>("Scene")
 		.addFunction("createObject", &(Scene::createGameObject))
 		.addFunction("name", &(Scene::setName))
+		.endClass();
+
+	luabridge::getGlobalNamespace(luastate)
+		.beginClass<Component>("Component")
 		.endClass();
 
 
@@ -309,10 +313,20 @@ int Game::initialiseSceneCreator()
 		luabridge::push(luastate, scene);
 		lua_setglobal(luastate, "scene");
 
-
-		luabridge::LuaRef populatescene = luabridge::getGlobal(luastate, "escena0");
-		populatescene();
+		std::string scenestring = "scene" + std::to_string(idx);
+		luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
+		populateScene();
 	};
+
+	int count = 0;
+	bool isNil = false;
+	while (!isNil) {
+		std::string scenestring = "scene" + std::to_string(count++);
+		luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
+		isNil = populateScene.isNil();
+	}
+
+	sceneManager->numberOfScenes = count;
 
 	return 0;
 }

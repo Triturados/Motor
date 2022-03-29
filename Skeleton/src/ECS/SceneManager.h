@@ -40,7 +40,7 @@ public:
 	std::string currentSceneName() const;
 
 	//Cuántas escenas hay ahora mismo en la pila
-	int currentSceneCount() const;
+	int stackedScenes() const;
 
 	//Cambiar a una escena dado su índice, indicando el tipo de cambio de escena
 	void changeScene(int SceneIdx, SceneLoad type);
@@ -55,6 +55,8 @@ public:
 
 private:
 	SceneFactory* sceneFactory;
+
+	int numberOfScenes = 0;
 
 	int currentIdx = 0;
 	bool initialised = false;

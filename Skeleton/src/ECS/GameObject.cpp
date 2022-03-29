@@ -1,11 +1,22 @@
 #include "Component.h"
 #include "GameObject.h"
+#include <Scene.h>
 #include <ComponentFactory.h>
+#include <iostream>
 
 GameObject::GameObject(std::string name)
 {
 	this->name = name;
 }
+
+GameObject::GameObject(std::string name, Scene* scn)
+{
+	this->name = name;
+	scene = scn;
+	scene->gObjects.push_back(this);
+	std::cout << "CAca de vaca";
+}
+
 
 GameObject::~GameObject()
 {
