@@ -15,9 +15,6 @@ class ComponentFactory;
 
 class lua_State;
 
-struct SceneDefinitions;
-
-typedef SceneDefinitions* (*Funct)();
 typedef void (*GameComponentDefinition)();
 
 struct Game {
@@ -47,7 +44,7 @@ private:
 	void lua();
 	void luabridge();
 
-	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
+	int initialiseDLLs(GameComponentDefinition& gcd);
 	int initialiseSceneCreator();
 };
 #endif

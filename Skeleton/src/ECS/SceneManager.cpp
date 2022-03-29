@@ -38,12 +38,6 @@ SceneManager::~SceneManager()
 		currentScene.pop();
 	}
 
-	for (auto sceneTemplate : scenesTemplates) {
-		delete sceneTemplate;
-	}
-	scenesTemplates.clear();
-
-
 	delete sceneFactory;
 }
 
@@ -98,13 +92,6 @@ void SceneManager::initiliseScenes()
 	createScene();
 }
 
-void SceneManager::defineScenesFactories(SceneFactories scenes)
-{
-	assert(("__Ya se han inicializado las escenas", initialised == false));
-	for (auto scene : scenes) {
-		scenesTemplates.push_back(scene);
-	}
-}
 
 void SceneManager::eraseTopScene()
 {

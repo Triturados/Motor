@@ -28,12 +28,6 @@
 
 using namespace std::chrono;
 
-struct SceneDefinitions {
-
-	std::vector<SceneCreator*> escenas;
-	void scenesDefinitions();
-};
-
 void Game::run()
 {
 	if (setup() == 0) {
@@ -44,22 +38,17 @@ void Game::run()
 
 int Game::setup()
 {
-	Funct escena;
 	GameComponentDefinition gameComponentDefinitions;
 
-	if (initialiseDLLs(escena, gameComponentDefinitions)) {
+	if (initialiseDLLs(gameComponentDefinitions)) {
 		return 1;
 	}
-
 
 	time = new LoveEngine::Time();
 	sceneManager = new SceneManager();
 	compFactory = new ComponentFactory();
 
 	gameComponentDefinitions();
-	//SceneDefinitions* creator = escena();
-
-	//sceneManager->defineScenesFactories(creator->escenas);
 
 	initialiseSceneCreator();
 
@@ -245,7 +234,7 @@ void Game::luabridge()
 
 
 
-int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
+int Game::initialiseDLLs(GameComponentDefinition& gcd)
 {
 
 #ifdef _DEBUG
@@ -258,18 +247,12 @@ int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 
 
 	if (singleton == NULL) {
-		std::cout << "No se encontró la biblioteca de singletons";
+		std::cout << "No se encontro la biblioteca de singletons";
 		return 1;
 	}
 
 	if (game == NULL) {
-		std::cout << "No se encontró el juego\n";
-		return 1;
-	}
-
-	escena = (Funct)GetProcAddress(game, "quierounaescena");
-	if (escena == NULL) {
-		std::cout << "No se encontró inicio del juego\n";
+		std::cout << "No se encontro el juego\n";
 		return 1;
 	}
 
