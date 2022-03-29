@@ -18,7 +18,6 @@ namespace Utilities {
 class PhysicsManager {
 
 private:
-	static PhysicsManager* instance_;
 
 	//Configuracion sobre la gestion de colisiones con bullet, nosotros usaremos la configuracion por defecto
 	btDefaultCollisionConfiguration* collConfig = nullptr;
@@ -37,12 +36,11 @@ private:
 
 	OgreDebugDrawer* mDebugDrawer = nullptr;
 
+	void destroyWorld();
+	
+public:
 	PhysicsManager();
 	virtual ~PhysicsManager();
-
-public:
-	static PhysicsManager* getInstance();
-	static bool setUpInstance();
 
 	//Método para inicializar el mundo de bullet con gravedad como parámetro
 	void init(const Utilities::Vector3<float> gravity);
@@ -58,10 +56,9 @@ public:
 
 	void update();
 	void fixedUpdate(float deltaTime);
-	void testeandoBullet();
+	void bulletTest();
 
-	void destroyWorld();
-	static void destroy();
+	void destroy();
 
 	btVector3 btConvert(const Utilities::Vector3<float>& v3);
 	Utilities::Vector3<float> v3Convert(const btVector3& v3);

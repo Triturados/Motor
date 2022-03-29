@@ -26,7 +26,7 @@ private:
 
 	//Errores
 	FMOD_RESULT fmod_error;
-	void throwFMODError(FMOD_RESULT result, int line, std::string filename);
+	void throwFMODError(FMOD_RESULT result, int errorLine);
 
 
 public:

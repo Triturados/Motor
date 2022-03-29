@@ -7,33 +7,14 @@
 #include "DebugDrawer.h"
 #include <OgreRenderer.h>
 
-PhysicsManager* PhysicsManager::instance_ = nullptr;
-
 PhysicsManager::PhysicsManager()
 {
-	std::cout << "Inicializando Bullet Physics!\n";
+	init(Utilities::Vector3<float>(0, -9.8f, 0));
 }
 
 PhysicsManager::~PhysicsManager()
 {
-	std::cout << "Destruyendo Bullet Physics!\n";
-}
-
-PhysicsManager* PhysicsManager::getInstance()
-{
-	return instance_;
-}
-
-bool PhysicsManager::setUpInstance()
-{
-	if (instance_ == nullptr) {
-		instance_ = new PhysicsManager();
-		instance_->init(Utilities::Vector3<float>(0, -9.8f, 0));
-		
-		return true;
-	}
-
-	return false;
+	destroy();
 }
 
 void PhysicsManager::init(const Utilities::Vector3<float> gravity)
@@ -94,6 +75,7 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 
 	return rb;
 }
+
 void PhysicsManager::destroyRigidBody(btRigidBody* body)
 {
 	dynamicsWorld->removeCollisionObject(body);
@@ -121,8 +103,7 @@ void PhysicsManager::destroyWorld()
 
 void PhysicsManager::destroy()
 {
-	instance_->destroyWorld();
-	delete instance_;
+	destroyWorld();
 }
 
 btVector3 PhysicsManager::btConvert(const Utilities::Vector3<float>& v3)
@@ -135,7 +116,8 @@ Utilities::Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
 	return Utilities::Vector3<float>(v3.x(), v3.y(), v3.z());
 }
 
-void PhysicsManager::testeandoBullet() {
+//Metodo temporal para probar el funcionamiento de Bullet
+void PhysicsManager::bulletTest() {
 	///-----includes_end-----
 	int i;
 	///-----initialization_start-----

@@ -35,8 +35,11 @@ struct SceneDefinitions {
 
 void Game::setup()
 {
+	//SoundManager
 	soundManager = new SoundManager();
 
+	//PhysicsManager
+	physicsManager = new PhysicsManager();
 
 	Funct escena;
 	GameComponentDefinition gcd;
@@ -59,9 +62,6 @@ void Game::setup()
 
 	ogreManager = new OgreRenderer();
 	ogreManager->exampleScene();
-
-	PhysicsManager::setUpInstance();
-	physicsManager = PhysicsManager::getInstance();
 
 	delete creator;
 }
@@ -157,7 +157,7 @@ void Game::testing()
 		game.quit();
 		break;
 	case 3: fmod(); break;
-	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
+	case 4: physicsManager->bulletTest(); break;
 	case 5: luabridge(); break;
 	default:
 		break;
