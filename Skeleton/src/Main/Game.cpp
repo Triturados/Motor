@@ -291,7 +291,7 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<GameObject>("GameObject")
-		.addConstructor<void(*)(std::string)>()
+		//.addConstructor<void(*)(std::string)>()
 		.addFunction("addComponent", &(GameObject::createComponent))
 		.endClass();
 
