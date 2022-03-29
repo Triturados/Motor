@@ -44,13 +44,13 @@ void OgreRenderer::initRoot() {
 	mLogPath = "./OGRE/Ogre.log";
 	mCfgPath = "./OGRE/ogre.cfg";
 
-	if(!Ogre::FileSystemLayer::fileExists(mPluginsCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo plugins.cfg");
-	if(!Ogre::FileSystemLayer::fileExists(mCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo ogre.cfg");
-	if(!Ogre::FileSystemLayer::fileExists(mLogPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo ogre.log");
+	if(!Ogre::FileSystemLayer::fileExists(mPluginsCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo plugins.cfg.");
+	if(!Ogre::FileSystemLayer::fileExists(mCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo ogre.cfg.");
+	if(!Ogre::FileSystemLayer::fileExists(mLogPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo ogre.log.");
 
 	mRoot = new Ogre::Root(mPluginsCfgPath, mCfgPath, mLogPath);
 
-	if(!mRoot) throwOgreError(__LINE__, "Error al crear la raiz de Ogre");
+	if(!mRoot) throwOgreError(__LINE__, "Error al crear la raiz de Ogre.");
 
 	//Borrar ogre.cfg para mostrar la ventana de diagolo inicial.  Uso de GL3+ por defecto
 	if (!mRoot->restoreConfig()) mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
@@ -61,7 +61,7 @@ void OgreRenderer::initRoot() {
 /// </summary>
 void OgreRenderer::loadResources()
 {
-	if (!Ogre::FileSystemLayer::fileExists(mResourcesCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo resources.cfg");
+	if (!Ogre::FileSystemLayer::fileExists(mResourcesCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo resources.cfg.");
 
 	Ogre::ConfigFile cf;
 	cf.load(mResourcesCfgPath);
@@ -96,7 +96,7 @@ void OgreRenderer::initRTShaderSystem()
 			Ogre::MaterialManager::getSingleton().addListener(mMaterialMgrListener);
 		}
 	}
-	else throwOgreError(__LINE__, "No se ha podido inicializar el sistema de shaders de Ogre");
+	else throwOgreError(__LINE__, "No se ha podido inicializar el sistema de shaders de Ogre.");
 
 	mShaderGenerator->addSceneManager(mSceneMgr);
 }
@@ -124,7 +124,6 @@ void OgreRenderer::destroyRTShaderSystem()
 		mShaderGenerator = NULL;
 	}
 }
-
 
 /// <summary>
 /// Crea la ventana inicial (camara y viewport) y el manejador de escenas
@@ -157,7 +156,6 @@ void OgreRenderer::throwOgreError(int errorLine, const std::string& errorMsg) {
 	LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, errorLine, __FILENAME__, errorMsg);
 }
 
-
 /// <summary>
 /// Actualiza la escena. True si lo hace correctamente, False si se cierra
 /// </summary>
@@ -171,8 +169,6 @@ bool OgreRenderer::update()
 	return true;
 }
 
-
-
 void OgreRenderer::exampleScene()
 {
 	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
@@ -182,7 +178,6 @@ void OgreRenderer::exampleScene()
 
 	//mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 }
-
 
 OgreRenderer::~OgreRenderer()
 {
@@ -196,9 +191,7 @@ OgreRenderer::~OgreRenderer()
 		OGRE_DELETE mRoot;
 		mRoot = NULL;
 	}
-
 }
-
 
 Ogre::SceneNode* OgreRenderer::createNode()
 {

@@ -9,7 +9,7 @@ namespace LoveEngine {
 	class ErrorHandling {
 		public:
 
-			static void throwError(const std::string& projectName, int errorLine, const std::string& errorFile, const std::string& errorMsg);
+		  static void throwError(const std::string& projectName, int errorLine, const std::string& errorFile, const std::string& errorMsg);
 	};
 }
 

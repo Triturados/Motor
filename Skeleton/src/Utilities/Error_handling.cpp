@@ -5,7 +5,11 @@ void LoveEngine::ErrorHandling::throwError(const std::string& projectName, int e
 
 	std::stringstream ss; ss << "[ERROR en el proyecto " << projectName << "] ";
 	ss << "(Linea: " << std::to_string(errorLine) << ", " << "Archivo: " << errorFile << ") : ";
-	ss << errorMsg << '\n';
+	ss << errorMsg;
+
+	if (errorMsg[errorMsg.size()-1] != '.') ss << '.';
+
+	ss << '\n';
 
 	throw std::exception(ss.str().c_str());
 }
