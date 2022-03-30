@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\RigidBody.cpp">
+      <Filter>Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\SceneFactory.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\RigidBody.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
