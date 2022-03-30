@@ -34,7 +34,7 @@ public:
     InputManager();
      
     void setSDLwithOgreTest();
-    int initSDLWindowTest();
+    void initSDLWindowTest();
     bool handleInput();
     bool isKeyPressed(InputKeys key);
 

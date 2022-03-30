@@ -71,7 +71,7 @@ void InputManager::setSDLwithOgreTest() {
 	//SDL_Surface* screen = SDL_SetVideoMode(640, 480, 0, SDL_OPENGL);
 }
 
-int InputManager::initSDLWindowTest() {
+void InputManager::initSDLWindowTest() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) throwINPUTError(__LINE__);
 
 	SDL_Window* window = SDL_CreateWindow("SDL2 Window",
