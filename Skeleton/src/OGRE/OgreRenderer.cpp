@@ -244,7 +244,7 @@ void OgreRenderer::exampleScene()
 	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	ogreNode->attachObject(ogreEntity);
 
-	//mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 }
 
 

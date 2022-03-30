@@ -14,5 +14,5 @@ function scene1()
     scene:name("Escena de Daniel")
     local obj = scene:createObject("Objeto de Daniel")
     local comp = obj:addComponent("EscribirNumero")
-    comp:send2(15610, 0)
+    comp:send2(1, 0)
 end
