@@ -44,6 +44,7 @@ int Game::setup()
 		return 1;
 	}
 
+	input = new Input();
 	time = new LoveEngine::Time();
 	sceneManager = new LoveEngine::SceneManagement::SceneManager();
 	compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
@@ -55,7 +56,6 @@ int Game::setup()
 	sceneManager->initiliseScenes();
 
 	renderer = new OgreRenderer();
-	Input::init();
 	renderer->exampleScene();
 
 	PhysicsManager::setUpInstance();
@@ -89,7 +89,7 @@ void Game::loop()
 			break;
 		}
 
-		Input::getInstance()->handleInput();
+		input->handleInput();
 
 		physics->update();
 
@@ -133,6 +133,7 @@ void Game::quit()
 	delete time;
 	delete renderer;
 	delete compFactory;
+	delete input;
 }
 
 
@@ -169,9 +170,8 @@ void Game::testing()
 
 void Game::sdlinput()
 {
-	Input::init();
+	input = new Input();
 	Input::initSDLWindowTest();
-	Input* input = Input::getInstance();
 
 	while (true) input->handleInput();
 }

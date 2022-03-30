@@ -32,22 +32,18 @@ enum class MouseState {
 
 class Input {
 public:
+    Input();
     //singleton
     static void setSDLwithOgreTest();
     static int initSDLWindowTest();
     static Input* getInstance();
-    static bool init();
     bool handleInput();
     bool isKeyPressed(InputKeys key);
-
 
     //static std::unordered_map<SDL_KeyCode, tecla> teclas;
     /*void addListener(SDL_KeyCode k, Component* c);*/
 private:
-    Input() {
-        
-    };
-
+   
 
     std::unordered_set<SDL_Scancode>* lastPressedKeys;
     static Input* _instance;

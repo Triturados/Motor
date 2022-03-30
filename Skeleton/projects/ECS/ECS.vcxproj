@@ -76,7 +76,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

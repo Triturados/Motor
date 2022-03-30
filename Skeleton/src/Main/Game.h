@@ -17,6 +17,7 @@ class OgreRenderer;
 class PhysicsManager;
 
 
+class Input;
 class lua_State;
 
 typedef void (*GameComponentDefinition)();
@@ -36,6 +37,7 @@ private:
 	HMODULE game;
 	HMODULE singleton;
 
+	Input* input;
 	OgreRenderer* renderer;
 	LoveEngine::SceneManagement::SceneManager* sceneManager;
 	LoveEngine::ComponentDefinitions::ComponentFactory* compFactory;

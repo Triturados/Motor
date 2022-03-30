@@ -1,24 +1,30 @@
 #include "Input.h"
 //#include <SDL.h>
+#include <cassert>
+#include <SingletonInfo.h>
 
 Input* Input::_instance = nullptr;
 
 Input* Input::getInstance()
 {
+	if (_instance == nullptr) {
+		_instance = static_cast<Input*>(LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Input));
+	}
 	return _instance;
 }
 
-//teclas = new std::unordered_map<SDL_KeyCode, tecla>();
-bool Input::init()
+Input::Input()
 {
-	if (_instance == nullptr) {
-		_instance = new Input();
-		_instance->lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+	if (_instance != nullptr) {
+		assert(false);
 	}
-	else return false;
 
-	return true;
+	Input::_instance = this;
+	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
 }
+
+//teclas = new std::unordered_map<SDL_KeyCode, tecla>();
+
 
 bool Input::handleInput()
 {
@@ -67,6 +73,7 @@ bool Input::isKeyPressed(InputKeys key)
 {
 	return lastPressedKeys->count((SDL_Scancode)((int)key + 4));
 }
+
 //
 //void Input::addListener(SDL_KeyCode k, Component* c)
 //{
