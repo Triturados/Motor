@@ -15,11 +15,12 @@ namespace LoveEngine {
 
 		class Component;
 		class GameObject;
-
 		class Scene final {
 
 			friend SceneManagement::SceneManager;
 			friend SceneManagement::SceneFactory;
+			friend class Game;
+			friend class Timer;
 			friend GameObject;
 
 			Scene(std::string name);
@@ -36,8 +37,8 @@ namespace LoveEngine {
 
 			void setName(std::string newname);
 
-			GameObject* createGameObject(std::string name = "new game object");
 		private:
+			GameObject* createGameObject(std::string name = "new game object");
 
 
 

@@ -18,7 +18,6 @@ namespace LoveEngine {
 
 		Component::Component()
 		{
-
 			this->scene = nullptr;
 			this->gameObject = nullptr;
 		}
@@ -54,6 +53,10 @@ namespace LoveEngine {
 			enabled = !enabled;
 		}
 
+		GameObject* Component::createObject(std::string name)
+		{
+			return gameObject->createGameObject(name);
+		}
 	}
 }
 template <class T>

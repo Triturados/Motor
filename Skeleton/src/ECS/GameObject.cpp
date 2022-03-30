@@ -69,6 +69,7 @@ namespace LoveEngine {
 			return enabled;
 		}
 
+
 		void GameObject::init()
 		{
 			for (Component* comp : componentsList) {
@@ -130,5 +131,12 @@ namespace LoveEngine {
 			}
 		}
 
+		GameObject* GameObject::createGameObject(std::string name)
+		{
+			auto go = scene->createGameObject(name);
+			go->init();
+			go->postInit();
+			return go;
+		}
 	}
 }

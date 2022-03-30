@@ -86,6 +86,8 @@ namespace LoveEngine {
 
 #pragma endregion Physics Callbacks
 
+			GameObject* createObject(std::string name);
+
 		public:
 			void remove(Component* comp);
 			void remove(GameObject* go);
@@ -94,7 +96,6 @@ namespace LoveEngine {
 			void setActive(bool val);
 			bool isActive();
 			void swapActive();
-
 
 		private:
 

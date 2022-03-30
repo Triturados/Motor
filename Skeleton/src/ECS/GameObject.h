@@ -132,6 +132,8 @@ namespace LoveEngine {
 			void removeGameObject(GameObject* gO);
 			void canvelRemove();
 			bool isEnabled();
+
+			GameObject* createGameObject(std::string name);
 		};
 	}
 }
