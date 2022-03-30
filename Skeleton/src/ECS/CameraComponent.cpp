@@ -23,7 +23,7 @@ namespace LoveEngine {
 
 		}
 
-		void CameraComponent::getParameters(Transform* pos)
+		/*void CameraComponent::getParameters(Transform* pos)
 		{
 			position = pos;
 
@@ -44,7 +44,7 @@ namespace LoveEngine {
 			mCamera->setAspectRatio(
 				Ogre::Real(vp->getActualWidth()) /
 				Ogre::Real(vp->getActualHeight()));
-		}
+		}*/
 
 		void CameraComponent::lookAt(Utilities::Vector3<float>* pos)
 		{
