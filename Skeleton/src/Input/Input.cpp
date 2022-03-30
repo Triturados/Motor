@@ -1,26 +1,17 @@
 #include "Input.h"
+#include "Error_handling.h"
 //#include <SDL.h>
 
-Input* Input::_instance = nullptr;
 
-Input* Input::getInstance()
-{
-	return _instance;
+InputManager::InputManager() {
+	lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+	mouseState = MouseState::NONE;
+	mouseX = mouseY = 0;
 }
 
 //teclas = new std::unordered_map<SDL_KeyCode, tecla>();
-bool Input::init()
-{
-	if (_instance == nullptr) {
-		_instance = new Input();
-		_instance->lastPressedKeys = new std::unordered_set<SDL_Scancode>();
-	}
-	else return false;
 
-	return true;
-}
-
-bool Input::handleInput()
+bool InputManager::handleInput()
 {
 	SDL_Event sdlevent;
 	while (SDL_PollEvent(&sdlevent)) {
@@ -63,10 +54,11 @@ bool Input::handleInput()
 	}
 	return true;
 }
-bool Input::isKeyPressed(InputKeys key)
+bool InputManager::isKeyPressed(InputKeys key)
 {
 	return lastPressedKeys->count((SDL_Scancode)((int)key + 4));
 }
+
 //
 //void Input::addListener(SDL_KeyCode k, Component* c)
 //{
@@ -74,18 +66,13 @@ bool Input::isKeyPressed(InputKeys key)
 //	t->second.suscriptores.push_back(c);*/
 //}
 
-
-void Input::setSDLwithOgreTest() {
-	SDL_Init(SDL_INIT_VIDEO);
+void InputManager::setSDLwithOgreTest() {
+	if (!SDL_Init(SDL_INIT_VIDEO)) throwINPUTError(__LINE__);
 	//SDL_Surface* screen = SDL_SetVideoMode(640, 480, 0, SDL_OPENGL);
 }
 
-int Input::initSDLWindowTest() {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		std::cout << "Failed to initialize the SDL2 library\n";
-		return -1;
-	}
+int InputManager::initSDLWindowTest() {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) throwINPUTError(__LINE__);
 
 	SDL_Window* window = SDL_CreateWindow("SDL2 Window",
 		SDL_WINDOWPOS_CENTERED,
@@ -93,21 +80,17 @@ int Input::initSDLWindowTest() {
 		680, 480,
 		0);
 
-	if (!window)
-	{
-		std::cout << "Failed to create window\n";
-		return -1;
-	}
+	if (!window) throwINPUTError(__LINE__);
 
 	SDL_Surface* window_surface = SDL_GetWindowSurface(window);
 
-	if (!window_surface)
-	{
-		std::cout << "Failed to get the surface from the window\n";
-		return -1;
-	}
+	if (!window_surface) throwINPUTError(__LINE__);
 
-	SDL_UpdateWindowSurface(window);
+	if(SDL_UpdateWindowSurface(window) < 0)  throwINPUTError(__LINE__);
 
 	SDL_Delay(5000);
+}
+
+void InputManager::throwINPUTError(int errorLine) {
+	LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, errorLine, __FILENAME__, SDL_GetError());
 }

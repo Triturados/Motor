@@ -13,6 +13,7 @@ class OgreRenderer;
 class PhysicsManager;
 class ComponentFactory;
 class SoundManager;
+class InputManager;
 
 struct SceneDefinitions;
 
@@ -28,6 +29,7 @@ struct Game {
 	SceneManager* sceneManager;
 	PhysicsManager* physicsManager;
 	SoundManager* soundManager;
+	InputManager* inputManager;
 
 	ComponentFactory* compFactory;
 	LoveEngine::Time* time;
@@ -46,6 +48,8 @@ private:
 	void fmod();
 	void lua();
 	void luabridge();
+	void ogre();
+	void bullet();
 
 	int initialiseDLLs(Funct& func, GameComponentDefinition& gcd);
 };

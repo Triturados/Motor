@@ -44,6 +44,9 @@ void Game::setup()
 	//OgreManager
 	ogreManager = new OgreRenderer();
 
+	//InputManager
+	inputManager = new InputManager();
+
 	Funct escena;
 	GameComponentDefinition gcd;
 
@@ -51,7 +54,6 @@ void Game::setup()
 	if (dlls) {
 		throw std::exception("Error en la inicialización de las DLLs\n");
 	}
-
 
 	time = new LoveEngine::Time();
 	sceneManager = new SceneManager();
@@ -140,26 +142,16 @@ void Game::testing()
 {
 	int a;
 	std::cout << "Pulsa los siguientes botones para probar cada proyecto:\n";
-	std::cout << "0 - LUA\n";
-	std::cout << "1 - Input\n";
-	std::cout << "2 - OGRE\n";
-	std::cout << "3 - FMOD\n";
-	std::cout << "4 - Bullet\n";
-	std::cout << "5 - LuaBridge\n";
+	std::cout << "0 - LUA\n1 - Input\n2 - OGRE\n3 - FMOD\n4 - Bullet\n5 - LuaBridge\n";
 	std::cin >> a;
 
 	switch (a)
 	{
 	case 0: lua(); break;
 	case 1: sdlinput(); break;
-	case 2:
-		Game game;
-		game.setup();
-		game.loop();
-		game.quit();
-		break;
+	case 2: ogre(); break;
 	case 3: fmod(); break;
-	case 4: physicsManager->bulletTest(); break;
+	case 4: bullet(); break;
 	case 5: luabridge(); break;
 	default:
 		break;
@@ -172,11 +164,8 @@ void Game::testing()
 
 void Game::sdlinput()
 {
-	Input::init();
-	Input::initSDLWindowTest();
-	Input* input = Input::getInstance();
-
-	while (true) input->handleInput();
+	inputManager->initSDLWindowTest();
+	while (true) inputManager->handleInput();
 }
 
 void Game::fmod()
@@ -197,6 +186,17 @@ void Game::fmod()
 
 	// Release the sound
 	sound.releaseSound(0);
+}
+
+void Game::ogre() {
+	Game game;
+	game.setup();
+	game.loop();
+	game.quit();
+}
+
+void Game::bullet() {
+	physicsManager->bulletTest();
 }
 
 void Game::lua()
@@ -234,8 +234,6 @@ void Game::luabridge()
 
 	std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
 }
-
-
 
 int Game::initialiseDLLs(Funct& escena, GameComponentDefinition& gcd)
 {

@@ -8,8 +8,6 @@
 #include <string>
 #include <iostream>
 #include <unordered_set>
-
-
 #include <SDL.h>
 //#include "SDL_keycode.h"
 
@@ -30,31 +28,27 @@ enum class MouseState {
     NONE, CLICK_L, CLICK_R, CLICK_M
 };
 
-class Input {
+class InputManager {
 public:
-    //singleton
-    static void setSDLwithOgreTest();
-    static int initSDLWindowTest();
-    static Input* getInstance();
-    static bool init();
+   
+    InputManager();
+     
+    void setSDLwithOgreTest();
+    int initSDLWindowTest();
     bool handleInput();
     bool isKeyPressed(InputKeys key);
 
-
     //static std::unordered_map<SDL_KeyCode, tecla> teclas;
     /*void addListener(SDL_KeyCode k, Component* c);*/
-private:
-    Input() {
-        
-    };
 
+private:
 
     std::unordered_set<SDL_Scancode>* lastPressedKeys;
-    static Input* _instance;
     int mouseX, mouseY;
     MouseState mouseState;
-    
-};
 
+    //Errores
+    void throwINPUTError(int errorLine);
+};
 
 #endif
