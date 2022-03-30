@@ -56,7 +56,7 @@ public:
 	//destruye un rigidbody de bullet
 	void destroyRigidBody(btRigidBody* body);
 
-	void update();
+	void update(float);
 	void fixedUpdate(float deltaTime);
 	void testeandoBullet();
 

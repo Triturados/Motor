@@ -9,7 +9,7 @@ namespace LoveEngine {
 	Time* Time::instance = nullptr;
 
 	Time::Time() {
-		deltaTime = physicsTime = timeSinceStart = timeScale = unscaledTime = frameCount = 0;
+		deltaTime = physicsTime = timeSinceStart = timeScale = unscaledTime = frameCount = 1;
 
 		if (instance != nullptr) {
 			assert(false);

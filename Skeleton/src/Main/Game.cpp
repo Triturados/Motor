@@ -6,7 +6,6 @@
 #include <GameObject.h>
 #include <GameTime.h>
 #include <ComponentFactory.h>
-#include <chrono>
 #include <thread>
 #include <Windows.h>
 #include <time.h>
@@ -70,16 +69,13 @@ void Game::loop()
 {
 	const float numIterations = 360;
 
-	const float updateFrameRate = 60;
 	const float physicsFrameRate = 50;
-
-	duration uInterval = duration<double>(1.0 / updateFrameRate);
+	//double pInterval = 1.0 / physicsFrameRate;
 	duration pInterval = duration<double>(1.0 / physicsFrameRate);
-	duration rInterval = duration<double>(1.0 / updateFrameRate);
 
-	auto applicationStart = high_resolution_clock::now();
-
-	auto initialTime = applicationStart;
+	steady_clock::time_point applicationStart = high_resolution_clock::now();
+	steady_clock::time_point lastPhysicFrame  = applicationStart;
+	steady_clock::time_point beginFrame       = applicationStart;
 
 	for (int i = 0; i < numIterations; i++) {
 
@@ -91,37 +87,25 @@ void Game::loop()
 
 		input->handleInput();
 
-		physics->update();
-
 		currentScene->update();
 
-		physics->fixedUpdate(physicsFrameRate);
+		if ((beginFrame - lastPhysicFrame).count() > physicsFrameRate) {
 
-		currentScene->stepPhysics();
+			currentScene->stepPhysics();
+			physics->update(pInterval.count() * time->timeScale);
 
-		//currentScene->render();
+			lastPhysicFrame = beginFrame;
+		}
+
 		renderer->update();
 
-
-		sceneManager->checkChange();
+		sceneManager->tryChangeScene();
 
 		//Calculo del tiempo
-		auto currentTime = high_resolution_clock::now();
-
-		duration<float, std::milli> timeSinceStart = currentTime - applicationStart;
-		duration<double, std::milli> timeSinceLastFrame = currentTime - initialTime;
-		duration<double, std::milli> sleepFor = uInterval - timeSinceLastFrame;
-
-
-		time->timeSinceStart = timeSinceStart.count();
-		time->deltaTime = timeSinceLastFrame.count() * 0.001;
-		time->frameCount++;
-
-		initialTime = currentTime;
-		//std::this_thread::sleep_for(sleepFor);
+		steady_clock::time_point endFrame = high_resolution_clock::now();
+		updateTimeValues(beginFrame, endFrame, applicationStart);
+		beginFrame = endFrame;
 	}
-
-	std::cout << "Frame rate medio: " << time->calculateFrameRate() << " Esperado: " << updateFrameRate << "\n";
 }
 
 void Game::quit()
@@ -286,11 +270,11 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::Component>("Component")
-		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues ))
+		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues))
 		.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
 		.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
-		.addFunction("send1", &(LoveEngine::ECS::Component::send1value ))
-		.addFunction("send" , &(LoveEngine::ECS::Component::send1value ))
+		.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
+		.addFunction("send", &(LoveEngine::ECS::Component::send1value))
 		.endClass();
 
 
@@ -317,5 +301,16 @@ int Game::initialiseSceneCreator()
 	sceneManager->numberOfScenes = count;
 
 	return 0;
+}
+
+void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)
+{
+	duration<float, std::milli> timeSinceStart = endFrame - appStart;
+	duration<double, std::milli> timeSinceLastFrame = endFrame - beginFrame;
+
+	time->timeSinceStart = timeSinceStart.count();
+	time->deltaTime = timeSinceLastFrame.count() * 0.001;
+	time->frameCount++;
+
 }
 

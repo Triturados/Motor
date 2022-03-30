@@ -52,7 +52,7 @@ namespace LoveEngine {
 			void changeScene(int SceneIdx, SceneLoad type);
 
 			//Comprueba si la escena debe cambiar, y la actualiza
-			void checkChange();
+			void tryChangeScene();
 
 			//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
 			void initiliseScenes();

@@ -17,10 +17,8 @@ namespace LoveEngine {
 		float physicsTime;
 		float timeSinceStart;
 		float timeScale;
-
 		unsigned long frameCount;
 		float calculateFrameRate();
-
 	};
 
 }

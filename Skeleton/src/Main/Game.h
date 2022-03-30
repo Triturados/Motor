@@ -3,6 +3,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <Windows.h>
+#include <chrono>
 
 namespace LoveEngine {
 	class Time;
@@ -13,6 +14,8 @@ namespace LoveEngine {
 		class SceneManager;
 	}
 }
+
+
 class OgreRenderer;
 class PhysicsManager;
 
@@ -52,5 +55,10 @@ private:
 
 	int initialiseDLLs(GameComponentDefinition& gcd);
 	int initialiseSceneCreator();
+
+	void updateTimeValues(
+		const std::chrono::steady_clock::time_point& beginFrame,
+		const std::chrono::steady_clock::time_point& endFrame,
+		const std::chrono::steady_clock::time_point& appStart);
 };
 #endif

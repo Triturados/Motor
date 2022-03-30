@@ -77,7 +77,7 @@ namespace LoveEngine {
 			sceneChangeType = type;
 		}
 
-		void SceneManager::checkChange()
+		void SceneManager::tryChangeScene()
 		{
 			if (shouldChange) {
 				shouldChange = false;

@@ -62,9 +62,9 @@ btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
 	return dynamicsWorld;
 }
 
-void PhysicsManager::update()
+void PhysicsManager::update(float physicsFrameRate)
 {
-	dynamicsWorld->stepSimulation(1.f / 60.f);
+	dynamicsWorld->stepSimulation(physicsFrameRate);
 
 
 #ifdef _DEBUG
