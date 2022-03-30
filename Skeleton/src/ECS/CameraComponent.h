@@ -1,10 +1,22 @@
 #pragma once
 
+
 #include <Component.h>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
 
 class OgreSceneManager;
+class Transform;
+
+namespace Ogre {
+	class SceneNode;
+	class SceneManager;
+}
+
+namespace Utilities {
+	template<typename T>
+	class Vector3;
+}
 
 namespace LoveEngine {
 	namespace ECS {
@@ -13,16 +25,17 @@ namespace LoveEngine {
 		{
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
-			Ogre::SceneManager* mSceneMgr;
 
 			Ogre::Viewport* vp;
-			Ogre::RenderWindow* mWindow;
+			Transform* position;
 		public:
 
 			CameraComponent();
 			~CameraComponent();
 
-			void getParameters(Ogre::RenderWindow* window, Ogre::SceneManager* manager);
+			void getParameters(Transform* pos);
+
+			void lookAt(Utilities::Vector3<float> pos);
 		};
 	}
 }
