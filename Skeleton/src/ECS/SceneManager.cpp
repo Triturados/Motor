@@ -152,6 +152,7 @@ namespace LoveEngine {
 
 		void changeScene(int idx, int scenechangetype)
 		{
+			assert(scenechangetype >= 0 && scenechangetype <= 4);
 			changeScene(idx, (SceneLoad)scenechangetype);
 		}
 	}

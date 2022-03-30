@@ -286,6 +286,11 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::Component>("Component")
+		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues ))
+		.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
+		.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
+		.addFunction("send1", &(LoveEngine::ECS::Component::send1value ))
+		.addFunction("send" , &(LoveEngine::ECS::Component::send1value ))
 		.endClass();
 
 

@@ -24,8 +24,6 @@ namespace LoveEngine {
 		}
 
 
-		
-
 		void Component::remove(Component* comp)
 		{
 			comp->gameObject->removeComponent(comp);

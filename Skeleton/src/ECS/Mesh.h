@@ -36,7 +36,6 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* scale;
 
 		public:
-			Mesh() {};
 			void init();
 			void update();
 			void sendParameters(std::string mN = "", Ogre::SceneNode* eN = nullptr, Ogre::SceneNode* pN = nullptr,

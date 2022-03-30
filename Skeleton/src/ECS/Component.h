@@ -2,6 +2,12 @@
 #include <vector>
 #include <string>
 
+
+namespace Utilities {
+	template<class T>
+	class Vector3;
+}
+
 namespace LoveEngine {
 	namespace ECS {
 
@@ -45,6 +51,15 @@ namespace LoveEngine {
 			virtual void activated() {};
 			virtual void deActivated() {};
 
+		public:
+			virtual void sendValues(int, float, Component*, GameObject*) {};
+
+
+			inline  void send3values(int i, float f, Component* c) { return sendValues(i, f, c, nullptr); };
+			inline  void send2values(int i, float f) { return sendValues(i, f, nullptr, nullptr); };
+			inline  void send1value (int i) { return sendValues(i, 0, nullptr, nullptr); };
+
+		protected:
 #pragma region Input Callbacks
 
 			void keyListener(Key keys[]);
