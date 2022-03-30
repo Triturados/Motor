@@ -2,10 +2,6 @@
 
 #include "Component.h"
 
-class btCollisionShape;
-class GameObject;
-class btRigidBody;
-class Transform;
 
 namespace Utilities {
 	template <typename T>
@@ -18,69 +14,47 @@ enum class ForceMode {
 	IMPULSE,
 	VELOCITY_CHANGE
 };
+
+enum RBState {
+	Kinematic,
+	Static,
+	Dynamic
+};
+
+class btRigidBody;
+
 namespace LoveEngine {
 
 	namespace ECS {
+		class Transform;
 
 		class RigidBody : public Component
 		{
 		private:
-			//Masa del Rigidbody
 			float mass;
 
-			//Rigidbody principal
-			btRigidBody* rb;
+			btRigidBody* rigidBody = nullptr;
+			Transform* tr = nullptr;
 
-			Transform* tr;
+			Utilities::Vector3<float>* vel;
+			Utilities::Vector3<float>* acc;
+
+			RBState stateMode;
 
 		public:
 			RigidBody();
-			virtual ~RigidBody();
 
+			~RigidBody();
 
 			void init();
-			void update(float deltaTime);
-			void stepPhysics();
 
-			void setPosition(const Utilities::Vector3<float>& newPos);
+			void update();
 
-			void setGravity(const Utilities::Vector3<float>& newGrav);
+			void addForce(Utilities::Vector3<float>& vel, Utilities::Vector3<float>& relativePos, int type);
 
-			void setTrigger(bool trigger_);
+			void setTransform(Transform* t_);
 
-			void setKinematic(bool kinematic_);
-
-			void setStatic(bool _static);
-
-			void setRestitution(float restitution);
-
-			void setLinearVelocity(const Utilities::Vector3<float>& vel);
-
-			void setFriction(float friction);
-
-			void setCollisionShape(btCollisionShape* newShape);
-
-			void setLinearFactor(const Utilities::Vector3<float>& axis);
-
-			void setAngularFactor(const Utilities::Vector3<float>& axis);
-
-			const Utilities::Vector3<float>& getLinearVelocity() const;
-
-			bool isTrigger() const;
-
-			bool isKinematic() const;
-
-			bool isStatic() const;
-
-			btCollisionShape* getShape() const;
-
-			btRigidBody* getBtRb() const;
-
-			int getMask()const;
-
-			void addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type = (int)ForceMode::FORCE);
-
-			bool onCollisionEnter(const std::string& id) const;
+			void setMass(float mass_);
 		};
 	}
 

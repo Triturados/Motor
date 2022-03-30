@@ -11,123 +11,85 @@
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include "Vector3.h"
+#include "PhysicsManager.h"
+#include "Transform.h"
 
 namespace LoveEngine {
 	namespace ECS {
 
 
-		RigidBody::RigidBody() : Component(), rb(nullptr), tr(nullptr), mass(1.0f)
-		{
+		inline Utilities::Vector3<float> cvt(const btVector3& V) {
+			return Utilities::Vector3(V.x(), V.y(), V.z());
+		}
 
+		inline btVector3 cvt(const Utilities::Vector3<float>& V) {
+			return btVector3(V.x, V.y, V.z);
+		}
+
+		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
+		{
 		}
 
 		RigidBody::~RigidBody()
 		{
+			delete vel;
+			delete acc;
 
+			delete tr;
+			delete rigidBody;
 		}
 
-		void RigidBody::init()
+		void  RigidBody::init()
 		{
-
+			Utilities::Vector3<float> pos = *(tr->getPos());
+			if (rigidBody == nullptr) {
+				//Creamos un RB y se anade al PhysicsManager
+				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass);
+			}
 		}
 
-		void RigidBody::update(float deltaTime)
+		void RigidBody::update()
 		{
+			Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
+			addForce(*vel, relPos, (int)ForceMode::FORCE);
 
+			Utilities::Vector3 newPos = cvt(rigidBody->getWorldTransform().getOrigin());
+
+			
+			tr->setPos(&newPos);  //actualizar pos tr
 		}
 
-		void RigidBody::stepPhysics()
+		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
 		{
-
+			vel = &force;
+			if (enabled) {
+				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
+					if (type == (int)ForceMode::FORCE)
+						rigidBody->applyCentralForce(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
+					else if (type == (int)ForceMode::IMPULSE)
+						rigidBody->applyCentralImpulse(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
+				}
+				else {
+					if (type == (int)ForceMode::FORCE)
+						rigidBody->applyForce(
+							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
+							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+					else if (type == (int)ForceMode::IMPULSE)
+						rigidBody->applyImpulse(
+							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
+							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+				}
+			}
 		}
 
-		void RigidBody::setPosition(const Utilities::Vector3<float>& newPos)
+		void RigidBody::setTransform(Transform* t_)
 		{
-
+			tr = t_;
 		}
 
-		void RigidBody::setGravity(const Utilities::Vector3<float>& newGrav)
+		void RigidBody::setMass(float mass_)
 		{
-
-		}
-
-		void RigidBody::setTrigger(const bool trigger) {
-
-		}
-
-		void RigidBody::setKinematic(const bool kinematic) {
-
-		}
-
-		void RigidBody::setStatic(const bool static) {
-
-
-		}
-
-		void RigidBody::setRestitution(float restitution)
-		{
-
-		}
-
-		void RigidBody::setLinearVelocity(const Utilities::Vector3<float>& vel)
-		{
-
-		}
-
-		void RigidBody::setFriction(float friction)
-		{
-
-		}
-
-		void RigidBody::setCollisionShape(btCollisionShape* newShape)
-		{
-
-		}
-
-
-		const Utilities::Vector3<float>& RigidBody::getLinearVelocity() const
-		{
-			return Utilities::Vector3<float>();
-		}
-
-		bool RigidBody::isTrigger() const
-		{
-			return true;
-		}
-
-		bool RigidBody::isKinematic() const
-		{
-			return rb->isKinematicObject();
-		}
-
-		bool RigidBody::isStatic() const
-		{
-			return rb->isStaticObject();
-		}
-
-		btCollisionShape* RigidBody::getShape() const
-		{
-			return rb->getCollisionShape();
-		}
-
-		btRigidBody* RigidBody::getBtRb() const
-		{
-			return rb;
-		}
-
-		int RigidBody::getMask() const
-		{
-			return 0;
-		}
-
-		void RigidBody::addForce(const Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
-		{
-
-		}
-
-		bool RigidBody::onCollisionEnter(const std::string& id) const
-		{
-			return true;
+			mass = mass_;
 		}
 	}
 }
