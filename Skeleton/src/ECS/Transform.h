@@ -47,6 +47,7 @@ namespace LoveEngine {
 			void detachChildren();
 
 			void setParent(Transform* p);
+			void addChild(Transform* c);
 			void updateChildren(int mode);
 		};
 	}

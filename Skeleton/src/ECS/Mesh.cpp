@@ -48,7 +48,10 @@ namespace LoveEngine {
 			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
 
-			//entityNode->setOrientation(Ogre::Quaternion(rot->w, rot->x, rot->y, rot->z));
+			entityNode->resetOrientation();
+			entityNode->yaw(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+			entityNode->pitch(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 		}
 
 		//No se llama el update 

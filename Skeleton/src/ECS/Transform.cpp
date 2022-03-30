@@ -67,6 +67,11 @@ namespace LoveEngine {
 
 		void Transform::setParent(Transform* p) {
 			parent = p;
+			parent->addChild(this);
+		}
+
+		void Transform::addChild(Transform* c) {
+			children.push_back(c);
 		}
 
 		void Transform::updateChildren(int mode)
