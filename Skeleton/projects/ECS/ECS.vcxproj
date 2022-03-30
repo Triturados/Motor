@@ -60,7 +60,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,6 +93,7 @@
     <ClCompile Include="..\..\src\ECS\GameObject.cpp" />
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Mesh.cpp" />
+    <ClCompile Include="..\..\src\ECS\RigidBody.cpp" />
     <ClCompile Include="..\..\src\ECS\Scene.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneManager.cpp" />
@@ -108,6 +109,7 @@
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />
     <ClInclude Include="..\..\src\ECS\Mesh.h" />
+    <ClInclude Include="..\..\src\ECS\RigidBody.h" />
     <ClInclude Include="..\..\src\ECS\Scene.h" />
     <ClInclude Include="..\..\src\ECS\SceneFactory.h" />
     <ClInclude Include="..\..\src\ECS\SceneManager.h" />
@@ -116,6 +118,9 @@
     <ClInclude Include="..\..\src\ECS\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">
+      <Project>{246877cb-9f09-4048-bcbd-e94c03a4ca4d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\LuaBridge\LuaBridge.vcxproj">
       <Project>{fcd5cadd-0170-4aeb-999b-a5d42d99bb08}</Project>
     </ProjectReference>

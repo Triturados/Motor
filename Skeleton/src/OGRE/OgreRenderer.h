@@ -56,6 +56,7 @@ public:
 	void removeNode(Ogre::SceneNode* node);
 
 	Ogre::SceneManager* getSceneManager();
+	Ogre::RenderWindow* getRenderWindow();
 
 	void exampleScene();
 	

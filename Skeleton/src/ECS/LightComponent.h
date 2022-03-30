@@ -12,8 +12,6 @@ namespace Ogre {
 	class Light;
 }
 
-enum lightType { point, directional, spot };
-
 namespace Utilities {
 	template<typename T>
 	class Vector3;
@@ -24,11 +22,14 @@ namespace Utilities {
 namespace LoveEngine {
 	namespace ECS {
 
+		enum lightType { point, directional, spot };
+
+
 		class Transform;
 		class LightComponent : public Component
 		{
+		private:
 			Ogre::SceneNode* entityNode;
-			Ogre::SceneManager* scnMgr;
 
 			Transform* pos;
 
@@ -45,7 +46,7 @@ namespace LoveEngine {
 
 			void init();
 
-			void sendParameters(lightType t, std::string n, Ogre::SceneManager* manager);
+			void sendParameters(lightType t, std::string n);
 			void specularColor(float r, float g, float b);
 			void diffuseColor(float r, float g, float b);
 			void setDir(Utilities::Vector3<float> direction);

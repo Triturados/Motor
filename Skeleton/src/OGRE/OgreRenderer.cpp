@@ -197,7 +197,7 @@ void OgreRenderer::setupScenes()
 {
 	mSceneMgr = mRoot->createSceneManager();
 
-	mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	/*mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mCameraNode->setPosition(0, 0, 80);
 	mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
@@ -212,7 +212,7 @@ void OgreRenderer::setupScenes()
 
 	mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
+		Ogre::Real(vp->getActualHeight()));*/
 
 
 
@@ -283,4 +283,8 @@ void OgreRenderer::removeNode(Ogre::SceneNode* node)
 Ogre::SceneManager* OgreRenderer::getSceneManager()
 {
 	return mSceneMgr;
+}
+Ogre::RenderWindow* OgreRenderer::getRenderWindow()
+{
+	return mWindow;
 }
