@@ -7,7 +7,7 @@ void LoveEngine::ErrorHandling::throwError(const std::string& projectName, int e
 	ss << "(Linea: " << std::to_string(errorLine) << ", " << "Archivo: " << errorFile << ") : ";
 	ss << errorMsg;
 
-	if (errorMsg[errorMsg.size()-1] != '.') ss << '.';
+	if (errorMsg.size() > 0 && errorMsg[errorMsg.size()-1] != '.') ss << '.';
 
 	ss << '\n';
 
