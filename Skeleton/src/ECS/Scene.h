@@ -35,6 +35,9 @@ namespace LoveEngine {
 			void stepPhysics();
 			void render();
 
+			void onSceneUp();
+			void onSceneDown();
+
 			void setName(std::string newname);
 
 		private:

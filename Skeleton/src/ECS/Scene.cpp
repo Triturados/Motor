@@ -68,6 +68,23 @@ namespace LoveEngine {
 			//	rend->update();
 		}
 
+		void Scene::onSceneUp()
+		{
+			for (auto gO : gObjects) {
+				if (gO->enabled && !gO->dead)
+					gO->onSceneUp();
+			}
+		}
+
+		void Scene::onSceneDown()
+		{
+			for (auto gO : gObjects) {
+				if (gO->enabled && !gO->dead)
+					gO->onSceneDown();
+			}
+		}
+
+	
 		void Scene::setName(std::string newname) {
 			name = newname;
 		}

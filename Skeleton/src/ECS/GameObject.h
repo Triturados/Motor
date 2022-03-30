@@ -45,6 +45,8 @@ namespace LoveEngine {
 			void activated();
 			void deActivated();
 
+			void onSceneUp();
+			void onSceneDown();
 		public:
 
 			template <typename T>

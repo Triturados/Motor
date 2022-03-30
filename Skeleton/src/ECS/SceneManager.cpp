@@ -119,6 +119,8 @@ namespace LoveEngine {
 
 		void SceneManager::manageScene()
 		{
+			currentScene.top()->onSceneDown();
+
 			switch (sceneChangeType)
 			{
 			case SceneLoad::CLEAR: {
@@ -126,23 +128,29 @@ namespace LoveEngine {
 					eraseTopScene();
 				}
 				createScene();
+				break;
 			}
 
 			case SceneLoad::PUSH: {
 				createScene();
+				break;
 			}
 
 			case SceneLoad::POP: {
 				eraseTopScene();
+				break;
 			}
 
 			case SceneLoad::SWAP: {
 				eraseTopScene();
 				createScene();
+				break;
 			}
 			default:
 				break;
 			}
+
+			currentScene.top()->onSceneUp();
 		}
 
 		void changeScene(int idx, SceneLoad scenechangetype)

@@ -51,6 +51,8 @@ namespace LoveEngine {
 			virtual void activated() {};
 			virtual void deActivated() {};
 
+			virtual void onSceneUp() {};
+			virtual void onSceneDown() {};
 		public:
 			virtual void sendValues(int, float, Component*, GameObject*) {};
 

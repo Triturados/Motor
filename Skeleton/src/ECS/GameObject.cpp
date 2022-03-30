@@ -131,6 +131,18 @@ namespace LoveEngine {
 			}
 		}
 
+		void GameObject::onSceneUp() {
+			for (Component* comp : componentsList) {
+				comp->onSceneUp();
+			}
+		}
+
+		void GameObject::onSceneDown() {
+			for (Component* comp : componentsList) {
+				comp->onSceneDown();
+			}
+		}
+
 		GameObject* GameObject::createGameObject(std::string name)
 		{
 			auto go = scene->createGameObject(name);
