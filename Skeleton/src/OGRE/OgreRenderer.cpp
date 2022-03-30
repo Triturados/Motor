@@ -284,3 +284,7 @@ Ogre::SceneManager* OgreRenderer::getSceneManager()
 {
 	return mSceneMgr;
 }
+Ogre::RenderWindow* OgreRenderer::getRenderWindow()
+{
+	return mWindow;
+}

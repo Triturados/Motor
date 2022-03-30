@@ -35,7 +35,7 @@ namespace LoveEngine {
 
 			void getParameters(Transform* pos);
 
-			void lookAt(Utilities::Vector3<float> pos);
+			void lookAt(Utilities::Vector3<float>* pos);
 		};
 	}
 }

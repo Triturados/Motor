@@ -6,6 +6,8 @@
 #include <OgreViewport.h>
 #include <OgreCamera.h>
 #include <OgreRenderWindow.h>
+#include <Transform.h>
+#include <Vector3.h>
 
 
 namespace LoveEngine {
@@ -44,9 +46,9 @@ namespace LoveEngine {
 				Ogre::Real(vp->getActualHeight()));
 		}
 
-		void CameraComponent::lookAt(Utilities::Vector3<float> pos)
+		void CameraComponent::lookAt(Utilities::Vector3<float>* pos)
 		{
-			mCameraNode->lookAt(Ogre::Vector3(pos.x, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
+			//mCameraNode->lookAt(Ogre::Vector3(pos->, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
 		}
 
 	}
