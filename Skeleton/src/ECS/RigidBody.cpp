@@ -44,7 +44,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass);
+				rigidBody = PhysicsManager::getInstance()->createRB(pos, 0, mass);
 			}
 		}
 

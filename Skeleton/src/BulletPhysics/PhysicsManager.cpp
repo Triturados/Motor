@@ -79,11 +79,19 @@ void PhysicsManager::fixedUpdate(float deltaTime)
 	dynamicsWorld->stepSimulation(deltaTime);
 }
 
-btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int group, int mask)
+btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int shape, int group, int mask)
 {
 	btTransform transform;
 	transform.setIdentity();
 	transform.setOrigin(btVector3(pos.x, pos.y, pos.z));
+	btCollisionShape* groundShape;
+	if (shape == 0) {
+		groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
+
+		
+	}
+
+	collisionShapes->push_back(groundShape);
 
 	btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), new btBoxShape(btVector3(1.0f, 1.0f, 1.0f)));
 	btRigidBody* rb = new btRigidBody(info);

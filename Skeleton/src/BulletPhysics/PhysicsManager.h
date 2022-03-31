@@ -9,6 +9,8 @@ class btRigidBody;
 class OgreDebugDrawer;
 class btCollisionObject;
 class btVector3;
+class btCollisionShape;
+template <class T> class btAlignedObjectArray;
 
 namespace Utilities {
 	template <typename T>
@@ -37,6 +39,8 @@ private:
 
 	OgreDebugDrawer* mDebugDrawer = nullptr;
 
+	btAlignedObjectArray<btCollisionShape*>* collisionShapes;
+
 	PhysicsManager();
 	virtual ~PhysicsManager();
 
@@ -51,7 +55,7 @@ public:
 
 	//Crea el un rigidbody de bullet a partir de los siguientes parametros:
 	//Posicion, masa e identificador (el cual determina la forma del collider)
-	btRigidBody* createRB(Utilities::Vector3<float> pos, float mass, int group = -1, int mask = -1);
+	btRigidBody* createRB(Utilities::Vector3<float> pos, float mass, int shape, int group = -1, int mask = -1);
 
 	//destruye un rigidbody de bullet
 	void destroyRigidBody(btRigidBody* body);
