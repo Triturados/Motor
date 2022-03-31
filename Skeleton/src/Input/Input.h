@@ -22,8 +22,11 @@ struct tecla {
     std::vector<Component*> suscriptores;
 };
 
+// Los valores son automaticamente incrementos de 1 en 1 si no estan definidos
 enum class InputKeys {
-    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z
+    A = 4,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,W,X,Y,Z,
+    RIGHT = 80, LEFT, DOWN, UP, TAB = 43, CTRL = 224, SHIFT = 225,
+    SPACE = 205, ESCAPE = 41, ENTER = 88
 };
 
 enum class MouseState {

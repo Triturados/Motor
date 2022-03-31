@@ -2,6 +2,7 @@
 //#include <SDL.h>
 #include <cassert>
 #include <SingletonInfo.h>
+#include <string>
 
 Input* Input::_instance = nullptr;
 
@@ -20,7 +21,22 @@ Input::Input()
 	}
 
 	Input::_instance = this;
+	lastPressedKeys = new std::unordered_set<SDL_Scancode>();
 	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
+
+	/*std::cout << SDL_SCANCODE_A << std::endl;
+
+	std::cout << SDL_SCANCODE_DOWN << std::endl;
+	std::cout << SDL_SCANCODE_UP << std::endl;
+	std::cout << SDL_SCANCODE_RIGHT << std::endl;;
+	std::cout << SDL_SCANCODE_LEFT << std::endl;;
+
+	std::cout << SDL_SCANCODE_TAB << std::endl;;
+	std::cout << SDL_SCANCODE_LSHIFT << std::endl;;
+	std::cout << SDL_SCANCODE_LCTRL << std::endl;;
+	std::cout << SDL_SCANCODE_KP_SPACE << std::endl;;
+	std::cout << SDL_SCANCODE_ESCAPE << std::endl;;
+	std::cout << SDL_SCANCODE_KP_ENTER << std::endl;;*/
 }
 
 //teclas = new std::unordered_map<SDL_KeyCode, tecla>();
@@ -33,7 +49,7 @@ bool Input::handleInput()
 		switch (sdlevent.type) {
 		case SDL_KEYDOWN:
 		{
-			int enumvalue = (int)sdlevent.key.keysym.scancode - 4;
+			int enumvalue = (int)sdlevent.key.keysym.scancode;
 			std::cout << enumvalue << std::endl;
 
 			lastPressedKeys->insert(sdlevent.key.keysym.scancode);
@@ -71,7 +87,7 @@ bool Input::handleInput()
 }
 bool Input::isKeyPressed(InputKeys key)
 {
-	return lastPressedKeys->count((SDL_Scancode)((int)key + 4));
+	return lastPressedKeys->count((SDL_Scancode)((int)key));
 }
 
 //
