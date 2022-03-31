@@ -105,10 +105,10 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 		groundShape = new btSphereShape(btScalar(1.));
 	}
 
-	collisionShapes->push_back(groundShape);
+	//collisionShapes->push_back(groundShape);
 
-	btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
-	btRigidBody* rb = new btRigidBody(info);
+	//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
+	btRigidBody* rb = new btRigidBody(mass, new btDefaultMotionState(transform), new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.))));
 
 	rb->forceActivationState(DISABLE_DEACTIVATION);
 
