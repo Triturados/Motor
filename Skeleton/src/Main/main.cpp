@@ -13,6 +13,10 @@ void main()
 	bool success = true;
 	Game g;
 
+	//Descomentar estas dos lineas para probar los metodos de testing
+	//g.testing();
+	//return;
+
 	//Inicialización de managers y librerías
 	try {
 		g.setup();

@@ -7,6 +7,7 @@ void LoveEngine::ErrorHandling::throwError(const std::string& projectName, int e
 	ss << "(Linea: " << std::to_string(errorLine) << ", " << "Archivo: " << errorFile << ") : ";
 	ss << errorMsg;
 
+	//Si el mensaje es no vacio y no termina en punto se le agrega, por seguir un formato
 	if (errorMsg.size() > 0 && errorMsg[errorMsg.size()-1] != '.') ss << '.';
 
 	ss << '\n';
