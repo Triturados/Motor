@@ -21,6 +21,9 @@
     <ClCompile Include="..\..\src\Utilities\SingletonInfo.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Utilities\Error_handling.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\GameTime.h">
@@ -44,6 +47,8 @@
     <ClInclude Include="..\..\src\Utilities\SingletonInfo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Utilities\Error_handling.h">
+      <Filter>Archivos de encabezado</Filter>
     <ClInclude Include="..\..\src\Export.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

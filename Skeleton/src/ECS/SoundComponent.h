@@ -7,7 +7,7 @@ namespace FMOD {
 	class Sound;
 	typedef Sound* SoundClass;
 }
-class SoundSystemClass;
+class SoundManager;
 
 enum soundType { effects, environment, voices, music };
 
@@ -18,14 +18,14 @@ namespace LoveEngine {
 		{
 		private:
 			FMOD::SoundClass sound;
-			SoundSystemClass* soundMngr;
+			SoundManager* soundMngr;
 
 			int channel;
 		public:
 
 			SoundComponent();
 			~SoundComponent();
-			void createSound(SoundSystemClass* manager, const char* pFile, int channel_);
+			void createSound(SoundManager* manager, const char* pFile, int channel_);
 			void playSound(soundType groupChannel, bool bLoop = false);
 			void releaseSound();
 			void setSpeed(float s);

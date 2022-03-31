@@ -28,29 +28,31 @@
 
 #include <memory>
 
-
 using namespace std::chrono;
 
-void Game::run()
-{
-	if (setup() == 0) {
-		loop();
-		quit();
-	}
-}
+void Game::setup() {
 
-int Game::setup()
-{
 	GameComponentDefinition gameComponentDefinitions;
 
 	if (initialiseDLLs(gameComponentDefinitions)) {
-		return 1;
+		assert("Error al inicializar las DLL.", false);
 	}
 
-	input = new Input();
 	time = new LoveEngine::Time();
 	sceneManager = new LoveEngine::SceneManagement::SceneManager();
 	compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
+
+	//Manager del proyecto de Input
+	inputManager = new InputManager();
+
+	//Manager del proyecto de sonido
+	soundManager = new SoundManager();
+
+	//Manager del proyecto de fisica
+	physicsManager = new PhysicsManager();
+
+	//Manager del proyecto de render
+	ogreManager = new OgreRenderer();
 
 	gameComponentDefinitions();
 
@@ -58,11 +60,7 @@ int Game::setup()
 
 	sceneManager->initiliseScenes();
 
-	renderer = new OgreRenderer();
-	//renderer->exampleScene();
-
-	PhysicsManager::setUpInstance();
-	physics = PhysicsManager::getInstance();
+	ogreManager->exampleScene();
 
 	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
 	camera->addComponent<LoveEngine::ECS::Transform>();
@@ -79,7 +77,7 @@ int Game::setup()
 	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	go->addComponent<LoveEngine::ECS::Transform>();
 	go->addComponent<LoveEngine::ECS::Mesh>();
-	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr, 
+	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr,
 		nullptr, nullptr, go->getComponent<LoveEngine::ECS::Transform>());
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
 	go->addComponent<LoveEngine::ECS::RigidBody>();
@@ -89,9 +87,8 @@ int Game::setup()
 	Utilities::Vector3<float>* vel = new Utilities::Vector3<float>(0, -50, 0);
 	Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
 	go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
-	
+
 	//delete creator;
-	return 0;
 }
 
 
@@ -115,19 +112,19 @@ void Game::loop()
 			break;
 		}
 
-		input->handleInput();
+		inputManager->handleInput();
 
 		currentScene->update();
 
 		if ((beginFrame - lastPhysicFrame).count() > physicsFrameRate) {
 
 			currentScene->stepPhysics();
-			physics->update(pInterval.count() * time->timeScale);
+			physicsManager->update(pInterval.count() * time->timeScale);
 
 			lastPhysicFrame = beginFrame;
 		}
 
-		renderer->update();
+		ogreManager->update();
 
 		sceneManager->tryChangeScene();
 
@@ -143,57 +140,50 @@ void Game::quit()
 	FreeLibrary(game);
 	FreeLibrary(singleton);
 
+	delete compFactory;
 	delete sceneManager;
 	delete time;
-	delete renderer;
-	delete compFactory;
-	delete input;
+
+	delete ogreManager;
+	delete inputManager;
+	delete soundManager;
+	delete physicsManager;
 }
 
 
+//M�todos temporales para testing
 void Game::testing()
 {
 	int a;
 	std::cout << "Pulsa los siguientes botones para probar cada proyecto:\n";
-	std::cout << "0 - LUA\n";
-	std::cout << "1 - Input\n";
-	std::cout << "2 - OGRE\n";
-	std::cout << "3 - FMOD\n";
-	std::cout << "4 - Bullet\n";
-	std::cout << "5 - LuaBridge\n";
+	std::cout << "0 - LUA\n1 - Input\n2 - OGRE\n3 - FMOD\n4 - Bullet\n5 - LuaBridge\n";
 	std::cin >> a;
 
-	switch (a)
-	{
-	case 0: lua(); break;
-	case 1: sdlinput(); break;
-	case 2:
-		Game game;
-		game.run(); break;
-	case 3: fmod(); break;
-	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
-	case 5: luabridge(); break;
-	default:
-		break;
+	switch (a) {
+		case 0: lua(); break;
+		case 1: sdlinput(); break;
+		case 2: ogre(); break;
+		case 3: fmod(); break;
+		case 4: bullet(); break;
+		case 5: luabridge(); break;
+		default: break;
 	}
 
-	std::cout << "Escribe algo para salir.\n";
-	std::cin >> a;
+	std::cout << "Escribe algo para salir: "; std::cin >> a;
 }
 
 
-void Game::sdlinput()
-{
-	input = new Input();
-	Input::initSDLWindowTest();
+void Game::sdlinput() {
+	inputManager = new InputManager();
+	InputManager::initSDLWindowTest();
 
-	while (true) input->handleInput();
+	while (true) inputManager->handleInput();
 }
 
 void Game::fmod()
 {
 	//FMOD
-	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
+	SoundManager sound = SoundManager(); //Inicializacion
 
 	// Create a sample sound
 	FMOD::SoundClass soundSample;
@@ -208,6 +198,17 @@ void Game::fmod()
 
 	// Release the sound
 	sound.releaseSound(0);
+}
+
+void Game::ogre() {
+	Game game;
+	game.setup();
+	game.loop();
+	game.quit();
+}
+
+void Game::bullet() {
+	physicsManager->bulletTest();
 }
 
 void Game::lua()
@@ -247,7 +248,6 @@ void Game::luabridge()
 }
 
 
-
 int Game::initialiseDLLs(GameComponentDefinition& gcd)
 {
 
@@ -270,12 +270,11 @@ int Game::initialiseDLLs(GameComponentDefinition& gcd)
 		return 1;
 	}
 
-	gcd = (GameComponentDefinition)GetProcAddress(game, "componentDefinition");
+	gcd = (GameComponentDefinition) GetProcAddress(game, "componentDefinition");
 	if (gcd == NULL) {
 		std::cout << "El juego no define correctamente los componentes\n";
 		return 1;
 	}
-
 
 	return 0;
 }
@@ -340,6 +339,4 @@ void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const st
 	time->timeSinceStart = timeSinceStart.count();
 	time->deltaTime = timeSinceLastFrame.count() * 0.001;
 	time->frameCount++;
-
 }
-
