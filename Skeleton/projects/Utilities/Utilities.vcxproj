@@ -15,6 +15,7 @@
     <ClCompile Include="..\..\src\Utilities\SingletonInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\Export.h" />
     <ClInclude Include="..\..\src\Utilities\GameTime.h" />
     <ClInclude Include="..\..\src\Utilities\Recta.h" />
     <ClInclude Include="..\..\src\Utilities\Singleton.h" />

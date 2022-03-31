@@ -44,5 +44,8 @@
     <ClInclude Include="..\..\src\Utilities\SingletonInfo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Export.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
