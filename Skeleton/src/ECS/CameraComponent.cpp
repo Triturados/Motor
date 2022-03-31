@@ -1,14 +1,14 @@
 #include "CameraComponent.h"
-
-#include "OgreSceneManager.h"
-#include "Component.h"
 #include <iostream>
-#include <OgreViewport.h>
-#include <OgreCamera.h>
-#include <OgreRenderWindow.h>
-#include <Transform.h>
+#include "OgreLight.h"
+#include "OgreSceneManager.h"
+#include <Ogre.h>
+#include <OgreRenderer.h>
+#include <OgreSceneNode.h>
+#include "Transform.h"
+#include "GameObject.h"
 #include <Vector3.h>
-
+#include <Vector4.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -17,15 +17,15 @@ namespace LoveEngine {
 		{
 
 		}
-
 		CameraComponent::~CameraComponent()
 		{
-
+			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
+			//OgreRenderer::instance->removeNode(mCameraNode);
 		}
 
-		/*void CameraComponent::getParameters(Transform* pos)
+		void CameraComponent::sendParameters(Transform* pos)
 		{
-			position = pos;
+			/*position = pos;
 
 			mCameraNode = OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
@@ -43,13 +43,18 @@ namespace LoveEngine {
 
 			mCamera->setAspectRatio(
 				Ogre::Real(vp->getActualWidth()) /
-				Ogre::Real(vp->getActualHeight()));
-		}*/
+				Ogre::Real(vp->getActualHeight()));*/
+		}
+
+		void CameraComponent::lookAtPlayer(Transform* playerPos)
+		{
+			/*Utilities::Vector3<float>* pos = playerPos->getPos();
+			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);*/
+		}
 
 		void CameraComponent::lookAt(Utilities::Vector3<float>* pos)
 		{
-			//mCameraNode->lookAt(Ogre::Vector3(pos->, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
+			/*mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);*/
 		}
-
 	}
 }

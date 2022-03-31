@@ -21,6 +21,8 @@ namespace Utilities {
 namespace LoveEngine {
 	namespace ECS {
 
+		class Transform;
+
 		class CameraComponent : public Component
 		{
 			Ogre::Camera* mCamera;
@@ -28,12 +30,15 @@ namespace LoveEngine {
 
 			Ogre::Viewport* vp;
 			Transform* position;
+			Transform* player;
 		public:
 
 			CameraComponent();
 			~CameraComponent();
 
-			void getParameters(Transform* pos);
+			void sendParameters(Transform* playerPos = nullptr);
+
+			void lookAtPlayer(Transform* playerPos = nullptr);
 
 			void lookAt(Utilities::Vector3<float>* pos);
 		};
