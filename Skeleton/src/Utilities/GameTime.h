@@ -1,11 +1,12 @@
 #pragma once
 #include <functional>
+#include <../Export.h>
 class Component;
 class GameObject;
 
 namespace LoveEngine {
 
-	class Time {
+	class lovexport Time {
 		static Time* instance;
 	public:
 		Time();

@@ -1,7 +1,7 @@
 #pragma once
-
 #ifndef _INPUT_H
 #define _INPUT_H
+#include <../Export.h>
 
 #include <vector>
 #include <unordered_map>
@@ -30,7 +30,7 @@ enum class MouseState {
     NONE, CLICK_L, CLICK_R, CLICK_M
 };
 
-class Input {
+class lovexport Input {
 public:
     Input();
     //singleton

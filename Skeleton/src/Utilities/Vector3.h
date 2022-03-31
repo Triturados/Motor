@@ -1,11 +1,11 @@
 #pragma once
+#include <../Export.h>
 #include <math.h>
 #include "Recta.h"
-
 namespace Utilities
 {
 	template<typename T = float >
-	class Vector3 {
+	class lovexport Vector3 {
 	private:
 		float gradosARadianes(double grados)
 		{

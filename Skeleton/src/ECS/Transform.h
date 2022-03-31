@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
@@ -15,7 +16,7 @@ namespace Utilities {
 namespace LoveEngine {
 	namespace ECS {
 
-		class Transform : public Component
+		class lovexport Transform : public Component
 		{
 		private:
 			Utilities::Vector3<float>* position;

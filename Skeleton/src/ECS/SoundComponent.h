@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #include <Component.h>
 namespace FMOD {
@@ -13,7 +14,7 @@ enum soundType { effects, environment, voices, music };
 namespace LoveEngine {
 	namespace ECS {
 
-		class SoundComponent : public Component
+		class lovexport SoundComponent : public Component
 		{
 		private:
 			FMOD::SoundClass sound;

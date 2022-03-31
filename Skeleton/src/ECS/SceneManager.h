@@ -3,6 +3,7 @@
 #include <stack>
 #include <functional>
 #include <string>
+#include <../Export.h>
 
 /// <summary>
 /// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
@@ -27,7 +28,7 @@ namespace LoveEngine {
 		void changeScene(int idx, SceneLoad scenechangetype);
 		void changeScene(int idx, int scenechangetype);
 
-		class SceneManager final {
+		class lovexport SceneManager final {
 			friend class Game;
 
 			static SceneManager* instance;
