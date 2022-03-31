@@ -80,13 +80,13 @@ void Game::setup() {
 	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr,
 		nullptr, nullptr, go->getComponent<LoveEngine::ECS::Transform>());
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
-	go->addComponent<LoveEngine::ECS::RigidBody>();
+	/*go->addComponent<LoveEngine::ECS::RigidBody>();
 	go->getComponent<LoveEngine::ECS::RigidBody>()->setTransform(go->getComponent<LoveEngine::ECS::Transform>());
 	go->getComponent<LoveEngine::ECS::RigidBody>()->setMass(1.0);
 	go->getComponent<LoveEngine::ECS::RigidBody>()->init();
 	Utilities::Vector3<float>* vel = new Utilities::Vector3<float>(0, -50, 0);
 	Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
-	go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
+	go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);*/
 
 	//delete creator;
 }
