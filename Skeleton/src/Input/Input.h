@@ -9,10 +9,11 @@
 #include <iostream>
 #include <unordered_set>
 #include <SDL.h>
+
 //#include "SDL_keycode.h"
+//class SDL_Scancode;
 
 class Component;
-//class SDL_Scancode;
 struct tecla {
     bool pressedLastFrame = false;
     bool beingPressed = false;
@@ -30,11 +31,10 @@ enum class MouseState {
 
 class InputManager {
 public:
-    Input();
-    //singleton
+    InputManager();
     static void setSDLwithOgreTest();
-    static int initSDLWindowTest();
-    static Input* getInstance();
+    static void initSDLWindowTest();
+    static InputManager* getInstance();
     bool handleInput();
     bool isKeyPressed(InputKeys key);
 
@@ -42,13 +42,14 @@ public:
     /*void addListener(SDL_KeyCode k, Component* c);*/
 private:
 
-
     std::unordered_set<SDL_Scancode>* lastPressedKeys;
     int mouseX, mouseY;
     MouseState mouseState;
 
+    static InputManager* _instance;
+
     //Errores
-    void throwINPUTError(int errorLine);
+    static void throwINPUTError(int errorLine);
 };
 
 #endif

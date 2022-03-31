@@ -14,8 +14,8 @@ void main()
 	Game g;
 
 	//Descomentar estas dos lineas para probar los metodos de testing
-	//g.testing();
-	//return;
+	/*g.testing();
+	return;*/
 
 	//Inicialización de managers y librerías
 	try {

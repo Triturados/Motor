@@ -16,25 +16,17 @@ namespace LoveEngine {
 	}
 }
 
-
 class OgreRenderer;
 class PhysicsManager;
-class ComponentFactory;
 class SoundManager;
 class InputManager;
 
-
-class Input;
+class ComponentFactory;
 class lua_State;
 
 typedef void (*GameComponentDefinition)();
 
 struct Game {
-	void run();
-
-	int setup();
-
-	void quit();
 
 	void setup();
 	void loop();
@@ -46,20 +38,15 @@ private:
 	HMODULE game;
 	HMODULE singleton;
 
-	Input* input;
-	OgreRenderer* renderer;
+	InputManager* inputManager;
+	OgreRenderer* ogreManager;
+	SoundManager* soundManager;
+	PhysicsManager* physicsManager;
+
 	LoveEngine::SceneManagement::SceneManager* sceneManager;
 	LoveEngine::ComponentDefinitions::ComponentFactory* compFactory;
 	LoveEngine::Time* time;
-	PhysicsManager* physics;
 	lua_State* luastate;
-	//M�todos de testing de funcionamiento de librer�as
-	void sdlinput();
-	void fmod();
-	void lua();
-	void luabridge();
-	void ogre();
-	void bullet();
 
 	int initialiseDLLs(GameComponentDefinition& gcd);
 	int initialiseSceneCreator();
@@ -68,5 +55,13 @@ private:
 		const std::chrono::steady_clock::time_point& beginFrame,
 		const std::chrono::steady_clock::time_point& endFrame,
 		const std::chrono::steady_clock::time_point& appStart);
+
+	//Metodos de testing de funcionamiento de librerias
+	void sdlinput();
+	void fmod();
+	void lua();
+	void luabridge();
+	void ogre();
+	void bullet();
 };
 #endif

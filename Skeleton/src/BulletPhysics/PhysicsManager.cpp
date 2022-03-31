@@ -6,22 +6,39 @@
 #include <GameObject.h>
 #include <OgreRenderer.h>
 #include <Error_handling.h>
+#include <SingletonInfo.h>
 #include "Vector3.h"
 #include "DebugDrawer.h"
 
+PhysicsManager* PhysicsManager::instance_ = nullptr;
 
-PhysicsManager::PhysicsManager()
-{
+PhysicsManager* PhysicsManager::getInstance() {
+
+	/*if (instance_ == nullptr) {
+		instance_ = static_cast<PhysicsManager*>(LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Physics));
+	}*/
+	return instance_;
+}
+
+PhysicsManager::PhysicsManager() {
+
+	if (instance_ != nullptr) {
+		assert("No se ha podido crear la instancia del PhysicsManager.", false);
+	}
+
 	init(Utilities::Vector3<float>(0, -9.8f, 0));
+
+	PhysicsManager::instance_ = this;
+	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
 }
 
-PhysicsManager::~PhysicsManager()
-{
-	std::cout << "Destruyendo Bullet Physics!\n";
+PhysicsManager::~PhysicsManager() {
+
+	destroy();
 }
 
-void PhysicsManager::checkCollision()
-{
+void PhysicsManager::checkCollision() {
+
 	if (dynamicsWorld == nullptr) return;
 	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
 
@@ -32,25 +49,8 @@ void PhysicsManager::checkCollision()
 	}
 }
 
-PhysicsManager* PhysicsManager::getInstance()
-{
-	return instance_;
-}
+void PhysicsManager::init(const Utilities::Vector3<float> gravity) {
 
-bool PhysicsManager::setUpInstance()
-{
-	if (instance_ == nullptr) {
-		instance_ = new PhysicsManager();
-		instance_->init(Utilities::Vector3<float>(0, -9.8f, 0));
-
-		return true;
-	}
-
-	return false;
-}
-
-void PhysicsManager::init(const Utilities::Vector3<float> gravity)
-{
 	collConfig = new btDefaultCollisionConfiguration();
 
 	collDispatcher = new btCollisionDispatcher(collConfig);
@@ -72,22 +72,21 @@ void PhysicsManager::init(const Utilities::Vector3<float> gravity)
 	checkExceptions();
 }
 
-void PhysicsManager::checkExceptions()
-{
+void PhysicsManager::checkExceptions() {
+
 	if (!collConfig || !collDispatcher || !broadPhaseInterface || !constraintSolver || !dynamicsWorld) {
 		LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, __LINE__, __FILENAME__, "Error al inicializar Bullet Physics, alguna de las variables de configuracion del mundo tiene un valor no valido.");
 	}
 }
 
-btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
-{
+btDiscreteDynamicsWorld* PhysicsManager::getWorld() const {
+
 	return dynamicsWorld;
 }
 
-void PhysicsManager::update(float physicsFrameRate)
-{
-	dynamicsWorld->stepSimulation(physicsFrameRate);
+void PhysicsManager::update(float physicsFrameRate) {
 
+	dynamicsWorld->stepSimulation(physicsFrameRate);
 
 #ifdef _DEBUG
 	//dynamicsWorld->getDebugDrawer()->drawBox(btVector3(5, 5, 5), btVector3(10, 10, 10), btVector3(1, 0, 0));
@@ -96,13 +95,13 @@ void PhysicsManager::update(float physicsFrameRate)
 #endif // _DEBUG
 }
 
-void PhysicsManager::fixedUpdate(float deltaTime)
-{
+void PhysicsManager::fixedUpdate(float deltaTime) {
+
 	dynamicsWorld->stepSimulation(deltaTime);
 }
 
-btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int shape, int group, int mask)
-{
+btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int shape, int group, int mask) {
+
 	btTransform transform;
 	transform.setIdentity();
 	transform.setOrigin(btVector3(pos.x, pos.y, pos.z));
@@ -127,8 +126,8 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 	return rb;
 }
 
-void PhysicsManager::destroyRigidBody(btRigidBody* body)
-{
+void PhysicsManager::destroyRigidBody(btRigidBody* body) {
+
 	dynamicsWorld->removeCollisionObject(body);
 	delete body->getCollisionShape();
 	delete body->getMotionState();
@@ -137,8 +136,8 @@ void PhysicsManager::destroyRigidBody(btRigidBody* body)
 }
 
 
-void PhysicsManager::destroyWorld()
-{
+void PhysicsManager::destroyWorld() {
+
 	delete collConfig; collConfig = nullptr;
 
 	delete collDispatcher; collDispatcher = nullptr;
@@ -152,23 +151,25 @@ void PhysicsManager::destroyWorld()
 	delete dynamicsWorld; dynamicsWorld = nullptr;
 }
 
-void PhysicsManager::destroy()
-{
+void PhysicsManager::destroy() {
+
 	destroyWorld();
 }
 
-btVector3 PhysicsManager::btConvert(const Utilities::Vector3<float>& v3)
-{
+btVector3 PhysicsManager::btConvert(const Utilities::Vector3<float>& v3) {
+
 	return btVector3(v3.x, v3.y, v3.z);
 }
 
-Utilities::Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
-{
+Utilities::Vector3<float> PhysicsManager::v3Convert(const btVector3& v3) {
+
 	return Utilities::Vector3<float>(v3.x(), v3.y(), v3.z());
 }
 
+
 //Metodo temporal para probar el funcionamiento de Bullet
 void PhysicsManager::bulletTest() {
+
 	///-----includes_end-----
 	int i;
 	///-----initialization_start-----

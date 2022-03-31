@@ -38,7 +38,7 @@ void SoundManager::createSound(FMOD::SoundClass* pSound, const char* pFile, int 
 	fmod_error = m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);
 	throwFMODError(fmod_error, __LINE__);
 
-	if (!std::ifstream(pFile)) throw std::exception("[Error en el proyecto SoundProject] : Sound file doesn't not exist.");
+	if (!std::ifstream(pFile)) throw std::exception("[Error en el proyecto SoundProject] : El archivo de sonido no existe o no se ha podido encontrar.");
 
 	//Añadimos al mapa de sonidos generales un tupla somido canal
 	std::pair<int, FMOD::SoundClass> sound(channel, *pSound);

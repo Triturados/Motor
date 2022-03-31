@@ -16,7 +16,7 @@ namespace LoveEngine {
 
 		}
 
-		void SoundComponent::createSound(SoundSystemClass* manager, const char* pFile, int channel_)
+		void SoundComponent::createSound(SoundManager* manager, const char* pFile, int channel_)
 		{
 			soundMngr = manager;
 			channel = channel_;

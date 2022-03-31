@@ -20,6 +20,7 @@ namespace Utilities {
 class PhysicsManager {
 
 private:
+	static PhysicsManager* instance_;
 
 	//Configuracion sobre la gestion de colisiones con bullet, nosotros usaremos la configuracion por defecto
 	btDefaultCollisionConfiguration* collConfig = nullptr;
@@ -40,20 +41,21 @@ private:
 
 	btAlignedObjectArray<btCollisionShape*>* collisionShapes;
 
-	PhysicsManager();
-	virtual ~PhysicsManager();
-
 	void destroyWorld();
+	void checkCollision();
 
+	//Errores
 	void checkExceptions();
 
-	void checkCollision();
 public:
 	static PhysicsManager* getInstance();
-	static bool setUpInstance();
+
+	PhysicsManager();
+	~PhysicsManager();
 
 	//M�todo para inicializar el mundo de bullet con gravedad como par�metro
 	void init(const Utilities::Vector3<float> gravity);
+
 
 	btDiscreteDynamicsWorld* getWorld() const;
 
@@ -64,12 +66,14 @@ public:
 	//destruye un rigidbody de bullet
 	void destroyRigidBody(btRigidBody* body);
 
+
 	void update(float);
 	void fixedUpdate(float deltaTime);
-	void bulletTest();
 
 	void destroy();
 
 	btVector3 btConvert(const Utilities::Vector3<float>& v3);
 	Utilities::Vector3<float> v3Convert(const btVector3& v3);
+
+	void bulletTest();
 };

@@ -1,32 +1,35 @@
 #include "Input.h"
 #include "Error_handling.h"
-//#include <SDL.h>
 #include <cassert>
 #include <SingletonInfo.h>
 
-Input* Input::_instance = nullptr;
+//#include <SDL.h>
 
-Input* Input::getInstance()
+InputManager* InputManager::_instance = nullptr;
+
+InputManager* InputManager::getInstance()
 {
 	if (_instance == nullptr) {
-		_instance = static_cast<Input*>(LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Input));
+		_instance = static_cast<InputManager*>(LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Input));
 	}
 	return _instance;
 }
 
-Input::Input()
+InputManager::InputManager()
 {
 	if (_instance != nullptr) {
-		assert(false);
+		assert("No se ha podido crear la instancia del InputManager.", false);
 	}
 
-	Input::_instance = this;
+	lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+	mouseState = MouseState::NONE;
+	mouseX = mouseY = 0;
+
+	InputManager::_instance = this;
 	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
 }
 
-//teclas = new std::unordered_map<SDL_KeyCode, tecla>();
-
-bool Input::handleInput()
+bool InputManager::handleInput()
 {
 	SDL_Event sdlevent;
 	while (SDL_PollEvent(&sdlevent)) {
@@ -45,7 +48,7 @@ bool Input::handleInput()
 			break;
 		case SDL_MOUSEMOTION:
 			SDL_GetMouseState(&mouseX, &mouseY);
-			std::cout << "Rat�n movido: " << mouseX << " " << mouseY << std::endl;
+			std::cout << "Raton movido: " << mouseX << " " << mouseY << std::endl;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 			if(sdlevent.button.button == SDL_BUTTON_LEFT)
@@ -54,11 +57,11 @@ bool Input::handleInput()
 				mouseState = MouseState::CLICK_R;
 			else if (sdlevent.button.button == SDL_BUTTON_MIDDLE)
 				mouseState = MouseState::CLICK_M;
-			std::cout << "Rat�n pulsado: " << (int)MouseState::CLICK_M << std::endl;
+			std::cout << "Raton pulsado: " << (int)MouseState::CLICK_M << std::endl;
 			break;
 		case SDL_MOUSEBUTTONUP:
 			mouseState = MouseState::NONE;
-			std::cout << "Rat�n soltado." << std::endl;
+			std::cout << "Raton soltado." << std::endl;
 			break;
 		case SDL_QUIT:
 			return false;
@@ -69,12 +72,14 @@ bool Input::handleInput()
 	}
 	return true;
 }
+
 bool InputManager::isKeyPressed(InputKeys key)
 {
 	return lastPressedKeys->count((SDL_Scancode)((int)key + 4));
 }
 
-//
+//teclas = new std::unordered_map<SDL_KeyCode, tecla>();
+
 //void Input::addListener(SDL_KeyCode k, Component* c)
 //{
 //	/*auto t = teclas

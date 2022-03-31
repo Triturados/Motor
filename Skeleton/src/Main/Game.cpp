@@ -24,35 +24,31 @@
 
 #include <memory>
 
-
 using namespace std::chrono;
 
-void Game::run()
-{
-	//SoundManager
-	soundManager = new SoundManager();
+void Game::setup() {
 
-	//PhysicsManager
-	physicsManager = new PhysicsManager();
-
-	//OgreManager
-	ogreManager = new OgreRenderer();
-
-	//InputManager
-	inputManager = new InputManager();
-
-int Game::setup()
-{
 	GameComponentDefinition gameComponentDefinitions;
 
 	if (initialiseDLLs(gameComponentDefinitions)) {
-		return 1;
+		assert("Error al inicializar las DLL.", false);
 	}
 
-	input = new Input();
 	time = new LoveEngine::Time();
 	sceneManager = new LoveEngine::SceneManagement::SceneManager();
 	compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
+
+	//Manager del proyecto de Input
+	inputManager = new InputManager();
+
+	//Manager del proyecto de sonido
+	soundManager = new SoundManager();
+
+	//Manager del proyecto de fisica
+	physicsManager = new PhysicsManager();
+
+	//Manager del proyecto de render
+	ogreManager = new OgreRenderer();
 
 	gameComponentDefinitions();
 
@@ -63,7 +59,6 @@ int Game::setup()
 	ogreManager->exampleScene();
 
 	//delete creator;
-	return 0;
 }
 
 
@@ -87,19 +82,19 @@ void Game::loop()
 			break;
 		}
 
-		input->handleInput();
+		inputManager->handleInput();
 
 		currentScene->update();
 
 		if ((beginFrame - lastPhysicFrame).count() > physicsFrameRate) {
 
 			currentScene->stepPhysics();
-			physics->update(pInterval.count() * time->timeScale);
+			physicsManager->update(pInterval.count() * time->timeScale);
 
 			lastPhysicFrame = beginFrame;
 		}
 
-		renderer->update();
+		ogreManager->update();
 
 		sceneManager->tryChangeScene();
 
@@ -115,13 +110,14 @@ void Game::quit()
 	FreeLibrary(game);
 	FreeLibrary(singleton);
 
-	physicsManager->destroy();
-
+	delete compFactory;
 	delete sceneManager;
 	delete time;
+
 	delete ogreManager;
-	delete compFactory;
-	delete input;
+	delete inputManager;
+	delete soundManager;
+	delete physicsManager;
 }
 
 
@@ -133,29 +129,25 @@ void Game::testing()
 	std::cout << "0 - LUA\n1 - Input\n2 - OGRE\n3 - FMOD\n4 - Bullet\n5 - LuaBridge\n";
 	std::cin >> a;
 
-	switch (a)
-	{
-	case 0: lua(); break;
-	case 1: sdlinput(); break;
-	case 2: ogre(); break;
-	case 3: fmod(); break;
-	case 4: bullet(); break;
-	case 5: luabridge(); break;
-	default:
-		break;
+	switch (a) {
+		case 0: lua(); break;
+		case 1: sdlinput(); break;
+		case 2: ogre(); break;
+		case 3: fmod(); break;
+		case 4: bullet(); break;
+		case 5: luabridge(); break;
+		default: break;
 	}
 
-	std::cout << "Escribe algo para salir.\n";
-	std::cin >> a;
+	std::cout << "Escribe algo para salir: "; std::cin >> a;
 }
 
 
-void Game::sdlinput()
-{
-	input = new Input();
-	Input::initSDLWindowTest();
+void Game::sdlinput() {
+	inputManager = new InputManager();
+	InputManager::initSDLWindowTest();
 
-	while (true) input->handleInput();
+	while (true) inputManager->handleInput();
 }
 
 void Game::fmod()
@@ -226,7 +218,6 @@ void Game::luabridge()
 }
 
 
-
 int Game::initialiseDLLs(GameComponentDefinition& gcd)
 {
 
@@ -249,12 +240,11 @@ int Game::initialiseDLLs(GameComponentDefinition& gcd)
 		return 1;
 	}
 
-	gcd = (GameComponentDefinition)GetProcAddress(game, "componentDefinition");
+	gcd = (GameComponentDefinition) GetProcAddress(game, "componentDefinition");
 	if (gcd == NULL) {
 		std::cout << "El juego no define correctamente los componentes\n";
 		return 1;
 	}
-
 
 	return 0;
 }
@@ -319,5 +309,4 @@ void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const st
 	time->timeSinceStart = timeSinceStart.count();
 	time->deltaTime = timeSinceLastFrame.count() * 0.001;
 	time->frameCount++;
-
 }
