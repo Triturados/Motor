@@ -14,12 +14,14 @@ namespace LoveEngine {
 	namespace SceneManagement {
 		class SceneManager;
 	}
+	namespace Input {
+		class InputManager;
+	}
 }
 
 class OgreRenderer;
 class PhysicsManager;
 class SoundManager;
-class InputManager;
 
 class ComponentFactory;
 class lua_State;
@@ -38,7 +40,7 @@ private:
 	HMODULE game;
 	HMODULE singleton;
 
-	InputManager* inputManager;
+	LoveEngine::Input::InputManager* inputManager;
 	OgreRenderer* ogreManager;
 	SoundManager* soundManager;
 	PhysicsManager* physicsManager;

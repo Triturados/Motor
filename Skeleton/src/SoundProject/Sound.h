@@ -1,7 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include <fmod.hpp>
-
+#include <../Export.h>
 namespace FMOD {
 	class System;
 	class Sound;
@@ -13,7 +13,7 @@ namespace FMOD {
 	typedef Sound* SoundClass;
 }
 
-class SoundManager //Clase que maneja el sonido a partir del uso de FMOD
+class lovexport SoundManager //Clase que maneja el sonido a partir del uso de FMOD
 {
 private:
 	const int MaxCh = 36;

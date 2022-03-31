@@ -4,6 +4,8 @@
 #include <SingletonInfo.h>
 
 //#include <SDL.h>
+namespace LoveEngine {
+	namespace Input {
 
 InputManager* InputManager::_instance = nullptr;
 
@@ -113,4 +115,7 @@ void InputManager::initSDLWindowTest() {
 
 void InputManager::throwINPUTError(int errorLine) {
 	LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, errorLine, __FILENAME__, SDL_GetError());
+}
+
+	}
 }

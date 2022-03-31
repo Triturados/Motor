@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 class btDefaultCollisionConfiguration;
 class btCollisionDispatcher;
@@ -17,7 +18,7 @@ namespace Utilities {
 	class Vector3;
 }
 
-class PhysicsManager {
+class lovexport PhysicsManager {
 
 private:
 	static PhysicsManager* instance_;

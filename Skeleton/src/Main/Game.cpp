@@ -43,7 +43,7 @@ void Game::setup() {
 	compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
 
 	//Manager del proyecto de Input
-	inputManager = new InputManager();
+	inputManager = new LoveEngine::Input::InputManager();
 
 	//Manager del proyecto de sonido
 	soundManager = new SoundManager();
@@ -174,10 +174,10 @@ void Game::testing()
 
 
 void Game::sdlinput() {
-	inputManager = new InputManager();
-	InputManager::initSDLWindowTest();
+	/*inputManager = new InputManager();
+	InputManager::initSDLWindowTest();*/
 
-	while (true) inputManager->handleInput();
+	//while (true) inputManager->handleInput();
 }
 
 void Game::fmod()

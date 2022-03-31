@@ -1,5 +1,4 @@
 #include "PhysicsManager.h"
-
 #include <iostream>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>

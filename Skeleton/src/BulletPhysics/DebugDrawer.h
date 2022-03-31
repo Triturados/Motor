@@ -1,7 +1,6 @@
 #ifndef DebugDrawer_h__
 #define DebugDrawer_h__
 
-
 //namespace Ogre {
 //    class FrameListener;
 //};

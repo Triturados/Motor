@@ -1,7 +1,7 @@
 #pragma once
 #ifndef OGRERENDERER_H
 #define OGRERENDERER_H
-
+#include <../Export.h>
 // Estos dos archivos incluyen clases anidadas (MaterialManagerListener y ShaderGenerator resp.) que se referencian como atributos de OgreRenderer.
 // Como no se puede hacer forward declaration de las clases anidadas, los archivos tienen que estar incluidos.
 #include <OgreMaterialManager.h>;
@@ -17,7 +17,7 @@ namespace Ogre {
 
 class SDL_Window;
 
-class OgreRenderer
+class lovexport OgreRenderer
 {
 private:
 	Ogre::Root* mRoot;

@@ -11,9 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">
-      <Project>{246877cb-9f09-4048-bcbd-e94c03a4ca4d}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ECS\ECS.vcxproj">
       <Project>{d0e7ff3a-6667-480a-a1df-c5f898597cda}</Project>
     </ProjectReference>
@@ -25,15 +22,6 @@
     </ProjectReference>
     <ProjectReference Include="..\LUA\LUA.vcxproj">
       <Project>{d5b79b46-5fe1-4eb2-a6b2-cc8cc167fa1c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\OGRE\OGRE.vcxproj">
-      <Project>{57663220-5e15-4009-92e8-65f60806a5a9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SoundProject\SoundProject.vcxproj">
-      <Project>{1afb29ff-a508-4251-8a1c-21107615c230}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{17c98f4b-91be-4d6c-8ea1-7037992a19b3}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
