@@ -6,7 +6,7 @@ namespace FMOD {
 	class Sound;
 	typedef Sound* SoundClass;
 }
-class SoundSystemClass;
+class SoundManager;
 
 enum soundType { effects, environment, voices, music };
 

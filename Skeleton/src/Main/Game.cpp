@@ -29,11 +29,17 @@ using namespace std::chrono;
 
 void Game::run()
 {
-	if (setup() == 0) {
-		loop();
-		quit();
-	}
-}
+	//SoundManager
+	soundManager = new SoundManager();
+
+	//PhysicsManager
+	physicsManager = new PhysicsManager();
+
+	//OgreManager
+	ogreManager = new OgreRenderer();
+
+	//InputManager
+	inputManager = new InputManager();
 
 int Game::setup()
 {
@@ -54,11 +60,7 @@ int Game::setup()
 
 	sceneManager->initiliseScenes();
 
-	renderer = new OgreRenderer();
-	renderer->exampleScene();
-
-	PhysicsManager::setUpInstance();
-	physics = PhysicsManager::getInstance();
+	ogreManager->exampleScene();
 
 	//delete creator;
 	return 0;
@@ -113,35 +115,31 @@ void Game::quit()
 	FreeLibrary(game);
 	FreeLibrary(singleton);
 
+	physicsManager->destroy();
+
 	delete sceneManager;
 	delete time;
-	delete renderer;
+	delete ogreManager;
 	delete compFactory;
 	delete input;
 }
 
 
+//M�todos temporales para testing
 void Game::testing()
 {
 	int a;
 	std::cout << "Pulsa los siguientes botones para probar cada proyecto:\n";
-	std::cout << "0 - LUA\n";
-	std::cout << "1 - Input\n";
-	std::cout << "2 - OGRE\n";
-	std::cout << "3 - FMOD\n";
-	std::cout << "4 - Bullet\n";
-	std::cout << "5 - LuaBridge\n";
+	std::cout << "0 - LUA\n1 - Input\n2 - OGRE\n3 - FMOD\n4 - Bullet\n5 - LuaBridge\n";
 	std::cin >> a;
 
 	switch (a)
 	{
 	case 0: lua(); break;
 	case 1: sdlinput(); break;
-	case 2:
-		Game game;
-		game.run(); break;
+	case 2: ogre(); break;
 	case 3: fmod(); break;
-	case 4: PhysicsManager::getInstance()->testeandoBullet(); break;
+	case 4: bullet(); break;
 	case 5: luabridge(); break;
 	default:
 		break;
@@ -163,7 +161,7 @@ void Game::sdlinput()
 void Game::fmod()
 {
 	//FMOD
-	SoundSystemClass sound = SoundSystemClass(); //Inicializacion 
+	SoundManager sound = SoundManager(); //Inicializacion
 
 	// Create a sample sound
 	FMOD::SoundClass soundSample;
@@ -178,6 +176,17 @@ void Game::fmod()
 
 	// Release the sound
 	sound.releaseSound(0);
+}
+
+void Game::ogre() {
+	Game game;
+	game.setup();
+	game.loop();
+	game.quit();
+}
+
+void Game::bullet() {
+	physicsManager->bulletTest();
 }
 
 void Game::lua()
@@ -312,4 +321,3 @@ void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const st
 	time->frameCount++;
 
 }
-

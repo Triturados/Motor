@@ -1,17 +1,18 @@
+#include "PhysicsManager.h"
+
 #include <iostream>
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <GameObject.h>
-#include "PhysicsManager.h"
+#include <OgreRenderer.h>
+#include <Error_handling.h>
 #include "Vector3.h"
 #include "DebugDrawer.h"
-#include <OgreRenderer.h>
 
-PhysicsManager* PhysicsManager::instance_ = nullptr;
 
 PhysicsManager::PhysicsManager()
 {
-	std::cout << "Inicializando Bullet Physics!\n";
+	init(Utilities::Vector3<float>(0, -9.8f, 0));
 }
 
 PhysicsManager::~PhysicsManager()
@@ -41,7 +42,7 @@ bool PhysicsManager::setUpInstance()
 	if (instance_ == nullptr) {
 		instance_ = new PhysicsManager();
 		instance_->init(Utilities::Vector3<float>(0, -9.8f, 0));
-		
+
 		return true;
 	}
 
@@ -67,6 +68,15 @@ void PhysicsManager::init(const Utilities::Vector3<float> gravity)
 //	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 //	dynamicsWorld->setDebugDrawer(mDebugDrawer);
 //#endif // DEBUG
+
+	checkExceptions();
+}
+
+void PhysicsManager::checkExceptions()
+{
+	if (!collConfig || !collDispatcher || !broadPhaseInterface || !constraintSolver || !dynamicsWorld) {
+		LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, __LINE__, __FILENAME__, "Error al inicializar Bullet Physics, alguna de las variables de configuracion del mundo tiene un valor no valido.");
+	}
 }
 
 btDiscreteDynamicsWorld* PhysicsManager::getWorld() const
@@ -116,6 +126,7 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 
 	return rb;
 }
+
 void PhysicsManager::destroyRigidBody(btRigidBody* body)
 {
 	dynamicsWorld->removeCollisionObject(body);
@@ -143,8 +154,7 @@ void PhysicsManager::destroyWorld()
 
 void PhysicsManager::destroy()
 {
-	instance_->destroyWorld();
-	delete instance_;
+	destroyWorld();
 }
 
 btVector3 PhysicsManager::btConvert(const Utilities::Vector3<float>& v3)
@@ -157,7 +167,8 @@ Utilities::Vector3<float> PhysicsManager::v3Convert(const btVector3& v3)
 	return Utilities::Vector3<float>(v3.x(), v3.y(), v3.z());
 }
 
-void PhysicsManager::testeandoBullet() {
+//Metodo temporal para probar el funcionamiento de Bullet
+void PhysicsManager::bulletTest() {
 	///-----includes_end-----
 	int i;
 	///-----initialization_start-----

@@ -2,6 +2,7 @@
 
 #ifndef GAME_H
 #define GAME_H
+
 #include <Windows.h>
 #include <chrono>
 
@@ -18,6 +19,9 @@ namespace LoveEngine {
 
 class OgreRenderer;
 class PhysicsManager;
+class ComponentFactory;
+class SoundManager;
+class InputManager;
 
 
 class Input;
@@ -32,7 +36,9 @@ struct Game {
 
 	void quit();
 
+	void setup();
 	void loop();
+	void quit();
 
 	void testing();
 
@@ -47,11 +53,13 @@ private:
 	LoveEngine::Time* time;
 	PhysicsManager* physics;
 	lua_State* luastate;
-	//Métodos de testing de funcionamiento de librerías
+	//Mï¿½todos de testing de funcionamiento de librerï¿½as
 	void sdlinput();
 	void fmod();
 	void lua();
 	void luabridge();
+	void ogre();
+	void bullet();
 
 	int initialiseDLLs(GameComponentDefinition& gcd);
 	int initialiseSceneCreator();
