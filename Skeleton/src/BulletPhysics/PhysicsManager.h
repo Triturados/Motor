@@ -44,6 +44,7 @@ private:
 	PhysicsManager();
 	virtual ~PhysicsManager();
 
+	void checkCollision();
 public:
 	static PhysicsManager* getInstance();
 	static bool setUpInstance();

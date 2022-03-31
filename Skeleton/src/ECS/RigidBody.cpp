@@ -11,6 +11,7 @@
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 
 #include "Vector3.h"
+#include "Vector4.h"
 #include "PhysicsManager.h"
 #include "Transform.h"
 
@@ -26,13 +27,17 @@ namespace LoveEngine {
 			return btVector3(V.x, V.y, V.z);
 		}
 
+		inline Utilities::Vector4<float> cvt(const btQuaternion& V) {
+			return Utilities::Vector4(V.x(), V.y(), V.z(), V.w());
+		}
+
 		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
 		{
 		}
 
 		RigidBody::~RigidBody()
 		{
-			delete vel;
+			delete lastForce;
 			delete acc;
 
 			delete tr;
@@ -50,18 +55,19 @@ namespace LoveEngine {
 
 		void RigidBody::update()
 		{
-			Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
-			addForce(*vel, relPos, (int)ForceMode::FORCE);
+			//Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
+			//addForce(*lastForce, relPos, (int)ForceMode::FORCE);
 
 			Utilities::Vector3 newPos = cvt(rigidBody->getWorldTransform().getOrigin());
-
+			Utilities::Vector4 newRot = cvt(rigidBody->getWorldTransform().getRotation());
 			
 			tr->setPos(&newPos);  //actualizar pos tr
+			tr->setRot(&newRot);
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
 		{
-			vel = &force;
+			lastForce = &force;
 			if (enabled) {
 				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
 					if (type == (int)ForceMode::FORCE)

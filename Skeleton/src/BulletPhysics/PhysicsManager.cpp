@@ -19,6 +19,18 @@ PhysicsManager::~PhysicsManager()
 	std::cout << "Destruyendo Bullet Physics!\n";
 }
 
+void PhysicsManager::checkCollision()
+{
+	if (dynamicsWorld == nullptr) return;
+	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+
+	for (int i = 0; i < numManifolds; i++) {
+		btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+		const btCollisionObject* obA = contactManifold->getBody0();
+		const btCollisionObject* obB = contactManifold->getBody1();
+	}
+}
+
 PhysicsManager* PhysicsManager::getInstance()
 {
 	return instance_;
@@ -88,12 +100,14 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 	if (shape == 0) {
 		groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
 
-		
+	}
+	else {
+		groundShape = new btSphereShape(btScalar(1.));
 	}
 
 	collisionShapes->push_back(groundShape);
 
-	btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), new btBoxShape(btVector3(1.0f, 1.0f, 1.0f)));
+	btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
 	btRigidBody* rb = new btRigidBody(info);
 
 	rb->forceActivationState(DISABLE_DEACTIVATION);
