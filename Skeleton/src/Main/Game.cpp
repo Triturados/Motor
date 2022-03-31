@@ -297,8 +297,7 @@ int Game::initialiseSceneCreator()
 		luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
 		isNil = populateScene.isNil();
 	}
-
-	sceneManager->numberOfScenes = count;
+	sceneManager->numberOfScenes = count - 1;
 
 	return 0;
 }
