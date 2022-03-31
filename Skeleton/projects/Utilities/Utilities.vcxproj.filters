@@ -49,6 +49,8 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Utilities\Error_handling.h">
       <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\..\src\Export.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

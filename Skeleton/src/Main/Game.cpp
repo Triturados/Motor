@@ -17,6 +17,10 @@
 
 #include <Sound.h>
 #include <Transform.h>
+#include <Mesh.h>
+#include <CameraComponent.h>
+#include <LightComponent.h>
+#include <RigidBody.h>
 #include <Vector3.h>
 #include <lua.hpp>
 #include <Input.h>
@@ -57,6 +61,32 @@ void Game::setup() {
 	sceneManager->initiliseScenes();
 
 	ogreManager->exampleScene();
+
+	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
+	camera->addComponent<LoveEngine::ECS::Transform>();
+	camera->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
+	camera->addComponent<LoveEngine::ECS::CameraComponent>();
+	camera->getComponent<LoveEngine::ECS::CameraComponent>()->lookAt(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
+	camera->getComponent<LoveEngine::ECS::CameraComponent>()->setActive(true);
+
+	LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
+	luz->addComponent<LoveEngine::ECS::Transform>();
+	luz->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 10.0, 0.0));
+	luz->addComponent<LoveEngine::ECS::LightComponent>();
+
+	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
+	go->addComponent<LoveEngine::ECS::Transform>();
+	go->addComponent<LoveEngine::ECS::Mesh>();
+	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr,
+		nullptr, nullptr, go->getComponent<LoveEngine::ECS::Transform>());
+	go->getComponent<LoveEngine::ECS::Mesh>()->init();
+	go->addComponent<LoveEngine::ECS::RigidBody>();
+	go->getComponent<LoveEngine::ECS::RigidBody>()->setTransform(go->getComponent<LoveEngine::ECS::Transform>());
+	go->getComponent<LoveEngine::ECS::RigidBody>()->setMass(1.0);
+	go->getComponent<LoveEngine::ECS::RigidBody>()->init();
+	Utilities::Vector3<float>* vel = new Utilities::Vector3<float>(0, -50, 0);
+	Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
+	go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
 
 	//delete creator;
 }
