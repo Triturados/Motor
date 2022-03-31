@@ -22,4 +22,7 @@ namespace LoveEngine {
 		float calculateFrameRate();
 	};
 
+	/*inline lovexport Time* TimeInstance() {
+		return Time::getInstance();
+	}*/
 }

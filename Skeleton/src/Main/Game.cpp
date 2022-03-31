@@ -147,7 +147,7 @@ void Game::quit()
 	delete ogreManager;
 	delete inputManager;
 	delete soundManager;
-	delete physicsManager;
+	//delete physicsManager;
 }
 
 
