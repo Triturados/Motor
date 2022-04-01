@@ -8,9 +8,9 @@
 #include <string>
 #include <iostream>
 #include <unordered_set>
-#include <SDL.h>
+//#include <SDL.h>
 
-//#include "SDL_keycode.h"
+#include "SDL_keycode.h"
 //class SDL_Scancode;
 
 class Component;

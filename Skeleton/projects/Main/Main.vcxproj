@@ -14,9 +14,6 @@
     <ProjectReference Include="..\ECS\ECS.vcxproj">
       <Project>{d0e7ff3a-6667-480a-a1df-c5f898597cda}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Input\Input.vcxproj">
-      <Project>{1e18fc5c-60f3-49be-9cb6-31f16f5c1f90}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\LuaBridge\LuaBridge.vcxproj">
       <Project>{fcd5cadd-0170-4aeb-999b-a5d42d99bb08}</Project>
     </ProjectReference>
