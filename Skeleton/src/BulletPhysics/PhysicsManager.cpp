@@ -34,6 +34,7 @@ PhysicsManager::PhysicsManager() {
 PhysicsManager::~PhysicsManager() {
 
 	destroy();
+	//destroyWorld();
 }
 
 void PhysicsManager::checkCollision() {
@@ -61,6 +62,8 @@ void PhysicsManager::init(const Utilities::Vector3<float> gravity) {
 		constraintSolver, collConfig);
 
 	dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
+
+	collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 //#ifdef _DEBUG
 //	mDebugDrawer = new OgreDebugDrawer(OgreRenderer::instance->getSceneManager());
@@ -151,6 +154,28 @@ void PhysicsManager::destroyWorld() {
 }
 
 void PhysicsManager::destroy() {
+
+	//remove the rigidbodies from the dynamics world and delete them
+	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
+	{
+		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		if (body && body->getMotionState())
+		{
+			delete body->getMotionState();
+		}
+		dynamicsWorld->removeCollisionObject(obj);
+		delete obj;
+	}
+
+	//delete collision shapes
+	for (int j = 0; j < collisionShapes->size(); j++)
+	{
+		btCollisionShape* shape = collisionShapes->at(j);
+		collisionShapes->at(j) = 0;
+		delete shape;
+	}
+
 
 	destroyWorld();
 }
