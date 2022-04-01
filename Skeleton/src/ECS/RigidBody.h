@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include <../Export.h>
 
 
 namespace Utilities {
@@ -28,7 +29,7 @@ namespace LoveEngine {
 	namespace ECS {
 		class Transform;
 
-		class RigidBody : public Component
+		class lovexport RigidBody : public Component
 		{
 		private:
 			float mass;

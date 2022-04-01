@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 #include <vector>
 #include <string>
 
@@ -16,7 +17,7 @@ namespace LoveEngine {
 		using Key = char;
 
 		// Componente interfaz, utilizada para listas polimórficas
-		class Component {
+		class lovexport Component {
 			friend GameObject;
 
 		public:
@@ -128,7 +129,7 @@ namespace LoveEngine {
 		// de ella deben estar declaradas así:
 		// class NombreClase: public ComponentTemplate<NombreClase>
 		template <class T>
-		class ComponentTemplate : public Component
+		class lovexport ComponentTemplate : public Component
 		{
 		private:
 			static unsigned int componentNum;

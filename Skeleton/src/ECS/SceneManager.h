@@ -3,6 +3,7 @@
 #include <stack>
 #include <functional>
 #include <string>
+#include <../Export.h>
 
 /// <summary>
 /// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
@@ -24,15 +25,19 @@ namespace LoveEngine {
 			PUSH, SWAP, POP, CLEAR,
 		};
 
-		void changeScene(int idx, SceneLoad scenechangetype);
-		void changeScene(int idx, int scenechangetype);
+		lovexport void changeScene(int idx, SceneLoad scenechangetype);
+		lovexport void changeSceneByIndex(int idx, int scenechangetype);
+		//inline lovexport void changeSceneByIndex(int idx, int scenechangetype) {
+		//	//assert(scenechangetype >= 0 && scenechangetype <= 4);
+		//	changeScene(idx, (SceneLoad)scenechangetype);
+		//}
 
-		class SceneManager final {
+		class lovexport SceneManager final {
 			friend class Game;
 
 			static SceneManager* instance;
 		public:
-			static SceneManager* getInstance();
+			static  SceneManager* getInstance();
 			SceneManager();
 			~SceneManager();
 
@@ -79,3 +84,7 @@ namespace LoveEngine {
 		};
 	}
 }
+//
+//lovexport int damenumero() {
+//	return 13;
+//}

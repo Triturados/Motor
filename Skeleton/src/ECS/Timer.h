@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #include <Component.h>
 #include <functional>
@@ -6,7 +7,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		class Timer : public Component {
+		class lovexport Timer : public Component {
 			using action = std::function<void(Timer* t)>;
 		private:
 			float maxTime = 0;

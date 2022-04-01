@@ -1,7 +1,6 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"
-#include <string>
 
 namespace LoveEngine {
 	namespace ECS {

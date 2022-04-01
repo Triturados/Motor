@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #include <map>
 #include <string>
@@ -9,9 +10,9 @@ namespace LoveEngine {
 		class Component;
 	}
 	namespace ComponentDefinitions {
-	class ComponentCreator;
+		class ComponentCreator;
 
-		class ComponentFactory {
+		class lovexport ComponentFactory {
 
 		private:
 			static ComponentFactory* instance;
@@ -31,7 +32,7 @@ namespace LoveEngine {
 		};
 
 
-		class ComponentCreator {
+		class lovexport ComponentCreator {
 			template<class CompType>
 			friend class ComponentCreatorTemplate;
 		public:
@@ -47,7 +48,7 @@ namespace LoveEngine {
 
 
 		template <class CompType>
-		class ComponentCreatorTemplate : public ComponentCreator {
+		class lovexport ComponentCreatorTemplate : public ComponentCreator {
 
 		public:
 			ComponentCreatorTemplate(std::string name) : ComponentCreator(name) {

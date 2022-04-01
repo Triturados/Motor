@@ -1,11 +1,12 @@
 #pragma once
 #include <math.h>
 #include "Recta.h"
+#include <../Export.h>
 
 namespace Utilities
 {
 	template<typename T = float>
-	class Vector2 {
+	class lovexport Vector2 {
 	public:
 
 		T x;

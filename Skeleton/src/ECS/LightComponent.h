@@ -2,6 +2,7 @@
 
 //#ifndef LIGHT_H
 //#define LIGHT_H
+#include <../Export.h>
 
 #include <Component.h>
 
@@ -26,7 +27,7 @@ namespace LoveEngine {
 
 
 		class Transform;
-		class LightComponent : public Component
+		class lovexport LightComponent : public Component
 		{
 		private:
 			Ogre::SceneNode* entityNode;

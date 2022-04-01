@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 class btDefaultCollisionConfiguration;
 class btCollisionDispatcher;
@@ -17,7 +18,7 @@ namespace Utilities {
 	class Vector3;
 }
 
-class PhysicsManager {
+class lovexport PhysicsManager {
 
 private:
 	static PhysicsManager* instance_;
@@ -31,26 +32,31 @@ private:
 	//Variable de bullet que se usa para hacer calculos de manera eficiente para generar posibles colisiones
 	btBroadphaseInterface* broadPhaseInterface = nullptr;
 
-	//Variable de bullet que hace de solucionador de restricciones 
+	//Variable de bullet que hace de solucionador de restricciones
 	btSequentialImpulseConstraintSolver* constraintSolver = nullptr;
 
-	//Variable que representa el entorno dinámico de bullet con las anteriores variables como configuración
+	//Variable que representa el entorno dinï¿½mico de bullet con las anteriores variables como configuraciï¿½n
 	btDiscreteDynamicsWorld* dynamicsWorld = nullptr;
 
 	OgreDebugDrawer* mDebugDrawer = nullptr;
 
 	btAlignedObjectArray<btCollisionShape*>* collisionShapes;
 
-	PhysicsManager();
-	virtual ~PhysicsManager();
-
+	void destroyWorld();
 	void checkCollision();
+
+	//Errores
+	void checkExceptions();
+
 public:
 	static PhysicsManager* getInstance();
-	static bool setUpInstance();
 
-	//Método para inicializar el mundo de bullet con gravedad como parámetro
+	PhysicsManager();
+	~PhysicsManager();
+
+	//Mï¿½todo para inicializar el mundo de bullet con gravedad como parï¿½metro
 	void init(const Utilities::Vector3<float> gravity);
+
 
 	btDiscreteDynamicsWorld* getWorld() const;
 
@@ -61,13 +67,14 @@ public:
 	//destruye un rigidbody de bullet
 	void destroyRigidBody(btRigidBody* body);
 
+
 	void update(float);
 	void fixedUpdate(float deltaTime);
-	void testeandoBullet();
 
-	void destroyWorld();
-	static void destroy();
+	void destroy();
 
 	btVector3 btConvert(const Utilities::Vector3<float>& v3);
 	Utilities::Vector3<float> v3Convert(const btVector3& v3);
+
+	void bulletTest();
 };

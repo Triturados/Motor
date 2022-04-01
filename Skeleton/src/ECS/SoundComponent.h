@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #include <Component.h>
 namespace FMOD {
@@ -6,25 +7,25 @@ namespace FMOD {
 	class Sound;
 	typedef Sound* SoundClass;
 }
-class SoundSystemClass;
+class SoundManager;
 
 enum soundType { effects, environment, voices, music };
 
 namespace LoveEngine {
 	namespace ECS {
 
-		class SoundComponent : public Component
+		class lovexport SoundComponent : public Component
 		{
 		private:
 			FMOD::SoundClass sound;
-			SoundSystemClass* soundMngr;
+			SoundManager* soundMngr;
 
 			int channel;
 		public:
 
 			SoundComponent();
 			~SoundComponent();
-			void createSound(SoundSystemClass* manager, const char* pFile, int channel_);
+			void createSound(SoundManager* manager, const char* pFile, int channel_);
 			void playSound(soundType groupChannel, bool bLoop = false);
 			void releaseSound();
 			void setSpeed(float s);

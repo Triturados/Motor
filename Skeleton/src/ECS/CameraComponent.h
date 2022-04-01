@@ -1,5 +1,6 @@
 #pragma once
 
+#include <../Export.h>
 
 #include <Component.h>
 #include <OgreRenderer.h>
@@ -23,7 +24,7 @@ namespace LoveEngine {
 
 		class Transform;
 
-		class CameraComponent : public Component
+		class lovexport CameraComponent : public Component
 		{
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;

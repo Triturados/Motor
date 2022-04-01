@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 #include <string>
 #include <list>
 
@@ -15,7 +16,7 @@ namespace LoveEngine {
 
 		class Component;
 		class GameObject;
-		class Scene final {
+		class lovexport Scene final {
 
 			friend SceneManagement::SceneManager;
 			friend SceneManagement::SceneFactory;

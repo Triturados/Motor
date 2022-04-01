@@ -19,13 +19,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -57,7 +57,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
@@ -73,7 +73,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
@@ -120,6 +120,9 @@
   <ItemGroup>
     <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">
       <Project>{246877cb-9f09-4048-bcbd-e94c03a4ca4d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Input\Input.vcxproj">
+      <Project>{1e18fc5c-60f3-49be-9cb6-31f16f5c1f90}</Project>
     </ProjectReference>
     <ProjectReference Include="..\LuaBridge\LuaBridge.vcxproj">
       <Project>{fcd5cadd-0170-4aeb-999b-a5d42d99bb08}</Project>

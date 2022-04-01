@@ -1,9 +1,9 @@
 #pragma once
-
+#include <../Export.h>
 namespace Utilities
 {
 	template<typename T = float>
-	class Vector4 {
+	class lovexport Vector4 {
 	public:
 
 		T x;

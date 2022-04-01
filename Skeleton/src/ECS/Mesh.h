@@ -1,4 +1,5 @@
 #pragma once
+#include <../Export.h>
 
 #ifndef MESH_H
 #define MESH_H
@@ -22,7 +23,7 @@ namespace LoveEngine {
 	namespace ECS {
 
 		class Transform;
-		class Mesh : public Component
+		class lovexport Mesh : public Component
 		{
 		private:
 			std::string  meshName = "";

@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <list>
+#include <../Export.h>
 
 
 namespace LoveEngine {
@@ -14,7 +15,7 @@ namespace LoveEngine {
 		template <typename T>
 		concept isComponent = std::is_base_of<Component, T>::value;
 
-		class GameObject final {
+		class lovexport GameObject final {
 
 			friend Scene;
 			friend class SceneCreator;
