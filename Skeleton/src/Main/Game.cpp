@@ -67,7 +67,7 @@ void Game::setup() {
 	
 	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
 	LoveEngine::ECS::Transform* transformCamera= camera->addComponent<LoveEngine::ECS::Transform>();
-	transformCamera->setPos(Utilities::Vector3<float>(0.0, 0.0, 100.0));
+	transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
 	LoveEngine::ECS::Camera* cam= camera->addComponent<LoveEngine::ECS::Camera>();
 	cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
 	cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
@@ -175,7 +175,7 @@ void Game::loop()
 
 		ogreManager->update();
 
-		sceneManager->tryChangeScene();
+		//sceneManager->tryChangeScene();
 
 		//Calculo del tiempo
 		steady_clock::time_point endFrame = high_resolution_clock::now();
