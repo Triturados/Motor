@@ -77,8 +77,8 @@ void Game::setup() {
 	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	go->addComponent<LoveEngine::ECS::Transform>();
 	go->addComponent<LoveEngine::ECS::Mesh>();
-	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr,
-		nullptr, nullptr, go->getComponent<LoveEngine::ECS::Transform>());
+	go->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("ogrehead.mesh",nullptr,
+		 go->getComponent<LoveEngine::ECS::Transform>(),nullptr);
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
 	go->addComponent<LoveEngine::ECS::RigidBody>();
 	go->getComponent<LoveEngine::ECS::RigidBody>()->setTransform(go->getComponent<LoveEngine::ECS::Transform>());

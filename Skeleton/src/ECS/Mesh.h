@@ -39,10 +39,10 @@ namespace LoveEngine {
 		public:
 			void init();
 			void update();
-			void sendParameters(std::string mN = "", Ogre::SceneNode* eN = nullptr, Ogre::SceneNode* pN = nullptr,
-				Ogre::Entity* e = nullptr, Transform* p = nullptr, Transform* eT = nullptr);
+			void sendvalues(std::string mN, Transform* p, Transform* eT, LoveEngine::ECS::GameObject* pObj);
 			~Mesh();
-
+			Ogre::SceneNode* getEntityNode();
+			
 		};
 	}
 }

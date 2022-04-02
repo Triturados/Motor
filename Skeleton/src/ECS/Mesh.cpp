@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include <stdexcept>
 #include <OgreRenderer.h>
+#include <GameObject.h>
 #include <OgreSceneNode.h>
 #include <Vector3.h>
 #include <Vector4.h>
@@ -10,15 +11,12 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::sendParameters(std::string mN, Ogre::SceneNode* eN, Ogre::SceneNode* pN, Ogre::Entity* e, Transform* p, Transform* eT)
+		void Mesh::sendvalues(std::string mN, Transform* p, Transform* eT, LoveEngine::ECS::GameObject* pObj)
 		{
 			meshName = mN;
-			entityNode = eN;
-			parentNode = pN;
-			entity = e;
 			parent = p;
 			child = eT;
-
+			if (pObj != nullptr)parentNode = pObj->getComponent<Mesh>()->getEntityNode(); //Obtenemos el nodo del padre a partir de la malla del padre 
 		}
 		void Mesh::init()
 		{
@@ -69,6 +67,10 @@ namespace LoveEngine {
 		{
 			OgreRenderer::instance->removeNode(entityNode);
 			delete rot, pos, scale;
+		}
+		Ogre::SceneNode* Mesh::getEntityNode()
+		{
+			return nullptr;
 		}
 	}
 }
