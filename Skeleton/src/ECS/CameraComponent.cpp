@@ -13,19 +13,15 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		CameraComponent::CameraComponent()
+		Camera::~Camera()
 		{
 
-		}
-		CameraComponent::~CameraComponent()
-		{
-			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
-			//OgreRenderer::instance->removeNode(mCameraNode);
+			OgreRenderer::instance->removeNode(mCameraNode);
 		}
 
-		void CameraComponent::sendParameters(Transform* pos)
+		void Camera::sendvalues(Transform* pos)
 		{
-			/*position = pos;
+			position = pos;
 
 			mCameraNode = OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
@@ -37,24 +33,25 @@ namespace LoveEngine {
 			mCameraNode->attachObject(mCamera);
 
 
+
 			vp = OgreRenderer::instance->getRenderWindow()->addViewport(mCamera);
 
 			vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
 			mCamera->setAspectRatio(
 				Ogre::Real(vp->getActualWidth()) /
-				Ogre::Real(vp->getActualHeight()));*/
+				Ogre::Real(vp->getActualHeight()));
 		}
 
-		void CameraComponent::lookAtPlayer(Transform* playerPos)
+		void Camera::lookAtPlayer(Transform* playerPos)
 		{
 			/*Utilities::Vector3<float>* pos = playerPos->getPos();
 			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);*/
 		}
 
-		void CameraComponent::lookAt(Utilities::Vector3<float>* pos)
+		void Camera::lookAt(Utilities::Vector3<float>* pos)
 		{
-			/*mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);*/
+			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);
 		}
 	}
 }

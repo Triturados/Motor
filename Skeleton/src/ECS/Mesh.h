@@ -37,12 +37,14 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* scale;
 
 		public:
-			void init();
-			void update();
-			void sendvalues(std::string mN, Transform* p, Transform* eT, LoveEngine::ECS::GameObject* pObj);
+			void init()override;
+			void update()override;
+			void sendvalues(std::string mN, Transform* eT, LoveEngine::ECS::GameObject* pObj);
+			void onSceneUp() override;
+			void onSceneDown() override;
 			~Mesh();
 			Ogre::SceneNode* getEntityNode();
-			
+
 		};
 	}
 }

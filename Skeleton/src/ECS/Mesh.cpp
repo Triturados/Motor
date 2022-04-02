@@ -11,12 +11,15 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::sendvalues(std::string mN, Transform* p, Transform* eT, LoveEngine::ECS::GameObject* pObj)
+		void Mesh::sendvalues(std::string mN, Transform* eT, LoveEngine::ECS::GameObject* pObj)
 		{
 			meshName = mN;
-			parent = p;
 			child = eT;
-			if (pObj != nullptr)parentNode = pObj->getComponent<Mesh>()->getEntityNode(); //Obtenemos el nodo del padre a partir de la malla del padre 
+			if (pObj != nullptr)
+			{
+				parentNode = pObj->getComponent<Mesh>()->getEntityNode(); //Obtenemos el nodo del padre a partir de la malla del padre 
+				parent = pObj->getComponent<Transform>();
+			}
 		}
 		void Mesh::init()
 		{

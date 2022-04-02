@@ -196,25 +196,25 @@ void OgreRenderer::setupScenes()
 {
 	mSceneMgr = mRoot->createSceneManager();
 
-	mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	mCameraNode->setPosition(0, 0, 80);
-	mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
+	//mCameraNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	//mCameraNode->setPosition(0, 0, 80);
+	//mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
-	mCamera = mSceneMgr->createCamera("MainCam");
-	mCamera->setNearClipDistance(5);
+	//mCamera = mSceneMgr->createCamera("MainCam");
+	//mCamera->setNearClipDistance(5);
 
-	mCameraNode->attachObject(mCamera);
+	//mCameraNode->attachObject(mCamera);
 
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	//Ogre::Viewport* vp = mWindow->addViewport(mCamera);
 
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	//vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	mCamera->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
+	//mCamera->setAspectRatio(
+	//	Ogre::Real(vp->getActualWidth()) /
+	//	Ogre::Real(vp->getActualHeight()));
 
-	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
-	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+	//Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	//Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 void OgreRenderer::throwOgreError(int errorLine, const std::string& errorMsg) {
