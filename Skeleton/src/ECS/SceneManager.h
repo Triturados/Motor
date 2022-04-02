@@ -5,12 +5,6 @@
 #include <string>
 #include <../Export.h>
 
-/// <summary>
-/// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
-/// =POP   : REMOVE THE SCENE AT THE TOP OF THE STACK
-/// =CLEAR : REMOVES ALL PREVIOUS SCENE AND CREATES THE NEW ONE
-/// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
-/// </summary>
 
 
 namespace LoveEngine {
@@ -21,8 +15,15 @@ namespace LoveEngine {
 	namespace SceneManagement {
 		class SceneFactory;
 
+		/// <summary>
+		/// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
+		/// =POP   : REMOVE THE SCENE AT THE TOP OF THE STACK
+		/// =CLEAR : REMOVES ALL PREVIOUS SCENE AND CREATES THE NEW ONE
+		/// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
+		/// =EXIT  : STOPS THE GAME
+		/// </summary>
 		enum class SceneLoad {
-			PUSH, SWAP, POP, CLEAR,
+			PUSH, SWAP, POP, CLEAR, EXIT
 		};
 
 		lovexport void changeScene(int idx, SceneLoad scenechangetype);

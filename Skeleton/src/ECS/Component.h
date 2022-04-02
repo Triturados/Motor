@@ -62,6 +62,8 @@ namespace LoveEngine {
 			inline  void send2values(int i, float f) { return sendValues(i, f, nullptr, nullptr); };
 			inline  void send1value (int i) { return sendValues(i, 0, nullptr, nullptr); };
 
+			virtual void receiveMessage(std::string mssg) {};
+
 		protected:
 #pragma region Input Callbacks
 

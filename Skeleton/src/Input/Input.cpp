@@ -4,7 +4,7 @@
 #include <SingletonInfo.h>
 #include <string>
 
-//#include <SDL.h>
+#include <SDL.h>
 namespace LoveEngine {
 	namespace Input {
 

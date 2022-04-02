@@ -61,32 +61,38 @@ void Game::setup() {
 	sceneManager->initiliseScenes();
 
 	ogreManager->exampleScene();
-
+	ogreManager->getSceneManager()->destroyAllCameras();
+	
 	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
-	camera->addComponent<LoveEngine::ECS::Transform>();
-	camera->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
-	camera->addComponent<LoveEngine::ECS::CameraComponent>();
-	camera->getComponent<LoveEngine::ECS::CameraComponent>()->lookAt(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
-	camera->getComponent<LoveEngine::ECS::CameraComponent>()->setActive(true);
+	LoveEngine::ECS::Transform* transformCamera= camera->addComponent<LoveEngine::ECS::Transform>();
+	transformCamera->setPos(new Utilities::Vector3<float>(0.0, 0.0, 100.0));
+	LoveEngine::ECS::Camera* cam= camera->addComponent<LoveEngine::ECS::Camera>();
+	cam->sendvalues(camera->getComponent<LoveEngine::ECS::Transform>());
+	cam->lookAt(new Utilities::Vector3<float>(0.0, 0.0, -50.0));
+	cam->setActive(true);
 
 	LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
-	luz->addComponent<LoveEngine::ECS::Transform>();
-	luz->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 10.0, 0.0));
-	luz->addComponent<LoveEngine::ECS::LightComponent>();
+	LoveEngine::ECS::Transform* transformLight= luz->addComponent<LoveEngine::ECS::Transform>();
+	transformLight->setPos(new Utilities::Vector3<float>(0.0, 10.0, 50.0));
+	LoveEngine::ECS::Light* lightC=  luz->addComponent<LoveEngine::ECS::Light>();
+	lightC->sendParameters(LoveEngine::ECS::lightType::point, "light1");
 
 	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	go->addComponent<LoveEngine::ECS::Transform>();
 	go->addComponent<LoveEngine::ECS::Mesh>();
-	go->getComponent <LoveEngine::ECS::Mesh>()->sendParameters("ogrehead.mesh", nullptr, nullptr,
-		nullptr, nullptr, go->getComponent<LoveEngine::ECS::Transform>());
+	go->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("ogrehead.mesh",
+		 go->getComponent<LoveEngine::ECS::Transform>(),nullptr);
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
-	go->addComponent<LoveEngine::ECS::RigidBody>();
-	go->getComponent<LoveEngine::ECS::RigidBody>()->setTransform(go->getComponent<LoveEngine::ECS::Transform>());
-	go->getComponent<LoveEngine::ECS::RigidBody>()->setMass(1.0);
-	go->getComponent<LoveEngine::ECS::RigidBody>()->init();
-	Utilities::Vector3<float>* vel = new Utilities::Vector3<float>(0, -50, 0);
-	Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
-	go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
+
+	//go->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(30.0, 0.0, 0.0));
+
+	//go->addComponent<LoveEngine::ECS::RigidBody>();
+	//go->getComponent<LoveEngine::ECS::RigidBody>()->setTransform(go->getComponent<LoveEngine::ECS::Transform>());
+	//go->getComponent<LoveEngine::ECS::RigidBody>()->setMass(1.0);
+	//go->getComponent<LoveEngine::ECS::RigidBody>()->init();
+	//Utilities::Vector3<float>* vel = new Utilities::Vector3<float>(8, 0, 0);
+	//Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
+	//go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
 
 	//delete creator;
 }
@@ -287,8 +293,8 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::GameObject>("GameObject")
-		.addConstructor<void(*)(std::string, LoveEngine::ECS::Scene*)>()
 		.addFunction("addComponent", &(LoveEngine::ECS::GameObject::createComponent))
+		.addFunction("sendMsg", &(LoveEngine::ECS::GameObject::sendMessage))
 		.endClass();
 
 	luabridge::getGlobalNamespace(luastate)
@@ -299,11 +305,12 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::Component>("Component")
-		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues))
+		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues)) //int float comp gameObject
 		.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
 		.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
 		.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
 		.addFunction("send", &(LoveEngine::ECS::Component::send1value))
+		.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveMessage))
 		.endClass();
 
 

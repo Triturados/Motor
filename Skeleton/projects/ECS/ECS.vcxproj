@@ -45,8 +45,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)..\..\libs\$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\exes\</OutDir>
     <IntDir>$(ProjectDir)..\..\temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -60,7 +61,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\Input;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +77,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\LuaBridgeSrc\Source;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\core\inc;$(ProjectDir)..\..\dependencies\FMODStudioAPIWindows\api\studio\inc;$(ProjectDir)..\..\src\Utilities;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\SoundProject;$(ProjectDir)..\..\src\Input;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\dependencies\BulletSrc\src;$(ProjectDir)..\..\src\BulletPhysics;$(SolutionDir)dependencies\OgreBuild\SDL2-2.0.20\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,6 +94,7 @@
     <ClCompile Include="..\..\src\ECS\GameObject.cpp" />
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Mesh.cpp" />
+    <ClCompile Include="..\..\src\ECS\MouseTracker.cpp" />
     <ClCompile Include="..\..\src\ECS\RigidBody.cpp" />
     <ClCompile Include="..\..\src\ECS\Scene.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp" />
@@ -109,6 +111,7 @@
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />
     <ClInclude Include="..\..\src\ECS\Mesh.h" />
+    <ClInclude Include="..\..\src\ECS\MouseTracker.h" />
     <ClInclude Include="..\..\src\ECS\RigidBody.h" />
     <ClInclude Include="..\..\src\ECS\Scene.h" />
     <ClInclude Include="..\..\src\ECS\SceneFactory.h" />

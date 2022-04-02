@@ -137,6 +137,8 @@ namespace LoveEngine {
 			bool isEnabled();
 
 			GameObject* createGameObject(std::string name);
+
+			void sendMessage(std::string mssg);
 		};
 	}
 }

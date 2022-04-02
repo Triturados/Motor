@@ -14,7 +14,7 @@ enum soundType { effects, environment, voices, music };
 namespace LoveEngine {
 	namespace ECS {
 
-		class lovexport SoundComponent : public Component
+		class lovexport Sound : public Component
 		{
 		private:
 			FMOD::SoundClass sound;
@@ -23,8 +23,6 @@ namespace LoveEngine {
 			int channel;
 		public:
 
-			SoundComponent();
-			~SoundComponent();
 			void createSound(SoundManager* manager, const char* pFile, int channel_);
 			void playSound(soundType groupChannel, bool bLoop = false);
 			void releaseSound();

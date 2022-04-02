@@ -6,34 +6,24 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		SoundComponent::SoundComponent()
-		{
-
-		}
-
-		SoundComponent::~SoundComponent()
-		{
-
-		}
-
-		void SoundComponent::createSound(SoundManager* manager, const char* pFile, int channel_)
+		void Sound::createSound(SoundManager* manager, const char* pFile, int channel_)
 		{
 			soundMngr = manager;
 			channel = channel_;
 			soundMngr->createSound(&sound, pFile, channel);
 		}
 
-		void SoundComponent::playSound(soundType groupChannel, bool bLoop)
+		void Sound::playSound(soundType groupChannel, bool bLoop)
 		{
 			soundMngr->playSound(sound, groupChannel, bLoop);
 		}
 
-		void SoundComponent::releaseSound()
+		void Sound::releaseSound()
 		{
 			soundMngr->releaseSound(channel);
 		}
 
-		void SoundComponent::setSpeed(float s)
+		void Sound::setSpeed(float s)
 		{
 			soundMngr->setSpeed(channel, s);
 		}

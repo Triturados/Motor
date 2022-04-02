@@ -24,7 +24,7 @@ namespace LoveEngine {
 
 		class Transform;
 
-		class lovexport CameraComponent : public Component
+		class lovexport Camera : public Component
 		{
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
@@ -34,14 +34,16 @@ namespace LoveEngine {
 			Transform* player;
 		public:
 
-			CameraComponent();
-			~CameraComponent();
+			
+			~Camera();
 
-			void sendParameters(Transform* playerPos = nullptr);
+			void sendvalues(Transform* playerPos = nullptr);
 
 			void lookAtPlayer(Transform* playerPos = nullptr);
 
 			void lookAt(Utilities::Vector3<float>* pos);
+			void onSceneUp() override;
+			void onSceneDown() override;
 		};
 	}
 }

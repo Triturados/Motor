@@ -49,7 +49,7 @@ namespace LoveEngine {
 
 			void init();
 
-			void update();
+			void update() override;
 
 			void addForce(Utilities::Vector3<float>& vel, Utilities::Vector3<float>& relativePos, int type);
 

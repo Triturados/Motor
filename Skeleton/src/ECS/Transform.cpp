@@ -2,6 +2,7 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <string>
+#include <iostream>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -99,6 +100,11 @@ namespace LoveEngine {
 			for (std::list<Transform*>::iterator it = children.begin();
 				it != children.end(); it++) children.erase(it);
 			children.clear();
+		}
+
+		void Transform::update()
+		{
+			//std::cout  << "\n";
 		}
 	}
 }

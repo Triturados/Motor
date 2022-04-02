@@ -36,6 +36,8 @@ namespace LoveEngine {
 			Transform();
 			~Transform();
 
+			void update() override;
+
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();
 			Utilities::Vector3<float>* getScale();
