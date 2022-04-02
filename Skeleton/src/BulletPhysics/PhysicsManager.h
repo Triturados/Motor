@@ -1,16 +1,18 @@
 #pragma once
 #include <../Export.h>
+#include <vector>
 
 class btDefaultCollisionConfiguration;
-class btCollisionDispatcher;
+class btDispatcher;
 class btBroadphaseInterface;
-class btSequentialImpulseConstraintSolver;
-class btDiscreteDynamicsWorld;
+class btConstraintSolver;
+class btDynamicsWorld;
 class btRigidBody;
 class OgreDebugDrawer;
 class btCollisionObject;
 class btVector3;
 class btCollisionShape;
+class btDiscreteDynamicsWorld;
 template <class T> class btAlignedObjectArray;
 
 namespace Utilities {
@@ -27,21 +29,22 @@ private:
 	btDefaultCollisionConfiguration* collConfig = nullptr;
 
 	//Variable de bullet que hace de "pasador" de colisiones
-	btCollisionDispatcher* collDispatcher = nullptr;
+	btDispatcher* collDispatcher = nullptr;
 
 	//Variable de bullet que se usa para hacer calculos de manera eficiente para generar posibles colisiones
 	btBroadphaseInterface* broadPhaseInterface = nullptr;
 
 	//Variable de bullet que hace de solucionador de restricciones
-	btSequentialImpulseConstraintSolver* constraintSolver = nullptr;
+	btConstraintSolver* constraintSolver = nullptr;
 
 	//Variable que representa el entorno din�mico de bullet con las anteriores variables como configuraci�n
-	btDiscreteDynamicsWorld* dynamicsWorld = nullptr;
+	btDynamicsWorld* dynamicsWorld = nullptr;
 
 	OgreDebugDrawer* mDebugDrawer = nullptr;
 
-	btAlignedObjectArray<btCollisionShape*>* collisionShapes;
-
+	//desechar seguramente
+	//btAlignedObjectArray<btCollisionShape*>* collisionShapes;
+	std::vector<btRigidBody*> bodies;
 	void destroyWorld();
 	void checkCollision();
 
@@ -58,7 +61,7 @@ public:
 	void init(const Utilities::Vector3<float> gravity);
 
 
-	btDiscreteDynamicsWorld* getWorld() const;
+	btDynamicsWorld* getWorld() const;
 
 	//Crea el un rigidbody de bullet a partir de los siguientes parametros:
 	//Posicion, masa e identificador (el cual determina la forma del collider)

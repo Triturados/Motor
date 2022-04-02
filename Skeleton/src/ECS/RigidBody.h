@@ -17,9 +17,9 @@ enum class ForceMode {
 };
 
 enum RBState {
-	Kinematic,
-	Static,
-	Dynamic
+	Kinematic = 0,
+	Static = 1,
+	Dynamic = 2
 };
 
 class btRigidBody;
@@ -50,6 +50,8 @@ namespace LoveEngine {
 			void init();
 
 			void update() override;
+
+			void sendParameters(float mass_, Transform* eTm, int state_);
 
 			void addForce(Utilities::Vector3<float>& vel, Utilities::Vector3<float>& relativePos, int type);
 

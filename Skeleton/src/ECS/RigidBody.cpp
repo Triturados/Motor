@@ -49,25 +49,32 @@ namespace LoveEngine {
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = PhysicsManager::getInstance()->createRB(pos, 0, mass);
-				btQuaternion q;
+				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass, 0);
+				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
 				rigidBody->setWorldTransform(btTransform(q, cvt(pos)));
-				rigidBody->setMassProps(1.0f, btVector3(1.0, 1.0, 1.0));
-				rigidBody->setDamping(0.5, 0.5);
+				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));
+				rigidBody->setDamping(0.5, 0.5);*/
 			}
 		}
 
 		void RigidBody::update()
 		{
 			const auto worldTransform = rigidBody->getWorldTransform();
-
+			
 			Utilities::Vector3 newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4 newRot = cvt(worldTransform.getRotation());
 
 			tr->setPos(&newPos);
 			tr->setRot(&newRot);
+		}
+
+		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_)
+		{
+			mass = mass_;
+			tr = eTm;
+			stateMode = (RBState)state_;
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)

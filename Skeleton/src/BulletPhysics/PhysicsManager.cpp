@@ -25,7 +25,7 @@ PhysicsManager::PhysicsManager() {
 		assert("No se ha podido crear la instancia del PhysicsManager.", false);
 	}
 
-	init(Utilities::Vector3<float>(0, -9.8f, 0));
+	init(Utilities::Vector3<float>(0, -10, 0));
 
 	PhysicsManager::instance_ = this;
 	LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
@@ -34,7 +34,6 @@ PhysicsManager::PhysicsManager() {
 PhysicsManager::~PhysicsManager() {
 
 	destroy();
-	//destroyWorld();
 }
 
 void PhysicsManager::checkCollision() {
@@ -63,7 +62,7 @@ void PhysicsManager::init(const Utilities::Vector3<float> gravity) {
 
 	dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-	collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
+	//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 //#ifdef _DEBUG
 //	mDebugDrawer = new OgreDebugDrawer(OgreRenderer::instance->getSceneManager());
@@ -81,13 +80,14 @@ void PhysicsManager::checkExceptions() {
 	}
 }
 
-btDiscreteDynamicsWorld* PhysicsManager::getWorld() const {
+btDynamicsWorld* PhysicsManager::getWorld() const {
 
 	return dynamicsWorld;
 }
 
 void PhysicsManager::update(float physicsFrameRate) {
 
+	physicsFrameRate = 1 / 60;
 	dynamicsWorld->stepSimulation(physicsFrameRate);
 
 #ifdef _DEBUG
@@ -104,27 +104,44 @@ void PhysicsManager::fixedUpdate(float deltaTime) {
 
 btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int shape, int group, int mask) {
 
-	btTransform transform;
-	transform.setIdentity();
-	transform.setOrigin(btVector3(pos.x, pos.y, pos.z));
-	btCollisionShape* groundShape;
+	//creamos el collider
+	btCollisionShape* shapeBT;
+	
+	//diferentes tipos de caja de colision
 	if (shape == 0) {
-		groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
+		shapeBT = new btBoxShape(btVector3(pos.x, pos.y, pos.z));//cubo
 
 	}
+	else/* if(shape == 1)*/{
+		shapeBT = new btBoxShape(btVector3(pos.x, pos.y, pos.z));
+	}/*
 	else {
-		groundShape = new btSphereShape(btScalar(1.));
+		shapeBT = new btSphereShape(btScalar(1.));
+	}*/
+
+	//collisionShapes->push_back(shapeBT);
+
+	btTransform startTransform;
+	startTransform.setIdentity();
+	
+	//el rigidbody sera dinamico si su masa no es zero
+	//bool isDynamic = (mass != 0.f);
+
+	btVector3 localInertia(0, 0, 0);
+	if (mass != 0.f) {
+		shapeBT->calculateLocalInertia(mass, localInertia);
 	}
 
-	//collisionShapes->push_back(groundShape);
+	startTransform.setOrigin(btVector3(pos.x, pos.y, pos.z));
+	btMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
 	//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
-	btRigidBody* rb = new btRigidBody(mass, new btDefaultMotionState(transform), new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.))));
+	btRigidBody* rb = new btRigidBody(mass, myMotionState, shapeBT, localInertia);
 
-	rb->forceActivationState(DISABLE_DEACTIVATION);
+	//rb->forceActivationState(DISABLE_DEACTIVATION);
 
 	dynamicsWorld->addRigidBody(rb, group, mask);
-
+	bodies.push_back(rb);
 	return rb;
 }
 
@@ -156,7 +173,12 @@ void PhysicsManager::destroyWorld() {
 void PhysicsManager::destroy() {
 
 	//remove the rigidbodies from the dynamics world and delete them
-	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
+
+	for (int i = 0; i < bodies.size(); i++) {
+		destroyRigidBody(bodies[i]);
+	}
+
+	/*for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
 		btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
@@ -166,15 +188,15 @@ void PhysicsManager::destroy() {
 		}
 		dynamicsWorld->removeCollisionObject(obj);
 		delete obj;
-	}
+	}*/
 
 	//delete collision shapes
-	for (int j = 0; j < collisionShapes->size(); j++)
+	/*for (int j = 0; j < collisionShapes->size(); j++)
 	{
 		btCollisionShape* shape = collisionShapes->at(j);
 		collisionShapes->at(j) = 0;
 		delete shape;
-	}
+	}*/
 
 
 	destroyWorld();
