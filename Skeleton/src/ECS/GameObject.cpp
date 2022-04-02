@@ -150,5 +150,11 @@ namespace LoveEngine {
 			go->postInit();
 			return go;
 		}
+
+		void GameObject::sendMessage(std::string message) {
+			for (auto comp : componentsList) {
+				comp->receiveMessage(message);
+			}
+		}
 	}
 }

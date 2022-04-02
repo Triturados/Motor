@@ -293,8 +293,8 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::GameObject>("GameObject")
-		.addConstructor<void(*)(std::string, LoveEngine::ECS::Scene*)>()
 		.addFunction("addComponent", &(LoveEngine::ECS::GameObject::createComponent))
+		.addFunction("sendMsg", &(LoveEngine::ECS::GameObject::sendMessage))
 		.endClass();
 
 	luabridge::getGlobalNamespace(luastate)
@@ -305,11 +305,12 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::Component>("Component")
-		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues))
+		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues)) //int float comp gameObject
 		.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
 		.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
 		.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
 		.addFunction("send", &(LoveEngine::ECS::Component::send1value))
+		.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveMessage))
 		.endClass();
 
 

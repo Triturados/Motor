@@ -146,6 +146,12 @@ namespace LoveEngine {
 				createScene();
 				break;
 			}
+			case SceneLoad::EXIT: {
+				while (!currentScene.empty()) {
+					eraseTopScene();
+				}
+				return;
+			}
 			default:
 				break;
 			}

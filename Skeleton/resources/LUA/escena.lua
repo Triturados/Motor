@@ -6,7 +6,7 @@ end
 function scene0()
     scene:name("Escena de Dani")
     local obj = scene:createObject("Objeto de Dani")
-    obj:addComponent("ComponenteDeContar")
+    obj:addComponent("ComponenteDeContar"):sendMsg("Hola tontatatatata")
 end
 
 
