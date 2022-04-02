@@ -175,7 +175,7 @@ void Game::loop()
 
 		ogreManager->update();
 
-		//sceneManager->tryChangeScene();
+		sceneManager->tryChangeScene();
 
 		//Calculo del tiempo
 		steady_clock::time_point endFrame = high_resolution_clock::now();
