@@ -37,9 +37,7 @@ namespace LoveEngine {
 			
 			~Camera();
 
-			void sendvalues(Transform* playerPos = nullptr);
-
-			void lookAtPlayer(Transform* playerPos = nullptr);
+			void sendValues(int i, float f, Component* playerPos, GameObject* g) override;
 
 			void lookAt(Utilities::Vector3<float>* pos);
 			void onSceneUp() override;

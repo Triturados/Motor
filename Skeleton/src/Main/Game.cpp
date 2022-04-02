@@ -67,7 +67,7 @@ void Game::setup() {
 	LoveEngine::ECS::Transform* transformCamera= camera->addComponent<LoveEngine::ECS::Transform>();
 	transformCamera->setPos(new Utilities::Vector3<float>(0.0, 0.0, 100.0));
 	LoveEngine::ECS::Camera* cam= camera->addComponent<LoveEngine::ECS::Camera>();
-	cam->sendvalues(camera->getComponent<LoveEngine::ECS::Transform>());
+	cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
 	cam->lookAt(new Utilities::Vector3<float>(0.0, 0.0, -50.0));
 	cam->setActive(true);
 
