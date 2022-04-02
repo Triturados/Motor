@@ -64,19 +64,18 @@ void Game::setup() {
 	ogreManager->getSceneManager()->destroyAllCameras();
 	
 	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
-	camera->addComponent<LoveEngine::ECS::Transform>();
-	camera->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
-	camera->addComponent<LoveEngine::ECS::Camera>();
-	camera->getComponent<LoveEngine::ECS::Camera>()->sendvalues(camera->getComponent<LoveEngine::ECS::Transform>());
-	camera->getComponent<LoveEngine::ECS::Camera>()->lookAt(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
-	camera->getComponent<LoveEngine::ECS::Camera>()->setActive(true);
+	LoveEngine::ECS::Transform* transformCamera= camera->addComponent<LoveEngine::ECS::Transform>();
+	transformCamera->setPos(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
+	LoveEngine::ECS::Camera* cam= camera->addComponent<LoveEngine::ECS::Camera>();
+	cam->sendvalues(camera->getComponent<LoveEngine::ECS::Transform>());
+	cam->lookAt(new Utilities::Vector3<float>(0.0, 0.0, 50.0));
+	cam->setActive(true);
 
 	LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
-	luz->addComponent<LoveEngine::ECS::Transform>();
-	luz->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0.0, 10.0, 0.0));
-	luz->addComponent<LoveEngine::ECS::LightComponent>();
-	std::string lName = "light1";
-	luz->getComponent<LoveEngine::ECS::LightComponent>()->sendParameters(LoveEngine::ECS::lightType::directional, lName);
+	LoveEngine::ECS::Transform* transformLight= luz->addComponent<LoveEngine::ECS::Transform>();
+	transformLight->setPos(new Utilities::Vector3<float>(0.0, 10.0, 0.0));
+	LoveEngine::ECS::LightComponent* lightC=  luz->addComponent<LoveEngine::ECS::LightComponent>();
+	lightC->sendParameters(LoveEngine::ECS::lightType::directional, "light1");
 
 	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	go->addComponent<LoveEngine::ECS::Transform>();

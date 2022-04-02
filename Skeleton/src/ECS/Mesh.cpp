@@ -73,6 +73,15 @@ namespace LoveEngine {
 			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
 
+		void Mesh::onSceneDown()
+		{
+			entityNode->setVisible(false);
+		}
+		void Mesh::onSceneUp()
+		{
+			entityNode->setVisible(true);
+		}
+
 		Mesh::~Mesh()
 		{
 			OgreRenderer::instance->removeNode(entityNode);
