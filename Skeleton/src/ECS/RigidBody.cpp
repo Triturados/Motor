@@ -55,8 +55,8 @@ namespace LoveEngine {
 
 		void RigidBody::update()
 		{
-			//Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
-			//addForce(*lastForce, relPos, (int)ForceMode::FORCE);
+			/*Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
+			addForce(*lastForce, relPos, (int)ForceMode::FORCE);*/
 
 			Utilities::Vector3 newPos = cvt(rigidBody->getWorldTransform().getOrigin());
 			Utilities::Vector4 newRot = cvt(rigidBody->getWorldTransform().getRotation());

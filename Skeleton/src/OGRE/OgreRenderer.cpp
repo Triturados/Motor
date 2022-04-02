@@ -236,10 +236,10 @@ bool OgreRenderer::update()
 
 void OgreRenderer::exampleScene()
 {
-	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
+	//Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
 
-	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	ogreNode->attachObject(ogreEntity);
+	//Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	//ogreNode->attachObject(ogreEntity);
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 }

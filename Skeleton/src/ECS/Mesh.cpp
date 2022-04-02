@@ -60,6 +60,13 @@ namespace LoveEngine {
 			pos = child->getPos();
 			scale = child->getScale();
 
+			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
+			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
+
+			entityNode->resetOrientation();
+			entityNode->yaw(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+			entityNode->pitch(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
 
