@@ -41,9 +41,9 @@ namespace LoveEngine {
 				Ogre::Real(vp->getActualHeight()));
 		}
 
-		void Camera::lookAt(Utilities::Vector3<float>* pos)
+		void Camera::lookAt(Utilities::Vector3<float> pos)
 		{
-			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);
+			mCameraNode->lookAt(Ogre::Vector3(pos.x, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
 		}
 		void Camera::onSceneDown()
 		{

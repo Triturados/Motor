@@ -51,9 +51,11 @@ namespace LoveEngine {
 
 			void update() override;
 
+			void stepPhysics() override;
+
 			void sendParameters(float mass_, Transform* eTm, int state_, int forma_);
 
-			void addForce(Utilities::Vector3<float>& vel, Utilities::Vector3<float>& relativePos, int type);
+			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
 
 			void setTransform(Transform* t_);
 

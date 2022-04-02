@@ -88,14 +88,14 @@ btDynamicsWorld* PhysicsManager::getWorld() const {
 void PhysicsManager::update(float physicsFrameRate) {
 
 	//physicsFrameRate = 1 / 60;
-	dynamicsWorld->stepSimulation(physicsFrameRate);
+	dynamicsWorld->stepSimulation(1.f / 60.f, 10);
 
 	
 #ifdef _DEBUG
 	dynamicsWorld->stepSimulation(physicsFrameRate);
 	//dynamicsWorld->getDebugDrawer()->drawBox(btVector3(5, 5, 5), btVector3(10, 10, 10), btVector3(1, 0, 0));
 
-	dynamicsWorld->debugDrawWorld();
+	//dynamicsWorld->debugDrawWorld();
 #endif // _DEBUG
 }
 
@@ -111,11 +111,11 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 	
 	//diferentes tipos de caja de colision
 	if (shape == 0) {
-		shapeBT = new btBoxShape(btVector3(pos.x, pos.y, pos.z));//cubo
+		shapeBT = new btBoxShape(btVector3(50., 1., 50.));//cubo
 
 	}
 	else/* if(shape == 1)*/{
-		shapeBT = new btBoxShape(btVector3(pos.x, pos.y, pos.z));
+		shapeBT = new btSphereShape(btScalar(1.));
 	}/*
 	else {
 		shapeBT = new btSphereShape(btScalar(1.));

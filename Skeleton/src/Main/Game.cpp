@@ -67,15 +67,15 @@ void Game::setup() {
 	
 	LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
 	LoveEngine::ECS::Transform* transformCamera= camera->addComponent<LoveEngine::ECS::Transform>();
-	transformCamera->setPos(new Utilities::Vector3<float>(0.0, 0.0, 100.0));
+	transformCamera->setPos(Utilities::Vector3<float>(0.0, 0.0, 100.0));
 	LoveEngine::ECS::Camera* cam= camera->addComponent<LoveEngine::ECS::Camera>();
 	cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
-	cam->lookAt(new Utilities::Vector3<float>(0.0, 0.0, -50.0));
+	cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
 	cam->setActive(true);
 
 	LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
 	LoveEngine::ECS::Transform* transformLight= luz->addComponent<LoveEngine::ECS::Transform>();
-	transformLight->setPos(new Utilities::Vector3<float>(0.0, 10.0, 50.0));
+	transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
 	LoveEngine::ECS::Light* lightC=  luz->addComponent<LoveEngine::ECS::Light>();
 	lightC->sendParameters(LoveEngine::ECS::lightType::point, "light1");
 
@@ -105,7 +105,7 @@ void Game::setup() {
 
 	LoveEngine::ECS::GameObject* suelo = sceneManager->getCurrentScene()->createGameObject("suelo");
 	suelo->addComponent<LoveEngine::ECS::Transform>();
-	suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(new Utilities::Vector3<float>(70., 1., 70.));
+	suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(Utilities::Vector3<float>(70., 1., 70.));
 	suelo->addComponent<LoveEngine::ECS::Mesh>();
 	suelo->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("cube.mesh",
 		suelo->getComponent<LoveEngine::ECS::Transform>());
@@ -117,7 +117,7 @@ void Game::setup() {
 
 	LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
 	pelota->addComponent<LoveEngine::ECS::Transform>();
-	pelota->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0, 15, 0));
+	pelota->getComponent<LoveEngine::ECS::Transform>()->setPos(Utilities::Vector3<float>(0, 15, 0));
 	pelota->addComponent<LoveEngine::ECS::Mesh>();
 	pelota->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("sphere.mesh",
 		pelota->getComponent<LoveEngine::ECS::Transform>());

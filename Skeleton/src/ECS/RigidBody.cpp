@@ -67,8 +67,19 @@ namespace LoveEngine {
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
 			std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
-			tr->setPos(new Utilities::Vector3<float>(newPos));
-			tr->setRot(&newRot);
+			tr->setPos(newPos);
+			tr->setRot(newRot);
+		}
+
+		void RigidBody::stepPhysics()
+		{
+			const auto worldTransform = rigidBody->getWorldTransform();
+
+			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
+			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
+			std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			tr->setPos(newPos);
+			tr->setRot(newRot);
 		}
 
 		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_, int forma_)
@@ -79,9 +90,10 @@ namespace LoveEngine {
 			forma = forma_;
 		}
 
-		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
+		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)
 		{
-			lastForce = &force;
+			lastForce->x = force.x; lastForce->y = force.y; lastForce->z = force.z;
+
 			if (enabled) {
 				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
 					if (type == (int)ForceMode::FORCE)
