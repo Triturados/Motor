@@ -203,11 +203,11 @@ namespace LoveEngine {
 
 		void Light::onSceneDown()
 		{
-			setVisibility(false);
+			//setVisibility(false);
 		}
 		void Light::onSceneUp()
 		{
-			setVisibility(true);
+			//setVisibility(true);
 		}
 
 

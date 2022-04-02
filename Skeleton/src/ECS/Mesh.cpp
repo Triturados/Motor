@@ -78,11 +78,11 @@ namespace LoveEngine {
 		}
 		void Mesh::onSceneDown()
 		{
-			setVisibility(false);
+			//setVisibility(false);
 		}
 		void Mesh::onSceneUp()
 		{
-			setVisibility(true);
+			//setVisibility(true);
 		}
 
 		Mesh::~Mesh()

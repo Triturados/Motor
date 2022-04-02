@@ -55,11 +55,11 @@ namespace LoveEngine {
 		}
 		void Camera::onSceneDown()
 		{
-			mCameraNode->setVisible(false);
+			//mCameraNode->setVisible(false);
 		}
 		void Camera::onSceneUp()
 		{
-			mCameraNode->setVisible(true);
+			//mCameraNode->setVisible(true);
 		}
 	}
 }
