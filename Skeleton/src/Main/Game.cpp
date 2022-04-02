@@ -23,6 +23,7 @@
 #include <LightComponent.h>
 #include <RigidBody.h>
 #include <Vector3.h>
+#include <Vector4.h>
 #include <lua.hpp>
 #include <Input.h>
 #include <LuaBridge/LuaBridge.h>
@@ -79,17 +80,28 @@ void Game::setup() {
 	lightC->sendParameters(LoveEngine::ECS::lightType::point, "light1");
 
 	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
-	go->addComponent<LoveEngine::ECS::Transform>();
-	go->addComponent<LoveEngine::ECS::Mesh>();
-	go->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("ogrehead.mesh",
-														   go->getComponent<LoveEngine::ECS::Transform>());
-	go->getComponent<LoveEngine::ECS::Mesh>()->init();
+	LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
+	LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
+	m->sendvalues("ogrehead.mesh", t);
+	m->init();
 
 	LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
 	s->createSound("./FMOD/Sonidos/sonido.wav", 0);
 	soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
 	s->playSound(LoveEngine::ECS::soundType::effects, true);
 
+	LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
+	LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
+	Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
+	t2->setParent(t); t2->setPos(v);
+	LoveEngine::ECS::Mesh* m2 = go2->addComponent<LoveEngine::ECS::Mesh>();
+	m2->sendvalues("ogrehead.mesh", t2);
+	m2->init();
+
+	Utilities::Vector3<float>* v2 = new Utilities::Vector3<float>(-20, 0, 0);
+	t->setPos(v2);
+	Utilities::Vector4<float>* v3 = new Utilities::Vector4<float>(0, 0, 90, 0);
+	t->rotate(v3);
 	//go->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(30.0, 0.0, 0.0));
 
 	//go->addComponent<LoveEngine::ECS::RigidBody>();

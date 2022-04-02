@@ -45,7 +45,6 @@ namespace LoveEngine {
 		//No se llama el update 
 		void Mesh::update()
 		{
-			std::cout << "OgroPos " << pos->y << "\n";
 			rot = tr->getRot();
 			pos = tr->getPos();
 			scale = tr->getScale();

@@ -48,17 +48,24 @@ namespace LoveEngine {
 
 		void Transform::setScale(Utilities::Vector3<float>* s, Utilities::Vector3<float>* s2)
 		{
-			*scale = *s * *s2;
+			scale->x *= s->x * s2->x;
+			scale->y *= s->y * s2->y;
+			scale->z *= s->z * s2->z;
 			updateChildren(2);
 		}
 
 		void Transform::translate(Utilities::Vector3<float>* p) {
-			*position += *p;
+			position->x += p->x;
+			position->x += p->y;
+			position->z += p->z;
 			updateChildren(0);
 		}
 
 		void Transform::rotate(Utilities::Vector4<float>* r) {
-			*rotation += *r;
+			rotation->x += r->x;
+			rotation->y += r->y;
+			rotation->z += r->z;
+			rotation->w += r->w;
 			updateChildren(1);
 		}
 
