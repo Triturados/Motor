@@ -82,7 +82,7 @@ void Game::setup() {
 	go->addComponent<LoveEngine::ECS::Transform>();
 	go->addComponent<LoveEngine::ECS::Mesh>();
 	go->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("ogrehead.mesh",
-		 go->getComponent<LoveEngine::ECS::Transform>(),nullptr);
+														   go->getComponent<LoveEngine::ECS::Transform>());
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
 
 	LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();

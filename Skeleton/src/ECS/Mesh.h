@@ -28,10 +28,8 @@ namespace LoveEngine {
 		private:
 			std::string  meshName = "";
 			Ogre::SceneNode* entityNode = nullptr;
-			Ogre::SceneNode* parentNode = nullptr;
 			Ogre::Entity* entity = nullptr;
-			Transform* parent = nullptr;
-			Transform* child = nullptr;
+			Transform* tr = nullptr;
 			Utilities::Vector4<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
@@ -39,7 +37,7 @@ namespace LoveEngine {
 		public:
 			void init()override;
 			void update()override;
-			void sendvalues(std::string mN, Transform* eT, LoveEngine::ECS::GameObject* pObj);
+			void sendvalues(std::string mN, Transform* eT);
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
