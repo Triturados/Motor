@@ -50,18 +50,23 @@ namespace LoveEngine {
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
 				rigidBody = PhysicsManager::getInstance()->createRB(pos, 0, mass);
+				btQuaternion q;
+				Utilities::Vector4<float> vRot = *tr->getRot();
+				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
+				rigidBody->setWorldTransform(btTransform(q, cvt(pos)));
+				rigidBody->setMassProps(1.0f, btVector3(1.0, 1.0, 1.0));
+				rigidBody->setDamping(0.5, 0.5);
 			}
 		}
 
 		void RigidBody::update()
 		{
-			/*Utilities::Vector3 relPos = Utilities::Vector3(0.0f, 0.0f, 0.0f);
-			addForce(*lastForce, relPos, (int)ForceMode::FORCE);*/
+			const auto worldTransform = rigidBody->getWorldTransform();
 
-			Utilities::Vector3 newPos = cvt(rigidBody->getWorldTransform().getOrigin());
-			Utilities::Vector4 newRot = cvt(rigidBody->getWorldTransform().getRotation());
-			
-			tr->setPos(&newPos);  //actualizar pos tr
+			Utilities::Vector3 newPos = cvt(worldTransform.getOrigin());
+			Utilities::Vector4 newRot = cvt(worldTransform.getRotation());
+
+			tr->setPos(&newPos);
 			tr->setRot(&newRot);
 		}
 

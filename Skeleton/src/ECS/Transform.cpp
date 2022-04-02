@@ -104,7 +104,7 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
-			/*std::cout << "Hola Mundo jajajajaja" << "\n";*/
+			//std::cout  << "\n";
 		}
 	}
 }

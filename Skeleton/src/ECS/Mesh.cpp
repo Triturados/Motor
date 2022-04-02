@@ -8,6 +8,7 @@
 #include <Vector4.h>
 #include <Ogre.h>
 #include <string>
+#include <iostream>
 namespace LoveEngine {
 	namespace ECS {
 
@@ -58,7 +59,7 @@ namespace LoveEngine {
 		//No se llama el update 
 		void Mesh::update()
 		{
-
+			std::cout << "OgroPos " << pos->y << "\n";
 			rot = child->getRot();
 			pos = child->getPos();
 			scale = child->getScale();
