@@ -13,11 +13,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		LightComponent::LightComponent()
-		{
-
-		}
-		void LightComponent::sendParameters(lightType t, std::string n)
+		void Light::sendParameters(lightType t, std::string n)
 		{
 			pos = gameObject->getComponent<Transform>();
 			name = n;
@@ -88,7 +84,7 @@ namespace LoveEngine {
 
 			light->setVisible(true);
 		}
-		void LightComponent::init()
+		void Light::init()
 		{
 			visible = true;
 
@@ -145,40 +141,40 @@ namespace LoveEngine {
 			light->setVisible(true);
 		}
 
-		LightComponent::~LightComponent()
+		Light::~Light()
 		{
 			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
 			OgreRenderer::instance->removeNode(entityNode);
 		}
 
-		void LightComponent::specularColor(float r, float g, float b)
+		void Light::specularColor(float r, float g, float b)
 		{
 			light->setDiffuseColour(r, g, b);
 		}
 
-		void LightComponent::setPower(float power)
+		void Light::setPower(float power)
 		{
 			light->setPowerScale(power);
 		}
 
-		Utilities::Vector3<float> LightComponent::getSpecularColor()
+		Utilities::Vector3<float> Light::getSpecularColor()
 		{
 
 			return Utilities::Vector3<float>(light->getSpecularColour().r, light->getSpecularColour().g, light->getSpecularColour().b);
 		}
 
-		void LightComponent::diffuseColor(float r, float g, float b)
+		void Light::diffuseColor(float r, float g, float b)
 		{
 			light->setSpecularColour(r, g, b);
 		}
 
-		Utilities::Vector3<float> LightComponent::getDiffuseColor()
+		Utilities::Vector3<float> Light::getDiffuseColor()
 		{
 			return Utilities::Vector3<float>(light->getDiffuseColour().r, light->getDiffuseColour().g, light->getDiffuseColour().b);
 		}
 
 
-		void LightComponent::setDir(Utilities::Vector3<float> direction)
+		void Light::setDir(Utilities::Vector3<float> direction)
 		{
 			if (type != point) //Si la luz no es punto
 			{
@@ -186,7 +182,7 @@ namespace LoveEngine {
 			}
 		}
 
-		void LightComponent::setRange(float startAngle, float endAngle, float desvanecimiento)
+		void Light::setRange(float startAngle, float endAngle, float desvanecimiento)
 		{
 			if (type == spot)
 			{
@@ -194,16 +190,25 @@ namespace LoveEngine {
 			}
 		}
 
-		void LightComponent::setVisibility(bool active)
+		void Light::setVisibility(bool active)
 		{
 			light->setVisible(active);
 		}
 
-		bool LightComponent::getVisibility()
+		bool Light::getVisibility()
 		{
 			return visible;
 		}
 
+
+		void Light::onSceneDown()
+		{
+			setVisibility(false);
+		}
+		void Light::onSceneUp()
+		{
+			setVisibility(true);
+		}
 
 
 	}

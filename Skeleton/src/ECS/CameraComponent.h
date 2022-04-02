@@ -42,6 +42,8 @@ namespace LoveEngine {
 			void lookAtPlayer(Transform* playerPos = nullptr);
 
 			void lookAt(Utilities::Vector3<float>* pos);
+			void onSceneUp() override;
+			void onSceneDown() override;
 		};
 	}
 }

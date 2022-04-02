@@ -53,5 +53,13 @@ namespace LoveEngine {
 		{
 			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);
 		}
+		void Camera::onSceneDown()
+		{
+			mCameraNode->setVisible(false);
+		}
+		void Camera::onSceneUp()
+		{
+			mCameraNode->setVisible(true);
+		}
 	}
 }

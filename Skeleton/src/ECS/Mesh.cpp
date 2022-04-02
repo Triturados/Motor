@@ -72,14 +72,17 @@ namespace LoveEngine {
 			entityNode->roll(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
-
+		void Mesh::setVisibility(bool mode)
+		{
+			entityNode->setVisible(mode);
+		}
 		void Mesh::onSceneDown()
 		{
-			entityNode->setVisible(false);
+			setVisibility(false);
 		}
 		void Mesh::onSceneUp()
 		{
-			entityNode->setVisible(true);
+			setVisibility(true);
 		}
 
 		Mesh::~Mesh()

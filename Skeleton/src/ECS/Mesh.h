@@ -42,6 +42,7 @@ namespace LoveEngine {
 			void sendvalues(std::string mN, Transform* eT, LoveEngine::ECS::GameObject* pObj);
 			void onSceneUp() override;
 			void onSceneDown() override;
+			void setVisibility(bool mode = true);
 			~Mesh();
 			Ogre::SceneNode* getEntityNode();
 

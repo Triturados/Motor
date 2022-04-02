@@ -27,7 +27,7 @@ namespace LoveEngine {
 
 
 		class Transform;
-		class lovexport LightComponent : public Component
+		class lovexport Light : public Component
 		{
 		private:
 			Ogre::SceneNode* entityNode;
@@ -42,10 +42,9 @@ namespace LoveEngine {
 			lightType type;
 		public:
 
-			LightComponent();
-			~LightComponent();
+			~Light();
 
-			void init();
+			void init() override;
 
 			void sendParameters(lightType t, std::string n);
 			void specularColor(float r, float g, float b);
@@ -58,6 +57,8 @@ namespace LoveEngine {
 			Utilities::Vector3<float> getDiffuseColor();
 			Utilities::Vector3<float> getSpecularColor();
 			Utilities::Vector3<float> getDir();
+			void onSceneDown()override;
+			void onSceneUp()override;
 			bool getVisibility();
 		};
 
