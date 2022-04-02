@@ -213,8 +213,8 @@ void OgreRenderer::setupScenes()
 	//	Ogre::Real(vp->getActualWidth()) /
 	//	Ogre::Real(vp->getActualHeight()));
 
-	//Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
-	//Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 void OgreRenderer::throwOgreError(int errorLine, const std::string& errorMsg) {
