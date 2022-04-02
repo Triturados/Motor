@@ -6,10 +6,10 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Sound::createSound(SoundManager* manager, const char* pFile, int channel_)
+		void Sound::createSound(const char* pFile, int channel_)
 		{
-			soundMngr = manager;
 			channel = channel_;
+			soundMngr = SoundManager::instance;
 			soundMngr->createSound(&sound, pFile, channel);
 		}
 

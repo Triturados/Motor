@@ -18,6 +18,7 @@
 #include <Sound.h>
 #include <Transform.h>
 #include <Mesh.h>
+#include <SoundComponent.h>
 #include <CameraComponent.h>
 #include <LightComponent.h>
 #include <RigidBody.h>
@@ -83,6 +84,11 @@ void Game::setup() {
 	go->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("ogrehead.mesh",
 		 go->getComponent<LoveEngine::ECS::Transform>(),nullptr);
 	go->getComponent<LoveEngine::ECS::Mesh>()->init();
+
+	LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
+	s->createSound("./FMOD/Sonidos/sonido.wav", 0);
+	soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
+	s->playSound(LoveEngine::ECS::soundType::effects, true);
 
 	//go->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(30.0, 0.0, 0.0));
 
