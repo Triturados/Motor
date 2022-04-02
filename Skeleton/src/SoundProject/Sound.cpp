@@ -4,8 +4,16 @@
 #include <fstream>
 #include <Error_handling.h>
 
+SoundManager* SoundManager::instance = nullptr;
+
 SoundManager::SoundManager()
 {
+	if (instance != nullptr)
+		LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, __LINE__, 
+											  __FILENAME__, "Ya existe una instancia del SoundManager.");
+
+	instance = this;
+
 	fmod_error = FMOD::System_Create(&m_pSystem);
 	throwFMODError(fmod_error, __LINE__);
 
@@ -31,6 +39,12 @@ SoundManager::SoundManager()
 
 	channels.reserve(MaxCh);
 	for (int i = 0; i < MaxCh; i++) channels.push_back(nullptr);
+}
+
+SoundManager::~SoundManager()
+{
+	fmod_error = m_pSystem->release();
+	throwFMODError(fmod_error, __LINE__);
 }
 
 void SoundManager::createSound(FMOD::SoundClass* pSound, const char* pFile, int channel)

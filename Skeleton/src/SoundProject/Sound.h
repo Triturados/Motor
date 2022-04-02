@@ -32,7 +32,12 @@ private:
 public:
 	// Pointer to the FMOD instance
 	FMOD::System* m_pSystem;
+
+	static SoundManager* instance;
+
 	SoundManager();
+	~SoundManager();
+
 	void createSound(FMOD::SoundClass* pSound, const char* pFile,int channel);
 	void playSound(FMOD::SoundClass pSound, int groupChannel, bool bLoop = false);
 	void releaseSound(int channel);
