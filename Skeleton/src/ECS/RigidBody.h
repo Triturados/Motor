@@ -33,7 +33,7 @@ namespace LoveEngine {
 		{
 		private:
 			float mass;
-
+			int forma;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
@@ -51,7 +51,7 @@ namespace LoveEngine {
 
 			void update() override;
 
-			void sendParameters(float mass_, Transform* eTm, int state_);
+			void sendParameters(float mass_, Transform* eTm, int state_, int forma_);
 
 			void addForce(Utilities::Vector3<float>& vel, Utilities::Vector3<float>& relativePos, int type);
 

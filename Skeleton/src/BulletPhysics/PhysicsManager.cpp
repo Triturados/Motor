@@ -87,10 +87,12 @@ btDynamicsWorld* PhysicsManager::getWorld() const {
 
 void PhysicsManager::update(float physicsFrameRate) {
 
-	physicsFrameRate = 1 / 60;
+	//physicsFrameRate = 1 / 60;
 	dynamicsWorld->stepSimulation(physicsFrameRate);
 
+	
 #ifdef _DEBUG
+	dynamicsWorld->stepSimulation(physicsFrameRate);
 	//dynamicsWorld->getDebugDrawer()->drawBox(btVector3(5, 5, 5), btVector3(10, 10, 10), btVector3(1, 0, 0));
 
 	dynamicsWorld->debugDrawWorld();
@@ -125,8 +127,6 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 	startTransform.setIdentity();
 	
 	//el rigidbody sera dinamico si su masa no es zero
-	//bool isDynamic = (mass != 0.f);
-
 	btVector3 localInertia(0, 0, 0);
 	if (mass != 0.f) {
 		shapeBT->calculateLocalInertia(mass, localInertia);
@@ -138,10 +138,11 @@ btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass,
 	//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
 	btRigidBody* rb = new btRigidBody(mass, myMotionState, shapeBT, localInertia);
 
-	//rb->forceActivationState(DISABLE_DEACTIVATION);
+	rb->forceActivationState(DISABLE_DEACTIVATION);
 
-	dynamicsWorld->addRigidBody(rb, group, mask);
+	dynamicsWorld->addRigidBody(rb);
 	bodies.push_back(rb);
+	
 	return rb;
 }
 

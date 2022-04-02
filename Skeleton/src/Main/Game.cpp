@@ -79,7 +79,7 @@ void Game::setup() {
 	LoveEngine::ECS::Light* lightC=  luz->addComponent<LoveEngine::ECS::Light>();
 	lightC->sendParameters(LoveEngine::ECS::lightType::point, "light1");
 
-	LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
+	/*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
 	LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
 	m->sendvalues("ogrehead.mesh", t);
@@ -101,7 +101,32 @@ void Game::setup() {
 	Utilities::Vector3<float>* v2 = new Utilities::Vector3<float>(-20, 0, 0);
 	t->setPos(v2);
 	Utilities::Vector4<float>* v3 = new Utilities::Vector4<float>(0, 0, 90, 0);
-	t->rotate(v3);
+	t->rotate(v3);*/
+
+	LoveEngine::ECS::GameObject* suelo = sceneManager->getCurrentScene()->createGameObject("suelo");
+	suelo->addComponent<LoveEngine::ECS::Transform>();
+	suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(new Utilities::Vector3<float>(70., 1., 70.));
+	suelo->addComponent<LoveEngine::ECS::Mesh>();
+	suelo->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("cube.mesh",
+		suelo->getComponent<LoveEngine::ECS::Transform>());
+	suelo->getComponent<LoveEngine::ECS::Mesh>()->init();
+
+	suelo->addComponent<LoveEngine::ECS::RigidBody>();
+	suelo->getComponent<LoveEngine::ECS::RigidBody>()->sendParameters(0., suelo->getComponent<LoveEngine::ECS::Transform>(), 1, 0);
+	suelo->getComponent<LoveEngine::ECS::RigidBody>()->init();
+
+	LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
+	pelota->addComponent<LoveEngine::ECS::Transform>();
+	pelota->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(0, 15, 0));
+	pelota->addComponent<LoveEngine::ECS::Mesh>();
+	pelota->getComponent <LoveEngine::ECS::Mesh>()->sendvalues("sphere.mesh",
+		pelota->getComponent<LoveEngine::ECS::Transform>());
+	pelota->getComponent<LoveEngine::ECS::Mesh>()->init();
+
+	pelota->addComponent<LoveEngine::ECS::RigidBody>();
+	pelota->getComponent<LoveEngine::ECS::RigidBody>()->sendParameters(1.0, pelota->getComponent<LoveEngine::ECS::Transform>(), 1, 1);
+	pelota->getComponent<LoveEngine::ECS::RigidBody>()->init();
+
 	//go->getComponent<LoveEngine::ECS::Transform>()->setPos(new Utilities::Vector3<float>(30.0, 0.0, 0.0));
 
 	//go->addComponent<LoveEngine::ECS::RigidBody>();

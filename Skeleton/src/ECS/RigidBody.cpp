@@ -1,5 +1,6 @@
 #include "Rigidbody.h"
 #include <cmath>
+#include <iostream>
 
 #include "LinearMath/btDefaultMotionState.h"
 #include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
@@ -49,7 +50,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass, 0);
+				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass, forma);
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
@@ -63,18 +64,19 @@ namespace LoveEngine {
 		{
 			const auto worldTransform = rigidBody->getWorldTransform();
 			
-			Utilities::Vector3 newPos = cvt(worldTransform.getOrigin());
-			Utilities::Vector4 newRot = cvt(worldTransform.getRotation());
-
-			tr->setPos(&newPos);
+			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
+			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
+			std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			tr->setPos(new Utilities::Vector3<float>(newPos));
 			tr->setRot(&newRot);
 		}
 
-		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_)
+		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_, int forma_)
 		{
 			mass = mass_;
 			tr = eTm;
 			stateMode = (RBState)state_;
+			forma = forma_;
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
