@@ -13,7 +13,7 @@ function scene0()
         scale: 50,1,50;
         position: 0,0,0;
         rotation: 0,0,0,0;
-    ]]))
+    ]])
     local comp3 = suelo:addComponent("Mesh"):sendMsg([[
         meshName: cube.mesh;
     ]])

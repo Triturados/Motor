@@ -135,7 +135,7 @@ namespace LoveEngine {
 			v3.emplace(name, Utilities::Vector3(values[0], values[1], values[2]));
 		}
 		else {
-			//v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], values[3]));
+			v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], values[3]));
 		}
 	}
 
@@ -191,7 +191,7 @@ namespace LoveEngine {
 
 	Utilities::Vector4<float> StringFormatter::getVector4(std::string name)
 	{
-		return Utilities::Vector4<float>();
+		return v4.find(name)->second;
 	}
 
 
