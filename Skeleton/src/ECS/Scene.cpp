@@ -14,7 +14,6 @@ namespace LoveEngine {
 				delete gO;
 			}
 			gObjects.clear();
-			renderers.clear();
 		}
 
 		void Scene::init()

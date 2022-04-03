@@ -13,14 +13,16 @@ namespace Ogre {
 	class Light;
 }
 
-namespace Utilities {
-	template<typename T>
-	class Vector3;
-	template<typename T>
-	class Vector4;
-}
-
 namespace LoveEngine {
+
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector4;
+	}
+
+
 	namespace ECS {
 
 		enum lightType { point, directional, spot };

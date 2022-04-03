@@ -1,7 +1,7 @@
-#include "SoundComponent.h"
+#include "Sound.h"
 #include <fstream>
 #include <fmod.hpp>
-#include <Sound.h>
+#include <SoundManager.h>
 #include <iostream>
 namespace LoveEngine {
 	namespace ECS {
@@ -9,7 +9,7 @@ namespace LoveEngine {
 		void Sound::createSound(const char* pFile, int channel_)
 		{
 			channel = channel_;
-			soundMngr = SoundManager::instance;
+			soundMngr = LoveEngine::Audio::SoundManager::instance;
 			soundMngr->createSound(&sound, pFile, channel);
 		}
 

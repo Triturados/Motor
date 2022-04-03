@@ -4,29 +4,27 @@
 #include <../Export.h>
 
 
-namespace Utilities {
-	template <typename T>
-	class Vector3;
-}
-
-enum class ForceMode {
-	FORCE,
-	ACCELERATION,
-	IMPULSE,
-	VELOCITY_CHANGE
-};
-
-enum RBState {
-	Kinematic = 0,
-	Static = 1,
-	Dynamic = 2
-};
-
 class btRigidBody;
 
 namespace LoveEngine {
-
+	namespace Utilities {
+		template <typename T>
+		class Vector3;
+	}
 	namespace ECS {
+		enum class ForceMode {
+			FORCE,
+			ACCELERATION,
+			IMPULSE,
+			VELOCITY_CHANGE
+		};
+
+		enum class RBState {
+			Kinematic = 0,
+			Static = 1,
+			Dynamic = 2
+		};
+
 		class Transform;
 
 		class lovexport RigidBody : public Component

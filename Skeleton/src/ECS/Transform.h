@@ -7,13 +7,15 @@
 #include <list>
 #include <Component.h>
 
-namespace Utilities {
-	template<typename T>
-	class Vector3;
-	template<typename T>
-	class Vector4;
-}
 namespace LoveEngine {
+
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector4;
+	}
+
 	namespace ECS {
 
 		class lovexport Transform : public Component

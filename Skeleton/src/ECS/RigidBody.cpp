@@ -50,7 +50,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = PhysicsManager::getInstance()->createRB(pos, mass, forma);
+				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, mass, forma);
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);

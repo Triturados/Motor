@@ -3,179 +3,181 @@
 #include <math.h>
 #include "Recta.h"
 
-namespace Utilities
-{
-	template<typename T = float >
-	class lovexport Vector3 {
-	private:
-		float gradosARadianes(double grados)
-		{
-			return grados * 3.1416 / 180;
-		}
+namespace LoveEngine {
+	namespace Utilities
+	{
+		template<typename T = float >
+		class lovexport Vector3 {
+		private:
+			float gradosARadianes(double grados)
+			{
+				return grados * 3.1416 / 180;
+			}
 
-	public:
+		public:
 
-		T x;
-		T y;
-		T z;
+			T x;
+			T y;
+			T z;
 
-		Vector3()
-		{
-			x = 0; y = 0; z = 0;
-		}
+			Vector3()
+			{
+				x = 0; y = 0; z = 0;
+			}
 
-		Vector3(T prim, T sec, T ter)
-		{
-			x = prim;
-			y = sec;
-			z = ter;
-		}
-		
-		Vector3<T> operator+(Vector3<T> const& v2) const {
-			return Vector3(x + v2.x, y + v2.y, z + v2.z);
-		}
+			Vector3(T prim, T sec, T ter)
+			{
+				x = prim;
+				y = sec;
+				z = ter;
+			}
 
-		Vector3<T> operator*(Vector3<T> const& v2) const {
-			return Vector3(x * v2.x, y * v2.y, z * v2.z);
-		}
+			Vector3<T> operator+(Vector3<T> const& v2) const {
+				return Vector3(x + v2.x, y + v2.y, z + v2.z);
+			}
 
-		Vector3<T> operator-(Vector3<T> const& v2) const {
-			return Vector3(x - v2.x, y - v2.y, z - v2.z);
-		}
+			Vector3<T> operator*(Vector3<T> const& v2) const {
+				return Vector3(x * v2.x, y * v2.y, z * v2.z);
+			}
 
-		Vector3<T> operator+=(Vector3<T> const& v2) const {
-			return Vector3(x + v2.x, y + v2.y, z + v2.z);
-		}
+			Vector3<T> operator-(Vector3<T> const& v2) const {
+				return Vector3(x - v2.x, y - v2.y, z - v2.z);
+			}
 
-		bool operator==(Vector3<T> const& v2) const {
-			return x == v2.x && y == v2.y && z == v2.z;
-		}
+			Vector3<T> operator+=(Vector3<T> const& v2) const {
+				return Vector3(x + v2.x, y + v2.y, z + v2.z);
+			}
 
-		bool operator!=(Vector3<T> const& v2) const {
-			return x != v2.x || y != v2.y || z != v2.z;
-		}
+			bool operator==(Vector3<T> const& v2) const {
+				return x == v2.x && y == v2.y && z == v2.z;
+			}
 
-		void inverse()
-		{
-			x = -x;
-			y = -y;
-			z = -z;
-		}
+			bool operator!=(Vector3<T> const& v2) const {
+				return x != v2.x || y != v2.y || z != v2.z;
+			}
 
-		void add(T sumX, T sumY, T sumZ)
-		{
-			x += sumX;
-			y += sumY;
-			z += sumZ;
-		}
+			void inverse()
+			{
+				x = -x;
+				y = -y;
+				z = -z;
+			}
 
-		T magnitude() //Magnitud 
-		{
-			return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-		}
+			void add(T sumX, T sumY, T sumZ)
+			{
+				x += sumX;
+				y += sumY;
+				z += sumZ;
+			}
 
-		T magnitude2() //Magnitud al cuadrado
-		{
-			return pow(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)), 2);
-		}
+			T magnitude() //Magnitud 
+			{
+				return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+			}
 
-		void normalize() //normalizar vector
-		{
-			T magnitud = magnitude();
+			T magnitude2() //Magnitud al cuadrado
+			{
+				return pow(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)), 2);
+			}
 
-			x = x / magnitud;
-			y = y / magnitud;
-			z = z / magnitud;
-		}
+			void normalize() //normalizar vector
+			{
+				T magnitud = magnitude();
 
-		T scalarProduct(Vector3<T> b)
-		{
-			int x_ = x * b.x;
-			int y_ = y * b.y;
-			int z_ = z * b.z;
+				x = x / magnitud;
+				y = y / magnitud;
+				z = z / magnitud;
+			}
 
-			return (x_ + y_ + z_);
-		}
+			T scalarProduct(Vector3<T> b)
+			{
+				int x_ = x * b.x;
+				int y_ = y * b.y;
+				int z_ = z * b.z;
 
-		Recta getRecta(Vector3<T> b)
-		{
-			Vector3<T> v = this - b;
+				return (x_ + y_ + z_);
+			}
 
-			element auxX, auxY, auxZ;
+			Recta getRecta(Vector3<T> b)
+			{
+				Vector3<T> v = this - b;
 
-			auxX.value = x;
-			auxX.landa = v.x;
+				element auxX, auxY, auxZ;
 
-			auxY.value = y;
-			auxY.landa = v.y;
+				auxX.value = x;
+				auxX.landa = v.x;
 
-			auxZ.value = z;
-			auxZ.landa = v.z;
+				auxY.value = y;
+				auxY.landa = v.y;
 
-			return Recta(auxX, auxY, auxZ);
-		}
+				auxZ.value = z;
+				auxZ.landa = v.z;
 
-		Vector3<T> interpolatePoint(Vector3<T> b, float interpolation)
-		{
-			Vector3<T> v = this - b;
+				return Recta(auxX, auxY, auxZ);
+			}
 
-			Vector3<T> aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
+			Vector3<T> interpolatePoint(Vector3<T> b, float interpolation)
+			{
+				Vector3<T> v = this - b;
 
-			return aux;
-		}
+				Vector3<T> aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
 
-		Vector3<T> vectorialProduct(Vector3<T> b)
-		{
-			Vector3<T> vectorial;
+				return aux;
+			}
 
-			vectorial.x = y * b.z - z * b.y;
-			vectorial.y = z * b.x - x * b.z;
-			vectorial.z = x * b.y - y * b.x;
+			Vector3<T> vectorialProduct(Vector3<T> b)
+			{
+				Vector3<T> vectorial;
 
-			return vectorial;
-		}
+				vectorial.x = y * b.z - z * b.y;
+				vectorial.y = z * b.x - x * b.z;
+				vectorial.z = x * b.y - y * b.x;
 
-		T getDistance(Vector3<T> b) //Distancia entre 2 vectores
-		{
-			int x_ = x - b.x;
-			int y_ = y - b.y;
-			int z_ = z - b.z;
-			Vector3<T> aux = Vector3(x_, y_, z_);
-			return aux.magnitude();
-		}
+				return vectorial;
+			}
 
-		Vector3<T> rotateX(double degrees) { //Rotar en el eje x
-			double rads = gradosARadianes(degrees);
+			T getDistance(Vector3<T> b) //Distancia entre 2 vectores
+			{
+				int x_ = x - b.x;
+				int y_ = y - b.y;
+				int z_ = z - b.z;
+				Vector3<T> aux = Vector3(x_, y_, z_);
+				return aux.magnitude();
+			}
 
-			Vector3<T> A;
-			A.x = x;
-			A.y = cos(rads) * y + sin(rads) * z;
-			A.z = -sin(rads) * y + cos(rads) * z;
+			Vector3<T> rotateX(double degrees) { //Rotar en el eje x
+				double rads = gradosARadianes(degrees);
 
-			return A;
-		}
+				Vector3<T> A;
+				A.x = x;
+				A.y = cos(rads) * y + sin(rads) * z;
+				A.z = -sin(rads) * y + cos(rads) * z;
 
-		Vector3<T> rotateY(double degrees) { //Rotar en el eje y
-			double rads = gradosARadianes(degrees);
+				return A;
+			}
 
-			Vector3<T> A;
-			A.x = (cos(rads) * x) - (sin(rads) * z);
-			A.y = y;
-			A.z = (sin(rads) * x) + (cos(rads) * z);
+			Vector3<T> rotateY(double degrees) { //Rotar en el eje y
+				double rads = gradosARadianes(degrees);
 
-			return A;
-		}
+				Vector3<T> A;
+				A.x = (cos(rads) * x) - (sin(rads) * z);
+				A.y = y;
+				A.z = (sin(rads) * x) + (cos(rads) * z);
 
-		Vector3<T> rotateZ(double degrees) { //Rotar en el eje z
-			double rads = gradosARadianes(degrees);
+				return A;
+			}
 
-			Vector3<T> A;
-			A.x = (cos(rads) * x) + (sin(rads) * y);
-			A.y = (-sin(rads) * x) + (cos(rads) * y);
-			A.z = z;
+			Vector3<T> rotateZ(double degrees) { //Rotar en el eje z
+				double rads = gradosARadianes(degrees);
 
-			return A;
-		}
+				Vector3<T> A;
+				A.x = (cos(rads) * x) + (sin(rads) * y);
+				A.y = (-sin(rads) * x) + (cos(rads) * y);
+				A.z = z;
 
-	};
+				return A;
+			}
+
+		};
+	}
 }

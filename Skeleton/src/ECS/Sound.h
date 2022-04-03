@@ -7,9 +7,11 @@ namespace FMOD {
 	class Sound;
 	typedef Sound* SoundClass;
 }
-class SoundManager;
 
 namespace LoveEngine {
+	namespace Audio {
+		class SoundManager;
+	}
 	namespace ECS {
 
 		enum soundType { effects, environment, voices, music };
@@ -18,7 +20,7 @@ namespace LoveEngine {
 		{
 		private:
 			FMOD::SoundClass sound;
-			SoundManager* soundMngr;
+			LoveEngine::Audio::SoundManager* soundMngr;
 
 			int channel;
 		public:

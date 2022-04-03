@@ -26,7 +26,7 @@ void main()
 #endif
 
 	bool success = true;
-	Game g;
+	LoveEngine::Game g;
 
 	//Descomentar estas dos lineas para probar los metodos de testing
 	/*g.testing();

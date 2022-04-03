@@ -16,23 +16,23 @@ namespace LoveEngine {
 		Camera::~Camera()
 		{
 
-			OgreRenderer::instance->removeNode(mCameraNode);
+			Renderer::OgreRenderer::instance->removeNode(mCameraNode);
 		}
 
 		void Camera::receiveValues(int i, float f, Component* playerPos, GameObject* g)
 		{
 			position = static_cast<Transform*>(playerPos);
 
-			mCameraNode = OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			mCameraNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
-			mCamera = OgreRenderer::instance->getSceneManager()->createCamera("MainCam");
+			mCamera = Renderer::OgreRenderer::instance->getSceneManager()->createCamera("MainCam");
 			mCamera->setNearClipDistance(5);
 
 			mCameraNode->attachObject(mCamera);
 
-			vp = OgreRenderer::instance->getRenderWindow()->addViewport(mCamera);
+			vp = Renderer::OgreRenderer::instance->getRenderWindow()->addViewport(mCamera);
 
 			vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 

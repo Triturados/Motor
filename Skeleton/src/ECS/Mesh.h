@@ -8,18 +8,20 @@
 #include <string>
 
 
-namespace Utilities {
-	template<typename T>
-	class Vector3;
-	template<typename T>
-	class Vector4;
-}
 namespace Ogre {
 	class SceneNode;
 	class Entity;
 }
 
 namespace LoveEngine {
+
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector4;
+	}
+
 	namespace ECS {
 
 		class Transform;
@@ -43,8 +45,6 @@ namespace LoveEngine {
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
 			~Mesh();
-
-
 		};
 	}
 }
