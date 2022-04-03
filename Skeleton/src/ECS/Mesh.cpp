@@ -9,13 +9,20 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
+#include <StringFormater.h>
+
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::sendvalues(std::string mN, Transform* eT)
+		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
 		{
-			meshName = mN;
-			tr = eT;
+
+			tr = static_cast<Transform*>(eT);
+		}
+		void Mesh::receiveMessage(std::string s)
+		{
+			StringFormatter sTf(s);
+			meshName = sTf.getString("meshName");
 		}
 		void Mesh::init()
 		{

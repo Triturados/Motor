@@ -46,7 +46,7 @@ namespace LoveEngine {
 
 			void init() override;
 
-			void recieveValues(lightType t, std::string n);
+			void receiveValues(int lightT,float lightNumber, Component*c=nullptr, GameObject*g=nullptr)override;
 			void specularColor(float r, float g, float b);
 			void diffuseColor(float r, float g, float b);
 			void setDir(Utilities::Vector3<float> direction);

@@ -14,11 +14,11 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Light::recieveValues(lightType t, std::string n)
+		void Light::receiveValues(int lightT, float lightNumber, Component*, GameObject*)
 		{
 			pos = gameObject->getComponent<Transform>();
-			name = n;
-			type = t;
+			name = "light"+(int)lightNumber;
+			type = static_cast<lightType>(lightT);
 
 			if (type == point)
 			{
