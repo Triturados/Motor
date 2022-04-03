@@ -6,7 +6,10 @@ end
 function scene0()
     scene:name("Escena de Dani")
     local obj = scene:createObject("Objeto de Dani")
-    obj:addComponent("ComponenteDeContar"):sendMsg("Hola tontatatatata")
+    --obj:addComponent("ComponenteDeContar"):sendMsg("Hola tontatatatata")
+    obj:addComponent('EscribirNumero'):sendMsg([[
+        numerito: 120
+    ]])
 end
 
 

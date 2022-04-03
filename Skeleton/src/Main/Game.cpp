@@ -137,7 +137,6 @@ void Game::setup() {
 	//Utilities::Vector3<float>* pos = new Utilities::Vector3<float>(0, 0, 0);
 	//go->getComponent<LoveEngine::ECS::RigidBody>()->addForce(*vel, *pos, 0);
 
-	//delete creator;
 }
 
 
@@ -337,6 +336,7 @@ int Game::initialiseSceneCreator()
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::GameObject>("GameObject")
 		.addFunction("addComponent", &(LoveEngine::ECS::GameObject::createComponent))
+		.addFunction("sendMssg", &(LoveEngine::ECS::GameObject::sendMessage))
 		.addFunction("sendMsg", &(LoveEngine::ECS::GameObject::sendMessage))
 		.endClass();
 
@@ -348,12 +348,13 @@ int Game::initialiseSceneCreator()
 
 	luabridge::getGlobalNamespace(luastate)
 		.beginClass<LoveEngine::ECS::Component>("Component")
-		.addFunction("send4", &(LoveEngine::ECS::Component::sendValues)) //int float comp gameObject
+		.addFunction("send4", &(LoveEngine::ECS::Component::receiveValues)) //int float comp gameObject
 		.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
 		.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
 		.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
 		.addFunction("send", &(LoveEngine::ECS::Component::send1value))
 		.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveMessage))
+		.addFunction("sendMssg", &(LoveEngine::ECS::Component::receiveMessage))
 		.endClass();
 
 

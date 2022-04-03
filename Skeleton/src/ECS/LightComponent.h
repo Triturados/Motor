@@ -60,6 +60,9 @@ namespace LoveEngine {
 			void onSceneDown()override;
 			void onSceneUp()override;
 			bool getVisibility();
+
+
+			void receiveMessage(std::string message) override;
 		};
 
 	}

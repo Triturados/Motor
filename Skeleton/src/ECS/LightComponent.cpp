@@ -9,6 +9,7 @@
 #include "GameObject.h"
 #include <Vector3.h>
 #include <Vector4.h>
+#include <StringFormater.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -198,6 +199,13 @@ namespace LoveEngine {
 		bool Light::getVisibility()
 		{
 			return visible;
+		}
+
+		void Light::receiveMessage(std::string message)
+		{
+			StringFormatter sf(message);
+			//Hola tenia que crear el string formatter en algun sitio porque sino no se compilaba
+			//Igualmente esto será útil para la luz just saying
 		}
 
 

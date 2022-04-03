@@ -1,5 +1,6 @@
 #pragma once
 #include <../Export.h>
+
 namespace Utilities
 {
 	template<typename T = float>
@@ -53,5 +54,5 @@ namespace Utilities
 		}
 	};
 
-	using Quaternion = Vector4<float>;
+	//using Quaternion = Vector4<float>;
 }

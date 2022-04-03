@@ -2,6 +2,7 @@
 #include <../Export.h>
 #include <math.h>
 #include "Recta.h"
+
 namespace Utilities
 {
 	template<typename T = float >

@@ -19,7 +19,7 @@ namespace LoveEngine {
 			OgreRenderer::instance->removeNode(mCameraNode);
 		}
 
-		void Camera::sendValues(int i, float f, Component* playerPos, GameObject* g)
+		void Camera::receiveValues(int i, float f, Component* playerPos, GameObject* g)
 		{
 			position = static_cast<Transform*>(playerPos);
 
