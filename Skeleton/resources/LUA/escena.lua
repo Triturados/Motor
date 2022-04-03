@@ -21,3 +21,16 @@ function scene1()
     local comp = obj:addComponent("EscribirNumero")
     comp:send2(1, 0)
 end
+
+function scene2()
+    scene::name("Calvo cabron")
+    local suelo = scene:createObject("Suelo")
+    local comp = suelo:addComponent("EscribirNumero")
+    local comp2 = suelo:addComponent("Transform")
+    
+    local comp3 = suelo:addComponent("Mesh"):sendMsg([[
+        meshName: cube.mesh
+    ]])
+    local comp4 = suelo:addComponent("Rigidbody")
+    comp4:
+end
