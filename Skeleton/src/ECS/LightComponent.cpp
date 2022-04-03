@@ -140,8 +140,52 @@ namespace LoveEngine {
 		void Light::receiveMessage(std::string message)
 		{
 			StringFormatter sf(message);
-			//Hola tenia que crear el string formatter en algun sitio porque sino no se compilaba
-			//Igualmente esto será útil para la luz just saying
+			
+			std::string metodo = sf.getString("methodType");
+			
+			if (metodo == "setDiffuse")
+			{
+				Utilities::Vector3<float> vector = sf.getVector3("vector3");
+
+				diffuseColor(vector.x, vector.y, vector.z);
+
+			}
+			else if (metodo == "setPower")
+			{
+				float value = sf.getFloat("float");
+
+				setPower(value);
+			}
+			else if (metodo == "setSpecular")
+			{
+				Utilities::Vector3<float> vector = sf.getVector3("vector3");
+
+				specularColor(vector.x, vector.y, vector.z);
+			}
+			else if (metodo == "setVisibility")
+			{
+				bool aux = sf.getBool("bool");
+
+				setVisibility(aux);
+			}
+			else if (metodo == "setRange")
+			{
+				float startAngle = sf.getFloat("startAngle");
+				float endAngle = sf.getFloat("endAngle");
+				float desvanecimiento = sf.getFloat("desvanecimiento");
+
+				setRange(startAngle, endAngle, desvanecimiento);
+			}
+			else if (metodo == "setDir")
+			{
+				Utilities::Vector3<float> vector = sf.getVector3("vector3");
+
+				setDir(vector);
+			}
+			else
+			{
+				std::cout << "ESA FUNCION NO EXISTE";
+			}
 		}
 
 
