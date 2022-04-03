@@ -8,6 +8,19 @@
 
 namespace LoveEngine {
 
+	/*
+	*
+	*	Ejemplo de sintaxis:
+	*
+	*	[[
+	*		numero: 2;
+	*		dir: 2, 4.1, 1;
+	*		tieneGravedad: true;
+	*		nombre: Dani;
+	*	]]
+	*
+	*/
+
 	class lovexport StringFormatter {
 
 	private:

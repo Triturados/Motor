@@ -15,7 +15,6 @@ namespace LoveEngine {
 	*		nombre: Dani;
 	*	]]
 	*
-	*
 	*/
 
 
@@ -32,9 +31,9 @@ namespace LoveEngine {
 
 			char c = message[idx++];
 
-			if (c == ' ' || c == '\n') continue; //Ignoramos los espacios o saltos de linea
+			if (c == ' ') continue; //Ignoramos los espacios o saltos de linea
 
-			if (c == ':' || c == ';') //Los puntos y coma o dos puntos marcan el final de cada palabra
+			if (c == ':' || c == ';' || c == '\n') //Los puntos y coma o dos puntos marcan el final de cada palabra
 			{
 				return currentword;
 			}
@@ -54,6 +53,8 @@ namespace LoveEngine {
 		while (idx < messageSize) {
 
 			std::string newword = nextWord(message, idx);
+
+			if (newword == "") continue; //En caso de que la palabra recibida sea vacía
 
 			if (lastword == "")
 			{
@@ -96,7 +97,7 @@ namespace LoveEngine {
 		std::string current = "";
 		for (auto c : value) {
 
-			if (c == ' ' || c == '\n') //Si se ha colado un espacio, ignorarlo
+			if (c == ' ') //Si se ha colado un espacio, ignorarlo
 				continue;
 
 			if (c == ',') {	//Si tiene una coma, añado el elemento a una nueva posicion del vector
