@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 //#include <../Export.h>
 //
 //#ifndef ANIMATION_H
@@ -30,13 +30,13 @@
 //			bool isActive;
 //			std::string name;
 //		public:
-//			
-//			void sendValues(std::string animaName);
+//			void receiveMessage(std::string message) override;
+//
 //			void setActive(bool activated = true);
 //			void setLoop(bool activated = true);
 //
-//			void init();
-//			void update();
+//			void init() override;
+//			void update() override;
 //
 //			bool playingAnimation(std::string animationName);
 //

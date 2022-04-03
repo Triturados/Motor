@@ -66,7 +66,7 @@
     <ClCompile Include="..\..\src\ECS\MouseTracker.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
+    <ClCompile Include="..\..\src\ECS\Animation.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +116,7 @@
     <ClInclude Include="..\..\src\ECS\MouseTracker.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
+    <ClInclude Include="..\..\src\ECS\Animation.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -79,6 +79,11 @@ namespace LoveEngine {
 			//setVisibility(true);
 		}
 
+		Ogre::Entity* Mesh::getEntity()
+		{
+			return entity;
+		}
+
 		Mesh::~Mesh()
 		{
 			ogremanager->removeNode(entityNode);

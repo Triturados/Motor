@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\ECS\Animation.cpp" />
     <ClCompile Include="..\..\src\ECS\CameraComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Component.cpp" />
     <ClCompile Include="..\..\src\ECS\ComponentFactory.cpp" />
@@ -102,9 +103,9 @@
     <ClCompile Include="..\..\src\ECS\Sound.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
-    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\ECS\Animation.h" />
     <ClInclude Include="..\..\src\ECS\CameraComponent.h" />
     <ClInclude Include="..\..\src\ECS\Component.h" />
     <ClInclude Include="..\..\src\ECS\ComponentFactory.h" />
@@ -120,7 +121,6 @@
     <ClInclude Include="..\..\src\ECS\Sound.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />
     <ClInclude Include="..\..\src\ECS\Transform.h" />
-    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">

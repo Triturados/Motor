@@ -11,7 +11,7 @@
 //namespace LoveEngine {
 //	namespace ECS {
 //
-//		void Animation::sendValues(std::string animaState)
+//		void Animation::receiveMessage(std::string animaState)
 //		{
 //			name = animaState;
 //			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(animaState);
