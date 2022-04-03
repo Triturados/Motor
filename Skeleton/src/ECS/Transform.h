@@ -5,18 +5,15 @@
 #define TRANSFORM_H
 
 #include <list>
-#include <string>
 #include <Component.h>
 
+namespace Utilities {
+	template<typename T>
+	class Vector3;
+	template<typename T>
+	class Vector4;
+}
 namespace LoveEngine {
-
-	namespace Utilities {
-		template<typename T>
-		class Vector3;
-		template<typename T>
-		class Vector4;
-	}
-
 	namespace ECS {
 
 		class lovexport Transform : public Component
@@ -32,7 +29,7 @@ namespace LoveEngine {
 			Transform* parent;
 			std::list<Transform*> children;
 
-			void setScale(Utilities::Vector3<float> s, Utilities::Vector3<float> s2);
+			void setScale(Utilities::Vector3<float>* s, Utilities::Vector3<float>* s2);
 
 		public:
 
@@ -40,17 +37,16 @@ namespace LoveEngine {
 			~Transform();
 
 			void update() override;
-			void receiveMessage(std::string s) override;
 
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();
 			Utilities::Vector3<float>* getScale();
 
-			void setRot(Utilities::Vector4<float> r);
-			void setPos(Utilities::Vector3<float> p);
-			void setScale(Utilities::Vector3<float> s);
-			void translate(Utilities::Vector3<float> p);
-			void rotate(Utilities::Vector4<float> r);
+			void setRot(Utilities::Vector4<float>* r);
+			void setPos(Utilities::Vector3<float>* p);
+			void setScale(Utilities::Vector3<float>* s);
+			void translate(Utilities::Vector3<float>* p);
+			void rotate(Utilities::Vector4<float>* r);
 			void detachChildren();
 
 			void setParent(Transform* p);

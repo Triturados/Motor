@@ -6,11 +6,7 @@
 #include <Windows.h>
 #include <chrono>
 
-class lua_State;
-
-typedef void (*GameComponentDefinition)();
 namespace LoveEngine {
-
 	class Time;
 	namespace ComponentDefinitions {
 		class ComponentFactory;
@@ -21,53 +17,53 @@ namespace LoveEngine {
 	namespace Input {
 		class InputManager;
 	}
-	namespace Physics {
-		class PhysicsManager;
-	}
-	namespace Audio { 
-		class SoundManager;
-	}
-	namespace Renderer {
-		class OgreRenderer;
-	}
-
-	struct Game {
-
-		void setup();
-		void loop();
-		void quit();
-
-		void testing();
-
-	private:
-		HMODULE game;
-		HMODULE singleton;
-
-		Input::InputManager* inputManager;
-		Renderer::OgreRenderer* ogreManager;
-		Audio::SoundManager* soundManager;
-		Physics::PhysicsManager* physicsManager;
-
-		SceneManagement::SceneManager* sceneManager;
-		ComponentDefinitions::ComponentFactory* compFactory;
-		LoveEngine::Time* time;
-		lua_State* luastate;
-
-		int initialiseDLLs(GameComponentDefinition& gcd);
-		int initialiseSceneCreator();
-
-		void updateTimeValues(
-			const std::chrono::steady_clock::time_point& beginFrame,
-			const std::chrono::steady_clock::time_point& endFrame,
-			const std::chrono::steady_clock::time_point& appStart);
-
-		//Metodos de testing de funcionamiento de librerias
-		void sdlinput();
-		void fmod();
-		void lua();
-		void luabridge();
-		void ogre();
-		void bullet();
-	};
 }
+
+class OgreRenderer;
+class PhysicsManager;
+class SoundManager;
+
+class ComponentFactory;
+class lua_State;
+
+typedef void (*GameComponentDefinition)();
+
+struct Game {
+
+	void setup();
+	void loop();
+	void quit();
+
+	void testing();
+
+private:
+	HMODULE game;
+	HMODULE singleton;
+
+	LoveEngine::Input::InputManager* inputManager;
+	OgreRenderer* ogreManager;
+	SoundManager* soundManager;
+	PhysicsManager* physicsManager;
+
+	LoveEngine::SceneManagement::SceneManager* sceneManager;
+	LoveEngine::ComponentDefinitions::ComponentFactory* compFactory;
+	LoveEngine::Time* time;
+	lua_State* luastate;
+
+	int initialiseDLLs(GameComponentDefinition& gcd);
+	int initialiseSceneCreator();
+
+	void updateTimeValues(
+		const std::chrono::steady_clock::time_point& beginFrame,
+		const std::chrono::steady_clock::time_point& endFrame,
+		const std::chrono::steady_clock::time_point& appStart);
+
+	//Metodos de testing de funcionamiento de librerias
+	void sdlinput();
+	void fmod();
+	void lua();
+	void luabridge();
+	void ogre();
+	void bullet();
+};
 #endif

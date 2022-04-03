@@ -9,12 +9,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\SoundProject\SoundManager.h">
+    <ClInclude Include="..\..\Src\SoundProject\Sound.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\SoundProject\SoundManager.cpp">
+    <ClCompile Include="..\..\Src\SoundProject\Sound.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
   </ItemGroup>

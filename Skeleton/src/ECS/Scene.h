@@ -3,6 +3,8 @@
 #include <string>
 #include <list>
 
+class Renderer;
+
 namespace LoveEngine {
 
 	namespace SceneManagement {
@@ -43,7 +45,10 @@ namespace LoveEngine {
 			GameObject* createGameObject(std::string name = "new game object");
 
 
+
+
 			std::list<GameObject*> gObjects;
+			std::list<Renderer*> renderers;
 		};
 	}
 }

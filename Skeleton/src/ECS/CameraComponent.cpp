@@ -16,27 +16,25 @@ namespace LoveEngine {
 		Camera::~Camera()
 		{
 
-			ogremanager->removeNode(mCameraNode);
+			OgreRenderer::instance->removeNode(mCameraNode);
 		}
 
-		void Camera::receiveValues(int i, float f, Component* playerPos, GameObject* g)
+		void Camera::sendvalues(Transform* pos)
 		{
-			position = static_cast<Transform*>(playerPos);
-			ogremanager = Renderer::OgreRenderer::getInstance();
-		}
+			position = pos;
 
-		void Camera::init()
-		{
-			mCameraNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			mCameraNode = OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
-			mCamera = ogremanager->getSceneManager()->createCamera("MainCam");
+			mCamera = OgreRenderer::instance->getSceneManager()->createCamera("MainCam");
 			mCamera->setNearClipDistance(5);
 
 			mCameraNode->attachObject(mCamera);
 
-			vp = ogremanager->getRenderWindow()->addViewport(mCamera);
+
+
+			vp = OgreRenderer::instance->getRenderWindow()->addViewport(mCamera);
 
 			vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
@@ -45,9 +43,15 @@ namespace LoveEngine {
 				Ogre::Real(vp->getActualHeight()));
 		}
 
-		void Camera::lookAt(Utilities::Vector3<float> pos)
+		void Camera::lookAtPlayer(Transform* playerPos)
 		{
-			mCameraNode->lookAt(Ogre::Vector3(pos.x, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
+			/*Utilities::Vector3<float>* pos = playerPos->getPos();
+			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);*/
+		}
+
+		void Camera::lookAt(Utilities::Vector3<float>* pos)
+		{
+			mCameraNode->lookAt(Ogre::Vector3(pos->x, pos->y, pos->z), Ogre::Node::TransformSpace::TS_WORLD);
 		}
 		void Camera::onSceneDown()
 		{

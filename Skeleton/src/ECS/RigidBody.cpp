@@ -1,6 +1,5 @@
 #include "Rigidbody.h"
 #include <cmath>
-#include <iostream>
 
 #include "LinearMath/btDefaultMotionState.h"
 #include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
@@ -48,53 +47,32 @@ namespace LoveEngine {
 		void  RigidBody::init()
 		{
 			Utilities::Vector3<float> pos = *(tr->getPos());
-			Utilities::Vector3<float> scale = *(tr->getScale());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)forma);
-				/*btQuaternion q;
+				rigidBody = PhysicsManager::getInstance()->createRB(pos, 0, mass);
+				btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
 				rigidBody->setWorldTransform(btTransform(q, cvt(pos)));
-				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));
-				rigidBody->setDamping(0.5, 0.5);*/
+				rigidBody->setMassProps(1.0f, btVector3(1.0, 1.0, 1.0));
+				rigidBody->setDamping(0.5, 0.5);
 			}
 		}
 
 		void RigidBody::update()
 		{
 			const auto worldTransform = rigidBody->getWorldTransform();
-			
-			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
-			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
-			tr->setPos(newPos);
-			tr->setRot(newRot);
+
+			Utilities::Vector3 newPos = cvt(worldTransform.getOrigin());
+			Utilities::Vector4 newRot = cvt(worldTransform.getRotation());
+
+			tr->setPos(&newPos);
+			tr->setRot(&newRot);
 		}
 
-		void RigidBody::stepPhysics()
+		void RigidBody::addForce(Utilities::Vector3<float>& force, Utilities::Vector3<float>& relativePos, int type)
 		{
-			const auto worldTransform = rigidBody->getWorldTransform();
-
-			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
-			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
-			tr->setPos(newPos);
-			tr->setRot(newRot);
-		}
-
-		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_, std::string forma_)
-		{
-			mass = mass_;
-			tr = eTm;
-			stateMode = (RBState)state_;
-			setForma(forma_);
-		}
-
-		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)
-		{
-			lastForce->x = force.x; lastForce->y = force.y; lastForce->z = force.z;
-
+			lastForce = &force;
 			if (enabled) {
 				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
 					if (type == (int)ForceMode::FORCE)
@@ -123,32 +101,6 @@ namespace LoveEngine {
 		void RigidBody::setMass(float mass_)
 		{
 			mass = mass_;
-		}
-		void RigidBody::setForma(std::string nameF_)
-		{
-			if (nameF_ == "cube") {
-				forma = TipoForma::Cube;
-			}
-			else if (nameF_ == "sphere") {
-				forma = TipoForma::Sphere;
-			}
-			else if (nameF_ == "plane") {
-				forma = TipoForma::Plane;
-			}
-			else if (nameF_ == "cone") {
-				forma = TipoForma::Cone;
-			}
-			else if (nameF_ == "cylinder") {
-				forma = TipoForma::Cylinder;
-			}
-			else {
-				forma = TipoForma::Cube;
-			}
-		}
-
-		void RigidBody::setLinearVelocity(Utilities::Vector3<float> vel)
-		{
-			rigidBody->setLinearVelocity(cvt(vel));
 		}
 	}
 }

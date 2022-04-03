@@ -3,30 +3,15 @@
 
 #include "Game.h"
 #include "checkML.h"
-//#include <string>
-//#include <StringFormater.h>
-//#include <Vector3.h>
 
 void main()
 {
-	//std::string message =
-	//	"valor: 454231; vec: 2.13, 4, 0; gravedad: true; nombre: Dani";
-
-	//LoveEngine::StringFormatter sf(message);
-
-	//std::string nombre = sf.getString("nombre");
-	//std::cout << nombre << "\n";
-
-	//int valor = sf.getInt("valor");
-	//bool gravedad = sf.getBool("gravedad");
-	//Utilities::Vector3 vec = sf.getVector3("vec");
-	//return;
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
 	bool success = true;
-	LoveEngine::Game g;
+	Game g;
 
 	//Descomentar estas dos lineas para probar los metodos de testing
 	/*g.testing();
@@ -83,6 +68,7 @@ void main()
 
 	if (!success) {
 		std::cout << "Error en la destructora del motor.\n";
+		return;
 	}
 
 	std::cout << "Bye bye!";

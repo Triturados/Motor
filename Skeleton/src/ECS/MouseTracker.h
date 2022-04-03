@@ -5,10 +5,10 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		class lovexport MouseTracker: public Component {
+		class lovexport MouseTracker {
 		public:
 
-			void update() override;
+			void update();
 
 		};
 

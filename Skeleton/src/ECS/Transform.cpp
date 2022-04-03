@@ -3,7 +3,6 @@
 #include <Vector4.h>
 #include <string>
 #include <iostream>
-#include <StringFormater.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -32,48 +31,34 @@ namespace LoveEngine {
 			return scale;
 		}
 
-		void Transform::setRot(Utilities::Vector4<float> r) {
-			rotation->x = r.x;
-			rotation->y = r.y;
-			rotation->z = r.z;
-			rotation->w = r.w;
+		void Transform::setRot(Utilities::Vector4<float>* r) {
+			rotation = r;
 			updateChildren(1);
 		}
 
-		void Transform::setPos(Utilities::Vector3<float> p) {
-			position->x = p.x;
-			position->y = p.y;
-			position->z = p.z;
+		void Transform::setPos(Utilities::Vector3<float>* p) {
+			position = p;
 			updateChildren(0);
 		}
 
-		void Transform::setScale(Utilities::Vector3<float> s) {
-			scale->x = s.x;
-			scale->y = s.y;
-			scale->z = s.z;
+		void Transform::setScale(Utilities::Vector3<float>* s) {
+			scale = s;
 			updateChildren(2);
 		}
 
-		void Transform::setScale(Utilities::Vector3<float> s, Utilities::Vector3<float> s2)
+		void Transform::setScale(Utilities::Vector3<float>* s, Utilities::Vector3<float>* s2)
 		{
-			scale->x *= s.x * s2.x;
-			scale->y *= s.y * s2.y;
-			scale->z *= s.z * s2.z;
+			*scale = *s * *s2;
 			updateChildren(2);
 		}
 
-		void Transform::translate(Utilities::Vector3<float> p) {
-			position->x += p.x;
-			position->x += p.y;
-			position->z += p.z;
+		void Transform::translate(Utilities::Vector3<float>* p) {
+			*position += *p;
 			updateChildren(0);
 		}
 
-		void Transform::rotate(Utilities::Vector4<float> r) {
-			rotation->x += r.x;
-			rotation->y += r.y;
-			rotation->z += r.z;
-			rotation->w += r.w;
+		void Transform::rotate(Utilities::Vector4<float>* r) {
+			*rotation += *r;
 			updateChildren(1);
 		}
 
@@ -97,9 +82,9 @@ namespace LoveEngine {
 			for (auto& c : children) {
 				switch (mode)
 				{
-				case 0: c->translate(*position); break;
-				case 1: c->rotate(*rotation); break;
-				case 2: c->setScale(*scale, *c->scale); break;
+				case 0: c->translate(position); break;
+				case 1: c->rotate(rotation); break;
+				case 2: c->setScale(scale, c->scale); break;
 				default:
 					break;
 				}
@@ -120,24 +105,6 @@ namespace LoveEngine {
 		void Transform::update()
 		{
 			//std::cout  << "\n";
-		}
-
-		void Transform::receiveMessage(std::string s)
-		{
-			StringFormatter sTf(s);
-			Utilities::Vector3<float> v = sTf.getVector3("scale");
-			scale->x = v.x;
-			scale->y = v.y;
-			scale->z = v.z;
-			Utilities::Vector3<float> v1 = sTf.getVector3("position");
-			position->x = v1.x;
-			position->y = v1.y;
-			position->z = v1.z;
-			Utilities::Vector4<float> v2 = sTf.getVector4("rotation");
-			rotation->x = v2.x;
-			rotation->y = v2.y;
-			rotation->z = v2.z;
-			rotation->w = v2.w;
 		}
 	}
 }
