@@ -46,7 +46,7 @@ namespace LoveEngine {
 
 			void init() override;
 
-			void sendParameters(lightType t, std::string n);
+			void recieveValues(lightType t, std::string n);
 			void specularColor(float r, float g, float b);
 			void diffuseColor(float r, float g, float b);
 			void setDir(Utilities::Vector3<float> direction);

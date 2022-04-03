@@ -14,7 +14,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Light::sendParameters(lightType t, std::string n)
+		void Light::recieveValues(lightType t, std::string n)
 		{
 			pos = gameObject->getComponent<Transform>();
 			name = n;

@@ -76,9 +76,6 @@ namespace LoveEngine {
 			OgreRenderer::instance->removeNode(entityNode);
 			delete rot, pos, scale;
 		}
-		Ogre::SceneNode* Mesh::getEntityNode()
-		{
-			return nullptr;
-		}
+
 	}
 }
