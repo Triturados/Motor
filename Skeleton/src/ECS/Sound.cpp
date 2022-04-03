@@ -22,7 +22,7 @@ namespace LoveEngine {
 
 		void Sound::init()
 		{
-			soundMngr = LoveEngine::Audio::SoundManager::instance;
+			soundMngr = LoveEngine::Audio::SoundManager::getInstance();
 			soundMngr->createSound(&sound, soundRoute.c_str(), channel);
 		}
 

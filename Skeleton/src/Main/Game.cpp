@@ -91,7 +91,7 @@ namespace LoveEngine {
 		LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 		LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
 		s->receiveValues(LoveEngine::ECS::soundType::effects, 0);
-		s->receiveMessage("soundName: sonido.wav; bLoop: false");
+		s->receiveMessage("soundName: wii.mp3; bLoop: false");
 		s->init();
 		soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
 		s->playSound();

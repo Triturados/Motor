@@ -29,12 +29,14 @@ namespace LoveEngine {
 			FMOD_RESULT fmod_error;
 			void throwFMODError(FMOD_RESULT result, int errorLine);
 
-
-		public:
 			// Pointer to the FMOD instance
 			FMOD::System* m_pSystem;
 
 			static SoundManager* instance;
+
+		public:
+
+			static SoundManager* getInstance();
 
 			SoundManager();
 			~SoundManager();

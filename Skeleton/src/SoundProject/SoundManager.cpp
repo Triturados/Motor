@@ -3,10 +3,20 @@
 #include <string.h>
 #include <fstream>
 #include <Error_handling.h>
+#include <SingletonInfo.h>
 
 namespace LoveEngine {
 	namespace Audio {
 		SoundManager* SoundManager::instance = nullptr;
+
+		SoundManager* SoundManager::getInstance()
+		{
+			if (instance == nullptr) {
+				instance = static_cast<SoundManager*>(
+					LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::SoundManager));
+			}
+			return instance;
+		}
 
 		SoundManager::SoundManager()
 		{
@@ -15,6 +25,7 @@ namespace LoveEngine {
 					__FILENAME__, "Ya existe una instancia del SoundManager.");
 
 			instance = this;
+			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SoundManager);
 
 			fmod_error = FMOD::System_Create(&m_pSystem);
 			throwFMODError(fmod_error, __LINE__);
