@@ -52,7 +52,7 @@ namespace LoveEngine {
 
 			void init() override;
 
-			void receiveValues(int lightT,float lightNumber, Component*c=nullptr, GameObject*g=nullptr)override;
+			void receiveValues(int lightT,float lightNumber, Component* c, GameObject*g=nullptr)override;
 			void specularColor(float r, float g, float b);
 			void diffuseColor(float r, float g, float b);
 			void setDir(Utilities::Vector3<float> direction);
@@ -62,7 +62,6 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> getDiffuseColor();
 			Utilities::Vector3<float> getSpecularColor();
-			Utilities::Vector3<float> getDir();
 			void onSceneDown()override;
 			void onSceneUp()override;
 			bool getVisibility();

@@ -71,6 +71,7 @@ namespace LoveEngine {
 		transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
 		LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
 		cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
+		cam->init();
 		cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
 		cam->setActive(true);
 
@@ -78,20 +79,24 @@ namespace LoveEngine {
 		LoveEngine::ECS::Transform* transformLight = luz->addComponent<LoveEngine::ECS::Transform>();
 		transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
 		LoveEngine::ECS::Light* lightC = luz->addComponent<LoveEngine::ECS::Light>();
-		lightC->receiveValues(LoveEngine::ECS::lightType::point, 1);
+		lightC->receiveValues(LoveEngine::ECS::lightType::point, 1, transformLight);
+		lightC->init();
 
 		/*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 		LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
 		LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
 		m->sendvalues("ogrehead.mesh", t);
-		m->init();
+		m->init();*/
 
+		LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 		LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
-		s->createSound("./FMOD/Sonidos/sonido.wav", 0);
+		s->receiveValues(LoveEngine::ECS::soundType::effects, 0);
+		s->receiveMessage("soundName: sonido.wav; bLoop: false");
+		s->init();
 		soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
-		s->playSound(LoveEngine::ECS::soundType::effects, true);
+		s->playSound();
 
-		LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
+		/*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
 		LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
 		Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
 		t2->setParent(t); t2->setPos(v);

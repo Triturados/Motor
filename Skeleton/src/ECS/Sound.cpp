@@ -3,17 +3,30 @@
 #include <fmod.hpp>
 #include <SoundManager.h>
 #include <iostream>
+#include <StringFormater.h>
+
 namespace LoveEngine {
 	namespace ECS {
 
-		void Sound::createSound(const char* pFile, int channel_)
+		void Sound::receiveValues(int gChannel, float f, Component* playerPos, GameObject* g)
 		{
-			channel = channel_;
-			soundMngr = LoveEngine::Audio::SoundManager::instance;
-			soundMngr->createSound(&sound, pFile, channel);
+			groupChannel = static_cast<soundType>(gChannel);
 		}
 
-		void Sound::playSound(soundType groupChannel, bool bLoop)
+		void Sound::receiveMessage(std::string s)
+		{
+			StringFormatter sTf(s);
+			soundRoute = "./FMOD/Sonidos/" + sTf.getString("soundName");
+			bLoop = sTf.getBool("bLoop");
+		}
+
+		void Sound::init()
+		{
+			soundMngr = LoveEngine::Audio::SoundManager::instance;
+			soundMngr->createSound(&sound, soundRoute.c_str(), channel);
+		}
+
+		void Sound::playSound()
 		{
 			soundMngr->playSound(sound, groupChannel, bLoop);
 		}

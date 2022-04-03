@@ -16,14 +16,15 @@ namespace LoveEngine {
 
 		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
 		{
-
 			tr = static_cast<Transform*>(eT);
 		}
+		
 		void Mesh::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);
 			meshName = sTf.getString("meshName");
 		}
+
 		void Mesh::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform

@@ -2,6 +2,8 @@
 #include <../Export.h>
 
 #include <Component.h>
+#include <string>
+
 namespace FMOD {
 	class System;
 	class Sound;
@@ -22,11 +24,16 @@ namespace LoveEngine {
 			FMOD::SoundClass sound;
 			LoveEngine::Audio::SoundManager* soundMngr;
 
-			int channel;
+			std::string soundRoute;
+			soundType groupChannel;
+			int channel = 0;
+			bool bLoop = false;
 		public:
 
-			void createSound(const char* pFile, int channel_);
-			void playSound(soundType groupChannel, bool bLoop = false);
+			void init() override;
+			void receiveValues(int gChannel, float f, Component* playerPos = nullptr, GameObject* g = nullptr) override;
+			void receiveMessage(std::string s) override;
+			void playSound();
 			void releaseSound();
 			void setSpeed(float s);
 		};
