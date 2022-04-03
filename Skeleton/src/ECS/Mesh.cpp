@@ -9,22 +9,30 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
+#include <StringFormater.h>
+
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::sendvalues(std::string mN, Transform* eT)
+		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
 		{
-			meshName = mN;
-			tr = eT;
+			tr = static_cast<Transform*>(eT);
 		}
-		void Mesh::init()
-		{
 
+		void Mesh::receiveMessage(std::string s)
+		{
+			StringFormatter sTf(s);
+			meshName = sTf.getString("meshName");
+		}
+
+		void Mesh::init() {
+			ogremanager = Renderer::OgreRenderer::getInstance();
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
 			if (meshName == "") throw new std::exception("La malla no tiene nombre");
-			entityNode = OgreRenderer::instance->createNode();
+			entityNode = ogremanager->createNode();
 
-			if (entity == nullptr)entity = OgreRenderer::instance->getSceneManager()->createEntity(meshName);
+			if (entity == nullptr)
+				entity = ogremanager->getSceneManager()->createEntity(meshName);
 			else throw new std::exception("Ya existe una entidad asociada");
 
 			entityNode->attachObject(entity);
@@ -71,14 +79,15 @@ namespace LoveEngine {
 			//setVisibility(true);
 		}
 
+		Ogre::Entity* Mesh::getEntity()
+		{
+			return entity;
+		}
+
 		Mesh::~Mesh()
 		{
-			OgreRenderer::instance->removeNode(entityNode);
+			ogremanager->removeNode(entityNode);
 			delete rot, pos, scale;
-		}
-		Ogre::SceneNode* Mesh::getEntityNode()
-		{
-			return nullptr;
 		}
 	}
 }

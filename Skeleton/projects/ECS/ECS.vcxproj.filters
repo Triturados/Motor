@@ -54,7 +54,7 @@
     <ClCompile Include="..\..\src\ECS\CameraComponent.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\ECS\SoundComponent.cpp">
+    <ClCompile Include="..\..\src\ECS\Sound.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp">
@@ -70,6 +70,9 @@
       <Filter>Components\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\ECS\Action.cpp">
+      <Filter>Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ECS\Animation.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,7 +110,7 @@
     <ClInclude Include="..\..\src\ECS\CameraComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\ECS\SoundComponent.h">
+    <ClInclude Include="..\..\src\ECS\Sound.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\SceneFactory.h">
@@ -123,6 +126,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Action.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\Animation.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

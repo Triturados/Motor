@@ -14,12 +14,16 @@ namespace Ogre {
 	class SceneManager;
 }
 
-namespace Utilities {
-	template<typename T>
-	class Vector3;
-}
 
 namespace LoveEngine {
+
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+	}
+	namespace Renderer {
+		class OgreRenderer;
+	}
 	namespace ECS {
 
 		class Transform;
@@ -32,12 +36,14 @@ namespace LoveEngine {
 			Ogre::Viewport* vp;
 			Transform* position;
 			Transform* player;
-		public:
 
-			
+			Renderer::OgreRenderer* ogremanager;
+
+		public:
 			~Camera();
 
-			void sendValues(int i, float f, Component* playerPos, GameObject* g) override;
+			void receiveValues(int i, float f, Component* playerPos, GameObject* g) override;
+			void init() override;
 
 			void lookAt(Utilities::Vector3<float> pos);
 			void onSceneUp() override;

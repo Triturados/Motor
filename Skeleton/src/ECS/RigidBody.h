@@ -2,38 +2,45 @@
 
 #include "Component.h"
 #include <../Export.h>
+#include <string>
 
-
-namespace Utilities {
-	template <typename T>
-	class Vector3;
-}
-
-enum class ForceMode {
-	FORCE,
-	ACCELERATION,
-	IMPULSE,
-	VELOCITY_CHANGE
-};
-
-enum RBState {
-	Kinematic = 0,
-	Static = 1,
-	Dynamic = 2
-};
 
 class btRigidBody;
 
 namespace LoveEngine {
-
+	namespace Utilities {
+		template <typename T>
+		class Vector3;
+	}
 	namespace ECS {
+		enum class ForceMode {
+			FORCE,
+			ACCELERATION,
+			IMPULSE,
+			VELOCITY_CHANGE
+		};
+
+		enum class RBState {
+			Kinematic = 0,
+			Static = 1,
+			Dynamic = 2
+		};
+
+		enum class TipoForma {
+			Cube = 0,
+			Sphere = 1,
+			Plane = 2,
+			Cylinder = 3,
+			Cone = 4
+		};
+
 		class Transform;
 
 		class lovexport RigidBody : public Component
 		{
 		private:
 			float mass;
-			int forma;
+			TipoForma forma;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
@@ -47,20 +54,25 @@ namespace LoveEngine {
 
 			~RigidBody();
 
-			void init();
+			void init() override;
 
 			void update() override;
 
 			void stepPhysics() override;
 
-			void sendParameters(float mass_, Transform* eTm, int state_, int forma_);
+			void receiveValues(int state_, float mass_, Component* eTm, GameObject* g = nullptr) override;
+			void receiveMessage(std::string s) override;
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
 
 			void setTransform(Transform* t_);
 
 			void setMass(float mass_);
+
+			void setForma(std::string nameF_);
+
+			void setLinearVelocity(Utilities::Vector3<float> vel);
 		};
-	}
+	};
 
 }

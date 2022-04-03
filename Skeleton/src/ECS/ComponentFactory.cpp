@@ -3,7 +3,11 @@
 #include <SingletonInfo.h>
 #include <cassert>
 #include <Timer.h>
-
+#include <MouseTracker.h>
+#include <Transform.h>
+#include <Mesh.h>
+#include <RigidBody.h>
+#include <CameraComponent.h>
 
 
 namespace LoveEngine {
@@ -41,6 +45,12 @@ namespace LoveEngine {
 			*/
 
 			registerComponent(new ComponentCreatorTemplate<Timer>("Timer"));
+			registerComponent(new ComponentCreatorTemplate<MouseTracker>("MouseTracker"));
+			registerComponent(new ComponentCreatorTemplate<Mesh>("Mesh"));
+			registerComponent(new ComponentCreatorTemplate<RigidBody>("Rigidbody"));
+			registerComponent(new ComponentCreatorTemplate<Transform>("Transform"));
+			registerComponent(new ComponentCreatorTemplate<Camera>("Camera"));
+			
 		}
 
 
