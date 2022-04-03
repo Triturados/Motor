@@ -132,10 +132,10 @@ namespace LoveEngine {
 		}
 
 		if (idx == 2) { //Numero de comas de la palabra ( 2 comas -> 3 elementos -> vector 3 )
-			v3.emplace(name, Utilities::Vector3(values[0], values[1], values[2]));
+			v3.emplace(name, Utilities::Vector3(values[0], values[1], std::stof(current)));
 		}
 		else {
-			v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], values[3]));
+			v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], std::stof(current)));
 		}
 	}
 
