@@ -21,10 +21,13 @@ namespace LoveEngine {
 		template<typename T>
 		class Vector4;
 	}
-
+	namespace Renderer {
+		class OgreRenderer;
+	}
 	namespace ECS {
 
 		class Transform;
+
 		class lovexport Mesh : public Component
 		{
 		private:
@@ -36,6 +39,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 
+			Renderer::OgreRenderer* ogremanager;
 		public:
 			void init()override;
 			void update()override;

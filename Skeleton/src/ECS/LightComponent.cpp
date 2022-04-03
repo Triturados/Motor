@@ -16,6 +16,7 @@ namespace LoveEngine {
 
 		void Light::receiveValues(int lightT, float lightNumber, Component*, GameObject*)
 		{
+			ogremanager = Renderer::OgreRenderer::getInstance();
 			pos = gameObject->getComponent<Transform>();
 			name = "light"+(int)lightNumber;
 			type = static_cast<lightType>(lightT);
@@ -38,39 +39,39 @@ namespace LoveEngine {
 			switch (type)
 			{
 			case point:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0.3, 0.3, 0.3);
 				light->setSpecularColour(0.3, 0.3, 0.3);
 
 				light->setType(Ogre::Light::LT_POINT);
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
 				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 				break;
 			case directional:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(Ogre::ColourValue(0.4, 0, 0));
 				light->setSpecularColour(Ogre::ColourValue(0.4, 0, 0));
 
 				light->setType(Ogre::Light::LT_DIRECTIONAL);
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
 				entityNode->setDirection(Ogre::Vector3(0, -1, 1));
 
 				break;
 			case spot:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0, 0, 1.0);
 				light->setSpecularColour(0, 0, 1.0);
 
 				light->setType(Ogre::Light::LT_SPOTLIGHT);
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode(); //AQUI USO EL NODO DE LA ENTIDAD O UNO NUEVO¿?
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode(); //AQUI USO EL NODO DE LA ENTIDAD O UNO NUEVO¿?
 				entityNode->attachObject(light);
 				entityNode->setDirection(-1, -1, 0);
 
@@ -87,12 +88,13 @@ namespace LoveEngine {
 		}
 		void Light::init()
 		{
+			ogremanager = Renderer::OgreRenderer::getInstance();
 			visible = true;
 
 			switch (type)
 			{
 			case point:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0.3, 0.3, 0.3);
 				light->setSpecularColour(0.3, 0.3, 0.3);
@@ -100,32 +102,32 @@ namespace LoveEngine {
 				light->setType(Ogre::Light::LT_POINT);
 
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
 				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 				break;
 			case directional:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(Ogre::ColourValue(0.4, 0, 0));
 				light->setSpecularColour(Ogre::ColourValue(0.4, 0, 0));
 
 				light->setType(Ogre::Light::LT_DIRECTIONAL);
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
 				entityNode->setDirection(Ogre::Vector3(0, -1, 0));
 
 				break;
 			case spot:
-				light = Renderer::OgreRenderer::instance->getSceneManager()->createLight(name);
+				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0, 0, 1.0);
 				light->setSpecularColour(0, 0, 1.0);
 
 				light->setType(Ogre::Light::LT_SPOTLIGHT);
 
-				entityNode = Renderer::OgreRenderer::instance->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
 				entityNode->setDirection(-1, -1, 0);
 
@@ -145,7 +147,7 @@ namespace LoveEngine {
 		Light::~Light()
 		{
 			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
-			Renderer::OgreRenderer::instance->removeNode(entityNode);
+			ogremanager->removeNode(entityNode);
 		}
 
 		void Light::specularColor(float r, float g, float b)

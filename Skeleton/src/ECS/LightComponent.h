@@ -22,7 +22,9 @@ namespace LoveEngine {
 		class Vector4;
 	}
 
-
+	namespace Renderer {
+		class OgreRenderer;
+	}
 	namespace ECS {
 
 		enum lightType { point, directional, spot };
@@ -33,6 +35,8 @@ namespace LoveEngine {
 		{
 		private:
 			Ogre::SceneNode* entityNode;
+
+			Renderer::OgreRenderer* ogremanager;
 
 			Transform* pos;
 

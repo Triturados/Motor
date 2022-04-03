@@ -25,12 +25,13 @@ namespace LoveEngine {
 			meshName = sTf.getString("meshName");
 		}
 		void Mesh::init() {
-
+			ogremanager = Renderer::OgreRenderer::getInstance();
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
 			if (meshName == "") throw new std::exception("La malla no tiene nombre");
-			entityNode = Renderer::OgreRenderer::instance->createNode();
+			entityNode = ogremanager->createNode();
 
-			if (entity == nullptr)entity = Renderer::OgreRenderer::instance->getSceneManager()->createEntity(meshName);
+			if (entity == nullptr)
+				entity = ogremanager->getSceneManager()->createEntity(meshName);
 			else throw new std::exception("Ya existe una entidad asociada");
 
 			entityNode->attachObject(entity);
@@ -79,7 +80,7 @@ namespace LoveEngine {
 
 		Mesh::~Mesh()
 		{
-			Renderer::OgreRenderer::instance->removeNode(entityNode);
+			ogremanager->removeNode(entityNode);
 			delete rot, pos, scale;
 		}
 	}

@@ -21,10 +21,20 @@
 #include <SDL.h>
 #include <SDL_syswm.h>
 #include <SDL_events.h>
+#include <SingletonInfo.h>
 
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
+
+		OgreRenderer* OgreRenderer::getInstance()
+		{
+			if (instance == nullptr) {
+				instance = static_cast<OgreRenderer*>(Singleton::getElement(Singleton::positions::Renderer));
+			}
+
+			return instance;
+		}
 
 		OgreRenderer::OgreRenderer()
 		{
@@ -39,6 +49,7 @@ namespace LoveEngine {
 
 			loadResources();
 			setupScenes();
+			Singleton::addElement(this, Singleton::positions::Renderer);
 			initRTShaderSystem();
 		}
 

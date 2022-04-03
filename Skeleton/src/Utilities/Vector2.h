@@ -80,16 +80,6 @@ namespace LoveEngine {
 				return (x_ + y_);
 			}
 
-			Vector2<T> vectorialProduct(Vector2<T> b)
-			{
-				Vector2<T> vectorial;
-
-				vectorial.x = y * b.z - z * b.y;
-				vectorial.y = z * b.x - x * b.z;
-
-				return vectorial;
-			}
-
 			T getDistance(Vector2<T> b) //Distancia entre 2 vectores
 			{
 				int x_ = x - b.x;

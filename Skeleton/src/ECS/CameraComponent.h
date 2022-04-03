@@ -21,7 +21,9 @@ namespace LoveEngine {
 		template<typename T>
 		class Vector3;
 	}
-
+	namespace Renderer {
+		class OgreRenderer;
+	}
 	namespace ECS {
 
 		class Transform;
@@ -34,6 +36,9 @@ namespace LoveEngine {
 			Ogre::Viewport* vp;
 			Transform* position;
 			Transform* player;
+
+			Renderer::OgreRenderer* ogremanager;
+
 		public:
 			~Camera();
 

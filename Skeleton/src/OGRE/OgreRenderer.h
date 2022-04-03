@@ -45,9 +45,9 @@ namespace LoveEngine {
 
 			void throwOgreError(int errorLine, const std::string& errorMsg);
 
-		public:
-
 			static OgreRenderer* instance;
+		public:
+			static OgreRenderer* getInstance();
 			OgreRenderer();
 
 			void initRoot();

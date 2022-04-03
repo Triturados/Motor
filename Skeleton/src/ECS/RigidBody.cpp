@@ -66,7 +66,7 @@ namespace LoveEngine {
 			
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
 			tr->setPos(newPos);
 			tr->setRot(newRot);
 		}
@@ -77,7 +77,7 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
 			tr->setPos(newPos);
 			tr->setRot(newRot);
 		}
