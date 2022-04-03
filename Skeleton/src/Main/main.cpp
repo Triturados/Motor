@@ -33,27 +33,27 @@ void main()
 	return;*/
 
 	//Inicialización de managers y librerías
-	try {
+	/*try {*/
 		g.setup();
-	}
-	catch (std::exception e) {
-		std::cout << e.what() << "\n";
-		success = false;
-	}
-	catch (...) {
-		std::cout << "Excepción no controlada.\n";
-		success = false;
-	}
+	//}
+	//catch (std::exception e) {
+	//	std::cout << e.what() << "\n";
+		//success = false;
+//	}
+	//catch (...) {
+	//	std::cout << "Excepción no controlada.\n";
+	//	success = false;
+	//}
 
-	if (!success) {
-		std::cout << "Error al inicializar el motor.\n";
-		return;
-	}
+	//if (!success) {
+	//	std::cout << "Error al inicializar el motor.\n";
+	//	return;
+	//}
 
 	//Ejecución del bucle principal
-	try {
+	/*try {*/
 		g.loop();
-	}
+	/*}
 	catch (std::exception e) {
 		std::cout << e.what() << "\n";
 		success = false;
@@ -66,7 +66,7 @@ void main()
 	if (!success) {
 		std::cout << "Error en el bucle principal del motor.\n";
 		return;
-	}
+	}*/
 
 	//Destructora del motor
 	try {
