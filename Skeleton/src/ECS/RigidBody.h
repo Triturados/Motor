@@ -25,13 +25,21 @@ namespace LoveEngine {
 			Dynamic = 2
 		};
 
+		enum class TipoForma {
+			Cube = 0,
+			Sphere = 1,
+			Plane = 2,
+			Cylinder = 3,
+			Cone = 4
+		};
+
 		class Transform;
 
 		class lovexport RigidBody : public Component
 		{
 		private:
 			float mass;
-			int forma;
+			TipoForma forma;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
@@ -51,13 +59,15 @@ namespace LoveEngine {
 
 			void stepPhysics() override;
 
-			void sendParameters(float mass_, Transform* eTm, int state_, int forma_);
+			void sendParameters(float mass_, Transform* eTm, int state_, std::string forma_);
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
 
 			void setTransform(Transform* t_);
 
 			void setMass(float mass_);
+
+			void setForma(std::string nameF_);
 		};
 	}
 
