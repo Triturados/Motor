@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\ECS\Action.cpp" />
     <ClCompile Include="..\..\src\ECS\Agent.cpp" />
     <ClCompile Include="..\..\src\ECS\CameraComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Component.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\ECS\Action.h" />
     <ClInclude Include="..\..\src\ECS\Agent.h" />
     <ClInclude Include="..\..\src\ECS\CameraComponent.h" />
     <ClInclude Include="..\..\src\ECS\Component.h" />
