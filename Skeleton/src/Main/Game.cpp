@@ -66,78 +66,78 @@ namespace LoveEngine {
 		ogreManager->exampleScene();
 		ogreManager->getSceneManager()->destroyAllCameras();
 
-		LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
-		LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
-		transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
-		LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
-		cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
-		cam->init();
-		cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
-		cam->setActive(true);
+		//LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
+		//LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
+		//transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
+		//LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
+		//cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
+		//cam->init();
+		//cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
+		//cam->setActive(true);
 
-		LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
-		LoveEngine::ECS::Transform* transformLight = luz->addComponent<LoveEngine::ECS::Transform>();
-		transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
-		LoveEngine::ECS::Light* lightC = luz->addComponent<LoveEngine::ECS::Light>();
-		lightC->receiveValues(LoveEngine::ECS::lightType::point, 1, transformLight);
-		lightC->init();
+		//LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
+		//LoveEngine::ECS::Transform* transformLight = luz->addComponent<LoveEngine::ECS::Transform>();
+		//transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
+		//LoveEngine::ECS::Light* lightC = luz->addComponent<LoveEngine::ECS::Light>();
+		//lightC->receiveValues(LoveEngine::ECS::lightType::point, 1, transformLight);
+		//lightC->init();
 
-		/*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
-		LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
-		LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
-		m->sendvalues("ogrehead.mesh", t);
-		m->init();*/
+		///*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
+		//LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
+		//LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
+		//m->sendvalues("ogrehead.mesh", t);
+		//m->init();*/
 
-		LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
-		LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
-		s->receiveValues(LoveEngine::ECS::soundType::effects, 0);
-		s->receiveMessage("soundName: wii.mp3; bLoop: false");
-		s->init();
-		soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
-		s->playSound();
+		//LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
+		//LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
+		//s->receiveValues(LoveEngine::ECS::soundType::effects, 0);
+		//s->receiveMessage("soundName: wii.mp3; bLoop: false");
+		//s->init();
+		//soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
+		//s->playSound();
 
-		/*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
-		LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
-		Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
-		t2->setParent(t); t2->setPos(v);
-		LoveEngine::ECS::Mesh* m2 = go2->addComponent<LoveEngine::ECS::Mesh>();
-		m2->sendvalues("ogrehead.mesh", t2);
-		m2->init();
+		///*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
+		//LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
+		//Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
+		//t2->setParent(t); t2->setPos(v);
+		//LoveEngine::ECS::Mesh* m2 = go2->addComponent<LoveEngine::ECS::Mesh>();
+		//m2->sendvalues("ogrehead.mesh", t2);
+		//m2->init();
 
-		Utilities::Vector3<float>* v2 = new Utilities::Vector3<float>(-20, 0, 0);
-		t->setPos(v2);
-		Utilities::Vector4<float>* v3 = new Utilities::Vector4<float>(0, 0, 90, 0);
-		t->rotate(v3);*/
+		//Utilities::Vector3<float>* v2 = new Utilities::Vector3<float>(-20, 0, 0);
+		//t->setPos(v2);
+		//Utilities::Vector4<float>* v3 = new Utilities::Vector4<float>(0, 0, 90, 0);
+		//t->rotate(v3);*/
 
-		LoveEngine::ECS::GameObject* suelo = sceneManager->getCurrentScene()->createGameObject("suelo");
-		suelo->addComponent<LoveEngine::ECS::Transform>();
-		suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(Utilities::Vector3<float>(70., 1., 70.));
+		//LoveEngine::ECS::GameObject* suelo = sceneManager->getCurrentScene()->createGameObject("suelo");
+		//suelo->addComponent<LoveEngine::ECS::Transform>();
+		//suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(Utilities::Vector3<float>(70., 1., 70.));
 
-		LoveEngine::ECS::Mesh* sueloMesh = suelo->addComponent<LoveEngine::ECS::Mesh>();
-		sueloMesh->receiveValues(0, 0,
-			suelo->getComponent<LoveEngine::ECS::Transform>());
-		sueloMesh->receiveMessage("meshName: cube.mesh");
-		sueloMesh->init();
+		//LoveEngine::ECS::Mesh* sueloMesh = suelo->addComponent<LoveEngine::ECS::Mesh>();
+		//sueloMesh->receiveValues(0, 0,
+		//	suelo->getComponent<LoveEngine::ECS::Transform>());
+		//sueloMesh->receiveMessage("meshName: cube.mesh");
+		//sueloMesh->init();
 
-		suelo->addComponent<LoveEngine::ECS::RigidBody>();
-		suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 0., suelo->getComponent<LoveEngine::ECS::Transform>());
-		suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: cube;");
-		suelo->getComponent<LoveEngine::ECS::RigidBody>()->init();
+		//suelo->addComponent<LoveEngine::ECS::RigidBody>();
+		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 0., suelo->getComponent<LoveEngine::ECS::Transform>());
+		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: cube;");
+		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->init();
 
-		LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
-		LoveEngine::ECS::Transform* pelotaTransform = pelota->addComponent<LoveEngine::ECS::Transform>();
-		pelotaTransform->setPos(Utilities::Vector3<float>(0, 15, 0));
+		//LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
+		//LoveEngine::ECS::Transform* pelotaTransform = pelota->addComponent<LoveEngine::ECS::Transform>();
+		//pelotaTransform->setPos(Utilities::Vector3<float>(0, 15, 0));
 
-		LoveEngine::ECS::Mesh* pelotaMesh = pelota->addComponent<LoveEngine::ECS::Mesh>();
-		pelotaMesh->receiveValues(0, 0, pelota->getComponent<LoveEngine::ECS::Transform>());
-		pelotaMesh->receiveMessage("meshName: sphere.mesh");
-		pelotaMesh->init();
+		//LoveEngine::ECS::Mesh* pelotaMesh = pelota->addComponent<LoveEngine::ECS::Mesh>();
+		//pelotaMesh->receiveValues(0, 0, pelota->getComponent<LoveEngine::ECS::Transform>());
+		//pelotaMesh->receiveMessage("meshName: sphere.mesh");
+		//pelotaMesh->init();
 
 
-		pelota->addComponent<LoveEngine::ECS::RigidBody>();
-		pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 1.0, pelota->getComponent<LoveEngine::ECS::Transform>());
-		pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: sphere;");
-		pelota->getComponent<LoveEngine::ECS::RigidBody>()->init();
+		//pelota->addComponent<LoveEngine::ECS::RigidBody>();
+		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 1.0, pelota->getComponent<LoveEngine::ECS::Transform>());
+		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: sphere;");
+		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->init();
 
 	}
 
@@ -379,7 +379,7 @@ namespace LoveEngine {
 			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
 			isNil = populateScene.isNil();
 		}
-		sceneManager->numberOfScenes = count - 1;
+		sceneManager->numberOfScenes = count;
 
 		return 0;
 	}
