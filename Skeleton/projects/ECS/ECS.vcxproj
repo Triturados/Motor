@@ -102,7 +102,6 @@
     <ClCompile Include="..\..\src\ECS\SoundComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
-    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\CameraComponent.h" />
@@ -120,7 +119,6 @@
     <ClInclude Include="..\..\src\ECS\SoundComponent.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />
     <ClInclude Include="..\..\src\ECS\Transform.h" />
-    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BulletPhysics\BulletPhysics.vcxproj">

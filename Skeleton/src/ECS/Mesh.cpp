@@ -95,10 +95,5 @@ namespace LoveEngine {
 		{
 			return nullptr;
 		}
-
-		Ogre::Entity* Mesh::getEntity()
-		{
-			return entity;
-		}
 	}
 }
