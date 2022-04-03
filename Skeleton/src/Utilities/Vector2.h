@@ -89,5 +89,12 @@ namespace LoveEngine {
 				return aux.magnitude();
 			}
 		};
+
+		template <class T>
+		std::ostream& operator<<(std::ostream& os, const Vector2<T>& v)
+		{
+			os << v.x << ", " << v.y;
+			return os;
+		}
 	}
 }

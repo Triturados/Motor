@@ -179,5 +179,12 @@ namespace LoveEngine {
 			}
 
 		};
+
+		template <class T>
+		std::ostream& operator<<(std::ostream& os, const Vector3<T>& v)
+		{
+			os << v.x << ", " << v.y << ", " << v.z;
+			return os;
+		}
 	}
 }

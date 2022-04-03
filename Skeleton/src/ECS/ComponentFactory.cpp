@@ -3,7 +3,7 @@
 #include <SingletonInfo.h>
 #include <cassert>
 #include <Timer.h>
-
+#include <MouseTracker.h>
 
 
 namespace LoveEngine {
@@ -41,6 +41,7 @@ namespace LoveEngine {
 			*/
 
 			registerComponent(new ComponentCreatorTemplate<Timer>("Timer"));
+			registerComponent(new ComponentCreatorTemplate<MouseTracker>("MouseTracker"));
 		}
 
 
