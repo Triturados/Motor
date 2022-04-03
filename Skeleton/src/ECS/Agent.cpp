@@ -14,6 +14,12 @@ namespace LoveEngine {
                 delete a;
         }
 
+        void Agent::init()
+        {
+            actions.push_back(new Idle(this));
+            actions.push_back(new MeleeAttack(this));
+        }
+
         void Agent::update()
         {
             currentAction->activeUpdate();

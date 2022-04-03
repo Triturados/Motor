@@ -14,7 +14,7 @@ namespace LoveEngine {
 
             ~Agent();
 
-            void init() override {};
+            void init() override;
 
             void update() override;
 
