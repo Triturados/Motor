@@ -16,54 +16,58 @@ namespace Ogre {
 }
 
 class SDL_Window;
+namespace LoveEngine {
+	namespace Renderer {
+		class lovexport OgreRenderer
+		{
+		private:
+			Ogre::Root* mRoot;
+			Ogre::String mResourcesCfgPath;
+			Ogre::String mPluginsCfgPath;
+			Ogre::String mCfgPath;
+			Ogre::String mLogPath;
 
-class lovexport OgreRenderer
-{
-private:
-	Ogre::Root* mRoot;
-	Ogre::String mResourcesCfgPath;
-	Ogre::String mPluginsCfgPath;
-	Ogre::String mCfgPath;
-	Ogre::String mLogPath;
+			Ogre::RenderWindow* mWindow;
+			SDL_Window* native;
+			Ogre::SceneManager* mSceneMgr;
 
-	Ogre::RenderWindow* mWindow;
-	SDL_Window* native;
-	Ogre::SceneManager* mSceneMgr;
+			Ogre::Camera* mCamera;
+			Ogre::SceneNode* mCameraNode;
 
-	Ogre::Camera* mCamera;
-	Ogre::SceneNode* mCameraNode;
+			Ogre::RTShader::ShaderGenerator* mShaderGenerator;
+			Ogre::MaterialManager::Listener* mMaterialMgrListener;
 
-	Ogre::RTShader::ShaderGenerator* mShaderGenerator;
-	Ogre::MaterialManager::Listener* mMaterialMgrListener;
+			void loadResources();
+			void initOgreWithSDL();
+			void initRTShaderSystem();
+			void destroyRTShaderSystem();
+			void setupScenes();
 
-	void loadResources();
-	void initOgreWithSDL();
-	void initRTShaderSystem();
-	void destroyRTShaderSystem();
-	void setupScenes();
+			void throwOgreError(int errorLine, const std::string& errorMsg);
 
-	void throwOgreError(int errorLine, const std::string& errorMsg);
+			static OgreRenderer* instance;
+		public:
+			static OgreRenderer* getInstance();
+			OgreRenderer();
 
-public:
+			void initRoot();
+			bool update();
 
-	static OgreRenderer* instance;
-	OgreRenderer();
+			Ogre::SceneNode* createNode();
+			Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
+			void removeNode(Ogre::SceneNode* node);
 
-	void initRoot();
-	bool update();
+			Ogre::SceneManager* getSceneManager();
+			Ogre::RenderWindow* getRenderWindow();
 
-	Ogre::SceneNode* createNode();
-	Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
-	void removeNode(Ogre::SceneNode* node);
+			void exampleScene();
 
-	Ogre::SceneManager* getSceneManager();
-	Ogre::RenderWindow* getRenderWindow();
 
-	void exampleScene();
-	
+			~OgreRenderer();
+		};
 
-	~OgreRenderer();
-};
 
+	}
+}
 
 #endif // !OGRERENDERER_H

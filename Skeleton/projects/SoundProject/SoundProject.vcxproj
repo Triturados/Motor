@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\SoundProject\Sound.cpp" />
+    <ClCompile Include="..\..\Src\SoundProject\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\SoundProject\Sound.h" />
+    <ClInclude Include="..\..\Src\SoundProject\SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">
