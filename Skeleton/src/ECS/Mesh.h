@@ -42,7 +42,7 @@ namespace LoveEngine {
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
 			~Mesh();
-			Ogre::SceneNode* getEntityNode();
+			
 
 		};
 	}
