@@ -145,5 +145,10 @@ namespace LoveEngine {
 				forma = TipoForma::Cube;
 			}
 		}
+
+		void RigidBody::setLinearVelocity(Utilities::Vector3<float> vel)
+		{
+			rigidBody->setLinearVelocity(cvt(vel));
+		}
 	}
 }

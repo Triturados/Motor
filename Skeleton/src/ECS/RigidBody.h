@@ -68,7 +68,9 @@ namespace LoveEngine {
 			void setMass(float mass_);
 
 			void setForma(std::string nameF_);
+
+			void setLinearVelocity(Utilities::Vector3<float> vel);
 		};
-	}
+	};
 
 }
