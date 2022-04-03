@@ -37,12 +37,13 @@ namespace LoveEngine {
 		public:
 			void init()override;
 			void update()override;
-			void sendvalues(std::string mN, Transform* eT);
+			void receiveValues(int i, float f, Component* eT = nullptr, GameObject* g = nullptr)override;
+			void receiveMessage(std::string s)override;
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
 			~Mesh();
-			
+
 
 		};
 	}
