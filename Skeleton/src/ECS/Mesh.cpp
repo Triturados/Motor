@@ -9,43 +9,37 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
+#include <StringFormater.h>
+
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::sendvalues(std::string mN, Transform* eT, LoveEngine::ECS::GameObject* pObj)
+		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
 		{
-			meshName = mN;
-			child = eT;
-			if (pObj != nullptr)
-			{
-				parentNode = pObj->getComponent<Mesh>()->getEntityNode(); //Obtenemos el nodo del padre a partir de la malla del padre 
-				parent = pObj->getComponent<Transform>();
-			}
+			tr = static_cast<Transform*>(eT);
 		}
-		void Mesh::init()
-		{
 
+		void Mesh::receiveMessage(std::string s)
+		{
+			StringFormatter sTf(s);
+			meshName = sTf.getString("meshName");
+		}
+
+		void Mesh::init() {
+			ogremanager = Renderer::OgreRenderer::getInstance();
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
 			if (meshName == "") throw new std::exception("La malla no tiene nombre");
-			if (parentNode == nullptr)entityNode = OgreRenderer::instance->createNode();
-			else entityNode = OgreRenderer::instance->createChildNode(parentNode);
+			entityNode = ogremanager->createNode();
 
-			if (entity == nullptr)entity = OgreRenderer::instance->getSceneManager()->createEntity(meshName);
+			if (entity == nullptr)
+				entity = ogremanager->getSceneManager()->createEntity(meshName);
 			else throw new std::exception("Ya existe una entidad asociada");
 
 			entityNode->attachObject(entity);
 
-
-			if (parent != nullptr) {
-				rot = parent->getRot();
-				pos = parent->getPos();
-				scale = parent->getScale();
-			}
-			else {
-				rot = child->getRot();
-				pos = child->getPos();
-				scale = child->getScale();
-			}
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
 
 			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
@@ -59,10 +53,9 @@ namespace LoveEngine {
 		//No se llama el update 
 		void Mesh::update()
 		{
-			std::cout << "OgroPos " << pos->y << "\n";
-			rot = child->getRot();
-			pos = child->getPos();
-			scale = child->getScale();
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
 
 			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
@@ -88,17 +81,8 @@ namespace LoveEngine {
 
 		Mesh::~Mesh()
 		{
-			OgreRenderer::instance->removeNode(entityNode);
+			ogremanager->removeNode(entityNode);
 			delete rot, pos, scale;
-		}
-		Ogre::SceneNode* Mesh::getEntityNode()
-		{
-			return nullptr;
-		}
-
-		Ogre::Entity* Mesh::getEntity()
-		{
-			return entity;
 		}
 	}
 }
