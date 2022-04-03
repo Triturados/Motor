@@ -5,6 +5,7 @@
 #define TRANSFORM_H
 
 #include <list>
+#include <string>
 #include <Component.h>
 
 namespace LoveEngine {
@@ -39,6 +40,7 @@ namespace LoveEngine {
 			~Transform();
 
 			void update() override;
+			void receiveMessage(std::string s) override;
 
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();
