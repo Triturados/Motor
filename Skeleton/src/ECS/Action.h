@@ -12,25 +12,25 @@ namespace LoveEngine {
             // Cantidad de prioridad que se incrementa cada frame
             float increasePrioOverTime = 0.0;
 
-            // Avisa al agente de cuï¿½ndo se PUEDE tomar otra acciï¿½n
+            // Avisa al agente de cuándo se PUEDE tomar otra acción
             bool actionComplete = false;
 
-            // Condiciones que se tienen que cumplir para que la acciï¿½n se realice, ignorando prioridad
-            // Por ejemplo un ataque melï¿½ puede requerir una mï¿½nima proximidad al objetivo
+            // Condiciones que se tienen que cumplir para que la acción se realice, ignorando prioridad
+            // Por ejemplo un ataque melé puede requerir una mínima proximidad al objetivo
             virtual bool conditionsFulfilled() const { return true; };
 
             virtual void onActionStart() {};
 
             Action(Agent* agent_, float priority_ = LONG_MAX);
 
-            // llamado en cada frame, estï¿½ o no activa la acciï¿½n (necesario para control de prioridad etc.)
+            // llamado en cada frame, esté o no activa la acción (necesario para control de prioridad etc.)
             virtual void passiveUpdate();
 
-            // llamado en cada frame mientras se estï¿½ ejecutando la acciï¿½n
+            // llamado en cada frame mientras se esté ejecutando la acción
             virtual void activeUpdate() {};
 
-            // Si la acciï¿½n no se ha completado, tiene que seguir a pesar de las prioridades actuales
-            // Si las condiciones no se cumplen, no se ejecutarï¿½ esta acciï¿½n
+            // Si la acción no se ha completado, tiene que seguir a pesar de las prioridades actuales
+            // Si las condiciones no se cumplen, no se ejecutará esta acción
             float getPriority() const noexcept;
         protected:
             Agent* agent;
@@ -42,5 +42,20 @@ namespace LoveEngine {
             float priority;
         };
 
+        class MeleeAttack : public Action
+        {
+        public:
+            MeleeAttack(Agent* agent_);
+        protected:
+            void onActionStart() final;
+        };
+
+        class Idle : public Action
+        {
+        public:
+            Idle(Agent* agent_);
+        protected:
+            void activeUpdate() final;
+        };
 	}
 }

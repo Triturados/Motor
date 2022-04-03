@@ -18,8 +18,8 @@ namespace LoveEngine {
             addPriority(-increasePrioOverTime * LoveEngine::Time::getInstance()->deltaTime);
         }
 
-        // Si la acciï¿½n no se ha completado, tiene que seguir a pesar de las prioridades actuales
-        // Si las condiciones no se cumplen, no se ejecutarï¿½ esta acciï¿½n
+        // Si la acción no se ha completado, tiene que seguir a pesar de las prioridades actuales
+        // Si las condiciones no se cumplen, no se ejecutará esta acción
         float Action::getPriority() const noexcept { return actionComplete ? LONG_MIN : conditionsFulfilled() ? priority : LONG_MAX; }
 
         // Para incrementar la prioridad, hay que pasar valores negativos
@@ -29,5 +29,12 @@ namespace LoveEngine {
             priority = priority_;
         }
 
+        MeleeAttack::MeleeAttack(Agent* agent_) : Action(agent_, 10.0) { increasePrioOverTime = 1.0; }
+
+        void MeleeAttack::onActionStart() { std::cout << "\n\n\n\n\n\n\nAttacking at melee\n\n\n\n\n\n\n\n"; setPriority(10.0); }
+
+        Idle::Idle(Agent* agent_) : Action(agent_, 8.0) { actionComplete = true; }
+
+        void Idle::activeUpdate() { std::cout << "Idle\n"; }
     }
 }
