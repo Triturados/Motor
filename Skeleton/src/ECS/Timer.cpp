@@ -8,8 +8,6 @@
 namespace LoveEngine {
 	namespace ECS {
 
-
-
 		void Timer::onTimeUp()
 		{
 			funct(this);
@@ -86,7 +84,6 @@ namespace LoveEngine {
 			return timer;
 		}
 
-#include <iostream>
 		Timer* Timer::deleteGameObject(GameObject* gObject, float time)
 		{
 			Timer* timer = createObjectWithTimer();

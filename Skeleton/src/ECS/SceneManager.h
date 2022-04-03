@@ -26,13 +26,7 @@ namespace LoveEngine {
 			PUSH, SWAP, POP, CLEAR, EXIT
 		};
 
-		lovexport void changeScene(int idx, SceneLoad scenechangetype);
-		lovexport void changeSceneByIndex(int idx, int scenechangetype);
-		//inline lovexport void changeSceneByIndex(int idx, int scenechangetype) {
-		//	//assert(scenechangetype >= 0 && scenechangetype <= 4);
-		//	changeScene(idx, (SceneLoad)scenechangetype);
-		//}
-
+		
 		class lovexport SceneManager final {
 			friend class Game;
 
@@ -83,7 +77,16 @@ namespace LoveEngine {
 			//Pila con las escenas actuales
 			std::stack<ECS::Scene*> currentScene;
 		};
+
+
+		
+		//void changeSceneByIndex(int idx, int scenechangetype) {
+		//	changeScene(idx, (SceneLoad)scenechangetype);
+		//}
+		lovexport void changeScene(int idx, SceneManagement::SceneLoad scenechangetype);
 	}
+
+	
 }
 //
 //lovexport int damenumero() {

@@ -82,7 +82,7 @@ namespace LoveEngine {
 		//lightC->receiveValues(LoveEngine::ECS::lightType::point, 1, transformLight);
 		//lightC->init();
 
-		///*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
+		//*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 		//LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
 		//LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
 		//m->sendvalues("ogrehead.mesh", t);
@@ -96,7 +96,7 @@ namespace LoveEngine {
 		//soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
 		//s->playSound();
 
-		///*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
+		//*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
 		//LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
 		//Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
 		//t2->setParent(t); t2->setPos(v);
@@ -349,6 +349,12 @@ namespace LoveEngine {
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
+			.beginClass<LoveEngine::ECS::Scene>("Scene")
+			.addFunction("createObject", &(LoveEngine::ECS::Scene::createGameObject))
+			.addFunction("name", &(LoveEngine::ECS::Scene::setName))
+			.endClass();
+
+		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::Component>("Component")
 			.addFunction("send4", &(LoveEngine::ECS::Component::receiveValues)) //int float comp gameObject
 			.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
@@ -361,7 +367,6 @@ namespace LoveEngine {
 
 
 		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
-
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
 			luabridge::push(luastate, scene);

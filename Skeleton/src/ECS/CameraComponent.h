@@ -46,6 +46,7 @@ namespace LoveEngine {
 			void init() override;
 
 			void lookAt(Utilities::Vector3<float> pos);
+			void lookAtDir(float x, float y, float z);
 			void onSceneUp() override;
 			void onSceneDown() override;
 		};

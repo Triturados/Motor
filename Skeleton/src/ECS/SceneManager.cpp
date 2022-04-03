@@ -159,15 +159,12 @@ namespace LoveEngine {
 			currentScene.top()->onSceneUp();
 		}
 
-		void changeScene(int idx, SceneLoad scenechangetype)
-		{
-			SceneManager::getInstance()->changeScene(idx, scenechangetype);
+		void changeScene(int idx, SceneLoad scenechangetype) {
+			SceneManagement::SceneManager::getInstance()->changeScene(idx, scenechangetype);
 		}
-
-		void changeScene(int idx, int scenechangetype)
-		{
-			assert(scenechangetype >= 0 && scenechangetype <= 4);
-			changeScene(idx, (SceneLoad)scenechangetype);
+		void changeSceneByIdx(int idx, int type) {
+			assert(type >= 0 && type < 5);
+			SceneManagement::SceneManager::getInstance()->changeScene(idx, (SceneLoad)type);
 		}
 	}
 }
