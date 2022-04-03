@@ -11,6 +11,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 
+#include <StringFormater.h>
 #include "Vector3.h"
 #include "Vector4.h"
 #include "PhysicsManager.h"
@@ -83,12 +84,17 @@ namespace LoveEngine {
 			tr->setRot(newRot);
 		}
 
-		void RigidBody::sendParameters(float mass_, Transform* eTm, int state_, std::string forma_)
+		void RigidBody::receiveValues(int state_, float mass_, Component* eTm, GameObject* g)
 		{
 			mass = mass_;
-			tr = eTm;
+			tr = static_cast<Transform*>(eTm);
 			stateMode = (RBState)state_;
-			setForma(forma_);
+		}
+
+		void RigidBody::receiveMessage(std::string s)
+		{
+			StringFormatter sTf(s);
+			setForma(sTf.getString("forma"));
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)

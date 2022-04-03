@@ -120,7 +120,8 @@ namespace LoveEngine {
 		sueloMesh->init();
 
 		suelo->addComponent<LoveEngine::ECS::RigidBody>();
-		suelo->getComponent<LoveEngine::ECS::RigidBody>()->sendParameters(0., suelo->getComponent<LoveEngine::ECS::Transform>(), 1, "cube");
+		suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 0., suelo->getComponent<LoveEngine::ECS::Transform>());
+		suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: cube;");
 		suelo->getComponent<LoveEngine::ECS::RigidBody>()->init();
 
 		LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
@@ -134,7 +135,8 @@ namespace LoveEngine {
 
 
 		pelota->addComponent<LoveEngine::ECS::RigidBody>();
-		pelota->getComponent<LoveEngine::ECS::RigidBody>()->sendParameters(1.0, pelota->getComponent<LoveEngine::ECS::Transform>(), 1, "sphere");
+		pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 1.0, pelota->getComponent<LoveEngine::ECS::Transform>());
+		pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: sphere;");
 		pelota->getComponent<LoveEngine::ECS::RigidBody>()->init();
 
 	}

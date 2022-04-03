@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include <../Export.h>
+#include <string>
 
 
 class btRigidBody;
@@ -53,13 +54,14 @@ namespace LoveEngine {
 
 			~RigidBody();
 
-			void init();
+			void init() override;
 
 			void update() override;
 
 			void stepPhysics() override;
 
-			void sendParameters(float mass_, Transform* eTm, int state_, std::string forma_);
+			void receiveValues(int state_, float mass_, Component* eTm, GameObject* g = nullptr) override;
+			void receiveMessage(std::string s) override;
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
 
