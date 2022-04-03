@@ -113,7 +113,7 @@ namespace LoveEngine {
 				continue;
 			}
 
-			if (c < '0' || c > '9') //Si uno de los elementos no es numérico, entonces se trata de un string
+			if ((c < '0' || c > '9') && c != '-') //Si uno de los elementos no es numérico, entonces se trata de un string
 			{
 				s.emplace(name, value);
 				return;

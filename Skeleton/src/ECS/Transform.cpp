@@ -129,15 +129,15 @@ namespace LoveEngine {
 			scale->x = v.x;
 			scale->y = v.y;
 			scale->z = v.z;
-			Utilities::Vector3<float> v1 = sTf.getVector3("position");
-			position->x = v1.x;
-			position->y = v1.y;
-			position->z = v1.z;
 			Utilities::Vector4<float> v2 = sTf.getVector4("rotation");
 			rotation->x = v2.x;
 			rotation->y = v2.y;
 			rotation->z = v2.z;
 			rotation->w = v2.w;
+			Utilities::Vector3<float> v1 = sTf.getVector3("position");
+			position->x = v1.x;
+			position->y = v1.y;
+			position->z = v1.z;
 		}
 	}
 }

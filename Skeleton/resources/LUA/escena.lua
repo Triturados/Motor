@@ -9,9 +9,9 @@ function scene0()
     local comp = suelo:addComponent("EscribirNumero")
     local comp2 = suelo:addComponent("Transform")
     
-    comp2.sendMsg([[
+    comp2:sendMsg([[
         scale: 50,1,50;
-        position: 0,0,0;
+        position: 0,-100,0;
         rotation: 0,0,0,0;
     ]])
     local comp3 = suelo:addComponent("Mesh"):sendMsg([[
@@ -21,7 +21,7 @@ function scene0()
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
     local compAidaLaMejor = camaraAidaLaMejor:addComponent("Transform")
         
-    compAidaLaMejor.sendMsg([[
+    compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
         position: 0,10,50;
         rotation: 0,0,0,0;
