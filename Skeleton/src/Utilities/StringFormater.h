@@ -47,14 +47,23 @@ namespace LoveEngine {
 
 		StringFormatter(std::string message);
 
+		//=========== Getters ================
 		int getInt(std::string name);
 		float getFloat(std::string name);
 		int getBool(std::string name);
 		char getChar(std::string name);
-
+		std::string getString(std::string name);
 		Utilities::Vector3<float> getVector3(std::string name);
 		Utilities::Vector4<float> getVector4(std::string name);
 
-		std::string getString(std::string name);
+
+		//=========== Save Getters ============
+		bool tryGetInt(std::string name, int& value);
+		bool tryGetFloat(std::string name, float& value);
+		bool tryGetBool(std::string name, bool& value);
+		bool tryGetChar(std::string name, char& value);
+		bool tryGetString(std::string name, std::string& value);
+		bool tryGetVector3(std::string name, Utilities::Vector3<float>& value);
+		bool tryGetVector4(std::string name, Utilities::Vector4<float>& value);
 	};
 }

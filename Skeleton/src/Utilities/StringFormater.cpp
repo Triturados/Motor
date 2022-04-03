@@ -188,4 +188,83 @@ namespace LoveEngine {
 	{
 		return Utilities::Vector4<float>();
 	}
+
+
+	bool StringFormatter::tryGetInt(std::string name, int& value)
+	{
+		auto it =i.find(name);
+
+		if (it != i.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetFloat(std::string name, float& value)
+	{
+		auto it = f.find(name);
+
+		if (it != f.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetBool(std::string name, bool& value)
+	{
+		auto it = b.find(name);
+
+		if (it != b.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetChar(std::string name, char& value)
+	{
+		auto it = c.find(name);
+
+		if (it != c.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetString(std::string name, std::string& value)
+	{
+		auto it = s.find(name);
+
+		if (it != s.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetVector3(std::string name, Utilities::Vector3<float>& value)
+	{
+		auto it = v3.find(name);
+
+		if (it != v3.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
+	bool StringFormatter::tryGetVector4(std::string name, Utilities::Vector4<float>& value)
+	{
+		auto it = v4.find(name);
+
+		if (it != v4.end())
+		{
+			value = it->second;
+			return true;
+		}
+		return false;
+	}
 }

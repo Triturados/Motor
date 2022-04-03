@@ -77,7 +77,7 @@ void Game::setup() {
 	LoveEngine::ECS::Transform* transformLight= luz->addComponent<LoveEngine::ECS::Transform>();
 	transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
 	LoveEngine::ECS::Light* lightC=  luz->addComponent<LoveEngine::ECS::Light>();
-	lightC->sendParameters(LoveEngine::ECS::lightType::point, "light1");
+	lightC->recieveValues(LoveEngine::ECS::lightType::point, "light1");
 
 	/*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
 	LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
