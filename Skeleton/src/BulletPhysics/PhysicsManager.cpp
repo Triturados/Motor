@@ -107,22 +107,30 @@ namespace LoveEngine {
 			dynamicsWorld->stepSimulation(deltaTime);
 		}
 
-		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos, float mass, int shape, int group, int mask) {
+		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/) {
 
 			//creamos el collider
 			btCollisionShape* shapeBT;
 
 			//diferentes tipos de caja de colision
+			//diferentes tipos de caja de colision
 			if (shape == 0) {
-				shapeBT = new btBoxShape(btVector3(50., 1., 50.));//cubo
+
+				shapeBT = new btBoxShape(btVector3(scale_.x, scale_.y, scale_.z));//cubo
 
 			}
-			else/* if(shape == 1)*/ {
-				shapeBT = new btSphereShape(btScalar(1.));
-			}/*
+			else if (shape == 1) {
+				shapeBT = new btSphereShape(btScalar(scale_.x));
+			}
+			else if (shape == 2) {
+				shapeBT = new btStaticPlaneShape(btVector3(scale_.x, scale_.y, scale_.z), 0);
+			}
+			else if (shape == 3) {
+				shapeBT = new btCylinderShape(btVector3(scale_.x, scale_.y, scale_.z));
+			}
 			else {
-				shapeBT = new btSphereShape(btScalar(1.));
-			}*/
+				shapeBT = new btConeShape(scale_.x / 2, scale_.y);
+			}
 
 			//collisionShapes->push_back(shapeBT);
 
@@ -135,7 +143,7 @@ namespace LoveEngine {
 				shapeBT->calculateLocalInertia(mass, localInertia);
 			}
 
-			startTransform.setOrigin(btVector3(pos.x, pos.y, pos.z));
+			startTransform.setOrigin(btVector3(pos_.x, pos_.y, pos_.z));
 			btMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
 			//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
