@@ -13,15 +13,23 @@
 #include "SDL_keycode.h"
 //class SDL_Scancode;
 
-class Component;
 
 namespace LoveEngine {
+	namespace ECS {
+		class Component;
+	}
+
+	namespace Utilities {
+		template <class T>
+		class Vector2;
+	}
+
 	namespace Input {
 		struct lovexport tecla {
 			bool pressedLastFrame = false;
 			bool beingPressed = false;
 			bool keyUp = false;
-			std::vector<Component*> suscriptores;
+			std::vector<ECS::Component*> suscriptores;
 		};
 
 		enum class lovexport InputKeys {
@@ -42,6 +50,8 @@ namespace LoveEngine {
 			static InputManager* getInstance();
 			bool handleInput();
 			bool isKeyPressed(InputKeys key);
+
+			Utilities::Vector2<float> mousePosition();
 
 			//static std::unordered_map<SDL_KeyCode, tecla> teclas;
 			/*void addListener(SDL_KeyCode k, Component* c);*/
