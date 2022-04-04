@@ -1,7 +1,36 @@
 #include "GameTime.h"
+#include <Windows.h>
+#include <cassert>
+#include <SingletonInfo.h>
 
 
-float GameTime::calculateFrameRate() {
+namespace LoveEngine {
 
-	return frameCount / timeSinceStart * 1000;
+	Time* Time::instance = nullptr;
+
+	Time::Time() {
+		deltaTime = physicsTime = timeSinceStart = timeScale = unscaledTime = frameCount = 1;
+
+		if (instance != nullptr) {
+			assert(false);
+		}
+
+		Time::instance = this;
+
+		Singleton::addElement(this, Singleton::positions::Time);
+	}
+
+	Time* Time::getInstance() {
+		if (instance == nullptr) {
+			instance = static_cast<Time*>(Singleton::getElement(Singleton::positions::Time));
+		}
+		return instance;
+	}
+
+
+	float Time::calculateFrameRate() {
+		return frameCount / timeSinceStart * 1000;
+	}
+
+	
 }

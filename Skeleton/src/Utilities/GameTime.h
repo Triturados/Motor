@@ -1,15 +1,28 @@
 #pragma once
+#include <functional>
+#include <../Export.h>
+class Component;
+class GameObject;
 
+namespace LoveEngine {
 
+	class lovexport Time {
+		static Time* instance;
+	public:
+		Time();
 
-class GameTime {
-public:
+		static Time* getInstance();
 
-	float deltaTime;
-	float physicsTime;
-	float timeSinceStart;
-	float timeScale;
+		float deltaTime;
+		float unscaledTime;
+		float physicsTime;
+		float timeSinceStart;
+		float timeScale;
+		unsigned long frameCount;
+		float calculateFrameRate();
+	};
 
-	unsigned long frameCount;
-	float calculateFrameRate();
-};
+	/*inline lovexport Time* TimeInstance() {
+		return Time::getInstance();
+	}*/
+}

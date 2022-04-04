@@ -1,47 +1,49 @@
 #pragma once
+#include <../Export.h>
 #include <string>
 #include <list>
 
-class Renderer;
-class Component;
-class GameObject;
-class SceneManager;
-class SceneCreator;
+namespace LoveEngine {
 
-class Scene final {
+	namespace SceneManagement {
+		class SceneManager;
+		class SceneFactory;
+	}
 
-	friend SceneCreator;
-	friend SceneManager;
-	Scene(std::string name);
-public:
-	~Scene();
+	namespace ECS {
 
-	std::string name;
+		class Component;
+		class GameObject;
+		class lovexport Scene final {
 
-	void init();
-	void postInit();
-	void update();
-	void stepPhysics();
-	void render();
+			friend SceneManagement::SceneManager;
+			friend SceneManagement::SceneFactory;
+			friend class Game;
+			friend class Timer;
+			friend GameObject;
 
-private:
-	std::list<GameObject*> gObjects;
-	std::list<Renderer*> renderers;
-};
+			Scene(std::string name);
+		public:
+			~Scene();
+
+			std::string name;
+
+			void init();
+			void postInit();
+			void update();
+			void stepPhysics();
+			void render();
+
+			void onSceneUp();
+			void onSceneDown();
+
+			void setName(std::string newname);
+
+		private:
+			GameObject* createGameObject(std::string name = "new game object");
 
 
-
-//Clase para añadir cada uno de los elementos a la escena
-class SceneCreator {
-
-public:
-	Scene* createScene();
-protected:
-	virtual Scene* populateScene() { return nullptr; };
-	std::list<GameObject*> gObjects;
-
-	Scene* createScene(std::string name);
-	GameObject* createGameObject(std::string name);
-private:
-	void push(Scene*);
-};
+			std::list<GameObject*> gObjects;
+		};
+	}
+}

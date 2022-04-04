@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main", "projects\Main\Main.vcxproj", "{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Biblioteca", "projects\Biblioteca\Biblioteca.vcxproj", "{30349241-46D6-45E5-9485-498371E27ED8}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OGRE", "projects\OGRE\OGRE.vcxproj", "{57663220-5E15-4009-92E8-65F60806A5A9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoundProject", "projects\SoundProject\SoundProject.vcxproj", "{1AFB29FF-A508-4251-8A1C-21107615C230}"
@@ -20,6 +18,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LUA", "projects\LUA\LUA.vcxproj", "{D5B79B46-5FE1-4EB2-A6B2-CC8CC167FA1C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utilities", "projects\Utilities\Utilities.vcxproj", "{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Singleton", "projects\Singleton\Singleton.vcxproj", "{1E64F590-1645-45B1-AAAF-D1E069FA6F65}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaBridge", "projects\LuaBridge\LuaBridge.vcxproj", "{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,12 +37,6 @@ Global
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.ActiveCfg = Release|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x64.Build.0 = Release|x64
 		{BFED8C4B-DD9A-4273-95CA-E81C06D91C0D}.Release|x86.ActiveCfg = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x64.ActiveCfg = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x64.Build.0 = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Debug|x86.ActiveCfg = Debug|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x64.ActiveCfg = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x64.Build.0 = Release|x64
-		{30349241-46D6-45E5-9485-498371E27ED8}.Release|x86.ActiveCfg = Release|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x64.ActiveCfg = Debug|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x64.Build.0 = Debug|x64
 		{57663220-5E15-4009-92E8-65F60806A5A9}.Debug|x86.ActiveCfg = Debug|x64
@@ -83,6 +79,18 @@ Global
 		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x64.ActiveCfg = Release|x64
 		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x64.Build.0 = Release|x64
 		{17C98F4B-91BE-4D6C-8EA1-7037992A19B3}.Release|x86.ActiveCfg = Release|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Debug|x64.ActiveCfg = Debug|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Debug|x64.Build.0 = Debug|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Debug|x86.ActiveCfg = Debug|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Release|x64.ActiveCfg = Release|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Release|x64.Build.0 = Release|x64
+		{1E64F590-1645-45B1-AAAF-D1E069FA6F65}.Release|x86.ActiveCfg = Release|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Debug|x64.ActiveCfg = Debug|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Debug|x64.Build.0 = Debug|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Debug|x86.ActiveCfg = Debug|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Release|x64.ActiveCfg = Release|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Release|x64.Build.0 = Release|x64
+		{FCD5CADD-0170-4AEB-999B-A5D42D99BB08}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

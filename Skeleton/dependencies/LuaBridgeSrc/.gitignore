@@ -1,0 +1,12 @@
+Documentation
+*.swp
+Makefile
+CMakeCache.txt
+CMakeFiles/
+*.dir/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+.vs/
+.vscode

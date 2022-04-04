@@ -3,67 +3,92 @@
 #include <stack>
 #include <functional>
 #include <string>
-
-/// <summary>
-/// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
-/// =POP   : REMOVE THE SCENE AT THE TOP OF THE STACK
-/// =CLEAR : REMOVES ALL PREVIOUS SCENE AND CREATES THE NEW ONE
-/// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
-/// </summary>
-enum class SceneLoad {
-	PUSH, POP, CLEAR, SWAP
-};
+#include <../Export.h>
 
 
-class Scene;
-class SceneCreator;
-using SceneFactory = std::vector<SceneCreator*>;
+
+namespace LoveEngine {
+	namespace ECS {
+		class Scene;
+	}
+
+	namespace SceneManagement {
+		class SceneFactory;
+
+		/// <summary>
+		/// =PUSH  : ADD THE NEW SCENE AT THE TOP OF THE STACK
+		/// =POP   : REMOVE THE SCENE AT THE TOP OF THE STACK
+		/// =CLEAR : REMOVES ALL PREVIOUS SCENE AND CREATES THE NEW ONE
+		/// =SWAP  : REMOVE THE SCENE AT THE TOP OF THE STACK AND CREATES THE NEW ONE
+		/// =EXIT  : STOPS THE GAME
+		/// </summary>
+		enum class SceneLoad {
+			PUSH, SWAP, POP, CLEAR, EXIT
+		};
+
+		
+		class lovexport SceneManager final {
+			friend class Game;
+
+			static SceneManager* instance;
+		public:
+			static  SceneManager* getInstance();
+			SceneManager();
+			~SceneManager();
+
+			ECS::Scene* getCurrentScene();
+
+			//Número de escenas totales
+			int sceneCount() const;
+
+			//Índice o nombre de la escena actual
+			int         currentSceneIdx() const;
+			std::string currentSceneName() const;
+
+			//Cuántas escenas hay ahora mismo en la pila
+			int stackedScenes() const;
+
+			//Cambiar a una escena dado su índice, indicando el tipo de cambio de escena
+			void changeScene(int SceneIdx, SceneLoad type);
+
+			//Comprueba si la escena debe cambiar, y la actualiza
+			void tryChangeScene();
+
+			//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
+			void initiliseScenes();
+			//Añade las distintas escenas a la fábrica de escenas
+
+		private:
+			SceneManagement::SceneFactory* sceneFactory;
+
+			int numberOfScenes = 0;
+
+			int currentIdx = 0;
+			bool initialised = false;
+
+			bool shouldChange = false;
+			int sceneToLoad = -1;
+			SceneLoad sceneChangeType;
+
+			void eraseTopScene();
+			void createScene();
+			void manageScene();
+
+			//Pila con las escenas actuales
+			std::stack<ECS::Scene*> currentScene;
+		};
 
 
-class SceneManager final {
+		
+		//void changeSceneByIndex(int idx, int scenechangetype) {
+		//	changeScene(idx, (SceneLoad)scenechangetype);
+		//}
+		lovexport void changeScene(int idx, SceneManagement::SceneLoad scenechangetype);
+	}
 
-public:
-	static SceneManager* instance;
-	SceneManager();
-	~SceneManager();
-
-	Scene* getCurrentScene();
-
-	//Número de escenas totales
-	int sceneCount() const;
-
-	//Índice o nombre de la escena actual
-	int         currentSceneIdx () const;
-	std::string currentSceneName() const;
-
-	//Cuántas escenas hay ahora mismo en la pila
-	int currentSceneCount() const;
-
-	//Cambiar a una escena dado su índice, indicando el tipo de cambio de escena
-	void changeScene(int SceneIdx, SceneLoad type);
 	
-	//Comprueba si la escena debe cambiar, y la actualiza
-	void checkChange();
-
-	//Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución
-	void initiliseScenes();
-	//Añade las distintas escenas a la fábrica de escenas
-	void defineScenesFactories(SceneFactory scenes);
-protected:
-
-	int currentIdx = 0;
-	bool initialised = false;
-
-	bool shouldChange = false;
-	int sceneToLoad = -1;
-	SceneLoad sceneChangeType;
-
-	void eraseTopScene();
-	void createScene();
-	void manageScene();
-
-	//Vector con todas las escenas
-	SceneFactory scenesTemplates;
-	//Pila con las escenas actuales
-	std::stack<Scene*> currentScene;
-};
+}
+//
+//lovexport int damenumero() {
+//	return 13;
+//}

@@ -1,94 +1,160 @@
-#include <iostream>
 #include "Component.h"
 #include "GameObject.h"
+#include <Scene.h>
+#include <ComponentFactory.h>
+#include <iostream>
 
 
-GameObject::GameObject(std::string name)
-{
-	this->name = name;
-}
+namespace LoveEngine {
+	namespace ECS {
 
-GameObject::~GameObject()
-{
-	for (auto& comp : componentsList) {
-		delete comp;
-		comp = nullptr;
-	}
-	componentsList.clear();
-}
+		GameObject::GameObject(std::string name)
+		{
+			this->name = name;
+		}
 
-void GameObject::print(std::string mssg, std::string file, int line)
-{
-	if (file.length() > 0) {
-
-		std::cout << "File: " << file << "\n";
-	}
-	if (line >= 0)
-	{
-		std::cout << "Line: " << line << " ";
-	}
-
-	std::cout << name << ": " << mssg << "\n";
-}
-
-void GameObject::init()
-{
-	for (Component* comp : componentsList) {
-		comp->init();
-	}
-}
-
-void GameObject::postInit()
-{
-	for (Component* comp : componentsList) {
-		comp->postInit();
-	}
-}
+		GameObject::GameObject(std::string name, Scene* scn)
+		{
+			this->name = name;
+			scene = scn;
+			scene->gObjects.push_back(this);
+			std::cout << "CAca de vaca";
+		}
 
 
+		GameObject::~GameObject()
+		{
+			for (auto& comp : componentsList) {
+				delete comp;
+				comp = nullptr;
+			}
+			componentsList.clear();
+		}
 
-void GameObject::update()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->update();
-	}
 
-	for (auto it : componentsToErase) {
-		delete* it;
-		componentsList.erase(it);
-	}
-	componentsToErase.clear();
-}
+		Component* GameObject::createComponent(std::string compname)
+		{
+			Component* comp = LoveEngine::ComponentDefinitions::ComponentFactory::getInstance()->createComponent(compname);
 
-void GameObject::stepPhysics()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->stepPhysics();
-	}
-}
+			comp->gameObject = this;
+			comp->scene = scene;
+			componentsList.push_back(comp);
 
-void GameObject::preRender()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->preRender();
-	}
-}
+			return comp;
+		}
 
-void GameObject::activated()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->activated();
-	}
-}
+		void GameObject::activate(bool value)
+		{
+			enabled = value;
+		}
 
-void GameObject::deActivated()
-{
-	for (Component* comp : componentsList) {
-		if (comp->enabled)
-			comp->deActivated();
+		void GameObject::removeGameObject()
+		{
+			dead = true;
+		}
+
+		void GameObject::removeGameObject(GameObject* gO)
+		{
+			gO->removeGameObject();
+		}
+
+		void GameObject::canvelRemove()
+		{
+			dead = false;
+		}
+
+
+		bool GameObject::isEnabled()
+		{
+			return enabled;
+		}
+
+
+		void GameObject::init()
+		{
+			for (Component* comp : componentsList) {
+				comp->init();
+			}
+		}
+
+		void GameObject::postInit()
+		{
+			for (Component* comp : componentsList) {
+				comp->postInit();
+			}
+		}
+
+
+		void GameObject::update()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->update();
+			}
+
+			for (auto it : componentsToErase) {
+				delete* it;
+				componentsList.erase(it);
+			}
+			componentsToErase.clear();
+		}
+
+		void GameObject::stepPhysics()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->stepPhysics();
+			}
+		}
+
+		void GameObject::preRender()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->preRender();
+			}
+		}
+
+		void GameObject::activated()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->activated();
+			}
+		}
+
+		void GameObject::deActivated()
+		{
+			for (Component* comp : componentsList) {
+				if (comp->enabled)
+					comp->deActivated();
+			}
+		}
+
+		void GameObject::onSceneUp() {
+			for (Component* comp : componentsList) {
+				comp->onSceneUp();
+			}
+		}
+
+		void GameObject::onSceneDown() {
+			for (Component* comp : componentsList) {
+				comp->onSceneDown();
+			}
+		}
+
+		GameObject* GameObject::createGameObject(std::string name)
+		{
+			auto go = scene->createGameObject(name);
+			go->init();
+			go->postInit();
+			return go;
+		}
+
+		void GameObject::sendMessage(std::string message) {
+			for (auto comp : componentsList) {
+				comp->receiveMessage(message);
+			}
+		}
 	}
 }
