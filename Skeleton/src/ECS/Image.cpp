@@ -33,7 +33,7 @@ namespace LoveEngine {
 			if(!tr) throw new std::exception("Se necesita transform para usar el componente Image");*/
 
 			/*tr->setPos({ 300,300,0 });*/
-			ogremanager->renderImage(0,0,300,300,material);
+			ogremanager->renderImage(0,0,30,30,material);
 		}
 
 		//No se llama el update 
