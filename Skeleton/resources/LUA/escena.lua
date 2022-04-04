@@ -30,7 +30,7 @@ function scene0()
 
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
     local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
-        
+    camaraAidaLaMejor:addComponent("MouseTracker"):send3(0, 1, nil)
     compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
         position: 0,15,75;

@@ -44,7 +44,6 @@ namespace LoveEngine {
 	public:
 		void clear();
 		void addString(std::string message);
-		constexpr unsigned int str2int(const char* str, int h = 0);
 
 		StringFormatter(std::string message);
 

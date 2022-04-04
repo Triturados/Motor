@@ -32,20 +32,6 @@ namespace LoveEngine {
 
 			InputManager::_instance = this;
 			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
-
-			/*std::cout << SDL_SCANCODE_A << std::endl;
-
-			std::cout << SDL_SCANCODE_DOWN << std::endl;
-			std::cout << SDL_SCANCODE_UP << std::endl;
-			std::cout << SDL_SCANCODE_RIGHT << std::endl;;
-			std::cout << SDL_SCANCODE_LEFT << std::endl;;
-
-			std::cout << SDL_SCANCODE_TAB << std::endl;;
-			std::cout << SDL_SCANCODE_LSHIFT << std::endl;;
-			std::cout << SDL_SCANCODE_LCTRL << std::endl;;
-			std::cout << SDL_SCANCODE_KP_SPACE << std::endl;;
-			std::cout << SDL_SCANCODE_ESCAPE << std::endl;;
-			std::cout << SDL_SCANCODE_KP_ENTER << std::endl;;*/
 		}
 
 		bool InputManager::handleInput()
@@ -95,6 +81,11 @@ namespace LoveEngine {
 		bool InputManager::isKeyPressed(InputKeys key)
 		{
 			return lastPressedKeys->count((SDL_Scancode)((int)key));
+		}
+
+		bool InputManager::mousePressed(MouseState state)
+		{
+			return mouseState == state;
 		}
 
 		Utilities::Vector2<float> InputManager::mousePosition()

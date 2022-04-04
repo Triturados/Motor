@@ -49,6 +49,10 @@ namespace LoveEngine {
 			void lookAtDir(float x, float y, float z);
 			void onSceneUp() override;
 			void onSceneDown() override;
+
+			void yaw(float angle);
+			void pitch(float angle);
+			void roll(float angle);
 		};
 	}
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <../Export.h>
 #include <math.h>
-#include "Recta.h"
 
 namespace LoveEngine {
 	namespace Utilities
@@ -34,11 +33,6 @@ namespace LoveEngine {
 
 			Vector3<T> operator+(Vector3<T> const& v2) const {
 				return Vector3(x + v2.x, y + v2.y, z + v2.z);
-			}
-
-			Vector3<T> operator*(Vector3<T> const& v2) const {
-				return Vector3(x * v2.x, y * v2.y, z * v2.z);
-
 			}
 
 			Vector3<T> operator*(float f) const {
@@ -77,12 +71,12 @@ namespace LoveEngine {
 
 			T magnitude() //Magnitud 
 			{
-				return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+				return sqrt(x * x + y * y + z * z);
 			}
 
-			T magnitude2() //Magnitud al cuadrado
+			T magnitudeSqr() //Magnitud al cuadrado
 			{
-				return pow(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)), 2);
+				return x * x + y * y + z * z;
 			}
 
 			void normalize() //normalizar vector
@@ -101,24 +95,6 @@ namespace LoveEngine {
 				int z_ = z * b.z;
 
 				return (x_ + y_ + z_);
-			}
-
-			Recta getRecta(Vector3<T> b)
-			{
-				Vector3<T> v = this - b;
-
-				element auxX, auxY, auxZ;
-
-				auxX.value = x;
-				auxX.landa = v.x;
-
-				auxY.value = y;
-				auxY.landa = v.y;
-
-				auxZ.value = z;
-				auxZ.landa = v.z;
-
-				return Recta(auxX, auxY, auxZ);
 			}
 
 			Vector3<T> interpolatePoint(Vector3<T> b, float interpolation)
@@ -144,6 +120,8 @@ namespace LoveEngine {
 			T getDistance(Vector3<T> b) //Distancia entre 2 vectores
 			{
 				int x_ = x - b.x;
+
+
 				int y_ = y - b.y;
 				int z_ = z - b.z;
 				Vector3<T> aux = Vector3(x_, y_, z_);
@@ -176,7 +154,7 @@ namespace LoveEngine {
 				//double rads = gradosARadianes(degrees);
 
 				Vector3<T> A;
-				A.x = (cos(degrees) * x) -	 (sin(degrees) * y);
+				A.x = (cos(degrees) * x) - (sin(degrees) * y);
 				A.y = (sin(degrees) * x) + (cos(degrees) * y);
 				A.z = z;
 

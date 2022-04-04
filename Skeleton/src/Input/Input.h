@@ -50,7 +50,7 @@ namespace LoveEngine {
 			static InputManager* getInstance();
 			bool handleInput();
 			bool isKeyPressed(InputKeys key);
-
+			bool mousePressed(MouseState state);
 			Utilities::Vector2<float> mousePosition();
 
 			//static std::unordered_map<SDL_KeyCode, tecla> teclas;

@@ -49,6 +49,7 @@ namespace LoveEngine {
 		void Camera::lookAt(Utilities::Vector3<float> pos)
 		{
 			mCameraNode->lookAt(Ogre::Vector3(pos.x, pos.y, pos.z), Ogre::Node::TransformSpace::TS_WORLD);
+
 		}
 
 		void Camera::lookAtDir(float x, float y, float z)
@@ -59,6 +60,18 @@ namespace LoveEngine {
 		void Camera::onSceneDown()
 		{
 			//mCameraNode->setVisible(false);
+		}
+		void Camera::yaw(float angle)
+		{
+			mCameraNode->yaw(Ogre::Radian(angle));
+		}
+		void Camera::pitch(float angle)
+		{
+			mCameraNode->pitch(Ogre::Radian(angle));
+		}
+		void Camera::roll(float angle)
+		{
+			mCameraNode->roll(Ogre::Radian(angle));
 		}
 		void Camera::onSceneUp()
 		{
