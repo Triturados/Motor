@@ -28,6 +28,21 @@ function scene0()
     ]])
     local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
    
+    local bola = scene:createObject("Bola")
+    local compBola = bola:addComponent('Transform')
+        
+    compBola:sendMsg([[
+        scale: 1,1,1;
+        position: 0,20,0;
+        rotation: 0,0,0,0;
+    ]])
+    local compBolaMesh = bola:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+
+    local compRigidbody = bola:addComponent('Rigidbody')
+    compRigidbody:send2(0, 0.0)
+    compRigidbody:sendMsg([[forma: cube]])
 
     -- local comp4 = suelo:addComponent("Rigidbody")
 end
