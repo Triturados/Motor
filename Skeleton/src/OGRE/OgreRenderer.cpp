@@ -310,6 +310,7 @@ namespace LoveEngine {
 			overlay->show();
 
 			numOfImages++;
+			return overlay;
 		}
 
 		OgreRenderer::~OgreRenderer()
