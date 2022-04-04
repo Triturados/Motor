@@ -16,6 +16,7 @@
 #include "Vector4.h"
 #include "PhysicsManager.h"
 #include "Transform.h"
+#include "GameObject.h"
 
 namespace LoveEngine {
 	namespace ECS {
@@ -48,6 +49,7 @@ namespace LoveEngine {
 
 		void  RigidBody::init()
 		{
+			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			Utilities::Vector3<float> scale = *(tr->getScale());
 			if (rigidBody == nullptr) {
@@ -87,7 +89,6 @@ namespace LoveEngine {
 		void RigidBody::receiveValues(int state_, float mass_, Component* eTm, GameObject* g)
 		{
 			mass = mass_;
-			tr = static_cast<Transform*>(eTm);
 			stateMode = (RBState)state_;
 		}
 

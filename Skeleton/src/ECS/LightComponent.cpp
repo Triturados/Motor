@@ -16,14 +16,13 @@ namespace LoveEngine {
 
 		void Light::receiveValues(int lightT, float lightNumber, Component* c, GameObject*)
 		{
-			ogremanager = Renderer::OgreRenderer::getInstance();
-			pos = gameObject->getComponent<Transform>();
 			name = "light"+(int)lightNumber;
 			type = static_cast<lightType>(lightT);
 		}
 		void Light::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
+			pos = gameObject->getComponent<Transform>();
 			visible = true;
 
 			switch (type)

@@ -60,7 +60,7 @@ namespace LoveEngine {
 
 			void stepPhysics() override;
 
-			void receiveValues(int state_, float mass_, Component* eTm, GameObject* g = nullptr) override;
+			void receiveValues(int state_, float mass_, Component* eTm = nullptr, GameObject* g = nullptr) override;
 			void receiveMessage(std::string s) override;
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);

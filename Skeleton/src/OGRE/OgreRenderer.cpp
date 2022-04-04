@@ -111,6 +111,11 @@ namespace LoveEngine {
 			native = SDL_CreateWindow(appName_.c_str(), SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, flags);
 
+			//puntero ventana
+			const auto g = SDL_bool(true);
+			SDL_SetWindowGrab(native, g);
+			SDL_ShowCursor(true);
+
 			// Se obtiene informacion de la version de SDL
 			SDL_SysWMinfo wmInfo;
 			SDL_VERSION(&wmInfo.version);
