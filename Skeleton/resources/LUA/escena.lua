@@ -7,26 +7,26 @@ function scene0()
     
     local suelo = scene:createObject("Suelo")
     local comp = suelo:addComponent("EscribirNumero")
-    local comp2 = suelo:addComponent("Transform")
+    local comp2 = suelo:addComponent('Transform')
     
     comp2:sendMsg([[
         scale: 50,1,50;
-        position: 0,-100,0;
+        position: 0,0,0;
         rotation: 0,0,0,0;
     ]])
-    local comp3 = suelo:addComponent("Mesh"):sendMsg([[
+    local comp3 = suelo:addComponent('Mesh'):sendMsg([[
         meshName: cube.mesh;
     ]])
 
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
-    local compAidaLaMejor = camaraAidaLaMejor:addComponent("Transform")
+    local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
         
     compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
         position: 0,10,50;
         rotation: 0,0,0,0;
     ]])
-    local compAidaLaMejor2 = camaraAidaLaMejor:addComponent("Camera")
+    local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
    
 
     -- local comp4 = suelo:addComponent("Rigidbody")

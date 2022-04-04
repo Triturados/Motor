@@ -57,6 +57,8 @@ namespace LoveEngine {
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
 
+		ogreManager->getSceneManager()->destroyAllCameras();
+
 		gameComponentDefinitions();
 
 		initialiseSceneCreator();
@@ -64,7 +66,6 @@ namespace LoveEngine {
 		sceneManager->initiliseScenes();
 
 		ogreManager->exampleScene();
-		ogreManager->getSceneManager()->destroyAllCameras();
 
 		//LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
 		//LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
