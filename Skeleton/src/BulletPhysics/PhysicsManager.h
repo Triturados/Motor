@@ -10,6 +10,7 @@ class btDynamicsWorld;
 class btRigidBody;
 class OgreDebugDrawer;
 class btCollisionObject;
+class btManifoldPoint;
 class btVector3;
 class btCollisionShape;
 class btDiscreteDynamicsWorld;

@@ -89,7 +89,6 @@ namespace LoveEngine {
 		void RigidBody::receiveValues(int state_, float mass_, Component* eTm, GameObject* g)
 		{
 			mass = mass_;
-			tr = static_cast<Transform*>(eTm);
 			stateMode = (RBState)state_;
 		}
 
