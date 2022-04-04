@@ -40,6 +40,7 @@ namespace LoveEngine {
 		{
 		private:
 			float mass;
+			float restitution;
 			TipoForma forma;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;

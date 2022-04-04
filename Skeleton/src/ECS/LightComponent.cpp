@@ -43,14 +43,14 @@ namespace LoveEngine {
 			case directional:
 				light = ogremanager->getSceneManager()->createLight(name);
 
-				light->setDiffuseColour(Ogre::ColourValue(0.4, 0, 0));
-				light->setSpecularColour(Ogre::ColourValue(0.4, 0, 0));
+				light->setDiffuseColour(Ogre::ColourValue(0.8, 0.8, 0.8));
+				light->setSpecularColour(Ogre::ColourValue(0.8, 0.8, 0.8));
 
 				light->setType(Ogre::Light::LT_DIRECTIONAL);
 
 				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
-				entityNode->setDirection(Ogre::Vector3(0, -1, 0));
+				entityNode->setDirection(Ogre::Vector3(0, -1, -0.5));
 
 				break;
 			case spot:

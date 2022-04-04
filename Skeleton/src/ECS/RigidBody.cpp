@@ -55,6 +55,7 @@ namespace LoveEngine {
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)forma);
+				rigidBody->setRestitution(restitution);
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
@@ -96,6 +97,7 @@ namespace LoveEngine {
 		{
 			StringFormatter sTf(s);
 			setForma(sTf.getString("forma"));
+			restitution = sTf.getFloat("restitution");
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)

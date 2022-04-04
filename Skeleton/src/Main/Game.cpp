@@ -65,7 +65,7 @@ namespace LoveEngine {
 
 		sceneManager->initiliseScenes();
 
-		ogreManager->exampleScene();
+		//ogreManager->exampleScene();
 		/*ogreManager->getSceneManager()->destroyAllCameras();
 
 		LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");

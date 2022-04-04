@@ -19,14 +19,14 @@ function scene0()
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
     compRigidbodySuelo:send2(0, 0.0)
-    compRigidbodySuelo:sendMsg([[forma: cube]])
+    compRigidbodySuelo:sendMsg([[forma: cube; restitution: 0.9;]])
 
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
     local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
         
     compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
-        position: 0,30,200;
+        position: 0,15,75;
         rotation: 0,0,0,0;
     ]])
     local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
@@ -35,17 +35,39 @@ function scene0()
     local compBola = bola:addComponent('Transform')
         
     compBola:sendMsg([[
-        scale: 1,1,1;
-        position: 0,20,0;
+        scale: 2,2,2;
+        position: -20,40,0;
         rotation: 0,0,0,0;
     ]])
     local compBolaMesh = bola:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: bolaroja.mesh;
     ]])
 
     local compRigidbody = bola:addComponent('Rigidbody')
-    compRigidbody:send2(0, 1.0)
-    compRigidbody:sendMsg([[forma: sphere]])
+    compRigidbody:send2(1, 1.0)
+    compRigidbody:sendMsg([[
+        forma: sphere; 
+        restitution: 1.0;
+    ]])
+
+    local bolaPesada = scene:createObject("BolaPesada")
+    local compBolaPesada = bolaPesada:addComponent('Transform')
+        
+    compBolaPesada:sendMsg([[
+        scale: 4,4,4;
+        position: 20,40,0;
+        rotation: 0,0,0,0;
+    ]])
+    local compBolaMesh = bolaPesada:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+
+    local bolaPesadaRigid = bolaPesada:addComponent('Rigidbody')
+    bolaPesadaRigid:send2(1, 1.0)
+    bolaPesadaRigid:sendMsg([[
+        forma: sphere; 
+        restitution: 0.75;
+    ]])
 
     local luz = scene:createObject("Luz")
     local compLuz = luz:addComponent('Transform')
@@ -57,22 +79,22 @@ function scene0()
     ]])
 
     local compLight = luz:addComponent('Light')
-    compLight:send2(0, 0.0)
+    compLight:send2(1, 0.0)
 
    local player = scene:createObject("jugador")
    local tr = player:addComponent("Transform")
    tr:sendMsg([[
     scale: 2,2,2;
-    position: 0,20,0;
+    position: 0,11,0;
     rotation: 0,0,0,0;
-]])
-local mesh = player:addComponent("Mesh")
-mesh:sendMsg([[meshName: Sinbad.mesh]])
-player:addComponent("MovimientoJugador"):sendMsg([[
-    speed: 15.0
-    rotSpeed: 5.0
-]])
-    
+    ]])
+    local mesh = player:addComponent("Mesh")
+    mesh:sendMsg([[meshName: Sinbad.mesh]])
+    player:addComponent("MovimientoJugador"):sendMsg([[
+        speed: 15.0
+        rotSpeed: 5.0
+    ]])
+
 end
 
 
