@@ -57,6 +57,8 @@ namespace LoveEngine {
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
 
+		ogreManager->getSceneManager()->destroyAllCameras();
+
 		gameComponentDefinitions();
 
 		initialiseSceneCreator();

@@ -10,7 +10,7 @@ function scene0()
     
     comp2:sendMsg([[
         scale: 50,1,50;
-        position: 0,-100,0;
+        position: 0,0,0;
         rotation: 0,0,0,0;
     ]])
 
@@ -19,7 +19,7 @@ function scene0()
     ]])
 
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
-    local compAidaLaMejor = camaraAidaLaMejor:addComponent("Transform")
+    local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
         
     compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
