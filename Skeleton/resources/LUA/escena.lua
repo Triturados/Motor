@@ -17,6 +17,9 @@ function scene0()
     local comp3 = suelo:addComponent('Mesh'):sendMsg([[
         meshName: cube.mesh;
     ]])
+    local compRigidbodySuelo = suelo:addComponent('Rigidbody')
+    compRigidbodySuelo:send2(0, 0.0)
+    compRigidbodySuelo:sendMsg([[forma: cube]])
 
     local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
     local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
@@ -41,8 +44,20 @@ function scene0()
     ]])
 
     local compRigidbody = bola:addComponent('Rigidbody')
-    compRigidbody:send2(0, 0.0)
-    compRigidbody:sendMsg([[forma: cube]])
+    compRigidbody:send2(0, 1.0)
+    compRigidbody:sendMsg([[forma: sphere]])
+
+    local luz = scene:createObject("Luz")
+    local compLuz = luz:addComponent('Transform')
+        
+    compLuz:sendMsg([[
+        scale: 1,1,1;
+        position: 0,40,0;
+        rotation: 0,0,0,0;
+    ]])
+
+    local compLight = luz:addComponent('Light')
+    compLight:send2(0, 0.0)
 
     -- local comp4 = suelo:addComponent("Rigidbody")
 end
