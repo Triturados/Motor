@@ -9,6 +9,7 @@
 #include <RigidBody.h>
 #include <CameraComponent.h>
 #include <LightComponent.h>
+#include <Image.h>
 
 
 namespace LoveEngine {
@@ -52,6 +53,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Transform>("Transform"));
 			registerComponent(new ComponentCreatorTemplate<Camera>("Camera"));
 			registerComponent(new ComponentCreatorTemplate<Light>("Light"));
+			registerComponent(new ComponentCreatorTemplate<Image>("Image"));
 			
 		}
 

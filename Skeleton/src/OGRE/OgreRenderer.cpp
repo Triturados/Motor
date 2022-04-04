@@ -23,6 +23,15 @@
 #include <SDL_events.h>
 #include <SingletonInfo.h>
 
+#include <OgreOverlay.h>
+#include <OgreOverlayManager.h>
+#include <OgreOverlayContainer.h>
+#include <OgreOverlayPrerequisites.h>
+#include <OgreTextAreaOverlayElement.h>
+#include <OgreBorderPanelOverlayElement.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayContainer.h>
+
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -50,7 +59,11 @@ namespace LoveEngine {
 			loadResources();
 			setupScenes();
 			Singleton::addElement(this, Singleton::positions::Renderer);
+			overlaySystem = new Ogre::OverlaySystem();
+			overlayManager = Ogre::OverlayManager::getSingletonPtr();
+			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();
+			numOfImages = 0;
 		}
 
 		/// <summary>
@@ -260,6 +273,43 @@ namespace LoveEngine {
 			//ogreNode->attachObject(ogreEntity);
 
 			mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+		}
+
+		//NO SE USA
+		SDL_Texture* OgreRenderer::createSDLTexture(const char* texName, int& width, int& height)
+		{
+			SDL_Surface* sur = SDL_LoadBMP(texName);
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(sdlRenderer, sur);
+			width = sur->w; height = sur->h;
+			SDL_FreeSurface(sur);
+			return texture;
+		}
+		/// <summary>
+		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
+		/// </summary>
+		Ogre::Overlay* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material)
+		{
+			// Elemento que contendra el overlay
+			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
+				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
+			container->setMetricsMode(Ogre::GMM_PIXELS);
+			container->setPosition(x, y);
+			container->setDimensions(w, h);
+
+			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
+			container->setMaterialName(material);
+
+			// El overlay, que gestiona la poscion, rotacion...
+			Ogre::Overlay* overlay = overlayManager->create("Image" + std::to_string(numOfImages));
+			overlay->add2D(container);
+			
+			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
+			
+
+			// Mostrar el overlay
+			overlay->show();
+
+			numOfImages++;
 		}
 
 		OgreRenderer::~OgreRenderer()

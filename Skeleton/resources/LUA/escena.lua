@@ -6,6 +6,13 @@ function scene0()
     scene:name("Escena de Prueba")
     
     local suelo = scene:createObject("Suelo")
+	
+    local kaka = scene:createObject("uiobj")
+	local compdadad2 = kaka:addComponent("Transform")
+	local micompo2 = kaka:addComponent("Image"):sendMsg([[
+        material: ui
+    ]])
+	
     local comp2 = suelo:addComponent("Transform")
     
     comp2:sendMsg([[
