@@ -65,7 +65,7 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-			gContactProcessedCallback = callbackFunc;
+			//gContactProcessedCallback = callbackFunc;
 			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 		//#ifdef _DEBUG
