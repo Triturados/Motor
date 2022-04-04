@@ -64,16 +64,16 @@ namespace LoveEngine {
 		sceneManager->initiliseScenes();
 
 		ogreManager->exampleScene();
-		ogreManager->getSceneManager()->destroyAllCameras();
+		/*ogreManager->getSceneManager()->destroyAllCameras();
 
-		//LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
-		//LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
-		//transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
-		//LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
-		//cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
-		//cam->init();
-		//cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
-		//cam->setActive(true);
+		LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
+		LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
+		transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
+		LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
+		cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
+		cam->init();
+		cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
+		cam->setActive(true);*/
 
 		//LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
 		//LoveEngine::ECS::Transform* transformLight = luz->addComponent<LoveEngine::ECS::Transform>();
