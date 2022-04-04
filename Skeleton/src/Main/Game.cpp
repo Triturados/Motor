@@ -146,7 +146,7 @@ namespace LoveEngine {
 
 	void Game::loop()
 	{
-		const float numIterations = 360;
+		const float numIterations = 3600;
 
 		const float physicsFrameRate = 50;
 		//double pInterval = 1.0 / physicsFrameRate;

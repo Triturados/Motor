@@ -56,14 +56,14 @@ namespace LoveEngine {
 				case SDL_KEYDOWN:
 				{
 					int enumvalue = (int)sdlevent.key.keysym.scancode;
-					std::cout << enumvalue << std::endl;
+					//std::cout << enumvalue << std::endl;
 
 					lastPressedKeys->insert(sdlevent.key.keysym.scancode);
 					break;
 				}
 				case SDL_KEYUP:
 					lastPressedKeys->erase(sdlevent.key.keysym.scancode);
-					std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
+					//std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
 					break;
 				case SDL_MOUSEMOTION:
 					SDL_GetMouseState(&mouseX, &mouseY);

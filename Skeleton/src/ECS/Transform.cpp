@@ -32,6 +32,19 @@ namespace LoveEngine {
 			return scale;
 		}
 
+		Utilities::Vector3<float> Transform::forward()
+		{
+			Utilities::Vector3<float> f(0, 0, 1);
+
+			f = f.rotateX(rotation->x);
+			f = f.rotateY(rotation->y);
+			f = f.rotateZ(rotation->z);
+			
+			f.normalize();
+
+			return f;
+		}
+
 		void Transform::setRot(Utilities::Vector4<float> r) {
 			rotation->x = r.x;
 			rotation->y = r.y;

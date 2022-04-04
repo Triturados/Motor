@@ -26,7 +26,7 @@ function scene0()
         
     compAidaLaMejor:sendMsg([[
         scale: 1,1,1;
-        position: 0,3,0;
+        position: 0,30,200;
         rotation: 0,0,0,0;
     ]])
     local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
@@ -59,7 +59,19 @@ function scene0()
     local compLight = luz:addComponent('Light')
     compLight:send2(0, 0.0)
 
-   
+   local player = scene:createObject("jugador")
+   local tr = player:addComponent("Transform")
+   tr:sendMsg([[
+    scale: 2,2,2;
+    position: 0,20,0;
+    rotation: 0,0,0,0;
+]])
+local mesh = player:addComponent("Mesh")
+mesh:sendMsg([[meshName: Sinbad.mesh]])
+player:addComponent("MovimientoJugador"):sendMsg([[
+    speed: 15.0
+    rotSpeed: 5.0
+]])
     
 end
 

@@ -38,6 +38,11 @@ namespace LoveEngine {
 
 			Vector3<T> operator*(Vector3<T> const& v2) const {
 				return Vector3(x * v2.x, y * v2.y, z * v2.z);
+
+			}
+
+			Vector3<T> operator*(float f) const {
+				return Vector3(x * f, y * f, z * f);
 			}
 
 			Vector3<T> operator-(Vector3<T> const& v2) const {
@@ -146,33 +151,33 @@ namespace LoveEngine {
 			}
 
 			Vector3<T> rotateX(double degrees) { //Rotar en el eje x
-				double rads = gradosARadianes(degrees);
+				//double rads = gradosARadianes(degrees);
 
 				Vector3<T> A;
 				A.x = x;
-				A.y = cos(rads) * y + sin(rads) * z;
-				A.z = -sin(rads) * y + cos(rads) * z;
+				A.y = cos(degrees) * y - sin(degrees) * z;
+				A.z = sin(degrees) * y + cos(degrees) * z;
 
 				return A;
 			}
 
 			Vector3<T> rotateY(double degrees) { //Rotar en el eje y
-				double rads = gradosARadianes(degrees);
+				//double rads = gradosARadianes(degrees);
 
 				Vector3<T> A;
-				A.x = (cos(rads) * x) - (sin(rads) * z);
+				A.x = (cos(degrees) * x) + (sin(degrees) * z);
 				A.y = y;
-				A.z = (sin(rads) * x) + (cos(rads) * z);
+				A.z = (-sin(degrees) * x) + (cos(degrees) * z);
 
 				return A;
 			}
 
 			Vector3<T> rotateZ(double degrees) { //Rotar en el eje z
-				double rads = gradosARadianes(degrees);
+				//double rads = gradosARadianes(degrees);
 
 				Vector3<T> A;
-				A.x = (cos(rads) * x) + (sin(rads) * y);
-				A.y = (-sin(rads) * x) + (cos(rads) * y);
+				A.x = (cos(degrees) * x) -	 (sin(degrees) * y);
+				A.y = (sin(degrees) * x) + (cos(degrees) * y);
 				A.z = z;
 
 				return A;
