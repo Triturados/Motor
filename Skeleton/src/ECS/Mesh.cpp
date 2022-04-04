@@ -87,7 +87,7 @@ namespace LoveEngine {
 		Mesh::~Mesh()
 		{
 			ogremanager->removeNode(entityNode);
-			delete rot, pos, scale;
+			//delete rot, pos, scale;
 		}
 	}
 }
