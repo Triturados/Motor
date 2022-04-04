@@ -47,6 +47,8 @@ namespace LoveEngine {
 
 			OgreDebugDrawer* mDebugDrawer = nullptr;
 
+			
+
 			//desechar seguramente
 			//btAlignedObjectArray<btCollisionShape*>* collisionShapes;
 			std::vector<btRigidBody*> bodies;
@@ -55,6 +57,9 @@ namespace LoveEngine {
 
 			//Errores
 			void checkExceptions();
+
+			bool callbackFunc(btManifoldPoint& cp, void* obj1,
+				void* obj2);
 
 		public:
 			static PhysicsManager* getInstance();

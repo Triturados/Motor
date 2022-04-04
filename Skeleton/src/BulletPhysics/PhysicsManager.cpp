@@ -65,6 +65,7 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
+			gContactProcessedCallback = callbackFunc;
 			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 		//#ifdef _DEBUG
@@ -81,6 +82,12 @@ namespace LoveEngine {
 			if (!collConfig || !collDispatcher || !broadPhaseInterface || !constraintSolver || !dynamicsWorld) {
 				LoveEngine::ErrorHandling::throwError(__PROJECT_NAME__, __LINE__, __FILENAME__, "Error al inicializar Bullet Physics, alguna de las variables de configuracion del mundo tiene un valor no valido.");
 			}
+		}
+
+		bool PhysicsManager::callbackFunc(btManifoldPoint& cp, void* obj1, 
+			void* obj2)
+		{
+			return false;
 		}
 
 		btDynamicsWorld* PhysicsManager::getWorld() const {
