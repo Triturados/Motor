@@ -10,7 +10,7 @@
 #include <CameraComponent.h>
 #include <LightComponent.h>
 #include <Image.h>
-
+#include <Animation.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -54,7 +54,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Camera>("Camera"));
 			registerComponent(new ComponentCreatorTemplate<Light>("Light"));
 			registerComponent(new ComponentCreatorTemplate<Image>("Image"));
-			
+			registerComponent(new ComponentCreatorTemplate<Animation>("Animation"));
 		}
 
 

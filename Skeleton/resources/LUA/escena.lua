@@ -102,6 +102,9 @@ function scene0()
         rotSpeed: 5.0
     ]])
 
+    local animation = player:addComponent("Animation")
+    animation:sendMsg([[animName: Dance]])
+
 end
 
 

@@ -7,18 +7,22 @@
 #include <Mesh.h>
 #include <OgreEntity.h>
 #include <GameTime.h>
+#include <StringFormater.h>
 
 namespace LoveEngine {
 	namespace ECS {
 
 		void Animation::receiveMessage(std::string animaState)
 		{
-			name = animaState;
+			StringFormatter sTf(animaState);
+			name = sTf.getString("animName");
 		}
 
 		void Animation::init()
 		{
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
+			setLoop(true);
+			setActive(true);
 		}
 
 		Animation::~Animation()
