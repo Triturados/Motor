@@ -4,7 +4,7 @@ end
 
 function scene0()
     scene:name("Escena de Prueba")
-    
+
     local suelo = scene:createObject("Suelo")
 	
     local kaka = scene:createObject("uiobj")
@@ -28,15 +28,15 @@ function scene0()
     compRigidbodySuelo:send2(0, 0.0)
     compRigidbodySuelo:sendMsg([[forma: cube; restitution: 0.9;]])
 
-    local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
-    local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
-    camaraAidaLaMejor:addComponent("MouseTracker"):send3(0, 1, nil)
-    compAidaLaMejor:sendMsg([[
-        scale: 1,1,1;
-        position: 0,15,75;
-        rotation: 0,0,0,0;
-    ]])
-    local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
+    -- local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
+    -- local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
+    -- camaraAidaLaMejor:addComponent("MouseTracker"):send3(0, 1, nil)
+    -- compAidaLaMejor:sendMsg([[
+    --     scale: 1,1,1;
+    --     position: 0,15,75;
+    --     rotation: 0,0,0,0;
+    -- ]])
+    -- local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
    
     local bola = scene:createObject("Bola")
     local compBola = bola:addComponent('Transform')
@@ -76,17 +76,17 @@ function scene0()
         restitution: 0.75;
     ]])
 
-    local luz = scene:createObject("Luz")
-    local compLuz = luz:addComponent('Transform')
+     local luz = scene:createObject("Luz")
+     local compLuz = luz:addComponent('Transform')
         
-    compLuz:sendMsg([[
-        scale: 1,1,1;
-        position: 0,40,0;
-        rotation: 0,0,0,0;
-    ]])
+     compLuz:sendMsg([[
+         scale: 1,1,1;
+         position: 0,40,0;
+         rotation: 0,0,0,0;
+     ]])
 
-    local compLight = luz:addComponent('Light')
-    compLight:send2(1, 0.0)
+     local compLight = luz:addComponent('Light')
+     compLight:send2(1, 0.0)
 
    local player = scene:createObject("jugador")
    local tr = player:addComponent("Transform")

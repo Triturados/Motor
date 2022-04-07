@@ -9,7 +9,6 @@
 #include <string>
 #include <iostream>
 #include <StringFormater.h>
-
 namespace LoveEngine {
 	namespace ECS {
 
@@ -22,6 +21,9 @@ namespace LoveEngine {
 		{
 			StringFormatter sTf(s);
 			material = sTf.getString("material");
+
+			sTf.tryGetInt("width" , width );
+			sTf.tryGetInt("height", height);
 		}
 		void Image::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
@@ -33,7 +35,7 @@ namespace LoveEngine {
 			if(!tr) throw new std::exception("Se necesita transform para usar el componente Image");*/
 
 			/*tr->setPos({ 300,300,0 });*/
-			ogremanager->renderImage(0,0,30,30,material);
+			overlay = ogremanager->renderImage(0,0,width,height,material);
 		}
 
 		//No se llama el update 
@@ -43,14 +45,16 @@ namespace LoveEngine {
 				rectangles just means "use the default" */
 			if (!visible) return;
 			
-			
 		}
+
 		void Image::setVisibility(bool mode)
 		{
 			visible = mode;
 		}
+
 		void Image::onSceneDown()
 		{
+			ogremanager->disableOverlay(overlay);
 			//visible = false;
 		}
 		void Image::onSceneUp()

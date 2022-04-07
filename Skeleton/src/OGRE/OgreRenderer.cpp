@@ -283,6 +283,7 @@ namespace LoveEngine {
 			width = sur->w; height = sur->h;
 			SDL_FreeSurface(sur);
 			return texture;
+			
 		}
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
@@ -311,6 +312,11 @@ namespace LoveEngine {
 
 			numOfImages++;
 			return overlay;
+		}
+
+		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
+		{
+			overlayManager->destroy(ov);
 		}
 
 		OgreRenderer::~OgreRenderer()

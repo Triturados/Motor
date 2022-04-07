@@ -74,6 +74,8 @@ namespace LoveEngine {
 			void createScene();
 			void manageScene();
 
+			void createSplashScreen();
+
 			//Pila con las escenas actuales
 			std::stack<ECS::Scene*> currentScene;
 		};

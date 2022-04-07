@@ -8,6 +8,11 @@
 #include <string>
 
 class SDL_Texture;
+
+namespace Ogre {
+	class Overlay;
+}
+
 namespace LoveEngine {
 
 	namespace Utilities {
@@ -32,12 +37,13 @@ namespace LoveEngine {
 			std::string material = "";
 			SDL_Texture* texture = nullptr;
 
-			int width = -1, height = -1;
+			int width = 10, height = 10;
 			//Utilities::Vector2<float>* scale;
 
 			Renderer::OgreRenderer* ogremanager;
 
 			bool visible = true;
+			Ogre::Overlay* overlay;
 		public:
 			void init()override;
 			void update()override;
