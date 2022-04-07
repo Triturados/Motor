@@ -16,7 +16,7 @@ namespace LoveEngine {
 	}
 	namespace ECS {
 
-		enum soundType { effects, environment, voices, music };
+		enum class soundType { effects, environment, voices, music };
 
 		class lovexport Sound : public Component
 		{
@@ -31,7 +31,6 @@ namespace LoveEngine {
 		public:
 
 			void init() override;
-			void receiveValues(int gChannel, float f, Component* playerPos = nullptr, GameObject* g = nullptr) override;
 			void receiveMessage(std::string s) override;
 			void playSound();
 			void releaseSound();

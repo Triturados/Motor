@@ -12,11 +12,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Image::receiveValues(int i, float f, Component* eT, GameObject* g)
-		{
-
-			/*tr = static_cast<Transform*>(eT);*/
-		}
+		
 		void Image::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);

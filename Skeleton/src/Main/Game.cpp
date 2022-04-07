@@ -272,22 +272,15 @@ namespace LoveEngine {
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::Scene>("Scene")
 			.addFunction("createObject", &(LoveEngine::ECS::Scene::createGameObject))
-			.addFunction("name", &(LoveEngine::ECS::Scene::setName))
-			.endClass();
-
-		luabridge::getGlobalNamespace(luastate)
-			.beginClass<LoveEngine::ECS::Scene>("Scene")
-			.addFunction("createObject", &(LoveEngine::ECS::Scene::createGameObject))
+			.addFunction("createGameObject", &(LoveEngine::ECS::Scene::createGameObject))
 			.addFunction("name", &(LoveEngine::ECS::Scene::setName))
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::Component>("Component")
-			.addFunction("send4", &(LoveEngine::ECS::Component::receiveValues)) //int float comp gameObject
-			.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
-			.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
-			.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
-			.addFunction("send", &(LoveEngine::ECS::Component::send1value))
+			.addFunction("sendComponent", &(LoveEngine::ECS::Component::receiveComponent))
+			.addFunction("sendGameObject", &(LoveEngine::ECS::Component::receiveGameObject))
+			.addFunction("sendObject", &(LoveEngine::ECS::Component::receiveGameObject))
 			.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveMessage))
 			.addFunction("sendMssg", &(LoveEngine::ECS::Component::receiveMessage))
 			.endClass();

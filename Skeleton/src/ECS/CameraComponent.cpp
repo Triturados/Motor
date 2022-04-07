@@ -19,11 +19,6 @@ namespace LoveEngine {
 			ogremanager->removeNode(mCameraNode);
 		}
 
-		void Camera::receiveValues(int i, float f, Component* playerPos, GameObject* g)
-		{
-		
-		}
-
 		void Camera::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();

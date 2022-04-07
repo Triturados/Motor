@@ -5,6 +5,13 @@
 #include <GameObject.h>
 #include <CameraComponent.h>
 #include <GameTime.h>
+#include <StringFormater.h>
+
+void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
+{
+	rotationSpeed = i;
+	maincam = static_cast<Camera*>(c);
+}
 
 LoveEngine::ECS::MouseTracker::MouseTracker()
 {
@@ -41,10 +48,4 @@ void LoveEngine::ECS::MouseTracker::update()
 	}
 
 	*mousepos = newpos;
-}
-
-void LoveEngine::ECS::MouseTracker::receiveValues(int, float f, Component* c, GameObject*)
-{
-	rotationSpeed = f;
-	maincam = static_cast<Camera*>(c);
 }

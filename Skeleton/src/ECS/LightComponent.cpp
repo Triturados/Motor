@@ -14,11 +14,6 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Light::receiveValues(int lightT, float lightNumber, Component* c, GameObject*)
-		{
-			name = "light"+(int)lightNumber;
-			type = static_cast<lightType>(lightT);
-		}
 		void Light::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
@@ -27,7 +22,7 @@ namespace LoveEngine {
 
 			switch (type)
 			{
-			case point:
+			case lightType::point:
 				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0.3, 0.3, 0.3);
@@ -40,7 +35,7 @@ namespace LoveEngine {
 				entityNode->attachObject(light);
 				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 				break;
-			case directional:
+			case lightType::directional:
 				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(Ogre::ColourValue(0.8, 0.8, 0.8));
@@ -53,7 +48,7 @@ namespace LoveEngine {
 				entityNode->setDirection(Ogre::Vector3(0, -1, -0.5));
 
 				break;
-			case spot:
+			case lightType::spot:
 				light = ogremanager->getSceneManager()->createLight(name);
 
 				light->setDiffuseColour(0, 0, 1.0);
@@ -112,7 +107,7 @@ namespace LoveEngine {
 
 		void Light::setDir(Utilities::Vector3<float> direction)
 		{
-			if (type != point) //Si la luz no es punto
+			if (type != lightType::point) //Si la luz no es punto
 			{
 				entityNode->setDirection(direction.x, direction.y, direction.z);
 			}
@@ -120,7 +115,7 @@ namespace LoveEngine {
 
 		void Light::setRange(float startAngle, float endAngle, float desvanecimiento)
 		{
-			if (type == spot)
+			if (type == lightType::spot)
 			{
 				light->setSpotlightRange(Ogre::Degree(startAngle), Ogre::Degree(endAngle), Ogre::Real(desvanecimiento));
 			}
@@ -140,6 +135,17 @@ namespace LoveEngine {
 		{
 			StringFormatter sf(message);
 		
+			sf.tryGetString("name", name);
+			std::string t;
+			
+			if (sf.tryGetString("type", t)) {
+				if (t == "point")
+					type = lightType::point;
+				else if (t == "directional")
+					type = lightType::directional;
+				else if (t == "spot")
+					type = lightType::spot;
+			}
 		}
 
 

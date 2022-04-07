@@ -17,11 +17,12 @@ namespace LoveEngine {
 			float rotationSpeed;
 			Utilities::Vector2<float>* mousepos;
 		public:
+			void receiveComponent(int i, Component* c) override;
+
 			MouseTracker();
 			~MouseTracker();
 			void init() override;
 			void update() override;
-			void receiveValues(int, float, Component*, GameObject*) override;
 		};
 
 	}

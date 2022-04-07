@@ -14,10 +14,6 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
-		{
-		}
-
 		void Mesh::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);

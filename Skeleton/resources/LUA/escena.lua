@@ -25,12 +25,18 @@ function scene0()
         meshName: cube.mesh;
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
-    compRigidbodySuelo:send2(0, 0.0)
-    compRigidbodySuelo:sendMsg([[forma: cube; restitution: 0.9;]])
+    compRigidbodySuelo:sendMsg([[
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        ]])
 
+
+    --Camara comentada por lo del splash screen
     -- local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
     -- local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
-    -- camaraAidaLaMejor:addComponent("MouseTracker"):send3(0, 1, nil)
+    -- camaraAidaLaMejor:addComponent("MouseTracker"):receiveComponent(5, camaraAidaLaMejor)
     -- compAidaLaMejor:sendMsg([[
     --     scale: 1,1,1;
     --     position: 0,15,75;
@@ -51,10 +57,12 @@ function scene0()
     ]])
 
     local compRigidbody = bola:addComponent('Rigidbody')
-    compRigidbody:send2(1, 1.0)
     compRigidbody:sendMsg([[
-        forma: sphere; 
+        state: static;
+        mass: 1.0;
+        shape: sphere; 
         restitution: 1.0;
+
     ]])
 
     local bolaPesada = scene:createObject("BolaPesada")
@@ -70,30 +78,34 @@ function scene0()
     ]])
 
     local bolaPesadaRigid = bolaPesada:addComponent('Rigidbody')
-    bolaPesadaRigid:send2(1, 1.0)
     bolaPesadaRigid:sendMsg([[
-        forma: sphere; 
+        shape: sphere; 
+        mass: 1.0;
+        type: static;
         restitution: 0.75;
     ]])
 
-     local luz = scene:createObject("Luz")
-     local compLuz = luz:addComponent('Transform')
+    local luz = scene:createObject("Luz")
+    local compLuz = luz:addComponent('Transform')
         
-     compLuz:sendMsg([[
-         scale: 1,1,1;
-         position: 0,40,0;
-         rotation: 0,0,0,0;
-     ]])
+    compLuz:sendMsg([[
+        scale: 1,1,1;
+        position: 0,40,0;
+        rotation: 0,0,0,0;
+    ]])
+    
+    local compLight = luz:addComponent('Light')
+    compLight:sendMssg([[
+        name: luz_direccional
+        type: directional
+    ]])
 
-     local compLight = luz:addComponent('Light')
-     compLight:send2(1, 0.0)
-
-   local player = scene:createObject("jugador")
-   local tr = player:addComponent("Transform")
-   tr:sendMsg([[
-    scale: 2,2,2;
-    position: 0,11,0;
-    rotation: 0,0,0,0;
+    local player = scene:createObject("jugador")
+    local tr = player:addComponent("Transform")
+    tr:sendMsg([[
+        scale: 2,2,2;
+        position: 0,11,0;
+        rotation: 0,0,0,0;
     ]])
     local mesh = player:addComponent("Mesh")
     mesh:sendMsg([[meshName: Sinbad.mesh]])

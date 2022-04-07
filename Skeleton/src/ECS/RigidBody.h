@@ -41,7 +41,7 @@ namespace LoveEngine {
 		private:
 			float mass;
 			float restitution;
-			TipoForma forma;
+			TipoForma shape;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
@@ -61,7 +61,6 @@ namespace LoveEngine {
 
 			void stepPhysics() override;
 
-			void receiveValues(int state_, float mass_, Component* eTm = nullptr, GameObject* g = nullptr) override;
 			void receiveMessage(std::string s) override;
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
@@ -70,7 +69,7 @@ namespace LoveEngine {
 
 			void setMass(float mass_);
 
-			void setForma(std::string nameF_);
+			void setShape(std::string nameF_);
 
 			void setLinearVelocity(Utilities::Vector3<float> vel);
 		};
