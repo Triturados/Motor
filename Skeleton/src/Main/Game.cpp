@@ -44,10 +44,7 @@ namespace LoveEngine {
 		time = new LoveEngine::Time();
 		sceneManager = new LoveEngine::SceneManagement::SceneManager();
 		compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
-
-		//Manager del proyecto de Input
-		inputManager = new LoveEngine::Input::InputManager();
-
+		
 		//Manager del proyecto de sonido
 		soundManager = new LoveEngine::Audio::SoundManager();
 
@@ -56,6 +53,10 @@ namespace LoveEngine {
 
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
+
+		//Manager del proyecto de Input
+		inputManager = new LoveEngine::Input::InputManager();
+
 
 		ogreManager->getSceneManager()->destroyAllCameras();
 

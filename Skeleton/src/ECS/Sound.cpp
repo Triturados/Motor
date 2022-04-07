@@ -37,7 +37,7 @@ namespace LoveEngine {
 					}
 				}
 			}
-			bLoop = sTf.getBool("bLoop");
+			bLoop = sTf.getBool("loop");
 		}
 
 		void Sound::init()

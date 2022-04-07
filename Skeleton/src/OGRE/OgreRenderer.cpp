@@ -93,7 +93,10 @@ namespace LoveEngine {
 		/// </summary>
 		void OgreRenderer::initOgreWithSDL() {
 			// Inicializacion SDL
-			assert(SDL_GetError(), SDL_Init(SDL_INIT_VIDEO) != 0);
+			int sdlinit = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+			assert(SDL_GetError(), sdlinit != 0);
+			SDL_JoystickEventState(SDL_ENABLE);
+			SDL_JoystickUpdate();
 			mRoot->restoreConfig();
 
 			// Se pasa el valor false para indiciar que vamos a construir la ventana nosotros, no se hace automaticamente
@@ -331,6 +334,8 @@ namespace LoveEngine {
 				OGRE_DELETE mRoot;
 				mRoot = NULL;
 			}
+
+			SDL_Quit();
 		}
 
 		Ogre::SceneNode* OgreRenderer::createNode()
