@@ -27,7 +27,7 @@ namespace LoveEngine {
 	}
 	namespace ECS {
 
-		enum lightType { point, directional, spot };
+		enum class lightType { point, directional, spot };
 
 
 		class Transform;
@@ -52,7 +52,6 @@ namespace LoveEngine {
 
 			void init() override;
 
-			void receiveValues(int lightT,float lightNumber, Component* c, GameObject*g=nullptr)override;
 			void specularColor(float r, float g, float b);
 			void diffuseColor(float r, float g, float b);
 			void setDir(Utilities::Vector3<float> direction);

@@ -13,9 +13,16 @@ namespace Ogre {
 	class RenderWindow;
 	class SceneManager;
 	class SceneNode;
+	class OverlayManager;
+	class OverlaySystem;
+	class Overlay;
 }
 
 class SDL_Window;
+class SDL_Renderer;
+class SDL_Texture;
+class SDL_Rect;
+class SDL_SysWMinfo;
 namespace LoveEngine {
 	namespace Renderer {
 		class lovexport OgreRenderer
@@ -29,6 +36,7 @@ namespace LoveEngine {
 
 			Ogre::RenderWindow* mWindow;
 			SDL_Window* native;
+			SDL_Renderer* sdlRenderer;
 			Ogre::SceneManager* mSceneMgr;
 
 			Ogre::Camera* mCamera;
@@ -36,6 +44,10 @@ namespace LoveEngine {
 
 			Ogre::RTShader::ShaderGenerator* mShaderGenerator;
 			Ogre::MaterialManager::Listener* mMaterialMgrListener;
+
+			int numOfImages;
+			Ogre::OverlaySystem* overlaySystem;
+			Ogre::OverlayManager* overlayManager;
 
 			void loadResources();
 			void initOgreWithSDL();
@@ -62,6 +74,10 @@ namespace LoveEngine {
 
 			void exampleScene();
 
+			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
+			Ogre::Overlay* renderImage(int x, int y, int w, int h, std::string material);
+
+			void disableOverlay(Ogre::Overlay*);
 
 			~OgreRenderer();
 		};

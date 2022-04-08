@@ -39,8 +39,8 @@ namespace LoveEngine {
 
 			void setName(std::string newname);
 
-		private:
 			GameObject* createGameObject(std::string name = "new game object");
+		private:
 
 
 			std::list<GameObject*> gObjects;

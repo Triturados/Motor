@@ -1,16 +1,16 @@
 #pragma once
 #include <../Export.h>
 
-#ifndef MESH_H
-#define MESH_H
+#ifndef IMAGE_H	
+#define IMAGE_H
 
 #include <Component.h>
 #include <string>
 
+class SDL_Texture;
 
 namespace Ogre {
-	class SceneNode;
-	class Entity;
+	class Overlay;
 }
 
 namespace LoveEngine {
@@ -20,26 +20,30 @@ namespace LoveEngine {
 		class Vector3;
 		template<typename T>
 		class Vector4;
+		template<typename T>
+		class Vector2;
 	}
 	namespace Renderer {
 		class OgreRenderer;
 	}
+
 	namespace ECS {
 
 		class Transform;
 
-		class lovexport Mesh : public Component
+		class lovexport Image : public Component
 		{
 		private:
-			std::string  meshName = "";
-			Ogre::SceneNode* entityNode = nullptr;
-			Ogre::Entity* entity = nullptr;
-			Transform* tr = nullptr;
-			Utilities::Vector4<float>* rot;
-			Utilities::Vector3<float>* pos;
-			Utilities::Vector3<float>* scale;
+			std::string material = "";
+			SDL_Texture* texture = nullptr;
+
+			int width = 10, height = 10;
+			//Utilities::Vector2<float>* scale;
 
 			Renderer::OgreRenderer* ogremanager;
+
+			bool visible = true;
+			Ogre::Overlay* overlay;
 		public:
 			void init()override;
 			void update()override;
@@ -47,8 +51,7 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
-			Ogre::Entity* getEntity();
-			~Mesh();
+			~Image();
 		};
 	}
 }

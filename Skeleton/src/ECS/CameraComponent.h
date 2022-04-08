@@ -42,12 +42,16 @@ namespace LoveEngine {
 		public:
 			~Camera();
 
-			void receiveValues(int i, float f, Component* playerPos, GameObject* g) override;
 			void init() override;
 
 			void lookAt(Utilities::Vector3<float> pos);
+			void lookAtDir(float x, float y, float z);
 			void onSceneUp() override;
 			void onSceneDown() override;
+
+			void yaw(float angle);
+			void pitch(float angle);
+			void roll(float angle);
 		};
 	}
 }

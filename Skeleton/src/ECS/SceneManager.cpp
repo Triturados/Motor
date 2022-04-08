@@ -5,6 +5,11 @@
 #include <SingletonInfo.h>
 #include <iostream>
 #include <SceneFactory.h>
+#include <Image.h>
+#include <GameObject.h>
+#include <CameraComponent.h>
+#include <Transform.h>
+#include <Timer.h>
 
 namespace LoveEngine {
 	namespace SceneManagement {
@@ -91,9 +96,30 @@ namespace LoveEngine {
 			assert(("__No hay escenas para crear__", sceneCount() > 0));
 
 			sceneToLoad = 0;
-			createScene();
+			createSplashScreen();
+			//createScene();
 		}
 
+
+		void SceneManager::createSplashScreen()
+		{
+			ECS::Scene* scene = new ECS::Scene("splash scene");
+			currentScene.push(scene);
+
+			auto camera = scene->createGameObject("Camera");
+			camera->addComponent<ECS::Transform>()->receiveMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
+			camera->addComponent<ECS::Camera>();
+
+			auto gameObject = scene->createGameObject("Image");
+			gameObject->addComponent<ECS::Image>()->receiveMessage("material: splashScreen; width: 1280; height : 720");
+
+			ECS::Timer::invoke([&](ECS::Timer*) {
+				changeScene(0, SceneLoad::SWAP);
+				std::cout << "Cambio de escena\n"; }, 3.0f);
+
+			scene->init();
+			scene->postInit();
+		}
 
 		void SceneManager::eraseTopScene()
 		{
@@ -159,15 +185,12 @@ namespace LoveEngine {
 			currentScene.top()->onSceneUp();
 		}
 
-		void changeScene(int idx, SceneLoad scenechangetype)
-		{
-			SceneManager::getInstance()->changeScene(idx, scenechangetype);
+		void changeScene(int idx, SceneLoad scenechangetype) {
+			SceneManagement::SceneManager::getInstance()->changeScene(idx, scenechangetype);
 		}
-
-		void changeScene(int idx, int scenechangetype)
-		{
-			assert(scenechangetype >= 0 && scenechangetype <= 4);
-			changeScene(idx, (SceneLoad)scenechangetype);
+		void changeSceneByIdx(int idx, int type) {
+			assert(type >= 0 && type < 5);
+			SceneManagement::SceneManager::getInstance()->changeScene(idx, (SceneLoad)type);
 		}
 	}
 }

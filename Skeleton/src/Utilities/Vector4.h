@@ -63,5 +63,11 @@ namespace LoveEngine {
 		}
 
 		//using Quaternion = Vector4<float>;
+		template <class T>
+		class Vector3;
+		template <class T>
+		static Vector4<T> EulerToQuaternion(Vector3<T> v) {
+
+		}
 	}
 }

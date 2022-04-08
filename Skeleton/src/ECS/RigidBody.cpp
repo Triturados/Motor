@@ -16,6 +16,7 @@
 #include "Vector4.h"
 #include "PhysicsManager.h"
 #include "Transform.h"
+#include "GameObject.h"
 
 namespace LoveEngine {
 	namespace ECS {
@@ -35,6 +36,8 @@ namespace LoveEngine {
 
 		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
 		{
+			stateMode = (RBState)0;
+			mass = 1;
 		}
 
 		RigidBody::~RigidBody()
@@ -48,11 +51,13 @@ namespace LoveEngine {
 
 		void  RigidBody::init()
 		{
+			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			Utilities::Vector3<float> scale = *(tr->getScale());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)forma);
+				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)shape);
+				rigidBody->setRestitution(restitution);
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
@@ -65,7 +70,7 @@ namespace LoveEngine {
 		void RigidBody::update()
 		{
 			const auto worldTransform = rigidBody->getWorldTransform();
-			
+
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
 			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
@@ -84,17 +89,26 @@ namespace LoveEngine {
 			tr->setRot(newRot);
 		}
 
-		void RigidBody::receiveValues(int state_, float mass_, Component* eTm, GameObject* g)
-		{
-			mass = mass_;
-			tr = static_cast<Transform*>(eTm);
-			stateMode = (RBState)state_;
-		}
-
 		void RigidBody::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);
-			setForma(sTf.getString("forma"));
+			setShape(sTf.getString("shape"));
+			sTf.tryGetFloat("restitution", restitution);
+			sTf.tryGetFloat("mass", mass);
+
+			std::string str;
+			if (sTf.tryGetString("state", str)) {
+
+				if (str == "kinematic") {
+					stateMode = RBState::Kinematic;
+				}
+				else if (str == "dynamic") {
+					stateMode = RBState::Dynamic;
+				}
+				else  if (str == "static") {
+					stateMode = RBState::Static;
+				}
+			}
 		}
 
 		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)
@@ -130,25 +144,25 @@ namespace LoveEngine {
 		{
 			mass = mass_;
 		}
-		void RigidBody::setForma(std::string nameF_)
+		void RigidBody::setShape(std::string nameS_)
 		{
-			if (nameF_ == "cube") {
-				forma = TipoForma::Cube;
+			if (nameS_ == "cube") {
+				shape = TipoForma::Cube;
 			}
-			else if (nameF_ == "sphere") {
-				forma = TipoForma::Sphere;
+			else if (nameS_ == "sphere") {
+				shape = TipoForma::Sphere;
 			}
-			else if (nameF_ == "plane") {
-				forma = TipoForma::Plane;
+			else if (nameS_ == "plane") {
+				shape = TipoForma::Plane;
 			}
-			else if (nameF_ == "cone") {
-				forma = TipoForma::Cone;
+			else if (nameS_ == "cone") {
+				shape = TipoForma::Cone;
 			}
-			else if (nameF_ == "cylinder") {
-				forma = TipoForma::Cylinder;
+			else if (nameS_ == "cylinder") {
+				shape = TipoForma::Cylinder;
 			}
 			else {
-				forma = TipoForma::Cube;
+				shape = TipoForma::Cube;
 			}
 		}
 

@@ -44,10 +44,7 @@ namespace LoveEngine {
 		time = new LoveEngine::Time();
 		sceneManager = new LoveEngine::SceneManagement::SceneManager();
 		compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
-
-		//Manager del proyecto de Input
-		inputManager = new LoveEngine::Input::InputManager();
-
+		
 		//Manager del proyecto de sonido
 		soundManager = new LoveEngine::Audio::SoundManager();
 
@@ -57,94 +54,23 @@ namespace LoveEngine {
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
 
+		//Manager del proyecto de Input
+		inputManager = new LoveEngine::Input::InputManager();
+
+
+		ogreManager->getSceneManager()->destroyAllCameras();
+
 		gameComponentDefinitions();
 
 		initialiseSceneCreator();
 
 		sceneManager->initiliseScenes();
-
-		ogreManager->exampleScene();
-		ogreManager->getSceneManager()->destroyAllCameras();
-
-		//LoveEngine::ECS::GameObject* camera = sceneManager->getCurrentScene()->createGameObject("objCamera");
-		//LoveEngine::ECS::Transform* transformCamera = camera->addComponent<LoveEngine::ECS::Transform>();
-		//transformCamera->setPos(Utilities::Vector3<float>(0.0, 10.0, 100.0));
-		//LoveEngine::ECS::Camera* cam = camera->addComponent<LoveEngine::ECS::Camera>();
-		//cam->send3values(0, 0, camera->getComponent<LoveEngine::ECS::Transform>());
-		//cam->init();
-		//cam->lookAt(Utilities::Vector3<float>(0.0, 0.0, -50.0));
-		//cam->setActive(true);
-
-		//LoveEngine::ECS::GameObject* luz = sceneManager->getCurrentScene()->createGameObject("objLuz");
-		//LoveEngine::ECS::Transform* transformLight = luz->addComponent<LoveEngine::ECS::Transform>();
-		//transformLight->setPos(Utilities::Vector3<float>(0.0, 10.0, 50.0));
-		//LoveEngine::ECS::Light* lightC = luz->addComponent<LoveEngine::ECS::Light>();
-		//lightC->receiveValues(LoveEngine::ECS::lightType::point, 1, transformLight);
-		//lightC->init();
-
-		///*LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
-		//LoveEngine::ECS::Transform* t = go->addComponent<LoveEngine::ECS::Transform>();
-		//LoveEngine::ECS::Mesh* m = go->addComponent<LoveEngine::ECS::Mesh>();
-		//m->sendvalues("ogrehead.mesh", t);
-		//m->init();*/
-
-		//LoveEngine::ECS::GameObject* go = sceneManager->getCurrentScene()->createGameObject("obj1");
-		//LoveEngine::ECS::Sound* s = go->addComponent<LoveEngine::ECS::Sound>();
-		//s->receiveValues(LoveEngine::ECS::soundType::effects, 0);
-		//s->receiveMessage("soundName: wii.mp3; bLoop: false");
-		//s->init();
-		//soundManager->setVolumeChannel(LoveEngine::ECS::soundType::effects, 0.1);
-		//s->playSound();
-
-		///*LoveEngine::ECS::GameObject* go2 = sceneManager->getCurrentScene()->createGameObject("obj2");
-		//LoveEngine::ECS::Transform* t2 = go2->addComponent<LoveEngine::ECS::Transform>();
-		//Utilities::Vector3<float>* v = new Utilities::Vector3<float>(20, 0, 0);
-		//t2->setParent(t); t2->setPos(v);
-		//LoveEngine::ECS::Mesh* m2 = go2->addComponent<LoveEngine::ECS::Mesh>();
-		//m2->sendvalues("ogrehead.mesh", t2);
-		//m2->init();
-
-		//Utilities::Vector3<float>* v2 = new Utilities::Vector3<float>(-20, 0, 0);
-		//t->setPos(v2);
-		//Utilities::Vector4<float>* v3 = new Utilities::Vector4<float>(0, 0, 90, 0);
-		//t->rotate(v3);*/
-
-		//LoveEngine::ECS::GameObject* suelo = sceneManager->getCurrentScene()->createGameObject("suelo");
-		//suelo->addComponent<LoveEngine::ECS::Transform>();
-		//suelo->getComponent<LoveEngine::ECS::Transform>()->setScale(Utilities::Vector3<float>(70., 1., 70.));
-
-		//LoveEngine::ECS::Mesh* sueloMesh = suelo->addComponent<LoveEngine::ECS::Mesh>();
-		//sueloMesh->receiveValues(0, 0,
-		//	suelo->getComponent<LoveEngine::ECS::Transform>());
-		//sueloMesh->receiveMessage("meshName: cube.mesh");
-		//sueloMesh->init();
-
-		//suelo->addComponent<LoveEngine::ECS::RigidBody>();
-		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 0., suelo->getComponent<LoveEngine::ECS::Transform>());
-		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: cube;");
-		//suelo->getComponent<LoveEngine::ECS::RigidBody>()->init();
-
-		//LoveEngine::ECS::GameObject* pelota = sceneManager->getCurrentScene()->createGameObject("obj1");
-		//LoveEngine::ECS::Transform* pelotaTransform = pelota->addComponent<LoveEngine::ECS::Transform>();
-		//pelotaTransform->setPos(Utilities::Vector3<float>(0, 15, 0));
-
-		//LoveEngine::ECS::Mesh* pelotaMesh = pelota->addComponent<LoveEngine::ECS::Mesh>();
-		//pelotaMesh->receiveValues(0, 0, pelota->getComponent<LoveEngine::ECS::Transform>());
-		//pelotaMesh->receiveMessage("meshName: sphere.mesh");
-		//pelotaMesh->init();
-
-
-		//pelota->addComponent<LoveEngine::ECS::RigidBody>();
-		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveValues(1, 1.0, pelota->getComponent<LoveEngine::ECS::Transform>());
-		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->receiveMessage("forma: sphere;");
-		//pelota->getComponent<LoveEngine::ECS::RigidBody>()->init();
-
 	}
 
 
 	void Game::loop()
 	{
-		const float numIterations = 360;
+		const float numIterations = 3600;
 
 		const float physicsFrameRate = 50;
 		//double pInterval = 1.0 / physicsFrameRate;
@@ -162,7 +88,9 @@ namespace LoveEngine {
 				break;
 			}
 
-			inputManager->handleInput();
+			if (!inputManager->handleInput()){ //if SDl Quit, exit the game
+				break;
+			}
 
 			currentScene->update();
 
@@ -345,23 +273,21 @@ namespace LoveEngine {
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::Scene>("Scene")
 			.addFunction("createObject", &(LoveEngine::ECS::Scene::createGameObject))
+			.addFunction("createGameObject", &(LoveEngine::ECS::Scene::createGameObject))
 			.addFunction("name", &(LoveEngine::ECS::Scene::setName))
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::Component>("Component")
-			.addFunction("send4", &(LoveEngine::ECS::Component::receiveValues)) //int float comp gameObject
-			.addFunction("send3", &(LoveEngine::ECS::Component::send3values))
-			.addFunction("send2", &(LoveEngine::ECS::Component::send2values))
-			.addFunction("send1", &(LoveEngine::ECS::Component::send1value))
-			.addFunction("send", &(LoveEngine::ECS::Component::send1value))
+			.addFunction("sendComponent", &(LoveEngine::ECS::Component::receiveComponent))
+			.addFunction("sendGameObject", &(LoveEngine::ECS::Component::receiveGameObject))
+			.addFunction("sendObject", &(LoveEngine::ECS::Component::receiveGameObject))
 			.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveMessage))
 			.addFunction("sendMssg", &(LoveEngine::ECS::Component::receiveMessage))
 			.endClass();
 
 
 		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
-
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
 			luabridge::push(luastate, scene);

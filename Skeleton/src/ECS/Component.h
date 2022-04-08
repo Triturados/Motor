@@ -55,12 +55,8 @@ namespace LoveEngine {
 			virtual void onSceneUp() {};
 			virtual void onSceneDown() {};
 		public:
-			virtual void receiveValues(int, float, Component*, GameObject*) {};
-
-
-			inline  void send3values(int i, float f, Component* c) { return receiveValues(i, f, c, nullptr); };
-			inline  void send2values(int i, float f) { return receiveValues(i, f, nullptr, nullptr); };
-			inline  void send1value(int i) { return receiveValues(i, 0, nullptr, nullptr); };
+			virtual void receiveComponent(int, Component*) {};
+			virtual void receiveGameObject(int, GameObject*) {};
 
 			virtual void receiveMessage(std::string mssg) {};
 

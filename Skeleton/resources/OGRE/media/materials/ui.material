@@ -1,0 +1,13 @@
+material ui{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture Captura.jpg
+				colour_op modulate
+			}
+		}
+	}
+}

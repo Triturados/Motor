@@ -46,6 +46,8 @@ namespace LoveEngine {
 			Utilities::Vector4<float>* getRot();
 			Utilities::Vector3<float>* getScale();
 
+			Utilities::Vector3<float> forward();
+
 			void setRot(Utilities::Vector4<float> r);
 			void setPos(Utilities::Vector3<float> p);
 			void setScale(Utilities::Vector3<float> s);

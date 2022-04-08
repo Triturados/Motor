@@ -8,7 +8,9 @@
 #include <Mesh.h>
 #include <RigidBody.h>
 #include <CameraComponent.h>
-
+#include <LightComponent.h>
+#include <Image.h>
+#include <Animation.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -50,7 +52,9 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<RigidBody>("Rigidbody"));
 			registerComponent(new ComponentCreatorTemplate<Transform>("Transform"));
 			registerComponent(new ComponentCreatorTemplate<Camera>("Camera"));
-			
+			registerComponent(new ComponentCreatorTemplate<Light>("Light"));
+			registerComponent(new ComponentCreatorTemplate<Image>("Image"));
+			registerComponent(new ComponentCreatorTemplate<Animation>("Animation"));
 		}
 
 

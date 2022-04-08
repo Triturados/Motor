@@ -113,7 +113,7 @@ namespace LoveEngine {
 				continue;
 			}
 
-			if (c < '0' || c > '9') //Si uno de los elementos no es numérico, entonces se trata de un string
+			if ((c < '0' || c > '9') && c != '-') //Si uno de los elementos no es numérico, entonces se trata de un string
 			{
 				s.emplace(name, value);
 				return;
@@ -132,10 +132,10 @@ namespace LoveEngine {
 		}
 
 		if (idx == 2) { //Numero de comas de la palabra ( 2 comas -> 3 elementos -> vector 3 )
-			v3.emplace(name, Utilities::Vector3(values[0], values[1], values[2]));
+			v3.emplace(name, Utilities::Vector3(values[0], values[1], std::stof(current)));
 		}
 		else {
-			v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], values[3]));
+			v4.emplace(name, Utilities::Vector4(values[0], values[1], values[2], std::stof(current)));
 		}
 	}
 

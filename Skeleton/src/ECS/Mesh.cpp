@@ -14,11 +14,6 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::receiveValues(int i, float f, Component* eT, GameObject* g)
-		{
-			tr = static_cast<Transform*>(eT);
-		}
-
 		void Mesh::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);
@@ -27,6 +22,7 @@ namespace LoveEngine {
 
 		void Mesh::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
+			tr = gameObject->getComponent<Transform>();
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
 			if (meshName == "") throw new std::exception("La malla no tiene nombre");
 			entityNode = ogremanager->createNode();
@@ -61,9 +57,9 @@ namespace LoveEngine {
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
 
 			entityNode->resetOrientation();
-			entityNode->yaw(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
-			entityNode->pitch(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
-			entityNode->roll(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
 			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
 		void Mesh::setVisibility(bool mode)
@@ -87,7 +83,7 @@ namespace LoveEngine {
 		Mesh::~Mesh()
 		{
 			ogremanager->removeNode(entityNode);
-			delete rot, pos, scale;
+			//delete rot, pos, scale;
 		}
 	}
 }

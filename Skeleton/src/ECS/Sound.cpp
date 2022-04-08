@@ -8,16 +8,36 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Sound::receiveValues(int gChannel, float f, Component* playerPos, GameObject* g)
-		{
-			groupChannel = static_cast<soundType>(gChannel);
-		}
+		
 
 		void Sound::receiveMessage(std::string s)
 		{
 			StringFormatter sTf(s);
 			soundRoute = "./FMOD/Sonidos/" + sTf.getString("soundName");
-			bLoop = sTf.getBool("bLoop");
+
+			int channel;
+			if (sTf.tryGetInt("channel", channel)) {
+				groupChannel = static_cast<soundType>(channel);
+			}
+			else {
+				std::string name;
+				if (sTf.tryGetString("channel", name))
+				{
+					if (name == "environment") {
+						groupChannel = soundType::environment;
+					}
+					else if (name == "voices") {
+						groupChannel = soundType::voices;
+					}
+					else if (name == "music") {
+						groupChannel = soundType::music;
+					}
+					else {
+						groupChannel = soundType::effects;
+					}
+				}
+			}
+			bLoop = sTf.getBool("loop");
 		}
 
 		void Sound::init()
@@ -28,7 +48,7 @@ namespace LoveEngine {
 
 		void Sound::playSound()
 		{
-			soundMngr->playSound(sound, groupChannel, bLoop);
+			soundMngr->playSound(sound, (int) groupChannel, bLoop);
 		}
 
 		void Sound::releaseSound()

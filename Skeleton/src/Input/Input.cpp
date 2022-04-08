@@ -4,7 +4,6 @@
 #include <SingletonInfo.h>
 #include <string>
 #include <Vector2.h>
-
 #include <SDL.h>
 namespace LoveEngine {
 	namespace Input {
@@ -33,19 +32,15 @@ namespace LoveEngine {
 			InputManager::_instance = this;
 			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
 
-			/*std::cout << SDL_SCANCODE_A << std::endl;
+			if (!initialiseController()) {
+				std::cout << "No se pudo inicializar ningun mando\n";
+			}
+		}
 
-			std::cout << SDL_SCANCODE_DOWN << std::endl;
-			std::cout << SDL_SCANCODE_UP << std::endl;
-			std::cout << SDL_SCANCODE_RIGHT << std::endl;;
-			std::cout << SDL_SCANCODE_LEFT << std::endl;;
-
-			std::cout << SDL_SCANCODE_TAB << std::endl;;
-			std::cout << SDL_SCANCODE_LSHIFT << std::endl;;
-			std::cout << SDL_SCANCODE_LCTRL << std::endl;;
-			std::cout << SDL_SCANCODE_KP_SPACE << std::endl;;
-			std::cout << SDL_SCANCODE_ESCAPE << std::endl;;
-			std::cout << SDL_SCANCODE_KP_ENTER << std::endl;;*/
+		InputManager::~InputManager()
+		{
+			delete lastPressedKeys;
+			SDL_GameControllerClose(sdlcontroller);
 		}
 
 		bool InputManager::handleInput()
@@ -56,14 +51,14 @@ namespace LoveEngine {
 				case SDL_KEYDOWN:
 				{
 					int enumvalue = (int)sdlevent.key.keysym.scancode;
-					std::cout << enumvalue << std::endl;
+					//std::cout << enumvalue << std::endl;
 
 					lastPressedKeys->insert(sdlevent.key.keysym.scancode);
 					break;
 				}
 				case SDL_KEYUP:
 					lastPressedKeys->erase(sdlevent.key.keysym.scancode);
-					std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
+					//std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
 					break;
 				case SDL_MOUSEMOTION:
 					SDL_GetMouseState(&mouseX, &mouseY);
@@ -85,7 +80,55 @@ namespace LoveEngine {
 				case SDL_QUIT:
 					return false;
 					break;
+				case SDL_JOYBUTTONDOWN: {
+					int button = (int)sdlevent.cbutton.button;
+					if (button < controllerButtonCount) {
+
+						auto& state = controller.buttons[button];
+						if (state != ControllerButtonState::DOWN && state != ControllerButtonState::HOLD) {
+							state = ControllerButtonState::DOWN;
+						}
+						else if (state == ControllerButtonState::DOWN) {
+							state = ControllerButtonState::HOLD;
+						}
+					}
+					break;
+				}
+				case SDL_JOYBUTTONUP: {
+					int button = (int)sdlevent.cbutton.button;
+					if (button < controllerButtonCount) {
+
+						auto& state = controller.buttons[button];
+						if (state != ControllerButtonState::UP && state != ControllerButtonState::NONE) {
+							state = ControllerButtonState::UP;
+						}
+						else if (state == ControllerButtonState::UP) {
+							state = ControllerButtonState::NONE;
+						}
+					}
+					break;
+				}
+				case SDL_JOYAXISMOTION:
+					if (std::abs(sdlevent.jaxis.value) > 8000) {
+						float val = (sdlevent.jaxis.value - 8000) / 32000.0f;
+
+						int stick = (int)sdlevent.jaxis.axis;
+
+						if (stick == 3) {
+							controller.leftTrigger = val;
+						}
+						else if (stick == 4) {
+							controller.rightTrigger = val;
+						}
+						else {
+							val *= -1;
+							Utilities::Vector2<float>& js = stick > 1 ? controller.rightJoystick : controller.leftJoystick;
+							(stick % 2 ? js.y : js.x) = val;
+						}
+					}
+					break;
 				default:
+
 					break;
 				}
 			}
@@ -97,9 +140,25 @@ namespace LoveEngine {
 			return lastPressedKeys->count((SDL_Scancode)((int)key));
 		}
 
+		bool InputManager::mousePressed(MouseState state)
+		{
+			return mouseState == state;
+		}
+
 		Utilities::Vector2<float> InputManager::mousePosition()
 		{
 			return Utilities::Vector2<float>(mouseX, mouseY);
+		}
+
+		Controller& InputManager::getController()
+		{
+			return controller;
+			// TODO: Insertar una instrucción "return" aquí
+		}
+
+		bool InputManager::controllerConected()
+		{
+			return sdlcontroller != NULL;
 		}
 
 		//teclas = new std::unordered_map<SDL_KeyCode, tecla>();
@@ -133,6 +192,22 @@ namespace LoveEngine {
 			if (SDL_UpdateWindowSurface(window) < 0)  throwINPUTError(__LINE__);
 
 			SDL_Delay(5000);
+		}
+
+		bool InputManager::initialiseController()
+		{
+			sdlcontroller = NULL;
+
+			for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+				if (SDL_IsGameController(i)) {
+					sdlcontroller = SDL_GameControllerOpen(i);
+					if (sdlcontroller) {
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 
 		void InputManager::throwINPUTError(int errorLine) {
