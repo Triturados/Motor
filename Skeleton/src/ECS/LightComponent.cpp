@@ -14,19 +14,28 @@
 namespace LoveEngine {
 	namespace ECS {
 
+		Light::Light()
+		{
+			specular = new Utilities::Vector3<float>(0.5, 0.5, 0.5);
+			diffuse = new Utilities::Vector3<float>(0.5, 0.5, 0.5);
+			direction = new Utilities::Vector3<float>(0, -1, -0.5);
+			inRange = 35.0;
+			outRange = 55.0;
+			fallOff = 1.0;
+			visible = true;
+		}
 		void Light::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			pos = gameObject->getComponent<Transform>();
-			visible = true;
 
 			switch (type)
 			{
 			case lightType::point:
 				light = ogremanager->getSceneManager()->createLight(name);
 
-				light->setDiffuseColour(0.3, 0.3, 0.3);
-				light->setSpecularColour(0.3, 0.3, 0.3);
+				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
+				light->setSpecularColour(specular->x, specular->y, specular->z);
 
 				light->setType(Ogre::Light::LT_POINT);
 
@@ -38,70 +47,80 @@ namespace LoveEngine {
 			case lightType::directional:
 				light = ogremanager->getSceneManager()->createLight(name);
 
-				light->setDiffuseColour(Ogre::ColourValue(0.8, 0.8, 0.8));
-				light->setSpecularColour(Ogre::ColourValue(0.8, 0.8, 0.8));
+				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
+				light->setSpecularColour(specular->x, specular->y, specular->z);
 
 				light->setType(Ogre::Light::LT_DIRECTIONAL);
 
 				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
-				entityNode->setDirection(Ogre::Vector3(0, -1, -0.5));
+				entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
 
 				break;
 			case lightType::spot:
 				light = ogremanager->getSceneManager()->createLight(name);
 
-				light->setDiffuseColour(0, 0, 1.0);
-				light->setSpecularColour(0, 0, 1.0);
+				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
+				light->setSpecularColour(specular->x, specular->y, specular->z);
 
 				light->setType(Ogre::Light::LT_SPOTLIGHT);
 
 				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
-				entityNode->setDirection(-1, -1, 0);
+				entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
 
 
 				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
 
-				light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+				light->setSpotlightRange(Ogre::Degree(inRange), Ogre::Degree(outRange), fallOff);
 				break;
 			default:
 				break;
 			}
 
-			light->setVisible(true);
+			setVisibility(visible);
 		}
 
 		Light::~Light()
 		{
+			delete diffuse;
+			delete specular;
+			delete direction;
 			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
 			ogremanager->removeNode(entityNode);
 		}
 
-		void Light::specularColor(float r, float g, float b)
+		void Light::diffuseColor(float r, float g, float b)
 		{
+			diffuse->x += r;
+			diffuse->y += g;
+			diffuse->z += b;
 			light->setDiffuseColour(r, g, b);
 		}
 
 		void Light::setPower(float power)
 		{
+			lightPower = power;
 			light->setPowerScale(power);
 		}
 
 		Utilities::Vector3<float> Light::getSpecularColor()
 		{
 
-			return Utilities::Vector3<float>(light->getSpecularColour().r, light->getSpecularColour().g, light->getSpecularColour().b);
+			return *specular;
 		}
 
-		void Light::diffuseColor(float r, float g, float b)
+		void Light::specularColor(float r, float g, float b)
 		{
+			specular->x += r;
+			specular->y += g;
+			specular->z += b;
 			light->setSpecularColour(r, g, b);
 		}
 
 		Utilities::Vector3<float> Light::getDiffuseColor()
 		{
-			return Utilities::Vector3<float>(light->getDiffuseColour().r, light->getDiffuseColour().g, light->getDiffuseColour().b);
+			return *diffuse;
 		}
 
 
@@ -117,6 +136,9 @@ namespace LoveEngine {
 		{
 			if (type == lightType::spot)
 			{
+				inRange = startAngle;
+				outRange = endAngle;
+				fallOff = desvanecimiento;
 				light->setSpotlightRange(Ogre::Degree(startAngle), Ogre::Degree(endAngle), Ogre::Real(desvanecimiento));
 			}
 		}
@@ -145,6 +167,58 @@ namespace LoveEngine {
 					type = lightType::directional;
 				else if (t == "spot")
 					type = lightType::spot;
+
+				Utilities::Vector3<float> aux;
+				if (sf.tryGetVector3("diffuse", aux))
+				{
+					diffuse->x += aux.x;
+					diffuse->y += aux.y;
+					diffuse->z += aux.z;
+				}
+
+				if (sf.tryGetVector3("specular", aux))
+				{
+					specular->x += aux.x;
+					specular->y += aux.y;
+					specular->z += aux.z;
+				}
+
+				if (sf.tryGetVector3("direction", aux))
+				{
+					direction->x += aux.x;
+					direction->y += aux.y;
+					direction->z += aux.z;
+				}
+
+				int p;
+				if (sf.tryGetInt("power", p))
+				{
+					lightPower = p;
+				}
+
+				float rang;
+
+				if (sf.tryGetFloat("inAngle", rang))
+				{
+					inRange = rang;
+				}
+
+				if (sf.tryGetFloat("outAngle", rang))
+				{
+					outRange = rang;
+				}
+
+				if (sf.tryGetFloat("fallOff", rang))
+				{
+					fallOff = rang;
+				}
+
+				bool see;
+
+				if (sf.tryGetBool("visibility", see))
+				{
+					visible = see;
+				}
 			}
 		}
 
