@@ -18,6 +18,7 @@ namespace LoveEngine {
 		class lovexport GameObject final {
 
 			friend Scene;
+			friend class Rigidbody;
 			friend class SceneCreator;
 		public:
 
@@ -48,6 +49,11 @@ namespace LoveEngine {
 
 			void onSceneUp();
 			void onSceneDown();
+
+			void colliding();
+			void enterCollision();
+			void exitCollision();
+
 		public:
 
 			template <typename T>

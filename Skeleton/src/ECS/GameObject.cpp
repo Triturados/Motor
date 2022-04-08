@@ -143,6 +143,27 @@ namespace LoveEngine {
 			}
 		}
 
+		void GameObject::colliding()
+		{
+			for (Component* comp : componentsList) {
+				comp->colliding();
+			}
+		}
+
+		void GameObject::enterCollision()
+		{
+			for (Component* comp : componentsList) {
+				comp->enterCollision();
+			}
+		}
+
+		void GameObject::exitCollision()
+		{
+			for (Component* comp : componentsList) {
+				comp->exitCollision();
+			}
+		}
+
 		GameObject* GameObject::createGameObject(std::string name)
 		{
 			auto go = scene->createGameObject(name);
