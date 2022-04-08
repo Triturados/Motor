@@ -111,6 +111,7 @@ namespace LoveEngine {
 			camera->addComponent<ECS::Camera>();
 
 			auto gameObject = scene->createGameObject("Image");
+			gameObject->addComponent<ECS::Transform>();
 			gameObject->addComponent<ECS::Image>()->receiveMessage("material: splashScreen; width: 1280; height : 720");
 
 			ECS::Timer::invoke([&](ECS::Timer*) {

@@ -16,6 +16,7 @@ namespace Ogre {
 	class OverlayManager;
 	class OverlaySystem;
 	class Overlay;
+	class OverlayContainer;
 }
 
 class SDL_Window;
@@ -75,7 +76,7 @@ namespace LoveEngine {
 			void exampleScene();
 
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
-			Ogre::Overlay* renderImage(int x, int y, int w, int h, std::string material);
+			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
 
 			void disableOverlay(Ogre::Overlay*);
 

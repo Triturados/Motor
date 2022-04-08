@@ -7,10 +7,9 @@
 #include <Component.h>
 #include <string>
 
-class SDL_Texture;
-
 namespace Ogre {
 	class Overlay;
+	class OverlayContainer;
 }
 
 namespace LoveEngine {
@@ -35,15 +34,15 @@ namespace LoveEngine {
 		{
 		private:
 			std::string material = "";
-			SDL_Texture* texture = nullptr;
+			Transform* tr = nullptr;
 
 			int width = 10, height = 10;
-			//Utilities::Vector2<float>* scale;
 
 			Renderer::OgreRenderer* ogremanager;
 
 			bool visible = true;
 			Ogre::Overlay* overlay;
+			Ogre::OverlayContainer* container;
 		public:
 			void init()override;
 			void update()override;
@@ -51,6 +50,7 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
+			void setPos(int x, int y);
 			~Image();
 		};
 	}

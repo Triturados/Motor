@@ -270,11 +270,6 @@ namespace LoveEngine {
 
 		void OgreRenderer::exampleScene()
 		{
-			//Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
-
-			//Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-			//ogreNode->attachObject(ogreEntity);
-
 			mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 		}
 
@@ -291,7 +286,7 @@ namespace LoveEngine {
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
 		/// </summary>
-		Ogre::Overlay* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material)
+		Ogre::OverlayContainer* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay)
 		{
 			// Elemento que contendra el overlay
 			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
@@ -304,17 +299,15 @@ namespace LoveEngine {
 			container->setMaterialName(material);
 
 			// El overlay, que gestiona la poscion, rotacion...
-			Ogre::Overlay* overlay = overlayManager->create("Image" + std::to_string(numOfImages));
+			overlay = overlayManager->create("Image" + std::to_string(numOfImages));
 			overlay->add2D(container);
 			
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 			
-
 			// Mostrar el overlay
 			overlay->show();
-
 			numOfImages++;
-			return overlay;
+			return container;
 		}
 
 		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
