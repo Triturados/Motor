@@ -46,9 +46,21 @@ namespace LoveEngine {
 
 			std::string name;
 			lightType type;
+
+			//Parameters
+
+			Utilities::Vector3<float>* diffuse;
+			Utilities::Vector3<float>* specular;
+			Utilities::Vector3<float>* direction;
+			int lightPower;
+
+			float inRange;
+			float outRange;
+			float fallOff;
 		public:
 
 			~Light();
+			Light();
 
 			void init() override;
 
