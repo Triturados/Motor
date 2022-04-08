@@ -31,6 +31,8 @@
 
 #include <memory>
 
+typedef const char* (*GameName)();
+
 using namespace std::chrono;
 namespace LoveEngine {
 	void Game::setup() {
@@ -44,7 +46,7 @@ namespace LoveEngine {
 		time = new LoveEngine::Time();
 		sceneManager = new LoveEngine::SceneManagement::SceneManager();
 		compFactory = new LoveEngine::ComponentDefinitions::ComponentFactory();
-		
+
 		//Manager del proyecto de sonido
 		soundManager = new LoveEngine::Audio::SoundManager();
 
@@ -57,6 +59,8 @@ namespace LoveEngine {
 		//Manager del proyecto de Input
 		inputManager = new LoveEngine::Input::InputManager();
 
+
+		changeWindowTitle();
 
 		ogreManager->getSceneManager()->destroyAllCameras();
 
@@ -88,7 +92,7 @@ namespace LoveEngine {
 				break;
 			}
 
-			if (!inputManager->handleInput()){ //if SDl Quit, exit the game
+			if (!inputManager->handleInput()) { //if SDl Quit, exit the game
 				break;
 			}
 
@@ -126,103 +130,6 @@ namespace LoveEngine {
 		delete inputManager;
 		delete soundManager;
 		//delete physicsManager;
-	}
-
-
-	//M�todos temporales para testing
-	void Game::testing()
-	{
-		int a;
-		std::cout << "Pulsa los siguientes botones para probar cada proyecto:\n";
-		std::cout << "0 - LUA\n1 - Input\n2 - OGRE\n3 - FMOD\n4 - Bullet\n5 - LuaBridge\n";
-		std::cin >> a;
-
-		switch (a) {
-		case 0: lua(); break;
-		case 1: sdlinput(); break;
-		case 2: ogre(); break;
-		case 3: fmod(); break;
-		case 4: bullet(); break;
-		case 5: luabridge(); break;
-		default: break;
-		}
-
-		std::cout << "Escribe algo para salir: "; std::cin >> a;
-	}
-
-
-	void Game::sdlinput() {
-		/*inputManager = new InputManager();
-		InputManager::initSDLWindowTest();*/
-
-		//while (true) inputManager->handleInput();
-	}
-
-	void Game::fmod()
-	{
-		//FMOD
-		Audio::SoundManager sound = Audio::SoundManager(); //Inicializacion
-
-		// Create a sample sound
-		FMOD::SoundClass soundSample;
-		sound.createSound(&soundSample, "./FMOD/Sonidos/sonido.wav", 0);
-
-		// Play the sound, with loop mode
-		sound.playSound(soundSample, 0, true);
-
-		// Do something meanwhile...
-		int a;
-		std::cin >> a;
-
-		// Release the sound
-		sound.releaseSound(0);
-	}
-
-	void Game::ogre() {
-		Game game;
-		game.setup();
-		game.loop();
-		game.quit();
-	}
-
-	void Game::bullet() {
-		physicsManager->bulletTest();
-	}
-
-	void Game::lua()
-	{
-		lua_State* L = luaL_newstate();
-
-		const char* s = "a = 2 + 7";
-		int r = luaL_dostring(L, s);
-
-		if (r == LUA_OK) {
-			lua_getglobal(L, "a");
-			if (lua_isnumber(L, -1)) {
-				float a_in_cpp = (float)lua_tonumber(L, -1);
-				std::cout << "LUA LUA LUA: " << a_in_cpp << "\n";
-			}
-		}
-		lua_close(L);
-	}
-
-	void Game::luabridge()
-	{
-		// create a lua state
-		lua_State* luastate = luaL_newstate();
-
-		// load standard libs
-		luaL_openlibs(luastate);
-
-		// load some code from lua file
-		int scriptloadstatus = luaL_dofile(luastate, "LUABRIDGE/Example.lua");
-
-		// call function defined in lua script
-		luabridge::LuaRef addanddouble = luabridge::getGlobal(luastate, "addAndDouble");
-
-		int x = addanddouble(15, 12);
-
-		std::cout << "[evaluate lua] (15 + 12) * 2 = " << x << std::endl;
 	}
 
 
@@ -308,6 +215,19 @@ namespace LoveEngine {
 		sceneManager->numberOfScenes = count;
 
 		return 0;
+	}
+
+	void Game::changeWindowTitle()
+	{
+		std::string title = "";
+		GameName name = (GameName)GetProcAddress(game, "gameName");
+
+		if (name == NULL)
+			title = "LoveEngine";
+		else
+			title = name();
+
+		ogreManager->changeWindowTitle(title);
 	}
 
 	void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)

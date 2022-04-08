@@ -22,7 +22,6 @@
 #include <SDL_syswm.h>
 #include <SDL_events.h>
 #include <SingletonInfo.h>
-
 #include <OgreOverlay.h>
 #include <OgreOverlayManager.h>
 #include <OgreOverlayContainer.h>
@@ -31,7 +30,7 @@
 #include <OgreBorderPanelOverlayElement.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayContainer.h>
-
+#include "Window.h"
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -121,7 +120,7 @@ namespace LoveEngine {
 			// Aqui se pueden establecer flags, algunos que pueden ser de utilidad mas adelante:
 			// SDL_WINDOW_FULLSCREEN_DESKTOP, SDL_WINDOW_BORDERLESS
 			int flags = 0;
-			std::string appName_;
+			std::string appName_ = "Love";
 
 			// Creacion ventana SDL
 			native = SDL_CreateWindow(appName_.c_str(), SDL_WINDOWPOS_CENTERED,
@@ -129,7 +128,7 @@ namespace LoveEngine {
 
 			//puntero ventana
 			const auto g = SDL_bool(true);
-			SDL_SetWindowGrab(native, g);
+			//SDL_SetWindowGrab(native, g);
 			SDL_ShowCursor(true);
 
 			// Se obtiene informacion de la version de SDL
@@ -151,7 +150,6 @@ namespace LoveEngine {
 
 			// Creamos la ventana de OGRE con estos parametros
 			mWindow = mRoot->createRenderWindow(appName_, windowWidth, windowHeight, false, &miscParams);
-
 		}
 
 		/// <summary>
@@ -268,9 +266,24 @@ namespace LoveEngine {
 			return true;
 		}
 
+		Window* OgreRenderer::getWindowInfo()
+		{
+			if (windowinfo == nullptr)
+			{
+				windowinfo = new Window(this);
+			}
+
+			return windowinfo;
+		}
+
 		void OgreRenderer::exampleScene()
 		{
 			mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+		}
+
+		void OgreRenderer::changeWindowTitle(std::string title)
+		{
+			SDL_SetWindowTitle(native, title.c_str());
 		}
 
 		//NO SE USA

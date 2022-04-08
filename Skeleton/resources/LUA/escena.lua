@@ -5,6 +5,9 @@ end
 function scene0()
     scene:name("Escena de Prueba")
 
+    local a = scene:createObject("AAA");
+    a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")
+
     local suelo = scene:createObject("Suelo")
 	
     local kaka = scene:createObject("uiobj")

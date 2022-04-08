@@ -15,7 +15,6 @@ namespace LoveEngine {
 
 		Camera::~Camera()
 		{
-
 			ogremanager->removeNode(mCameraNode);
 		}
 

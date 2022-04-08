@@ -37,8 +37,6 @@ namespace LoveEngine {
 		void loop();
 		void quit();
 
-		void testing();
-
 	private:
 		HMODULE game;
 		HMODULE singleton;
@@ -56,18 +54,12 @@ namespace LoveEngine {
 		int initialiseDLLs(GameComponentDefinition& gcd);
 		int initialiseSceneCreator();
 
+		void changeWindowTitle();
+
 		void updateTimeValues(
 			const std::chrono::steady_clock::time_point& beginFrame,
 			const std::chrono::steady_clock::time_point& endFrame,
 			const std::chrono::steady_clock::time_point& appStart);
-
-		//Metodos de testing de funcionamiento de librerias
-		void sdlinput();
-		void fmod();
-		void lua();
-		void luabridge();
-		void ogre();
-		void bullet();
 	};
 }
 #endif
