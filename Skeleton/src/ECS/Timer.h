@@ -34,7 +34,7 @@ namespace LoveEngine {
 
 
 			static Timer* invoke(action funct, float time);
-			static Timer* repeat(action funct, float initialcall, float interval);
+			static Timer* repeat(action funct, float interval);
 			static Timer* deleteGameObject(GameObject* gameObject, float time);
 			static Timer* deleteComponent(Component* component, float time);
 

@@ -11,7 +11,9 @@ namespace LoveEngine {
 		void Timer::onTimeUp()
 		{
 			funct(this);
-			gameObject->removeGameObject();
+			if (!_loop)
+				gameObject->removeGameObject();
+			else currentTime = 0;
 		}
 
 		void Timer::setValue(action f, float t)
@@ -72,14 +74,10 @@ namespace LoveEngine {
 			return timer;
 		}
 
-		//TODO repear
-		Timer* Timer::repeat(action funct, float initialcall, float interval)
+		Timer* Timer::repeat(action funct, float interval)
 		{
 			Timer* timer = createObjectWithTimer();
-			auto f = [&](Timer* t) {
-				invoke(funct, interval);
-			};
-			timer->setValue(f, initialcall);
+			timer->setValue(funct, interval);
 			timer->loop();
 			return timer;
 		}

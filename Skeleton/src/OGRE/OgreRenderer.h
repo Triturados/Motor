@@ -24,6 +24,9 @@ class SDL_Texture;
 class SDL_Rect;
 class SDL_SysWMinfo;
 namespace LoveEngine {
+
+	class Window;
+
 	namespace Renderer {
 		class lovexport OgreRenderer
 		{
@@ -57,6 +60,7 @@ namespace LoveEngine {
 
 			void throwOgreError(int errorLine, const std::string& errorMsg);
 
+			Window* windowinfo;
 			static OgreRenderer* instance;
 		public:
 			static OgreRenderer* getInstance();
@@ -64,6 +68,8 @@ namespace LoveEngine {
 
 			void initRoot();
 			bool update();
+
+			Window* getWindowInfo();
 
 			Ogre::SceneNode* createNode();
 			Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
@@ -73,6 +79,7 @@ namespace LoveEngine {
 			Ogre::RenderWindow* getRenderWindow();
 
 			void exampleScene();
+			void changeWindowTitle(std::string);
 
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
 			Ogre::Overlay* renderImage(int x, int y, int w, int h, std::string material);
