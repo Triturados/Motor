@@ -129,7 +129,7 @@ namespace LoveEngine {
 
 			//puntero ventana
 			const auto g = SDL_bool(true);
-			SDL_SetWindowGrab(native, g);
+			//SDL_SetWindowGrab(native, g);
 			SDL_ShowCursor(true);
 
 			// Se obtiene informacion de la version de SDL
