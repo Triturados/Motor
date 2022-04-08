@@ -73,6 +73,7 @@ namespace LoveEngine {
 			static InputManager* getInstance();
 			bool handleInput();
 			bool isKeyPressed(InputKeys key);
+			bool keyJustPressed(InputKeys key);
 			bool mousePressed(MouseState state);
 			Utilities::Vector2<float> mousePosition();
 
@@ -84,6 +85,7 @@ namespace LoveEngine {
 
 			Controller controller;
 			std::unordered_set<SDL_Scancode>* lastPressedKeys;
+			std::unordered_set<SDL_Scancode>* justPressedKeys;
 			int mouseX, mouseY;
 			MouseState mouseState;
 
