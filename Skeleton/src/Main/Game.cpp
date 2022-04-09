@@ -194,12 +194,18 @@ namespace LoveEngine {
 			.addFunction("sendMssg", &(LoveEngine::ECS::Component::receiveUnformattedMessage))
 			.endClass();
 
-
+	
 		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
 			luabridge::push(luastate, scene);
 			lua_setglobal(luastate, "scene");
+
+			luabridge::push(luastate, sceneManager->persistentScene->gObjects.front());
+			lua_setglobal(luastate, "persistentObject");
+
+			luabridge::push(luastate, sceneManager->persistentScene->gObjects.front());
+			lua_setglobal(luastate, "persistentGameObject");
 
 			std::string scenestring = "scene" + std::to_string(idx);
 			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
