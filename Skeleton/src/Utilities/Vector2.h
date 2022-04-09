@@ -25,6 +25,11 @@ namespace LoveEngine {
 				y = sec;
 			}
 
+			Vector2(const Vector2& v) {
+				x = v.x;
+				y = v.y;
+			}
+
 			Vector2<T> operator+(Vector2<T> const& v2) const {
 				return Vector3(x + v2.x, y + v2.y);
 			}
