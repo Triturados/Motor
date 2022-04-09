@@ -29,6 +29,7 @@ namespace LoveEngine {
 		
 		class lovexport SceneManager final {
 			friend class Game;
+			friend ECS::Scene;
 
 			static SceneManager* instance;
 		public:
@@ -59,6 +60,10 @@ namespace LoveEngine {
 			//Añade las distintas escenas a la fábrica de escenas
 
 		private:
+			ECS::Scene* persistentScene;
+			void updatePersistentScene();
+			void initialisePersistentScene();
+
 			SceneManagement::SceneFactory* sceneFactory;
 
 			int numberOfScenes = 0;

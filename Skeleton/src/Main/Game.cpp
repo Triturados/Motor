@@ -69,6 +69,7 @@ namespace LoveEngine {
 		initialiseSceneCreator();
 
 		sceneManager->initiliseScenes();
+		sceneManager->initialisePersistentScene();
 	}
 
 

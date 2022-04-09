@@ -33,6 +33,7 @@ namespace LoveEngine {
 			}
 			sceneChangeType = SceneLoad::PUSH;
 
+			persistentScene = nullptr;
 			sceneFactory = new SceneManagement::SceneFactory();
 
 			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
@@ -45,6 +46,7 @@ namespace LoveEngine {
 				currentScene.pop();
 			}
 
+			delete persistentScene;
 			delete sceneFactory;
 		}
 
@@ -90,6 +92,12 @@ namespace LoveEngine {
 			}
 		}
 
+		void SceneManager::updatePersistentScene()
+		{
+			persistentScene->update();
+			persistentScene->stepPhysics();
+		}
+
 		void SceneManager::initiliseScenes()
 		{
 			initialised = true;
@@ -98,6 +106,15 @@ namespace LoveEngine {
 			sceneToLoad = 0;
 			createSplashScreen();
 			//createScene();
+		}
+
+		void SceneManager::initialisePersistentScene()
+		{
+			persistentScene = new ECS::Scene("Persistent Scene");
+			persistentScene->createGameObject("Persistent GameObject");
+
+			persistentScene->init();
+			persistentScene->postInit();
 		}
 
 

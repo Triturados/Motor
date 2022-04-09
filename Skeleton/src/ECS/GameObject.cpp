@@ -164,6 +164,11 @@ namespace LoveEngine {
 			}
 		}
 
+		Scene* GameObject::getCurrentScene()
+		{
+			return scene;
+		}
+
 		GameObject* GameObject::createGameObject(std::string name)
 		{
 			auto go = scene->createGameObject(name);

@@ -53,6 +53,9 @@ namespace LoveEngine {
 			void exitCollision();
 
 		public:
+			
+			Scene* getCurrentScene();
+
 			std::string name;
 
 			template <typename T>
@@ -133,7 +136,6 @@ namespace LoveEngine {
 
 				return vec;
 			}
-
 
 			void activate(bool value);
 			void removeGameObject();
