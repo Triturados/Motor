@@ -5,7 +5,7 @@
 #include <GameObject.h>
 #include <CameraComponent.h>
 #include <GameTime.h>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 {

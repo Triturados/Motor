@@ -4,11 +4,6 @@
 
 namespace LoveEngine {
 
-	namespace Utilities {
-		template <class t>
-		class Vector2;
-	}
-
 	namespace ECS {
 		class Camera;
 		class lovexport MouseTracker: public Component {

@@ -20,6 +20,7 @@ namespace LoveEngine {
 	*	]]
 	*
 	*/
+	namespace Utilities {
 
 	class lovexport StringFormatter {
 
@@ -48,22 +49,24 @@ namespace LoveEngine {
 		StringFormatter(std::string message);
 
 		//=========== Getters ================
-		int getInt(std::string name);
-		float getFloat(std::string name);
-		int getBool(std::string name);
-		char getChar(std::string name);
-		std::string getString(std::string name);
-		Utilities::Vector3<float> getVector3(std::string name);
-		Utilities::Vector4<float> getVector4(std::string name);
+		int getInt(std::string name) const;
+		float getFloat(std::string name) const;
+		int getBool(std::string name) const;
+		char getChar(std::string name) const;
+		std::string getString(std::string name) const;
+		Utilities::Vector3<float> getVector3(std::string name) const;
+		Utilities::Vector4<float> getVector4(std::string name) const;
 
 
 		//=========== Save Getters ============
-		bool tryGetInt(std::string name, int& value);
-		bool tryGetFloat(std::string name, float& value);
-		bool tryGetBool(std::string name, bool& value);
-		bool tryGetChar(std::string name, char& value);
-		bool tryGetString(std::string name, std::string& value);
-		bool tryGetVector3(std::string name, Utilities::Vector3<float>& value);
-		bool tryGetVector4(std::string name, Utilities::Vector4<float>& value);
+		bool tryGetInt(std::string name, int& value) const;
+		bool tryGetFloat(std::string name, float& value) const;
+		bool tryGetBool(std::string name, bool& value) const;
+		bool tryGetChar(std::string name, char& value) const;
+		bool tryGetString(std::string name, std::string& value) const;
+		bool tryGetVector3(std::string name, Utilities::Vector3<float>& value) const;
+		bool tryGetVector4(std::string name, Utilities::Vector4<float>& value) const;
 	};
+	}
+
 }

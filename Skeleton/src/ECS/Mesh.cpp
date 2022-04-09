@@ -9,15 +9,14 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::receiveMessage(std::string s)
+		void Mesh::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			meshName = sTf.getString("meshName");
+			meshName = sf.getString("meshName");
 		}
 
 		void Mesh::init() {

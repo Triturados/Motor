@@ -8,7 +8,7 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 #include <OgreOverlay.h>
 #include <OgreOverlayManager.h>
@@ -22,13 +22,12 @@ namespace LoveEngine {
 	namespace ECS {
 
 		
-		void Image::receiveMessage(std::string s)
+		void Image::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			material = sTf.getString("material");
+			material = sf.getString("material");
 
-			sTf.tryGetInt("width" , width );
-			sTf.tryGetInt("height", height);
+			sf.tryGetInt("width" , width );
+			sf.tryGetInt("height", height);
 		}
 		void Image::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();

@@ -1,6 +1,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "StringFormatter.h"
 
 namespace LoveEngine {
 	namespace ECS {
@@ -20,7 +21,6 @@ namespace LoveEngine {
 			this->scene = nullptr;
 			this->gameObject = nullptr;
 		}
-
 
 		void Component::remove(Component* comp)
 		{
@@ -50,6 +50,12 @@ namespace LoveEngine {
 		void Component::swapActive()
 		{
 			enabled = !enabled;
+		}
+
+		void Component::receiveUnformattedMessage(std::string msg)
+		{
+			Utilities::StringFormatter sf(msg);
+			receiveMessage(sf);
 		}
 
 		GameObject* Component::createObject(std::string name)

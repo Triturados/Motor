@@ -174,7 +174,7 @@ namespace LoveEngine {
 
 		void GameObject::sendMessage(std::string message) {
 			for (auto comp : componentsList) {
-				comp->receiveMessage(message);
+				comp->receiveUnformattedMessage(message);
 			}
 		}
 	}

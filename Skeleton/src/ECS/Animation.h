@@ -30,7 +30,7 @@ namespace LoveEngine {
 			bool isActive;
 			std::string name;
 		public:
-			void receiveMessage(std::string message) override;
+			void receiveMessage(Utilities::StringFormatter& message) override;
 
 			void setActive(bool activated = true);
 			void setLoop(bool activated = true);

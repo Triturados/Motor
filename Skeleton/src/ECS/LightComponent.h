@@ -15,13 +15,6 @@ namespace Ogre {
 
 namespace LoveEngine {
 
-	namespace Utilities {
-		template<typename T>
-		class Vector3;
-		template<typename T>
-		class Vector4;
-	}
-
 	namespace Renderer {
 		class OgreRenderer;
 	}
@@ -78,7 +71,7 @@ namespace LoveEngine {
 			bool getVisibility();
 
 
-			void receiveMessage(std::string message) override;
+			void receiveMessage(Utilities::StringFormatter& message) override;
 		};
 
 	}

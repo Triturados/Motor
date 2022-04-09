@@ -9,7 +9,7 @@
 #include "GameObject.h"
 #include <Vector3.h>
 #include <Vector4.h>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -153,10 +153,8 @@ namespace LoveEngine {
 			return visible;
 		}
 
-		void Light::receiveMessage(std::string message)
+		void Light::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sf(message);
-		
 			sf.tryGetString("name", name);
 			std::string t;
 			
