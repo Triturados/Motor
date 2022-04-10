@@ -63,6 +63,7 @@ namespace LoveEngine {
 
 			Window* windowinfo;
 			static OgreRenderer* instance;
+			int initForText=0;
 		public:
 			static OgreRenderer* getInstance();
 			OgreRenderer();
@@ -86,6 +87,8 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
 
 			void disableOverlay(Ogre::Overlay*);
+			void createOverlayElement( std::string typeName);
+			void destroyText();
 
 			~OgreRenderer();
 		};

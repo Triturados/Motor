@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\src\ECS\SceneManager.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneUtils.cpp" />
     <ClCompile Include="..\..\src\ECS\Sound.cpp" />
+    <ClCompile Include="..\..\src\ECS\Text.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
   </ItemGroup>
@@ -123,6 +124,7 @@
     <ClInclude Include="..\..\src\ECS\SceneManager.h" />
     <ClInclude Include="..\..\src\ECS\SceneUtils.h" />
     <ClInclude Include="..\..\src\ECS\Sound.h" />
+    <ClInclude Include="..\..\src\ECS\Text.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />
     <ClInclude Include="..\..\src\ECS\Transform.h" />
   </ItemGroup>

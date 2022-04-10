@@ -27,6 +27,7 @@
 #include <OgreOverlayContainer.h>
 #include <OgreOverlayPrerequisites.h>
 #include <OgreTextAreaOverlayElement.h>
+#include "OgreStringConverter.h"
 #include <OgreBorderPanelOverlayElement.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayContainer.h>
@@ -294,7 +295,7 @@ namespace LoveEngine {
 			width = sur->w; height = sur->h;
 			SDL_FreeSurface(sur);
 			return texture;
-			
+
 		}
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
@@ -314,9 +315,9 @@ namespace LoveEngine {
 			// El overlay, que gestiona la poscion, rotacion...
 			overlay = overlayManager->create("Image" + std::to_string(numOfImages));
 			overlay->add2D(container);
-			
+
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
-			
+
 			// Mostrar el overlay
 			overlay->show();
 			numOfImages++;
@@ -326,6 +327,39 @@ namespace LoveEngine {
 		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
 		{
 			overlayManager->destroy(ov);
+		}
+
+		void OgreRenderer::createOverlayElement(std::string typeName)
+		{
+
+			//WithoutChild
+			Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
+			panel->setMetricsMode(Ogre::GMM_PIXELS);
+			panel->setPosition(0, 0);
+			panel->setDimensions(1.0f, 1.0f);
+			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY" + initForText);
+			o->add2D(panel);
+
+			std::string szElement = "element_" + initForText;
+			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY" + initForText);
+			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
+			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
+			panel->addChild(textArea);
+			overlay->show();
+
+		}
+
+		void OgreRenderer::destroyText()
+		{
+			std::string szElement = "element_" + initForText;
+			overlayManager->destroyOverlayElement(szElement);
+			--(initForText);
+			if (initForText == 0)
+			{
+				//Destruimos los dos elementos que componenel texto 
+				overlayManager->destroyOverlayElement("GUI");
+				overlayManager->destroy("GUI_OVERLAY" + initForText);
+			}
 		}
 
 		OgreRenderer::~OgreRenderer()
