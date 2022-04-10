@@ -3,8 +3,6 @@
 #include <../Export.h>
 
 #include <Component.h>
-#include <OgreRenderer.h>
-#include <OgreSceneNode.h>
 
 class OgreSceneManager;
 class Transform;
@@ -12,6 +10,8 @@ class Transform;
 namespace Ogre {
 	class SceneNode;
 	class SceneManager;
+	class Viewport;
+	class Camera;
 }
 
 
