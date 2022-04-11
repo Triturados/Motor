@@ -143,6 +143,32 @@ namespace LoveEngine {
 			}
 		}
 
+		void GameObject::colliding()
+		{
+			for (Component* comp : componentsList) {
+				comp->colliding();
+			}
+		}
+
+		void GameObject::enterCollision()
+		{
+			for (Component* comp : componentsList) {
+				comp->enterCollision();
+			}
+		}
+
+		void GameObject::exitCollision()
+		{
+			for (Component* comp : componentsList) {
+				comp->exitCollision();
+			}
+		}
+
+		Scene* GameObject::getCurrentScene()
+		{
+			return scene;
+		}
+
 		GameObject* GameObject::createGameObject(std::string name)
 		{
 			auto go = scene->createGameObject(name);
@@ -153,7 +179,7 @@ namespace LoveEngine {
 
 		void GameObject::sendMessage(std::string message) {
 			for (auto comp : componentsList) {
-				comp->receiveMessage(message);
+				comp->receiveUnformattedMessage(message);
 			}
 		}
 	}

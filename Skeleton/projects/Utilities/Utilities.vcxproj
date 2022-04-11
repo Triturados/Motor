@@ -14,7 +14,7 @@
     <ClCompile Include="..\..\src\Utilities\Error_handling.cpp" />
     <ClCompile Include="..\..\src\Utilities\GameTime.cpp" />
     <ClCompile Include="..\..\src\Utilities\SingletonInfo.cpp" />
-    <ClCompile Include="..\..\src\Utilities\StringFormater.cpp" />
+    <ClCompile Include="..\..\src\Utilities\StringFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\Error_handling.h" />
@@ -22,7 +22,7 @@
     <ClInclude Include="..\..\src\Utilities\GameTime.h" />
     <ClInclude Include="..\..\src\Utilities\Recta.h" />
     <ClInclude Include="..\..\src\Utilities\SingletonInfo.h" />
-    <ClInclude Include="..\..\src\Utilities\StringFormater.h" />
+    <ClInclude Include="..\..\src\Utilities\StringFormatter.h" />
     <ClInclude Include="..\..\src\Utilities\Vector2.h" />
     <ClInclude Include="..\..\src\Utilities\Vector3.h" />
     <ClInclude Include="..\..\src\Utilities\Vector4.h" />

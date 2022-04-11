@@ -22,16 +22,17 @@
 #include <SDL_syswm.h>
 #include <SDL_events.h>
 #include <SingletonInfo.h>
-
 #include <OgreOverlay.h>
 #include <OgreOverlayManager.h>
 #include <OgreOverlayContainer.h>
 #include <OgreOverlayPrerequisites.h>
 #include <OgreTextAreaOverlayElement.h>
+#include "OgreStringConverter.h"
 #include <OgreBorderPanelOverlayElement.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayContainer.h>
-
+#include "Window.h"
+#include <Vector4.h>
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -121,7 +122,7 @@ namespace LoveEngine {
 			// Aqui se pueden establecer flags, algunos que pueden ser de utilidad mas adelante:
 			// SDL_WINDOW_FULLSCREEN_DESKTOP, SDL_WINDOW_BORDERLESS
 			int flags = 0;
-			std::string appName_;
+			std::string appName_ = "Love";
 
 			// Creacion ventana SDL
 			native = SDL_CreateWindow(appName_.c_str(), SDL_WINDOWPOS_CENTERED,
@@ -129,7 +130,7 @@ namespace LoveEngine {
 
 			//puntero ventana
 			const auto g = SDL_bool(true);
-			SDL_SetWindowGrab(native, g);
+			//SDL_SetWindowGrab(native, g);
 			SDL_ShowCursor(true);
 
 			// Se obtiene informacion de la version de SDL
@@ -151,7 +152,6 @@ namespace LoveEngine {
 
 			// Creamos la ventana de OGRE con estos parametros
 			mWindow = mRoot->createRenderWindow(appName_, windowWidth, windowHeight, false, &miscParams);
-
 		}
 
 		/// <summary>
@@ -268,14 +268,24 @@ namespace LoveEngine {
 			return true;
 		}
 
+		Window* OgreRenderer::getWindowInfo()
+		{
+			if (windowinfo == nullptr)
+			{
+				windowinfo = new Window(this);
+			}
+
+			return windowinfo;
+		}
+
 		void OgreRenderer::exampleScene()
 		{
-			//Ogre::Entity* ogreEntity = mSceneMgr->createEntity("ogrehead.mesh");
-
-			//Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-			//ogreNode->attachObject(ogreEntity);
-
 			mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+		}
+
+		void OgreRenderer::changeWindowTitle(std::string title)
+		{
+			SDL_SetWindowTitle(native, title.c_str());
 		}
 
 		//NO SE USA
@@ -286,12 +296,12 @@ namespace LoveEngine {
 			width = sur->w; height = sur->h;
 			SDL_FreeSurface(sur);
 			return texture;
-			
+
 		}
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
 		/// </summary>
-		Ogre::Overlay* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material)
+		Ogre::OverlayContainer* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay)
 		{
 			// Elemento que contendra el overlay
 			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
@@ -304,23 +314,74 @@ namespace LoveEngine {
 			container->setMaterialName(material);
 
 			// El overlay, que gestiona la poscion, rotacion...
-			Ogre::Overlay* overlay = overlayManager->create("Image" + std::to_string(numOfImages));
+			overlay = overlayManager->create("Image" + std::to_string(numOfImages));
 			overlay->add2D(container);
-			
+
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
-			
 
 			// Mostrar el overlay
 			overlay->show();
-
 			numOfImages++;
-			return overlay;
+			return container;
 		}
 
 		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
 		{
 			overlayManager->destroy(ov);
 		}
+
+		Ogre::TextAreaOverlayElement* OgreRenderer::createOverlayElement(std::string typeName)
+		{
+
+			//WithoutChild
+			Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
+			panel->setMetricsMode(Ogre::GMM_PIXELS);
+			panel->setPosition(0, 0);
+			panel->setDimensions(1.0f, 1.0f);
+			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY" + initForText);
+			o->add2D(panel);
+
+			std::string szElement = "element_" + initForText;
+			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY" + initForText);
+			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
+			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
+			panel->addChild(textArea);
+			overlay->show();
+
+			return textArea;
+
+		}
+
+		void OgreRenderer::destroyText()
+		{
+			std::string szElement = "element_" + initForText;
+			overlayManager->destroyOverlayElement(szElement);
+			--(initForText);
+			if (initForText == 0)
+			{
+				//Destruimos los dos elementos que componenel texto 
+				overlayManager->destroyOverlayElement("GUI");
+				overlayManager->destroy("GUI_OVERLAY" + initForText);
+			}
+			
+		}
+
+		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea)
+		{
+		}
+
+		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
+		{
+		}
+
+		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)
+		{
+
+		}
+
+
+
+
 
 		OgreRenderer::~OgreRenderer()
 		{

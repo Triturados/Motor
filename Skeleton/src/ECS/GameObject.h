@@ -18,14 +18,13 @@ namespace LoveEngine {
 		class lovexport GameObject final {
 
 			friend Scene;
+			friend class Rigidbody;
 			friend class SceneCreator;
-		public:
 
 			GameObject(std::string name);
 			GameObject(std::string name, Scene* scene);
 			~GameObject();
-			std::string name;
-
+	
 		private:
 
 			Scene* scene;
@@ -48,7 +47,16 @@ namespace LoveEngine {
 
 			void onSceneUp();
 			void onSceneDown();
+
+			void colliding();
+			void enterCollision();
+			void exitCollision();
+
 		public:
+			
+			Scene* getCurrentScene();
+
+			std::string name;
 
 			template <typename T>
 			requires isComponent<T>
@@ -128,7 +136,6 @@ namespace LoveEngine {
 
 				return vec;
 			}
-
 
 			void activate(bool value);
 			void removeGameObject();

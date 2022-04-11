@@ -37,6 +37,8 @@ namespace LoveEngine {
 			void onSceneUp();
 			void onSceneDown();
 
+			GameObject* persistentGameObject();
+
 			void setName(std::string newname);
 
 			GameObject* createGameObject(std::string name = "new game object");

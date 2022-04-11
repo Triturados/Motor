@@ -10,13 +10,6 @@
 
 namespace LoveEngine {
 
-	namespace Utilities {
-		template<typename T>
-		class Vector3;
-		template<typename T>
-		class Vector4;
-	}
-
 	namespace ECS {
 
 		class lovexport Transform : public Component
@@ -40,7 +33,7 @@ namespace LoveEngine {
 			~Transform();
 
 			void update() override;
-			void receiveMessage(std::string s) override;
+			void receiveMessage(Utilities::StringFormatter& s) override;
 
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();

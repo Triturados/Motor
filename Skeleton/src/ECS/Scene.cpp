@@ -1,6 +1,6 @@
 #include "Scene.h"
 #include "GameObject.h"
-
+#include "SceneManager.h"
 namespace LoveEngine {
 	namespace ECS {
 
@@ -81,6 +81,11 @@ namespace LoveEngine {
 				if (gO->enabled && !gO->dead)
 					gO->onSceneDown();
 			}
+		}
+
+		GameObject* Scene::persistentGameObject()
+		{
+			return SceneManagement::SceneManager::getInstance()->persistentScene->gObjects.front();
 		}
 
 	

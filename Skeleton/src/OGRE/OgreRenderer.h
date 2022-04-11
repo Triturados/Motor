@@ -16,6 +16,8 @@ namespace Ogre {
 	class OverlayManager;
 	class OverlaySystem;
 	class Overlay;
+	class OverlayContainer;
+	class TextAreaOverlayElement;
 }
 
 class SDL_Window;
@@ -24,6 +26,12 @@ class SDL_Texture;
 class SDL_Rect;
 class SDL_SysWMinfo;
 namespace LoveEngine {
+
+	class Window;
+	namespace Utilities {
+		template<typename T>
+		class Vector4;
+	}
 	namespace Renderer {
 		class lovexport OgreRenderer
 		{
@@ -57,13 +65,17 @@ namespace LoveEngine {
 
 			void throwOgreError(int errorLine, const std::string& errorMsg);
 
+			Window* windowinfo;
 			static OgreRenderer* instance;
+			int initForText=0;
 		public:
 			static OgreRenderer* getInstance();
 			OgreRenderer();
 
 			void initRoot();
 			bool update();
+
+			Window* getWindowInfo();
 
 			Ogre::SceneNode* createNode();
 			Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
@@ -73,12 +85,17 @@ namespace LoveEngine {
 			Ogre::RenderWindow* getRenderWindow();
 
 			void exampleScene();
+			void changeWindowTitle(std::string);
 
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
-			Ogre::Overlay* renderImage(int x, int y, int w, int h, std::string material);
+			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
 
 			void disableOverlay(Ogre::Overlay*);
-
+			Ogre::TextAreaOverlayElement* createOverlayElement( std::string typeName);
+			void destroyText();
+			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea);
+			void setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea);
+			void setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea);
 			~OgreRenderer();
 		};
 

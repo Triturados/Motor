@@ -33,6 +33,7 @@ namespace LoveEngine {
 			}
 			sceneChangeType = SceneLoad::PUSH;
 
+			persistentScene = nullptr;
 			sceneFactory = new SceneManagement::SceneFactory();
 
 			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
@@ -45,6 +46,7 @@ namespace LoveEngine {
 				currentScene.pop();
 			}
 
+			delete persistentScene;
 			delete sceneFactory;
 		}
 
@@ -90,6 +92,12 @@ namespace LoveEngine {
 			}
 		}
 
+		void SceneManager::updatePersistentScene()
+		{
+			persistentScene->update();
+			persistentScene->stepPhysics();
+		}
+
 		void SceneManager::initiliseScenes()
 		{
 			initialised = true;
@@ -100,6 +108,15 @@ namespace LoveEngine {
 			//createScene();
 		}
 
+		void SceneManager::initialisePersistentScene()
+		{
+			persistentScene = new ECS::Scene("Persistent Scene");
+			persistentScene->createGameObject("Persistent GameObject");
+
+			persistentScene->init();
+			persistentScene->postInit();
+		}
+
 
 		void SceneManager::createSplashScreen()
 		{
@@ -107,11 +124,12 @@ namespace LoveEngine {
 			currentScene.push(scene);
 
 			auto camera = scene->createGameObject("Camera");
-			camera->addComponent<ECS::Transform>()->receiveMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
+			camera->addComponent<ECS::Transform>()->receiveUnformattedMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
 			camera->addComponent<ECS::Camera>();
 
 			auto gameObject = scene->createGameObject("Image");
-			gameObject->addComponent<ECS::Image>()->receiveMessage("material: splashScreen; width: 1280; height : 720");
+			gameObject->addComponent<ECS::Transform>();
+			gameObject->addComponent<ECS::Image>()->receiveUnformattedMessage("material: splashScreen; width: 1280; height : 720");
 
 			ECS::Timer::invoke([&](ECS::Timer*) {
 				changeScene(0, SceneLoad::SWAP);

@@ -8,30 +8,39 @@
 #include <Ogre.h>
 #include <string>
 #include <iostream>
-#include <StringFormater.h>
+#include <StringFormatter.h>
+
+#include <OgreOverlay.h>
+#include <OgreOverlayManager.h>
+#include <OgreOverlayContainer.h>
+#include <OgreOverlayPrerequisites.h>
+#include <OgreTextAreaOverlayElement.h>
+#include <OgreBorderPanelOverlayElement.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayContainer.h>
 namespace LoveEngine {
 	namespace ECS {
 
 		
-		void Image::receiveMessage(std::string s)
+		void Image::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			material = sTf.getString("material");
+			material = sf.getString("material");
 
-			sTf.tryGetInt("width" , width );
-			sTf.tryGetInt("height", height);
+			sf.tryGetInt("width" , width );
+			sf.tryGetInt("height", height);
 		}
 		void Image::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 
-			/*if (texName == "") throw new std::exception("La textura no tiene nombre");
-			texture = ogremanager->createSDLTexture(texName.c_str(), width, height);*/
+			if (material == "") throw new std::exception("El material no tiene nombre");
 			
-			/*tr = gameObject->getComponent<Transform>();
-			if(!tr) throw new std::exception("Se necesita transform para usar el componente Image");*/
+			tr = gameObject->getComponent<Transform>();
+			if(!tr) throw new std::exception("Se necesita transform para usar el componente Image");
 
 			/*tr->setPos({ 300,300,0 });*/
-			overlay = ogremanager->renderImage(0,0,width,height,material);
+			container = ogremanager->renderImage(0,0,width,height,material, overlay);
+
+			/*setPos(300, 300);*/
 		}
 
 		//No se llama el update 
@@ -45,7 +54,14 @@ namespace LoveEngine {
 
 		void Image::setVisibility(bool mode)
 		{
-			visible = mode;
+			if (mode) overlay->show();
+			else overlay->hide();
+		}
+
+		void Image::setPos(int x, int y)
+		{
+			tr->setPos(Utilities::Vector3((float)x,(float)y,0.0f));
+			container->setPosition(tr->getPos()->x, tr->getPos()->y);
 		}
 
 		void Image::onSceneDown()
@@ -57,6 +73,8 @@ namespace LoveEngine {
 		{
 			//visible = true;
 		}
+
+
 
 		Image::~Image()
 		{

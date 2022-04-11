@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "ParticleSystem.h"
 #include "Transform.h"
 #include <stdexcept>
 #include <OgreRenderer.h>
@@ -14,23 +14,38 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		void Mesh::receiveMessage(Utilities::StringFormatter& sf)
+		void ParticleSystem::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			meshName = sf.getString("meshName");
+			particleName = sf.getString("particleName");
+			emitting = sf.getBool("emitting");
 		}
 
-		void Mesh::init() {
+		void ParticleSystem::setActive(bool activated)
+		{
+			pSys->setEmitting(activated);
+			emitting = activated;
+		}
+
+		bool ParticleSystem::isEmitting()
+		{
+			return emitting;
+		}
+
+		void ParticleSystem::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			tr = gameObject->getComponent<Transform>();
+
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
-			if (meshName == "") throw new std::exception("La malla no tiene nombre");
+			if (particleName == "") throw new std::exception("El sistema de particulas no tiene nombre");
+
 			entityNode = ogremanager->createNode();
 
-			if (entity == nullptr)
-				entity = ogremanager->getSceneManager()->createEntity(meshName);
-			else throw new std::exception("Ya existe una entidad asociada");
+			if (pSys == nullptr)
+				pSys = ogremanager->getSceneManager()->createParticleSystem(particleName, particleName);
+			else throw new std::exception("Ya existe un sistema de particulas con ese nombre.");
 
-			entityNode->attachObject(entity);
+			entityNode->attachObject(pSys);
+			pSys->setEmitting(emitting);
 
 			rot = tr->getRot();
 			pos = tr->getPos();
@@ -46,7 +61,7 @@ namespace LoveEngine {
 		}
 
 		//No se llama el update 
-		void Mesh::update()
+		void ParticleSystem::update()
 		{
 			rot = tr->getRot();
 			pos = tr->getPos();
@@ -59,30 +74,16 @@ namespace LoveEngine {
 			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
 			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
-			//Usar Translate , Scale, y luego la rotacion esta por ver 
-		}
-		void Mesh::setVisibility(bool mode)
-		{
-			entityNode->setVisible(mode);
-		}
-		void Mesh::onSceneDown()
-		{
-			//setVisibility(false);
-		}
-		void Mesh::onSceneUp()
-		{
-			//setVisibility(true);
 		}
 
-		Ogre::Entity* Mesh::getEntity()
+		Ogre::ParticleSystem* ParticleSystem::getPSys()
 		{
-			return entity;
+			return pSys;
 		}
 
-		Mesh::~Mesh()
+		ParticleSystem::~ParticleSystem()
 		{
 			ogremanager->removeNode(entityNode);
-			//delete rot, pos, scale;
 		}
 	}
 }

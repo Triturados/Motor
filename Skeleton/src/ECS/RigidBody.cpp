@@ -11,7 +11,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 
-#include <StringFormater.h>
+#include <StringFormatter.h>
 #include "Vector3.h"
 #include "Vector4.h"
 #include "PhysicsManager.h"
@@ -89,15 +89,14 @@ namespace LoveEngine {
 			tr->setRot(newRot);
 		}
 
-		void RigidBody::receiveMessage(std::string s)
+		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			setShape(sTf.getString("shape"));
-			sTf.tryGetFloat("restitution", restitution);
-			sTf.tryGetFloat("mass", mass);
+			setShape(sf.getString("shape"));
+			sf.tryGetFloat("restitution", restitution);
+			sf.tryGetFloat("mass", mass);
 
 			std::string str;
-			if (sTf.tryGetString("state", str)) {
+			if (sf.tryGetString("state", str)) {
 
 				if (str == "kinematic") {
 					stateMode = RBState::Kinematic;

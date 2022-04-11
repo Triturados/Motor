@@ -3,18 +3,16 @@
 #include <vector>
 #include <string>
 
-
-namespace Utilities {
-	template<class T>
-	class Vector3;
-}
-
 namespace LoveEngine {
+
+	namespace Utilities {
+		class StringFormatter;
+	}
+
 	namespace ECS {
 
 		class Scene;
 		class GameObject;
-		using Key = char;
 
 		// Componente interfaz, utilizada para listas polimórficas
 		class lovexport Component {
@@ -25,8 +23,21 @@ namespace LoveEngine {
 			static unsigned int numOfComponentClasses;
 
 			Component();
-
 			GameObject* gameObject;
+
+			virtual void receiveComponent(int, Component*) {};
+			virtual void receiveGameObject(int, GameObject*) {};
+
+			void receiveUnformattedMessage(std::string mssg);
+
+			void remove(Component* comp);
+			void remove(GameObject* go);
+			void remove();
+
+			void setActive(bool val);
+			bool isActive();
+			void swapActive();
+
 		protected:
 
 			// Puntero a escena
@@ -40,8 +51,6 @@ namespace LoveEngine {
 			/// a un objeto que no tiene todas sus dependencias, se escribe un mensaje de error y no se añande.
 			std::vector<Component*> dependencies;
 
-		protected:
-
 			virtual void init() {};
 			virtual void postInit() {};
 
@@ -54,56 +63,20 @@ namespace LoveEngine {
 
 			virtual void onSceneUp() {};
 			virtual void onSceneDown() {};
-		public:
-			virtual void receiveComponent(int, Component*) {};
-			virtual void receiveGameObject(int, GameObject*) {};
 
-			virtual void receiveMessage(std::string mssg) {};
-
-		protected:
-#pragma region Input Callbacks
-
-			void keyListener(Key keys[]);
-			void clickListener(int mouseButtons[]);
-			void mouseMovementListener();
-
-			virtual void keyPressed(Key key) {};
-			virtual void keyDown(Key key) {};
-			virtual void keyUp(Key key) {};
-
-			virtual void clickPressed(int button) {};
-			virtual void clickUp(int button) {};
-			virtual void clickDown(int button) {};
-
-			virtual void onMouseMoved(int mx, int my, int x, int y) {};
-
-#pragma endregion 
-
-#pragma region Physics Callbacks
+			virtual void receiveMessage(Utilities::StringFormatter& sf) {};
 
 			virtual void colliding() {};
 			virtual void enterCollision() {};
 			virtual void exitCollision() {};
 
-#pragma endregion Physics Callbacks
 
 			GameObject* createObject(std::string name);
-
-		public:
-			void remove(Component* comp);
-			void remove(GameObject* go);
-			void remove();
-
-			void setActive(bool val);
-			bool isActive();
-			void swapActive();
 
 		private:
 
 			bool dead = false;
 			std::vector<GameObject*> collisions;
-			void checkCollisionCallbacks();
-
 		};
 
 
@@ -156,6 +129,15 @@ namespace LoveEngine {
 
 
 	}
+
+	namespace Utilities {
+		template<class T>
+		class Vector4;
+		template<class T>
+		class Vector3;
+		template<class T>
+		class Vector2;
+	}
 }
 // Un hash genera un número muy grande determinista a partir de un valor
 template<class T>
@@ -163,3 +145,5 @@ struct std::hash<LoveEngine::ECS::ComponentTemplate<T>>
 {
 	std::size_t operator()(unsigned int num) const noexcept;
 };
+
+

@@ -11,6 +11,7 @@
 #include <LightComponent.h>
 #include <Image.h>
 #include <Animation.h>
+#include <ParticleSystem.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -55,6 +56,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Light>("Light"));
 			registerComponent(new ComponentCreatorTemplate<Image>("Image"));
 			registerComponent(new ComponentCreatorTemplate<Animation>("Animation"));
+			registerComponent(new ComponentCreatorTemplate<ParticleSystem>("ParticleSystem"));
 		}
 
 

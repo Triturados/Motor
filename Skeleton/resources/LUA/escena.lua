@@ -5,6 +5,9 @@ end
 function scene0()
     scene:name("Escena de Prueba")
 
+    local a = scene:createObject("AAA");
+    a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")
+
     local suelo = scene:createObject("Suelo")
 	
     local kaka = scene:createObject("uiobj")
@@ -116,6 +119,10 @@ function scene0()
 
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
+
+    local particleSys = scene:createObject("Bomba")
+    particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
+    particleSys:addComponent("ParticleSystem"):sendMsg([[particleName: bomb; emitting: true]])
 
 end
 

@@ -31,7 +31,7 @@ namespace LoveEngine {
 		public:
 
 			void init() override;
-			void receiveMessage(std::string s) override;
+			void receiveMessage(Utilities::StringFormatter& s) override;
 			void playSound();
 			void releaseSound();
 			void setSpeed(float s);

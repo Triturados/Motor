@@ -7,15 +7,14 @@
 #include <Mesh.h>
 #include <OgreEntity.h>
 #include <GameTime.h>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
 
-		void Animation::receiveMessage(std::string animaState)
+		void Animation::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(animaState);
-			name = sTf.getString("animName");
+			name = sf.getString("animName");
 		}
 
 		void Animation::init()

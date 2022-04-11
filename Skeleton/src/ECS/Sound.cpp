@@ -3,25 +3,24 @@
 #include <fmod.hpp>
 #include <SoundManager.h>
 #include <iostream>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
 
 		
 
-		void Sound::receiveMessage(std::string s)
+		void Sound::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			soundRoute = "./FMOD/Sonidos/" + sTf.getString("soundName");
+			soundRoute = "./FMOD/Sonidos/" + sf.getString("soundName");
 
 			int channel;
-			if (sTf.tryGetInt("channel", channel)) {
+			if (sf.tryGetInt("channel", channel)) {
 				groupChannel = static_cast<soundType>(channel);
 			}
 			else {
 				std::string name;
-				if (sTf.tryGetString("channel", name))
+				if (sf.tryGetString("channel", name))
 				{
 					if (name == "environment") {
 						groupChannel = soundType::environment;
@@ -37,7 +36,7 @@ namespace LoveEngine {
 					}
 				}
 			}
-			bLoop = sTf.getBool("loop");
+			bLoop = sf.getBool("loop");
 		}
 
 		void Sound::init()

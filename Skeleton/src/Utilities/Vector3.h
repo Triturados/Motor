@@ -1,6 +1,7 @@
 #pragma once
 #include <../Export.h>
 #include <math.h>
+#include <iostream>
 
 namespace LoveEngine {
 	namespace Utilities
@@ -30,6 +31,13 @@ namespace LoveEngine {
 				y = sec;
 				z = ter;
 			}
+
+			Vector3(const Vector3& other) {
+				x = other.x;
+				y = other.y;
+				z = other.z;
+			}
+
 
 			Vector3<T> operator+(Vector3<T> const& v2) const {
 				return Vector3(x + v2.x, y + v2.y, z + v2.z);

@@ -8,10 +8,7 @@
 class btRigidBody;
 
 namespace LoveEngine {
-	namespace Utilities {
-		template <typename T>
-		class Vector3;
-	}
+	
 	namespace ECS {
 		enum class ForceMode {
 			FORCE,
@@ -61,7 +58,7 @@ namespace LoveEngine {
 
 			void stepPhysics() override;
 
-			void receiveMessage(std::string s) override;
+			void receiveMessage(Utilities::StringFormatter& s) override;
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
 

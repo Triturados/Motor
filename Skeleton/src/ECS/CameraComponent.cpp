@@ -5,6 +5,8 @@
 #include <Ogre.h>
 #include <OgreRenderer.h>
 #include <OgreSceneNode.h>
+#include <OgreViewport.h>
+#include <OgreCamera.h>
 #include "Transform.h"
 #include "GameObject.h"
 #include <Vector3.h>
@@ -15,7 +17,6 @@ namespace LoveEngine {
 
 		Camera::~Camera()
 		{
-
 			ogremanager->removeNode(mCameraNode);
 		}
 

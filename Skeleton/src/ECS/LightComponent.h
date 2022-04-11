@@ -15,13 +15,6 @@ namespace Ogre {
 
 namespace LoveEngine {
 
-	namespace Utilities {
-		template<typename T>
-		class Vector3;
-		template<typename T>
-		class Vector4;
-	}
-
 	namespace Renderer {
 		class OgreRenderer;
 	}
@@ -46,9 +39,21 @@ namespace LoveEngine {
 
 			std::string name;
 			lightType type;
+
+			//Parameters
+
+			Utilities::Vector3<float>* diffuse;
+			Utilities::Vector3<float>* specular;
+			Utilities::Vector3<float>* direction;
+			int lightPower;
+
+			float inRange;
+			float outRange;
+			float fallOff;
 		public:
 
 			~Light();
+			Light();
 
 			void init() override;
 
@@ -66,7 +71,7 @@ namespace LoveEngine {
 			bool getVisibility();
 
 
-			void receiveMessage(std::string message) override;
+			void receiveMessage(Utilities::StringFormatter& message) override;
 		};
 
 	}

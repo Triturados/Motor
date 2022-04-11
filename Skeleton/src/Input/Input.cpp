@@ -26,6 +26,7 @@ namespace LoveEngine {
 
 			InputManager::_instance = this;
 			lastPressedKeys = new std::unordered_set<SDL_Scancode>();
+			justPressedKeys = new std::unordered_set<SDL_Scancode>();
 			mouseState = MouseState::NONE;
 			mouseX = mouseY = 0;
 
@@ -40,19 +41,21 @@ namespace LoveEngine {
 		InputManager::~InputManager()
 		{
 			delete lastPressedKeys;
+			delete justPressedKeys;
 			SDL_GameControllerClose(sdlcontroller);
 		}
 
 		bool InputManager::handleInput()
 		{
+			// Se vacian las teclas que fueron pulsadas justo en frame anterior
+			justPressedKeys->clear();
 			SDL_Event sdlevent;
 			while (SDL_PollEvent(&sdlevent)) {
 				switch (sdlevent.type) {
 				case SDL_KEYDOWN:
 				{
-					int enumvalue = (int)sdlevent.key.keysym.scancode;
-					//std::cout << enumvalue << std::endl;
-
+					if(lastPressedKeys->count(sdlevent.key.keysym.scancode) == 0)
+						justPressedKeys->insert(sdlevent.key.keysym.scancode);
 					lastPressedKeys->insert(sdlevent.key.keysym.scancode);
 					break;
 				}
@@ -138,6 +141,11 @@ namespace LoveEngine {
 		bool InputManager::isKeyPressed(InputKeys key)
 		{
 			return lastPressedKeys->count((SDL_Scancode)((int)key));
+		}
+
+		bool InputManager::keyJustPressed(InputKeys key)
+		{
+			return justPressedKeys->count((SDL_Scancode)((int)key));
 		}
 
 		bool InputManager::mousePressed(MouseState state)

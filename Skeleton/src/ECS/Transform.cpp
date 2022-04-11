@@ -3,7 +3,7 @@
 #include <Vector4.h>
 #include <string>
 #include <iostream>
-#include <StringFormater.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -135,22 +135,11 @@ namespace LoveEngine {
 			//std::cout  << "\n";
 		}
 
-		void Transform::receiveMessage(std::string s)
+		void Transform::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			StringFormatter sTf(s);
-			Utilities::Vector3<float> v = sTf.getVector3("scale");
-			scale->x = v.x;
-			scale->y = v.y;
-			scale->z = v.z;
-			Utilities::Vector4<float> v2 = sTf.getVector4("rotation");
-			rotation->x = v2.x;
-			rotation->y = v2.y;
-			rotation->z = v2.z;
-			rotation->w = v2.w;
-			Utilities::Vector3<float> v1 = sTf.getVector3("position");
-			position->x = v1.x;
-			position->y = v1.y;
-			position->z = v1.z;
+			sf.tryGetVector3("scale", *scale);
+			sf.tryGetVector4("rotation", *rotation);
+			sf.tryGetVector3("position", *position);
 		}
 	}
 }

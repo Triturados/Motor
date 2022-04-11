@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#include "Recta.h"
+#include <iostream>
 #include <../Export.h>
 
 namespace LoveEngine {
@@ -23,6 +23,11 @@ namespace LoveEngine {
 			{
 				x = prim;
 				y = sec;
+			}
+
+			Vector2(const Vector2& v) {
+				x = v.x;
+				y = v.y;
 			}
 
 			Vector2<T> operator+(Vector2<T> const& v2) const {

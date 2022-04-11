@@ -99,14 +99,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\OGRE\OgreRenderer.cpp" />
+    <ClCompile Include="..\..\src\OGRE\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\OGRE\OgreRenderer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{17c98f4b-91be-4d6c-8ea1-7037992a19b3}</Project>
-    </ProjectReference>
+    <ClInclude Include="..\..\src\OGRE\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
