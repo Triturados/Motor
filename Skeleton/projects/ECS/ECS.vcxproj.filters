@@ -78,6 +78,9 @@
     <ClCompile Include="..\..\src\ECS\Text.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\ParticleSystem.cpp">
+      <Filter>Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -135,6 +138,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Text.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\ParticleSystem.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

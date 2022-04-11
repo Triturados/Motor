@@ -97,6 +97,7 @@
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Mesh.cpp" />
     <ClCompile Include="..\..\src\ECS\MouseTracker.cpp" />
+    <ClCompile Include="..\..\src\ECS\ParticleSystem.cpp" />
     <ClCompile Include="..\..\src\ECS\RigidBody.cpp" />
     <ClCompile Include="..\..\src\ECS\Scene.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />
     <ClInclude Include="..\..\src\ECS\Mesh.h" />
     <ClInclude Include="..\..\src\ECS\MouseTracker.h" />
+    <ClInclude Include="..\..\src\ECS\ParticleSystem.h" />
     <ClInclude Include="..\..\src\ECS\RigidBody.h" />
     <ClInclude Include="..\..\src\ECS\Scene.h" />
     <ClInclude Include="..\..\src\ECS\SceneFactory.h" />

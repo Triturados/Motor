@@ -1,0 +1,89 @@
+#include "ParticleSystem.h"
+#include "Transform.h"
+#include <stdexcept>
+#include <OgreRenderer.h>
+#include <GameObject.h>
+#include <OgreSceneNode.h>
+#include <Vector3.h>
+#include <Vector4.h>
+#include <Ogre.h>
+#include <string>
+#include <iostream>
+#include <StringFormatter.h>
+
+namespace LoveEngine {
+	namespace ECS {
+
+		void ParticleSystem::receiveMessage(Utilities::StringFormatter& sf)
+		{
+			particleName = sf.getString("particleName");
+			emitting = sf.getBool("emitting");
+		}
+
+		void ParticleSystem::setActive(bool activated)
+		{
+			pSys->setEmitting(activated);
+			emitting = activated;
+		}
+
+		bool ParticleSystem::isEmitting()
+		{
+			return emitting;
+		}
+
+		void ParticleSystem::init() {
+			ogremanager = Renderer::OgreRenderer::getInstance();
+			tr = gameObject->getComponent<Transform>();
+
+			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
+			if (particleName == "") throw new std::exception("El sistema de particulas no tiene nombre");
+
+			entityNode = ogremanager->createNode();
+
+			if (pSys == nullptr)
+				pSys = ogremanager->getSceneManager()->createParticleSystem(particleName, particleName);
+			else throw new std::exception("Ya existe un sistema de particulas con ese nombre.");
+
+			entityNode->attachObject(pSys);
+			pSys->setEmitting(emitting);
+
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
+
+			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
+			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
+
+			entityNode->resetOrientation();
+			entityNode->yaw(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+			entityNode->pitch(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+		}
+
+		//No se llama el update 
+		void ParticleSystem::update()
+		{
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
+
+			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
+			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
+
+			entityNode->resetOrientation();
+			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+		}
+
+		Ogre::ParticleSystem* ParticleSystem::getPSys()
+		{
+			return pSys;
+		}
+
+		ParticleSystem::~ParticleSystem()
+		{
+			ogremanager->removeNode(entityNode);
+		}
+	}
+}

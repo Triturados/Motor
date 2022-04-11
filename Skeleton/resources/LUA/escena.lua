@@ -120,6 +120,10 @@ function scene0()
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
 
+    local particleSys = scene:createObject("Bomba")
+    particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
+    particleSys:addComponent("ParticleSystem"):sendMsg([[particleName: bomb; emitting: true]])
+
 end
 
 
