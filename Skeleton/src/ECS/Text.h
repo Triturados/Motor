@@ -44,7 +44,7 @@ namespace LoveEngine {
 			std::string textContent;
 			Renderer::OgreRenderer* ogremanager;
 			Ogre::TextAreaOverlayElement* textArea;
-			Utilities::Vector3<float>colors;
+			Utilities::Vector3<float>* colors;
 			int width;
 			int height;
 			int x;
