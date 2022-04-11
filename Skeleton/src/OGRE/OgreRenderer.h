@@ -17,6 +17,7 @@ namespace Ogre {
 	class OverlaySystem;
 	class Overlay;
 	class OverlayContainer;
+	class TextAreaOverlayElement;
 }
 
 class SDL_Window;
@@ -87,7 +88,7 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
 
 			void disableOverlay(Ogre::Overlay*);
-			void createOverlayElement( std::string typeName);
+			Ogre::TextAreaOverlayElement* createOverlayElement( std::string typeName);
 			void destroyText();
 
 			~OgreRenderer();

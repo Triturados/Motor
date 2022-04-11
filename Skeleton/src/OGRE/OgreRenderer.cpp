@@ -329,7 +329,7 @@ namespace LoveEngine {
 			overlayManager->destroy(ov);
 		}
 
-		void OgreRenderer::createOverlayElement(std::string typeName)
+		Ogre::TextAreaOverlayElement* OgreRenderer::createOverlayElement(std::string typeName)
 		{
 
 			//WithoutChild
@@ -346,6 +346,8 @@ namespace LoveEngine {
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
 			panel->addChild(textArea);
 			overlay->show();
+
+			return textArea;
 
 		}
 

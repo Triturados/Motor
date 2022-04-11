@@ -6,10 +6,16 @@
 #include <Component.h>
 #include <string>
 
+
 namespace Ogre {
 	class Overlay;
 	class OverlayContainer;
 	class OverlayElement;
+	class TextAreaOverlayElement;
+}
+namespace Utilities {
+	template<typename T>
+	class Vector3;
 }
 namespace LoveEngine {
 
@@ -34,9 +40,16 @@ namespace LoveEngine {
 			void setVisibility(bool mode = true);
 		private:
 			
-			std::string typeName;
+			std::string textName;
+			std::string textContent;
 			Renderer::OgreRenderer* ogremanager;
-
+			Ogre::TextAreaOverlayElement* textArea;
+			Utilities::Vector3<float>colors;
+			int width;
+			int height;
+			int x;
+			int y;
+			float charHeight;
 		};
 	}
 }
