@@ -6,7 +6,8 @@ namespace LoveEngine {
 
 	namespace ECS {
 		class Camera;
-		class lovexport MouseTracker: public Component {
+		class lovexport MouseTracker: public ComponentTemplate<MouseTracker>
+		{
 		private:
 			Camera* maincam;
 			float rotationSpeed;

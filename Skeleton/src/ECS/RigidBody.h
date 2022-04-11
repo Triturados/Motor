@@ -33,7 +33,7 @@ namespace LoveEngine {
 
 		class Transform;
 
-		class lovexport RigidBody : public Component
+		class lovexport RigidBody : public ComponentTemplate<RigidBody>
 		{
 		private:
 			float mass;
