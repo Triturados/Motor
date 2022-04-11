@@ -32,6 +32,7 @@
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayContainer.h>
 #include "Window.h"
+#include <Vector4.h>
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -362,7 +363,25 @@ namespace LoveEngine {
 				overlayManager->destroyOverlayElement("GUI");
 				overlayManager->destroy("GUI_OVERLAY" + initForText);
 			}
+			
 		}
+
+		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea)
+		{
+		}
+
+		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
+		{
+		}
+
+		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)
+		{
+
+		}
+
+
+
+
 
 		OgreRenderer::~OgreRenderer()
 		{

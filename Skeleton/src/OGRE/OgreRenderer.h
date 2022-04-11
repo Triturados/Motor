@@ -28,7 +28,10 @@ class SDL_SysWMinfo;
 namespace LoveEngine {
 
 	class Window;
-
+	namespace Utilities {
+		template<typename T>
+		class Vector4;
+	}
 	namespace Renderer {
 		class lovexport OgreRenderer
 		{
@@ -90,7 +93,9 @@ namespace LoveEngine {
 			void disableOverlay(Ogre::Overlay*);
 			Ogre::TextAreaOverlayElement* createOverlayElement( std::string typeName);
 			void destroyText();
-
+			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea);
+			void setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea);
+			void setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea);
 			~OgreRenderer();
 		};
 
