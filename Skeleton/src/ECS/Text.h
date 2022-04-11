@@ -25,7 +25,7 @@ namespace LoveEngine {
 	namespace ECS {
 		class Transform;
 
-		class lovexport Text : public Component
+		class lovexport Text : public ComponentTemplate<Text>
 		{
 		public:
 			Text() {};

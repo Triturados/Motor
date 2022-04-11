@@ -24,7 +24,7 @@ namespace LoveEngine {
 
 
 		class Transform;
-		class lovexport Light : public Component
+		class lovexport Light : public ComponentTemplate<Light>
 		{
 		private:
 			Ogre::SceneNode* entityNode;

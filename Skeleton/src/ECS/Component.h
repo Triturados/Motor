@@ -89,10 +89,11 @@ namespace LoveEngine {
 		/// Al ser un template, se compila una versión de esta función por cada tipo que lo llame.
 		/// </summary>
 		template<typename T>
-		inline static auto calculateComponentNum() {
-			static auto componentNum = Component::numOfComponentClasses++;;
+		inline static unsigned int calculateComponentNum() 
+		{
+			static unsigned int componentNum = Component::numOfComponentClasses++;;
 			return componentNum;
-		}
+		};
 
 
 		// Todas las clases Componentes deben heredar de esta clase, para que puedan tener IDs.
@@ -103,31 +104,34 @@ namespace LoveEngine {
 		class lovexport ComponentTemplate : public Component
 		{
 		private:
+			friend T;
+
 			static unsigned int componentNum;
 			static size_t id;
+			
+			ComponentTemplate()
+			{
+				generateComponentID();
+			}
 
-			void generateComponentID();
+			// Las ids se usan para comparar componentes y organizarlas en listas ordenadas
+			void generateComponentID()
+			{
+				componentNum = calculateComponentNum<T>();
+				std::hash<ComponentTemplate<T>> myComponentHash;
+				ComponentTemplate<T>::id = myComponentHash(componentNum);
+			}
+
 		public:
-			ComponentTemplate();
 			inline size_t getId() const { return id; };
 		};
 
-		// Las ids se usan para comparar componentes y organizarlas en listas ordenadas
+		//Inicialización de atributos estáticos
 		template<class T>
-		inline void ComponentTemplate<T>::generateComponentID()
-		{
-			componentNum = calculateComponentNum<T>();
-			std::hash<ComponentTemplate<T>> myComponentHash;
-			ComponentTemplate<T>::id = myComponentHash(componentNum);
-		}
+		unsigned int ComponentTemplate<T>::componentNum = 0;
 
 		template<class T>
-		inline ComponentTemplate<T>::ComponentTemplate()
-		{
-			generateComponentID();
-		}
-
-
+		size_t ComponentTemplate<T>::id = 0;
 	}
 
 	namespace Utilities {
@@ -143,7 +147,10 @@ namespace LoveEngine {
 template<class T>
 struct std::hash<LoveEngine::ECS::ComponentTemplate<T>>
 {
-	std::size_t operator()(unsigned int num) const noexcept;
+	std::size_t operator()(unsigned int num) const noexcept 
+	{
+		std::size_t h = std::hash<int>{}(num);
+		return h ^ (h << 1);
+	}
 };
-
 

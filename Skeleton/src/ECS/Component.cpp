@@ -7,12 +7,6 @@ namespace LoveEngine {
 	namespace ECS {
 
 		//Inicialización de atributos estáticos
-		template<class T>
-		unsigned int ComponentTemplate<T>::componentNum = 0;
-
-		template<class T>
-		size_t ComponentTemplate<T>::id = 0;
-
 		unsigned int Component::numOfComponentClasses = 0;
 
 
@@ -63,10 +57,4 @@ namespace LoveEngine {
 			return gameObject->createGameObject(name);
 		}
 	}
-}
-template <class T>
-std::size_t std::hash<LoveEngine::ECS::ComponentTemplate<T>>::operator()(unsigned int num) const noexcept
-{
-	std::size_t h = std::hash<int>{}(num);
-	return h ^ (h << 1);
 }
