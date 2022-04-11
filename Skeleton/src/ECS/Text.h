@@ -44,11 +44,11 @@ namespace LoveEngine {
 			std::string textContent;
 			Renderer::OgreRenderer* ogremanager;
 			Ogre::TextAreaOverlayElement* textArea;
-<<<<<<< Updated upstream
-			Utilities::Vector3<float>* colors;
-=======
+//<<<<<<< Updated upstream
+			//Utilities::Vector3<float>* colors;
+//=======
 			Utilities::Vector4<float>* colorPtr;
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 			int width;
 			int height;
 			int x;
