@@ -30,7 +30,7 @@ namespace LoveEngine {
 			Vector4(const Vector4& v) {
 				x = v.x;
 				y = v.y;
-				z = v.y;
+				z = v.z;
 				w = v.w;
 			}
 

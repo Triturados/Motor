@@ -34,6 +34,7 @@ namespace LoveEngine {
 
 			void update() override;
 			void receiveMessage(Utilities::StringFormatter& s) override;
+			void receiveComponent(int i, Component* c) override;
 
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();

@@ -70,17 +70,18 @@ namespace LoveEngine {
 
 		void Transform::setScale(Utilities::Vector3<float> s, Utilities::Vector3<float> s2)
 		{
-			updateChildren(2);
 			scale->x *= s.x * s2.x;
 			scale->y *= s.y * s2.y;
 			scale->z *= s.z * s2.z;
+			updateChildren(2);
 		}
 
 		void Transform::translate(Utilities::Vector3<float> p) {
-			updateChildren(0);
+			
 			position->x += p.x;
-			position->x += p.y;
+			position->y += p.y;
 			position->z += p.z;
+			updateChildren(0);
 		}
 
 		void Transform::rotate(Utilities::Vector4<float> r) {
@@ -115,7 +116,7 @@ namespace LoveEngine {
 				switch (mode)
 				{
 				case 0: c->translate(*position); break;
-				case 1: c->rotate(*rotation); break;
+				//case 1: c->rotate(*rotation); break;
 				case 2: c->setScale(*scale, *c->scale); break;
 				default:
 					break;
@@ -127,9 +128,9 @@ namespace LoveEngine {
 		{
 			if (children.empty()) return;
 
-			rotateChild(modeAngule, ang, *position);
 			float x = 0, y = 0, z = 0, dist = 0;
 			for (auto& c : children) {
+				c->rotateChild(modeAngule, ang, *position);
 				switch (modeAngule)
 				{
 					//giro en ang z
@@ -192,7 +193,8 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
-			//std::cout  << "\n";
+			if(!children.empty())
+			std::cout <<"Soy un ogro bobo: " << position->y << std::endl;
 		}
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)
@@ -200,6 +202,14 @@ namespace LoveEngine {
 			sf.tryGetVector3("scale", *scale);
 			sf.tryGetVector4("rotation", *rotation);
 			sf.tryGetVector3("position", *position);
+			
+		}
+		void Transform::receiveComponent(int i, Component* c)
+		{
+			//setChild
+			if (i == 1) {
+				setParent(static_cast<Transform*>(c));
+			}
 		}
 	}
 }
