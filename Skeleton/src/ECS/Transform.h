@@ -51,6 +51,8 @@ namespace LoveEngine {
 			void setParent(Transform* p);
 			void addChild(Transform* c);
 			void updateChildren(int mode);
+
+			void rotateChild(int angule, float ang, Utilities::Vector3<float> posP);
 		};
 	}
 }

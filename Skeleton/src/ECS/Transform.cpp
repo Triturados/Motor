@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <StringFormatter.h>
+#include <math.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -61,33 +62,36 @@ namespace LoveEngine {
 		}
 
 		void Transform::setScale(Utilities::Vector3<float> s) {
+			updateChildren(2);
 			scale->x = s.x;
 			scale->y = s.y;
 			scale->z = s.z;
-			updateChildren(2);
 		}
 
 		void Transform::setScale(Utilities::Vector3<float> s, Utilities::Vector3<float> s2)
 		{
+			updateChildren(2);
 			scale->x *= s.x * s2.x;
 			scale->y *= s.y * s2.y;
 			scale->z *= s.z * s2.z;
-			updateChildren(2);
 		}
 
 		void Transform::translate(Utilities::Vector3<float> p) {
+			updateChildren(0);
 			position->x += p.x;
 			position->x += p.y;
 			position->z += p.z;
-			updateChildren(0);
 		}
 
 		void Transform::rotate(Utilities::Vector4<float> r) {
+			//updateChildren(1);
 			rotation->x += r.x;
+			rotateChild(1, r.x, *position);
 			rotation->y += r.y;
+			rotateChild(2, r.y, *position);
 			rotation->z += r.z;
-			rotation->w += r.w;
-			updateChildren(1);
+			rotateChild(0, r.z, *position);
+			rotation->w += r.w;//??
 		}
 
 		void Transform::detachChildren() {
@@ -117,6 +121,62 @@ namespace LoveEngine {
 					break;
 				}
 			}
+		}
+
+		void Transform::rotateChild(int modeAngule, float ang, Utilities::Vector3<float> posP)
+		{
+			if (children.empty()) return;
+
+			rotateChild(modeAngule, ang, *position);
+			float x = 0, y = 0, z = 0, dist = 0;
+			for (auto& c : children) {
+				switch (modeAngule)
+				{
+					//giro en ang z
+				case 0:
+					//posicion respecto al padre
+					x = position->x - posP.x;
+					y = position->y - posP.y;
+
+					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
+
+					position->x = dist * cos(ang);
+					position->y = dist * sin(ang);
+
+					rotation->z += ang;
+
+					break;
+					//giro en ang x
+				case 1:
+					//posicion respecto al padre
+					z = position->z - posP.z;
+					y = position->y - posP.y;
+
+					dist = std::sqrt(std::pow(z, 2) + std::pow(y, 2));
+
+					position->z = dist * cos(ang);
+					position->y = dist * sin(ang);
+
+					rotation->x += ang;
+					break;
+					//giro en ang y
+				case 2:
+					//posicion respecto al padre
+					z = position->z - posP.z;
+					x = position->x - posP.x;
+
+					dist = std::sqrt(std::pow(z, 2) + std::pow(x, 2));
+
+					position->z = dist * cos(ang);
+					position->x = dist * sin(ang);
+
+					rotation->y += ang;
+					break;
+				default:
+					break;
+				}
+			}
+			
 		}
 
 		Transform::~Transform()
