@@ -47,6 +47,7 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
+			void setMaterial(std::string materialName);
 			Ogre::Entity* getEntity();
 			~Mesh();
 		};

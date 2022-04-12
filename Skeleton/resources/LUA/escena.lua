@@ -24,7 +24,8 @@ function scene0()
         rotation: 0,0,0,0;
     ]])
 
-    local comp3 = suelo:addComponent("Mesh"):sendMsg([[
+    local comp3 = suelo:addComponent("Mesh")
+    comp3:sendMsg([[
         meshName: cube.mesh;
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
@@ -35,6 +36,9 @@ function scene0()
         restitution: 0.9;
         ]])
 
+    local material = suelo:addComponent("Material")
+    material:sendMsg([[materialName: bolaroja]])
+    material:sendComponent(0, comp3)
 
     --Camara comentada por lo del splash screen
     -- local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
@@ -122,7 +126,8 @@ function scene0()
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
-    particleSys:addComponent("ParticleSystem"):sendMsg([[particleName: bomb; emitting: true]])
+    local pSys = particleSys:addComponent("ParticleSystem")
+    pSys:sendMsg([[particleName: bomb; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
     textPrueba:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,15,-20; rotation: 0,0,0,0;]])

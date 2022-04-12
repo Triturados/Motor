@@ -95,6 +95,7 @@
     <ClCompile Include="..\..\src\ECS\GameObject.cpp" />
     <ClCompile Include="..\..\src\ECS\Image.cpp" />
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
+    <ClCompile Include="..\..\src\ECS\Material.cpp" />
     <ClCompile Include="..\..\src\ECS\Mesh.cpp" />
     <ClCompile Include="..\..\src\ECS\MouseTracker.cpp" />
     <ClCompile Include="..\..\src\ECS\ParticleSystem.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\..\src\ECS\GameObject.h" />
     <ClInclude Include="..\..\src\ECS\Image.h" />
     <ClInclude Include="..\..\src\ECS\LightComponent.h" />
+    <ClInclude Include="..\..\src\ECS\Material.h" />
     <ClInclude Include="..\..\src\ECS\Mesh.h" />
     <ClInclude Include="..\..\src\ECS\MouseTracker.h" />
     <ClInclude Include="..\..\src\ECS\ParticleSystem.h" />
