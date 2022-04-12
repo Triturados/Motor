@@ -148,7 +148,7 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> auxPos;
 
-			float x = 0, y = 0, z = 0, dist = 0, sen = 0;
+			float x = 0, y = 0, z = 0, dist = 0, angleRad = 0;
 			for (auto& c : children) {
 				c->rotateChild(modeAngule, ang, *c->position);
 				switch (modeAngule)
@@ -157,32 +157,40 @@ namespace LoveEngine {
 				case 0:
 					//posicion respecto al padre
 
-					x = c->position->x - c->parent->position->x;
-					y = c->position->y - c->parent->position->y;
+					/*x = c->localPosition->x;
+					y = c->localPosition->y;
 
 					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 					c->position = c->getParent()->getPos();
 					c->rotation->z += ang;
 					c->position->x += c->forward().x * dist;
-					c->position->y += c->forward().y * dist;
-					c->position->z += c->forward().z * dist;
+					c->position->y += c->forward().y * dist;*/
+					//c->position->z += c->forward().z * dist;
 
 					//NO SE QUE ESTOY HACIENDOOO AAAAAAAAAAAA
 
 					/*c->position->x = posP.x + (std::cos(ang) * c->localPosition->x) +(-std::sin(ang) * c->localPosition->x);
 					c->position->y = posP.y + (std::sin(ang) * c->localPosition->y) + (std::cos(ang) * c->localPosition->y);*/
 
-					/*x = c->position->x - c->parent->position->x;
-					y = c->position->y - c->parent->position->y;
+					//x = c->localPosition->x;
+					//y = c->localPosition->y;
 
-					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
+					//dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 
-					c->position->x = dist * std::cos(ang);
-					sen = std::sin(ang);
-					c->position->y = dist * std::sin(ang* std::numbers::pi / 180);
-					*/
+					//c->position->x = dist * std::cos(ang /** std::numbers::pi / 180*/);
+					//
+					//c->position->y = dist * std::sin(ang/** std::numbers::pi / 180*/);
+					//
 					//c->rotation->z += ang;
 
+					angleRad = ang * 3.141592f / 180.0f;
+					x = (c->position->x) * std::cos(ang) - (c->position->y) * std::sin(ang);
+					y = (c->position->x) * std::sin(ang) + (c->position->y) * std::cos(ang);
+					c->localPosition->x = x ;
+					c->localPosition->y = y ;
+					c->position->x = c->localPosition->x + c->getParent()->getPos()->x;
+					dist = c->getParent()->getPos()->y;
+					c->position->y = c->localPosition->y + c->getParent()->getPos()->y;
 					break;
 					//giro en ang x
 				case 1:
