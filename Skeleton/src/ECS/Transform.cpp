@@ -5,6 +5,8 @@
 #include <iostream>
 #include <StringFormatter.h>
 #include <math.h>
+#include <cmath>
+#include <numbers>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -12,6 +14,7 @@ namespace LoveEngine {
 		Transform::Transform()
 		{
 			position = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
+			localPosition = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
 			scale = new Utilities::Vector3<float>(1.0, 1.0, 1.0);
 			rotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
 			parent = nullptr;
@@ -51,18 +54,25 @@ namespace LoveEngine {
 			rotation->y = r.y;
 			rotation->z = r.z;
 			rotation->w = r.w;
-			updateChildren(1);
+			updateChildren(1, Utilities::Vector3<float>(0, 0, 0));
 		}
 
 		void Transform::setPos(Utilities::Vector3<float> p) {
 			position->x = p.x;
 			position->y = p.y;
 			position->z = p.z;
-			updateChildren(0);
+			//updateChildren(0, p);
+		}
+
+		void Transform::setLocalPos(Utilities::Vector3<float> lP)
+		{
+			localPosition->x = lP.x;
+			localPosition->y = lP.y;
+			localPosition->z = lP.z;
 		}
 
 		void Transform::setScale(Utilities::Vector3<float> s) {
-			updateChildren(2);
+			//updateChildren(2);
 			scale->x = s.x;
 			scale->y = s.y;
 			scale->z = s.z;
@@ -73,7 +83,7 @@ namespace LoveEngine {
 			scale->x *= s.x * s2.x;
 			scale->y *= s.y * s2.y;
 			scale->z *= s.z * s2.z;
-			updateChildren(2);
+			//updateChildren(2);
 		}
 
 		void Transform::translate(Utilities::Vector3<float> p) {
@@ -81,17 +91,17 @@ namespace LoveEngine {
 			position->x += p.x;
 			position->y += p.y;
 			position->z += p.z;
-			updateChildren(0);
+			updateChildren(0, p);
 		}
 
 		void Transform::rotate(Utilities::Vector4<float> r) {
 			//updateChildren(1);
 			rotation->x += r.x;
-			rotateChild(1, r.x, *position);
+			//rotateChild(1, r.x, *position);
 			rotation->y += r.y;
-			rotateChild(2, r.y, *position);
-			rotation->z += r.z;
+			//rotateChild(2, r.y, *position);
 			rotateChild(0, r.z, *position);
+			rotation->z += r.z;
 			rotation->w += r.w;//??
 		}
 
@@ -105,17 +115,19 @@ namespace LoveEngine {
 		}
 
 		void Transform::addChild(Transform* c) {
+			c->setLocalPos(*c->getPos());
 			children.push_back(c);
+			
 		}
 
-		void Transform::updateChildren(int mode)
+		void Transform::updateChildren(int mode, Utilities::Vector3<float> p)
 		{
 			if (children.empty()) return;
 
 			for (auto& c : children) {
 				switch (mode)
 				{
-				case 0: c->translate(*position); break;
+				case 0: c->translate(p); break;
 				//case 1: c->rotate(*rotation); break;
 				case 2: c->setScale(*scale, *c->scale); break;
 				default:
@@ -128,7 +140,7 @@ namespace LoveEngine {
 		{
 			if (children.empty()) return;
 
-			float x = 0, y = 0, z = 0, dist = 0;
+			float x = 0, y = 0, z = 0, dist = 0, sen = 0;
 			for (auto& c : children) {
 				c->rotateChild(modeAngule, ang, *c->position);
 				switch (modeAngule)
@@ -136,14 +148,19 @@ namespace LoveEngine {
 					//giro en ang z
 				case 0:
 					//posicion respecto al padre
-					x = c->position->x - posP.x;
-					y = c->position->y - posP.y;
+
+					c->position->x = posP.x + (std::cos(ang) * c->localPosition->x) +(-std::sin(ang) * c->localPosition->x);
+					c->position->y = posP.y + (std::sin(ang) * c->localPosition->y) + (std::cos(ang) * c->localPosition->y);
+
+					/*x = c->position->x - c->parent->position->x;
+					y = c->position->y - c->parent->position->y;
 
 					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 
-					c->position->x = dist * cos(ang);
-					c->position->y = dist * sin(ang);
-
+					c->position->x = dist * std::cos(ang);
+					sen = std::sin(ang);
+					c->position->y = dist * std::sin(ang* std::numbers::pi / 180);
+					*/
 					c->rotation->z += ang;
 
 					break;
@@ -176,6 +193,8 @@ namespace LoveEngine {
 				default:
 					break;
 				}
+
+				c->rotateChild(modeAngule, ang, *position);
 			}
 			
 		}
@@ -202,6 +221,7 @@ namespace LoveEngine {
 			sf.tryGetVector3("scale", *scale);
 			sf.tryGetVector4("rotation", *rotation);
 			sf.tryGetVector3("position", *position);
+			//sf.tryGetVector3("position", *localPosition);
 			
 		}
 		void Transform::receiveComponent(int i, Component* c)

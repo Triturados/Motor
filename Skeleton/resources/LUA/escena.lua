@@ -125,7 +125,7 @@ function scene0()
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
         scale: 2,2,2;
-        position: 0,11,0;
+        position: 0,10,0;
         rotation: 0,0,0,0;
     ]])
     local mesh = player:addComponent("Mesh")
