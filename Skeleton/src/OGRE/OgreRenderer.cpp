@@ -338,45 +338,53 @@ namespace LoveEngine {
 			panel->setMetricsMode(Ogre::GMM_PIXELS);
 			panel->setPosition(0, 0);
 			panel->setDimensions(1.0f, 1.0f);
-			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY" + initForText);
+			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
 			o->add2D(panel);
 
-			std::string szElement = "element_" + initForText;
-			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY" + initForText);
+			int num = 0;
+			std::string szElement = "element_"+typeName;
+			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY");
 			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
 			panel->addChild(textArea);
 			overlay->show();
 
+
 			return textArea;
 
 		}
 
-		void OgreRenderer::destroyText()
+		void OgreRenderer::destroyText(std::string elemName)
 		{
-			std::string szElement = "element_" + initForText;
+			std::string szElement = "element_" + elemName;
 			overlayManager->destroyOverlayElement(szElement);
 			--(initForText);
 			if (initForText == 0)
 			{
 				//Destruimos los dos elementos que componenel texto 
 				overlayManager->destroyOverlayElement("GUI");
-				overlayManager->destroy("GUI_OVERLAY" + initForText);
+				overlayManager->destroy("GUI_OVERLAY" + elemName);
 			}
 			
 		}
 
-		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea)
+		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea,float charHeight)
 		{
+			tArea->setCaption(info);
+			tArea->setDimensions(width,height);
+			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
+			//tArea->setFontName("Arial");
+			tArea->setCharHeight(charHeight);
 		}
 
 		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
 		{
+			tArea->setPosition(x, y);
 		}
 
 		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)
 		{
-
+			tArea->setColour(Ogre::ColourValue(R, G, B, I));
 		}
 
 

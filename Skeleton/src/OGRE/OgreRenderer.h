@@ -91,9 +91,9 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
 
 			void disableOverlay(Ogre::Overlay*);
-			Ogre::TextAreaOverlayElement* createOverlayElement( std::string typeName);
-			void destroyText();
-			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea);
+			Ogre::TextAreaOverlayElement* createOverlayElement(std::string typeName);
+			void destroyText(std::string textName);
+			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea,float charHeight);
 			void setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea);
 			void setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea);
 			~OgreRenderer();

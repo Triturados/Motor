@@ -124,6 +124,20 @@ function scene0()
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
     particleSys:addComponent("ParticleSystem"):sendMsg([[particleName: bomb; emitting: true]])
 
+    local textPrueba = scene:createObject("TextoPrueba")
+    textPrueba:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,15,-20; rotation: 0,0,0,0;]])
+    textPrueba:addComponent("Text"):sendMsg([[
+        typeName: pruebaTexto
+        textContent: Esto es un texto de prueba
+        red: 0.6
+        green: 0.7
+        blue: 0.7
+        isis: 0.0
+        width: 100
+        height: 100
+        charHeight:0.8
+        ]])
+
 end
 
 
