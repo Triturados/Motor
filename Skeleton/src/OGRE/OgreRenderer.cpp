@@ -396,6 +396,8 @@ namespace LoveEngine {
 			// Destroy the RT Shader System.
 			destroyRTShaderSystem();
 			mWindow->destroy();
+			delete overlaySystem;
+			overlayManager = nullptr;
 
 			if (mRoot)
 			{
