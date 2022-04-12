@@ -106,6 +106,20 @@ function scene0()
         name: luz_direccional
         type: directional
     ]])
+----------hijo ogro
+    local bolaHijaJug = scene:createObject("BolaHija")
+    local compTrBolaHijaJug = bolaHijaJug:addComponent('Transform')
+        
+    bolaHijaJug:sendMsg([[
+        scale: 2,2,2;
+        position: 10,10,0;
+        rotation: 0,0,0,0;
+    ]])
+    local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+--------------
+
 
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
@@ -123,6 +137,10 @@ function scene0()
 
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
+
+    --haciendo hijo bola (no funca aun)
+    -- compTrBolaHijaJug:sendComponent(1, tr)
+
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
