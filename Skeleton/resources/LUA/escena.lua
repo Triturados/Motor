@@ -110,7 +110,7 @@ function scene0()
     local bolaHijaJug = scene:createObject("BolaHija")
     local compTrBolaHijaJug = bolaHijaJug:addComponent('Transform')
         
-    bolaHijaJug:sendMsg([[
+    compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
         position: 10,10,0;
         rotation: 0,0,0,0;
@@ -139,7 +139,7 @@ function scene0()
     animation:sendMsg([[animName: Dance]])
 
     --haciendo hijo bola (no funca aun)
-    -- compTrBolaHijaJug:sendComponent(1, tr)
+    compTrBolaHijaJug:sendComponent(1, tr)
 
 
     local particleSys = scene:createObject("Bomba")

@@ -136,42 +136,42 @@ namespace LoveEngine {
 					//giro en ang z
 				case 0:
 					//posicion respecto al padre
-					x = position->x - posP.x;
-					y = position->y - posP.y;
+					x = c->position->x - posP.x;
+					y = c->position->y - posP.y;
 
 					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 
-					position->x = dist * cos(ang);
-					position->y = dist * sin(ang);
+					c->position->x = dist * cos(ang);
+					c->position->y = dist * sin(ang);
 
-					rotation->z += ang;
+					c->rotation->z += ang;
 
 					break;
 					//giro en ang x
 				case 1:
 					//posicion respecto al padre
-					z = position->z - posP.z;
-					y = position->y - posP.y;
+					z = c->position->z - posP.z;
+					y = c->position->y - posP.y;
 
 					dist = std::sqrt(std::pow(z, 2) + std::pow(y, 2));
 
-					position->z = dist * cos(ang);
-					position->y = dist * sin(ang);
+					c->position->z = dist * cos(ang);
+					c->position->y = dist * sin(ang);
 
-					rotation->x += ang;
+					c->rotation->x += ang;
 					break;
 					//giro en ang y
 				case 2:
 					//posicion respecto al padre
-					z = position->z - posP.z;
-					x = position->x - posP.x;
+					z = c->position->z - posP.z;
+					x = c->position->x - posP.x;
 
 					dist = std::sqrt(std::pow(z, 2) + std::pow(x, 2));
 
-					position->z = dist * cos(ang);
-					position->x = dist * sin(ang);
+					c->position->z = dist * cos(ang);
+					c->position->x = dist * sin(ang);
 
-					rotation->y += ang;
+					c->rotation->y += ang;
 					break;
 				default:
 					break;
