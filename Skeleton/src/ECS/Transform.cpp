@@ -130,7 +130,7 @@ namespace LoveEngine {
 
 			float x = 0, y = 0, z = 0, dist = 0;
 			for (auto& c : children) {
-				c->rotateChild(modeAngule, ang, *position);
+				c->rotateChild(modeAngule, ang, *c->position);
 				switch (modeAngule)
 				{
 					//giro en ang z
