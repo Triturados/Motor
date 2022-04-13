@@ -65,6 +65,20 @@ namespace LoveEngine {
             void activeUpdate() final;
         };
 
+        class Chase : public Action
+        {
+        public:
+            Chase(Agent* agent_);
+            void setTarget(Transform* t);
+            void activeUpdate() final;
+        protected:
+            float maxVel = 10;
+            float acc = 10;
+            RigidBody* rb = nullptr;
+            Transform* target = nullptr;
+            Transform* tr = nullptr;
+        };
+
         class Leap : public Action
         {
         public:

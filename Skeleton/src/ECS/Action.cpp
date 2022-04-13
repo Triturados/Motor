@@ -63,6 +63,25 @@ namespace LoveEngine {
 
         void Idle::activeUpdate() { std::cout << "Idle\n"; }
 
+        Chase::Chase(Agent* agent_) : Action(agent_, 0.0) { };
+
+        void Chase::setTarget(Transform* t)
+        {
+            target = t;
+        }
+
+        void Chase::activeUpdate()
+        {
+            if ((*(rb->getVelocity())).magnitude() < maxVel)
+            {
+                Utilities::Vector3<float> targetPos = *(target->getPos());
+                Utilities::Vector3<float> pos = *(tr->getPos());
+                
+                rb->addForce((targetPos - pos).getNormalized() * acc * rb->getMass(), Utilities::Vector3<float>(0, 0, 0), (int)ForceMode::ACCELERATION);
+                //lookat target
+            }
+        }
+
         Leap::Leap(Agent* agent_) : Action(agent)
         {
             rb = agent->gameObject->getComponent<RigidBody>();
