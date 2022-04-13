@@ -35,9 +35,29 @@ namespace LoveEngine {
         }
 #pragma region ExampleActions
 
-        MeleeAttack::MeleeAttack(Agent* agent_) : Action(agent_, 10.0) { increasePrioOverTime = 1.0; }
+        MeleeAttack::MeleeAttack(Agent* agent_) : Action(agent_, 10.0) { increasePrioOverTime = 10.0; };
 
-        void MeleeAttack::onActionStart() { std::cout << "\n\n\n\n\n\n\nAttacking at melee\n\n\n\n\n\n\n\n"; setPriority(10.0); }
+        void MeleeAttack::setTarget(Transform* t)
+        {
+            target = t;
+        }
+
+        bool MeleeAttack::conditionsFulfilled() const
+        {
+            return (*(target->getPos()) - *(tr->getPos())).magnitude() < 10;
+        }
+
+        void MeleeAttack::onActionStart() 
+        { 
+            //start animation
+            std::cout << "\n\n\n\n\n\n\nAttacking at melee\n\n\n\n\n\n\n\n"; 
+            setPriority(30.0); 
+        }
+
+        void MeleeAttack::activeUpdate()
+        {
+            //lookat target
+        }
 
         Idle::Idle(Agent* agent_) : Action(agent_, 8.0) { actionComplete = true; }
 

@@ -42,36 +42,41 @@ namespace LoveEngine {
             float priority;
         };
 
+        class RigidBody;
+        class Transform;
         class MeleeAttack : public Action
         {
         public:
             MeleeAttack(Agent* agent_);
-        protected:
+            void setTarget(Transform* t);
+            bool conditionsFulfilled() const final;
             void onActionStart() final;
+            void activeUpdate() final;
+        protected:
+            RigidBody* rb;
+            Transform* target = nullptr;
+            Transform* tr = nullptr;
         };
 
         class Idle : public Action
         {
         public:
             Idle(Agent* agent_);
-        protected:
             void activeUpdate() final;
         };
 
-        class RigidBody;
-        class Transform;
         class Leap : public Action
         {
         public:
             Leap(Agent* agent_);
             void setTarget(Transform* t);
+            bool conditionsFulfilled() const final;
+            void onActionStart() final;
+            void activeUpdate() final;
         protected:
             RigidBody* rb;
             Transform* target = nullptr;
             Transform* tr = nullptr;
-            bool conditionsFulfilled() const final;
-            void onActionStart() final;
-            void activeUpdate() final;
         };
 	}
 }
