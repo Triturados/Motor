@@ -57,5 +57,21 @@ namespace LoveEngine {
         protected:
             void activeUpdate() final;
         };
+
+        class RigidBody;
+        class Transform;
+        class Leap : public Action
+        {
+        public:
+            Leap(Agent* agent_);
+            void setTarget(Transform* t);
+        protected:
+            RigidBody* rb;
+            Transform* target = nullptr;
+            Transform* tr = nullptr;
+            bool conditionsFulfilled() const final;
+            void onActionStart() final;
+            void activeUpdate() final;
+        };
 	}
 }

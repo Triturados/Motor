@@ -7,7 +7,7 @@
 namespace LoveEngine {
 	namespace ECS {
         class Action;
-		class lovexport Agent : public Component
+		class lovexport Agent : public ComponentTemplate<Agent>
 		{
         public:
             Agent();
