@@ -54,14 +54,16 @@ namespace LoveEngine {
 
 			initRoot();
 
+			overlaySystem = new Ogre::OverlaySystem();
+			overlayManager = Ogre::OverlayManager::getSingletonPtr();
+
 			initOgreWithSDL();
 			//mWindow = mRoot->initialise(true, "Juego");
 
 			loadResources();
 			setupScenes();
 			Singleton::addElement(this, Singleton::positions::Renderer);
-			overlaySystem = new Ogre::OverlaySystem();
-			overlayManager = Ogre::OverlayManager::getSingletonPtr();
+
 			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();
 			numOfImages = 0;
