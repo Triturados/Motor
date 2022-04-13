@@ -169,5 +169,11 @@ namespace LoveEngine {
 		{
 			rigidBody->setLinearVelocity(cvt(vel));
 		}
+
+		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
+		{
+			auto vel = rigidBody->getLinearVelocity();
+			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
+		}
 	}
 }
