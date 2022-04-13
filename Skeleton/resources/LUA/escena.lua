@@ -112,7 +112,7 @@ function scene0()
         
     compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
-        position: 10,10,0;
+        position: 0,0,0;
         rotation: 0,0,0,0;
     ]])
     local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
@@ -120,6 +120,21 @@ function scene0()
     ]])
 --------------
 
+----------bola hijo ogro "cam"
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+        
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 25,15,25;
+        rotation: 0,0,0,0;
+    ]])
+    local compcam = cam:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+
+    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
+--------------
 
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
@@ -140,7 +155,9 @@ function scene0()
 
     --haciendo hijo bola (no funca aun)
     compTrBolaHijaJug:sendComponent(1, tr)
-
+    --haciendo hijo del hijo del player a la  "cam"
+    trcam:sendComponent(1, compTrBolaHijaJug)
+    --Metiendo compoennte rotar Camara
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
