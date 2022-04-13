@@ -16,8 +16,10 @@ namespace LoveEngine {
 
 		void ParticleSystem::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			particleName = sf.getString("particleName");
-			emitting = sf.getBool("emitting");
+			sf.tryGetString("particleName", particleName);
+
+			bool isEmit;
+			if(sf.tryGetBool("emitting", isEmit)) emitting = isEmit;
 		}
 
 		void ParticleSystem::setActive(bool activated)
@@ -29,6 +31,11 @@ namespace LoveEngine {
 		bool ParticleSystem::isEmitting()
 		{
 			return emitting;
+		}
+
+		void ParticleSystem::setMaterial(std::string materialName)
+		{
+			pSys->setMaterialName(materialName);
 		}
 
 		void ParticleSystem::init() {

@@ -34,6 +34,7 @@ namespace LoveEngine {
 
 			void update() override;
 			void receiveMessage(Utilities::StringFormatter& s) override;
+			void receiveComponent(int i, Component* c) override;
 
 			Utilities::Vector3<float>* getPos();
 			Utilities::Vector4<float>* getRot();
@@ -43,14 +44,18 @@ namespace LoveEngine {
 
 			void setRot(Utilities::Vector4<float> r);
 			void setPos(Utilities::Vector3<float> p);
+			void setLocalPos(Utilities::Vector3<float> lP);
 			void setScale(Utilities::Vector3<float> s);
 			void translate(Utilities::Vector3<float> p);
 			void rotate(Utilities::Vector4<float> r);
 			void detachChildren();
 
 			void setParent(Transform* p);
+			Transform* getParent();
 			void addChild(Transform* c);
-			void updateChildren(int mode);
+			void updateChildren(int mode, Utilities::Vector3<float> p);
+
+			void rotateChild(int angule, float ang, Utilities::Vector3<float> posP);
 		};
 	}
 }

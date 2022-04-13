@@ -24,7 +24,8 @@ function scene0()
         rotation: 0,0,0,0;
     ]])
 
-    local comp3 = suelo:addComponent("Mesh"):sendMsg([[
+    local comp3 = suelo:addComponent("Mesh")
+    comp3:sendMsg([[
         meshName: cube.mesh;
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
@@ -35,6 +36,9 @@ function scene0()
         restitution: 0.9;
         ]])
 
+    local material = suelo:addComponent("Material")
+    material:sendMsg([[materialName: bolaroja]])
+    material:sendComponent(0, comp3)
 
     --Camara comentada por lo del splash screen
     -- local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
@@ -102,12 +106,41 @@ function scene0()
         name: luz_direccional
         type: directional
     ]])
+----------hijo ogro
+    local bolaHijaJug = scene:createObject("BolaHija")
+    local compTrBolaHijaJug = bolaHijaJug:addComponent('Transform')
+        
+    compTrBolaHijaJug:sendMsg([[
+        scale: 2,2,2;
+        position: 0,0,0;
+        rotation: 0,0,0,0;
+    ]])
+    local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+--------------
+
+----------bola hijo ogro "cam"
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+        
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 25,15,25;
+        rotation: 0,0,0,0;
+    ]])
+    local compcam = cam:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+
+    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
+--------------
 
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
         scale: 2,2,2;
-        position: 0,11,0;
+        position: 0,10,0;
         rotation: 0,0,0,0;
     ]])
     local mesh = player:addComponent("Mesh")
@@ -120,9 +153,30 @@ function scene0()
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
 
+    --haciendo hijo bola (no funca aun)
+    compTrBolaHijaJug:sendComponent(1, tr)
+    --haciendo hijo del hijo del player a la  "cam"
+    trcam:sendComponent(1, compTrBolaHijaJug)
+    --Metiendo compoennte rotar Camara
+
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
-    particleSys:addComponent("ParticleSystem"):sendMsg([[particleName: bomb; emitting: true]])
+    local pSys = particleSys:addComponent("ParticleSystem")
+    pSys:sendMsg([[particleName: bomb; emitting: true]])
+
+    local textPrueba = scene:createObject("TextoPrueba")
+    textPrueba:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,0; rotation: 0,0,0,0;]])
+    textPrueba:addComponent("Text"):sendMsg([[
+        typeName: pruebaTexto
+        textContent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        red:1.0
+        green: 1.0
+        blue: 0.0
+        isis: 0.0
+        width: 200000
+        height: 200000
+        charHeight:0.5
+        ]])
 
 end
 
@@ -167,16 +221,3 @@ function scene2()
 
     -- local comp4 = suelo:addComponent("Rigidbody")
 end
-
--- function scene2()
---     scene::name("Calvo cabron")
---     -- local suelo = scene:createObject("Suelo")
---     -- local comp = suelo:addComponent("EscribirNumero")
---     -- local comp2 = suelo:addComponent("Transform")
-    
---     -- local comp3 = suelo:addComponent("Mesh"):sendMsg([[
---     --     meshName: cube.mesh
---     -- ]])
---     -- local comp4 = suelo:addComponent("Rigidbody")
---     comp4:
--- end

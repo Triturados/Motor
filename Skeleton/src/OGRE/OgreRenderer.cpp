@@ -54,14 +54,16 @@ namespace LoveEngine {
 
 			initRoot();
 
+			overlaySystem = new Ogre::OverlaySystem();
+			overlayManager = Ogre::OverlayManager::getSingletonPtr();
+
 			initOgreWithSDL();
 			//mWindow = mRoot->initialise(true, "Juego");
 
 			loadResources();
 			setupScenes();
 			Singleton::addElement(this, Singleton::positions::Renderer);
-			overlaySystem = new Ogre::OverlaySystem();
-			overlayManager = Ogre::OverlayManager::getSingletonPtr();
+
 			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();
 			numOfImages = 0;
@@ -336,47 +338,54 @@ namespace LoveEngine {
 			//WithoutChild
 			Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
 			panel->setMetricsMode(Ogre::GMM_PIXELS);
-			panel->setPosition(0, 0);
-			panel->setDimensions(1.0f, 1.0f);
-			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY" + initForText);
+			panel->setPosition(5.0, 15.0);
+			panel->setDimensions(3.0f, 3.0f);
+			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
 			o->add2D(panel);
 
-			std::string szElement = "element_" + initForText;
-			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY" + initForText);
+		
+			std::string szElement = "element_" + typeName;
+			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY");
 			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
 			panel->addChild(textArea);
 			overlay->show();
+			textArea->show();
+
 
 			return textArea;
 
 		}
 
-		void OgreRenderer::destroyText()
+		void OgreRenderer::destroyText(std::string elemName)
 		{
-			std::string szElement = "element_" + initForText;
+			std::string szElement = "element_" + elemName;
 			overlayManager->destroyOverlayElement(szElement);
-			--(initForText);
-			if (initForText == 0)
-			{
-				//Destruimos los dos elementos que componenel texto 
-				overlayManager->destroyOverlayElement("GUI");
-				overlayManager->destroy("GUI_OVERLAY" + initForText);
-			}
-			
+
+			//Destruimos los dos elementos que componenel texto 
+			overlayManager->destroyOverlayElement("GUI");
+			overlayManager->destroy("GUI_OVERLAY" + elemName);
+
+
 		}
 
-		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea)
+		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea, float charHeight)
 		{
+			tArea->setCaption(info);
+			tArea->setDimensions(1.0, 1.0);
+			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
+			tArea->setFontName("arial");
+			tArea->setCharHeight(charHeight);
 		}
 
 		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
 		{
+			tArea->setPosition(x, y);
 		}
 
 		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)
 		{
-
+			tArea->setColour(Ogre::ColourValue(R, G, B, I));
 		}
 
 
@@ -388,6 +397,8 @@ namespace LoveEngine {
 			// Destroy the RT Shader System.
 			destroyRTShaderSystem();
 			mWindow->destroy();
+			delete overlaySystem;
+			overlayManager = nullptr;
 
 			if (mRoot)
 			{
