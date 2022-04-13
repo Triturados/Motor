@@ -120,8 +120,15 @@ namespace LoveEngine {
 			return parent;
 		}
 
+		Transform* Transform::getFirstParent()
+		{
+			if (parent == nullptr) return this;
+			else parent->getFirstParent();
+		}
+
 		void Transform::addChild(Transform* c) {
-			c->setLocalPos(*c->getPos());
+			Utilities::Vector3<float> aux = *c->getPos() - *position;
+			c->setLocalPos(aux);
 			children.push_back(c);
 			
 		}
@@ -150,7 +157,7 @@ namespace LoveEngine {
 
 			float x = 0, y = 0, z = 0, dist = 0, angleRad = 0;
 			for (auto& c : children) {
-				c->rotateChild(modeAngule, ang, *c->position);
+				c->rotateChild(modeAngule, ang, posP);
 				switch (modeAngule)
 				{
 					//giro en ang z
@@ -192,8 +199,8 @@ namespace LoveEngine {
 
 					c->localPosition->x = x ;
 					c->localPosition->y = y ;
-					c->position->x = c->localPosition->x + position->x;
-					c->position->y = c->localPosition->y + position->y;
+					c->position->x = c->localPosition->x + posP.x;
+					c->position->y = c->localPosition->y + posP.y;
 					c->rotation->z += ang;
 					break;
 					//giro en ang x
@@ -207,8 +214,8 @@ namespace LoveEngine {
 
 					c->localPosition->z = z;
 					c->localPosition->x = x;
-					c->position->x = c->localPosition->x + position->x;
-					c->position->z = c->localPosition->z + position->z;
+					c->position->x = c->localPosition->x + posP.x;
+					c->position->z = c->localPosition->z + posP.z;
 					c->rotation->y += ang;
 
 
@@ -232,15 +239,15 @@ namespace LoveEngine {
 
 					c->localPosition->z = z;
 					c->localPosition->y = y;
-					c->position->y = c->localPosition->y + position->y;
-					c->position->z = c->localPosition->z + position->z;
+					c->position->y = c->localPosition->y + posP.y;
+					c->position->z = c->localPosition->z + posP.z;
 					c->rotation->x += ang;
 					break;
 				default:
 					break;
 				}
 
-				c->rotateChild(modeAngule, ang, *position);
+				//c->rotateChild(modeAngule, ang, *position);
 			}
 			
 		}
