@@ -112,7 +112,7 @@ function scene0()
         
     compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
-        position: 0,0,0;
+        position: 0,10,0;
         rotation: 0,0,0,0;
     ]])
     local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
