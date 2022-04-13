@@ -161,8 +161,8 @@ function scene0()
 
     --Metiendo componente rotar Camara
     rotarcam:sendMsg([[
-        verSens: 1.5
-        horiSens: 1.5
+        verSens: 3.5
+        horiSens: 3.5
     ]])
 
     rotarcam:sendGameObject(0, bola)
