@@ -338,18 +338,19 @@ namespace LoveEngine {
 			//WithoutChild
 			Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
 			panel->setMetricsMode(Ogre::GMM_PIXELS);
-			panel->setPosition(0, 0);
-			panel->setDimensions(1.0f, 1.0f);
+			panel->setPosition(5.0, 15.0);
+			panel->setDimensions(3.0f, 3.0f);
 			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
 			o->add2D(panel);
 
-			int num = 0;
-			std::string szElement = "element_"+typeName;
+		
+			std::string szElement = "element_" + typeName;
 			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY");
 			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
 			panel->addChild(textArea);
 			overlay->show();
+			textArea->show();
 
 
 			return textArea;
@@ -360,20 +361,18 @@ namespace LoveEngine {
 		{
 			std::string szElement = "element_" + elemName;
 			overlayManager->destroyOverlayElement(szElement);
-			--(initForText);
-			if (initForText == 0)
-			{
-				//Destruimos los dos elementos que componenel texto 
-				overlayManager->destroyOverlayElement("GUI");
-				overlayManager->destroy("GUI_OVERLAY" + elemName);
-			}
-			
+
+			//Destruimos los dos elementos que componenel texto 
+			overlayManager->destroyOverlayElement("GUI");
+			overlayManager->destroy("GUI_OVERLAY" + elemName);
+
+
 		}
 
-		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea,float charHeight)
+		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea, float charHeight)
 		{
 			tArea->setCaption(info);
-			tArea->setDimensions(width,height);
+			tArea->setDimensions(1.0, 1.0);
 			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
 			tArea->setFontName("arial");
 			tArea->setCharHeight(charHeight);
