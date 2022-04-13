@@ -96,6 +96,17 @@ namespace LoveEngine {
 				z = z / magnitud;
 			}
 
+			Vector3<T> getNormalized() //recibir vector normalizado
+			{
+				T magnitud = magnitude();
+
+				float x_, y_, z_;
+				x_ = x / magnitud;
+				y_ = y / magnitud;
+				z_ = z / magnitud;
+				return Vector3<T>(x_, y_, z_);
+			}
+
 			T scalarProduct(Vector3<T> b)
 			{
 				int x_ = x * b.x;
