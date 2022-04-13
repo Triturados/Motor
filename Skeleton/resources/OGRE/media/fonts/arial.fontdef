@@ -1,0 +1,5 @@
+arial
+{
+    type truetype
+    source arial.ttf
+}
