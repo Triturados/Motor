@@ -375,7 +375,7 @@ namespace LoveEngine {
 			tArea->setCaption(info);
 			tArea->setDimensions(width,height);
 			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
-			//tArea->setFontName("arial");
+			tArea->setFontName("arial");
 			tArea->setCharHeight(charHeight);
 		}
 
