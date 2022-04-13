@@ -69,6 +69,10 @@ namespace LoveEngine {
 			void setShape(std::string nameF_);
 
 			void setLinearVelocity(Utilities::Vector3<float> vel);
+
+			inline float getMass() const noexcept { return mass; };
+			Utilities::Vector3<float>* getVelocity() const noexcept;
+			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };
 		};
 	};
 
