@@ -97,11 +97,11 @@ namespace LoveEngine {
 
 		void Transform::rotate(Utilities::Vector4<float> r) {
 			//updateChildren(1);
+			rotateChild(2, r.x, *position);
 			rotation->x += r.x;
-			//rotateChild(1, r.x, *position);
+			rotateChild(1, r.y, *position);
 			rotation->y += r.y;
-			//rotateChild(2, r.y, *position);
-			//rotateChild(0, r.z, *position);
+			rotateChild(0, r.z, *position);
 			rotation->z += r.z;
 			rotation->w += r.w;//??
 		}
@@ -184,18 +184,35 @@ namespace LoveEngine {
 					//c->rotation->z += ang;
 
 					angleRad = ang * 3.141592f / 180.0f;
-					x = (c->position->x) * std::cos(ang) - (c->position->y) * std::sin(ang);
-					y = (c->position->x) * std::sin(ang) + (c->position->y) * std::cos(ang);
+
+					x = ((c->localPosition->x) * std::cos(ang) - (c->localPosition->y) * std::sin(ang));
+					y = ((c->localPosition->x) * std::sin(ang) + (c->localPosition->y) * std::cos(ang));
+
+					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
+
 					c->localPosition->x = x ;
 					c->localPosition->y = y ;
-					c->position->x = c->localPosition->x + c->getParent()->getPos()->x;
-					dist = c->getParent()->getPos()->y;
-					c->position->y = c->localPosition->y + c->getParent()->getPos()->y;
+					c->position->x = c->localPosition->x + position->x;
+					c->position->y = c->localPosition->y + position->y;
+					c->rotation->z += ang;
 					break;
 					//giro en ang x
 				case 1:
 					//posicion respecto al padre
-					z = c->position->z - posP.z;
+
+					z = ((c->localPosition->z) * std::cos(ang) - (c->localPosition->x) * std::sin(ang));
+					x = ((c->localPosition->z) * std::sin(ang) + (c->localPosition->x) * std::cos(ang));
+
+					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
+
+					c->localPosition->z = z;
+					c->localPosition->x = x;
+					c->position->x = c->localPosition->x + position->x;
+					c->position->z = c->localPosition->z + position->z;
+					c->rotation->y += ang;
+
+
+					/*z = c->position->z - posP.z;
 					y = c->position->y - posP.y;
 
 					dist = std::sqrt(std::pow(z, 2) + std::pow(y, 2));
@@ -203,20 +220,21 @@ namespace LoveEngine {
 					c->position->z = dist * cos(ang);
 					c->position->y = dist * sin(ang);
 
-					c->rotation->x += ang;
+					c->rotation->x += ang;*/
 					break;
 					//giro en ang y
 				case 2:
 					//posicion respecto al padre
-					z = c->position->z - posP.z;
-					x = c->position->x - posP.x;
+					y = ((c->localPosition->y) * std::cos(ang) - (c->localPosition->z) * std::sin(ang));
+					z = ((c->localPosition->y) * std::sin(ang) + (c->localPosition->z) * std::cos(ang));
 
-					dist = std::sqrt(std::pow(z, 2) + std::pow(x, 2));
+					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
 
-					c->position->z = dist * cos(ang);
-					c->position->x = dist * sin(ang);
-
-					c->rotation->y += ang;
+					c->localPosition->z = z;
+					c->localPosition->y = y;
+					c->position->y = c->localPosition->y + position->y;
+					c->position->z = c->localPosition->z + position->z;
+					c->rotation->x += ang;
 					break;
 				default:
 					break;
