@@ -71,6 +71,8 @@ function scene0()
         restitution: 1.0;
 
     ]])
+    ---prueba deteccion colisiones
+    --compRigidbody:sendComponent(1, compRigidbodySuelo)
 
     local bolaPesada = scene:createObject("BolaPesada")
     local compBolaPesada = bolaPesada:addComponent('Transform')
