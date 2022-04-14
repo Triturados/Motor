@@ -19,6 +19,16 @@
 #include "GameObject.h"
 #include "Collider.h"
 
+inline void callFinish(btPersistentManifold* const& manifold) {
+	
+	std::cout << "salgoCollision" << std::endl;
+}
+
+inline void callStart(btPersistentManifold* const& manifold) {
+	std::cout << "entroCollision" << std::endl;
+}
+
+
 namespace LoveEngine {
 	namespace ECS {
 
@@ -104,6 +114,9 @@ namespace LoveEngine {
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
 			rigidBody->setUserPointer((void*)col);
+
+			//gContactEndedCallback = callFinish;
+			//gContactStartedCallback = callStart;
 		}
 
 		void RigidBody::update()

@@ -27,7 +27,7 @@ namespace LoveEngine {
 		template <typename T>
 		class Vector3;
 	}
-
+	
 
 	namespace Physics {
 		class Collider;
@@ -37,7 +37,7 @@ namespace LoveEngine {
 		};
 
 		class lovexport PhysicsManager {
-
+			friend class RigidBody;
 		private:
 			static PhysicsManager* instance_;
 

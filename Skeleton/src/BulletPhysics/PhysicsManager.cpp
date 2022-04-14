@@ -9,6 +9,7 @@
 #include "Vector3.h"
 #include "DebugDrawer.h"
 #include "Collider.h"
+#include "RigidBody.h"
 
 inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
 	int partId1, int index1)
@@ -18,8 +19,7 @@ inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* co
 }
 
 inline void callFinish(btPersistentManifold* const& manifold) {
-
-	
+	manifold->getBody0();
 	std::cout << "salgoCollision" << std::endl;
 }
 
@@ -138,8 +138,8 @@ namespace LoveEngine {
 
 			//gContactAddedCallback
 			//gContactAddedCallback = callbackFunc;
-			gContactStartedCallback = callStart;
-			gContactEndedCallback = callFinish;
+			//gContactStartedCallback = callStart;
+			//gContactEndedCallback = callFinish;
 
 			collisiones = new std::vector<collisionObj>();
 			//gContactEndedCallback = 
@@ -176,7 +176,7 @@ namespace LoveEngine {
 
 			//physicsFrameRate = 1 / 60;
 			dynamicsWorld->stepSimulation(1.f / 60.f, 10);
-
+			checkCollision();
 
 #ifdef _DEBUG
 			dynamicsWorld->stepSimulation(physicsFrameRate);
@@ -187,7 +187,7 @@ namespace LoveEngine {
 		}
 
 		void PhysicsManager::fixedUpdate(float deltaTime) {
-
+			//checkCollision();
 			dynamicsWorld->stepSimulation(deltaTime);
 		}
 
