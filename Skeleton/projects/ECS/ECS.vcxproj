@@ -107,6 +107,7 @@
     <ClCompile Include="..\..\src\ECS\SceneFactory.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneManager.cpp" />
     <ClCompile Include="..\..\src\ECS\SceneUtils.cpp" />
+    <ClCompile Include="..\..\src\ECS\Slider.cpp" />
     <ClCompile Include="..\..\src\ECS\Sound.cpp" />
     <ClCompile Include="..\..\src\ECS\Text.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="..\..\src\ECS\SceneFactory.h" />
     <ClInclude Include="..\..\src\ECS\SceneManager.h" />
     <ClInclude Include="..\..\src\ECS\SceneUtils.h" />
+    <ClInclude Include="..\..\src\ECS\Slider.h" />
     <ClInclude Include="..\..\src\ECS\Sound.h" />
     <ClInclude Include="..\..\src\ECS\Text.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />

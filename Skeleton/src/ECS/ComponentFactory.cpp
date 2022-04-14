@@ -15,6 +15,7 @@
 #include <Text.h>
 #include <Material.h>
 #include <Agent.h>
+#include <Slider.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -63,6 +64,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Text>("Text"));
 			registerComponent(new ComponentCreatorTemplate<Material>("Material"));
 			registerComponent(new ComponentCreatorTemplate<Agent>("Agent"));
+			registerComponent(new ComponentCreatorTemplate<Slider>("Slider"));
 		}
 
 

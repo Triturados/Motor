@@ -66,7 +66,7 @@ namespace LoveEngine {
 
 			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();
-			numOfImages = 0;
+			numOfImages = numOverlays = 0;
 		}
 
 		/// <summary>
@@ -305,26 +305,39 @@ namespace LoveEngine {
 		/// </summary>
 		Ogre::OverlayContainer* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay)
 		{
-			// Elemento que contendra el overlay
-			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
-				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
-			container->setMetricsMode(Ogre::GMM_PIXELS);
-			container->setPosition(x, y);
-			container->setDimensions(w, h);
-
+			
+			Ogre::OverlayContainer* container = createContainer(x, y, w, h);
 			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
 			container->setMaterialName(material);
-
+			
 			// El overlay, que gestiona la poscion, rotacion...
-			overlay = overlayManager->create("Image" + std::to_string(numOfImages));
+			overlay = createOverlay();
 			overlay->add2D(container);
 
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 
 			// Mostrar el overlay
 			overlay->show();
+			return container;
+		}
+
+		Ogre::OverlayContainer* OgreRenderer::createContainer(int x, int y, int w, int h)
+		{
+			// Elemento que contendra el overlay
+			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
+				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
+			container->setMetricsMode(Ogre::GMM_PIXELS);
+			container->setPosition(x, y);
+			container->setDimensions(w, h);
 			numOfImages++;
 			return container;
+		}
+
+		Ogre::Overlay* OgreRenderer::createOverlay()
+		{
+			Ogre::Overlay* overlay = overlayManager->create("Overlay" + std::to_string(numOverlays));
+			numOverlays++;
+			return overlay;
 		}
 
 		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)

@@ -53,7 +53,7 @@ namespace LoveEngine {
 			Ogre::RTShader::ShaderGenerator* mShaderGenerator;
 			Ogre::MaterialManager::Listener* mMaterialMgrListener;
 
-			int numOfImages;
+			int numOfImages, numOverlays;
 			Ogre::OverlaySystem* overlaySystem;
 			Ogre::OverlayManager* overlayManager;
 
@@ -89,6 +89,8 @@ namespace LoveEngine {
 
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
 			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
+			Ogre::OverlayContainer* createContainer(int x, int y, int w, int h);
+			Ogre::Overlay* createOverlay();
 
 			void disableOverlay(Ogre::Overlay*);
 			Ogre::TextAreaOverlayElement* createOverlayElement(std::string typeName);
