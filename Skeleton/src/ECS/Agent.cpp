@@ -18,6 +18,7 @@ namespace LoveEngine {
         {
             actions.push_back(new Idle(this));
             actions.push_back(new MeleeAttack(this));
+            getNextAction();
         }
 
         void Agent::update()
@@ -25,9 +26,9 @@ namespace LoveEngine {
             currentAction->activeUpdate();
 
             for (Action* a : actions)
-                a->passiveUpdate();
+                a->passiveUpdateAndPrio();
 
-            if (currentAction->actionComplete)
+            if (!currentAction->lockAction)
             {
                 getNextAction();
                 currentAction->onActionStart();

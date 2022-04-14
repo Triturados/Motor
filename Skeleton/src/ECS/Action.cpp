@@ -18,20 +18,20 @@ namespace LoveEngine {
             priority = priority;
         }
 
-        void Action::passiveUpdate()
-        {
-            addPriority(-increasePrioOverTime * LoveEngine::Time::getInstance()->deltaTime);
-        }
-
         // Si la acción no se ha completado, tiene que seguir a pesar de las prioridades actuales
         // Si las condiciones no se cumplen, no se ejecutará esta acción
-        float Action::getPriority() const noexcept { return actionComplete ? LONG_MIN : conditionsFulfilled() ? priority : LONG_MAX; }
+        float Action::getPriority() const noexcept { return lockAction ? LONG_MIN : conditionsFulfilled() ? priority : LONG_MAX; }
 
         // Para incrementar la prioridad, hay que pasar valores negativos
         void Action::addPriority(float increase) { priority += increase;}
 
         void Action::setPriority(float priority_) {
             priority = priority_;
+        }
+        void Action::passiveUpdateAndPrio()
+        {
+            passiveUpdate();
+            addPriority(-increasePrioOverTime * LoveEngine::Time::getInstance()->deltaTime);
         }
 #pragma region ExampleActions
 
@@ -44,6 +44,7 @@ namespace LoveEngine {
 
         bool MeleeAttack::conditionsFulfilled() const
         {
+            if (target == nullptr) return true;
             return (*(target->getPos()) - *(tr->getPos())).magnitude() < 10;
         }
 
@@ -51,7 +52,7 @@ namespace LoveEngine {
         { 
             //start animation
             std::cout << "\n\n\n\n\n\n\nAttacking at melee\n\n\n\n\n\n\n\n"; 
-            setPriority(30.0); 
+            setPriority(30.0);
         }
 
         void MeleeAttack::activeUpdate()
@@ -59,7 +60,7 @@ namespace LoveEngine {
             //lookat target
         }
 
-        Idle::Idle(Agent* agent_) : Action(agent_, 8.0) { actionComplete = true; }
+        Idle::Idle(Agent* agent_) : Action(agent_, 8.0) {}
 
         void Idle::activeUpdate() { std::cout << "Idle\n"; }
 

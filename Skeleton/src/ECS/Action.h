@@ -9,11 +9,12 @@ namespace LoveEngine {
         class Action
         {
         public:
+            friend Agent;
             // Cantidad de prioridad que se incrementa cada frame
             float increasePrioOverTime = 0.0;
 
-            // Avisa al agente de cuándo se PUEDE tomar otra acción
-            bool actionComplete = false;
+            // Avisa al agente de que NO SE PUEDE tomar otra acción
+            bool lockAction = false;
 
             // Condiciones que se tienen que cumplir para que la acción se realice, ignorando prioridad
             // Por ejemplo un ataque melé puede requerir una mínima proximidad al objetivo
@@ -24,7 +25,7 @@ namespace LoveEngine {
             Action(Agent* agent_, float priority_ = LONG_MAX);
 
             // llamado en cada frame, esté o no activa la acción (necesario para control de prioridad etc.)
-            virtual void passiveUpdate();
+            virtual void passiveUpdate() {};
 
             // llamado en cada frame mientras se esté ejecutando la acción
             virtual void activeUpdate() {};
@@ -40,6 +41,8 @@ namespace LoveEngine {
             virtual void setPriority(float priority_);
         private:
             float priority;
+            // Este método es privado para evitar que sobrecargar el passiveUpdate requiera actualizar la prioridad
+            void passiveUpdateAndPrio();
         };
 
         class RigidBody;
