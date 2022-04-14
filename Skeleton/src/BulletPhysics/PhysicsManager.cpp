@@ -9,6 +9,14 @@
 #include "Vector3.h"
 #include "DebugDrawer.h"
 
+inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
+	int partId1, int index1)
+{
+	std::cout << "colisione" << std::endl;
+	return false;
+}
+
+
 namespace LoveEngine {
 	namespace Physics {
 		PhysicsManager* PhysicsManager::instance_ = nullptr;
@@ -65,7 +73,8 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-			//gContactProcessedCallback = callbackFunc;
+			//gContactAddedCallback
+			gContactAddedCallback = callbackFunc;
 			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 		//#ifdef _DEBUG
@@ -84,11 +93,11 @@ namespace LoveEngine {
 			}
 		}
 
-		bool PhysicsManager::callbackFunc(btManifoldPoint& cp, void* obj1, 
-			void* obj2)
+		/*bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, 
+			int partId1, int index1)
 		{
 			return false;
-		}
+		}*/
 
 		btDynamicsWorld* PhysicsManager::getWorld() const {
 

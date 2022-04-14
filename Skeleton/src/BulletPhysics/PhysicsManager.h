@@ -16,6 +16,10 @@ class btCollisionShape;
 class btDiscreteDynamicsWorld;
 template <class T> class btAlignedObjectArray;
 
+
+//bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0,
+//	const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1);
+
 namespace LoveEngine {
 
 	namespace Utilities {
@@ -59,8 +63,8 @@ namespace LoveEngine {
 			//Errores
 			void checkExceptions();
 
-			bool callbackFunc(btManifoldPoint& cp, void* obj1,
-				void* obj2);
+			/*bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, 
+				const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1);*/
 
 		public:
 			static PhysicsManager* getInstance();
