@@ -14,6 +14,7 @@
 #include <ParticleSystem.h>
 #include <Text.h>
 #include <Material.h>
+#include <Agent.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -61,6 +62,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<ParticleSystem>("ParticleSystem"));
 			registerComponent(new ComponentCreatorTemplate<Text>("Text"));
 			registerComponent(new ComponentCreatorTemplate<Material>("Material"));
+			registerComponent(new ComponentCreatorTemplate<Agent>("Agent"));
 		}
 
 

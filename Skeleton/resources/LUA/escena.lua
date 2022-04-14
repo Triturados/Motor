@@ -136,6 +136,9 @@ function scene0()
     --local rotarcam = bolaHijaJug:addComponent('CamRotate')
 --------------
 
+    local boss = scene:createObject("boss")
+    local agente = boss:addComponent("Agent")
+
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
