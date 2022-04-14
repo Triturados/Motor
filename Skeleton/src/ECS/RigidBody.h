@@ -46,7 +46,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* acc;
 
 			RBState stateMode;
-
+			bool collidesWithGameObject(GameObject* go) const;
 		public:
 			RigidBody();
 
@@ -73,6 +73,7 @@ namespace LoveEngine {
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
 			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };
+			inline btCollisionShape* getShape();
 		};
 	};
 

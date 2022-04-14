@@ -34,6 +34,39 @@ namespace LoveEngine {
 			return Utilities::Vector4(V.x(), V.y(), V.z(), V.w());
 		}
 
+		bool RigidBody::collidesWithGameObject(GameObject* go) const
+		{
+
+			if (go == nullptr) return false;
+
+			//Se obtiene el rb de la otra entidad
+			auto* otherRigidBody = reinterpret_cast<RigidBody*>(go->getComponent<RigidBody>());
+
+			if (!otherRigidBody->isActive())
+				return false;
+
+			//Declaracion del algoritmo de Vorono
+			btVoronoiSimplexSolver simplexSolver;
+			btGjkEpaPenetrationDepthSolver epaPenSolver;
+			btPointCollector collPoint;
+
+			//Detector de colisiones
+			btGjkPairDetector convexConvex(
+				static_cast<btConvexShape*>(rigidBody->getCollisionShape()),
+				static_cast<btConvexShape*>(otherRigidBody->getShape()),
+				&simplexSolver, &epaPenSolver);
+
+			//Mediante un input que guarda referencia de los dos objetos,
+			//se genera un output (collPoint), de manera que, posteriormente, se puede
+			//comprobar si se ha producido una colision.
+			btGjkPairDetector::ClosestPointInput input;
+			input.m_transformA = rigidBody->getWorldTransform();
+			input.m_transformB = otherRigidBody->rigidBody->getWorldTransform();
+			convexConvex.getClosestPoints(input, collPoint, nullptr);
+
+			return collPoint.m_hasResult && collPoint.m_distance <= 0;
+		}
+
 		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
 		{
 			stateMode = (RBState)0;
@@ -174,6 +207,10 @@ namespace LoveEngine {
 		{
 			auto vel = rigidBody->getLinearVelocity();
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
+		}
+		inline btCollisionShape* RigidBody::getShape()
+		{
+			return rigidBody->getCollisionShape();
 		}
 	}
 }
