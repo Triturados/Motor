@@ -37,6 +37,7 @@ namespace LoveEngine {
 
 		class lovexport RigidBody : public ComponentTemplate<RigidBody>
 		{
+			//friend GameObject;
 		private:
 			float mass;
 			float restitution;

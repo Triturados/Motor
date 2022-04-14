@@ -48,12 +48,13 @@ namespace LoveEngine {
 			void onSceneUp();
 			void onSceneDown();
 
-			void colliding(Component* other);
-			void enterCollision(Component* other);
-			void exitCollision(Component* other);
 
 		public:
 			
+			void colliding(GameObject* other);
+			void enterCollision(GameObject* other);
+			void exitCollision(GameObject* other);
+
 			Scene* getCurrentScene();
 
 			std::string name;
