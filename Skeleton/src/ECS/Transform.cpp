@@ -258,8 +258,7 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
-			if(!children.empty())
-			std::cout <<"Soy un ogro bobo: " << position->y << std::endl;
+
 		}
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)
