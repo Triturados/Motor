@@ -27,18 +27,17 @@ namespace LoveEngine {
 		template <typename T>
 		class Vector3;
 	}
-
+	
 
 	namespace Physics {
 		class Collider;
-		//struct collisionObj {
-		//	btRigidBody* rb = nullptr;
-		//	std::vector<btRigidBody*>* contactosObj = nullptr;
-		//	//collisionObj(btRigidBody* rb_) : rb(rb_) {}
-		//};
+		struct collisionObj {
+			btRigidBody* rb = nullptr;
+			std::vector<btRigidBody*>* contactosObj = nullptr;
+		};
 
 		class lovexport PhysicsManager {
-
+			friend class RigidBody;
 		private:
 			static PhysicsManager* instance_;
 
@@ -67,7 +66,7 @@ namespace LoveEngine {
 
 			void destroyWorld();
 			void checkCollision();
-			//std::vector<collisionObj> collisiones;
+			std::vector<collisionObj>* collisiones = nullptr;
 			std::map<const btCollisionObject*, std::pair<Collider*, Collider*>> contacts;
 			//Errores
 			void checkExceptions();
@@ -91,7 +90,7 @@ namespace LoveEngine {
 			//Posicion, masa e identificador (el cual determina la forma del collider)
 			btRigidBody* createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/);
 
-			//std::vector<btRigidBody*>* sendContacts(btRigidBody* btRb);
+			std::vector<btRigidBody*>* sendContacts(btRigidBody* btRb);
 
 			//destruye un rigidbody de bullet
 			void destroyRigidBody(btRigidBody* body);

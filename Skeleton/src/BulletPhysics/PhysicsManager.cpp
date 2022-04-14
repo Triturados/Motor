@@ -9,6 +9,7 @@
 #include "Vector3.h"
 #include "DebugDrawer.h"
 #include "Collider.h"
+#include "RigidBody.h"
 
 inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
 	int partId1, int index1)
@@ -18,6 +19,7 @@ inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* co
 }
 
 inline void callFinish(btPersistentManifold* const& manifold) {
+	manifold->getBody0();
 	std::cout << "salgoCollision" << std::endl;
 }
 
@@ -136,8 +138,10 @@ namespace LoveEngine {
 
 			//gContactAddedCallback
 			//gContactAddedCallback = callbackFunc;
-			gContactStartedCallback = callStart;
-			gContactEndedCallback = callFinish;
+			//gContactStartedCallback = callStart;
+			//gContactEndedCallback = callFinish;
+
+			collisiones = new std::vector<collisionObj>();
 			//gContactEndedCallback = 
 			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
@@ -172,7 +176,7 @@ namespace LoveEngine {
 
 			//physicsFrameRate = 1 / 60;
 			dynamicsWorld->stepSimulation(1.f / 60.f, 10);
-
+			checkCollision();
 
 #ifdef _DEBUG
 			dynamicsWorld->stepSimulation(physicsFrameRate);
@@ -183,7 +187,7 @@ namespace LoveEngine {
 		}
 
 		void PhysicsManager::fixedUpdate(float deltaTime) {
-
+			//checkCollision();
 			dynamicsWorld->stepSimulation(deltaTime);
 		}
 
@@ -235,25 +239,25 @@ namespace LoveEngine {
 			rb->setCollisionFlags(rb->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 			dynamicsWorld->addRigidBody(rb);
-			//collisionObj collObj;
-			//collObj.rb = rb;
-			//collisiones.push_back(collObj);
+			collisionObj collObj;
+			collObj.rb = rb;
+			collisiones->push_back(collObj);
 			bodies.push_back(rb); //------> BORRAR??
 
 			return rb;
 		}
 
-		/*std::vector<btRigidBody*>* PhysicsManager::sendContacts(btRigidBody* btRb)
+		std::vector<btRigidBody*>* PhysicsManager::sendContacts(btRigidBody* btRb)
 		{
 			int i = 0;
-			while (i < collisiones.size() - 1)
+			while (i < collisiones->size() - 1)
 			{
-				if (collisiones[i].rb = btRb) {
-					return collisiones[i].contactosObj;
+				if (collisiones->at(i).rb = btRb) {
+					return collisiones->at(i).contactosObj;
 				}
 			}
 			return nullptr;
-		}*/
+		}
 
 
 		void PhysicsManager::destroyRigidBody(btRigidBody* body) {

@@ -19,6 +19,16 @@
 #include "GameObject.h"
 #include "Collider.h"
 
+inline void callFinish(btPersistentManifold* const& manifold) {
+	
+	std::cout << "salgoCollision" << std::endl;
+}
+
+inline void callStart(btPersistentManifold* const& manifold) {
+	std::cout << "entroCollision" << std::endl;
+}
+
+
 namespace LoveEngine {
 	namespace ECS {
 
@@ -103,6 +113,10 @@ namespace LoveEngine {
 			}
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
+			rigidBody->setUserPointer((void*)col);
+
+			//gContactEndedCallback = callFinish;
+			//gContactStartedCallback = callStart;
 		}
 
 		void RigidBody::update()
@@ -110,11 +124,16 @@ namespace LoveEngine {
 			const auto worldTransform = rigidBody->getWorldTransform();
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
-			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
+			btScalar rotX,rotY,rotZ; 
+			worldTransform.getRotation().getEulerZYX(rotZ,rotY,rotX);
+			btVector3 rot = { rotX,rotY,rotZ };
+			Utilities::Vector3<float> newRot = cvt(rot);
 			
-			tr->setPos(newPos);
-			tr->setRot(newRot);
+			Utilities::Vector4<float> newRotToVec4(newRot.x, newRot.y, newRot.z, 0);
 
+			tr->setPos(newPos);
+			tr->setRot(newRotToVec4);
+			//std::cout << "PosRB: " << newRot.x << ", " << newRot.y << ", " << newRot.z << std::endl;
 			/*if (onCollisionEnter(other)) {
 				std::cout << "colisione" << std::endl;
 			}*/
@@ -126,9 +145,10 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			//std::cout << "PosRB: " << newRot.x << ", " << newRot.y << ", " << newRot.z << std::endl;
 			tr->setPos(newPos);
 			tr->setRot(newRot);
+			
 		}
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
@@ -210,6 +230,11 @@ namespace LoveEngine {
 		void RigidBody::setLinearVelocity(Utilities::Vector3<float> vel)
 		{
 			rigidBody->setLinearVelocity(cvt(vel));
+		}
+
+		void RigidBody::setAngularVelocity(Utilities::Vector3<float> vel)
+		{
+			rigidBody->setAngularVelocity(cvt(vel));
 		}
 
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept

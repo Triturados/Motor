@@ -18,7 +18,7 @@ namespace LoveEngine {
 		class lovexport GameObject final {
 
 			friend Scene;
-			friend class Rigidbody;
+			friend class RigidBody;
 			friend class SceneCreator;
 
 			GameObject(std::string name);
@@ -48,12 +48,13 @@ namespace LoveEngine {
 			void onSceneUp();
 			void onSceneDown();
 
-			void colliding();
-			void enterCollision();
-			void exitCollision();
 
 		public:
 			
+			void colliding(GameObject* other);
+			void enterCollision(GameObject* other);
+			void exitCollision(GameObject* other);
+
 			Scene* getCurrentScene();
 
 			std::string name;

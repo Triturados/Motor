@@ -37,6 +37,7 @@ namespace LoveEngine {
 
 		class lovexport RigidBody : public ComponentTemplate<RigidBody>
 		{
+			//friend GameObject;
 		private:
 			float mass;
 			float restitution;
@@ -77,6 +78,8 @@ namespace LoveEngine {
 			void setShape(std::string nameF_);
 
 			void setLinearVelocity(Utilities::Vector3<float> vel);
+
+			void setAngularVelocity(Utilities::Vector3<float> vel);
 
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;

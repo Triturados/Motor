@@ -143,24 +143,24 @@ namespace LoveEngine {
 			}
 		}
 
-		void GameObject::colliding()
+		void GameObject::colliding(GameObject* other)
 		{
 			for (Component* comp : componentsList) {
-				comp->colliding();
+				comp->colliding(other);
 			}
 		}
 
-		void GameObject::enterCollision()
+		void GameObject::enterCollision(GameObject* other)
 		{
 			for (Component* comp : componentsList) {
-				comp->enterCollision();
+				comp->enterCollision(other);
 			}
 		}
 
-		void GameObject::exitCollision()
+		void GameObject::exitCollision(GameObject* other)
 		{
 			for (Component* comp : componentsList) {
-				comp->exitCollision();
+				comp->exitCollision(other);
 			}
 		}
 

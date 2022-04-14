@@ -66,9 +66,9 @@ namespace LoveEngine {
 
 			virtual void receiveMessage(Utilities::StringFormatter& sf) {};
 
-			virtual void colliding() {};
-			virtual void enterCollision() {};
-			virtual void exitCollision() {};
+			virtual void colliding(GameObject* other) {};
+			virtual void enterCollision(GameObject* other) {};
+			virtual void exitCollision(GameObject* other) {};
 
 
 			GameObject* createObject(std::string name);
