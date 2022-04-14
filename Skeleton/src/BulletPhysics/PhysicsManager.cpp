@@ -8,12 +8,21 @@
 #include <SingletonInfo.h>
 #include "Vector3.h"
 #include "DebugDrawer.h"
+#include "Collider.h"
 
 inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
 	int partId1, int index1)
 {
 	std::cout << "colisione" << std::endl;
 	return false;
+}
+
+inline void callFinish(btPersistentManifold* const& manifold) {
+	std::cout << "salgoCollision" << std::endl;
+}
+
+inline void callStart(btPersistentManifold* const& manifold) {
+	std::cout << "entroCollision" << std::endl;
 }
 
 
@@ -49,6 +58,7 @@ namespace LoveEngine {
 
 		void PhysicsManager::checkCollision() {
 
+			std::map<const btCollisionObject*, std::pair< Collider*, Collider*>> newContacts;
 			if (dynamicsWorld == nullptr) return;
 			int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
 
@@ -59,7 +69,55 @@ namespace LoveEngine {
 				/*Check all contacts points*/
 
 				int numContacts = contactManifold->getNumContacts();
+				for (int j = 0; j < numContacts; j++) {
+					btManifoldPoint& pt = contactManifold->getContactPoint(j);
+					if (pt.getDistance() < 0.f)
+					{
+						Collider* coA = static_cast<Collider*>(obA->getUserPointer());
+						Collider* coB = static_cast<Collider*>(obB->getUserPointer());
+
+						if (newContacts.find(obA) == newContacts.end())
+						{
+							newContacts[obA] = { coA,coB };
+							newContacts[obB] = { coB,coA };
+						}
+
+					}
+				}
 			}
+
+			/* Check for added contacts ... */
+			std::map<const btCollisionObject*, std::pair< Collider*, Collider*>>::iterator it;
+
+			if (!newContacts.empty())
+			{
+				for (it = newContacts.begin(); it != newContacts.end(); it++)
+				{
+					if (contacts.find((*it).first) == contacts.end())
+					{
+						(*it).second.first->onCollisionEnter((*it).second.second->getGO());
+					}
+					else
+					{
+						// Remove to filter no more active contacts
+						(*it).second.first->onCollisionStay((*it).second.second->getGO());
+						contacts.erase((*it).first);
+					}
+				}
+			}
+
+
+			/* ... and removed contacts */
+			if (!contacts.empty())
+			{
+				for (it = contacts.begin(); it != contacts.end(); it++)
+				{
+					(*it).second.first->onCollisionExit((*it).second.second->getGO());
+				}
+				contacts.clear();
+			}
+
+			contacts = newContacts;
 		}
 
 		void PhysicsManager::init(const Utilities::Vector3<float> gravity) {
@@ -77,7 +135,10 @@ namespace LoveEngine {
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
 			//gContactAddedCallback
-			gContactAddedCallback = callbackFunc;
+			//gContactAddedCallback = callbackFunc;
+			gContactStartedCallback = callStart;
+			gContactEndedCallback = callFinish;
+			//gContactEndedCallback = 
 			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 		//#ifdef _DEBUG
@@ -174,10 +235,26 @@ namespace LoveEngine {
 			rb->setCollisionFlags(rb->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 			dynamicsWorld->addRigidBody(rb);
-			bodies.push_back(rb);
+			//collisionObj collObj;
+			//collObj.rb = rb;
+			//collisiones.push_back(collObj);
+			bodies.push_back(rb); //------> BORRAR??
 
 			return rb;
 		}
+
+		/*std::vector<btRigidBody*>* PhysicsManager::sendContacts(btRigidBody* btRb)
+		{
+			int i = 0;
+			while (i < collisiones.size() - 1)
+			{
+				if (collisiones[i].rb = btRb) {
+					return collisiones[i].contactosObj;
+				}
+			}
+			return nullptr;
+		}*/
+
 
 		void PhysicsManager::destroyRigidBody(btRigidBody* body) {
 
@@ -187,6 +264,7 @@ namespace LoveEngine {
 			delete body;
 			body = nullptr;
 		}
+
 
 
 		void PhysicsManager::destroyWorld() {

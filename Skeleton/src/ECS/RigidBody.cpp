@@ -17,6 +17,7 @@
 #include "PhysicsManager.h"
 #include "Transform.h"
 #include "GameObject.h"
+#include "Collider.h"
 
 namespace LoveEngine {
 	namespace ECS {
@@ -77,7 +78,8 @@ namespace LoveEngine {
 		{
 			delete lastForce;
 			delete acc;
-
+			if (col) delete col;
+			col = nullptr;
 			delete tr;
 			delete rigidBody;
 		}
@@ -99,6 +101,8 @@ namespace LoveEngine {
 				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));
 				rigidBody->setDamping(0.5, 0.5);*/
 			}
+			col = new LoveEngine::Physics::Collider();
+			col->setGO(gameObject);
 		}
 
 		void RigidBody::update()
@@ -225,6 +229,7 @@ namespace LoveEngine {
 
 		bool RigidBody::onCollisionEnter(RigidBody* other)
 		{
+
 			//Devuelve true en caso de existir colision
 			if (enabled) {
 				

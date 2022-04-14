@@ -8,7 +8,9 @@
 class btRigidBody;
 
 namespace LoveEngine {
-	
+	namespace Physics {
+		class Collider;
+	}
 	namespace ECS {
 		enum class ForceMode {
 			FORCE,
@@ -49,6 +51,10 @@ namespace LoveEngine {
 			bool collidesWithGameObject(RigidBody* go) const;
 			//prueba collisiones --> BORRAR MAS TARDE
 			RigidBody* other = nullptr;
+			std::vector<btRigidBody*>* contacts = nullptr;
+
+			LoveEngine::Physics::Collider* col = nullptr;
+
 		public:
 			RigidBody();
 

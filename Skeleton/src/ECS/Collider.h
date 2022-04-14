@@ -1,15 +1,26 @@
 #pragma once
+#include <../Export.h>
+namespace LoveEngine {
+	namespace ECS {
+	class GameObject;
+	}
+	namespace Physics {
+		class Collider
+		{
+		public:
+			Collider();
+			~Collider();
 
-class GameObject;
+			// Callbacks de colision
+			virtual void onCollisionEnter(LoveEngine::ECS::GameObject* other) {};
+			virtual void onCollisionExit(ECS::GameObject* other) {};
+			virtual void onCollisionStay(ECS::GameObject* other) {};
 
-class Collider
-{
-public:
-	Collider();
-	~Collider();
-	void setGO(GameObject* ent);
-	GameObject* getGO();
-protected:
-	GameObject* collGO = nullptr;
-};
+			void setGO(LoveEngine::ECS::GameObject* ent);
+			ECS::GameObject* getGO();
+		protected:
+			LoveEngine::ECS::GameObject* collGO = nullptr;
+		};
+	}
+}
 
