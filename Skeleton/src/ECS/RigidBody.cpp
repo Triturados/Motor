@@ -53,7 +53,7 @@ namespace LoveEngine {
 			//Detector de colisiones
 			btGjkPairDetector convexConvex(
 				static_cast<btConvexShape*>(rigidBody->getCollisionShape()),
-				static_cast<btConvexShape*>(otherRigidBody->getShape()),
+				static_cast<btConvexShape*>(otherRigidBody->rigidBody->getCollisionShape()),
 				&simplexSolver, &epaPenSolver);
 
 			//Mediante un input que guarda referencia de los dos objetos,
@@ -208,9 +208,17 @@ namespace LoveEngine {
 			auto vel = rigidBody->getLinearVelocity();
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
-		inline btCollisionShape* RigidBody::getShape()
+
+
+		bool RigidBody::onCollisionEnter(GameObject* other)
 		{
-			return rigidBody->getCollisionShape();
+			//Devuelve true en caso de existir colision
+			if (enabled) {
+				
+				return collidesWithGameObject(other);
+			}
+
+			return false;
 		}
 	}
 }
