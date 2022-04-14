@@ -48,9 +48,9 @@ namespace LoveEngine {
 			void onSceneUp();
 			void onSceneDown();
 
-			void colliding();
-			void enterCollision();
-			void exitCollision();
+			void colliding(Component* other);
+			void enterCollision(Component* other);
+			void exitCollision(Component* other);
 
 		public:
 			

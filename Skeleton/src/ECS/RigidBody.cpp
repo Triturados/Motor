@@ -103,6 +103,7 @@ namespace LoveEngine {
 			}
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
+			rigidBody->setUserPointer((void*)col);
 		}
 
 		void RigidBody::update()
