@@ -152,7 +152,7 @@ function scene0()
     player:addComponent("Rigidbody"):sendMsg([[
         shape: cube; 
         type: dynamic;
-        mass: 1.0;
+        mass: 10.0;
         restitution: 0.75;
     ]])
     local mesh = player:addComponent("Mesh")
