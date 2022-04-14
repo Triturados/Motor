@@ -213,6 +213,11 @@ namespace LoveEngine {
 			rigidBody->setLinearVelocity(cvt(vel));
 		}
 
+		void RigidBody::setAngularVelocity(Utilities::Vector3<float> vel)
+		{
+			rigidBody->setAngularVelocity(cvt(vel));
+		}
+
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
 		{
 			auto vel = rigidBody->getLinearVelocity();

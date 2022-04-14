@@ -18,7 +18,7 @@ namespace LoveEngine {
 		class lovexport GameObject final {
 
 			friend Scene;
-			friend class Rigidbody;
+			friend class RigidBody;
 			friend class SceneCreator;
 
 			GameObject(std::string name);
