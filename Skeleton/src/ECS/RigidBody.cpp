@@ -91,6 +91,7 @@ namespace LoveEngine {
 				//Creamos un RB y se anade al PhysicsManager
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)shape);
 				rigidBody->setRestitution(restitution);
+
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);

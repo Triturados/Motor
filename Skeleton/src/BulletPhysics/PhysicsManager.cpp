@@ -167,6 +167,9 @@ namespace LoveEngine {
 
 			rb->forceActivationState(DISABLE_DEACTIVATION);
 
+			//collisionflags -->CAMBIAR MAS ADELANTE
+			rb->setCollisionFlags(rb->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 			dynamicsWorld->addRigidBody(rb);
 			bodies.push_back(rb);
 
