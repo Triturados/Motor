@@ -18,6 +18,7 @@ namespace LoveEngine {
         {
             actions.push_back(new Idle(this));
             actions.push_back(new MeleeAttack(this));
+            actions.push_back(new Leap(this));
             getNextAction();
         }
 

@@ -14,7 +14,6 @@ namespace LoveEngine {
         Action::Action(Agent* agent_, float priority_)
         {
             agent = agent_;
-            agent->addAction(this);
             priority = priority;
         }
 
@@ -35,7 +34,12 @@ namespace LoveEngine {
         }
 #pragma region ExampleActions
 
-        MeleeAttack::MeleeAttack(Agent* agent_) : Action(agent_, 10.0) { increasePrioOverTime = 10.0; };
+        MeleeAttack::MeleeAttack(Agent* agent_) : Action(agent_, 10.0) 
+        {
+            rb = agent->gameObject->getComponent<RigidBody>();
+            tr = agent->gameObject->getComponent<Transform>();
+            increasePrioOverTime = 10.0; 
+        };
 
         void MeleeAttack::setTarget(Transform* t)
         {
@@ -44,20 +48,25 @@ namespace LoveEngine {
 
         bool MeleeAttack::conditionsFulfilled() const
         {
-            if (target == nullptr) return true;
+            if (target == nullptr) return true; // TO DO: Change true to false
             return (*(target->getPos()) - *(tr->getPos())).magnitude() < 10;
         }
 
         void MeleeAttack::onActionStart() 
         { 
-            //start animation
             std::cout << "\n\n\n\n\n\n\nAttacking at melee\n\n\n\n\n\n\n\n"; 
             setPriority(30.0);
+            if (target == nullptr || rb == nullptr || tr == nullptr)
+            {
+                //throw new std::exception("Faltan referencias para una acción");
+                return;
+            }
+            // TO DO: start animation
         }
 
         void MeleeAttack::activeUpdate()
         {
-            //lookat target
+            // TO DO: lookat target
         }
 
         Idle::Idle(Agent* agent_) : Action(agent_, 8.0) {}
@@ -83,7 +92,7 @@ namespace LoveEngine {
             }
         }
 
-        Leap::Leap(Agent* agent_) : Action(agent)
+        Leap::Leap(Agent* agent_) : Action(agent_, 80)
         {
             rb = agent->gameObject->getComponent<RigidBody>();
             tr = agent->gameObject->getComponent<Transform>();
@@ -97,12 +106,18 @@ namespace LoveEngine {
 
         bool Leap::conditionsFulfilled() const
         {
+            if (target == nullptr) return true; // TO DO: Change true to false
             return (*(target->getPos()) - *(tr->getPos())).magnitude() > 40;
         }
 
         void Leap::onActionStart()
         {
-            if (target == nullptr) return;
+            std::cout << "\n\n\n\n\n\n\nLeaping\n\n\n\n\n\n\n\n";
+            if (target == nullptr || rb == nullptr || tr == nullptr)
+            {
+                //throw new std::exception("Faltan referencias para una acción");
+                return;
+            }
             
             //start animation
             rb->addForce(*(target->getPos()) - *(tr->getPos()) + Utilities::Vector3<float>(0, 10, 0), Utilities::Vector3<float>(0, 0, 0), (int)ForceMode::IMPULSE);
@@ -110,6 +125,9 @@ namespace LoveEngine {
 
         void Leap::activeUpdate()
         {
+            setPriority(80);
+            if (target == nullptr || rb == nullptr || tr == nullptr) return; 
+            // TO DO: remove these lines ^^^^
             if (rb->getVelocity()->y > 0 && rb->getVelocity()->y < 0.02)
                 setPriority(80);
                 //end animation
