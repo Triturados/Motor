@@ -56,6 +56,9 @@ namespace LoveEngine {
 				btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
 				const btCollisionObject* obA = contactManifold->getBody0();
 				const btCollisionObject* obB = contactManifold->getBody1();
+				/*Check all contacts points*/
+
+				int numContacts = contactManifold->getNumContacts();
 			}
 		}
 
