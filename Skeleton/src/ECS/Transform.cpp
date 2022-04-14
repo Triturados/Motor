@@ -120,8 +120,15 @@ namespace LoveEngine {
 			return parent;
 		}
 
+		Transform* Transform::getFirstParent()
+		{
+			if (parent == nullptr) return this;
+			else parent->getFirstParent();
+		}
+
 		void Transform::addChild(Transform* c) {
-			c->setLocalPos(*c->getPos());
+			Utilities::Vector3<float> aux = *c->getPos() - *position;
+			c->setLocalPos(aux);
 			children.push_back(c);
 			
 		}
@@ -150,97 +157,55 @@ namespace LoveEngine {
 
 			float x = 0, y = 0, z = 0, dist = 0, angleRad = 0;
 			for (auto& c : children) {
-				c->rotateChild(modeAngule, ang, *c->position);
+				c->rotateChild(modeAngule, ang, posP);
 				switch (modeAngule)
 				{
 					//giro en ang z
 				case 0:
-					//posicion respecto al padre
-
-					/*x = c->localPosition->x;
-					y = c->localPosition->y;
-
-					dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
-					c->position = c->getParent()->getPos();
-					c->rotation->z += ang;
-					c->position->x += c->forward().x * dist;
-					c->position->y += c->forward().y * dist;*/
-					//c->position->z += c->forward().z * dist;
-
-					//NO SE QUE ESTOY HACIENDOOO AAAAAAAAAAAA
-
-					/*c->position->x = posP.x + (std::cos(ang) * c->localPosition->x) +(-std::sin(ang) * c->localPosition->x);
-					c->position->y = posP.y + (std::sin(ang) * c->localPosition->y) + (std::cos(ang) * c->localPosition->y);*/
-
-					//x = c->localPosition->x;
-					//y = c->localPosition->y;
-
-					//dist = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
-
-					//c->position->x = dist * std::cos(ang /** std::numbers::pi / 180*/);
-					//
-					//c->position->y = dist * std::sin(ang/** std::numbers::pi / 180*/);
-					//
-					//c->rotation->z += ang;
-
+					
 					angleRad = ang * 3.141592f / 180.0f;
 
 					x = ((c->localPosition->x) * std::cos(ang) - (c->localPosition->y) * std::sin(ang));
 					y = ((c->localPosition->x) * std::sin(ang) + (c->localPosition->y) * std::cos(ang));
 
-					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
-
 					c->localPosition->x = x ;
 					c->localPosition->y = y ;
-					c->position->x = c->localPosition->x + position->x;
-					c->position->y = c->localPosition->y + position->y;
+					c->position->x = c->localPosition->x + posP.x;
+					c->position->y = c->localPosition->y + posP.y;
 					c->rotation->z += ang;
 					break;
 					//giro en ang x
 				case 1:
-					//posicion respecto al padre
+					
 
 					z = ((c->localPosition->z) * std::cos(ang) - (c->localPosition->x) * std::sin(ang));
 					x = ((c->localPosition->z) * std::sin(ang) + (c->localPosition->x) * std::cos(ang));
 
-					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
+					
 
 					c->localPosition->z = z;
 					c->localPosition->x = x;
-					c->position->x = c->localPosition->x + position->x;
-					c->position->z = c->localPosition->z + position->z;
+					c->position->x = c->localPosition->x + posP.x;
+					c->position->z = c->localPosition->z + posP.z;
 					c->rotation->y += ang;
-
-
-					/*z = c->position->z - posP.z;
-					y = c->position->y - posP.y;
-
-					dist = std::sqrt(std::pow(z, 2) + std::pow(y, 2));
-
-					c->position->z = dist * cos(ang);
-					c->position->y = dist * sin(ang);
-
-					c->rotation->x += ang;*/
 					break;
 					//giro en ang y
 				case 2:
-					//posicion respecto al padre
+					
 					y = ((c->localPosition->y) * std::cos(ang) - (c->localPosition->z) * std::sin(ang));
 					z = ((c->localPosition->y) * std::sin(ang) + (c->localPosition->z) * std::cos(ang));
 
-					//dist = std::sqrt(std::pow(position->x, 2) + std::pow(position->y, 2)); //vector pos padre
-
 					c->localPosition->z = z;
 					c->localPosition->y = y;
-					c->position->y = c->localPosition->y + position->y;
-					c->position->z = c->localPosition->z + position->z;
+					c->position->y = c->localPosition->y + posP.y;
+					c->position->z = c->localPosition->z + posP.z;
 					c->rotation->x += ang;
 					break;
 				default:
 					break;
 				}
 
-				c->rotateChild(modeAngule, ang, *position);
+				
 			}
 			
 		}
@@ -258,7 +223,6 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
-
 		}
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)

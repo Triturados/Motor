@@ -8,7 +8,9 @@
 class btRigidBody;
 
 namespace LoveEngine {
-	
+	namespace Physics {
+		class Collider;
+	}
 	namespace ECS {
 		enum class ForceMode {
 			FORCE,
@@ -46,6 +48,12 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* acc;
 
 			RBState stateMode;
+			bool collidesWithGameObject(RigidBody* go) const;
+			//prueba collisiones --> BORRAR MAS TARDE
+			RigidBody* other = nullptr;
+			std::vector<btRigidBody*>* contacts = nullptr;
+
+			LoveEngine::Physics::Collider* col = nullptr;
 
 		public:
 			RigidBody();
@@ -73,6 +81,11 @@ namespace LoveEngine {
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
 			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };
+			//inline btCollisionShape* getShape() const noexcept;
+			void receiveComponent(int i, Component* c) override;
+
+			//Collisiones
+			bool onCollisionEnter(RigidBody* other);
 		};
 	};
 

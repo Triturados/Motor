@@ -1,0 +1,35 @@
+particle_system lluvia
+{
+    material        gotas
+    particle_width  3
+    particle_height 7
+    cull_each       true
+    quota           750
+    // Make common direction straight down (faster than self oriented)
+    billboard_type  oriented_common
+    common_direction 0 -1 0
+    
+    // Area emitter
+    emitter Box
+    {
+        angle           0
+        emission_rate   250
+        time_to_live    2.5
+        direction       0 -1 0
+        velocity    	300
+        colour_range_start  0.8 1 0.85 0.2
+        colour_range_end    1 1 1 0.5
+        width           300
+        height          300
+        depth           0
+    }
+
+    // Gravity
+    affector LinearForce
+    {
+        force_vector      0 -800 0
+        force_application add
+    }
+
+}
+

@@ -17,6 +17,7 @@
 #include "PhysicsManager.h"
 #include "Transform.h"
 #include "GameObject.h"
+#include "Collider.h"
 
 namespace LoveEngine {
 	namespace ECS {
@@ -34,6 +35,39 @@ namespace LoveEngine {
 			return Utilities::Vector4(V.x(), V.y(), V.z(), V.w());
 		}
 
+		bool RigidBody::collidesWithGameObject(RigidBody* go) const
+		{
+
+			if (go == nullptr) return false;
+
+			//Se obtiene el rb de la otra entidad
+			//auto* otherRigidBody = reinterpret_cast<RigidBody*>(go->getComponent<RigidBody>());
+
+			if (!go->isActive())
+				return false;
+
+			//Declaracion del algoritmo de Vorono
+			btVoronoiSimplexSolver simplexSolver;
+			btGjkEpaPenetrationDepthSolver epaPenSolver;
+			btPointCollector collPoint;
+
+			//Detector de colisiones
+			btGjkPairDetector convexConvex(
+				static_cast<btConvexShape*>(rigidBody->getCollisionShape()),
+				static_cast<btConvexShape*>(go->rigidBody->getCollisionShape()),
+				&simplexSolver, &epaPenSolver);
+
+			//Mediante un input que guarda referencia de los dos objetos,
+			//se genera un output (collPoint), de manera que, posteriormente, se puede
+			//comprobar si se ha producido una colision.
+			btGjkPairDetector::ClosestPointInput input;
+			input.m_transformA = rigidBody->getWorldTransform();
+			input.m_transformB = go->rigidBody->getWorldTransform();
+			convexConvex.getClosestPoints(input, collPoint, nullptr);
+
+			return collPoint.m_hasResult && collPoint.m_distance <= 0;
+		}
+
 		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
 		{
 			stateMode = (RBState)0;
@@ -44,7 +78,8 @@ namespace LoveEngine {
 		{
 			delete lastForce;
 			delete acc;
-
+			if (col) delete col;
+			col = nullptr;
 			delete tr;
 			delete rigidBody;
 		}
@@ -58,6 +93,7 @@ namespace LoveEngine {
 				//Creamos un RB y se anade al PhysicsManager
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)shape);
 				rigidBody->setRestitution(restitution);
+
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
@@ -65,6 +101,8 @@ namespace LoveEngine {
 				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));
 				rigidBody->setDamping(0.5, 0.5);*/
 			}
+			col = new LoveEngine::Physics::Collider();
+			col->setGO(gameObject);
 		}
 
 		void RigidBody::update()
@@ -73,9 +111,13 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			//std::cout << "PosRB: " << newPos.x << ", " << newPos.y << ", " << newPos.z << std::endl;
+			
 			tr->setPos(newPos);
 			tr->setRot(newRot);
+
+			/*if (onCollisionEnter(other)) {
+				std::cout << "colisione" << std::endl;
+			}*/
 		}
 
 		void RigidBody::stepPhysics()
@@ -174,6 +216,27 @@ namespace LoveEngine {
 		{
 			auto vel = rigidBody->getLinearVelocity();
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
+		}
+
+		void RigidBody::receiveComponent(int i, Component* c)
+		{
+
+			if (i == 1) {
+				other = static_cast<RigidBody*>(c);
+			}
+		}
+
+
+		bool RigidBody::onCollisionEnter(RigidBody* other)
+		{
+
+			//Devuelve true en caso de existir colision
+			if (enabled) {
+				
+				return collidesWithGameObject(other);
+			}
+
+			return false;
 		}
 	}
 }

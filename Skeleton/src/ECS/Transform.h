@@ -52,6 +52,7 @@ namespace LoveEngine {
 
 			void setParent(Transform* p);
 			Transform* getParent();
+			Transform* getFirstParent();
 			void addChild(Transform* c);
 			void updateChildren(int mode, Utilities::Vector3<float> p);
 

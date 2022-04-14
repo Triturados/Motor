@@ -1,6 +1,7 @@
 #pragma once
 #include <../Export.h>
 #include <vector>
+#include <map>
 
 class btDefaultCollisionConfiguration;
 class btDispatcher;
@@ -16,6 +17,10 @@ class btCollisionShape;
 class btDiscreteDynamicsWorld;
 template <class T> class btAlignedObjectArray;
 
+
+
+
+
 namespace LoveEngine {
 
 	namespace Utilities {
@@ -25,6 +30,12 @@ namespace LoveEngine {
 
 
 	namespace Physics {
+		class Collider;
+		//struct collisionObj {
+		//	btRigidBody* rb = nullptr;
+		//	std::vector<btRigidBody*>* contactosObj = nullptr;
+		//	//collisionObj(btRigidBody* rb_) : rb(rb_) {}
+		//};
 
 		class lovexport PhysicsManager {
 
@@ -53,14 +64,16 @@ namespace LoveEngine {
 			//desechar seguramente
 			//btAlignedObjectArray<btCollisionShape*>* collisionShapes;
 			std::vector<btRigidBody*> bodies;
+
 			void destroyWorld();
 			void checkCollision();
-
+			//std::vector<collisionObj> collisiones;
+			std::map<const btCollisionObject*, std::pair<Collider*, Collider*>> contacts;
 			//Errores
 			void checkExceptions();
 
-			bool callbackFunc(btManifoldPoint& cp, void* obj1,
-				void* obj2);
+			/*bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, 
+				const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1);*/
 
 		public:
 			static PhysicsManager* getInstance();
@@ -77,6 +90,8 @@ namespace LoveEngine {
 			//Crea el un rigidbody de bullet a partir de los siguientes parametros:
 			//Posicion, masa e identificador (el cual determina la forma del collider)
 			btRigidBody* createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/);
+
+			//std::vector<btRigidBody*>* sendContacts(btRigidBody* btRb);
 
 			//destruye un rigidbody de bullet
 			void destroyRigidBody(btRigidBody* body);

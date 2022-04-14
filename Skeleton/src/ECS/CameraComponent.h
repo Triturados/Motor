@@ -30,6 +30,7 @@ namespace LoveEngine {
 
 		class lovexport Camera : public Component
 		{
+			std::string name;
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
 
@@ -48,6 +49,7 @@ namespace LoveEngine {
 			void lookAtDir(float x, float y, float z);
 			void onSceneUp() override;
 			void onSceneDown() override;
+			void receiveMessage(Utilities::StringFormatter& sf)override;
 
 			void yaw(float angle);
 			void pitch(float angle);

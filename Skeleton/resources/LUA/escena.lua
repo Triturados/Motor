@@ -71,6 +71,8 @@ function scene0()
         restitution: 1.0;
 
     ]])
+    ---prueba deteccion colisiones
+    --compRigidbody:sendComponent(1, compRigidbodySuelo)
 
     local bolaPesada = scene:createObject("BolaPesada")
     local compBolaPesada = bolaPesada:addComponent('Transform')
@@ -112,12 +114,15 @@ function scene0()
         
     compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
-        position: 0,0,0;
+        position: 0,10,0;
         rotation: 0,0,0,0;
     ]])
     local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
         meshName: sphere.mesh;
     ]])
+
+    
+    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
 --------------
 
 ----------bola hijo ogro "cam"
@@ -132,8 +137,6 @@ function scene0()
     local compcam = cam:addComponent('Mesh'):sendMsg([[
         meshName: sphere.mesh;
     ]])
-
-    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
 --------------
 
     local boss = scene:createObject("boss")
@@ -160,12 +163,31 @@ function scene0()
     compTrBolaHijaJug:sendComponent(1, tr)
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
-    --Metiendo compoennte rotar Camara
+
+    --Metiendo componente rotar Camara
+    -- rotarcam:sendMsg([[
+    --     verSens: 3.5
+    --     horiSens: 3.5
+    -- ]])
+
+    -- rotarcam:sendGameObject(0, bola)
+    -- rotarcam:sendGameObject(1, player)
+    -- rotarcam:sendGameObject(2, cam)
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
     local pSys = particleSys:addComponent("ParticleSystem")
     pSys:sendMsg([[particleName: bomb; emitting: true]])
+
+    local lluviaParticle = scene:createObject("Lluvia")
+    lluviaParticle:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,100,0; rotation: 0,0,0,0;]])
+    local lluviaParticleSys = lluviaParticle:addComponent("ParticleSystem")
+    lluviaParticleSys:sendMsg([[particleName: lluvia; emitting: true]])
+
+    local torch = scene:createObject("Lluvia")
+    torch:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: -30,10,0; rotation: 0,0,0,0;]])
+    local torchSys = torch:addComponent("ParticleSystem")
+    torchSys:sendMsg([[particleName: torch; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
     textPrueba:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,0; rotation: 0,0,0,0;]])
