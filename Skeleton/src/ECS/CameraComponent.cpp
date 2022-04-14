@@ -11,6 +11,7 @@
 #include "GameObject.h"
 #include <Vector3.h>
 #include <Vector4.h>
+#include <StringFormatter.h>
 
 namespace LoveEngine {
 	namespace ECS {
@@ -28,7 +29,7 @@ namespace LoveEngine {
 			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
-			mCamera = ogremanager->getSceneManager()->createCamera("MainCam");
+			mCamera = ogremanager->getSceneManager()->createCamera(name);
 			mCamera->setNearClipDistance(5);
 
 			mCameraNode->attachObject(mCamera);
@@ -72,6 +73,11 @@ namespace LoveEngine {
 		void Camera::onSceneUp()
 		{
 			//mCameraNode->setVisible(true);
+		}
+
+		void Camera::receiveMessage(Utilities::StringFormatter& sf)
+		{
+			sf.tryGetString("cameraName", name);
 		}
 	}
 }
