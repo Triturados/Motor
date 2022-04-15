@@ -31,6 +31,10 @@ namespace LoveEngine {
 			else throw new std::exception("Ya existe una entidad asociada");
 
 			entityNode->attachObject(entity);
+			Utilities::Vector3<float> f;
+			entityNode->showBoundingBox(true);
+			Ogre::AxisAlignedBox aB = entityNode->_getWorldAABB();
+			aB.getHalfSize();
 
 			rot = tr->getRot();
 			pos = tr->getPos();
