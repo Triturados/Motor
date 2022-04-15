@@ -137,7 +137,7 @@ function scene0()
     ]])
 
     
-    local rotarcam = bolaHijaJug:addComponent('CamRotate')
+    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
 --------------
 
 ----------bola hijo ogro "cam"
@@ -186,14 +186,14 @@ function scene0()
     trcam:sendComponent(1, compTrBolaHijaJug)
 
     --Metiendo componente rotar Camara
-    rotarcam:sendMsg([[
-        verSens: 3.5
-        horiSens: 3.5
-    ]])
+    --rotarcam:sendMsg([[
+    --    verSens: 3.5
+    --    horiSens: 3.5
+    --]])
 
-    rotarcam:sendGameObject(0, bola)
-    rotarcam:sendGameObject(1, player)
-    rotarcam:sendGameObject(2, cam)
+    --rotarcam:sendGameObject(0, bola)
+    --rotarcam:sendGameObject(1, player)
+    --rotarcam:sendGameObject(2, cam)
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
