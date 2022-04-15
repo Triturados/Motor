@@ -125,7 +125,7 @@ namespace LoveEngine {
 
 			auto camera = scene->createGameObject("Camera");
 			camera->addComponent<ECS::Transform>()->receiveUnformattedMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
-			camera->addComponent<ECS::Camera>();
+			camera->addComponent<ECS::Camera>()->receiveUnformattedMessage("cameraName: escenaSplash");
 
 			auto gameObject = scene->createGameObject("Image");
 			gameObject->addComponent<ECS::Transform>();

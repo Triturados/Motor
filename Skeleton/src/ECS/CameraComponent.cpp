@@ -18,7 +18,10 @@ namespace LoveEngine {
 
 		Camera::~Camera()
 		{
-			ogremanager->removeNode(mCameraNode);
+			if (mCamera != nullptr)
+				ogremanager->getSceneManager()->destroyCamera(mCamera);
+			if (mCameraNode != nullptr)
+				ogremanager->getSceneManager()->destroySceneNode(mCameraNode);
 		}
 
 		void Camera::init()
@@ -41,6 +44,11 @@ namespace LoveEngine {
 			mCamera->setAspectRatio(
 				Ogre::Real(vp->getActualWidth()) /
 				Ogre::Real(vp->getActualHeight()));
+		}
+
+		void Camera::update()
+		{
+			std::cout << mCamera->getName() << std::endl;
 		}
 
 		void Camera::lookAt(Utilities::Vector3<float> pos)

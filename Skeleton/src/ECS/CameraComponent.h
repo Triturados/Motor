@@ -50,6 +50,7 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void receiveMessage(Utilities::StringFormatter& sf)override;
+			void update()override;
 
 			void yaw(float angle);
 			void pitch(float angle);
