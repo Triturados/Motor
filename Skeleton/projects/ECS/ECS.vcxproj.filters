@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\src\ECS\Agent.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\ECS\Action.cpp">
-      <Filter>Components\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\ECS\Animation.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
@@ -144,9 +141,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Agent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ECS\Action.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Animation.h">
