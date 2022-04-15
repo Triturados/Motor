@@ -34,6 +34,7 @@ namespace LoveEngine {
 
 			void setActive(bool activated = true);
 			void setLoop(bool activated = true);
+			void changeAnimation(std::string n );
 
 			void init() override;
 			void update() override;

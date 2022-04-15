@@ -24,6 +24,13 @@ namespace LoveEngine {
 			setActive(true);
 		}
 
+		void Animation::changeAnimation(std::string n)
+		{
+			name = n;
+
+			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
+		}
+
 		Animation::~Animation()
 		{
 
