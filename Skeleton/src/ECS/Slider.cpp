@@ -97,6 +97,16 @@ namespace LoveEngine {
 			ogremanager->disableOverlay(overlayBar);
 		}
 
+		void Slider::setProgress(int progress)
+		{
+			if (progress < 0 || progress > MAX_VALUE) return;
+			barProgress = progress;
+
+			float barWidth = barProgress * width / MAX_VALUE;
+			buttonTr->setPos({ posX + barWidth - buttonWidth / 2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
+			superiorBar->setWidth(barWidth);
+		}
+
 		void Slider::handleInput()
 		{
 			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
@@ -138,7 +148,7 @@ namespace LoveEngine {
 			superiorBar->setPosition(x, y);
 			inferiorBar->setPosition(x, y);
 			float buttonNewPos = barProgress * width / MAX_VALUE;
-			buttonTr->setPos({ x + buttonNewPos - buttonWidth/2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
+			buttonTr->setPos({ posX + buttonNewPos - buttonWidth/2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
 		}
 		void Slider::setDimensions(int w, int h)
 		{

@@ -60,6 +60,7 @@ namespace LoveEngine {
 			void setVisibility(bool mode = true);
 
 			inline int getProgress() { return barProgress; }
+			void setProgress(int progress);
 			void handleInput();
 			void setDetectInput(bool mode);
 			void setPos(int x, int y);
