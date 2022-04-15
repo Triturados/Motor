@@ -45,32 +45,59 @@ namespace LoveEngine {
 			buttonTr = gameObject->getComponent<Transform>();
 			if(!buttonTr) throw new std::exception("Se necesita transform para usar el componente Image");
 
-
+			// Containers con cada elemento
 			inferiorBar = ogremanager->createContainer(posX, posY, width, height);
 			inferiorBar->setMaterialName(materialBarBg);
 			superiorBar = ogremanager->createContainer(posX, posY, width, height);
 			superiorBar->setMaterialName(materialBar);
-			button = ogremanager->createContainer(posX + width - buttonWidth/2, posY + height/4, buttonWidth, buttonWidth);
+			button = ogremanager->createContainer(posX + width - buttonWidth/2, posY + height/2 - buttonWidth/2, buttonWidth, buttonWidth);
 			button->setMaterialName(materialButton);
 
 			// El overlay, que gestiona la poscion, rotacion...
 			overlayBar = ogremanager->createOverlay();
-			//overlayBarBg = ogremanager->createOverlay();
 			overlayBar->add2D(inferiorBar);
 			overlayBar->add2D(superiorBar);
 			overlayBar->add2D(button);
 
-			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
-
 			// Mostrar el overlay
 			overlayBar->show();
-			//overlayBarBg->show();
+			buttonTr->setPos({ (float)posX + width - buttonWidth / 2,(float)posY + height / 2 - buttonWidth / 2, (float)0 });
 
-			buttonTr->setPos({ (float)posX + width - buttonWidth / 2,(float)posY + height / 4, (float)0 });
+			//setDetectInput(false);
 		}
 
 		//No se llama el update 
 		void Slider::update()
+		{
+			if (detectInput) handleInput();
+			
+			button->setPosition(buttonTr->getPos()->x, buttonTr->getPos()->y);
+
+		}
+
+		void Slider::setVisibility(bool mode)
+		{
+			if (mode) overlayBar->show();
+			else overlayBar->hide();
+		}
+
+		void Slider::onSceneDown()
+		{
+			overlayBar->hide();
+		}
+		void Slider::onSceneUp()
+		{
+			overlayBar->show();
+		}
+
+
+
+		Slider::~Slider()
+		{
+			ogremanager->disableOverlay(overlayBar);
+		}
+
+		void Slider::handleInput()
 		{
 			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
 			if (inputmanager->mousePressed(Input::MouseState::CLICK_L)) {
@@ -85,7 +112,7 @@ namespace LoveEngine {
 			else tracking = false;
 
 			if (tracking) {
-				std::cout << "SLIDER SLIDEA";
+				//std::cout << "SLIDER SLIDEA progreso:  ";
 				float newXpos = mousePos.x;
 				if (newXpos < posX) newXpos = posX;
 				if (newXpos > posX + width - buttonWidth / 2) newXpos = posX + width - buttonWidth / 2;
@@ -94,34 +121,33 @@ namespace LoveEngine {
 				if (barWidth < 0) barWidth = 0;
 				if (barWidth > width) barWidth = width;
 				superiorBar->setWidth(barWidth);
+
+				barProgress = barWidth * MAX_VALUE / width;
+				//std::cout << barProgress << std::endl;
 			}
-			//superiorBar->setPosition(tr->getPos()->x, tr->getPos()->y);
-			//inferiorBar->setPosition(tr->getPos()->x, tr->getPos()->y);
-			button->setPosition(buttonTr->getPos()->x, buttonTr->getPos()->y);
-
 		}
-
-		void Slider::setVisibility(bool mode)
+		void Slider::setDetectInput(bool mode)
 		{
-			/*if (mode) overlay->show();
-			else overlay->hide();*/
+			detectInput = mode;
+			if (mode) button->show();
+			else button->hide();
 		}
-
-		void Slider::onSceneDown()
+		void Slider::setPos(int x, int y)
 		{
-			/*ogremanager->disableOverlay(overlay);*/
-			//visible = false;
+			posX = x; posY = y;
+			superiorBar->setPosition(x, y);
+			inferiorBar->setPosition(x, y);
+			float buttonNewPos = barProgress * width / MAX_VALUE;
+			buttonTr->setPos({ x + buttonNewPos - buttonWidth/2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
 		}
-		void Slider::onSceneUp()
+		void Slider::setDimensions(int w, int h)
 		{
-			//visible = true;
-		}
-
-
-
-		Slider::~Slider()
-		{
-
+			width = w; height = h;
+			superiorBar->setWidth(w);
+			superiorBar->setHeight(h);
+			inferiorBar->setWidth(w);
+			inferiorBar->setHeight(h);
+			buttonTr->setPos({ (float)posX + w - buttonWidth / 2, (float)posY + h / 2 - buttonWidth / 2,0.0f });
 		}
 	}
 }

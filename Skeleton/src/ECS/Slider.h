@@ -30,6 +30,7 @@ namespace LoveEngine {
 		{
 		private:
 			bool tracking = false;
+			bool detectInput = true;
 			const int MAX_VALUE = 100;
 			std::string materialBar = "";
 			std::string materialBarBg = "";
@@ -40,14 +41,16 @@ namespace LoveEngine {
 			int posX = 0, posY = 0;
 			int buttonWidth = 30;
 
-			Renderer::OgreRenderer* ogremanager;
-			Input::InputManager* inputmanager;
+			int barProgress = 100;
+
+			Renderer::OgreRenderer* ogremanager = nullptr;
+			Input::InputManager* inputmanager = nullptr;
 
 			bool visible = true;
-			Ogre::Overlay* overlayBar, *overlayBarBg;
-			Ogre::OverlayContainer* superiorBar;
-			Ogre::OverlayContainer* inferiorBar;
-			Ogre::OverlayContainer* button;
+			Ogre::Overlay* overlayBar = nullptr;
+			Ogre::OverlayContainer* superiorBar = nullptr;
+			Ogre::OverlayContainer* inferiorBar = nullptr;
+			Ogre::OverlayContainer* button = nullptr;
 		public:
 			void init()override;
 			void update()override;
@@ -55,6 +58,12 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
+
+			inline int getProgress() { return barProgress; }
+			void handleInput();
+			void setDetectInput(bool mode);
+			void setPos(int x, int y);
+			void setDimensions(int w, int h);
 			~Slider();
 		};
 	}

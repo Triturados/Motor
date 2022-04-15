@@ -7,7 +7,7 @@ material Heal_bg{
 			texture_unit {
 				texture Heal_bg.png
 				colour_op modulate
-				tex_address_mode clamp
+				tex_address_mode wrap
 			}
 		}
 	}
@@ -22,7 +22,7 @@ material Heal{
 			texture_unit {
 				texture Heal.png
 				colour_op modulate
-				tex_address_mode clamp
+				tex_address_mode wrap
 			}
 		}
 	}
@@ -37,7 +37,7 @@ material CircleButton{
 			texture_unit {
 				texture circleButton.png
 				colour_op modulate
-				tex_address_mode clamp
+				tex_address_mode wrap
 			}
 		}
 	}
