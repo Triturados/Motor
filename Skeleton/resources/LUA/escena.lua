@@ -140,7 +140,7 @@ function scene0()
 --------------
 
     local boss = scene:createObject("boss")
-    local agente = boss:addComponent("Agent")
+    --local agente = boss:addComponent("ComportamientoBoss")
 
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
