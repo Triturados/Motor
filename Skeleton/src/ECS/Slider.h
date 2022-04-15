@@ -18,6 +18,10 @@ namespace LoveEngine {
 		class OgreRenderer;
 	}
 
+	namespace Input {
+		class InputManager;
+	}
+
 	namespace ECS {
 
 		class Transform;
@@ -25,18 +29,25 @@ namespace LoveEngine {
 		class lovexport Slider : public Component
 		{
 		private:
+			bool tracking = false;
+			const int MAX_VALUE = 100;
 			std::string materialBar = "";
+			std::string materialBarBg = "";
 			std::string materialButton = "";
-			Transform* tr = nullptr;
+			Transform* buttonTr = nullptr;
 
 			int width = 10, height = 10;
 			int posX = 0, posY = 0;
+			int buttonWidth = 30;
 
 			Renderer::OgreRenderer* ogremanager;
+			Input::InputManager* inputmanager;
 
 			bool visible = true;
-			Ogre::Overlay* overlay;
-			Ogre::OverlayContainer* container;
+			Ogre::Overlay* overlayBar, *overlayBarBg;
+			Ogre::OverlayContainer* superiorBar;
+			Ogre::OverlayContainer* inferiorBar;
+			Ogre::OverlayContainer* button;
 		public:
 			void init()override;
 			void update()override;

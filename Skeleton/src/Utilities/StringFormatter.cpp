@@ -197,7 +197,7 @@ namespace LoveEngine {
 
 		bool StringFormatter::tryGetInt(std::string name, int& value) const
 		{
-			auto it = i.find(name);
+				auto it = i.find(name);
 
 			if (it != i.end())
 			{

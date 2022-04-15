@@ -10,10 +10,22 @@ function scene0()
 
     local suelo = scene:createObject("Suelo")
 	
-    local kaka = scene:createObject("uiobj")
-	local compdadad2 = kaka:addComponent("Transform")
-	local micompo2 = kaka:addComponent("Image"):sendMsg([[
+    local testImagen = scene:createObject("uiobj")
+	testImagen:addComponent("Transform")
+	testImagen:addComponent("Image"):sendMsg([[
         material: ui
+    ]])
+	
+	local testSlider = scene:createObject("miSlider")
+	testSlider:addComponent("Transform")
+    testSlider:addComponent("Slider"):sendMsg([[
+        materialBar: Heal;
+        materialBarBg: Heal_bg;
+        materialButton: CircleButton;
+        width: 300;
+        height: 50;
+        posX: 100;
+        posY: 100;
     ]])
 	
     local comp2 = suelo:addComponent("Transform")

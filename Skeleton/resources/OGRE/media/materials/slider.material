@@ -1,0 +1,45 @@
+material Heal_bg{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture Heal_bg.png
+				colour_op modulate
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Heal{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture Heal.png
+				colour_op modulate
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material CircleButton{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture circleButton.png
+				colour_op modulate
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
