@@ -72,7 +72,6 @@ namespace LoveEngine {
 			if (detectInput) handleInput();
 			
 			button->setPosition(buttonTr->getPos()->x, buttonTr->getPos()->y);
-
 		}
 
 		void Slider::setVisibility(bool mode)
@@ -99,11 +98,11 @@ namespace LoveEngine {
 
 		void Slider::setProgress(int progress)
 		{
-			if (progress < 0 || progress > MAX_VALUE) return;
+			if (progress < 0 || progress > MAX_VALUE) throw new std::exception("setProgress(), parametro de salud invalido");;
 			barProgress = progress;
 
-			float barWidth = barProgress * width / MAX_VALUE;
-			buttonTr->setPos({ posX + barWidth - buttonWidth / 2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
+			barWidth = barProgress * width / MAX_VALUE;
+			buttonTr->setPos({ (float) posX + barWidth - buttonWidth / 2, (float)posY + height / 2 - buttonWidth / 2,0.0f });
 			superiorBar->setWidth(barWidth);
 		}
 
@@ -127,7 +126,7 @@ namespace LoveEngine {
 				if (newXpos < posX) newXpos = posX;
 				if (newXpos > posX + width - buttonWidth / 2) newXpos = posX + width - buttonWidth / 2;
 				buttonTr->setPos({ newXpos,buttonTr->getPos()->y,0.0f });
-				int barWidth = mousePos.x - posX;
+				barWidth = mousePos.x - posX;
 				if (barWidth < 0) barWidth = 0;
 				if (barWidth > width) barWidth = width;
 				superiorBar->setWidth(barWidth);

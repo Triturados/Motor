@@ -27,6 +27,9 @@ function scene0()
         posX: 100;
         posY: 100;
     ]])
+    testSlider:addComponent("SaludJugador")
+
+    
 	
     local comp2 = suelo:addComponent("Transform")
     

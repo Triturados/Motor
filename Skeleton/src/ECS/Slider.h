@@ -31,7 +31,6 @@ namespace LoveEngine {
 		private:
 			bool tracking = false;
 			bool detectInput = true;
-			const int MAX_VALUE = 100;
 			std::string materialBar = "";
 			std::string materialBarBg = "";
 			std::string materialButton = "";
@@ -39,6 +38,7 @@ namespace LoveEngine {
 
 			int width = 10, height = 10;
 			int posX = 0, posY = 0;
+			int barWidth = 10;
 			int buttonWidth = 30;
 
 			int barProgress = 100;
@@ -60,12 +60,16 @@ namespace LoveEngine {
 			void setVisibility(bool mode = true);
 
 			inline int getProgress() { return barProgress; }
+			inline int getBarWidth() { return barWidth; }
+			inline int getMaxBarWidth() { return width; }
 			void setProgress(int progress);
 			void handleInput();
 			void setDetectInput(bool mode);
 			void setPos(int x, int y);
 			void setDimensions(int w, int h);
 			~Slider();
+
+			const int MAX_VALUE = 100;
 		};
 	}
 }
