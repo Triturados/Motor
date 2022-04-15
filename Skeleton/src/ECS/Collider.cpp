@@ -17,19 +17,19 @@ namespace LoveEngine {
 
 		void Collider::onCollisionEnter(LoveEngine::ECS::GameObject* other)
 		{
-			std::cout << "Entro en collision" << std::endl;
+			//std::cout << "Entro en collision" << std::endl;
 			collGO->enterCollision(other);
 		}
 
 		void Collider::onCollisionExit(LoveEngine::ECS::GameObject* other)
 		{
-			std::cout << "Salgo de collision" << std::endl;
+			//std::cout << "Salgo de collision" << std::endl;
 			collGO->exitCollision(other);
 		}
 
 		void Collider::onCollisionStay(LoveEngine::ECS::GameObject* other)
 		{
-			std::cout << "Estoy en collision" << std::endl;
+			//std::cout << "Estoy en collision" << std::endl;
 			collGO->colliding(other);
 		}
 
