@@ -23,6 +23,7 @@ namespace LoveEngine {
 			static unsigned int numOfComponentClasses;
 
 			Component();
+			virtual ~Component() {};
 			GameObject* gameObject;
 
 			virtual void receiveComponent(int, Component*) {};
