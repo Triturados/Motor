@@ -33,8 +33,10 @@ namespace LoveEngine {
 			entityNode->attachObject(entity);
 			Utilities::Vector3<float> f;
 			entityNode->showBoundingBox(true);
-			Ogre::AxisAlignedBox aB = entityNode->_getWorldAABB();
-			aB.getHalfSize();
+
+			//Obteneter el tamaño de la caja de colisiones de una entidad , de momento ninguna tiene caja con mas de tamaño 0
+			//Vector 3(De ogre) que te da el tamaño
+			entityNode->_getWorldAABB().getSize();
 
 			rot = tr->getRot();
 			pos = tr->getPos();
