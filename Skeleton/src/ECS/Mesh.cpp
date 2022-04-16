@@ -31,12 +31,17 @@ namespace LoveEngine {
 			else throw new std::exception("Ya existe una entidad asociada");
 
 			entityNode->attachObject(entity);
-			Utilities::Vector3<float> f;
+			
+
+
+
+			//Ejemplo para obtener el tamaño de una caja de colisiones y para poder posteriormente escalarla y hacerla visible
+			Ogre::AxisAlignedBox a = entityNode->_getWorldAABB();
+			a.getSize();
+			a.scale(Ogre::Vector3(2, 2, 2));
 			entityNode->showBoundingBox(true);
 
-			//Obteneter el tamaño de la caja de colisiones de una entidad , de momento ninguna tiene caja con mas de tamaño 0
-			//Vector 3(De ogre) que te da el tamaño
-			entityNode->_getWorldAABB().getSize();
+
 
 			rot = tr->getRot();
 			pos = tr->getPos();
