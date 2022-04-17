@@ -19,19 +19,9 @@
 #include "GameObject.h"
 #include "Collider.h"
 
-inline void callFinish(btPersistentManifold* const& manifold) {
-	
-	std::cout << "salgoCollision" << std::endl;
-}
-
-inline void callStart(btPersistentManifold* const& manifold) {
-	std::cout << "entroCollision" << std::endl;
-}
-
 
 namespace LoveEngine {
 	namespace ECS {
-
 
 		inline Utilities::Vector3<float> cvt(const btVector3& V) {
 			return Utilities::Vector3(V.x(), V.y(), V.z());
@@ -114,9 +104,6 @@ namespace LoveEngine {
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
 			rigidBody->setUserPointer((void*)col);
-
-			//gContactEndedCallback = callFinish;
-			//gContactStartedCallback = callStart;
 		}
 
 		void RigidBody::update()
@@ -133,10 +120,6 @@ namespace LoveEngine {
 
 			tr->setPos(newPos);
 			tr->setRot(newRotToVec4);
-			//std::cout << "PosRB: " << newRot.x << ", " << newRot.y << ", " << newRot.z << std::endl;
-			/*if (onCollisionEnter(other)) {
-				std::cout << "colisione" << std::endl;
-			}*/
 		}
 
 		void RigidBody::stepPhysics()
@@ -145,7 +128,6 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
-			//std::cout << "PosRB: " << newRot.x << ", " << newRot.y << ", " << newRot.z << std::endl;
 			tr->setPos(newPos);
 			tr->setRot(newRot);
 			
@@ -243,15 +225,7 @@ namespace LoveEngine {
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
 
-		void RigidBody::receiveComponent(int i, Component* c)
-		{
-
-			if (i == 1) {
-				other = static_cast<RigidBody*>(c);
-			}
-		}
-
-
+		
 		bool RigidBody::onCollisionEnter(RigidBody* other)
 		{
 

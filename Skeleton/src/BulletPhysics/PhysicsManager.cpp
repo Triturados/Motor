@@ -11,23 +11,6 @@
 #include "Collider.h"
 #include "RigidBody.h"
 
-inline bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
-	int partId1, int index1)
-{
-	std::cout << "colisione" << std::endl;
-	return false;
-}
-
-inline void callFinish(btPersistentManifold* const& manifold) {
-	manifold->getBody0();
-	std::cout << "salgoCollision" << std::endl;
-}
-
-inline void callStart(btPersistentManifold* const& manifold) {
-	std::cout << "entroCollision" << std::endl;
-}
-
-
 namespace LoveEngine {
 	namespace Physics {
 		PhysicsManager* PhysicsManager::instance_ = nullptr;
@@ -136,14 +119,6 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-			//gContactAddedCallback
-			//gContactAddedCallback = callbackFunc;
-			//gContactStartedCallback = callStart;
-			//gContactEndedCallback = callFinish;
-
-			collisiones = new std::vector<collisionObj>();
-			//gContactEndedCallback = 
-			//collisionShapes = new btAlignedObjectArray<btCollisionShape*>();
 
 		//#ifdef _DEBUG
 		//	mDebugDrawer = new OgreDebugDrawer(OgreRenderer::instance->getSceneManager());
@@ -239,26 +214,10 @@ namespace LoveEngine {
 			rb->setCollisionFlags(rb->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 			dynamicsWorld->addRigidBody(rb);
-			collisionObj collObj;
-			collObj.rb = rb;
-			collisiones->push_back(collObj);
-			bodies.push_back(rb); //------> BORRAR??
+			bodies.push_back(rb); 
 
 			return rb;
 		}
-
-		std::vector<btRigidBody*>* PhysicsManager::sendContacts(btRigidBody* btRb)
-		{
-			int i = 0;
-			while (i < collisiones->size() - 1)
-			{
-				if (collisiones->at(i).rb = btRb) {
-					return collisiones->at(i).contactosObj;
-				}
-			}
-			return nullptr;
-		}
-
 
 		void PhysicsManager::destroyRigidBody(btRigidBody* body) {
 
@@ -293,27 +252,6 @@ namespace LoveEngine {
 			for (int i = 0; i < bodies.size(); i++) {
 				destroyRigidBody(bodies[i]);
 			}
-
-			/*for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
-			{
-				btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[i];
-				btRigidBody* body = btRigidBody::upcast(obj);
-				if (body && body->getMotionState())
-				{
-					delete body->getMotionState();
-				}
-				dynamicsWorld->removeCollisionObject(obj);
-				delete obj;
-			}*/
-
-			//delete collision shapes
-			/*for (int j = 0; j < collisionShapes->size(); j++)
-			{
-				btCollisionShape* shape = collisionShapes->at(j);
-				collisionShapes->at(j) = 0;
-				delete shape;
-			}*/
-
 
 			destroyWorld();
 		}

@@ -9,7 +9,7 @@ namespace LoveEngine {
 		{
 		public:
 			Collider();
-			~Collider();
+			virtual ~Collider();
 
 			// Callbacks de colision
 			virtual void onCollisionEnter(LoveEngine::ECS::GameObject* other);

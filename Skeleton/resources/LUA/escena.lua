@@ -86,8 +86,6 @@ function scene0()
         restitution: 1.0;
 
     ]])
-    ---prueba deteccion colisiones
-    --compRigidbody:sendComponent(1, compRigidbodySuelo)
 
     local bolaPesada = scene:createObject("BolaPesada")
     local compBolaPesada = bolaPesada:addComponent('Transform')
@@ -180,7 +178,6 @@ function scene0()
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
 
-    --haciendo hijo bola (no funca aun)
     compTrBolaHijaJug:sendComponent(1, tr)
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
