@@ -50,11 +50,11 @@ namespace LoveEngine {
 		//Manager del proyecto de sonido
 		soundManager = new LoveEngine::Audio::SoundManager();
 
-		//Manager del proyecto de fisica
-		physicsManager = new LoveEngine::Physics::PhysicsManager();
-
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
+
+		//Manager del proyecto de fisica
+		physicsManager = new LoveEngine::Physics::PhysicsManager();
 
 		//Manager del proyecto de Input
 		inputManager = new LoveEngine::Input::InputManager();

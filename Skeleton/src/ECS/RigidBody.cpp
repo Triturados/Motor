@@ -88,10 +88,12 @@ namespace LoveEngine {
 		{
 			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
-			Utilities::Vector3<float> scale = *(tr->getScale());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
-				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, scale, mass, (int)shape);
+
+				if (colliderScale->x == -1 && colliderScale->y == -1 && colliderScale->z == -1) colliderScale = tr->getScale();
+
+				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape);
 				rigidBody->setRestitution(restitution);
 
 				/*btQuaternion q;
@@ -138,6 +140,9 @@ namespace LoveEngine {
 			setShape(sf.getString("shape"));
 			sf.tryGetFloat("restitution", restitution);
 			sf.tryGetFloat("mass", mass);
+
+			colliderScale = new Utilities::Vector3<float>(-1, -1, -1);
+			sf.tryGetVector3("colliderScale", *(colliderScale));
 
 			std::string str;
 			if (sf.tryGetString("state", str)) {

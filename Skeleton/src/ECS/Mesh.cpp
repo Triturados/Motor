@@ -32,16 +32,7 @@ namespace LoveEngine {
 
 			entityNode->attachObject(entity);
 			
-
-
-
-			//Ejemplo para obtener el tamaño de una caja de colisiones y para poder posteriormente escalarla y hacerla visible
-			Ogre::AxisAlignedBox a = entityNode->_getWorldAABB();
-			a.getSize();
-			a.scale(Ogre::Vector3(2, 2, 2));
 			entityNode->showBoundingBox(true);
-
-
 
 			rot = tr->getRot();
 			pos = tr->getPos();
