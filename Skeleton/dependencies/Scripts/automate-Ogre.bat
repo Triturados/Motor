@@ -9,8 +9,6 @@ set OGRE_BUILD=..\OgreBuild\
 set OGRE_SOL=..\OgreBuild\OGRE.sln
 set EXES_DIR=..\..\exes\
 
-goto caca
-
 rem Creamos el directorio donde se van a generar los archivos comprobando si no esta creado ya
 if not exist ..\OgreBuild\ mkdir ..\OgreBuild\
 if exist %OGRE_SOL% goto end
@@ -33,8 +31,6 @@ msbuild %OGRE_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
 msbuild %OGRE_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
 echo Build y Compilacion de OGRE terminada.
-
-:caca
 
 rem Copia de .dlls
 echo Copiando .dlls de Ogre...
