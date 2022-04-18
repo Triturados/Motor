@@ -18,7 +18,7 @@ if exist %BULLET_BUILD_DIR% rmdir /s /q %BULLET_BUILD_DIR%
 echo Build de Bullet borrada.
 
 echo Borrando build de LuaBridge...
-if exist %LUA_BUILD_DIR% rmdir /s /q %LUA_BUILD_DIR%
+if exist %LUABRIDGE_BUILD_DIR% rmdir /s /q %LUABRIDGE_BUILD_DIR%
 echo Build de LuaBridge borrada.
 
 echo Borrando todas las .dlls copiadas en exes...

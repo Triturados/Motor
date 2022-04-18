@@ -22,10 +22,8 @@ echo Copiando .dlls...
 cd %DLLS_RELEASE_DIR%
 copy SDL2.dll %EXES_DIR% 1>nul
 
-if %RELEASE_ENGINE% == false (
-    cd %DLLS_DEBUG_DIR%
-    copy SDL2d.dll %EXES_DIR% 1>nul
-)
+cd %DLLS_DEBUG_DIR%
+copy SDL2d.dll %EXES_DIR% 1>nul
 
 cd %WORKING_DIR%
 
