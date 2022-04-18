@@ -1,13 +1,22 @@
 @echo off
 
-rem El directorio actual es Skeleton\dependencies\Scripts
+rem Este .bat se encuentra en el directorio Dependencies/Scripts
 
-cd ..\FMODStudioAPIWindows\dlls
+rem Variables de directorios
+set WORKING_DIR=%cd%
+set FMOD_DLLS_DIR=..\FMODStudioAPIWindows\dlls\
+set EXES_DIR=..\..\exes\
 
-xcopy fmod.dll ..\..\..\exes /y
-xcopy fmodL.dll ..\..\..\exes /y
-xcopy fmodstudio.dll ..\..\..\exes /y
-xcopy fmodstudioL.dll ..\..\..\exes /y
+cd %FMOD_DLLS_DIR%
 
-rem Devolvemos la ruta de entrada a este archivo
-cd ..\..\Scripts
+echo Copiando dlls de FMOD...
+
+copy fmod.dll %EXES_DIR% 1>nul
+copy fmodL.dll %EXES_DIR% 1>nul
+copy fmodstudio.dll %EXES_DIR% 1>nul
+copy fmodstudioL.dll %EXES_DIR% 1>nul
+
+echo .Dlls de FMOD copiadas.
+echo Automatizacion de FMOD terminada.
+
+cd %WORKING_DIR%

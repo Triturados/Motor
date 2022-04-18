@@ -1,14 +1,33 @@
 @echo off
 
-rem El directorio actual es Skeleton\dependencies\Scripts
+rem Este .bat se encuentra en el directorio Dependencies/Scripts
 
-cd ..\OgreBuild\SDL2-build\Debug
+rem Variables de directorios
+set WORKING_DIR=%cd%
+set DEPENDENCIES_DIR=..\
+set SDL2_SOL=..\OgreBuild\SDL2-build\SDL2.sln
+set EXES_DIR=..\..\exes\
+set DLLS_RELEASE_DIR=..\OgreBuild\SDL2-build\Release\
+set DLLS_DEBUG_DIR=..\OgreBuild\SDL2-build\Debug\
 
-xcopy SDL2d.dll ..\..\..\..\exes /y
+echo Compilando la solucion de SDL2...
 
-cd ..\Release
+rem Compilacion de la solucion en Debug y en Release
+msbuild %SDL2_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+msbuild %SDL2_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
-xcopy SDL2.dll ..\..\..\..\exes /y
+echo Solucion de SDL2 compilada.
+echo Copiando .dlls...
 
-rem Devolvemos la ruta de entrada a este archivo
-cd ..\..\..\Scripts
+cd %DLLS_RELEASE_DIR%
+copy SDL2.dll %EXES_DIR% 1>nul
+
+if %RELEASE_ENGINE% == false (
+    cd %DLLS_DEBUG_DIR%
+    copy SDL2d.dll %EXES_DIR% 1>nul
+)
+
+cd %WORKING_DIR%
+
+echo .Dlls copiadas.
+echo Automatizacion de SDL2 terminada.
