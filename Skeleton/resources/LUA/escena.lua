@@ -56,16 +56,20 @@ function scene0()
     material:sendComponent(0, comp3)
 
     --Camara comentada por lo del splash screen
-    -- local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
-    -- local compAidaLaMejor = camaraAidaLaMejor:addComponent('Transform')
-    -- camaraAidaLaMejor:addComponent("MouseTracker"):receiveComponent(5, camaraAidaLaMejor)
-    -- compAidaLaMejor:sendMsg([[
-    --     scale: 1,1,1;
-    --     position: 0,15,75;
-    --     rotation: 0,0,0,0;
-    -- ]])
-    -- local compAidaLaMejor2 = camaraAidaLaMejor:addComponent('Camera')
-   
+    -- local camara = scene:createObject("CamaritaGuapa")
+    -- local transcam = camara:addComponent('Transform')
+    -- transcam:sendMsg([[
+    --    scale: 1,1,1;
+    --    position: 0,40,80;
+    --    rotation: 0,0,0,0;
+    --]])
+
+    -- local camCamera = camara:addComponent('Camera')
+     
+    -- camCamera:sendMsg([[
+    --    cameraName: escenaJuego;
+    --]])
+
     local bola = scene:createObject("Bola")
     local compBola = bola:addComponent('Transform')
         
@@ -135,7 +139,7 @@ function scene0()
     ]])
 
     
-    --local rotarcam = bolaHijaJug:addComponent('CamRotate')
+    local rotarcam = bolaHijaJug:addComponent('CamRotate')
 --------------
 
 ----------bola hijo ogro "cam"
@@ -144,10 +148,28 @@ function scene0()
         
     trcam:sendMsg([[
         scale: 2,2,2;
-        position: 25,15,25;
+        position: 0,40,80;
         rotation: 0,0,0,0;
     ]])
     local compcam = cam:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]])
+    local camCamera = cam:addComponent('Camera')
+    local camFollow = cam:addComponent('CamFollow')
+
+    camCamera:sendMsg([[
+        cameraName: escenaJuego;
+    ]])
+
+    local cam2 = scene:createObject("cam")
+    local trcam2 = cam2:addComponent('Transform')
+        
+    trcam2:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+    local compcam = cam2:addComponent('Mesh'):sendMsg([[
         meshName: sphere.mesh;
     ]])
 --------------
@@ -181,16 +203,19 @@ function scene0()
     compTrBolaHijaJug:sendComponent(1, tr)
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
+    trcam2:sendComponent(1, compTrBolaHijaJug)
 
     --Metiendo componente rotar Camara
-    --rotarcam:sendMsg([[
-    --    verSens: 3.5
-    --    horiSens: 3.5
-    --]])
+    rotarcam:sendMsg([[
+        verSens: 3.5
+        horiSens: 3.5
+    ]])
 
-    --rotarcam:sendGameObject(0, bola)
-    --rotarcam:sendGameObject(1, player)
-    --rotarcam:sendGameObject(2, cam)
+    camFollow:sendGameObject(0, player)
+
+    rotarcam:sendGameObject(0, bola)
+    rotarcam:sendGameObject(1, player)
+    rotarcam:sendGameObject(2, cam2)
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])

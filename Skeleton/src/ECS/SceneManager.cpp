@@ -8,6 +8,7 @@
 #include <Image.h>
 #include <GameObject.h>
 #include <CameraComponent.h>
+#include <Mesh.h>
 #include <Transform.h>
 #include <Timer.h>
 
@@ -125,6 +126,7 @@ namespace LoveEngine {
 
 			auto camera = scene->createGameObject("Camera");
 			camera->addComponent<ECS::Transform>()->receiveUnformattedMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
+			camera->addComponent<ECS::Mesh>()->receiveUnformattedMessage("meshName: sphere.mesh;");
 			camera->addComponent<ECS::Camera>()->receiveUnformattedMessage("cameraName: escenaSplash");
 
 			auto gameObject = scene->createGameObject("Image");

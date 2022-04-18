@@ -49,6 +49,7 @@ namespace LoveEngine {
 			void setVisibility(bool mode = true);
 			void setMaterial(std::string materialName);
 			Ogre::Entity* getEntity();
+			Ogre::SceneNode* getNode();
 			~Mesh();
 		};
 	}

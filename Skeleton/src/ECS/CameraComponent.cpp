@@ -12,21 +12,30 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <StringFormatter.h>
+#include <Mesh.h>
 
 namespace LoveEngine {
 	namespace ECS {
 
 		Camera::~Camera()
 		{
-			ogremanager->removeNode(mCameraNode);
+			if (mCamera != nullptr)
+				ogremanager->getSceneManager()->destroyCamera(mCamera);
+			
+			ogremanager->getRenderWindow()->removeAllViewports();
 		}
 
 		void Camera::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			position = gameObject->getComponent<Transform>();
-			mCameraNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);
+			
+			/*mCameraNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);*/
+			
+			mCameraNode = gameObject->getComponent<Mesh>()->getNode();
+			
+			
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
 			mCamera = ogremanager->getSceneManager()->createCamera(name);
@@ -45,7 +54,7 @@ namespace LoveEngine {
 
 		void Camera::update()
 		{
-			std::cout << "Camara: " << mCamera->getName() << std::endl;
+			//std::cout << "Camara: " << mCamera->getName() << std::endl;
 		}
 
 		void Camera::lookAt(Utilities::Vector3<float> pos)

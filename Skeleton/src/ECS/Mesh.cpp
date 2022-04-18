@@ -96,6 +96,11 @@ namespace LoveEngine {
 			return entity;
 		}
 
+		Ogre::SceneNode* Mesh::getNode()
+		{
+			return entityNode;
+		}
+
 		Mesh::~Mesh()
 		{
 			ogremanager->removeNode(entityNode);
