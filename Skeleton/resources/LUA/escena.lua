@@ -49,6 +49,7 @@ function scene0()
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
+        colliderScale: 3,3,3;
         ]])
 
     local material = suelo:addComponent("Material")
@@ -84,7 +85,7 @@ function scene0()
         mass: 1.0;
         shape: sphere; 
         restitution: 1.0;
-
+        colliderScale: 3,3,3;
     ]])
 
     local bolaPesada = scene:createObject("BolaPesada")
@@ -94,6 +95,7 @@ function scene0()
         scale: 4,4,4;
         position: 20,40,0;
         rotation: 0,0,0,0;
+        colliderScale: 3,3,3;
     ]])
     local compBolaMesh = bolaPesada:addComponent('Mesh'):sendMsg([[
         meshName: sphere.mesh;

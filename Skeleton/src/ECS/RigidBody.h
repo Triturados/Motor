@@ -47,6 +47,7 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float>* lastForce;
 			Utilities::Vector3<float>* acc;
+			Utilities::Vector3<float>* colliderScale;
 
 			RBState stateMode;
 			bool collidesWithGameObject(RigidBody* go) const;

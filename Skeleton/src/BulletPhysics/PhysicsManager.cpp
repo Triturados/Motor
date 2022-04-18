@@ -7,7 +7,6 @@
 #include <Error_handling.h>
 #include <SingletonInfo.h>
 #include "Vector3.h"
-#include "DebugDrawer.h"
 #include "Collider.h"
 #include "RigidBody.h"
 
@@ -119,13 +118,6 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
-
-		//#ifdef _DEBUG
-		//	mDebugDrawer = new OgreDebugDrawer(OgreRenderer::instance->getSceneManager());
-		//	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
-		//	dynamicsWorld->setDebugDrawer(mDebugDrawer);
-		//#endif // DEBUG
-
 			checkExceptions();
 		}
 
@@ -176,7 +168,6 @@ namespace LoveEngine {
 			if (shape == 0) {
 
 				shapeBT = new btBoxShape(btVector3(scale_.x, scale_.y, scale_.z));//cubo
-
 			}
 			else if (shape == 1) {
 				shapeBT = new btSphereShape(btScalar(scale_.x));
@@ -239,8 +230,6 @@ namespace LoveEngine {
 			delete broadPhaseInterface; broadPhaseInterface = nullptr;
 
 			delete constraintSolver; constraintSolver = nullptr;
-
-			delete mDebugDrawer; mDebugDrawer = nullptr;
 
 			delete dynamicsWorld; dynamicsWorld = nullptr;
 		}

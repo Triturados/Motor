@@ -17,17 +17,12 @@ class btCollisionShape;
 class btDiscreteDynamicsWorld;
 template <class T> class btAlignedObjectArray;
 
-
-
-
-
 namespace LoveEngine {
 
 	namespace Utilities {
 		template <typename T>
 		class Vector3;
 	}
-	
 
 	namespace Physics {
 		class Collider;
@@ -51,8 +46,6 @@ namespace LoveEngine {
 
 			//Variable que representa el entorno din�mico de bullet con las anteriores variables como configuraci�n
 			btDynamicsWorld* dynamicsWorld = nullptr;
-
-			OgreDebugDrawer* mDebugDrawer = nullptr;
 
 			std::vector<btRigidBody*> bodies;
 
