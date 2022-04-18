@@ -8,6 +8,7 @@ set WORKING_DIR=%cd%
 set OGRE_BUILD_DIR=.\Skeleton\dependencies\OgreBuild\
 set BULLET_BUILD_DIR=.\Skeleton\dependencies\BulletBuild\
 set LUABRIDGE_BUILD_DIR=.\Skeleton\dependencies\LuaBridgeBuild\
+set EXES_DIR=.\Skeleton\exes\
 
 echo Borrando builds de SDL2 y OGRE...
 if exist %OGRE_BUILD_DIR% rmdir /s /q %OGRE_BUILD_DIR%
@@ -21,8 +22,8 @@ echo Borrando build de LuaBridge...
 if exist %LUABRIDGE_BUILD_DIR% rmdir /s /q %LUABRIDGE_BUILD_DIR%
 echo Build de LuaBridge borrada.
 
-echo Borrando todas las .dlls copiadas en exes...
-del /s .\exes\*.dll 1>nul
-echo .Dlls borradas.
+echo Borrando la carpeta exes
+if exist %EXES_DIR% rmdir /s /q %EXES_DIR%
+echo Directorio exes borrado.
 
 echo Reset completado.

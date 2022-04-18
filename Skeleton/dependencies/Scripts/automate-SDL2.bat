@@ -3,12 +3,8 @@
 rem Este .bat se encuentra en el directorio Dependencies/Scripts
 
 rem Variables de directorios
-set WORKING_DIR=%cd%
-set DEPENDENCIES_DIR=..\
 set SDL2_SOL=..\OgreBuild\SDL2-build\SDL2.sln
 set EXES_DIR=..\..\exes\
-set DLLS_RELEASE_DIR=..\OgreBuild\SDL2-build\Release\
-set DLLS_DEBUG_DIR=..\OgreBuild\SDL2-build\Debug\
 
 echo Compilando la solucion de SDL2...
 
@@ -19,13 +15,8 @@ msbuild %SDL2_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 echo Solucion de SDL2 compilada.
 echo Copiando .dlls...
 
-cd %DLLS_RELEASE_DIR%
-copy SDL2.dll %EXES_DIR% 1>nul
-
-cd %DLLS_DEBUG_DIR%
-copy SDL2d.dll %EXES_DIR% 1>nul
-
-cd %WORKING_DIR%
+copy ..\OgreBuild\SDL2-build\Release\SDL2.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\SDL2-build\Debug\SDL2d.dll %EXES_DIR% /y 1>nul
 
 echo .Dlls copiadas.
 echo Automatizacion de SDL2 terminada.
