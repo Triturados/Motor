@@ -45,8 +45,8 @@ copy ..\OgreBuild\bin\release\zlib.dll %EXES_DIR% /y 1>nul
 copy ..\OgreBuild\bin\release\OgreBites.dll %EXES_DIR% /y 1>nul
 copy ..\OgreBuild\bin\release\OgreRTShaderSystem.dll %EXES_DIR% /y 1>nul
 
-copy ..\OgreBuild\bin\release\OgreBites_d.dll %EXES_DIR% /y 1>nul
-copy ..\OgreBuild\bin\release\OgreRTShaderSystem_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\OgreBites_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\OgreRTShaderSystem_d.dll %EXES_DIR% /y 1>nul
 copy ..\OgreBuild\bin\debug\OgreMain_d.dll %EXES_DIR% /y 1>nul
 copy ..\OgreBuild\bin\debug\OgreOverlay_d.dll %EXES_DIR% /y 1>nul
 copy ..\OgreBuild\bin\debug\Plugin_ParticleFX_d.dll %EXES_DIR% /y 1>nul
