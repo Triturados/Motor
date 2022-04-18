@@ -1,57 +1,59 @@
 @echo off
 
-rem El directorio actual es Skeleton\dependencies\Scripts
+rem Este .bat se encuentra en el directorio Dependencies/Scripts
 
-cd ..\OgreBuild\bin\debug
+rem Variables de directorios
+set CMAKE_EXE=..\CMAKE\bin\cmake.exe
+set OGRE_SRC=..\OgreSrc\
+set OGRE_BUILD=..\OgreBuild\ 
+set OGRE_SOL=..\OgreBuild\OGRE.sln
+set EXES_DIR=..\..\exes\
 
-rem Primero las dll de Debug
-xcopy Codec_STBI_d.dll ..\..\..\..\exes /y
-xcopy DefaultSamples_d.dll ..\..\..\..\exes /y
-xcopy OgreBites_d.dll ..\..\..\..\exes /y
-xcopy OgreMain_d.dll ..\..\..\..\exes /y
-xcopy OgreMeshLodGenerator_d.dll ..\..\..\..\exes /y
-xcopy OgreOverlay_d.dll ..\..\..\..\exes /y
-xcopy OgrePaging_d.dll ..\..\..\..\exes /y
-xcopy OgreProperty_d.dll ..\..\..\..\exes /y
-xcopy OgreRTShaderSystem_d.dll ..\..\..\..\exes /y
-xcopy OgreTerrain_d.dll ..\..\..\..\exes /y
-xcopy OgreVolume_d.dll ..\..\..\..\exes /y
-xcopy Plugin_BSPSceneManager_d.dll ..\..\..\..\exes /y
-xcopy Plugin_OctreeSceneManager_d.dll ..\..\..\..\exes /y
-xcopy Plugin_OctreeZone_d.dll ..\..\..\..\exes /y
-xcopy Plugin_ParticleFX_d.dll ..\..\..\..\exes /y
-xcopy Plugin_PCZSceneManager_d.dll ..\..\..\..\exes /y
-xcopy RenderSystem_GL_d.dll ..\..\..\..\exes /y
-xcopy RenderSystem_GL3Plus_d.dll ..\..\..\..\exes /y
-xcopy SDL2.dll ..\..\..\..\exes /y
-xcopy zlib.dll ..\..\..\..\exes /y
+rem Creamos el directorio donde se van a generar los archivos comprobando si no esta creado ya
+if not exist ..\OgreBuild\ mkdir ..\OgreBuild\
+if exist %OGRE_SOL% goto end
 
-rem Luego las dll de Release
+echo Generando la build de Ogre y compilando la solucion...
 
-cd ..\release
+%CMAKE_EXE%  -D CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release ^
+             -D OGRE_BUILD_PLUGIN_DOT_SCENE:BOOL=0 ^
+             -D OGRE_BUILD_RENDERSYSTEM_D3D9:BOOL=0 ^
+             -D OGRE_BUILD_RENDERSYSTEM_GLES2:BOOL=0 ^
+             -D OGRE_BUILD_RENDERSYSTEM_TINY:BOOL=0 ^
+             -D OGRE_BUILD_RENDERSYSTEM_VULKAN:BOOL=0 ^
+             -D OGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL=1 ^
+             -D OGRE_BUILD_SAMPLES:BOOL=0 ^
+             -D OGRE_INSTALL_SAMPLES:BOOL=0 ^
+             -S %OGRE_SRC% -B %OGRE_BUILD%
 
-xcopy Codec_Assimp.dll ..\..\..\..\exes /y
-xcopy Codec_STBI.dll ..\..\..\..\exes /y
-xcopy DefaultSamples.dll ..\..\..\..\exes /y
-xcopy OgreBites.dll ..\..\..\..\exes /y
-xcopy OgreMain.dll ..\..\..\..\exes /y
-xcopy OgreMeshLodGenerator.dll ..\..\..\..\exes /y
-xcopy OgreOverlay.dll ..\..\..\..\exes /y
-xcopy OgrePaging.dll ..\..\..\..\exes /y
-xcopy OgreProperty.dll ..\..\..\..\exes /y
-xcopy OgreRTShaderSystem.dll ..\..\..\..\exes /y
-xcopy OgreTerrain.dll ..\..\..\..\exes /y
-xcopy OgreVolume.dll ..\..\..\..\exes /y
-xcopy Plugin_BSPSceneManager.dll ..\..\..\..\exes /y
-xcopy Plugin_DotScene.dll ..\..\..\..\exes /y
-xcopy Plugin_OctreeSceneManager.dll ..\..\..\..\exes /y
-xcopy Plugin_OctreeZone.dll ..\..\..\..\exes /y
-xcopy Plugin_ParticleFX.dll ..\..\..\..\exes /y
-xcopy Plugin_PCZSceneManager.dll ..\..\..\..\exes /y
-xcopy RenderSystem_GL.dll ..\..\..\..\exes /y
-xcopy RenderSystem_GL3Plus.dll ..\..\..\..\exes /y
-xcopy SDL2.dll ..\..\..\..\exes /y
-xcopy zlib.dll ..\..\..\..\exes /y
+rem Compilacion de la solucion en Debug y en Release
+msbuild %OGRE_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
+msbuild %OGRE_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
 
-rem Devolvemos la ruta de entrada a este archivo
-cd ..\..\..\Scripts
+echo Build y Compilacion de OGRE terminada.
+
+rem Copia de .dlls
+echo Copiando .dlls de Ogre...
+
+copy ..\OgreBuild\bin\release\OgreMain.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\OgreOverlay.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\Plugin_ParticleFX.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\RenderSystem_GL.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\Codec_STBI.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\Codec_Assimp.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\zlib.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\OgreBites.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\release\OgreRTShaderSystem.dll %EXES_DIR% /y 1>nul
+
+copy ..\OgreBuild\bin\debug\OgreBites_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\OgreRTShaderSystem_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\OgreMain_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\OgreOverlay_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\Plugin_ParticleFX_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\RenderSystem_GL_d.dll %EXES_DIR% /y 1>nul
+copy ..\OgreBuild\bin\debug\Codec_STBI_d.dll %EXES_DIR% /y 1>nul
+
+echo .Dlls copiadas con exito.
+echo Automatizacion de Ogre terminada.
+
+:end
