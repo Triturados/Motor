@@ -7,6 +7,7 @@
 #include <Error_handling.h>
 #include <SingletonInfo.h>
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Collider.h"
 #include "RigidBody.h"
 
@@ -158,7 +159,8 @@ namespace LoveEngine {
 			dynamicsWorld->stepSimulation(deltaTime);
 		}
 
-		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/) {
+		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/,
+			Utilities::Vector4<float> rot_) {
 
 			//creamos el collider
 			btCollisionShape* shapeBT;
@@ -194,6 +196,9 @@ namespace LoveEngine {
 			}
 
 			startTransform.setOrigin(btVector3(pos_.x, pos_.y, pos_.z));
+			btQuaternion quat;
+			quat.setEuler(rot_.x, rot_.y, rot_.z);
+			startTransform.setRotation(quat);
 			btMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
 			//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);

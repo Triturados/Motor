@@ -86,12 +86,13 @@ namespace LoveEngine {
 		{
 			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
+			Utilities::Vector4<float> rot = *(tr->getRot());
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
 
 				if (colliderScale->x == -1 && colliderScale->y == -1 && colliderScale->z == -1) colliderScale = tr->getScale();
 
-				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape);
+				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape, rot);
 				rigidBody->setRestitution(restitution);
 
 				/*btQuaternion q;

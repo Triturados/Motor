@@ -22,6 +22,8 @@ namespace LoveEngine {
 	namespace Utilities {
 		template <typename T>
 		class Vector3;
+		template <typename T>
+		class Vector4;
 	}
 
 	namespace Physics {
@@ -70,7 +72,8 @@ namespace LoveEngine {
 
 			//Crea el un rigidbody de bullet a partir de los siguientes parametros:
 			//Posicion, masa e identificador (el cual determina la forma del collider)
-			btRigidBody* createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/);
+			btRigidBody* createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/, 
+				Utilities::Vector4<float> rot_);
 
 			//destruye un rigidbody de bullet
 			void destroyRigidBody(btRigidBody* body);
