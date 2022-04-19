@@ -358,4 +358,5 @@ MigrationBackup/
 !Skeleton/build/Debug/OGRE
 !Skeleton/build/Release/OGRE
 !Skeleton/dependencies/CMAKE/bin
+!Skeleton/resources/OGRE/Ogre.log
 !Skeleton/dependencies/LuaBridgeSrc/third_party/gtest/googletest/cmake/internal_utils.cmake
