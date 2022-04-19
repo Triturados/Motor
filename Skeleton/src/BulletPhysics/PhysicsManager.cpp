@@ -212,6 +212,10 @@ namespace LoveEngine {
 
 		void PhysicsManager::destroyRigidBody(btRigidBody* body) {
 
+			auto it = contacts.find(body);
+			if (it != contacts.end()) {
+				contacts.erase(it);
+			}
 			dynamicsWorld->removeCollisionObject(body);
 			delete body->getCollisionShape();
 			delete body->getMotionState();
