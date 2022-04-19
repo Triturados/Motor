@@ -6,6 +6,7 @@
 #include <GameObject.h>
 
 #include <Vector2.h>
+#include <Vector3.h>
 #include <Ogre.h>
 #include <string>
 #include <iostream>
@@ -28,10 +29,14 @@ namespace LoveEngine {
 		{
 			material = sf.getString("material");
 
-			sf.tryGetInt("width" , width);
-			sf.tryGetInt("height", height);
-			sf.tryGetInt("posX", posX);
-			sf.tryGetInt("posY", posY);
+			pos = new Utilities::Vector3(0, 0, 1);
+			dimensions = new Utilities::Vector2(0, 0);
+
+			sf.tryGetInt("width" , dimensions->x);
+			sf.tryGetInt("height", dimensions->y);
+			sf.tryGetInt("posX", pos->x);
+			sf.tryGetInt("posY", pos->y);
+			sf.tryGetInt("posZ", pos->z);
 		}
 
 		void Button::init() {
@@ -40,7 +45,7 @@ namespace LoveEngine {
 
 			if (material == "") throw new std::exception("El material no tiene nombre");
 
-			button = ogremanager->createContainer(posX, posY, width, height);
+			button = ogremanager->createContainer(*pos, *dimensions);
 			button->setMaterialName(material);
 
 			// El overlay, que gestiona la poscion, rotacion...
@@ -77,13 +82,15 @@ namespace LoveEngine {
 		Button::~Button()
 		{
 			ogremanager->disableOverlay(overlayBar);
+			delete pos;
+			delete dimensions;
 		}
 
 		void Button::handleInput()
 		{
 			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
 			if (inputmanager->mousePressed(Input::MouseState::JUST_CLICK_L)) {
-				if (mousePos.x >= posX && mousePos.x <= posX + width && mousePos.y >= posY && mousePos.y <= posY + height) {
+				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
 					lambda();
 
 				}
@@ -96,17 +103,20 @@ namespace LoveEngine {
 			if (mode) button->show();
 			else button->hide();
 		}
-		void Button::setPos(int x, int y)
+		void Button::setPos(Utilities::Vector3<int> pos_)
 		{
-			posX = x; posY = y;
-			button->setPosition(x, y);
+			button->setPosition(pos_.x, pos_.y);
+			overlayBar->setZOrder(pos_.z);
+			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
 		}
-		void Button::setDimensions(int w, int h)
+
+		void Button::setDimensions(Utilities::Vector2<int> dimensions_)
 		{
-			width = w; height = h;
-			button->setWidth(w);
-			button->setHeight(h);
+			button->setWidth(dimensions_.x);
+			button->setHeight(dimensions_.y);
+			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
 		}
+
 		void Button::onClick(std::function<void()> l)
 		{
 			lambda = l;

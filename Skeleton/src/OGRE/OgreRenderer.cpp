@@ -33,6 +33,8 @@
 #include <OgreOverlayContainer.h>
 #include "Window.h"
 #include <Vector4.h>
+#include <Vector3.h>
+#include <Vector2.h>
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -303,17 +305,17 @@ namespace LoveEngine {
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
 		/// </summary>
-		Ogre::OverlayContainer* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay)
+		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay)
 		{
 			
-			Ogre::OverlayContainer* container = createContainer(x, y, w, h);
+			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
 			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
 			container->setMaterialName(material);
 			
 			// El overlay, que gestiona la poscion, rotacion...
 			overlay = createOverlay();
 			overlay->add2D(container);
-
+			overlay->setZOrder(pos.z);
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 
 			// Mostrar el overlay
@@ -321,14 +323,14 @@ namespace LoveEngine {
 			return container;
 		}
 
-		Ogre::OverlayContainer* OgreRenderer::createContainer(int x, int y, int w, int h)
+		Ogre::OverlayContainer* OgreRenderer::createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions)
 		{
 			// Elemento que contendra el overlay
 			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
 				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
 			container->setMetricsMode(Ogre::GMM_PIXELS);
-			container->setPosition(x, y);
-			container->setDimensions(w, h);
+			container->setPosition(pos.x,pos.y);
+			container->setDimensions(dimensions.x, dimensions.y);
 			numOfImages++;
 			return container;
 		}
@@ -353,9 +355,10 @@ namespace LoveEngine {
 			container->setMetricsMode(Ogre::GMM_PIXELS);
 			container->setPosition(0, 0);
 			container->setDimensions(1.0f, 1.0f);
-			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
+			o = overlayManager->create("GUI_OVERLAY");
 			o->add2D(container);
 			o->show();
+			
 		
 			std::string szElement = "element_" + typeName;
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
@@ -376,18 +379,21 @@ namespace LoveEngine {
 			overlayManager->destroy("GUI_OVERLAY");
 		}
 
-		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea, float charHeight)
+		void OgreRenderer::setText(std::string info, Utilities::Vector2<int>dimensions, Ogre::TextAreaOverlayElement* tArea, float charHeight,int alignment)
 		{
 			tArea->setCaption(info);
 			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
-			tArea->setDimensions(width, height);
+			tArea->setDimensions(dimensions.x, dimensions.y);
 			tArea->setFontName("arial");
 			tArea->setCharHeight(charHeight);
+			tArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)alignment);
 		}
 
-		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
+		void OgreRenderer::setTextPos(Utilities::Vector3<int> pos_, Ogre::TextAreaOverlayElement* tArea)
 		{
-			tArea->setPosition(x, y);
+			tArea->setPosition(pos_.x,pos_.y);
+			o->setZOrder(pos_.z);
+			
 		}
 
 		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)

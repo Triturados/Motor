@@ -16,22 +16,28 @@ namespace LoveEngine {
 
 		void Mesh::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			meshName = sf.getString("meshName");
+
+			sf.tryGetString("meshName", meshName);
 		}
 
 		void Mesh::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			tr = gameObject->getComponent<Transform>();
-			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
-			if (meshName == "") throw new std::exception("La malla no tiene nombre");
-			entityNode = ogremanager->createNode();
+			if (meshName != "isCamera") {
+				//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
+				if (meshName == "") throw new std::exception("La malla no tiene nombre");
+				entityNode = ogremanager->createNode();
 
-			if (entity == nullptr)
-				entity = ogremanager->getSceneManager()->createEntity(meshName);
-			else throw new std::exception("Ya existe una entidad asociada");
+				if (entity == nullptr)
+					entity = ogremanager->getSceneManager()->createEntity(meshName);
+				else throw new std::exception("Ya existe una entidad asociada");
+				entityNode = ogremanager->createNode();
+				entityNode->attachObject(entity);
 
-			entityNode->attachObject(entity);
-			
+			}
+			else entityNode = ogremanager->createNode();
+
+
 			entityNode->showBoundingBox(true);
 
 			rot = tr->getRot();

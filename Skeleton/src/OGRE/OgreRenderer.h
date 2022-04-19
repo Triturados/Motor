@@ -31,6 +31,10 @@ namespace LoveEngine {
 	namespace Utilities {
 		template<typename T>
 		class Vector4;
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector2;
 	}
 	namespace Renderer {
 		class lovexport OgreRenderer
@@ -46,6 +50,7 @@ namespace LoveEngine {
 			SDL_Window* native;
 			SDL_Renderer* sdlRenderer;
 			Ogre::SceneManager* mSceneMgr;
+			Ogre::Overlay* o;
 
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
@@ -90,15 +95,15 @@ namespace LoveEngine {
 
 			//Interfaz
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
-			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
-			Ogre::OverlayContainer* createContainer(int x, int y, int w, int h);
+			Ogre::OverlayContainer* renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay);
+			Ogre::OverlayContainer* createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions);
 			Ogre::Overlay* createOverlay();
 
 			void disableOverlay(Ogre::Overlay*);
 			Ogre::TextAreaOverlayElement* createOverlayElement(std::string typeName);
 			void destroyText(std::string textName);
-			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea,float charHeight);
-			void setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea);
+			void setText(std::string info, Utilities::Vector2<int>dimensions, Ogre::TextAreaOverlayElement* tArea,float charHeight,int alignment);
+			void setTextPos(Utilities::Vector3<int> pos_, Ogre::TextAreaOverlayElement* tArea);
 			void setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea);
 			~OgreRenderer();
 		};

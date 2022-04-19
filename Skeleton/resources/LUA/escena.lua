@@ -4,7 +4,7 @@ function scene0()
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
     cam:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]]) 
     trcam:sendMsg([[
         scale: 2,2,2;
@@ -37,6 +37,7 @@ function scene0()
         height: 50;
         posX: 500;
         posY: 300;
+		posZ: 1
     ]])
 
     exitButton:sendMsg([[
@@ -45,6 +46,7 @@ function scene0()
         height: 50;
         posX: 500;
         posY: 360;
+		posZ: 1
     ]])
 
     local mainmenu = bg:addComponent("MainMenu");
@@ -71,7 +73,7 @@ function scene1()
         posY: 100;
     ]]) 	
 	
-    local suelo = scene:createObject("Suelo")
+    
 	
     local testImagen = scene:createObject("uiobj")
 	testImagen:addComponent("Transform")
@@ -113,7 +115,7 @@ function scene1()
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 300,3,300;
+        colliderScale: 30,10,30;
         ]])
 
     local material = suelo:addComponent("Material")
@@ -220,7 +222,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]])
     local camCamera = cam:addComponent('Camera')
     local camFollow = cam:addComponent('CamFollow')
@@ -238,7 +240,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam2:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]])
 --------------
 
@@ -292,8 +294,8 @@ function scene1()
 
     --Metiendo componente rotar Camara
     rotarcam:sendMsg([[
-        verSens: 3.5
-        horiSens: 3.5
+        verSens: 1.5
+        horiSens: 1.5
     ]])
 
     camFollow:sendGameObject(0, player)
@@ -318,17 +320,17 @@ function scene1()
     torchSys:sendMsg([[particleName: torch; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
-    textPrueba:addComponent("Transform")
     textPrueba:addComponent("Text"):sendMsg([[
         typeName: pruebaTexto
         textContent: ME CAGO EN TODO
         red:0.0
         green: 1.0
         blue: 0.0
-        isis: 1.0
+        alpha: 1.0
         width: 50
         height: 50
         charHeight:0.1
+        alignment : 2
         ]])
 
 end
