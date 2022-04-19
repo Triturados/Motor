@@ -39,6 +39,7 @@ namespace LoveEngine {
 			Transform* player;
 
 			Renderer::OgreRenderer* ogremanager;
+			int viewportZorder = 0;
 
 		public:
 			~Camera();

@@ -30,7 +30,7 @@ namespace LoveEngine {
 		{
 		private:
 			bool detectInput = true;
-			std::string materialBarBg = "";
+			std::string material = "";
 
 			int width = 10, height = 10;
 			int posX = 0, posY = 0;
@@ -55,7 +55,7 @@ namespace LoveEngine {
 			void setDetectInput(bool mode);
 			void setPos(int x, int y);
 			void setDimensions(int w, int h);
-			void setLambda(std::function<void()> l);
+			void onClick(std::function<void()> l);
 			~Button();
 
 			const int MAX_VALUE = 100;

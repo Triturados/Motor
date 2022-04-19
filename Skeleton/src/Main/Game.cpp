@@ -68,7 +68,6 @@ namespace LoveEngine {
 		gameComponentDefinitions();
 
 		if (initialiseSceneCreator()) {
-			std::cout << "ERROR";
 			assert(("Error al inicializar las DLL.", false));
 			return -1;
 		}

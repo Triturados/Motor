@@ -43,7 +43,7 @@ namespace LoveEngine {
 
 			mCameraNode->attachObject(mCamera);
 
-			vp = ogremanager->getRenderWindow()->addViewport(mCamera);
+			vp = ogremanager->getRenderWindow()->addViewport(mCamera, viewportZorder);
 
 			vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
@@ -70,7 +70,7 @@ namespace LoveEngine {
 
 		void Camera::onSceneDown()
 		{
-			//mCameraNode->setVisible(false);
+			mCameraNode->setVisible(false);
 		}
 		void Camera::yaw(float angle)
 		{
@@ -91,7 +91,8 @@ namespace LoveEngine {
 
 		void Camera::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			sf.tryGetString("cameraName", name);
+			sf.tryGetString("name", name);
+			sf.tryGetInt("zOrder", viewportZorder);
 		}
 	}
 }

@@ -24,10 +24,9 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		
 		void Button::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			materialBarBg = sf.getString("materialBarBg");
+			material = sf.getString("material");
 
 			sf.tryGetInt("width" , width);
 			sf.tryGetInt("height", height);
@@ -39,10 +38,10 @@ namespace LoveEngine {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			inputmanager = Input::InputManager::getInstance();
 
-			if (materialBarBg == "") throw new std::exception("El material no tiene nombre");
+			if (material == "") throw new std::exception("El material no tiene nombre");
 
 			button = ogremanager->createContainer(posX, posY, width, height);
-			button->setMaterialName(materialBarBg);
+			button->setMaterialName(material);
 
 			// El overlay, que gestiona la poscion, rotacion...
 			overlayBar = ogremanager->createOverlay();
@@ -50,10 +49,6 @@ namespace LoveEngine {
 
 			// Mostrar el overlay
 			overlayBar->show();
-
-			//auto g = []() { return 2; };
-			std::function<void()> g([] { std::cout << "pulaaaaa"; });
-			setLambda(g);
 		}
 
 		//No se llama el update 
@@ -112,7 +107,7 @@ namespace LoveEngine {
 			button->setWidth(w);
 			button->setHeight(h);
 		}
-		void Button::setLambda(std::function<void()> l)
+		void Button::onClick(std::function<void()> l)
 		{
 			lambda = l;
 		}
