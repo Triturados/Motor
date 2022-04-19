@@ -242,9 +242,6 @@ function scene1()
     ]])
 --------------
 
-    local boss = scene:createObject("boss")
-    --local agente = boss:addComponent("ComportamientoBoss")
-
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
@@ -268,6 +265,26 @@ function scene1()
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
 
+     -- Enemigo
+    local boss = scene:createObject("boss")
+    local bosstr = boss:addComponent("Transform")
+    bosstr:sendMsg([[
+        scale: 2,2,2;
+        position: 0,20,-20;
+        rotation: 90,0,0,0;
+    ]])
+    local bossAI = boss:addComponent("ComportamientoBoss")
+    bossAI:sendComponent(0, tr)
+    boss:addComponent("Mesh"):sendMsg([[meshName: boss.mesh]])
+    boss:addComponent('Rigidbody'):sendMsg([[
+        state: dynamic;
+        mass: 10.0;
+        shape: sphere; 
+        restitution: 1.0;
+        colliderScale: 10,10,10;
+    ]])
+    -- /Enemigo
+
     compTrBolaHijaJug:sendComponent(1, tr)
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
@@ -281,7 +298,7 @@ function scene1()
 
     camFollow:sendGameObject(0, player)
 
-    rotarcam:sendGameObject(0, bola)
+    rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
     rotarcam:sendGameObject(2, cam2)
 
