@@ -355,9 +355,10 @@ namespace LoveEngine {
 			container->setMetricsMode(Ogre::GMM_PIXELS);
 			container->setPosition(0, 0);
 			container->setDimensions(1.0f, 1.0f);
-			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
+			o = overlayManager->create("GUI_OVERLAY");
 			o->add2D(container);
 			o->show();
+			
 		
 			std::string szElement = "element_" + typeName;
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
@@ -378,18 +379,21 @@ namespace LoveEngine {
 			overlayManager->destroy("GUI_OVERLAY");
 		}
 
-		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea, float charHeight)
+		void OgreRenderer::setText(std::string info, Utilities::Vector2<int>dimensions, Ogre::TextAreaOverlayElement* tArea, float charHeight,int alignment)
 		{
 			tArea->setCaption(info);
 			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
-			tArea->setDimensions(width, height);
+			tArea->setDimensions(dimensions.x, dimensions.y);
 			tArea->setFontName("arial");
 			tArea->setCharHeight(charHeight);
+			tArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)alignment);
 		}
 
-		void OgreRenderer::setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea)
+		void OgreRenderer::setTextPos(Utilities::Vector3<int> pos_, Ogre::TextAreaOverlayElement* tArea)
 		{
-			tArea->setPosition(x, y);
+			tArea->setPosition(pos_.x,pos_.y);
+			o->setZOrder(pos_.z);
+			
 		}
 
 		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)

@@ -5,6 +5,7 @@
 #include <OgreRenderer.h>
 #include <OgreTextAreaOverlayElement.h>
 #include <Vector3.h>
+#include <Vector2.h>
 #include <StringFormatter.h>
 #include <GameObject.h>
 #include "Transform.h"
@@ -13,19 +14,26 @@ namespace LoveEngine
 {
 	namespace ECS {
 
-		
+
 		void Text::receiveMessage(Utilities::StringFormatter& sf)
 		{
+
+			pos = new Utilities::Vector3(0, 0, 0);
+			dimensions = new Utilities::Vector2(0, 0);
+			int alineacion;
 
 			sf.tryGetString("typeName", textName);
 			sf.tryGetString("textContent", textContent);
 			sf.tryGetFloat("red", color.r);
 			sf.tryGetFloat("green", color.g);
 			sf.tryGetFloat("blue", color.b);
-			sf.tryGetFloat("isis", color.a);
-			sf.tryGetInt("width", width);
-			sf.tryGetInt("height", height);
+			sf.tryGetFloat("alpha", color.a);
+			sf.tryGetInt("width", dimensions->x);
+			sf.tryGetInt("height", dimensions->y);
 			sf.tryGetFloat("charHeight", charHeight);
+			sf.tryGetInt("alignment", alineacion);
+
+			alignment = (alignmentEnum)alineacion;
 		}
 		void Text::onSceneUp()
 		{
@@ -47,19 +55,17 @@ namespace LoveEngine
 		void Text::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
-			tr = gameObject->getComponent<Transform>();
-			if (!tr) throw new std::exception("Se necesita transform para usar el componente Text");
 
 			textArea = ogremanager->createOverlayElement(textName);
-			ogremanager->setTextPos(tr->getPos()->x, tr->getPos()->y, textArea);
-			ogremanager->setText(textContent, width, height, textArea, charHeight);
-			ogremanager->setTextColor(color.r, color.g, color.b, color.a, textArea);
+			setPos(*pos);
+			setText(textContent);
+			setCol(color.r, color.g, color.b, color.a);
 		}
 
-		void Text::setPos(float xs, float ys)
+		void Text::setPos(Utilities::Vector3<int> pos_)
 		{
-			tr->setPos(Utilities::Vector3(xs, ys, 0.0f));
-			ogremanager->setTextPos(tr->getPos()->x, tr->getPos()->y, textArea);
+			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+			ogremanager->setTextPos(*pos, textArea);
 		}
 
 		void Text::setCol(float R, float G, float B, float I)
@@ -74,7 +80,7 @@ namespace LoveEngine
 		void Text::setText(std::string szString)
 		{
 			textContent = szString;
-			ogremanager->setText(textContent, width, height, textArea, charHeight);
+			ogremanager->setText(textContent, *dimensions, textArea, charHeight, (int) alignment);
 		}
 
 	}

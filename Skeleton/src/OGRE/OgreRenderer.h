@@ -50,6 +50,7 @@ namespace LoveEngine {
 			SDL_Window* native;
 			SDL_Renderer* sdlRenderer;
 			Ogre::SceneManager* mSceneMgr;
+			Ogre::Overlay* o;
 
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
@@ -101,8 +102,8 @@ namespace LoveEngine {
 			void disableOverlay(Ogre::Overlay*);
 			Ogre::TextAreaOverlayElement* createOverlayElement(std::string typeName);
 			void destroyText(std::string textName);
-			void setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea,float charHeight);
-			void setTextPos(int x, int y, Ogre::TextAreaOverlayElement* tArea);
+			void setText(std::string info, Utilities::Vector2<int>dimensions, Ogre::TextAreaOverlayElement* tArea,float charHeight,int alignment);
+			void setTextPos(Utilities::Vector3<int> pos_, Ogre::TextAreaOverlayElement* tArea);
 			void setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea);
 			~OgreRenderer();
 		};
