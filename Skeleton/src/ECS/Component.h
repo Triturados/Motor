@@ -29,7 +29,9 @@ namespace LoveEngine {
 			virtual void receiveComponent(int, Component*) {};
 			virtual void receiveGameObject(int, GameObject*) {};
 
-			void receiveUnformattedMessage(std::string mssg);
+			void formatString(std::string mssg);
+
+			virtual void receiveString(std::string mssg) {};
 
 			void remove(Component* comp);
 			void remove(GameObject* go);

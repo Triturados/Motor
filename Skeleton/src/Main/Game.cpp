@@ -196,8 +196,9 @@ namespace LoveEngine {
 			.addFunction("sendComponent", &(LoveEngine::ECS::Component::receiveComponent))
 			.addFunction("sendGameObject", &(LoveEngine::ECS::Component::receiveGameObject))
 			.addFunction("sendObject", &(LoveEngine::ECS::Component::receiveGameObject))
-			.addFunction("sendMsg", &(LoveEngine::ECS::Component::receiveUnformattedMessage))
-			.addFunction("sendMssg", &(LoveEngine::ECS::Component::receiveUnformattedMessage))
+			.addFunction("sendMsg", &(LoveEngine::ECS::Component::formatString))
+			.addFunction("sendMssg", &(LoveEngine::ECS::Component::formatString))
+			.addFunction("sendString", &(LoveEngine::ECS::Component::receiveString))
 			.endClass();
 
 	

@@ -124,13 +124,13 @@ namespace LoveEngine {
 			currentScene.push(scene);
 
 			auto camera = scene->createGameObject("Camera");
-			camera->addComponent<ECS::Transform>()->receiveUnformattedMessage("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
-			camera->addComponent<ECS::Mesh>()->receiveUnformattedMessage("meshName: sphere.mesh;");
-			camera->addComponent<ECS::Camera>()->receiveUnformattedMessage("cameraName: escenaSplash");
+			camera->addComponent<ECS::Transform>()->formatString("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
+			camera->addComponent<ECS::Mesh>()->formatString("meshName: sphere.mesh;");
+			camera->addComponent<ECS::Camera>()->formatString("cameraName: escenaSplash");
 
 			auto gameObject = scene->createGameObject("Image");
 			gameObject->addComponent<ECS::Transform>();
-			gameObject->addComponent<ECS::Image>()->receiveUnformattedMessage("material: splashScreen; width: 1280; height : 720");
+			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen; width: 1280; height : 720");
 
 			ECS::Timer::invoke([&](ECS::Timer*) {
 				changeScene(0, SceneLoad::SWAP);
