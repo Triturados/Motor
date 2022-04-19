@@ -120,9 +120,6 @@ namespace LoveEngine {
 
 	void Game::quit()
 	{
-		FreeLibrary(game);
-		FreeLibrary(singleton);
-
 		delete compFactory;
 		delete sceneManager;
 		delete time;
@@ -130,6 +127,10 @@ namespace LoveEngine {
 		delete ogreManager;
 		delete inputManager;
 		delete soundManager;
+
+		FreeLibrary(game);
+		FreeLibrary(singleton);
+
 		//delete physicsManager;
 	}
 

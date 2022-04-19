@@ -377,7 +377,7 @@ namespace LoveEngine {
 
 			//Destruimos los dos elementos que componenel texto 
 			overlayManager->destroyOverlayElement("GUI");
-			overlayManager->destroy("GUI_OVERLAY" + elemName);
+			overlayManager->destroy("GUI_OVERLAY");
 
 
 		}
