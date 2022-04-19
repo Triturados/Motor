@@ -178,7 +178,7 @@ namespace LoveEngine {
 
 		void GameObject::sendMessage(std::string message) {
 			for (auto comp : componentsList) {
-				comp->receiveUnformattedMessage(message);
+				comp->formatString(message);
 			}
 		}
 	}

@@ -46,7 +46,7 @@ namespace LoveEngine {
 			enabled = !enabled;
 		}
 
-		void Component::receiveUnformattedMessage(std::string msg)
+		void Component::formatString(std::string msg)
 		{
 			Utilities::StringFormatter sf(msg);
 			receiveMessage(sf);
