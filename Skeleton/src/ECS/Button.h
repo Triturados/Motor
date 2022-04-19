@@ -15,6 +15,13 @@ namespace Ogre {
 
 namespace LoveEngine {
 
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector2;
+	}
+
 	namespace Renderer {
 		class OgreRenderer;
 	}
@@ -32,8 +39,8 @@ namespace LoveEngine {
 			bool detectInput = true;
 			std::string material = "";
 
-			int width = 10, height = 10;
-			int posX = 0, posY = 0;
+			Utilities::Vector3<int>* pos;
+			Utilities::Vector2<int>* dimensions;
 
 			Renderer::OgreRenderer* ogremanager = nullptr;
 			Input::InputManager* inputmanager = nullptr;
@@ -53,8 +60,8 @@ namespace LoveEngine {
 
 			void handleInput();
 			void setDetectInput(bool mode);
-			void setPos(int x, int y);
-			void setDimensions(int w, int h);
+			void setPos(Utilities::Vector3<int> pos_);
+			void setDimensions(Utilities::Vector2<int> dimensions_);
 			void onClick(std::function<void()> l);
 			~Button();
 

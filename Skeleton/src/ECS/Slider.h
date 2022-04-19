@@ -14,6 +14,13 @@ namespace Ogre {
 
 namespace LoveEngine {
 
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector2;
+	}
+
 	namespace Renderer {
 		class OgreRenderer;
 	}
@@ -34,10 +41,11 @@ namespace LoveEngine {
 			std::string materialBar = "";
 			std::string materialBarBg = "";
 			std::string materialButton = "";
-			Transform* buttonTr = nullptr;
 
-			int width = 10, height = 10;
-			int posX = 0, posY = 0;
+			Utilities::Vector3<int>* pos;
+			Utilities::Vector3<int>* buttonPos;
+			Utilities::Vector2<int>* dimensions;
+			Utilities::Vector2<int>* buttonDimensions;
 			int barWidth = 10;
 			int buttonWidth = 30;
 
@@ -61,12 +69,12 @@ namespace LoveEngine {
 
 			inline int getProgress() { return barProgress; }
 			inline int getBarWidth() { return barWidth; }
-			inline int getMaxBarWidth() { return width; }
+			inline int getMaxBarWidth();
 			void setProgress(int progress);
 			void handleInput();
 			void setDetectInput(bool mode);
-			void setPos(int x, int y);
-			void setDimensions(int w, int h);
+			void setPos(Utilities::Vector3<int> pos_);
+			void setDimensions(Utilities::Vector2<int> dimensions_);
 			~Slider();
 
 			const int MAX_VALUE = 100;

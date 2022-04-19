@@ -33,6 +33,8 @@
 #include <OgreOverlayContainer.h>
 #include "Window.h"
 #include <Vector4.h>
+#include <Vector3.h>
+#include <Vector2.h>
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -303,17 +305,17 @@ namespace LoveEngine {
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
 		/// </summary>
-		Ogre::OverlayContainer* OgreRenderer::renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay)
+		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay)
 		{
 			
-			Ogre::OverlayContainer* container = createContainer(x, y, w, h);
+			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
 			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
 			container->setMaterialName(material);
 			
 			// El overlay, que gestiona la poscion, rotacion...
 			overlay = createOverlay();
 			overlay->add2D(container);
-
+			overlay->setZOrder(pos.z);
 			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 
 			// Mostrar el overlay
@@ -321,14 +323,14 @@ namespace LoveEngine {
 			return container;
 		}
 
-		Ogre::OverlayContainer* OgreRenderer::createContainer(int x, int y, int w, int h)
+		Ogre::OverlayContainer* OgreRenderer::createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions)
 		{
 			// Elemento que contendra el overlay
 			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
 				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
 			container->setMetricsMode(Ogre::GMM_PIXELS);
-			container->setPosition(x, y);
-			container->setDimensions(w, h);
+			container->setPosition(pos.x,pos.y);
+			container->setDimensions(dimensions.x, dimensions.y);
 			numOfImages++;
 			return container;
 		}

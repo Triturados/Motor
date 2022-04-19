@@ -9,6 +9,8 @@
 #include <string>
 #include <iostream>
 #include <StringFormatter.h>
+#include <Vector3.h>
+#include <Vector2.h>
 
 #include <OgreOverlay.h>
 #include <OgreOverlayManager.h>
@@ -26,21 +28,21 @@ namespace LoveEngine {
 		{
 			material = sf.getString("material");
 
-			sf.tryGetInt("width" , width );
-			sf.tryGetInt("height", height);
+			pos = new Utilities::Vector3(0,0,0);
+			dimensions = new Utilities::Vector2(0,0);
+
+			sf.tryGetInt("width" , dimensions->x);
+			sf.tryGetInt("height", dimensions->y);
+			sf.tryGetInt("posX", pos->x);
+			sf.tryGetInt("posY", pos->y);
+			sf.tryGetInt("posZ", pos->z);
 		}
 		void Image::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 
 			if (material == "") throw new std::exception("El material no tiene nombre");
-			
-			tr = gameObject->getComponent<Transform>();
-			if(!tr) throw new std::exception("Se necesita transform para usar el componente Image");
 
-			/*tr->setPos({ 300,300,0 });*/
-			container = ogremanager->renderImage(0,0,width,height,material, overlay);
-
-			/*setPos(300, 300);*/
+			container = ogremanager->renderImage(*pos, *dimensions, material, overlay);
 		}
 
 		//No se llama el update 
@@ -58,10 +60,18 @@ namespace LoveEngine {
 			else overlay->hide();
 		}
 
-		void Image::setPos(int x, int y)
+		void Image::setPos(Utilities::Vector3<int> pos_)
 		{
-			tr->setPos(Utilities::Vector3((float)x,(float)y,0.0f));
-			container->setPosition(tr->getPos()->x, tr->getPos()->y);
+			container->setPosition(pos_.x, pos_.y);
+			overlay->setZOrder(pos_.z);
+			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+		}
+
+		void Image::setDimensions(Utilities::Vector2<int> dimensions_)
+		{
+			container->setWidth(dimensions_.x);
+			container->setHeight(dimensions_.y);
+			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
 		}
 
 		void Image::onSceneDown()
@@ -78,7 +88,8 @@ namespace LoveEngine {
 
 		Image::~Image()
 		{
-
+			delete pos;
+			delete dimensions;
 		}
 	}
 }

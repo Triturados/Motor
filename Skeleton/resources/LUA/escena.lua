@@ -37,6 +37,7 @@ function scene0()
         height: 50;
         posX: 500;
         posY: 300;
+		posZ: 1
     ]])
 
     exitButton:sendMsg([[
@@ -45,6 +46,7 @@ function scene0()
         height: 50;
         posX: 500;
         posY: 360;
+		posZ: 1
     ]])
 
     local mainmenu = bg:addComponent("MainMenu");

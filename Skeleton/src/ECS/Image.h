@@ -14,6 +14,10 @@ namespace Ogre {
 
 namespace LoveEngine {
 
+	namespace Utilities {
+		template<typename T>
+		class Vector3;
+	}
 	namespace Renderer {
 		class OgreRenderer;
 	}
@@ -26,10 +30,9 @@ namespace LoveEngine {
 		{
 		private:
 			std::string material = "";
-			Transform* tr = nullptr;
 
-			int width = 10, height = 10;
-
+			Utilities::Vector3<int>* pos;
+			Utilities::Vector2<int>* dimensions;
 			Renderer::OgreRenderer* ogremanager;
 
 			bool visible = true;
@@ -42,7 +45,8 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
-			void setPos(int x, int y);
+			void setPos(Utilities::Vector3<int> pos_);
+			void setDimensions(Utilities::Vector2<int> dimensions_);
 			~Image();
 		};
 	}

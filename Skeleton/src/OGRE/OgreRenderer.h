@@ -31,6 +31,10 @@ namespace LoveEngine {
 	namespace Utilities {
 		template<typename T>
 		class Vector4;
+		template<typename T>
+		class Vector3;
+		template<typename T>
+		class Vector2;
 	}
 	namespace Renderer {
 		class lovexport OgreRenderer
@@ -90,8 +94,8 @@ namespace LoveEngine {
 
 			//Interfaz
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
-			Ogre::OverlayContainer* renderImage(int x, int y, int w, int h, std::string material, Ogre::Overlay*& overlay);
-			Ogre::OverlayContainer* createContainer(int x, int y, int w, int h);
+			Ogre::OverlayContainer* renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay);
+			Ogre::OverlayContainer* createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions);
 			Ogre::Overlay* createOverlay();
 
 			void disableOverlay(Ogre::Overlay*);
