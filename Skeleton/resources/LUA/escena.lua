@@ -73,7 +73,7 @@ function scene1()
         posY: 100;
     ]]) 	
 	
-    local suelo = scene:createObject("Suelo")
+    
 	
     local testImagen = scene:createObject("uiobj")
 	testImagen:addComponent("Transform")
@@ -115,7 +115,7 @@ function scene1()
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 3,3,3;
+        colliderScale: 30,10,30;
         ]])
 
     local material = suelo:addComponent("Material")
@@ -303,7 +303,6 @@ function scene1()
     torchSys:sendMsg([[particleName: torch; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
-    textPrueba:addComponent("Transform")
     textPrueba:addComponent("Text"):sendMsg([[
         typeName: pruebaTexto
         textContent: ME CAGO EN TODO
