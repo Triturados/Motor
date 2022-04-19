@@ -310,10 +310,11 @@ function scene1()
         red:0.0
         green: 1.0
         blue: 0.0
-        isis: 1.0
+        alpha: 1.0
         width: 50
         height: 50
         charHeight:0.1
+        alignment : 2
         ]])
 
 end
