@@ -133,7 +133,7 @@ namespace LoveEngine {
 		delete inputManager;
 		delete soundManager;
 
-		//delete physicsManager;
+		delete physicsManager;
 
 		FreeLibrary(game);
 		FreeLibrary(singleton);
