@@ -157,21 +157,21 @@ namespace LoveEngine {
 			}
 		}
 
-		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)
+		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, ForceMode mode)
 		{
 			if (enabled) {
 				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
-					if (type == (int)ForceMode::FORCE)
+					if (mode == ForceMode::FORCE)
 						rigidBody->applyCentralForce(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
-					else if (type == (int)ForceMode::IMPULSE)
+					else if (mode == ForceMode::IMPULSE)
 						rigidBody->applyCentralImpulse(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
 				}
 				else {
-					if (type == (int)ForceMode::FORCE)
+					if (mode == ForceMode::FORCE)
 						rigidBody->applyForce(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
-					else if (type == (int)ForceMode::IMPULSE)
+					else if (mode == ForceMode::IMPULSE)
 						rigidBody->applyImpulse(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));

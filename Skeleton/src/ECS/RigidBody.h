@@ -66,7 +66,7 @@ namespace LoveEngine {
 
 			void receiveMessage(Utilities::StringFormatter& s) override;
 
-			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, int type);
+			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, ForceMode mode);
 
 			void setTransform(Transform* t_);
 
