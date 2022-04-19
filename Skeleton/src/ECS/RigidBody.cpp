@@ -76,11 +76,9 @@ namespace LoveEngine {
 
 		RigidBody::~RigidBody()
 		{
-			delete lastForce;
 			delete acc;
 			if (col) delete col;
 			col = nullptr;
-			delete tr;
 			delete rigidBody;
 		}
 
@@ -161,8 +159,6 @@ namespace LoveEngine {
 
 		void RigidBody::addForce(Utilities::Vector3<float> force, Utilities::Vector3<float> relativePos, int type)
 		{
-			lastForce->x = force.x; lastForce->y = force.y; lastForce->z = force.z;
-
 			if (enabled) {
 				if (relativePos == Utilities::Vector3(0.0f, 0.0f, 0.0f)) {
 					if (type == (int)ForceMode::FORCE)

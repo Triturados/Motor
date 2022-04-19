@@ -45,7 +45,6 @@ namespace LoveEngine {
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
-			Utilities::Vector3<float>* lastForce;
 			Utilities::Vector3<float>* acc;
 			Utilities::Vector3<float>* colliderScale;
 
