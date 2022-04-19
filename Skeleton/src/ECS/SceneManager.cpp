@@ -96,7 +96,6 @@ namespace LoveEngine {
 		void SceneManager::updatePersistentScene()
 		{
 			persistentScene->update();
-			persistentScene->stepPhysics();
 		}
 
 		void SceneManager::initiliseScenes()

@@ -16,6 +16,7 @@
 #include <Material.h>
 #include <Agent.h>
 #include <Slider.h>
+#include <Button.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -65,6 +66,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Material>("Material"));
 			registerComponent(new ComponentCreatorTemplate<Agent>("Agent"));
 			registerComponent(new ComponentCreatorTemplate<Slider>("Slider"));
+			registerComponent(new ComponentCreatorTemplate<Button>("Button"));
 		}
 
 

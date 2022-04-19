@@ -33,7 +33,7 @@ namespace LoveEngine {
 
 	struct Game {
 
-		void setup();
+		int setup();
 		void loop();
 		void quit();
 

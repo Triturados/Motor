@@ -68,8 +68,12 @@ namespace LoveEngine {
 					//std::cout << "Raton movido: " << mouseX << " " << mouseY << std::endl;
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					if (sdlevent.button.button == SDL_BUTTON_LEFT)
-						mouseState = MouseState::CLICK_L;
+					if (sdlevent.button.button == SDL_BUTTON_LEFT) {
+						if (mouseState == MouseState::JUST_CLICK_L) mouseState = MouseState::CLICK_L;
+						else mouseState = MouseState::JUST_CLICK_L;
+					}
+						
+						
 					else if (sdlevent.button.button == SDL_BUTTON_RIGHT)
 						mouseState = MouseState::CLICK_R;
 					else if (sdlevent.button.button == SDL_BUTTON_MIDDLE)

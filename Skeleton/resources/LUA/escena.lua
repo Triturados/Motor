@@ -1,14 +1,78 @@
-function escenaEjemplo()
-    IvanTontoTonto()
+function scene0()
+    scene:name("Main menu")
+
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    cam:addComponent('Mesh'):sendMsg([[
+        meshName: sphere.mesh;
+    ]]) 
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+    
+    local camCamera = cam:addComponent('Camera')
+
+    camCamera:sendMsg([[
+        name: escenaMenu;
+        zOrder: -1
+    ]])
+
+    
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: menuBackground; 
+        width: 1280;
+        height : 720;
+    ]])
+
+    local startButton = scene:createObject("Start Button"):addComponent("Button");
+    local exitButton = scene:createObject("Exit Button"):addComponent("Button");
+
+    startButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+    ]])
+
+    exitButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+    ]])
+
+    local mainmenu = bg:addComponent("MainMenu");
+    mainmenu:sendComponent(0, startButton);
+    mainmenu:sendComponent(1, exitButton);
 end
 
-function scene0()
+function scene1()
     scene:name("Escena de Prueba")
+
+
+    persistentObject:addComponent("ComponenteDeContar")
 
     local a = scene:createObject("AAA");
     a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")
 
-    --Imagen--
+
+	local btest = scene:createObject("btest");
+    btest:addComponent("Button"):sendMsg([[
+        material: Heal_bg;
+        width: 300;
+        height: 50;
+        posX: 400;
+        posY: 100;
+    ]]) 	
+	
+    local suelo = scene:createObject("Suelo")
+	
     local testImagen = scene:createObject("uiobj")
 	testImagen:addComponent("Transform")
 	testImagen:addComponent("Image"):sendMsg([[
@@ -68,7 +132,7 @@ function scene0()
     -- local camCamera = camara:addComponent('Camera')
      
     -- camCamera:sendMsg([[
-    --    cameraName: escenaJuego;
+    --    name: escenaJuego;
     --]])
 
     --Bola--
@@ -162,7 +226,7 @@ function scene0()
     local camFollow = cam:addComponent('CamFollow')
 
     camCamera:sendMsg([[
-        cameraName: escenaJuego;
+        name: escenaJuego;
     ]])
 
     local cam2 = scene:createObject("cam")
@@ -253,7 +317,7 @@ function scene0()
 end
 
 
-function scene1()
+function scene2()
     scene:name("Escena de Dani")
     local obj = scene:createObject("Objeto de Dani")
     --obj:addComponent("ComponenteDeContar"):sendMsg("Hola tontatatatata")
@@ -262,34 +326,4 @@ function scene1()
         numerito: 4;
         otronumerito: 12 
     ]])
-end
-
-function scene2()
-    scene:name("Escena de Daniel")
-    
-    local suelo = scene:createObject("Suelo")
-    local comp = suelo:addComponent("EscribirNumero")
-    local comp2 = suelo:addComponent("Transform")
-    
-    comp2:sendMsg([[
-        scale: 50,1,50;
-        position: 0,-100,0;
-        rotation: 0,0,0,0;
-    ]])
-    local comp3 = suelo:addComponent("Mesh"):sendMsg([[
-        meshName: cube.mesh;
-    ]])
-
-    local camaraAidaLaMejor = scene:createObject("CamaritaGuapa")
-    local compAidaLaMejor = camaraAidaLaMejor:addComponent("Transform")
-        
-    compAidaLaMejor:sendMsg([[
-        scale: 1,1,1;
-        position: 0,10,50;
-        rotation: 0,0,0,0;
-    ]])
-    local compAidaLaMejor2 = camaraAidaLaMejor:addComponent("Camera")
-   
-
-    -- local comp4 = suelo:addComponent("Rigidbody")
 end
