@@ -4,7 +4,7 @@ function scene0()
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
     cam:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]]) 
     trcam:sendMsg([[
         scale: 2,2,2;
@@ -222,7 +222,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]])
     local camCamera = cam:addComponent('Camera')
     local camFollow = cam:addComponent('CamFollow')
@@ -240,7 +240,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam2:addComponent('Mesh'):sendMsg([[
-        meshName: sphere.mesh;
+        meshName: isCamera;
     ]])
 --------------
 
