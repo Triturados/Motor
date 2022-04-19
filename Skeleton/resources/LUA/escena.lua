@@ -1,9 +1,8 @@
-function escenaEjemplo()
-    IvanTontoTonto()
-end
-
 function scene0()
     scene:name("Escena de Prueba")
+
+
+    persistentObject:addComponent("ComponenteDeContar")
 
     local a = scene:createObject("AAA");
     a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")

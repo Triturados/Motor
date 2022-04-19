@@ -35,12 +35,13 @@ typedef const char* (*GameName)();
 
 using namespace std::chrono;
 namespace LoveEngine {
-	void Game::setup() {
+	int Game::setup() {
 
 		GameComponentDefinition gameComponentDefinitions;
 
 		if (initialiseDLLs(gameComponentDefinitions)) {
-			assert("Error al inicializar las DLL.", false);
+			assert(("Error al inicializar las DLL.", false));
+			return -1;
 		}
 
 		time = new LoveEngine::Time();
@@ -52,6 +53,7 @@ namespace LoveEngine {
 
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
+		ogreManager->getSceneManager()->destroyAllCameras();
 
 		//Manager del proyecto de fisica
 		physicsManager = new LoveEngine::Physics::PhysicsManager();
@@ -62,30 +64,32 @@ namespace LoveEngine {
 
 		changeWindowTitle();
 
-		ogreManager->getSceneManager()->destroyAllCameras();
 
 		gameComponentDefinitions();
 
-		initialiseSceneCreator();
+		if (initialiseSceneCreator()) {
+			std::cout << "ERROR";
+			assert(("Error al inicializar las DLL.", false));
+			return -1;
+		}
 
 		sceneManager->initiliseScenes();
 		sceneManager->initialisePersistentScene();
+
+		return 0;
 	}
 
 
 	void Game::loop()
 	{
-		const float numIterations = 3600;
-
 		const float physicsFrameRate = 50;
-		//double pInterval = 1.0 / physicsFrameRate;
 		duration pInterval = duration<double>(1.0 / physicsFrameRate);
 
 		steady_clock::time_point applicationStart = high_resolution_clock::now();
 		steady_clock::time_point lastPhysicFrame = applicationStart;
 		steady_clock::time_point beginFrame = applicationStart;
 
-		for (int i = 0; i < numIterations; i++) {
+		while(true){
 
 			LoveEngine::ECS::Scene* currentScene = sceneManager->getCurrentScene();
 
@@ -98,6 +102,8 @@ namespace LoveEngine {
 			}
 
 			currentScene->update();
+			sceneManager->updatePersistentScene();
+
 
 			if ((beginFrame - lastPhysicFrame).count() > physicsFrameRate) {
 
@@ -128,10 +134,10 @@ namespace LoveEngine {
 		delete inputManager;
 		delete soundManager;
 
+		//delete physicsManager;
+
 		FreeLibrary(game);
 		FreeLibrary(singleton);
-
-		//delete physicsManager;
 	}
 
 
@@ -220,7 +226,13 @@ namespace LoveEngine {
 			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
 			isNil = populateScene.isNil();
 		}
-		sceneManager->numberOfScenes = count;
+
+		sceneManager->numberOfScenes = count - 1;
+
+		if (count - 1 == 0) {
+			std::cout << "No hay ninguna escena para crear\n";
+			return -1;
+		}
 
 		return 0;
 	}
