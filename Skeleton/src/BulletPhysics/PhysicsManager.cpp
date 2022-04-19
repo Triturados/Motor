@@ -217,10 +217,12 @@ namespace LoveEngine {
 				contacts.erase(it);
 			}
 			dynamicsWorld->removeCollisionObject(body);
-			delete body->getCollisionShape();
-			delete body->getMotionState();
+			btMotionState* motionstate = body->getMotionState();
+			btCollisionShape* collisionshape = body->getCollisionShape();
 			delete body;
-			body = nullptr;
+			delete collisionshape;
+			delete motionstate;
+			//body = nullptr;
 		}
 
 

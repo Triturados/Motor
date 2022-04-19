@@ -79,7 +79,7 @@ namespace LoveEngine {
 			delete acc;
 			if (col) delete col;
 			col = nullptr;
-			delete rigidBody;
+			//delete rigidBody;
 		}
 
 		void  RigidBody::init()
