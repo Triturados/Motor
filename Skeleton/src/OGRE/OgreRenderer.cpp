@@ -349,22 +349,18 @@ namespace LoveEngine {
 		{
 
 			//WithoutChild
-			Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
-			panel->setMetricsMode(Ogre::GMM_PIXELS);
-			panel->setPosition(5.0, 15.0);
-			panel->setDimensions(3.0f, 3.0f);
+			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
+			container->setMetricsMode(Ogre::GMM_PIXELS);
+			container->setPosition(0, 0);
+			container->setDimensions(1.0f, 1.0f);
 			Ogre::Overlay* o = overlayManager->create("GUI_OVERLAY");
-			o->add2D(panel);
-
+			o->add2D(container);
+			o->show();
 		
 			std::string szElement = "element_" + typeName;
-			Ogre::Overlay* overlay = overlayManager->getByName("GUI_OVERLAY");
-			panel = static_cast<Ogre::OverlayContainer*>(overlayManager->getOverlayElement("GUI"));
 			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
-			panel->addChild(textArea);
-			overlay->show();
+			container->addChild(textArea);
 			textArea->show();
-
 
 			return textArea;
 
@@ -378,15 +374,13 @@ namespace LoveEngine {
 			//Destruimos los dos elementos que componenel texto 
 			overlayManager->destroyOverlayElement("GUI");
 			overlayManager->destroy("GUI_OVERLAY");
-
-
 		}
 
 		void OgreRenderer::setText(std::string info, int width, int height, Ogre::TextAreaOverlayElement* tArea, float charHeight)
 		{
 			tArea->setCaption(info);
-			tArea->setDimensions(1.0, 1.0);
 			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
+			tArea->setDimensions(width, height);
 			tArea->setFontName("arial");
 			tArea->setCharHeight(charHeight);
 		}
@@ -400,10 +394,6 @@ namespace LoveEngine {
 		{
 			tArea->setColour(Ogre::ColourValue(R, G, B, I));
 		}
-
-
-
-
 
 		OgreRenderer::~OgreRenderer()
 		{
@@ -447,6 +437,5 @@ namespace LoveEngine {
 		{
 			return mWindow;
 		}
-
 	}
 }

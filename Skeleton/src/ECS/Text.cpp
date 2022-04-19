@@ -58,7 +58,7 @@ namespace LoveEngine
 
 		void Text::setPos(float xs, float ys)
 		{
-			tr->setPos(Utilities::Vector3((float)xs, (float)ys, 0.0f));
+			tr->setPos(Utilities::Vector3(xs, ys, 0.0f));
 			ogremanager->setTextPos(tr->getPos()->x, tr->getPos()->y, textArea);
 		}
 

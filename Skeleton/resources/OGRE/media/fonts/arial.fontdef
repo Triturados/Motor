@@ -2,5 +2,6 @@ arial
 {
     type truetype
     source arial.ttf
-
+    size 64
+    resolution 72
 }

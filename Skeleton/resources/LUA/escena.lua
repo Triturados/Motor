@@ -79,6 +79,7 @@ function scene1()
         material: ui
     ]])
 	
+    --Slider--
 	local testSlider = scene:createObject("miSlider")
 	testSlider:addComponent("Transform")
     testSlider:addComponent("Slider"):sendMsg([[
@@ -92,8 +93,8 @@ function scene1()
     ]])
     testSlider:addComponent("SaludJugador")
 
-    
-	
+    --Suelo--
+	local suelo = scene:createObject("Suelo")
     local comp2 = suelo:addComponent("Transform")
     
     comp2:sendMsg([[
@@ -134,6 +135,7 @@ function scene1()
     --    name: escenaJuego;
     --]])
 
+    --Bola--
     local bola = scene:createObject("Bola")
     local compBola = bola:addComponent('Transform')
         
@@ -155,6 +157,7 @@ function scene1()
         colliderScale: 3,3,3;
     ]])
 
+    --BolaPesada--
     local bolaPesada = scene:createObject("BolaPesada")
     local compBolaPesada = bolaPesada:addComponent('Transform')
         
@@ -298,17 +301,17 @@ function scene1()
     torchSys:sendMsg([[particleName: torch; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
-    textPrueba:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,0; rotation: 0,0,0,0;]])
+    textPrueba:addComponent("Transform")
     textPrueba:addComponent("Text"):sendMsg([[
         typeName: pruebaTexto
-        textContent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        red:1.0
+        textContent: ME CAGO EN TODO
+        red:0.0
         green: 1.0
         blue: 0.0
-        isis: 0.0
-        width: 200000
-        height: 200000
-        charHeight:0.5
+        isis: 1.0
+        width: 50
+        height: 50
+        charHeight:0.1
         ]])
 
 end
