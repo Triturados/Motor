@@ -113,7 +113,7 @@ function scene1()
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 3,3,3;
+        colliderScale: 300,3,300;
         ]])
 
     local material = suelo:addComponent("Material")
