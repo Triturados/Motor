@@ -372,12 +372,12 @@ namespace LoveEngine {
 
 		void OgreRenderer::destroyText(std::string elemName)
 		{
-			std::string szElement = "element_" + elemName;
-			overlayManager->destroyOverlayElement(szElement);
+			//std::string szElement = "element_" + elemName;
+			//overlayManager->destroyOverlayElement(szElement);
 
-			//Destruimos los dos elementos que componenel texto 
-			overlayManager->destroyOverlayElement("GUI");
-			overlayManager->destroy("GUI_OVERLAY" + elemName);
+			////Destruimos los dos elementos que componenel texto 
+			//overlayManager->destroyOverlayElement("GUI");
+			//overlayManager->destroy("GUI_OVERLAY" + elemName);
 
 
 		}
