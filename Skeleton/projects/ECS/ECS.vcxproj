@@ -89,11 +89,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\ECS\Agent.cpp" />
     <ClCompile Include="..\..\src\ECS\Animation.cpp" />
+    <ClCompile Include="..\..\src\ECS\Button.cpp" />
     <ClCompile Include="..\..\src\ECS\CameraComponent.cpp" />
     <ClCompile Include="..\..\src\ECS\Collider.cpp" />
     <ClCompile Include="..\..\src\ECS\Component.cpp" />
     <ClCompile Include="..\..\src\ECS\ComponentFactory.cpp" />
-    <ClCompile Include="..\..\src\ECS\ECS.cpp" />
     <ClCompile Include="..\..\src\ECS\GameObject.cpp" />
     <ClCompile Include="..\..\src\ECS\Image.cpp" />
     <ClCompile Include="..\..\src\ECS\LightComponent.cpp" />
@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\Agent.h" />
     <ClInclude Include="..\..\src\ECS\Animation.h" />
+    <ClInclude Include="..\..\src\ECS\Button.h" />
     <ClInclude Include="..\..\src\ECS\CameraComponent.h" />
     <ClInclude Include="..\..\src\ECS\Collider.h" />
     <ClInclude Include="..\..\src\ECS\Component.h" />

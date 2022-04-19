@@ -18,7 +18,6 @@ namespace LoveEngine {
 			this->name = name;
 			scene = scn;
 			scene->gObjects.push_back(this);
-			std::cout << "CAca de vaca";
 		}
 
 

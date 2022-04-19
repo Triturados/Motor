@@ -7,6 +7,16 @@ function scene0()
     local a = scene:createObject("AAA");
     a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")
 
+
+	local btest = scene:createObject("btest");
+    btest:addComponent("Button"):sendMsg([[
+        materialBarBg: Heal_bg;
+        width: 300;
+        height: 50;
+        posX: 400;
+        posY: 100;
+    ]]) 	
+	
     local suelo = scene:createObject("Suelo")
 	
     local testImagen = scene:createObject("uiobj")
