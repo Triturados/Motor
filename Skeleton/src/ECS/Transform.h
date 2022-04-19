@@ -27,6 +27,9 @@ namespace LoveEngine {
 
 			void setScale(Utilities::Vector3<float> s, Utilities::Vector3<float> s2);
 
+		protected:
+			void removeChild(Transform* child);
+
 		public:
 
 			Transform();

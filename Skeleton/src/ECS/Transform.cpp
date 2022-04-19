@@ -21,6 +21,24 @@ namespace LoveEngine {
 			parent = nullptr;
 		}
 
+		Transform::~Transform()
+		{
+			delete position;
+			delete rotation;
+			delete scale;
+
+			// Solo hay que quitar los hijos de la lista. Se destruirán cuando se destruyan sus objetos
+			while (!children.empty())
+			{
+				auto c = *(children.begin());
+				c->setParent(nullptr);
+				children.remove(c);
+			}
+			children.clear();
+
+			if (parent != nullptr) parent->removeChild(this);
+		}
+
 
 		Utilities::Vector3<float>* Transform::getPos()
 		{
@@ -92,6 +110,11 @@ namespace LoveEngine {
 			//updateChildren(2);
 		}
 
+		void Transform::removeChild(Transform* child)
+		{
+			children.remove(child);
+		}
+
 		void Transform::translate(Utilities::Vector3<float> p) {
 			
 			position->x += p.x;
@@ -119,7 +142,7 @@ namespace LoveEngine {
 
 		void Transform::setParent(Transform* p) {
 			parent = p;
-			parent->addChild(this);
+			if (parent != nullptr) parent->addChild(this);
 		}
 
 		Transform* Transform::getParent()
@@ -246,17 +269,6 @@ namespace LoveEngine {
 				
 			}
 			
-		}
-
-		Transform::~Transform()
-		{
-			delete position;
-			delete rotation;
-			delete scale;
-
-			for (std::list<Transform*>::iterator it = children.begin();
-				it != children.end(); it++) children.erase(it);
-			children.clear();
 		}
 
 		void Transform::update()
