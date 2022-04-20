@@ -68,7 +68,11 @@ namespace LoveEngine {
 
 			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();
-			numOfImages = numOverlays = 0;
+
+			//UI
+			textContainer = createTextPanel("TextUIPanel");
+			textOverlay = createTextOverlay("TextUIOverlay");
+			numOfImages = numOverlays = numOfTexts = 0;
 		}
 
 		/// <summary>
@@ -272,6 +276,11 @@ namespace LoveEngine {
 			return true;
 		}
 
+		const Utilities::Vector2<float>& OgreRenderer::getWindowSize()
+		{
+			return Utilities::Vector2<float>(mWindow->getWidth(), mWindow->getHeight());
+		}
+
 		Window* OgreRenderer::getWindowInfo()
 		{
 			if (windowinfo == nullptr)
@@ -292,137 +301,9 @@ namespace LoveEngine {
 			SDL_SetWindowTitle(native, title.c_str());
 		}
 
-		//NO SE USA
-		SDL_Texture* OgreRenderer::createSDLTexture(const char* texName, int& width, int& height)
-		{
-			SDL_Surface* sur = SDL_LoadBMP(texName);
-			SDL_Texture* texture = SDL_CreateTextureFromSurface(sdlRenderer, sur);
-			width = sur->w; height = sur->h;
-			SDL_FreeSurface(sur);
-			return texture;
-
-		}
-		/// <summary>
-		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
-		/// </summary>
-		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay)
-		{
-			
-			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
-			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
-			container->setMaterialName(material);
-			
-			// El overlay, que gestiona la poscion, rotacion...
-			overlay = createOverlay();
-			overlay->add2D(container);
-			overlay->setZOrder(pos.z);
-			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
-
-			// Mostrar el overlay
-			overlay->show();
-			return container;
-		}
-
-		Ogre::OverlayContainer* OgreRenderer::createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions)
-		{
-			// Elemento que contendra el overlay
-			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(
-				overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
-			container->setMetricsMode(Ogre::GMM_PIXELS);
-			container->setPosition(pos.x,pos.y);
-			container->setDimensions(dimensions.x, dimensions.y);
-			numOfImages++;
-			return container;
-		}
-
-		Ogre::Overlay* OgreRenderer::createOverlay()
-		{
-			Ogre::Overlay* overlay = overlayManager->create("Overlay" + std::to_string(numOverlays));
-			numOverlays++;
-			return overlay;
-		}
-
-		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
-		{
-			overlayManager->destroy(ov);
-		}
-
-		Ogre::TextAreaOverlayElement* OgreRenderer::createOverlayElement(std::string typeName)
-		{
-
-			//WithoutChild
-			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "GUI"));
-			container->setMetricsMode(Ogre::GMM_PIXELS);
-			container->setPosition(0, 0);
-			container->setDimensions(1.0f, 1.0f);
-			o = overlayManager->create("GUI_OVERLAY");
-			o->add2D(container);
-			o->show();
-			
-		
-			std::string szElement = "element_" + typeName;
-			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", szElement));
-			container->addChild(textArea);
-			textArea->show();
-
-			return textArea;
-
-		}
-
-		void OgreRenderer::destroyText(std::string elemName)
-		{
-			std::string szElement = "element_" + elemName;
-			overlayManager->destroyOverlayElement(szElement);
-
-			//Destruimos los dos elementos que componenel texto 
-			overlayManager->destroyOverlayElement("GUI");
-			overlayManager->destroy("GUI_OVERLAY");
-		}
-
-		void OgreRenderer::setText(std::string info, Utilities::Vector2<int>dimensions, Ogre::TextAreaOverlayElement* tArea, float charHeight,int alignment)
-		{
-			tArea->setCaption(info);
-			tArea->setMetricsMode(Ogre::GMM_RELATIVE);
-			tArea->setDimensions(dimensions.x, dimensions.y);
-			tArea->setFontName("arial");
-			tArea->setCharHeight(charHeight);
-			tArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)alignment);
-		}
-
-		void OgreRenderer::setTextPos(Utilities::Vector3<int> pos_, Ogre::TextAreaOverlayElement* tArea)
-		{
-			tArea->setPosition(pos_.x,pos_.y);
-			o->setZOrder(pos_.z);
-			
-		}
-
-		void OgreRenderer::setTextColor(float R, float G, float B, float I, Ogre::TextAreaOverlayElement* tArea)
-		{
-			tArea->setColour(Ogre::ColourValue(R, G, B, I));
-		}
-
-		OgreRenderer::~OgreRenderer()
-		{
-			// Destroy the RT Shader System.
-			destroyRTShaderSystem();
-			mWindow->destroy();
-			delete overlaySystem;
-			overlayManager = nullptr;
-
-			if (mRoot)
-			{
-				mRoot->saveConfig();
-				OGRE_DELETE mRoot;
-				mRoot = NULL;
-			}
-
-			SDL_Quit();
-		}
-
 		Ogre::SceneNode* OgreRenderer::createNode()
 		{
 			return mSceneMgr->getRootSceneNode()->createChildSceneNode();
-
 		}
 
 		Ogre::SceneNode* OgreRenderer::createChildNode(Ogre::SceneNode* parent)
@@ -442,6 +323,139 @@ namespace LoveEngine {
 		Ogre::RenderWindow* OgreRenderer::getRenderWindow()
 		{
 			return mWindow;
+		}
+
+
+		// -- Image UI --
+
+		SDL_Texture* OgreRenderer::createSDLTexture(const char* texName, int& width, int& height)
+		{
+			SDL_Surface* sur = SDL_LoadBMP(texName);
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(sdlRenderer, sur);
+			width = sur->w; height = sur->h;
+			SDL_FreeSurface(sur);
+			return texture;
+		}
+
+		/// <summary>
+		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
+		/// </summary>
+		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay)
+		{
+			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
+			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
+			container->setMaterialName(material);
+
+			// El overlay, que gestiona la poscion, rotacion...
+			overlay = createOverlay();
+			overlay->add2D(container);
+			overlay->setZOrder(pos.z);
+			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
+
+			// Mostrar el overlay
+			overlay->show();
+			return container;
+		}
+
+		//Metodo privado para crear contenedores para imagenes
+		Ogre::OverlayContainer* OgreRenderer::createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions)
+		{
+			// Elemento que contendra el overlay
+			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", "Image" + std::to_string(numOfImages)));
+			container->setMetricsMode(Ogre::GMM_PIXELS);
+			container->setPosition(pos.x, pos.y);
+			container->setDimensions(dimensions.x, dimensions.y);
+			numOfImages++;
+			return container;
+		}
+
+		//Metodo privado para crear overlays para imagenes
+		Ogre::Overlay* OgreRenderer::createOverlay()
+		{
+			Ogre::Overlay* overlay = overlayManager->create("Overlay" + std::to_string(numOverlays));
+			numOverlays++;
+			return overlay;
+		}
+
+		void OgreRenderer::disableContainer(Ogre::OverlayContainer* overlayContainer)
+		{
+			overlayManager->destroyOverlayElement(overlayContainer);
+		}
+
+		void OgreRenderer::disableOverlay(Ogre::Overlay* ov)
+		{
+			overlayManager->destroy(ov);
+		}
+
+
+		// -- Text UI --
+
+		/// <summary>
+		/// Muestra un texto 2D por pantalla como Ogre::Overlay
+		/// </summary>
+		Ogre::TextAreaOverlayElement* OgreRenderer::createOverlayElement()
+		{
+			Ogre::TextAreaOverlayElement* textArea = static_cast<Ogre::TextAreaOverlayElement*>(overlayManager->createOverlayElement("TextArea", "Text" + std::to_string(numOfTexts)));
+			textContainer->addChild(textArea);
+			textArea->show();
+
+			numOfTexts++;
+
+			return textArea;
+		}
+
+		void OgreRenderer::setTextOverlayZOrder(float zOrder)
+		{
+			textOverlay->setZOrder(zOrder);
+		}
+
+		//Metodo privado para dar valor al container de todos los textos
+		Ogre::OverlayContainer* OgreRenderer::createTextPanel(const std::string& textPanelName)
+		{
+			Ogre::OverlayContainer* container = static_cast<Ogre::OverlayContainer*>(overlayManager->createOverlayElement("Panel", textPanelName));
+			container->setMetricsMode(Ogre::GMM_PIXELS);
+			container->setPosition(0, 0);
+			container->setDimensions(mWindow->getWidth(), mWindow->getHeight());
+
+			textOverlay = overlayManager->create("GUI_OVERLAY");
+			textOverlay->add2D(container);
+			textOverlay->show();
+
+			return container;
+		}
+
+		//Metodo privado para dar valor al overlay de todos los textos
+		Ogre::Overlay* OgreRenderer::createTextOverlay(const std::string& overlayName)
+		{
+			Ogre::Overlay* overlay = overlayManager->create(overlayName);
+
+			return overlay;
+		}
+
+		OgreRenderer::~OgreRenderer()
+		{
+			// Destroy the RT Shader System.
+			destroyRTShaderSystem();
+			mWindow->destroy();
+
+			//UI
+				//Tanto el overlay del texto como el container del texto son unicos para todos los textos
+				//por eso se manejan en esta clase, en cambia cada imagen tiene un overlay y container distintos
+				//y el control lo lleva la clase Imagen
+			overlayManager->destroy(textOverlay);
+			overlayManager->destroyOverlayElement(textContainer);
+
+			delete overlaySystem;
+			overlayManager = nullptr;
+
+			if (mRoot)
+			{
+				mRoot->saveConfig();
+				OGRE_DELETE mRoot;
+				mRoot = NULL;
+			}
+
+			SDL_Quit();
 		}
 	}
 }

@@ -20,23 +20,25 @@
 #include <OgreBorderPanelOverlayElement.h>
 #include <OgreOverlaySystem.h>
 #include <OgreOverlayContainer.h>
+
 namespace LoveEngine {
 	namespace ECS {
 
-		
 		void Image::receiveMessage(Utilities::StringFormatter& sf)
 		{
 			material = sf.getString("material");
 
-			pos = new Utilities::Vector3(0,0,0);
-			dimensions = new Utilities::Vector2(0,0);
+			pos = new Utilities::Vector3(0, 0, 0);
+			dimensions = new Utilities::Vector2(0, 0);
 
-			sf.tryGetInt("width" , dimensions->x);
+			sf.tryGetInt("width", dimensions->x);
 			sf.tryGetInt("height", dimensions->y);
 			sf.tryGetInt("posX", pos->x);
 			sf.tryGetInt("posY", pos->y);
 			sf.tryGetInt("posZ", pos->z);
+			
 		}
+
 		void Image::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 
@@ -51,7 +53,7 @@ namespace LoveEngine {
 			/* render background, whereas NULL for source and destination
 				rectangles just means "use the default" */
 			if (!visible) return;
-			
+
 		}
 
 		void Image::setVisibility(bool mode)
@@ -76,18 +78,20 @@ namespace LoveEngine {
 
 		void Image::onSceneDown()
 		{
-			ogremanager->disableOverlay(overlay);
-			//visible = false;
+			visible = false;
+			setVisibility(visible);
 		}
+
 		void Image::onSceneUp()
 		{
-			//visible = true;
+			visible = true;
+			setVisibility(visible);
 		}
-
-
 
 		Image::~Image()
 		{
+			ogremanager->disableOverlay(overlay);
+			ogremanager->disableContainer(container);
 			delete pos;
 			delete dimensions;
 		}

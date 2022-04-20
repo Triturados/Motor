@@ -318,18 +318,34 @@ function scene1()
     torchSys:sendMsg([[particleName: torch; emitting: true]])
 
     local textPrueba = scene:createObject("TextoPrueba")
-    textPrueba:addComponent("Text"):sendMsg([[
-        typeName: pruebaTexto
-        textContent: ME CAGO EN TODO
-        red:0.0
+    local textPruebaText = textPrueba:addComponent("Text")
+    textPruebaText:sendMsg([[
+        position: 50, 50, 0;
+        fontName: chikory
+        red:0.3
         green: 1.0
-        blue: 0.0
+        blue: 0.6
         alpha: 1.0
-        width: 50
-        height: 50
-        charHeight:0.1
-        alignment : 2
+        textScale: 0.05
+        alignment : 0
         ]])
+
+    textPruebaText:sendString("V I D A S")
+
+    local textPrueba2 = scene:createObject("TextoPrueba2")
+    local textPrueba2text = textPrueba2:addComponent("Text")
+    textPrueba2text:sendMsg([[
+        position: 20, 20, 0;
+        fontName: robot
+        red:0.1
+        green: 0.2
+        blue: 0.9
+        alpha: 1.0
+        textScale:0.03
+        alignment : 0
+        ]])
+
+    textPrueba2text:sendString("Soy el segundo texto uwu")
 
 end
 

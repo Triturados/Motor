@@ -14,76 +14,88 @@ namespace LoveEngine
 {
 	namespace ECS {
 
-
 		void Text::receiveMessage(Utilities::StringFormatter& sf)
 		{
-
-			pos = new Utilities::Vector3(0, 0, 0);
-			dimensions = new Utilities::Vector2(0, 0);
+			pos = new Utilities::Vector3<float>(0, 0, 0);
 			int alineacion;
 
-			sf.tryGetString("typeName", textName);
-			sf.tryGetString("textContent", textContent);
+			sf.tryGetVector3("position", *(pos));
+			sf.tryGetString("fontName", fontName);
 			sf.tryGetFloat("red", color.r);
 			sf.tryGetFloat("green", color.g);
 			sf.tryGetFloat("blue", color.b);
 			sf.tryGetFloat("alpha", color.a);
-			sf.tryGetInt("width", dimensions->x);
-			sf.tryGetInt("height", dimensions->y);
-			sf.tryGetFloat("charHeight", charHeight);
+			sf.tryGetFloat("textScale", textScale);
 			sf.tryGetInt("alignment", alineacion);
 
-			alignment = (alignmentEnum)alineacion;
+			alignment = (alignmentEnum) alineacion;
 		}
-		void Text::onSceneUp()
+
+		void Text::receiveString(std::string mssg)
 		{
-			setVisibility(true);
+			textContent = mssg;
 		}
-		void Text::onSceneDown()
-		{
-			setVisibility(false);
-		}
-		void Text::setVisibility(bool mode)
-		{
-			if (mode)textArea->show();
-			else textArea->hide();
-		}
-		Text::~Text()
-		{
-			ogremanager->destroyText(textName);
-		}
+
 		void Text::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
 
-			textArea = ogremanager->createOverlayElement(textName);
-			setPos(*pos);
-			setText(textContent);
-			setCol(color.r, color.g, color.b, color.a);
+			textArea = ogremanager->createOverlayElement();
+
+			setText();
+			setPos();
+			setCol();
 		}
 
-		void Text::setPos(Utilities::Vector3<int> pos_)
+		void Text::setPos()
 		{
-			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
-			ogremanager->setTextPos(*pos, textArea);
+			auto relative = pixelToRelative(pos->x, pos->y);
+			pos->x = relative.x; pos->y = relative.y;
+
+			textArea->setPosition(pos->x, pos->y);
+			ogremanager->setTextOverlayZOrder(pos->z);
 		}
 
-		void Text::setCol(float R, float G, float B, float I)
+		void Text::setCol()
 		{
-			color.r = R;
-			color.g = G;
-			color.b = B;
-			color.a = I;
-			ogremanager->setTextColor(color.r, color.g, color.b, color.a, textArea);
+			textArea->setColour(Ogre::ColourValue(color.r, color.g, color.b, color.a));
 		}
 
-		void Text::setText(std::string szString)
+		const Utilities::Vector2<float>& Text::pixelToRelative(float x, float y)
 		{
-			textContent = szString;
-			ogremanager->setText(textContent, *dimensions, textArea, charHeight, (int) alignment);
+			Utilities::Vector2<float> windowSize = ogremanager->getWindowSize();
+
+			return Utilities::Vector2<float>(x / windowSize.x, y / windowSize.y);
 		}
 
+		void Text::setText()
+		{
+			textArea->setCaption(textContent);
+			textArea->setMetricsMode(Ogre::GMM_RELATIVE);
+			textArea->setFontName(fontName);
+			textArea->setCharHeight(textScale);
+			textArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)alignment);
+		}
+
+		void Text::onSceneUp()
+		{
+			setVisibility(true);
+		}
+
+		void Text::onSceneDown()
+		{
+			setVisibility(false);
+		}
+
+		void Text::setVisibility(bool mode)
+		{
+			if (mode) textArea->show();
+			else textArea->hide();
+		}
+
+		Text::~Text()
+		{
+			delete pos;
+		}
 	}
-
-
 }
