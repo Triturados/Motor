@@ -45,6 +45,12 @@ namespace LoveEngine {
 			SDL_GameControllerClose(sdlcontroller);
 		}
 
+		void InputManager::mouseVisibility(bool inGame)
+		{
+			if(inGame)	SDL_SetRelativeMouseMode(SDL_TRUE);
+			else SDL_SetRelativeMouseMode(SDL_FALSE);
+		}
+
 		bool InputManager::handleInput()
 		{
 			// Se vacian las teclas que fueron pulsadas justo en frame anterior
@@ -64,6 +70,8 @@ namespace LoveEngine {
 					//std::cout << "Tecla soltada: " << (int)sdlevent.key.keysym.scancode << std::endl;
 					break;
 				case SDL_MOUSEMOTION:
+					relmouseX = sdlevent.motion.xrel;
+					relmouseY = sdlevent.motion.yrel;
 					SDL_GetMouseState(&mouseX, &mouseY);
 					//std::cout << "Raton movido: " << mouseX << " " << mouseY << std::endl;
 					break;
@@ -160,6 +168,11 @@ namespace LoveEngine {
 		Utilities::Vector2<float> InputManager::mousePosition()
 		{
 			return Utilities::Vector2<float>(mouseX, mouseY);
+		}
+
+		Utilities::Vector2<float> InputManager::relativeMousePosition()
+		{
+			return Utilities::Vector2<float>(relmouseX, relmouseY);
 		}
 
 		Controller& InputManager::getController()
