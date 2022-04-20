@@ -232,6 +232,11 @@ namespace LoveEngine {
 			}
 		}
 
+		void RigidBody::setRBGravity(Utilities::Vector3<float> newRBGrav)
+		{
+			rigidBody->setGravity(cvt(newRBGrav));
+		}
+
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
 		{
 			auto vel = rigidBody->getLinearVelocity();

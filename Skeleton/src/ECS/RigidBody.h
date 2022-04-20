@@ -81,6 +81,8 @@ namespace LoveEngine {
 
 			void setTrigger(bool trigger_);
 
+			void setRBGravity(Utilities::Vector3<float> newRBGrav);
+
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
 			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };
