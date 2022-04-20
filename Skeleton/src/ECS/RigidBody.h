@@ -69,6 +69,7 @@ namespace LoveEngine {
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, ForceMode mode);
 
+			//setters
 			void setTransform(Transform* t_);
 
 			void setMass(float mass_);
@@ -85,6 +86,13 @@ namespace LoveEngine {
 
 			void setRestitution(float resti);
 
+			void setFriccion(float friction);
+
+			void setLinearFactor(Utilities::Vector3<float> vect);
+
+			void setAngularFactor(Utilities::Vector3<float> vect);
+
+			//Getters
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
 			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };

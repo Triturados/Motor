@@ -252,6 +252,23 @@ namespace LoveEngine {
 			}
 		}
 
+		void RigidBody::setFriccion(float friction)
+		{
+			if (enabled) {
+				rigidBody->setFriction(friction);
+			}
+		}
+
+		void RigidBody::setLinearFactor(Utilities::Vector3<float> vect)
+		{
+			rigidBody->setLinearFactor(cvt(vect));
+		}
+
+		void RigidBody::setAngularFactor(Utilities::Vector3<float> vect)
+		{
+			rigidBody->setAngularFactor(cvt(vect));
+		}
+
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
 		{
 			auto vel = rigidBody->getLinearVelocity();
