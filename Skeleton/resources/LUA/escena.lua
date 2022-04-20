@@ -225,15 +225,6 @@ function scene1()
     camCamera:sendMsg([[
         name: escenaJuego;
     ]])
-
-    local cam2 = scene:createObject("cam")
-    local trcam2 = cam2:addComponent('Transform')
-        
-    trcam2:sendMsg([[
-        scale: 2,2,2;
-        position: 0,40,80;
-        rotation: 0,0,0,0;
-    ]])
     
 --------------
 
@@ -296,10 +287,8 @@ function scene1()
     ]])
     -- /Enemigo
 
-    compTrBolaHijaJug:sendComponent(1, tr)
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
-    trcam2:sendComponent(1, compTrBolaHijaJug)
 
     --Metiendo componente rotar Camara
     rotarcam:sendMsg([[
@@ -311,7 +300,7 @@ function scene1()
 
     rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
-    rotarcam:sendGameObject(2, cam2)
+    rotarcam:sendGameObject(2, cam)
 
     local particleSys = scene:createObject("Bomba")
     particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
