@@ -4,7 +4,7 @@ function scene0()
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
     cam:addComponent('Mesh'):sendMsg([[
-        meshName: isCamera;
+        meshName: emptyMesh;
     ]]) 
     trcam:sendMsg([[
         scale: 2,2,2;
@@ -187,7 +187,7 @@ function scene1()
     compLuz:sendMsg([[
         scale: 1,1,1;
         position: 0,40,0;
-        rotation: 0,0,0,0;
+        rotation: -45,0,0,0;
     ]])
     
     local compLight = luz:addComponent('Light')
@@ -222,7 +222,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam:addComponent('Mesh'):sendMsg([[
-        meshName: isCamera;
+        meshName: emptyMesh;
     ]])
     local camCamera = cam:addComponent('Camera')
     local camFollow = cam:addComponent('CamFollow')
@@ -240,7 +240,7 @@ function scene1()
         rotation: 0,0,0,0;
     ]])
     local compcam = cam2:addComponent('Mesh'):sendMsg([[
-        meshName: isCamera;
+        meshName: emptyMesh;
     ]])
 --------------
 
@@ -266,6 +266,22 @@ function scene1()
 
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
+
+    local luzPlayer = scene:createObject("Luz")
+    local compLuzPlayer = luzPlayer:addComponent('Transform')
+        
+    compLuzPlayer:sendMsg([[
+        scale: 1,1,1;
+        position: 0,10,0;
+        rotation: 0,0,0,0;
+    ]])
+    compLuzPlayer:sendComponent(1, tr)
+    
+    local compLightPlayer = luzPlayer:addComponent('Light')
+    compLightPlayer:sendMssg([[
+        name: luz_point
+        type: point
+    ]])
 
      -- Enemigo
     local boss = scene:createObject("boss")

@@ -23,7 +23,7 @@ namespace LoveEngine {
 		void Mesh::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			tr = gameObject->getComponent<Transform>();
-			if (meshName != "isCamera") {
+			if (meshName != "emptyMesh") {
 				//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
 				if (meshName == "") throw new std::exception("La malla no tiene nombre");
 				entityNode = ogremanager->createNode();
@@ -53,7 +53,6 @@ namespace LoveEngine {
 			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
 		}
 
-		//No se llama el update 
 		void Mesh::update()
 		{
 			rot = tr->getRot();
@@ -69,6 +68,7 @@ namespace LoveEngine {
 			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
 			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
+
 		void Mesh::setVisibility(bool mode)
 		{
 			entityNode->setVisible(mode);

@@ -31,7 +31,7 @@ namespace LoveEngine {
 
 			Renderer::OgreRenderer* ogremanager;
 
-			Transform* pos;
+			Transform* tr;
 
 			Ogre::Light* light;
 
@@ -45,6 +45,11 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* diffuse;
 			Utilities::Vector3<float>* specular;
 			Utilities::Vector3<float>* direction;
+
+			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* pos;
+			Utilities::Vector3<float>* scale;
+
 			int lightPower;
 
 			float inRange;
@@ -63,6 +68,7 @@ namespace LoveEngine {
 			void setRange(float startAngle, float endAngle, float desvanecimiento = 1.0);
 			void setVisibility(bool active);
 			void setPower(float power);
+			void update() override;
 
 			Utilities::Vector3<float> getDiffuseColor();
 			Utilities::Vector3<float> getSpecularColor();

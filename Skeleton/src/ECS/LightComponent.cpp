@@ -27,7 +27,7 @@ namespace LoveEngine {
 		void Light::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
-			pos = gameObject->getComponent<Transform>();
+			tr = gameObject->getComponent<Transform>();
 
 			switch (type)
 			{
@@ -42,7 +42,7 @@ namespace LoveEngine {
 
 				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				entityNode->attachObject(light);
-				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
+				entityNode->setPosition(Ogre::Vector3(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z));
 				break;
 			case lightType::directional:
 				light = ogremanager->getSceneManager()->createLight(name);
@@ -70,7 +70,7 @@ namespace LoveEngine {
 				entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
 
 
-				entityNode->setPosition(Ogre::Vector3(pos->getPos()->x, pos->getPos()->y, pos->getPos()->z));
+				entityNode->setPosition(Ogre::Vector3(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z));
 
 				light->setSpotlightRange(Ogre::Degree(inRange), Ogre::Degree(outRange), fallOff);
 				break;
@@ -79,6 +79,22 @@ namespace LoveEngine {
 			}
 
 			setVisibility(visible);
+		}
+
+		void Light::update()
+		{
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
+
+			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
+			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
+
+			entityNode->resetOrientation();
+			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
 
 		Light::~Light()
