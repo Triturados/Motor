@@ -28,13 +28,10 @@ namespace LoveEngine {
 		void Camera::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();
-			position = gameObject->getComponent<Transform>();
+			tr = gameObject->getComponent<Transform>();
 			
-			/*mCameraNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-			mCameraNode->setPosition(position->getPos()->x, position->getPos()->y, position->getPos()->z);*/
-			
-			mCameraNode = gameObject->getComponent<Mesh>()->getNode();
-			
+			mCameraNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			mCameraNode->setPosition(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z);
 			
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
@@ -54,7 +51,18 @@ namespace LoveEngine {
 
 		void Camera::update()
 		{
-			//std::cout << "Camara: " << mCamera->getName() << std::endl;
+			rot = tr->getRot();
+			pos = tr->getPos();
+			scale = tr->getScale();
+
+			mCameraNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
+			mCameraNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
+
+			mCameraNode->resetOrientation();
+			mCameraNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
+			mCameraNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
+			mCameraNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
+			//Usar Translate , Scale, y luego la rotacion esta por ver 
 		}
 
 		void Camera::lookAt(Utilities::Vector3<float> pos)

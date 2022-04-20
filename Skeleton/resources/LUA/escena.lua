@@ -3,9 +3,6 @@ function scene0()
 
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
-    cam:addComponent('Mesh'):sendMsg([[
-        meshName: emptyMesh;
-    ]]) 
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
@@ -221,9 +218,7 @@ function scene1()
         position: 0,40,80;
         rotation: 0,0,0,0;
     ]])
-    local compcam = cam:addComponent('Mesh'):sendMsg([[
-        meshName: emptyMesh;
-    ]])
+
     local camCamera = cam:addComponent('Camera')
     local camFollow = cam:addComponent('CamFollow')
 
@@ -239,9 +234,7 @@ function scene1()
         position: 0,40,80;
         rotation: 0,0,0,0;
     ]])
-    local compcam = cam2:addComponent('Mesh'):sendMsg([[
-        meshName: emptyMesh;
-    ]])
+    
 --------------
 
     local player = scene:createObject("jugador")

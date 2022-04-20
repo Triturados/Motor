@@ -35,8 +35,12 @@ namespace LoveEngine {
 			Ogre::SceneNode* mCameraNode;
 
 			Ogre::Viewport* vp;
-			Transform* position;
+			Transform* tr;
 			Transform* player;
+
+			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* pos;
+			Utilities::Vector3<float>* scale;
 
 			Renderer::OgreRenderer* ogremanager;
 			int viewportZorder = 0;
