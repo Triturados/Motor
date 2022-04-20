@@ -221,6 +221,17 @@ namespace LoveEngine {
 			rigidBody->setAngularVelocity(cvt(vel));
 		}
 
+		void RigidBody::setTrigger(bool trigger_)
+		{
+			trigger = trigger_;
+			if (trigger) {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
+			else {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+			}
+		}
+
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
 		{
 			auto vel = rigidBody->getLinearVelocity();

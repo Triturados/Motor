@@ -41,6 +41,7 @@ namespace LoveEngine {
 		private:
 			float mass;
 			float restitution;
+			bool trigger = false;
 			TipoForma shape;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
@@ -77,6 +78,8 @@ namespace LoveEngine {
 			void setLinearVelocity(Utilities::Vector3<float> vel);
 
 			void setAngularVelocity(Utilities::Vector3<float> vel);
+
+			void setTrigger(bool trigger_);
 
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
