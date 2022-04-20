@@ -93,7 +93,7 @@ namespace LoveEngine {
 				if (colliderScale->x == -1 && colliderScale->y == -1 && colliderScale->z == -1) colliderScale = tr->getScale();
 
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape, rot);
-				rigidBody->setRestitution(restitution);
+				setRestitution(restitution);
 
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
@@ -235,6 +235,21 @@ namespace LoveEngine {
 		void RigidBody::setRBGravity(Utilities::Vector3<float> newRBGrav)
 		{
 			rigidBody->setGravity(cvt(newRBGrav));
+		}
+
+		void RigidBody::setRestitution(float resti)
+		{
+			if (enabled) {
+				//restricciones
+				if (resti < 0) {
+					restitution = 0;
+				}
+				else if (resti > 1) {
+					restitution = 1;
+				}
+
+				rigidBody->setRestitution(restitution);
+			}
 		}
 
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
