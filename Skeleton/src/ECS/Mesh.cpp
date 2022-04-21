@@ -37,9 +37,6 @@ namespace LoveEngine {
 			}
 			else entityNode = ogremanager->createNode();
 
-
-			entityNode->showBoundingBox(true);
-
 			rot = tr->getRot();
 			pos = tr->getPos();
 			scale = tr->getScale();

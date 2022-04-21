@@ -28,6 +28,7 @@ namespace LoveEngine {
 
 	namespace Physics {
 		class Collider;
+		class OgreDebugDrawer;
 
 		class lovexport PhysicsManager {
 			friend class RigidBody;
@@ -48,6 +49,8 @@ namespace LoveEngine {
 
 			//Variable que representa el entorno din�mico de bullet con las anteriores variables como configuraci�n
 			btDynamicsWorld* dynamicsWorld = nullptr;
+
+			OgreDebugDrawer* debugDrawer = nullptr;
 
 			std::vector<btRigidBody*> bodies;
 

@@ -94,10 +94,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\BulletPhysics\DebugDrawer.cpp" />
     <ClCompile Include="..\..\src\BulletPhysics\MeshStrider.cpp" />
     <ClCompile Include="..\..\src\BulletPhysics\PhysicsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\BulletPhysics\DebugDrawer.h" />
     <ClInclude Include="..\..\src\BulletPhysics\MeshStrider.h" />
     <ClInclude Include="..\..\src\BulletPhysics\PhysicsManager.h" />
   </ItemGroup>

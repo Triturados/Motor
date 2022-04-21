@@ -6,6 +6,7 @@
 #include <OgreRenderer.h>
 #include <Error_handling.h>
 #include <SingletonInfo.h>
+#include "DebugDrawer.h"
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Collider.h"
@@ -119,6 +120,12 @@ namespace LoveEngine {
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
 
+#ifdef _DEBUG
+			debugDrawer = new OgreDebugDrawer(LoveEngine::Renderer::OgreRenderer::getInstance()->getSceneManager());
+			debugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+			dynamicsWorld->setDebugDrawer(debugDrawer);
+#endif
+
 			checkExceptions();
 		}
 
@@ -148,9 +155,8 @@ namespace LoveEngine {
 
 #ifdef _DEBUG
 			dynamicsWorld->stepSimulation(physicsFrameRate);
-			//dynamicsWorld->getDebugDrawer()->drawBox(btVector3(5, 5, 5), btVector3(10, 10, 10), btVector3(1, 0, 0));
 
-			//dynamicsWorld->debugDrawWorld();
+			dynamicsWorld->debugDrawWorld();
 #endif // _DEBUG
 		}
 
