@@ -1,0 +1,17 @@
+material skyboxhell
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture hellfront.png hellback.png hellleft.png hellright.png hellup.png helldown.png separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}

@@ -93,6 +93,9 @@
     <ClCompile Include="..\..\src\ECS\Button.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\Skybox.cpp">
+      <Filter>Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -168,6 +171,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Button.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\Skybox.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -352,6 +352,9 @@ function scene1()
 
     textPrueba2text:sendString("Soy el segundo texto uwu")
 
+    local skybox = scene:createObject("Skybox")
+    skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
+
 end
 
 

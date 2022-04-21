@@ -17,6 +17,7 @@
 #include <Agent.h>
 #include <Slider.h>
 #include <Button.h>
+#include <Skybox.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -67,6 +68,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Agent>("Agent"));
 			registerComponent(new ComponentCreatorTemplate<Slider>("Slider"));
 			registerComponent(new ComponentCreatorTemplate<Button>("Button"));
+			registerComponent(new ComponentCreatorTemplate<Skybox>("Skybox"));
 		}
 
 
