@@ -12,11 +12,11 @@ namespace LoveEngine {
 			virtual ~Collider();
 
 			// Callbacks de colision
-			virtual void onCollisionEnter(LoveEngine::ECS::GameObject* other);
+			virtual void onCollisionEnter(ECS::GameObject* other);
 			virtual void onCollisionExit(ECS::GameObject* other);
 			virtual void onCollisionStay(ECS::GameObject* other);
 
-			void setGO(LoveEngine::ECS::GameObject* ent);
+			void setGO(ECS::GameObject* ent);
 			ECS::GameObject* getGO();
 		protected:
 			LoveEngine::ECS::GameObject* collGO = nullptr;

@@ -58,7 +58,7 @@ namespace LoveEngine {
 
 			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
-
+			//entityNode->_getWorldAABB().getSize();
 			entityNode->resetOrientation();
 			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);

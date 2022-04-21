@@ -108,6 +108,7 @@ function scene1()
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
     compRigidbodySuelo:sendMsg([[
+        trigger: false;
         state: kinematic;
         mass: 0.0;
         shape: cube; 
@@ -361,4 +362,89 @@ function scene2()
         numerito: 4;
         otronumerito: 12 
     ]])
+
+
+     --Suelo--
+	local suelo = scene:createObject("Suelo")
+    local comp2 = suelo:addComponent("Transform")
+    
+    comp2:sendMsg([[
+        scale: 50,1,50;
+        position: 0,0,0;
+        rotation: 0,0,0,0;
+    ]])
+
+    local comp3 = suelo:addComponent("Mesh")
+    comp3:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+    local compRigidbodySuelo = suelo:addComponent('Rigidbody')
+    compRigidbodySuelo:sendMsg([[
+        trigger: true;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 30,10,30;
+        ]])
+
+    local material = suelo:addComponent("Material")
+    material:sendMsg([[materialName: bolaroja]])
+    material:sendComponent(0, comp3)
+
+    suelo:addComponent("DeadZone")
+
+    --luz
+    local luz = scene:createObject("Luz")
+    local compLuz = luz:addComponent('Transform')
+        
+    compLuz:sendMsg([[
+        scale: 1,1,1;
+        position: 0,40,0;
+        rotation: -45,0,0,0;
+    ]])
+    
+    local compLight = luz:addComponent('Light')
+    compLight:sendMssg([[
+        name: luz_direccional
+        type: directional
+    ]])
+
+    local camara = scene:createObject("CamaritaGuapa")
+    local transcam = camara:addComponent('Transform')
+    transcam:sendMsg([[
+       scale: 1,1,1;
+       position: 0,40,80;
+       rotation: 0,0,0,0;
+    ]])
+
+    local camCamera = camara:addComponent('Camera')
+     
+    camCamera:sendMsg([[
+       name: escenaJuego;
+    ]])
+
+local player = scene:createObject("jugador")
+local tr = player:addComponent("Transform")
+tr:sendMsg([[
+    scale: 2,2,2;
+    position: 0,10,0;
+    rotation: 0,0,0,0;
+]])
+player:addComponent("Rigidbody"):sendMsg([[
+    shape: cube; 
+    type: dynamic;
+    mass: 10.0;
+    restitution: 0.75;
+]])
+local mesh = player:addComponent("Mesh")
+mesh:sendMsg([[meshName: Sinbad.mesh]])
+player:addComponent("MovimientoJugador"):sendMsg([[
+    speed: 15.0
+    rotSpeed: 5.0
+]])
+
+
+
+
 end
