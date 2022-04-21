@@ -322,10 +322,7 @@ function scene1()
     textPruebaText:sendMsg([[
         position: 50, 50, 0;
         fontName: chikory
-        red:0.3
-        green: 1.0
-        blue: 0.6
-        alpha: 1.0
+        mainColor: 0.3, 1.0, 0.6, 1.0;
         textScale: 0.05
         alignment : 0
         ]])
@@ -342,10 +339,7 @@ function scene1()
     textPrueba2text:sendMsg([[
         position: 20, 20, 0;
         fontName: robot
-        red:0.1
-        green: 0.2
-        blue: 0.9
-        alpha: 1.0
+        mainColor: 0.1, 0.2, 0.9, 1.0;
         textScale:0.03
         alignment : 0
         ]])

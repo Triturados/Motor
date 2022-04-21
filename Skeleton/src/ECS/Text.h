@@ -27,10 +27,6 @@ namespace LoveEngine {
 	}
 	namespace ECS {
 		class Transform;
-		struct colors
-		{
-			float r, g, b, a;
-		};
 		enum class alignmentEnum { Left, Right, Center };
 
 		class lovexport Text : public ComponentTemplate<Text>
@@ -49,9 +45,7 @@ namespace LoveEngine {
 			void changeText(std::string mssg);
 		private:
 
-			void setText();
-			void setPos();
-			void setCol();
+			void configText();
 
 			const Utilities::Vector2<float>& pixelToRelative(float x, float y);
 
@@ -63,7 +57,10 @@ namespace LoveEngine {
 			std::string textContent;
 			std::string fontName;
 
-			colors color;
+			Utilities::Vector4<float>* mainColor;
+			Utilities::Vector4<float>* bottomColor;
+			Utilities::Vector4<float>* topColor;
+
 			alignmentEnum alignment;
 			int elemNum;
 			int width;
