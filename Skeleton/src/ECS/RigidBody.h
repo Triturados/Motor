@@ -41,7 +41,7 @@ namespace LoveEngine {
 		private:
 			float mass;
 			float restitution;
-			bool trigger = false;
+			bool trigger;
 			TipoForma shape;
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;

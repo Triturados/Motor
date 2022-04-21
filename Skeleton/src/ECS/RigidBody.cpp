@@ -94,7 +94,7 @@ namespace LoveEngine {
 
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape, rot);
 				setRestitution(restitution);
-
+				setTrigger(trigger);
 				/*btQuaternion q;
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
@@ -136,6 +136,9 @@ namespace LoveEngine {
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
 		{
+			//trigger = false;
+			sf.tryGetBool("trigger", trigger);
+			//setTrigger(trigger);
 			setShape(sf.getString("shape"));
 			sf.tryGetFloat("restitution", restitution);
 			sf.tryGetFloat("mass", mass);
