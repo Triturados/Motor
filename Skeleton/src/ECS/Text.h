@@ -46,6 +46,7 @@ namespace LoveEngine {
 			void setVisibility(bool mode = true);
 			void receiveString(std::string mssg) override;
 
+			void changeText(std::string mssg);
 		private:
 
 			void setText();

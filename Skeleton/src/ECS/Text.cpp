@@ -36,6 +36,12 @@ namespace LoveEngine
 			textContent = mssg;
 		}
 
+		void Text::changeText(std::string mssg)
+		{
+			textContent = mssg;
+			textArea->setCaption(textContent);
+		}
+
 		void Text::init()
 		{
 			ogremanager = Renderer::OgreRenderer::getInstance();

@@ -330,7 +330,12 @@ function scene1()
         alignment : 0
         ]])
 
-    textPruebaText:sendString("V I D A S")
+    --textPruebaText:sendString("V I D A S")
+    local showText = textPrueba:addComponent("ShowText")
+    showText:sendMssg([[
+        interval: 0.1
+    ]])
+    showText:sendString("Hola que tal como estas")
 
     local textPrueba2 = scene:createObject("TextoPrueba2")
     local textPrueba2text = textPrueba2:addComponent("Text")
