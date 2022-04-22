@@ -465,22 +465,22 @@ function scene3()
 
     camCamera:sendMsg([[
         name: escenaMuerte;
-        zOrder: -1
+        zOrder: -2
     ]])
 
     
     local bg = scene:createObject("Background");
     bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: menuBackground; 
+        material: menuDeadBackground; 
         width: 1280;
         height : 720;
     ]])
 
-    local startButton = scene:createObject("Restart Button"):addComponent("Button");
-    local exitButton = scene:createObject("Menu Button"):addComponent("Button");
+    local restartButton = scene:createObject("Restart Button"):addComponent("Button");
+    local menuButton = scene:createObject("Menu Button"):addComponent("Button");
 
-    startButton:sendMsg([[
+    restartButton:sendMsg([[
         material: Heal_bg;
         width: 100;
         height: 50;
@@ -489,7 +489,7 @@ function scene3()
 		posZ: 1
     ]])
 
-    exitButton:sendMsg([[
+    menuButton:sendMsg([[
         material: Heal_bg;
         width: 100;
         height: 50;
@@ -499,6 +499,6 @@ function scene3()
     ]])
 
     local mainmenu = bg:addComponent("DeadMenu");
-    mainmenu:sendComponent(0, startButton);
-    mainmenu:sendComponent(1, exitButton);
+    mainmenu:sendComponent(0, restartButton);
+    mainmenu:sendComponent(1, menuButton);
 end
