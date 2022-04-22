@@ -88,7 +88,7 @@ namespace LoveEngine {
 			void initRoot();
 			bool update();
 
-			const Utilities::Vector2<float>& getWindowSize();
+			Utilities::Vector2<float> getWindowSize();
 
 			Window* getWindowInfo();
 

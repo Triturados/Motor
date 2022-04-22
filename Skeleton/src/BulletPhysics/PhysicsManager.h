@@ -57,9 +57,9 @@ namespace LoveEngine {
 			void destroyWorld();
 			void checkCollision();
 			std::map<const btCollisionObject*, std::pair<Collider*, Collider*>> contacts;
+
 			//Errores
 			void checkExceptions();
-
 
 		public:
 			static PhysicsManager* getInstance();
@@ -89,8 +89,6 @@ namespace LoveEngine {
 
 			btVector3 btConvert(const Utilities::Vector3<float>& v3);
 			Utilities::Vector3<float> v3Convert(const btVector3& v3);
-
-			void bulletTest();
 		};
 	}
 }

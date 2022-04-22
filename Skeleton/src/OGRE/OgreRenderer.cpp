@@ -276,7 +276,7 @@ namespace LoveEngine {
 			return true;
 		}
 
-		const Utilities::Vector2<float>& OgreRenderer::getWindowSize()
+		Utilities::Vector2<float> OgreRenderer::getWindowSize()
 		{
 			return Utilities::Vector2<float>(mWindow->getWidth(), mWindow->getHeight());
 		}
