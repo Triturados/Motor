@@ -448,3 +448,57 @@ player:addComponent("MovimientoJugador"):sendMsg([[
 
 
 end
+
+
+function scene3()
+    scene:name("Dead menu")
+
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+    
+    local camCamera = cam:addComponent('Camera')
+
+    camCamera:sendMsg([[
+        name: escenaMuerte;
+        zOrder: -1
+    ]])
+
+    
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: menuBackground; 
+        width: 1280;
+        height : 720;
+    ]])
+
+    local startButton = scene:createObject("Restart Button"):addComponent("Button");
+    local exitButton = scene:createObject("Menu Button"):addComponent("Button");
+
+    startButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+		posZ: 1
+    ]])
+
+    exitButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+		posZ: 1
+    ]])
+
+    local mainmenu = bg:addComponent("DeadMenu");
+    mainmenu:sendComponent(0, startButton);
+    mainmenu:sendComponent(1, exitButton);
+end
