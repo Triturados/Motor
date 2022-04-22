@@ -1,50 +1,30 @@
 particle_system dash
+{ 
+material smoke
+particle_width 10
+particle_height 10
+cull_each true
+quota 500
+billboard_type point
+sorted true
+
+emitter Point
+	{ 
+		position 0 0 10
+		angle 30
+		emission_rate 50
+		colour 0.9 0.9 0.9 0.8
+		time_to_live 1.5
+		direction 0 0 0
+		velocity_min 20
+		velocity_max 50
+	}
+affector ColourFader
 {
-	quota	3000
-	material	smoke
-	particle_width	12
-	particle_height	24
-	cull_each	true
-	renderer	billboard
-	sorted	true
-	local_space	false
-	billboard_type	oriented_self
-
-	emitter Box
-	{
-		angle	180
-		colour	1 1 1 1
-		colour_range_start	1 1 1 1
-		colour_range_end	1 1 1 1
-		direction	0 1 0
-		emission_rate	30
-		position	0 0 0
-		velocity	50
-		velocity_min	50
-		velocity_max	1
-		time_to_live	0.3
-		time_to_live_min	0.3
-		time_to_live_max	0.3
-		duration	0
-		duration_min	0
-		duration_max	0
-		repeat_delay	0
-		repeat_delay_min	0
-		repeat_delay_max	0
-		width	1
-		height	1
-		depth	1
+	alpha -0.3
 	}
-
-	affector ColourFader
+affector Scaler
 	{
-		red	-0.05
-		green	0
-		blue	0
-		alpha	0
+		rate 10
 	}
-
-
-
-
 }
