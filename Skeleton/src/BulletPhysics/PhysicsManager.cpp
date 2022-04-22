@@ -11,6 +11,8 @@
 #include "Vector4.h"
 #include "Collider.h"
 #include "RigidBody.h"
+#define PI 3.1415926535897932384
+
 
 namespace LoveEngine {
 	namespace Physics {
@@ -198,12 +200,16 @@ namespace LoveEngine {
 			//el rigidbody sera dinamico si su masa no es zero
 			btVector3 localInertia(0, 0, 0);
 			if (mass != 0.f) {
-				shapeBT->calculateLocalInertia(mass, localInertia);
+				shapeBT->calculateLocalInertia(mass, localInertia); 
 			}
 
 			startTransform.setOrigin(btVector3(pos_.x, pos_.y, pos_.z));
 			btQuaternion quat;
-			quat.setEuler(rot_.x, rot_.y, rot_.z);
+			float x = rot_.x;
+			float y = rot_.y;
+			float z = rot_.z;
+			
+			quat.setEulerZYX(z, y, x);
 			startTransform.setRotation(quat);
 			btMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
