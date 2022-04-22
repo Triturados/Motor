@@ -104,6 +104,11 @@ namespace LoveEngine {
 			delete direction;
 			//Si destruimos el padre sera suficiente gracias a la jerarquia de nodos de Ogre 
 			ogremanager->removeNode(entityNode);
+
+			if (light != nullptr)
+				ogremanager->getSceneManager()->destroyLight(light);
+			if (entityNode != nullptr)
+				ogremanager->getSceneManager()->destroySceneNode(entityNode);
 		}
 
 		void Light::diffuseColor(float r, float g, float b)
