@@ -97,7 +97,7 @@ function scene1()
     local comp2 = suelo:addComponent("Transform")
     
     comp2:sendMsg([[
-        scale: 50,1,50;
+        scale: 100,1,100;
         position: 0,0,0;
         rotation: 0,0,0,0;
     ]])
@@ -113,7 +113,7 @@ function scene1()
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 30,10,30;
+        colliderScale: 100,1,100;
         ]])
 
     local material = suelo:addComponent("Material")
@@ -227,8 +227,8 @@ function scene1()
         name: escenaJuego;
     ]])
     
---------------
-
+    
+    --player--
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
@@ -241,6 +241,7 @@ function scene1()
         type: dynamic;
         mass: 10.0;
         restitution: 0.75;
+        colliderScale: 3,8,2;
     ]])
     local mesh = player:addComponent("Mesh")
     mesh:sendMsg([[meshName: Sinbad.mesh]])
@@ -268,13 +269,13 @@ function scene1()
         type: point
     ]])
 
-     -- Enemigo
+     --Enemigo--
     local boss = scene:createObject("boss")
     local bosstr = boss:addComponent("Transform")
     bosstr:sendMsg([[
-        scale: 2,2,2;
-        position: 0,20,-20;
-        rotation: 90,0,0,0;
+        scale: 3,3,3;
+        position: 50,20,-50;
+        rotation: -1.57079633,0,0,0;
     ]])
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
@@ -284,9 +285,8 @@ function scene1()
         mass: 10.0;
         shape: sphere; 
         restitution: 1.0;
-        colliderScale: 10,10,10;
+        colliderScale: 18,18,18;
     ]])
-    -- /Enemigo
 
     --haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
@@ -297,7 +297,7 @@ function scene1()
         horiSens: 5.5
     ]])
 
-    camFollow:sendGameObject(0, player)
+    camFollow:sendGameObject(0, boss)
 
     rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
