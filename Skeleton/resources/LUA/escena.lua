@@ -216,7 +216,7 @@ function scene1()
         
     trcam:sendMsg([[
         scale: 2,2,2;
-        position: 0,40,80;
+        position: 0,80,60;
         rotation: 0,0,0,0;
     ]])
 
