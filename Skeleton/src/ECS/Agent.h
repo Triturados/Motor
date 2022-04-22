@@ -50,6 +50,9 @@ namespace LoveEngine {
                 void passiveUpdateAndPrio();
             };
 #pragma endregion
+
+            // la acción que se está realizando actualmente
+            Action* currentAction = nullptr;
         public:
             Agent();
 
@@ -64,9 +67,6 @@ namespace LoveEngine {
         private:
             // vector iterable de acciones, para llamar los updates
             std::vector<Action*> actions;
-
-            // la acción que se está realizando actualmente
-            Action* currentAction = nullptr;
 
             Action* getNextAction();
 		};
