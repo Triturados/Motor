@@ -233,7 +233,7 @@ function scene1()
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
         scale: 2,2,2;
-        position: 0,10,0;
+        position: 0,30,0;
         rotation: 0,0,0,0;
     ]])
     player:addComponent("Rigidbody"):sendMsg([[
@@ -268,6 +268,13 @@ function scene1()
         name: luz_point
         type: point
     ]])
+
+    local dashParticles = scene:createObject("dashParticles")
+    local trDash = dashParticles:addComponent("Transform")
+    trDash:sendMsg([[scale: 1,1,1; position: 0,35,0; rotation: 0,0,0,0;]])
+    local dashSys = dashParticles:addComponent("ParticleSystem")
+    dashSys:sendMsg([[particleName: dash; emitting: false]])
+    trDash:sendComponent(1,tr)
 
      --Enemigo--
     local boss = scene:createObject("boss")
@@ -423,6 +430,7 @@ function scene2()
     camCamera:sendMsg([[
        name: escenaJuego;
     ]])
+
 
 local player = scene:createObject("jugador")
 local tr = player:addComponent("Transform")
