@@ -26,10 +26,16 @@ namespace LoveEngine {
 	void setFullScreen(bool val) {
 		Window::getInstance()->setFullScreen(val);
 	}
+
+	void setIcon(std::string val) {
+		Window::getInstance()->setWindowIcon(val);
+	}
+
 	float random()
 	{
 		return rand() % 1000 / 1000.0;
 	}
+
 	int randomBetween(int min, int max)
 	{
 		int dif = max - min;

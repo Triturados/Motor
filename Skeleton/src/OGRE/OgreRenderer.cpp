@@ -52,6 +52,7 @@ namespace LoveEngine {
 		{
 			if (instance != nullptr) throwOgreError(__LINE__, "Ya existe una instancia del OgreManager.");
 
+			icon = nullptr;
 			instance = this;
 
 			initRoot();
@@ -349,6 +350,19 @@ namespace LoveEngine {
 			width = sur->w; height = sur->h;
 			SDL_FreeSurface(sur);
 			return texture;
+		}
+
+		void OgreRenderer::repositionWindow(int x, int y)
+		{
+			SDL_SetWindowPosition(native, x, y);
+		}
+
+		void OgreRenderer::setWindowIcon(std::string path) {
+			//icon = IMG_LOAD(path.c_str());
+			icon = SDL_LoadBMP(path.c_str());
+			std::cout << (icon == nullptr ? "hola" : "chao") << "\n";
+
+			SDL_SetWindowIcon(native, icon);
 		}
 
 		/// <summary>

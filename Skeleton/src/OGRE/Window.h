@@ -38,7 +38,8 @@ namespace LoveEngine {
 		bool isMouseVisible();
 
 		void repositionWindow(Utilities::Vector2<int> pos);
-
+		void repositionWindow(int x, int y);
+		void setWindowIcon(std::string iconPath);
 		void lockMouse();
 		void freeMouse();
 

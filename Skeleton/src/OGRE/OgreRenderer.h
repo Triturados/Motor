@@ -23,6 +23,7 @@ namespace Ogre {
 
 class SDL_Window;
 class SDL_Renderer;
+class SDL_Surface;
 class SDL_Texture;
 class SDL_Rect;
 class SDL_SysWMinfo;
@@ -68,6 +69,8 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* textContainer;
 			Ogre::Overlay* textOverlay;
 
+			SDL_Surface* icon;
+
 			void loadResources();
 			void initOgreWithSDL();
 			void initRTShaderSystem();
@@ -89,7 +92,8 @@ namespace LoveEngine {
 			std::string getWindowTitle();
 			Window* getWindowInfo();
 			void setFullScreen(bool);
-
+			void repositionWindow(int x, int y);
+			void setWindowIcon(std::string path);
 		public:
 			static OgreRenderer* getInstance();
 			OgreRenderer();

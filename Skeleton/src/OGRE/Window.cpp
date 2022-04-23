@@ -100,7 +100,16 @@ namespace LoveEngine {
 
 	void Window::repositionWindow(Utilities::Vector2<int> pos)
 	{
-		renderer->getRenderWindow()->reposition(pos.x, pos.y);
+		repositionWindow(pos.x, pos.y);
+	}
+	void Window::repositionWindow(int x, int y)
+	{
+		renderer->repositionWindow(x, y);
+	}
+
+	void Window::setWindowIcon(std::string iconPath)
+	{
+		renderer->setWindowIcon(iconPath);
 	}
 
 	void Window::lockMouse()

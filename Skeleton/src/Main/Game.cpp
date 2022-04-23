@@ -209,6 +209,7 @@ namespace LoveEngine {
 			.addFunction("title", &(LoveEngine::setWindowTitle))
 			.addFunction("setTitle", &(LoveEngine::setWindowTitle))
 			.addFunction("getTitle", &(LoveEngine::getWindowTitle))
+			.addFunction("icon", &(LoveEngine::setIcon))
 			.addFunction("fullscreen", &(LoveEngine::setFullScreen))
 			.addFunction("random", &(LoveEngine::random))
 			.addFunction("randomBetween", &(LoveEngine::randomBetween));

@@ -14,6 +14,8 @@ namespace LoveEngine {
 
 	void setFullScreen(bool);
 
+	void setIcon(std::string);
+
 	float random(); // 0 - 1
 	int randomBetween(int min, int max); //exclusive
 }
