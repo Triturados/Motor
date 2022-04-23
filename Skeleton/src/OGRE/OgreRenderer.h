@@ -89,7 +89,8 @@ namespace LoveEngine {
 			bool update();
 
 			Utilities::Vector2<float> getWindowSize();
-
+			void resizeWindow(Utilities::Vector2<int>);
+			void resizeWindow(int x, int y);
 			Window* getWindowInfo();
 
 			Ogre::SceneNode* createNode();

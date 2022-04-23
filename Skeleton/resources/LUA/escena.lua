@@ -1,5 +1,4 @@
-
---Escenas del juego: 
+-- Escenas del juego: 
 --  0: menu
 --  1: settings
 --  2: pause
@@ -8,8 +7,9 @@
 --  5: boss2
 --  6: victory
 --  7: defeat
-
-function scene0() --Main menu
+--------------
+function scene0() -- Main menu
+    size(1280, 720)
     scene:name("Main menu")
 
     local cam = scene:createObject("cam")
@@ -36,6 +36,7 @@ function scene0() --Main menu
     ]])
 
     local startButton = scene:createObject("Start Button"):addComponent("Button");
+    local settingsButton = scene:createObject("Settings Button"):addComponent("Button");
     local exitButton = scene:createObject("Exit Button"):addComponent("Button");
 
     startButton:sendMsg([[
@@ -47,7 +48,7 @@ function scene0() --Main menu
 		posZ: 1
     ]])
 
-    exitButton:sendMsg([[
+    settingsButton:sendMsg([[
         material: Heal_bg;
         width: 100;
         height: 50;
@@ -56,12 +57,22 @@ function scene0() --Main menu
 		posZ: 1
     ]])
 
+    exitButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 420;
+		posZ: 1
+    ]])
+
     local mainmenu = bg:addComponent("MainMenu");
     mainmenu:sendComponent(0, startButton);
+    --mainmenu:sendComponent(1, settingsButton);
     mainmenu:sendComponent(1, exitButton);
 end
 
-function scene1() --Settings
+function scene1() -- Settings
     scene:name("Settings")
 
     local cam = scene:createObject("cam")
@@ -113,7 +124,7 @@ function scene1() --Settings
     mainmenu:sendComponent(1, exitButton);
 end
 
-function scene2() --Pause
+function scene2() -- Pause
     scene:name("Pause")
 
     local cam = scene:createObject("cam")
@@ -165,7 +176,8 @@ function scene2() --Pause
     mainmenu:sendComponent(1, exitButton);
 end
 
-function scene3() --Prueba
+function scene3() -- Prueba
+    size(width(), height())
     scene:name("Escena de Prueba")
 
     persistentObject:addComponent("ComponenteDeContar")
@@ -454,7 +466,7 @@ function scene3() --Prueba
     dialogue:sendMsg("lines: 3")
 
     for i = 0, 2, 1 do
-        local line = createText(20, 500+ i * 20, '  ')
+        local line = createText(20, 500 + i * 20, '  ')
         dialogue:sendComponent(i, line);
     end
     dialogue:sendMssg([[
@@ -472,7 +484,7 @@ function scene3() --Prueba
         line1: #viendo esto es porque eres una persona muy#
         line2: #atenta Muchas gracias por tu tiempo.#
     ]])
-    --textPrueba2text:sendString("Soy el segundo texto uwu")
+    -- textPrueba2text:sendString("Soy el segundo texto uwu")
 
     local skybox = scene:createObject("Skybox")
     skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
@@ -480,11 +492,11 @@ function scene3() --Prueba
     scene:createObject("Pause Game"):addComponent("PauseGame")
 end
 
-function createText( x, y, text)
+function createText(x, y, text)
     local textObj = scene:createObject("textObj")
     local textComp = textObj:addComponent("Text")
     textComp:sendMsg([[
-        position: ]]..x..','..y..[[, 0;
+        position: ]] .. x .. ',' .. y .. [[, 0;
         fontName: robot
         mainColor: 0.1, 0.2, 0.9, 1.0;
         textScale:0.03
@@ -498,7 +510,7 @@ function createText( x, y, text)
     return showText
 end
 
-function scene4() --Victory
+function scene4() -- Victory
     scene:name("Escena victoria")
 
     local cam = scene:createObject("cam")
@@ -550,7 +562,7 @@ function scene4() --Victory
     mainmenu:sendComponent(1, menuButton);
 end
 
-function scene5() --Defeat
+function scene5() -- Defeat
     scene:name("Escena derrota")
 
     local cam = scene:createObject("cam")

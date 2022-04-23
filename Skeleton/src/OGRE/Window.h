@@ -29,6 +29,7 @@ namespace LoveEngine {
 		void setWindowTitle(std::string );
 		void setFullScreen(bool screenmode);
 
+		void setWindowSize(int x, int y);
 		void setWindowSize(Utilities::Vector2<int> size);
 
 		std::string getWindowTitle();

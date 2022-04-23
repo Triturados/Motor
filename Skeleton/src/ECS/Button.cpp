@@ -86,6 +86,11 @@ namespace LoveEngine {
 			delete dimensions;
 		}
 
+		Button::Button()
+		{
+			lambda = []() {};
+		}
+
 		void Button::handleInput()
 		{
 			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();

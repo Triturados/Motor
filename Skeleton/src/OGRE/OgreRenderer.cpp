@@ -276,6 +276,13 @@ namespace LoveEngine {
 			return true;
 		}
 
+		void OgreRenderer::resizeWindow(int x, int y) {
+			SDL_SetWindowSize(native, x, y);
+		}
+		void OgreRenderer::resizeWindow(Utilities::Vector2<int> v) {
+			resizeWindow(v.x, v.y);
+		}
+
 		Utilities::Vector2<float> OgreRenderer::getWindowSize()
 		{
 			return Utilities::Vector2<float>(mWindow->getWidth(), mWindow->getHeight());

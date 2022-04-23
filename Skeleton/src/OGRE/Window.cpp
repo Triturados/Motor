@@ -78,8 +78,15 @@ namespace LoveEngine {
 	void Window::setWindowSize(Utilities::Vector2<int> size)
 	{
 		windowSize = size;
-		renderer->getRenderWindow()->resize(size.x, size.y);
+		renderer->resizeWindow(size);
 	}
+
+	void Window::setWindowSize(int x, int y)
+	{
+		windowSize = Utilities::Vector2<int>(x, y);
+		renderer->resizeWindow(x, y);
+	}
+
 
 	bool LoveEngine::Window::isFullScreen()
 	{
