@@ -107,8 +107,8 @@ namespace LoveEngine {
 
 			if (light != nullptr)
 				ogremanager->getSceneManager()->destroyLight(light);
-			if (entityNode != nullptr)
-				ogremanager->getSceneManager()->destroySceneNode(entityNode);
+			//if (entityNode != nullptr)
+			//	ogremanager->getSceneManager()->destroySceneNode(entityNode);
 		}
 
 		void Light::diffuseColor(float r, float g, float b)
