@@ -30,13 +30,15 @@
 #include <LuaBridge/LuaBridge.h>
 #include <Window.h>
 #include <memory>
+#include <random>
+#include "LUAfunctionality.h"
 
 typedef const char* (*GameName)();
 
 using namespace std::chrono;
 namespace LoveEngine {
 	int Game::setup() {
-
+		srand(std::time(NULL)); rand();
 		GameComponentDefinition gameComponentDefinitions;
 
 		if (initialiseDLLs(gameComponentDefinitions)) {
@@ -88,7 +90,7 @@ namespace LoveEngine {
 		steady_clock::time_point lastPhysicFrame = applicationStart;
 		steady_clock::time_point beginFrame = applicationStart;
 
-		while(true){
+		while (true) {
 
 			LoveEngine::ECS::Scene* currentScene = sceneManager->getCurrentScene();
 
@@ -171,18 +173,6 @@ namespace LoveEngine {
 		return 0;
 	}
 
-
-	void setWindowSize(int x, int y){
-		Window::getInstance()->setWindowSize(x, y);
-	}
-
-	int getWidth() {
-		return Window::getInstance()->getWindowSize().x;
-	}
-	int getHeight() {
-		return Window::getInstance()->getWindowSize().y;
-	}
-
 	int Game::initialiseSceneCreator()
 	{
 		luastate = luaL_newstate();
@@ -214,9 +204,15 @@ namespace LoveEngine {
 
 		luabridge::getGlobalNamespace(luastate)
 			.addFunction("size", &(LoveEngine::setWindowSize))
-			.addFunction("width", &(LoveEngine::getWidth))	
-			.addFunction("height", &(LoveEngine::getHeight));
-	
+			.addFunction("width", &(LoveEngine::getWidth))
+			.addFunction("height", &(LoveEngine::getHeight))
+			.addFunction("title", &(LoveEngine::setWindowTitle))
+			.addFunction("setTitle", &(LoveEngine::setWindowTitle))
+			.addFunction("getTitle", &(LoveEngine::getWindowTitle))
+			.addFunction("fullscreen", &(LoveEngine::setFullScreen))
+			.addFunction("random", &(LoveEngine::random))
+			.addFunction("randomBetween", &(LoveEngine::randomBetween));
+
 		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
@@ -262,7 +258,7 @@ namespace LoveEngine {
 		else
 			title = name();
 
-		ogreManager->changeWindowTitle(title);
+		Window::getInstance()->setWindowTitle(title);
 	}
 
 	void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)

@@ -8,6 +8,7 @@
 --  6: victory
 --  7: defeat
 --------------
+
 function scene0() -- Main menu
     size(1280, 720)
     scene:name("Main menu")

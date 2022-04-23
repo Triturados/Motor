@@ -283,10 +283,6 @@ namespace LoveEngine {
 			resizeWindow(v.x, v.y);
 		}
 
-		Utilities::Vector2<float> OgreRenderer::getWindowSize()
-		{
-			return Utilities::Vector2<float>(mWindow->getWidth(), mWindow->getHeight());
-		}
 
 		Window* OgreRenderer::getWindowInfo()
 		{
@@ -306,6 +302,17 @@ namespace LoveEngine {
 		void OgreRenderer::changeWindowTitle(std::string title)
 		{
 			SDL_SetWindowTitle(native, title.c_str());
+		}
+
+		void OgreRenderer::setFullScreen(bool mode)
+		{
+			Uint32 flag = mode ? SDL_WINDOW_FULLSCREEN : 0;
+			SDL_SetWindowFullscreen(native, flag);
+		}
+
+		std::string OgreRenderer::getWindowTitle()
+		{
+			return SDL_GetWindowTitle(native);
 		}
 
 		Ogre::SceneNode* OgreRenderer::createNode()
