@@ -96,29 +96,31 @@ namespace LoveEngine {
 					return false;
 					break;
 				case SDL_JOYBUTTONDOWN: {
-					int button = (int)sdlevent.cbutton.button;
+					button = (int)sdlevent.cbutton.button;
 					if (button < controllerButtonCount) {
 
-						auto& state = controller.buttons[button];
-						if (state != ControllerButtonState::DOWN && state != ControllerButtonState::HOLD) {
-							state = ControllerButtonState::DOWN;
+						buttonState = controller.buttons[button];
+						if (buttonState != ControllerButtonState::DOWN && buttonState != ControllerButtonState::HOLD) {
+							buttonState = ControllerButtonState::DOWN;
 						}
-						else if (state == ControllerButtonState::DOWN) {
-							state = ControllerButtonState::HOLD;
+						else if (buttonState == ControllerButtonState::DOWN) {
+							buttonState = ControllerButtonState::HOLD;
 						}
 					}
+
+					std::cout << "Boton pulsado: " << (int)sdlevent.cbutton.button << std::endl;
 					break;
 				}
 				case SDL_JOYBUTTONUP: {
 					int button = (int)sdlevent.cbutton.button;
 					if (button < controllerButtonCount) {
 
-						auto& state = controller.buttons[button];
-						if (state != ControllerButtonState::UP && state != ControllerButtonState::NONE) {
-							state = ControllerButtonState::UP;
+						buttonState = controller.buttons[button];
+						if (buttonState != ControllerButtonState::UP && buttonState != ControllerButtonState::NONE) {
+							buttonState = ControllerButtonState::UP;
 						}
-						else if (state == ControllerButtonState::UP) {
-							state = ControllerButtonState::NONE;
+						else if (buttonState == ControllerButtonState::UP) {
+							buttonState = ControllerButtonState::NONE;
 						}
 					}
 					break;
@@ -173,6 +175,15 @@ namespace LoveEngine {
 		Utilities::Vector2<float> InputManager::relativeMousePosition()
 		{
 			return Utilities::Vector2<float>(relmouseX, relmouseY);
+		}
+
+		bool InputManager::isControllerButtonPressed(ControllerButton b)
+		{
+			return (int)b == button;
+		}
+		bool InputManager::isControllerButtonState(ControllerButtonState s)
+		{
+			return s == buttonState;
 		}
 
 		Controller& InputManager::getController()
