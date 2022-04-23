@@ -23,14 +23,17 @@
 namespace LoveEngine {
 	namespace ECS {
 
+		//Conversor de vector3 de bullet al nuestro
 		inline Utilities::Vector3<float> cvt(const btVector3& V) {
 			return Utilities::Vector3(V.x(), V.y(), V.z());
 		}
 
+		//Conversor de nuestro vector3 al de bullet
 		inline btVector3 cvt(const Utilities::Vector3<float>& V) {
 			return btVector3(V.x, V.y, V.z);
 		}
 
+		//Conversor del cuaternion de bullet al nuestro
 		inline Utilities::Vector4<float> cvt(const btQuaternion& V) {
 			return Utilities::Vector4(V.x(), V.y(), V.z(), V.w());
 		}
