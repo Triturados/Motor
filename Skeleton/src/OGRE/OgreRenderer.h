@@ -23,6 +23,7 @@ namespace Ogre {
 
 class SDL_Window;
 class SDL_Renderer;
+class SDL_Surface;
 class SDL_Texture;
 class SDL_Rect;
 class SDL_SysWMinfo;
@@ -40,6 +41,7 @@ namespace LoveEngine {
 	namespace Renderer {
 		class lovexport OgreRenderer
 		{
+			friend LoveEngine::Window;
 		private:
 			Ogre::Root* mRoot;
 			Ogre::String mResourcesCfgPath;
@@ -67,6 +69,8 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* textContainer;
 			Ogre::Overlay* textOverlay;
 
+			SDL_Surface* icon;
+
 			void loadResources();
 			void initOgreWithSDL();
 			void initRTShaderSystem();
@@ -81,6 +85,15 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* createTextPanel(const std::string& textPanelName);
 			Ogre::Overlay* createTextOverlay(const std::string& overlayName);
 
+			//Window
+			void resizeWindow(Utilities::Vector2<int>);
+			void resizeWindow(int x, int y);
+			void changeWindowTitle(std::string);
+			std::string getWindowTitle();
+			Window* getWindowInfo();
+			void setFullScreen(bool);
+			void repositionWindow(int x, int y);
+			void setWindowIcon(std::string path);
 		public:
 			static OgreRenderer* getInstance();
 			OgreRenderer();
@@ -88,10 +101,7 @@ namespace LoveEngine {
 			void initRoot();
 			bool update();
 
-			Utilities::Vector2<float> getWindowSize();
-			void resizeWindow(Utilities::Vector2<int>);
-			void resizeWindow(int x, int y);
-			Window* getWindowInfo();
+
 
 			Ogre::SceneNode* createNode();
 			Ogre::SceneNode* createChildNode(Ogre::SceneNode* parent);
@@ -101,7 +111,6 @@ namespace LoveEngine {
 			Ogre::RenderWindow* getRenderWindow();
 
 			void exampleScene();
-			void changeWindowTitle(std::string);
 
 			//Image UI
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);

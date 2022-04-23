@@ -62,7 +62,7 @@ namespace LoveEngine {
 
 	std::string LoveEngine::Window::getWindowTitle()
 	{
-		return renderer->getRenderWindow()->getName();
+		return renderer->getWindowTitle();
 	}
 
 	void LoveEngine::Window::setFullScreen(bool screenmode)
@@ -72,7 +72,7 @@ namespace LoveEngine {
 		}
 		currentlyFullScreen = screenmode;
 
-		renderer->getRenderWindow()->setFullscreen(screenmode, windowSize.x, windowSize.y);
+		renderer->setFullScreen(screenmode);
 	}
 
 	void Window::setWindowSize(Utilities::Vector2<int> size)
@@ -100,7 +100,16 @@ namespace LoveEngine {
 
 	void Window::repositionWindow(Utilities::Vector2<int> pos)
 	{
-		renderer->getRenderWindow()->reposition(pos.x, pos.y);
+		repositionWindow(pos.x, pos.y);
+	}
+	void Window::repositionWindow(int x, int y)
+	{
+		renderer->repositionWindow(x, y);
+	}
+
+	void Window::setWindowIcon(std::string iconPath)
+	{
+		renderer->setWindowIcon(iconPath);
 	}
 
 	void Window::lockMouse()

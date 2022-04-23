@@ -8,8 +8,11 @@
 --  6: victory
 --  7: defeat
 --------------
+
 function scene0() -- Main menu
-    size(1280, 720)
+    icon('icon.bmp')
+
+    --size(randomBetween(100, 1000), randomBetween(100, 1000))
     scene:name("Main menu")
 
     local cam = scene:createObject("cam")
@@ -177,7 +180,6 @@ function scene2() -- Pause
 end
 
 function scene3() -- Prueba
-    size(width(), height())
     scene:name("Escena de Prueba")
 
     persistentObject:addComponent("ComponenteDeContar")

@@ -9,7 +9,7 @@
 #include <StringFormatter.h>
 #include <GameObject.h>
 #include "Transform.h"
-
+#include "Window.h"
 namespace LoveEngine
 {
 	namespace ECS {
@@ -116,7 +116,7 @@ namespace LoveEngine
 
 		Utilities::Vector2<float> Text::pixelToRelative(float x, float y)
 		{
-			Utilities::Vector2<float> windowSize = ogremanager->getWindowSize();
+			Utilities::Vector2<int> windowSize = Window::getInstance()->getWindowSize();
 
 			return Utilities::Vector2<float>(x / windowSize.x, y / windowSize.y);
 		}

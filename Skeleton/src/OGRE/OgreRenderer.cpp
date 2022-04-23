@@ -52,6 +52,7 @@ namespace LoveEngine {
 		{
 			if (instance != nullptr) throwOgreError(__LINE__, "Ya existe una instancia del OgreManager.");
 
+			icon = nullptr;
 			instance = this;
 
 			initRoot();
@@ -283,10 +284,6 @@ namespace LoveEngine {
 			resizeWindow(v.x, v.y);
 		}
 
-		Utilities::Vector2<float> OgreRenderer::getWindowSize()
-		{
-			return Utilities::Vector2<float>(mWindow->getWidth(), mWindow->getHeight());
-		}
 
 		Window* OgreRenderer::getWindowInfo()
 		{
@@ -306,6 +303,17 @@ namespace LoveEngine {
 		void OgreRenderer::changeWindowTitle(std::string title)
 		{
 			SDL_SetWindowTitle(native, title.c_str());
+		}
+
+		void OgreRenderer::setFullScreen(bool mode)
+		{
+			Uint32 flag = mode ? SDL_WINDOW_FULLSCREEN : 0;
+			SDL_SetWindowFullscreen(native, flag);
+		}
+
+		std::string OgreRenderer::getWindowTitle()
+		{
+			return SDL_GetWindowTitle(native);
 		}
 
 		Ogre::SceneNode* OgreRenderer::createNode()
@@ -342,6 +350,19 @@ namespace LoveEngine {
 			width = sur->w; height = sur->h;
 			SDL_FreeSurface(sur);
 			return texture;
+		}
+
+		void OgreRenderer::repositionWindow(int x, int y)
+		{
+			SDL_SetWindowPosition(native, x, y);
+		}
+
+		void OgreRenderer::setWindowIcon(std::string path) {
+			//icon = IMG_LOAD(path.c_str());
+			icon = SDL_LoadBMP(path.c_str());
+			std::cout << (icon == nullptr ? "hola" : "chao") << "\n";
+
+			SDL_SetWindowIcon(native, icon);
 		}
 
 		/// <summary>
