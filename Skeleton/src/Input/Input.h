@@ -82,6 +82,8 @@ namespace LoveEngine {
 
 			Controller& getController();
 			bool controllerConected();
+			bool isControllerButtonPressed(ControllerButton b);
+			bool isControllerButtonState(ControllerButtonState s);
 			//static std::unordered_map<SDL_KeyCode, tecla> teclas;
 			/*void addListener(SDL_KeyCode k, Component* c);*/
 		private:
@@ -97,6 +99,8 @@ namespace LoveEngine {
 
 			bool initialiseController();
 			SDL_GameController* sdlcontroller;
+			int button;
+			ControllerButtonState buttonState;
 			//Errores
 			static void throwINPUTError(int errorLine);
 		};

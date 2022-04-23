@@ -58,7 +58,7 @@ namespace LoveEngine {
 			Transform* getFirstParent();
 			void addChild(Transform* c);
 			void updateChildren(int mode, Utilities::Vector3<float> p);
-
+			Transform* getChild(int indx);
 			void rotateChild(Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng);
 		};
 	}

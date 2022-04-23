@@ -28,7 +28,7 @@
 #include <lua.hpp>
 #include <Input.h>
 #include <LuaBridge/LuaBridge.h>
-
+#include <Window.h>
 #include <memory>
 
 typedef const char* (*GameName)();
@@ -172,6 +172,17 @@ namespace LoveEngine {
 	}
 
 
+	void setWindowSize(int x, int y){
+		Window::getInstance()->setWindowSize(x, y);
+	}
+
+	int getWidth() {
+		return Window::getInstance()->getWindowSize().x;
+	}
+	int getHeight() {
+		return Window::getInstance()->getWindowSize().y;
+	}
+
 	int Game::initialiseSceneCreator()
 	{
 		luastate = luaL_newstate();
@@ -201,6 +212,10 @@ namespace LoveEngine {
 			.addFunction("sendString", &(LoveEngine::ECS::Component::receiveString))
 			.endClass();
 
+		luabridge::getGlobalNamespace(luastate)
+			.addFunction("size", &(LoveEngine::setWindowSize))
+			.addFunction("width", &(LoveEngine::getWidth))	
+			.addFunction("height", &(LoveEngine::getHeight));
 	
 		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {

@@ -47,7 +47,16 @@ namespace LoveEngine {
 
 			void configText();
 
-			const Utilities::Vector2<float>& pixelToRelative(float x, float y);
+			void setTextPosition(Utilities::Vector3<float> position);
+			void setTextColor(const Utilities::Vector4<float>& color);
+			void setTextBottomColor(const Utilities::Vector4<float>& color);
+			void setTextTopColor(const Utilities::Vector4<float>& color);
+			void setTextContent(const std::string& content);
+			void setTextFont(const std::string& font);
+			void setTextScale(float scale);
+			void setTextAligment(alignmentEnum aling);
+
+			Utilities::Vector2<float> pixelToRelative(float x, float y);
 
 			Renderer::OgreRenderer* ogremanager;
 			Ogre::TextAreaOverlayElement* textArea;

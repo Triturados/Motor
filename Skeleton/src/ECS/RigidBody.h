@@ -29,8 +29,7 @@ namespace LoveEngine {
 			Cube = 0,
 			Sphere = 1,
 			Plane = 2,
-			Cylinder = 3,
-			Cone = 4
+			Capsule = 3
 		};
 
 		class Transform;

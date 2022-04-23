@@ -203,11 +203,8 @@ namespace LoveEngine {
 			else if (nameS_ == "plane") {
 				shape = TipoForma::Plane;
 			}
-			else if (nameS_ == "cone") {
-				shape = TipoForma::Cone;
-			}
-			else if (nameS_ == "cylinder") {
-				shape = TipoForma::Cylinder;
+			else if (nameS_ == "capsule") {
+				shape = TipoForma::Capsule;
 			}
 			else {
 				shape = TipoForma::Cube;

@@ -1,4 +1,15 @@
-function scene0()
+-- Escenas del juego: 
+--  0: menu
+--  1: settings
+--  2: pause
+--  3: overworld
+--  4: boss1
+--  5: boss2
+--  6: victory
+--  7: defeat
+--------------
+function scene0() -- Main menu
+    size(1280, 720)
     scene:name("Main menu")
 
     local cam = scene:createObject("cam")
@@ -8,7 +19,7 @@ function scene0()
         position: 0,40,80;
         rotation: 0,0,0,0;
     ]])
-    
+
     local camCamera = cam:addComponent('Camera')
 
     camCamera:sendMsg([[
@@ -16,11 +27,73 @@ function scene0()
         zOrder: -1
     ]])
 
-    
     local bg = scene:createObject("Background");
     bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: menuBackground; 
+        material: backgroundMenu; 
+        width: 1280;
+        height : 720;
+    ]])
+
+    local startButton = scene:createObject("Start Button"):addComponent("Button");
+    local settingsButton = scene:createObject("Settings Button"):addComponent("Button");
+    local exitButton = scene:createObject("Exit Button"):addComponent("Button");
+
+    startButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+		posZ: 1
+    ]])
+
+    settingsButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+		posZ: 1
+    ]])
+
+    exitButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 420;
+		posZ: 1
+    ]])
+
+    local mainmenu = bg:addComponent("MainMenu");
+    mainmenu:sendComponent(0, startButton);
+    --mainmenu:sendComponent(1, settingsButton);
+    mainmenu:sendComponent(1, exitButton);
+end
+
+function scene1() -- Settings
+    scene:name("Settings")
+
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+
+    local camCamera = cam:addComponent('Camera')
+
+    camCamera:sendMsg([[
+        name: settings;
+        zOrder: -1
+    ]])
+
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: backgroundMenu; 
         width: 1280;
         height : 720;
     ]])
@@ -51,36 +124,85 @@ function scene0()
     mainmenu:sendComponent(1, exitButton);
 end
 
-function scene1()
-    scene:name("Escena de Prueba")
+function scene2() -- Pause
+    scene:name("Pause")
 
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+
+    local camCamera = cam:addComponent('Camera')
+
+    camCamera:sendMsg([[
+        name: pause;
+        zOrder: 2
+    ]])
+
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: pauseMenu; 
+        width: 1280;
+        height : 720;
+    ]])
+
+    local continue = scene:createObject("Start Button"):addComponent("Button");
+    local exitButton = scene:createObject("Exit Button"):addComponent("Button");
+
+    continue:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+		posZ: 1
+    ]])
+
+    exitButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+		posZ: 1
+    ]])
+
+    local mainmenu = bg:addComponent("PauseMenu");
+    mainmenu:sendComponent(0, continue);
+    mainmenu:sendComponent(1, exitButton);
+end
+
+function scene3() -- Prueba
+    size(width(), height())
+    scene:name("Escena de Prueba")
 
     persistentObject:addComponent("ComponenteDeContar")
 
     local a = scene:createObject("AAA");
     a:addComponent("MoverPantalla"):sendMsg("inicial: 0.1")
 
-
-	local btest = scene:createObject("btest");
+    local btest = scene:createObject("btest");
     btest:addComponent("Button"):sendMsg([[
         material: Heal_bg;
         width: 300;
         height: 50;
         posX: 400;
         posY: 100;
-    ]]) 	
-	
-    
-	
+    ]])
+
     local testImagen = scene:createObject("uiobj")
-	testImagen:addComponent("Transform")
-	testImagen:addComponent("Image"):sendMsg([[
+    testImagen:addComponent("Transform")
+    testImagen:addComponent("Image"):sendMsg([[
         material: ui
     ]])
-	
-    --Slider--
-	local testSlider = scene:createObject("miSlider")
-	testSlider:addComponent("Transform")
+
+    -- Slider--
+    local testSlider = scene:createObject("miSlider")
+    testSlider:addComponent("Transform")
     testSlider:addComponent("Slider"):sendMsg([[
         materialBar: Heal;
         materialBarBg: Heal_bg;
@@ -92,10 +214,10 @@ function scene1()
     ]])
     testSlider:addComponent("SaludJugador")
 
-    --Suelo--
-	local suelo = scene:createObject("Suelo")
+    -- Suelo--
+    local suelo = scene:createObject("Suelo")
     local comp2 = suelo:addComponent("Transform")
-    
+
     comp2:sendMsg([[
         scale: 100,1,100;
         position: 0,0,0;
@@ -120,25 +242,25 @@ function scene1()
     material:sendMsg([[materialName: bolaroja]])
     material:sendComponent(0, comp3)
 
-    --Camara comentada por lo del splash screen
+    -- Camara comentada por lo del splash screen
     -- local camara = scene:createObject("CamaritaGuapa")
     -- local transcam = camara:addComponent('Transform')
     -- transcam:sendMsg([[
     --    scale: 1,1,1;
     --    position: 0,40,80;
     --    rotation: 0,0,0,0;
-    --]])
+    -- ]])
 
     -- local camCamera = camara:addComponent('Camera')
-     
+
     -- camCamera:sendMsg([[
     --    name: escenaJuego;
-    --]])
+    -- ]])
 
-    --Bola--
+    -- Bola--
     local bola = scene:createObject("Bola")
     local compBola = bola:addComponent('Transform')
-        
+
     compBola:sendMsg([[
         scale: 2,2,2;
         position: -20,40,0;
@@ -157,10 +279,10 @@ function scene1()
         colliderScale: 3,3,3;
     ]])
 
-    --BolaPesada--
+    -- BolaPesada--
     local bolaPesada = scene:createObject("BolaPesada")
     local compBolaPesada = bolaPesada:addComponent('Transform')
-        
+
     compBolaPesada:sendMsg([[
         scale: 4,4,4;
         position: 20,40,0;
@@ -181,22 +303,22 @@ function scene1()
 
     local luz = scene:createObject("Luz")
     local compLuz = luz:addComponent('Transform')
-        
+
     compLuz:sendMsg([[
         scale: 1,1,1;
         position: 0,40,0;
         rotation: -45,0,0,0;
     ]])
-    
+
     local compLight = luz:addComponent('Light')
     compLight:sendMssg([[
         name: luz_direccional
         type: directional
     ]])
-----------hijo ogro
+    ----------hijo ogro
     local bolaHijaJug = scene:createObject("BolaHija")
     local compTrBolaHijaJug = bolaHijaJug:addComponent('Transform')
-        
+
     compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
         position: 0,10,0;
@@ -206,14 +328,13 @@ function scene1()
         meshName: sphere.mesh;
     ]])
 
-    
     local rotarcam = bolaHijaJug:addComponent('CamRotate')
---------------
+    --------------
 
-----------bola hijo ogro "cam"
+    ----------bola hijo ogro "cam"
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
-        
+
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,80,60;
@@ -226,14 +347,13 @@ function scene1()
     camCamera:sendMsg([[
         name: escenaJuego;
     ]])
-    
-    
-    --player--
+
+    -- player--
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
         scale: 2,2,2;
-        position: 0,10,0;
+        position: 0,30,0;
         rotation: 0,0,0,0;
     ]])
     player:addComponent("Rigidbody"):sendMsg([[
@@ -255,21 +375,28 @@ function scene1()
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
-        
+
     compLuzPlayer:sendMsg([[
         scale: 1,1,1;
         position: 0,10,0;
         rotation: 0,0,0,0;
     ]])
     compLuzPlayer:sendComponent(1, tr)
-    
+
     local compLightPlayer = luzPlayer:addComponent('Light')
     compLightPlayer:sendMssg([[
         name: luz_point
         type: point
     ]])
 
-     --Enemigo--
+    local dashParticles = scene:createObject("dashParticles")
+    local trDash = dashParticles:addComponent("Transform")
+    trDash:sendMsg([[scale: 1,1,1; position: 0,35,0; rotation: 0,0,0,0;]])
+    local dashSys = dashParticles:addComponent("ParticleSystem")
+    dashSys:sendMsg([[particleName: dash; emitting: false]])
+    trDash:sendComponent(1, tr)
+
+    -- Enemigo--
     local boss = scene:createObject("boss")
     local bosstr = boss:addComponent("Transform")
     bosstr:sendMsg([[
@@ -288,10 +415,10 @@ function scene1()
         colliderScale: 18,18,18;
     ]])
 
-    --haciendo hijo del hijo del player a la  "cam"
+    -- haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
 
-    --Metiendo componente rotar Camara
+    -- Metiendo componente rotar Camara
     rotarcam:sendMsg([[
         verSens: 5.5
         horiSens: 5.5
@@ -328,123 +455,161 @@ function scene1()
         alignment : 0
         ]])
 
-    --textPruebaText:sendString("V I D A S")
+    -- textPruebaText:sendString("V I D A S")
     local showText = textPrueba:addComponent("ShowText")
     showText:sendMssg([[
         interval: 0.1
     ]])
     showText:sendString("Hola que tal como estas")
+    createText(20, 100, 'asdasdas')
+    local dialogue = scene:createObject("Dialogue"):addComponent('Dialogue')
+    dialogue:sendMsg("lines: 3")
 
-    local textPrueba2 = scene:createObject("TextoPrueba2")
-    local textPrueba2text = textPrueba2:addComponent("Text")
-    textPrueba2text:sendMsg([[
-        position: 20, 20, 0;
+    for i = 0, 2, 1 do
+        local line = createText(20, 500 + i * 20, '  ')
+        dialogue:sendComponent(i, line);
+    end
+    dialogue:sendMssg([[
+        line0: #Soy el primer texto uwu#
+        line1: #Soy el segundo texto uwu#
+        line2: #Soy el tercer texto uwu...#
+    ]])
+    dialogue:sendMssg([[
+        line0: #Soy el cuarto texto uwu#
+        line1: #Soy el quinto texto uwu#
+        line2: #Soy el sexto texto uwu...#
+    ]])
+    dialogue:sendMssg([[
+        line0: #Hola nene, mi nombre es Yojhan Steven, si estas#
+        line1: #viendo esto es porque eres una persona muy#
+        line2: #atenta Muchas gracias por tu tiempo.#
+    ]])
+    -- textPrueba2text:sendString("Soy el segundo texto uwu")
+
+    local skybox = scene:createObject("Skybox")
+    skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
+
+    scene:createObject("Pause Game"):addComponent("PauseGame")
+end
+
+function createText(x, y, text)
+    local textObj = scene:createObject("textObj")
+    local textComp = textObj:addComponent("Text")
+    textComp:sendMsg([[
+        position: ]] .. x .. ',' .. y .. [[, 0;
         fontName: robot
         mainColor: 0.1, 0.2, 0.9, 1.0;
         textScale:0.03
         alignment : 0
         ]])
-
-    textPrueba2text:sendString("Soy el segundo texto uwu")
-
-    local skybox = scene:createObject("Skybox")
-    skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
-
+    local showText = textObj:addComponent("ShowText")
+    showText:sendMssg([[
+        interval: 0.1
+        ]])
+    showText:sendString(text)
+    return showText
 end
 
+function scene4() -- Victory
+    scene:name("Escena victoria")
 
-function scene2()
-    scene:name("Escena de Dani")
-    local obj = scene:createObject("Objeto de Dani")
-    --obj:addComponent("ComponenteDeContar"):sendMsg("Hola tontatatatata")
-    --obj:addComponent("MouseTracker")
-    obj:addComponent('EscribirNumero'):sendMsg([[
-        numerito: 4;
-        otronumerito: 12 
-    ]])
-
-
-     --Suelo--
-	local suelo = scene:createObject("Suelo")
-    local comp2 = suelo:addComponent("Transform")
-    
-    comp2:sendMsg([[
-        scale: 50,1,50;
-        position: 0,0,0;
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
         rotation: 0,0,0,0;
     ]])
 
-    local comp3 = suelo:addComponent("Mesh")
-    comp3:sendMsg([[
-        meshName: cube.mesh;
-    ]])
-    local compRigidbodySuelo = suelo:addComponent('Rigidbody')
-    compRigidbodySuelo:sendMsg([[
-        trigger: true;
-        state: kinematic;
-        mass: 0.0;
-        shape: cube; 
-        restitution: 0.9;
-        colliderScale: 30,10,30;
-        ]])
+    local camCamera = cam:addComponent('Camera')
 
-    local material = suelo:addComponent("Material")
-    material:sendMsg([[materialName: bolaroja]])
-    material:sendComponent(0, comp3)
-
-    suelo:addComponent("DeadZone")
-
-    --luz
-    local luz = scene:createObject("Luz")
-    local compLuz = luz:addComponent('Transform')
-        
-    compLuz:sendMsg([[
-        scale: 1,1,1;
-        position: 0,40,0;
-        rotation: -45,0,0,0;
-    ]])
-    
-    local compLight = luz:addComponent('Light')
-    compLight:sendMssg([[
-        name: luz_direccional
-        type: directional
-    ]])
-
-    local camara = scene:createObject("CamaritaGuapa")
-    local transcam = camara:addComponent('Transform')
-    transcam:sendMsg([[
-       scale: 1,1,1;
-       position: 0,40,80;
-       rotation: 0,0,0,0;
-    ]])
-
-    local camCamera = camara:addComponent('Camera')
-     
     camCamera:sendMsg([[
-       name: escenaJuego;
+        name: escenaMuerte;
+        zOrder: -2
     ]])
 
-local player = scene:createObject("jugador")
-local tr = player:addComponent("Transform")
-tr:sendMsg([[
-    scale: 2,2,2;
-    position: 0,10,0;
-    rotation: 0,0,0,0;
-]])
-player:addComponent("Rigidbody"):sendMsg([[
-    shape: cube; 
-    type: dynamic;
-    mass: 10.0;
-    restitution: 0.75;
-]])
-local mesh = player:addComponent("Mesh")
-mesh:sendMsg([[meshName: Sinbad.mesh]])
-player:addComponent("MovimientoJugador"):sendMsg([[
-    speed: 15.0
-    rotSpeed: 5.0
-]])
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: menuDeadBackground; 
+        width: 1280;
+        height : 720;
+    ]])
 
+    local restartButton = scene:createObject("Restart Button"):addComponent("Button");
+    local menuButton = scene:createObject("Menu Button"):addComponent("Button");
 
+    restartButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+		posZ: 1
+    ]])
 
+    menuButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+		posZ: 1
+    ]])
 
+    local mainmenu = bg:addComponent("DeadMenu");
+    mainmenu:sendComponent(0, restartButton);
+    mainmenu:sendComponent(1, menuButton);
+end
+
+function scene5() -- Defeat
+    scene:name("Escena derrota")
+
+    local cam = scene:createObject("cam")
+    local trcam = cam:addComponent('Transform')
+    trcam:sendMsg([[
+        scale: 2,2,2;
+        position: 0,40,80;
+        rotation: 0,0,0,0;
+    ]])
+
+    local camCamera = cam:addComponent('Camera')
+
+    camCamera:sendMsg([[
+        name: escenaMuerte;
+        zOrder: -2
+    ]])
+
+    local bg = scene:createObject("Background");
+    bg:addComponent("Transform")
+    bg:addComponent("Image"):sendMsg([[
+        material: menuDeadBackground; 
+        width: 1280;
+        height : 720;
+    ]])
+
+    local restartButton = scene:createObject("Restart Button"):addComponent("Button");
+    local menuButton = scene:createObject("Menu Button"):addComponent("Button");
+
+    restartButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 300;
+		posZ: 1
+    ]])
+
+    menuButton:sendMsg([[
+        material: Heal_bg;
+        width: 100;
+        height: 50;
+        posX: 500;
+        posY: 360;
+		posZ: 1
+    ]])
+
+    local mainmenu = bg:addComponent("DeadMenu");
+    mainmenu:sendComponent(0, restartButton);
+    mainmenu:sendComponent(1, menuButton);
 end

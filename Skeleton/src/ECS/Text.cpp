@@ -30,7 +30,7 @@ namespace LoveEngine
 			sf.tryGetVector4("topColor", *(topColor));
 			sf.tryGetFloat("textScale", textScale);
 			sf.tryGetInt("alignment", alineacion);
-
+			sf.tryGetString("text", textContent);
 			alignment = (alignmentEnum) alineacion;
 		}
 
@@ -50,24 +50,62 @@ namespace LoveEngine
 
 		void Text::configText()
 		{
+			auto a = *pos;
+
+			setTextPosition(a);
+			setTextColor(*(mainColor));
+			setTextBottomColor(*(bottomColor));
+			setTextBottomColor(*(topColor));
+			setTextContent(textContent);
+			setTextFont(fontName);
+			setTextScale(textScale);
+			setTextAligment(alignment);
+		}
+
+		void Text::setTextPosition(Utilities::Vector3<float> position)
+		{
 			//Posicion
-			auto relative = pixelToRelative(pos->x, pos->y);
-			pos->x = relative.x; pos->y = relative.y;
+			auto relative = pixelToRelative(position.x, position.y);
+			position.x = relative.x; position.y = relative.y;
 
-			textArea->setPosition(pos->x, pos->y);
-			ogremanager->setTextOverlayZOrder(pos->z);
+			textArea->setPosition(position.x, position.y);
+			ogremanager->setTextOverlayZOrder(position.z);
+		}
 
+		void Text::setTextColor(const Utilities::Vector4<float>& color)
+		{
 			//Color
-			textArea->setColour(Ogre::ColourValue(mainColor->x, mainColor->y, mainColor->z, mainColor->w));
-			if (bottomColor->w != -1) textArea->setColourBottom(Ogre::ColourValue(bottomColor->x, bottomColor->y, bottomColor->z, bottomColor->w));
-			if (topColor->w != -1) textArea->setColourTop(Ogre::ColourValue(topColor->x, topColor->y, topColor->z, topColor->w));
+			textArea->setColour(Ogre::ColourValue(color.x, color.y, color.z, color.w));
+		}
 
-			//Texto
+		void Text::setTextBottomColor(const Utilities::Vector4<float>& color)
+		{
+			if(color.w != -1) textArea->setColourBottom(Ogre::ColourValue(color.x, color.y, color.z, color.w));
+		}
+
+		void Text::setTextTopColor(const Utilities::Vector4<float>& color)
+		{
+			if (color.w != -1) textArea->setColourTop(Ogre::ColourValue(color.x, color.y, color.z, color.w));
+		}
+
+		void Text::setTextContent(const std::string& content)
+		{
 			textArea->setCaption(textContent);
-			textArea->setMetricsMode(Ogre::GMM_RELATIVE);
-			textArea->setFontName(fontName);
-			textArea->setCharHeight(textScale);
-			textArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)alignment);
+		}
+
+		void Text::setTextFont(const std::string& font)
+		{
+			textArea->setFontName(font);
+		}
+
+		void Text::setTextScale(float scale)
+		{
+			textArea->setCharHeight(scale);
+		}
+
+		void Text::setTextAligment(alignmentEnum aling)
+		{
+			textArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)aling);
 		}
 
 		void Text::changeText(std::string mssg)
@@ -76,7 +114,7 @@ namespace LoveEngine
 			textArea->setCaption(textContent);
 		}
 
-		const Utilities::Vector2<float>& Text::pixelToRelative(float x, float y)
+		Utilities::Vector2<float> Text::pixelToRelative(float x, float y)
 		{
 			Utilities::Vector2<float> windowSize = ogremanager->getWindowSize();
 

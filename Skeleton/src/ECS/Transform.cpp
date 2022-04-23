@@ -179,6 +179,17 @@ namespace LoveEngine {
 			}
 		}
 
+		Transform* Transform::getChild(int indx)
+		{
+			if (children.empty()) return nullptr;
+
+			auto it = children.begin();
+			for (int i = 0; i < indx; ++i) {
+				it++;
+			}
+			return *it;
+		}
+
 		void Transform::rotateChild(/*int modeAngule, float ang, */Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng)
 		{
 			if (children.empty()) return;
