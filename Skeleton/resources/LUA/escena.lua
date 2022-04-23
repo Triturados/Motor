@@ -30,7 +30,7 @@ function scene0() --Main menu
     local bg = scene:createObject("Background");
     bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: menuBackground; 
+        material: backgroundMenu; 
         width: 1280;
         height : 720;
     ]])
@@ -82,7 +82,7 @@ function scene1() --Settings
     local bg = scene:createObject("Background");
     bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: menuBackground; 
+        material: backgroundMenu; 
         width: 1280;
         height : 720;
     ]])
@@ -134,7 +134,7 @@ function scene2() --Pause
     local bg = scene:createObject("Background");
     bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: menuBackground; 
+        material: pauseMenu; 
         width: 1280;
         height : 720;
     ]])
@@ -449,23 +449,53 @@ function scene3() --Prueba
         interval: 0.1
     ]])
     showText:sendString("Hola que tal como estas")
+    createText(20, 100, 'asdasdas')
+    local dialogue = scene:createObject("Dialogue"):addComponent('Dialogue')
+    dialogue:sendMsg("lines: 3")
 
-    local textPrueba2 = scene:createObject("TextoPrueba2")
-    local textPrueba2text = textPrueba2:addComponent("Text")
-    textPrueba2text:sendMsg([[
-        position: 20, 20, 0;
-        fontName: robot
-        mainColor: 0.1, 0.2, 0.9, 1.0;
-        textScale:0.03
-        alignment : 0
-        ]])
-
-    textPrueba2text:sendString("Soy el segundo texto uwu")
+    for i = 0, 2, 1 do
+        local line = createText(20, 500+ i * 20, '  ')
+        dialogue:sendComponent(i, line);
+    end
+    dialogue:sendMssg([[
+        line0: #Soy el primer texto uwu#
+        line1: #Soy el segundo texto uwu#
+        line2: #Soy el tercer texto uwu...#
+    ]])
+    dialogue:sendMssg([[
+        line0: #Soy el cuarto texto uwu#
+        line1: #Soy el quinto texto uwu#
+        line2: #Soy el sexto texto uwu...#
+    ]])
+    dialogue:sendMssg([[
+        line0: #Hola nene, mi nombre es Yojhan Steven, si estas#
+        line1: #viendo esto es porque eres una persona muy#
+        line2: #atenta Muchas gracias por tu tiempo.#
+    ]])
+    --textPrueba2text:sendString("Soy el segundo texto uwu")
 
     local skybox = scene:createObject("Skybox")
     skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
 
     scene:createObject("Pause Game"):addComponent("PauseGame")
+end
+
+function createText( x, y, text)
+    local textObj = scene:createObject("textObj")
+    local textComp = textObj:addComponent("Text")
+    textComp:sendMsg([[
+        position: ]]..x..','..y..[[, 0;
+        fontName: robot
+        mainColor: 0.1, 0.2, 0.9, 1.0;
+        textScale:0.03
+        alignment : 0
+        ]])
+    local showText = textObj:addComponent("ShowText")
+    showText:sendMssg([[
+        interval: 0.1
+        ]])
+    showText:sendString(text)
+    return showText
 end
 
 function scene4() --Victory

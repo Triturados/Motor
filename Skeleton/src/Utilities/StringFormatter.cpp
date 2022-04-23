@@ -27,15 +27,25 @@ namespace LoveEngine {
 		std::string StringFormatter::nextWord(std::string message, int& idx)
 		{
 			std::string currentword = "";
+
+			bool complexString = false;
 			while (idx < message.size()) { //Itero por la palabra empezando por el indice actual
 
 				char c = message[idx++];
 
-				if (c == ' ') continue; //Ignoramos los espacios o saltos de linea
+				if (c == '#') {
+					complexString = !complexString;
+					continue;
+				}
 
-				if (c == ':' || c == ';' || c == '\n') //Los puntos y coma o dos puntos marcan el final de cada palabra
-				{
-					return currentword;
+				if (!complexString) {
+
+					if (c == ' ') continue; //Ignoramos los espacios o saltos de linea
+
+					if (c == ':' || c == ';' || c == '\n') //Los puntos y coma o dos puntos marcan el final de cada palabra
+					{
+						return currentword;
+					}
 				}
 
 				currentword.push_back(c); //Añadimos esta letra a la palabra
@@ -47,8 +57,8 @@ namespace LoveEngine {
 
 		void StringFormatter::processString(std::string message)
 		{
-
 			std::string lastword = "";
+			
 			int idx = 0, messageSize = message.size();
 			while (idx < messageSize) {
 
@@ -71,7 +81,7 @@ namespace LoveEngine {
 
 		void StringFormatter::processWord(std::string name, std::string value)
 		{
-
+			
 			if (value == "false") { // True y false equivalen a booleanos
 				b.emplace(name, false);
 				return;

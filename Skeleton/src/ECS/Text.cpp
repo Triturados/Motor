@@ -30,7 +30,7 @@ namespace LoveEngine
 			sf.tryGetVector4("topColor", *(topColor));
 			sf.tryGetFloat("textScale", textScale);
 			sf.tryGetInt("alignment", alineacion);
-
+			sf.tryGetString("text", textContent);
 			alignment = (alignmentEnum) alineacion;
 		}
 
