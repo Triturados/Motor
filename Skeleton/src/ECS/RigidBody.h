@@ -60,8 +60,6 @@ namespace LoveEngine {
 
 			void init() override;
 
-			void update() override;
-
 			void stepPhysics() override;
 
 			void receiveMessage(Utilities::StringFormatter& s) override;

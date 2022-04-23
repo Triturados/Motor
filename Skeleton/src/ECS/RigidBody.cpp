@@ -110,31 +110,20 @@ namespace LoveEngine {
 			rigidBody->setUserPointer((void*)col);
 		}
 
-		void RigidBody::update()
-		{
-			const auto worldTransform = rigidBody->getWorldTransform();
-
-			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
-			btScalar rotX,rotY,rotZ; 
-			worldTransform.getRotation().getEulerZYX(rotZ,rotY,rotX);
-			btVector3 rot = { rotX,rotY,rotZ };
-			Utilities::Vector3<float> newRot = cvt(rot);
-			
-			Utilities::Vector4<float> newRotToVec4(newRot.x, newRot.y, newRot.z, 0);
-
-			tr->setPos(newPos);
-			tr->setRot(newRotToVec4);
-		}
-
 		void RigidBody::stepPhysics()
 		{
 			const auto worldTransform = rigidBody->getWorldTransform();
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
-			Utilities::Vector4<float> newRot = cvt(worldTransform.getRotation());
+			btScalar rotX, rotY, rotZ;
+			worldTransform.getRotation().getEulerZYX(rotZ, rotY, rotX);
+			btVector3 rot = { rotX,rotY,rotZ };
+			Utilities::Vector3<float> newRot = cvt(rot);
+
+			Utilities::Vector4<float> newRotToVec4(newRot.x, newRot.y, newRot.z, 0);
+
 			tr->setPos(newPos);
-			tr->setRot(newRot);
-			
+			tr->setRot(newRotToVec4);
 		}
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
