@@ -8,13 +8,13 @@
 --  6: victory
 --  7: defeat
 --------------
+package.path = package.path .. ";../resources/LUA/?.lua"
 
 function scene0() -- Main menu
-    icon('icon.bmp')
-
     --size(randomBetween(100, 1000), randomBetween(100, 1000))
     scene:name("Main menu")
-
+    menu = require "menu";
+    menu:cambiarIcono()
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
     trcam:sendMsg([[
