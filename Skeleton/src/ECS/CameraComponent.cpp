@@ -21,7 +21,7 @@ namespace LoveEngine {
 			if (mCamera != nullptr)
 				ogremanager->getSceneManager()->destroyCamera(mCamera);
 			
-			ogremanager->getRenderWindow()->removeAllViewports();
+			ogremanager->getRenderWindow()->removeViewport(viewportZorder);
 		}
 
 		void Camera::init()
