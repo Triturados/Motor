@@ -131,11 +131,11 @@ namespace LoveEngine {
 		delete sceneManager;
 		delete time;
 
+		delete physicsManager;
 		delete ogreManager;
 		delete inputManager;
 		delete soundManager;
 
-		delete physicsManager;
 
 		lua_close(luastate);
 		FreeLibrary(game);

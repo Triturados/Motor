@@ -253,6 +253,11 @@ namespace LoveEngine {
 			delete constraintSolver; constraintSolver = nullptr;
 
 			delete dynamicsWorld; dynamicsWorld = nullptr;
+#ifdef _DEBUG
+			delete debugDrawer; debugDrawer = nullptr;
+
+#endif // DEBUG
+
 		}
 
 		void PhysicsManager::destroy() {
