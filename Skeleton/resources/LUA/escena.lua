@@ -74,6 +74,20 @@ function scene0() -- Main menu
     --mainmenu:sendComponent(1, settingsButton);
     mainmenu:sendComponent(1, exitButton);
     createVignette()
+
+
+    local transition = scene:createObject('Transition')
+    transition:addComponent('Image'):sendMssg([[
+        material: splashScreen; 
+        width: 1280;
+        height : 720;
+        posZ: 10
+    ]])
+    transition:addComponent('Transition'):sendMssg([[
+        type: fade
+        duration: 2.0
+        direction: true
+    ]])
     
 end
 
