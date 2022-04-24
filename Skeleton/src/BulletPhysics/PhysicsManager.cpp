@@ -152,11 +152,11 @@ namespace LoveEngine {
 		void PhysicsManager::update(float physicsFrameRate) {
 
 			//physicsFrameRate = 1 / 60;
-			dynamicsWorld->stepSimulation(1.f / 60.f, 10);
+			dynamicsWorld->stepSimulation(physicsFrameRate, 10);
 			checkCollision();
 
 #ifdef _DEBUG
-			dynamicsWorld->stepSimulation(physicsFrameRate);
+			//dynamicsWorld->stepSimulation(physicsFrameRate);
 
 			dynamicsWorld->debugDrawWorld();
 #endif // _DEBUG
