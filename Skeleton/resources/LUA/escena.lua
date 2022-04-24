@@ -411,7 +411,7 @@ function scene3() -- Prueba
     ]])
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
-    boss:addComponent("Mesh"):sendMsg([[meshName: boss.mesh]])
+    boss:addComponent("Mesh"):sendMsg([[meshName: Boss.mesh]])
     boss:addComponent('Rigidbody'):sendMsg([[
         state: dynamic;
         mass: 10.0;
