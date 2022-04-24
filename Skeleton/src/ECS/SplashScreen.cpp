@@ -17,21 +17,20 @@ namespace LoveEngine {
 
 			auto camera = scene->createGameObject("Camera");
 			camera->addComponent<ECS::Transform>()->formatString("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
-			camera->addComponent<ECS::Mesh>()->formatString("meshName: sphere.mesh;");
 			camera->addComponent<ECS::Camera>()->formatString("cameraName: escenaSplash");
 
 			auto gameObject = scene->createGameObject("Background");
-			gameObject->addComponent<ECS::Transform>();
 			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_background; width: 1280; height : 720; posZ: 0");
 
 			gameObject = scene->createGameObject("White");
-			gameObject->addComponent<ECS::Transform>();
 			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_white; width: 1280; height : 720; posY: 480; posZ: 1");
 			gameObject->addComponent<FillIcon>()->formatString("speed: -100.0");
 			
 			gameObject = scene->createGameObject("Content");
-			gameObject->addComponent<ECS::Transform>();
 			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_content; width: 1280; height : 720; posZ: 2");
+
+			gameObject = scene->createGameObject("Vignette");
+			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_vignette; width: 1280; height : 720; posZ: 20");
 
 
 			ECS::Timer::invoke([&](ECS::Timer*) {

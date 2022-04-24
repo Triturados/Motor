@@ -73,6 +73,8 @@ function scene0() -- Main menu
     mainmenu:sendComponent(0, startButton);
     --mainmenu:sendComponent(1, settingsButton);
     mainmenu:sendComponent(1, exitButton);
+    createVignette()
+    
 end
 
 function scene1() -- Settings
@@ -177,6 +179,7 @@ function scene2() -- Pause
     local mainmenu = bg:addComponent("PauseMenu");
     mainmenu:sendComponent(0, continue);
     mainmenu:sendComponent(1, exitButton);
+    createVignette()
 end
 
 function scene3() -- Prueba
@@ -463,12 +466,12 @@ function scene3() -- Prueba
         interval: 0.1
     ]])
     showText:sendString("Hola que tal como estas")
-    createText(20, 100, 'asdasdas')
+    createText(20, 100, 'tititiitiutututu')
     local dialogue = scene:createObject("Dialogue"):addComponent('Dialogue')
     dialogue:sendMsg("lines: 3")
 
     for i = 0, 2, 1 do
-        local line = createText(20, 500 + i * 20, '  ')
+        local line = createText(20, 500 + i * 30, '  ')
         dialogue:sendComponent(i, line);
     end
     dialogue:sendMssg([[
@@ -491,6 +494,7 @@ function scene3() -- Prueba
     local skybox = scene:createObject("Skybox")
     skybox:addComponent("Skybox"):sendMsg([[materialName: skyboxhell; distance: 300; ]])
 
+    createVignette()
     scene:createObject("Pause Game"):addComponent("PauseGame")
 end
 
@@ -499,9 +503,9 @@ function createText(x, y, text)
     local textComp = textObj:addComponent("Text")
     textComp:sendMsg([[
         position: ]] .. x .. ',' .. y .. [[, 0;
-        fontName: robot
-        mainColor: 0.1, 0.2, 0.9, 1.0;
-        textScale:0.03
+        fontName: SourceSansProLight
+        mainColor: 1, 1, 1, 1.0;
+        textScale:0.05
         alignment : 0
         ]])
     local showText = textObj:addComponent("ShowText")
@@ -562,6 +566,7 @@ function scene4() -- Victory
     local mainmenu = bg:addComponent("DeadMenu");
     mainmenu:sendComponent(0, restartButton);
     mainmenu:sendComponent(1, menuButton);
+    createVignette()
 end
 
 function scene5() -- Defeat
@@ -614,4 +619,12 @@ function scene5() -- Defeat
     local mainmenu = bg:addComponent("DeadMenu");
     mainmenu:sendComponent(0, restartButton);
     mainmenu:sendComponent(1, menuButton);
+    createVignette()
+end
+
+
+function createVignette()
+    scene:createObject('Vignette'):addComponent('Image'):sendMssg([[
+        material: splashScreen_vignette; width: 1280; height : 720; posZ: 20
+    ]])
 end

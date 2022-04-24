@@ -24,7 +24,6 @@ namespace LoveEngine {
 
 	namespace ECS {
 
-		class Transform;
 
 		class lovexport Image : public Component
 		{

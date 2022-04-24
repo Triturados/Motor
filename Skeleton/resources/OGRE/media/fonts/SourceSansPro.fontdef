@@ -1,0 +1,31 @@
+SourceSansPro
+{
+    type truetype
+    source SourceSansPro-Regular.ttf
+    size 64
+    resolution 72
+}
+
+SourceSansProLight
+{
+    type truetype
+    source SourceSansPro-Light.ttf
+    size 64
+    resolution 72
+}
+
+SourceSansProItalic
+{
+    type truetype
+    source SourceSansPro-Italic.ttf
+    size 64
+    resolution 72
+}
+
+SourceSansProBold
+{
+    type truetype
+    source SourceSansPro-SemiBold.ttf
+    size 64
+    resolution 72
+}

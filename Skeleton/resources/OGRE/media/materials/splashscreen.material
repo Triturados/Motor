@@ -51,3 +51,17 @@ material splashScreen_white{
 		}
 	}
 }
+
+material splashScreen_vignette{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture ssVignette.png
+				colour_op modulate
+			}
+		}
+	}
+}

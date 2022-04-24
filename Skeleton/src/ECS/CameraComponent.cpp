@@ -12,7 +12,6 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <StringFormatter.h>
-#include <Mesh.h>
 
 namespace LoveEngine {
 	namespace ECS {
