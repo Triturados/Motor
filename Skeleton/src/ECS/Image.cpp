@@ -76,6 +76,11 @@ namespace LoveEngine {
 			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
 		}
 
+		void Image::setOpacity(float fade)
+		{
+			ogremanager->setImageOpacity(container, fade);
+		}
+
 		void Image::onSceneDown()
 		{
 			visible = false;

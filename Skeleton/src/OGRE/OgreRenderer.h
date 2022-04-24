@@ -116,6 +116,9 @@ namespace LoveEngine {
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
 			Ogre::OverlayContainer* renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay);
 			Ogre::OverlayContainer* createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions);
+			
+			void setImageOpacity(Ogre::OverlayContainer* container, float fade);
+
 			Ogre::Overlay* createOverlay();
 			void disableContainer(Ogre::OverlayContainer* overlayContainer);
 			void disableOverlay(Ogre::Overlay* overlay);

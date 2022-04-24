@@ -137,6 +137,7 @@ namespace LoveEngine {
 
 		delete physicsManager;
 
+		lua_close(luastate);
 		FreeLibrary(game);
 		FreeLibrary(singleton);
 	}

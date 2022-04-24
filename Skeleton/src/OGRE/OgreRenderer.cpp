@@ -35,6 +35,8 @@
 #include <Vector4.h>
 #include <Vector3.h>
 #include <Vector2.h>
+#include <OgreTechnique.h>
+#include <OgrePass.h>
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -220,7 +222,7 @@ namespace LoveEngine {
 			if (mMaterialMgrListener != nullptr)
 			{
 				Ogre::MaterialManager::getSingleton().removeListener(mMaterialMgrListener);
-				//delete mMaterialMgrListener;
+				delete mMaterialMgrListener;
 				mMaterialMgrListener = nullptr;
 			}
 
@@ -373,17 +375,24 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
 			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material
 			container->setMaterialName(material);
-
 			// El overlay, que gestiona la poscion, rotacion...
 			overlay = createOverlay();
 			overlay->add2D(container);
 			overlay->setZOrder(pos.z);
-			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 
+		
+			/*overlay->rotate(Ogre::Radian(Ogre::Angle(90)));*/
 			// Mostrar el overlay
 			overlay->show();
 			return container;
 		}
+
+		void OgreRenderer::setImageOpacity(Ogre::OverlayContainer* container, float fade) {
+			container->getMaterial()->getTechnique(0)->getPass(0)->getTextureUnitState(0)
+				->setAlphaOperation(Ogre::LayerBlendOperationEx::LBX_MODULATE, Ogre::LayerBlendSource::LBS_TEXTURE
+					, Ogre::LayerBlendSource::LBS_MANUAL, 1.0f, fade);
+		}
+
 
 		//Metodo privado para crear contenedores para imagenes
 		Ogre::OverlayContainer* OgreRenderer::createContainer(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions)
@@ -482,7 +491,7 @@ namespace LoveEngine {
 				OGRE_DELETE mRoot;
 				mRoot = NULL;
 			}
-
+			delete windowinfo;
 			SDL_Quit();
 		}
 	}

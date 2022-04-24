@@ -46,6 +46,7 @@ namespace LoveEngine {
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
 			void setPos(Utilities::Vector3<int> pos_);
+			void setOpacity(float fade);
 			void setDimensions(Utilities::Vector2<int> dimensions_);
 			~Image();
 		};
