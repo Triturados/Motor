@@ -5,12 +5,7 @@
 #include <SingletonInfo.h>
 #include <iostream>
 #include <SceneFactory.h>
-#include <Image.h>
-#include <GameObject.h>
-#include <CameraComponent.h>
-#include <Mesh.h>
-#include <Transform.h>
-#include <Timer.h>
+#include <SplashScreen.h>
 
 namespace LoveEngine {
 	namespace SceneManagement {
@@ -123,18 +118,7 @@ namespace LoveEngine {
 			ECS::Scene* scene = new ECS::Scene("splash scene");
 			currentScene.push(scene);
 
-			auto camera = scene->createGameObject("Camera");
-			camera->addComponent<ECS::Transform>()->formatString("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
-			camera->addComponent<ECS::Mesh>()->formatString("meshName: sphere.mesh;");
-			camera->addComponent<ECS::Camera>()->formatString("cameraName: escenaSplash");
-
-			auto gameObject = scene->createGameObject("Image");
-			gameObject->addComponent<ECS::Transform>();
-			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen; width: 1280; height : 720");
-
-			ECS::Timer::invoke([&](ECS::Timer*) {
-				changeScene(0, SceneLoad::SWAP);
-				std::cout << "Cambio de escena\n"; }, 3.0f);
+			populateSplashScreen(scene);
 
 			scene->init();
 			scene->postInit();

@@ -35,6 +35,7 @@ namespace LoveEngine {
 			Utilities::Vector2<int>* dimensions;
 			Renderer::OgreRenderer* ogremanager;
 
+			float opacity = 1;
 			bool visible = true;
 			Ogre::Overlay* overlay;
 			Ogre::OverlayContainer* container;
@@ -45,8 +46,11 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
+			Utilities::Vector3<int> getPos();
 			void setPos(Utilities::Vector3<int> pos_);
+			float getOpacity();
 			void setOpacity(float fade);
+			Utilities::Vector2<int> getDimensions();
 			void setDimensions(Utilities::Vector2<int> dimensions_);
 			~Image();
 		};

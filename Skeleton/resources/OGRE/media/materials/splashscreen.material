@@ -11,3 +11,43 @@ material splashScreen{
 		}
 	}
 }
+
+material splashScreen_background{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture ssBackground.png
+				colour_op modulate
+			}
+		}
+	}
+}
+material splashScreen_content{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture ssContent.png
+				colour_op modulate
+			}
+		}
+	}
+}
+material splashScreen_white{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture ssWhite.png
+				colour_op modulate
+			}
+		}
+	}
+}

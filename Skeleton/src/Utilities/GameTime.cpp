@@ -10,7 +10,7 @@ namespace LoveEngine {
 
 	Time::Time() {
 		deltaTime = physicsTime = timeSinceStart = timeScale = unscaledTime = frameCount = 1;
-
+		deltaTime = 1 / 60.0f;
 		if (instance != nullptr) {
 			assert(false);
 		}

@@ -69,6 +69,12 @@ namespace LoveEngine {
 			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
 		}
 
+
+		Utilities::Vector3<int> Image::getPos()
+		{
+			return *pos;
+		}
+
 		void Image::setDimensions(Utilities::Vector2<int> dimensions_)
 		{
 			container->setWidth(dimensions_.x);
@@ -76,8 +82,19 @@ namespace LoveEngine {
 			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
 		}
 
+		Utilities::Vector2<int> Image::getDimensions()
+		{
+			return *dimensions;
+		}
+
+		float Image::getOpacity()
+		{
+			return opacity;
+		}
+
 		void Image::setOpacity(float fade)
 		{
+			opacity = fade;
 			ogremanager->setImageOpacity(container, fade);
 		}
 

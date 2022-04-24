@@ -96,6 +96,9 @@
     <ClCompile Include="..\..\src\ECS\Image.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\SplashScreen.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\Image.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\SplashScreen.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
