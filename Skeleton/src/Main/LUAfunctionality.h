@@ -17,5 +17,12 @@ namespace LoveEngine {
 	void setIcon(std::string);
 
 	float random(); // 0 - 1
+
 	int randomBetween(int min, int max); //exclusive
+
+	void print(std::string str);
+
+	int round(float);
+	int floor(float);
+	int ceil(float);
 }

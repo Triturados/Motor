@@ -28,6 +28,7 @@ function scene0() -- Main menu
     camCamera:sendMsg([[
         name: escenaMenu;
         zOrder: -1
+        compositor: B&W;
     ]])
 
     local bg = scene:createObject("Background");
@@ -38,56 +39,40 @@ function scene0() -- Main menu
         height : 720;
     ]])
 
-    local startButton = scene:createObject("Start Button"):addComponent("Button");
-    local settingsButton = scene:createObject("Settings Button"):addComponent("Button");
-    local exitButton = scene:createObject("Exit Button"):addComponent("Button");
-
-    startButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 300;
-		posZ: 1
-    ]])
-
-    settingsButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 360;
-		posZ: 1
-    ]])
-
-    exitButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 420;
-		posZ: 1
-    ]])
-
     local mainmenu = bg:addComponent("MainMenu");
-    mainmenu:sendComponent(0, startButton);
-    --mainmenu:sendComponent(1, settingsButton);
-    mainmenu:sendComponent(1, exitButton);
+
+    for i = 0, 5, 1 do
+        local button = scene:createObject("Menu button " .. i):addComponent('Button');
+
+        local w = round(100 + random() * 100);
+        local x = (width() - w) / 2;
+        button:sendMsg([[
+            material: Heal_bg;
+            width: ]] ..w..[[;
+            height: 50;
+            posX: ]] .. round(x) .. [[;
+            posY: ]] .. (300 + 60 * i) .. [[ ;
+            posZ: 1
+        ]])
+
+        mainmenu:sendComponent(i, button)
+    end
+
+
     createVignette()
 
-
-    local transition = scene:createObject('Transition')
-    transition:addComponent('Image'):sendMssg([[
-        material: splashScreen; 
-        width: 1280;
-        height : 720;
-        posZ: 10
-    ]])
-    transition:addComponent('Transition'):sendMssg([[
-        type: fade
-        duration: 2.0
-        direction: true
-    ]])
+    -- local transition = scene:createObject('Transition')
+    -- transition:addComponent('Image'):sendMssg([[
+    --     material: splashScreen; 
+    --     width: 1280;
+    --     height : 720;
+    --     posZ: 10
+    -- ]])
+    -- transition:addComponent('Transition'):sendMssg([[
+    --     type: fade
+    --     duration: 2.0
+    --     direction: true
+    -- ]])
     
 end
 
@@ -196,7 +181,7 @@ function scene2() -- Pause
     createVignette()
 end
 
-function scene3() -- Prueba
+function scene3() -- Overworld
     scene:name("Escena de Prueba")
 
     persistentObject:addComponent("ComponenteDeContar")
@@ -514,25 +499,13 @@ function scene3() -- Prueba
     scene:createObject("Pause Game"):addComponent("PauseGame")
 end
 
-function createText(x, y, text)
-    local textObj = scene:createObject("textObj")
-    local textComp = textObj:addComponent("Text")
-    textComp:sendMsg([[
-        position: ]] .. x .. ',' .. y .. [[, 0;
-        fontName: SourceSansProLight
-        mainColor: 1, 1, 1, 1.0;
-        textScale:0.05
-        alignment : 0
-        ]])
-    local showText = textObj:addComponent("ShowText")
-    showText:sendMssg([[
-        interval: 0.1
-        ]])
-    showText:sendString(text)
-    return showText
+function scene4() --Boss1
 end
 
-function scene4() -- Victory
+function scene5() --Boss2
+end
+
+function scene6() -- Victory
     scene:name("Escena victoria")
 
     local cam = scene:createObject("cam")
@@ -585,7 +558,7 @@ function scene4() -- Victory
     createVignette()
 end
 
-function scene5() -- Defeat
+function scene7() -- Defeat
     scene:name("Escena derrota")
 
     local cam = scene:createObject("cam")
@@ -638,6 +611,23 @@ function scene5() -- Defeat
     createVignette()
 end
 
+function createText(x, y, text)
+    local textObj = scene:createObject("textObj")
+    local textComp = textObj:addComponent("Text")
+    textComp:sendMsg([[
+        position: ]] .. x .. ',' .. y .. [[, 0;
+        fontName: SourceSansProLight
+        mainColor: 1, 1, 1, 1.0;
+        textScale:0.05
+        alignment : 0
+        ]])
+    local showText = textObj:addComponent("ShowText")
+    showText:sendMssg([[
+        interval: 0.1
+        ]])
+    showText:sendString(text)
+    return showText
+end
 
 function createVignette()
     scene:createObject('Vignette'):addComponent('Image'):sendMssg([[

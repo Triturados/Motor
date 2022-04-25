@@ -204,6 +204,10 @@ namespace LoveEngine {
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
+			.addFunction("print", &(LoveEngine::print))
+			.addFunction("floor", &(LoveEngine::floor))
+			.addFunction("round", &(LoveEngine::round))
+			.addFunction("ceil", &(LoveEngine::ceil))
 			.addFunction("size", &(LoveEngine::setWindowSize))
 			.addFunction("width", &(LoveEngine::getWidth))
 			.addFunction("height", &(LoveEngine::getHeight))

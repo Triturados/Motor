@@ -1,6 +1,7 @@
 #include "LUAfunctionality.h"
 #include <Window.h>
 #include <random>
+#include <iostream>
 
 namespace LoveEngine {
 
@@ -41,5 +42,21 @@ namespace LoveEngine {
 		int dif = max - min;
 		int r = rand() % dif;
 		return min + r;
+	}
+
+	void print(std::string mssg) {
+		std::cout << mssg << "\n";
+	}
+
+	int round(float t) {
+		return std::round(t);
+	}
+
+	int floor(float t) {
+		return std::floor(t);
+	}
+
+	int ceil(float t) {
+		return std::ceil(t);
 	}
 }
