@@ -13,10 +13,8 @@ namespace LoveEngine {
 	}
 	namespace ECS {
 		enum class ForceMode {
-			FORCE,
-			ACCELERATION,
-			IMPULSE,
-			VELOCITY_CHANGE
+			FORCE, //dura un segundo la fuerza 
+			IMPULSE //impulso intantaneo en un frame
 		};
 
 		enum class RBState {
@@ -45,7 +43,6 @@ namespace LoveEngine {
 			btRigidBody* rigidBody = nullptr;
 			Transform* tr = nullptr;
 
-			Utilities::Vector3<float>* acc;
 			Utilities::Vector3<float>* colliderScale;
 
 			RBState stateMode;
@@ -92,7 +89,6 @@ namespace LoveEngine {
 			//Getters
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
-			inline Utilities::Vector3<float>* getAcceleration() const noexcept { return acc; };
 			//inline btCollisionShape* getShape() const noexcept;
 
 			//Collisiones

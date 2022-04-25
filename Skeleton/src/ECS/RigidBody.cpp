@@ -79,10 +79,9 @@ namespace LoveEngine {
 
 		RigidBody::~RigidBody()
 		{
-			delete acc;
 			if (col) delete col;
 			col = nullptr;
-			//delete rigidBody;
+			rigidBody = nullptr;
 		}
 
 		void  RigidBody::init()
@@ -171,6 +170,7 @@ namespace LoveEngine {
 						rigidBody->applyImpulse(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+					
 				}
 			}
 		}
