@@ -265,7 +265,7 @@ function scene3() -- Overworld
         ]])
 
     charco:addComponent('EfectoEscenario'):sendMsg([[
-        type: 0
+        type: 1
     ]])
 
     -- Camara comentada por lo del splash screen
@@ -386,13 +386,13 @@ function scene3() -- Overworld
         shape: cube; 
         type: dynamic;
         mass: 10.0;
-        restitution: 0.75;
+        restitution: 0;
         colliderScale: 3,8,2;
     ]])
     local mesh = player:addComponent("Mesh")
     mesh:sendMsg([[meshName: Sinbad.mesh]])
     player:addComponent("MovimientoJugador"):sendMsg([[
-        speed: 15.0
+        speed: 30.0
         rotSpeed: 5.0
     ]])
 
