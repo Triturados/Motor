@@ -58,7 +58,22 @@ function scene0() -- Main menu
         mainmenu:sendComponent(i, button)
     end
 
+    for i = -1, -2, -1 do
+        local button = scene:createObject("Displacement button"):addComponent('Button');
 
+        button:sendMsg([[
+            material: Heal_bg;
+            width: 100;
+            height: 50;
+            posX: 3;
+            posY: ]] .. (125 + 60 * i) .. [[ ;
+            posZ: 1
+        ]])
+
+        mainmenu:sendComponent(i, button)
+    end
+
+    
     createVignette()
 
     -- local transition = scene:createObject('Transition')

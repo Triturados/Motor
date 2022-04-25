@@ -47,20 +47,23 @@ namespace LoveEngine {
 
 		void InputManager::mouseVisibility(bool inGame)
 		{
-			if(inGame)	SDL_SetRelativeMouseMode(SDL_TRUE);
+			if (inGame)	SDL_SetRelativeMouseMode(SDL_TRUE);
 			else SDL_SetRelativeMouseMode(SDL_FALSE);
 		}
 
 		bool InputManager::handleInput()
 		{
 			// Se vacian las teclas que fueron pulsadas justo en frame anterior
+			bool mouseclicked = false;
 			justPressedKeys->clear();
+
+
 			SDL_Event sdlevent;
 			while (SDL_PollEvent(&sdlevent)) {
 				switch (sdlevent.type) {
 				case SDL_KEYDOWN:
 				{
-					if(lastPressedKeys->count(sdlevent.key.keysym.scancode) == 0)
+					if (lastPressedKeys->count(sdlevent.key.keysym.scancode) == 0)
 						justPressedKeys->insert(sdlevent.key.keysym.scancode);
 					lastPressedKeys->insert(sdlevent.key.keysym.scancode);
 					break;
@@ -77,20 +80,21 @@ namespace LoveEngine {
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					if (sdlevent.button.button == SDL_BUTTON_LEFT) {
-						if (mouseState == MouseState::JUST_CLICK_L) mouseState = MouseState::CLICK_L;
-						else mouseState = MouseState::JUST_CLICK_L;
+						mouseclicked = true;
+						mouseState = MouseState::CLICK_L;
 					}
-						
-						
+
 					else if (sdlevent.button.button == SDL_BUTTON_RIGHT)
 						mouseState = MouseState::CLICK_R;
-					else if (sdlevent.button.button == SDL_BUTTON_MIDDLE)
+					else if (sdlevent.button.button == SDL_BUTTON_MIDDLE) {
 						mouseState = MouseState::CLICK_M;
-					std::cout << "Raton pulsado: " << (int)MouseState::CLICK_M << std::endl;
+						std::cout << "Raton pulsado: " << (int)MouseState::CLICK_M << std::endl;
+					}
+
 					break;
 				case SDL_MOUSEBUTTONUP:
+					//clickJustPressed = false;
 					mouseState = MouseState::NONE;
-					std::cout << "Raton soltado." << std::endl;
 					break;
 				case SDL_QUIT:
 					return false;
@@ -112,6 +116,7 @@ namespace LoveEngine {
 					break;
 				}
 				case SDL_JOYBUTTONUP: {
+
 					int button = (int)sdlevent.cbutton.button;
 					if (button < controllerButtonCount) {
 
@@ -149,6 +154,9 @@ namespace LoveEngine {
 					break;
 				}
 			}
+
+			clickJustPressed =  mouseclicked;
+
 			return true;
 		}
 
@@ -190,6 +198,11 @@ namespace LoveEngine {
 		{
 			return controller;
 			// TODO: Insertar una instrucción "return" aquí
+		}
+
+		bool InputManager::justClicked()
+		{
+			return clickJustPressed;
 		}
 
 		bool InputManager::controllerConected()
