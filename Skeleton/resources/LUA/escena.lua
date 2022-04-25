@@ -207,16 +207,16 @@ function scene3() -- Overworld
     -- Slider--
     local testSlider = scene:createObject("miSlider")
     testSlider:addComponent("Transform")
-    testSlider:addComponent("Slider"):sendMsg([[
-        materialBar: Heal;
-        materialBarBg: Heal_bg;
-        materialButton: CircleButton;
-        width: 300;
-        height: 50;
-        posX: 100;
-        posY: 100;
-    ]])
-    testSlider:addComponent("SaludJugador")
+    -- testSlider:addComponent("Slider"):sendMsg([[
+    --     materialBar: Heal;
+    --     materialBarBg: Heal_bg;
+    --     materialButton: CircleButton;
+    --     width: 300;
+    --     height: 50;
+    --     posX: 100;
+    --     posY: 100;
+    -- ]])
+    -- testSlider:addComponent("SaludJugador")
 
     -- Suelo--
     local suelo = scene:createObject("Suelo")
@@ -245,6 +245,28 @@ function scene3() -- Overworld
     local material = suelo:addComponent("Material")
     material:sendMsg([[materialName: bolaroja]])
     material:sendComponent(0, comp3)
+
+    --CHARCOS   
+    local charco = scene:createObject("CharcoLava")
+    charco:addComponent("Transform"):sendMsg([[
+        scale: 10,1,10;
+        position: 30,2,30;
+        rotation: 0,0,0,0;
+    ]])
+    charco:addComponent("Mesh"):sendMsg([[
+        meshName: cube.mesh;
+    ]])
+    charco:addComponent('Rigidbody'):sendMsg([[
+        trigger: true;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 10,1,10;
+        ]])
+
+    charco:addComponent('EfectoEscenario'):sendMsg([[
+        type: 0
+    ]])
 
     -- Camara comentada por lo del splash screen
     -- local camara = scene:createObject("CamaritaGuapa")
@@ -373,6 +395,18 @@ function scene3() -- Overworld
         speed: 15.0
         rotSpeed: 5.0
     ]])
+
+    player:addComponent("Slider"):sendMsg([[
+        materialBar: Heal;
+        materialBarBg: Heal_bg;
+        materialButton: CircleButton;
+        width: 300;
+        height: 50;
+        posX: 100;
+        posY: 100;
+    ]])
+    player:addComponent("SaludJugador")
+
 
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
