@@ -220,12 +220,31 @@ function scene3() -- Overworld
 
     -- Suelo--
     local suelo = scene:createObject("Suelo")
-    local comp2 = suelo:addComponent("Transform")
+    local sueloTr = suelo:addComponent("Transform")
 
-    comp2:sendMsg([[
+    -- Colocamos sus hijos
+    local charco = scene:createObject("CharcoLava")
+    local charcoTr = charco:addComponent("Transform")
+
+    charcoTr:sendMsg([[
+        scale: 10,1,10;
+        position: 30,2,30;
+        rotation: 0,0,0,0;
+    ]])
+
+
+
+    -- Colocamos el padre
+    sueloTr:sendMsg([[
         scale: 100,1,100;
         position: 0,0,0;
         rotation: 0,0,0,0;
+    ]])
+
+    charcoTr:sendComponent(1, sueloTr)
+    sueloTr:sendMsg([[
+        position: 80,0,0;
+        rotation: 0.5,0,0,0;
     ]])
 
     local comp3 = suelo:addComponent("Mesh")
@@ -247,12 +266,6 @@ function scene3() -- Overworld
     material:sendComponent(0, comp3)
 
     --CHARCOS   
-    local charco = scene:createObject("CharcoLava")
-    charco:addComponent("Transform"):sendMsg([[
-        scale: 10,1,10;
-        position: 30,2,30;
-        rotation: 0,0,0,0;
-    ]])
     charco:addComponent("Mesh"):sendMsg([[
         meshName: cube.mesh;
     ]])

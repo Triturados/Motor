@@ -171,7 +171,7 @@ namespace LoveEngine {
 				switch (mode)
 				{
 				case 0: c->translate(p); break;
-				case 1: c->rotateChild(*position, p); break;
+				case 1: rotateChild(*position, p); break;
 				case 2: c->setScale(*scale, *c->scale); break;
 				default:
 					break;
@@ -288,10 +288,20 @@ namespace LoveEngine {
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			sf.tryGetVector3("scale", *scale);
-			sf.tryGetVector4("rotation", *rotation);
-			sf.tryGetVector3("position", *position);
+			Utilities::Vector3<float> newPos = *position;
+			Utilities::Vector4<float> newRot = *rotation;
+			Utilities::Vector3<float> newScale = *scale;
+
+
+			sf.tryGetVector3("scale", newScale);
+			sf.tryGetVector4("rotation", newRot);
+			sf.tryGetVector3("position", newPos);
+			setPos(newPos);
+			setRot(newRot);
+			setScale(newScale);
+
 			//sf.tryGetVector3("position", *localPosition);
+
 			
 		}
 		void Transform::receiveComponent(int i, Component* c)
