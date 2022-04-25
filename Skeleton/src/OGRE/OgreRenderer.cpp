@@ -392,6 +392,8 @@ namespace LoveEngine {
 
 		void OgreRenderer::applyCompositor(Ogre::Viewport* vp, std::string compositor)
 		{
+			Ogre::CompositorManager::getSingleton().getByName(compositor)->createTechnique();
+			
 			Ogre::CompositorManager::getSingleton().addCompositor(vp, compositor);
 			Ogre::CompositorManager::getSingleton().setCompositorEnabled(vp, compositor, true);
 		}
