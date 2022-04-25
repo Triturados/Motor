@@ -1,7 +1,8 @@
 #pragma once
+#include <../Export.h>
 #include <math.h>
 #include <iostream>
-#include <../Export.h>
+#include "Utils.h"
 
 namespace LoveEngine {
 
@@ -83,6 +84,19 @@ namespace LoveEngine {
 				int y_ = y * b.y;
 
 				return (x_ + y_);
+			}
+
+			void lerp(Vector2<T> b, float t)
+			{
+				x = Utilities::lerp(x, b.x, t);
+				y = Utilities::lerp(y, b.y, t);
+			}
+
+			static Vector2<T> lerp(Vector2<T> a, Vector2<T> b, float t) {
+				Vector2<T> c;
+				c.x = Utilities::lerp(a.x, b.x, t);
+				c.y = Utilities::lerp(a.y, b.y, t);
+				return c;
 			}
 
 			T getDistance(Vector2<T> b) //Distancia entre 2 vectores

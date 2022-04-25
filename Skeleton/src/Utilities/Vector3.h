@@ -2,6 +2,7 @@
 #include <../Export.h>
 #include <math.h>
 #include <iostream>
+#include "Utils.h"
 
 namespace LoveEngine {
 	namespace Utilities
@@ -116,13 +117,19 @@ namespace LoveEngine {
 				return (x_ + y_ + z_);
 			}
 
-			Vector3<T> interpolatePoint(Vector3<T> b, float interpolation)
+			void lerp(Vector3<T> b, float t)
 			{
-				Vector3<T> v = this - b;
+				x = Utilities::lerp(x, b.x, t);
+				y = Utilities::lerp(y, b.y, t);
+				z = Utilities::lerp(z, b.z, t);
+			}
 
-				Vector3<T> aux = Vector3(this->x + (v.x * interpolation), this->y + (v.y * interpolation), this->z + (v.z * interpolation));
-
-				return aux;
+			static Vector3<T> lerp(Vector3<T> a, Vector3<T> b, float t) {
+				Vector3<T> c;
+				c.x = Utilities::lerp(a.x, b.x, t);
+				c.y = Utilities::lerp(a.y, b.y, t);
+				c.z = Utilities::lerp(a.z, b.z, t);
+				return c;
 			}
 
 			Vector3<T> vectorialProduct(Vector3<T> b)

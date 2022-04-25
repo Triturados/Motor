@@ -97,7 +97,6 @@ namespace LoveEngine {
 				Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
 				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
 					lambda();
-					std::cout << "button pressed\n";
 				}
 			}
 		}
