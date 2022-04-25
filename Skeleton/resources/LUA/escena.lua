@@ -454,7 +454,7 @@ function scene3() -- Overworld
     bosstr:sendMsg([[
         scale: 0.2,0.2,0.2;
         position: 50,20,-50;
-        rotation: -1.57,3.14,0,0;
+        rotation: 0,0,0,0;
     ]])
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
