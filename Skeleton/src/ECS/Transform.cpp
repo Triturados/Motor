@@ -231,53 +231,6 @@ namespace LoveEngine {
 				c->position->y = c->localPosition->y + posP.y;
 				c->position->z = c->localPosition->z + posP.z;
 				c->rotation->x += rotAng.x;
-
-				//switch (modeAngule)
-				//{
-				//	//giro en ang z
-				//case 0:
-				//	
-				//	x = ((c->localPosition->x) * std::cos(ang) - (c->localPosition->y) * std::sin(ang));
-				//	y = ((c->localPosition->x) * std::sin(ang) + (c->localPosition->y) * std::cos(ang));
-
-				//	c->localPosition->x = x ;
-				//	c->localPosition->y = y ;
-				//	c->position->x = c->localPosition->x + posP.x;
-				//	c->position->y = c->localPosition->y + posP.y;
-				//	c->rotation->z += ang;
-				//	break;
-				//	//giro en ang x
-				//case 1:
-				//	
-
-				//	z = ((c->localPosition->z) * std::cos(ang) - (c->localPosition->x) * std::sin(ang));
-				//	x = ((c->localPosition->z) * std::sin(ang) + (c->localPosition->x) * std::cos(ang));
-
-				//	
-
-				//	c->localPosition->z = z;
-				//	c->localPosition->x = x;
-				//	c->position->x = c->localPosition->x + posP.x;
-				//	c->position->z = c->localPosition->z + posP.z;
-				//	c->rotation->y += ang;
-				//	break;
-				//	//giro en ang y
-				//case 2:
-				//	
-				//	y = ((c->localPosition->y) * std::cos(ang) - (c->localPosition->z) * std::sin(ang));
-				//	z = ((c->localPosition->y) * std::sin(ang) + (c->localPosition->z) * std::cos(ang));
-
-				//	c->localPosition->z = z;
-				//	c->localPosition->y = y;
-				//	c->position->y = c->localPosition->y + posP.y;
-				//	c->position->z = c->localPosition->z + posP.z;
-				//	c->rotation->x += ang;
-				//	break;
-				//default:
-				//	break;
-				//}
-
-				
 			}
 			
 		}

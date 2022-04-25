@@ -242,10 +242,11 @@ function scene3() -- Overworld
     ]])
 
     charcoTr:sendComponent(1, sueloTr)
-    sueloTr:sendMsg([[
-        position: 80,0,0;
-        rotation: 0.5,0,0,0;
-    ]])
+    -- Volvemos a mover el escenario (si hiciese falta)
+    -- sueloTr:sendMsg([[
+    --     position: 0,0,0;
+    --     rotation: 0,0,0,0;
+    -- ]])
 
     local comp3 = suelo:addComponent("Mesh")
     comp3:sendMsg([[
@@ -267,7 +268,7 @@ function scene3() -- Overworld
 
     --CHARCOS   
     charco:addComponent("Mesh"):sendMsg([[
-        meshName: cube.mesh;
+        meshName: Charco.mesh;
     ]])
     charco:addComponent('Rigidbody'):sendMsg([[
         trigger: true;
