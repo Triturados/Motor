@@ -419,9 +419,9 @@ function scene3() -- Prueba
     local boss = scene:createObject("boss")
     local bosstr = boss:addComponent("Transform")
     bosstr:sendMsg([[
-        scale: 15,15,15;
+        scale: 0.2,0.2,0.2;
         position: 50,20,-50;
-        rotation: -1.57079633,0,0,0;
+        rotation: -1.57,3.14,0,0;
     ]])
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
@@ -434,6 +434,7 @@ function scene3() -- Prueba
         colliderScale: 18,18,18;
     ]])
 
+    boss:addComponent("Animation"):sendMsg([[animName: idle]])
 
     -- haciendo hijo del hijo del player a la  "cam"
     trcam:sendComponent(1, compTrBolaHijaJug)
