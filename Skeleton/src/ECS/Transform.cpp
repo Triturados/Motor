@@ -297,7 +297,10 @@ namespace LoveEngine {
 		void Transform::receiveComponent(int i, Component* c)
 		{
 			//setChild
-			if (i == 1) {
+			if (i == 0) {
+				addChild(static_cast<Transform*>(c));
+			}
+			else if (i == 1) {
 				setParent(static_cast<Transform*>(c));
 			}
 		}
