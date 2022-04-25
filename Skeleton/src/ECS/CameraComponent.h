@@ -3,6 +3,7 @@
 #include <../Export.h>
 
 #include <Component.h>
+#include <vector>
 
 class OgreSceneManager;
 class Transform;
@@ -45,6 +46,9 @@ namespace LoveEngine {
 			Renderer::OgreRenderer* ogremanager;
 			int viewportZorder = 0;
 
+			// usado solo para almacenar los compositores que se añaden antes del init
+			std::vector<std::string> compositors = std::vector<std::string>();
+
 		public:
 			~Camera();
 
@@ -60,6 +64,8 @@ namespace LoveEngine {
 			void yaw(float angle);
 			void pitch(float angle);
 			void roll(float angle);
+			
+			void applyCompositor(std::string compositor);
 		};
 	}
 }

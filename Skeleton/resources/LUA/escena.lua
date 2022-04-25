@@ -352,6 +352,9 @@ function scene3() -- Prueba
     camCamera:sendMsg([[
         name: escenaJuego;
     ]])
+    camCamera:sendMsg([[
+        compositor: B&W;
+    ]])
 
     -- player--
     local player = scene:createObject("jugador")

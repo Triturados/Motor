@@ -37,6 +37,9 @@
 #include <Vector2.h>
 #include <OgreTechnique.h>
 #include <OgrePass.h>
+#include <OgreCompositor.h>
+#include <OgreCompositorManager.h>
+
 namespace LoveEngine {
 	namespace Renderer {
 		OgreRenderer* OgreRenderer::instance = nullptr;
@@ -385,6 +388,12 @@ namespace LoveEngine {
 			// Mostrar el overlay
 			overlay->show();
 			return container;
+		}
+
+		void OgreRenderer::applyCompositor(Ogre::Viewport* vp, std::string compositor)
+		{
+			Ogre::CompositorManager::getSingleton().addCompositor(vp, compositor);
+			Ogre::CompositorManager::getSingleton().setCompositorEnabled(vp, compositor, true);
 		}
 
 		void OgreRenderer::setImageOpacity(Ogre::OverlayContainer* container, float fade) {

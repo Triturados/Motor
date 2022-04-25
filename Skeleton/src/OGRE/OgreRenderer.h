@@ -112,6 +112,8 @@ namespace LoveEngine {
 
 			void exampleScene();
 
+			void applyCompositor(Ogre::Viewport* vp, std::string compositor);
+
 			//Image UI
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);
 			Ogre::OverlayContainer* renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay);

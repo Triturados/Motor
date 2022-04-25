@@ -46,6 +46,10 @@ namespace LoveEngine {
 			mCamera->setAspectRatio(
 				Ogre::Real(vp->getActualWidth()) /
 				Ogre::Real(vp->getActualHeight()));
+
+			for (std::string c : compositors)
+				applyCompositor(c);
+			compositors = std::vector<std::string>();
 		}
 
 		void Camera::update()
@@ -91,6 +95,13 @@ namespace LoveEngine {
 		{
 			mCameraNode->roll(Ogre::Radian(angle));
 		}
+		void Camera::applyCompositor(std::string compositor)
+		{
+			if (vp == nullptr)
+				compositors.push_back(compositor);
+			else
+				ogremanager->applyCompositor(vp, compositor);
+		}
 		void Camera::onSceneUp()
 		{
 			//mCameraNode->setVisible(true);
@@ -98,8 +109,16 @@ namespace LoveEngine {
 
 		void Camera::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			sf.tryGetString("name", name);
-			sf.tryGetInt("zOrder", viewportZorder);
+			std::string compositor;
+			if (sf.tryGetString("compositor", compositor))
+			{
+				applyCompositor(compositor);
+			}
+			else
+			{
+				sf.tryGetString("name", name);
+				sf.tryGetInt("zOrder", viewportZorder);
+			}
 		}
 	}
 }
