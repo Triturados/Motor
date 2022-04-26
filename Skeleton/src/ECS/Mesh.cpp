@@ -58,12 +58,12 @@ namespace LoveEngine {
 
 			entityNode->setPosition(Ogre::Vector3(pos->x, pos->y, pos->z));
 			entityNode->setScale(Ogre::Vector3(scale->x, scale->y, scale->z));
-			//entityNode->_getWorldAABB().getSize();
+		
 			entityNode->resetOrientation();
 			entityNode->pitch(Ogre::Radian(rot->x), Ogre::Node::TS_WORLD);
 			entityNode->yaw(Ogre::Radian(rot->y), Ogre::Node::TS_WORLD);
 			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
-			//Usar Translate , Scale, y luego la rotacion esta por ver 
+			
 		}
 
 		void Mesh::setVisibility(bool mode)
@@ -78,11 +78,11 @@ namespace LoveEngine {
 
 		void Mesh::onSceneDown()
 		{
-			//setVisibility(false);
+			setVisibility(false);
 		}
 		void Mesh::onSceneUp()
 		{
-			//setVisibility(true);
+			setVisibility(true);
 		}
 
 		Ogre::Entity* Mesh::getEntity()
