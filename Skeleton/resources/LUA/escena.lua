@@ -433,7 +433,7 @@ function scene3() -- Overworld
         name: escenaJuego;
     ]])
     camCamera:sendMsg([[
-        compositor: B&W;
+        compositor: Posterize;
     ]])
 
     -- player--
