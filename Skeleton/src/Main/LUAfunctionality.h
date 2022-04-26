@@ -1,7 +1,11 @@
 #pragma once
 #include <string>
-namespace LoveEngine {
 
+class lua_State;
+namespace LoveEngine {
+	namespace ECS {
+		class Scene;
+	}
 	void setWindowSize(int x, int y);
 
 	int getWidth();
@@ -25,4 +29,7 @@ namespace LoveEngine {
 	int round(float);
 	int floor(float);
 	int ceil(float);
+
+
+	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename);
 }

@@ -223,35 +223,23 @@ namespace LoveEngine {
 			lua_setglobal(luastate, "persistentGameObject");
 
 			std::string scenestring = "scene" + std::to_string(idx);
-			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
-			populateScene();
 
-			luabridge::LuaRef objeto = luabridge::getGlobal(luastate, "mapa");
-
-			//if (!objeto.isNil() && !objeto.isFunction()) {
-
-			if (!objeto.isNil())
-			{
-				auto a = objeto["objects"];
-				if (!a.isNil())
-					std::cout << a["name"] << "\n";
-			}
-
-			//}
+			LoveEngine::parseScene(scene, luastate, scenestring);
+			
 		};
 
 		int count = 0;
 		bool isNil = false;
 		while (!isNil) {
 			std::string scenestring = "scene" + std::to_string(count++);
-			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
-			isNil = populateScene.isNil();
+			luabridge::LuaRef scene = luabridge::getGlobal(luastate, &scenestring[0]);
+			isNil = scene.isNil();
 		}
 
 		sceneManager->numberOfScenes = count - 1;
 
 		if (count - 1 == 0) {
-			std::cout << "No hay ninguna escena para crear\n";
+			std::cout << "Error en la lectura de Lua\n";
 			return -1;
 		}
 

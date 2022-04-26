@@ -10,23 +10,89 @@
 --------------
 package.path = package.path .. ";../resources/LUA/?.lua"
 
-mapa = {
-    name = "mappp",
+scene2 = {
+    name = "Pause",
     objects = {
-        name = "Objeto cool", 
-        components = {
-            type = 'Button', 
-            info = [[material: Heal_bg]]
+        {
+            name = "Camera",
+            components = {
+                {
+                    type = 'Transform',
+                    info = [[
+                        scale: 2,2,2;
+                        position: 0,40,80;
+                        rotation: 0,0,0;
+                    ]]
+                },
+                {
+                    type = 'Camera',
+                    info = [[
+                        name: pause;
+                        zOrder: 2
+                    ]]
+                }
             }
-        }
+        },
+        {
+            name = "Background",
+            components = {
+                    {
+                        type = 'Image',
+                        info = [[
+                            material: pauseMenu; 
+                            width: 1280;
+                            height : 720;
+                        ]]
+                    }
+                }
+        },
+        {
+            name = "Vignette",
+            components = {
+                    {
+                        type = 'Image',
+                        info = [[
+                            material: splashScreen_vignette; 
+                            width: 1280;
+                            height : 720;
+                        ]]
+                    }
+                }
+        },
+    },
+    code = function()
+        local continue = scene:createObject("Start Button"):addComponent("Button");
+        local exitButton = scene:createObject("Exit Button"):addComponent("Button");
+    
+        continue:sendMsg([[
+            material: Heal_bg;
+            width: 100;
+            height: 50;
+            posX: 500;
+            posY: 300;
+            posZ: 1
+        ]])
+    
+        exitButton:sendMsg([[
+            material: Heal_bg;
+            width: 100;
+            height: 50;
+            posX: 500;
+            posY: 360;
+            posZ: 1
+        ]])
+
+        local menuObj = scene:createObject("Main menu"):addComponent("PauseMenu")
+        menuObj:sendComponent(0, continue);
+        menuObj:sendComponent(1, exitButton);
+    end
 }
 
 function scene0() -- Main menu
-    --size(randomBetween(100, 1000), randomBetween(100, 1000))
+    -- size(randomBetween(100, 1000), randomBetween(100, 1000))
     scene:name("Main menu")
     menu = require "menu";
     menu:cambiarIcono()
-
 
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
@@ -61,7 +127,7 @@ function scene0() -- Main menu
         local x = (width() - w) / 2;
         button:sendMsg([[
             material: Heal_bg;
-            width: ]] ..w..[[;
+            width: ]] .. w .. [[;
             height: 50;
             posX: ]] .. round(x) .. [[;
             posY: ]] .. (initialHeigh + 60 * i) .. [[ ;
@@ -71,11 +137,9 @@ function scene0() -- Main menu
         mainmenu:sendComponent(i, button)
     end
 
-
     mainmenu:sendComponent(-1, createArrow(initialHeigh + 60 * 5 + 50))
     mainmenu:sendComponent(-2, createArrow(initialHeigh - 50))
 
-    
     createVignette()
 
     -- local transition = scene:createObject('Transition')
@@ -90,7 +154,7 @@ function scene0() -- Main menu
     --     duration: 2.0
     --     direction: true
     -- ]])
-    
+
 end
 
 function createArrow(pos)
@@ -100,14 +164,14 @@ function createArrow(pos)
     local x = round((width() - w) / 2);
     button:sendMsg([[
         material: Heal_bg;
-        width: ]] ..w..[[;
-        height: ]] ..w..[[;
+        width: ]] .. w .. [[;
+        height: ]] .. w .. [[;
         posX: ]] .. x .. [[;
         posY: ]] .. pos .. [[ ;
         posZ: 1
     ]])
 
-    --print(mapa['objects']['name'])
+    -- print(mapa['objects']['name'])
     return button
 end
 
@@ -163,58 +227,6 @@ function scene1() -- Settings
     mainmenu:sendComponent(1, exitButton);
 end
 
-function scene2() -- Pause
-    scene:name("Pause")
-
-    local cam = scene:createObject("cam")
-    local trcam = cam:addComponent('Transform')
-    trcam:sendMsg([[
-        scale: 2,2,2;
-        position: 0,40,80;
-        rotation: 0,0,0;
-    ]])
-
-    local camCamera = cam:addComponent('Camera')
-
-    camCamera:sendMsg([[
-        name: pause;
-        zOrder: 2
-    ]])
-
-    local bg = scene:createObject("Background");
-    bg:addComponent("Transform")
-    bg:addComponent("Image"):sendMsg([[
-        material: pauseMenu; 
-        width: 1280;
-        height : 720;
-    ]])
-
-    local continue = scene:createObject("Start Button"):addComponent("Button");
-    local exitButton = scene:createObject("Exit Button"):addComponent("Button");
-
-    continue:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 300;
-		posZ: 1
-    ]])
-
-    exitButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 360;
-		posZ: 1
-    ]])
-
-    local mainmenu = bg:addComponent("PauseMenu");
-    mainmenu:sendComponent(0, continue);
-    mainmenu:sendComponent(1, exitButton);
-    createVignette()
-end
 
 function scene3() -- Overworld
     scene:name("Escena de Prueba")
@@ -267,8 +279,6 @@ function scene3() -- Overworld
         rotation: 0,0,0;
     ]])
 
-
-
     -- Colocamos el padre
     sueloTr:sendMsg([[
         scale: 100,1,100;
@@ -301,7 +311,7 @@ function scene3() -- Overworld
     material:sendMsg([[materialName: bolaroja]])
     material:sendComponent(0, comp3)
 
-    --CHARCOS   
+    -- CHARCOS   
     charco:addComponent("Mesh"):sendMsg([[
         meshName: Charco.mesh;
     ]])
@@ -456,7 +466,6 @@ function scene3() -- Overworld
     ]])
     player:addComponent("SaludJugador")
 
-
     local animation = player:addComponent("Animation")
     animation:sendMsg([[animName: Dance]])
 
@@ -494,7 +503,7 @@ function scene3() -- Overworld
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
     boss:addComponent("Mesh"):sendMsg([[meshName: Boss.mesh]])
-    local bossRb =  boss:addComponent('Rigidbody')
+    local bossRb = boss:addComponent('Rigidbody')
     bossRb:sendMsg([[
         state: dynamic;
         mass: 10.0;
@@ -503,7 +512,7 @@ function scene3() -- Overworld
         colliderScale: 18,18,18;
     ]])
 
-    playerMov:sendComponent(1,bossRb)
+    playerMov:sendComponent(1, bossRb)
 
     boss:addComponent("Animation"):sendMsg([[animName: idle]])
 
@@ -585,10 +594,10 @@ function scene3() -- Overworld
     scene:createObject("Pause Game"):addComponent("PauseGame")
 end
 
-function scene4() --Boss1
+function scene4() -- Boss1
 end
 
-function scene5() --Boss2
+function scene5() -- Boss2
 end
 
 function scene6() -- Victory

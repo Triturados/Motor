@@ -2,6 +2,11 @@
 #include <Window.h>
 #include <random>
 #include <iostream>
+#include <Scene.h>
+#include <lua.hpp>
+#include <LuaBridge/LuaBridge.h>
+#include <GameObject.h>
+#include <Component.h>
 
 namespace LoveEngine {
 
@@ -58,5 +63,56 @@ namespace LoveEngine {
 
 	int ceil(float t) {
 		return std::ceil(t);
+	}
+	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename)
+	{
+		luabridge::LuaRef luascene = luabridge::getGlobal(luastate, &scenename[0]);
+
+		if (luascene.isNil())
+			return;
+
+		if (luascene.isFunction()) {
+			luascene();
+			return;
+		}
+
+		auto name = luascene["name"];
+		if (!name.isNil())
+			scene->name = name.tostring();
+
+		auto objects = luascene["objects"];
+		for (int go = 1; go <= objects.length(); go++) {
+
+			if (objects[go].isNil()) {
+				print("Error en los objetos");
+				return;
+			}
+			auto gameObjectName = objects[go]["name"];
+			std::string nameStr = gameObjectName.isNil() ? "New GameObject" : gameObjectName.tostring();
+			ECS::GameObject* gameObject = scene->createGameObject(nameStr);
+
+			auto components = objects[go]["components"];
+			if (components.isNil())
+				continue;
+
+			for (int cmp = 1; cmp <= components.length(); cmp++) {
+
+				auto cmpType = components[cmp]["type"];
+				if (cmpType.isNil())
+					continue;
+
+				ECS::Component* component = gameObject->createComponent(cmpType.tostring());
+
+				auto cmpInfo = components[cmp]["info"];
+				if (cmpInfo.isNil())
+					continue;
+
+				component->formatString(cmpInfo.tostring());
+			}
+		}
+
+		auto code = luascene["code"];
+		if (!code.isNil())
+			code();
 	}
 }
