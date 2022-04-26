@@ -10,7 +10,7 @@ sorted true
 
 emitter Point
 	{ 
-		position 0 0 10
+		position 0 0 0
 		angle 30
 		emission_rate 50
 		colour 0.9 0.9 0.9 0.8
