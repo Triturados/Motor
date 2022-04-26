@@ -455,6 +455,8 @@ function scene3() -- Overworld
         speed: 30.0
     ]])
 
+    player:addComponent("Animation"):sendMsg([[animName: idle]])
+
     player:addComponent("Slider"):sendMsg([[
         materialBar: Heal;
         materialBarBg: Heal_bg;
