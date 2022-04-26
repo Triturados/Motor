@@ -40,38 +40,27 @@ function scene0() -- Main menu
     ]])
 
     local mainmenu = bg:addComponent("MainMenu");
-
+    local initialHeigh = 300
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
-        local w = round(100 + random() * 100);
+        local w = randomBetween(100, 200)
         local x = (width() - w) / 2;
         button:sendMsg([[
             material: Heal_bg;
             width: ]] ..w..[[;
             height: 50;
             posX: ]] .. round(x) .. [[;
-            posY: ]] .. (300 + 60 * i) .. [[ ;
+            posY: ]] .. (initialHeigh + 60 * i) .. [[ ;
             posZ: 1
         ]])
 
         mainmenu:sendComponent(i, button)
     end
 
-    for i = -1, -2, -1 do
-        local button = scene:createObject("Displacement button"):addComponent('Button');
 
-        button:sendMsg([[
-            material: Heal_bg;
-            width: 100;
-            height: 50;
-            posX: 3;
-            posY: ]] .. (125 + 60 * i) .. [[ ;
-            posZ: 1
-        ]])
-
-        mainmenu:sendComponent(i, button)
-    end
+    mainmenu:sendComponent(-1, createArrow(initialHeigh + 60 * 5 + 50))
+    mainmenu:sendComponent(-2, createArrow(initialHeigh - 50))
 
     
     createVignette()
@@ -89,6 +78,22 @@ function scene0() -- Main menu
     --     direction: true
     -- ]])
     
+end
+
+function createArrow(pos)
+    local button = scene:createObject("Displacement button"):addComponent('Button');
+
+    local w = 50
+    local x = round((width() - w) / 2);
+    button:sendMsg([[
+        material: Heal_bg;
+        width: ]] ..w..[[;
+        height: ]] ..w..[[;
+        posX: ]] .. x .. [[;
+        posY: ]] .. pos .. [[ ;
+        posZ: 1
+    ]])
+    return button
 end
 
 function scene1() -- Settings
