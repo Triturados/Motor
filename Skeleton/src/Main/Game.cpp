@@ -55,7 +55,6 @@ namespace LoveEngine {
 
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
-		ogreManager->getSceneManager()->destroyAllCameras();
 
 		//Manager del proyecto de fisica
 		physicsManager = new LoveEngine::Physics::PhysicsManager();
