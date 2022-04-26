@@ -18,6 +18,9 @@ namespace LoveEngine {
 
 		Camera::~Camera()
 		{
+			if (mCameraNode != nullptr)
+				ogremanager->getSceneManager()->destroySceneNode(mCameraNode);
+
 			if (mCamera != nullptr)
 				ogremanager->getSceneManager()->destroyCamera(mCamera);
 			

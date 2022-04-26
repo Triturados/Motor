@@ -431,6 +431,7 @@ function scene3() -- Overworld
 
     camCamera:sendMsg([[
         name: escenaJuego;
+        zOrder: -3;
     ]])
     camCamera:sendMsg([[
         compositor: B&W;
