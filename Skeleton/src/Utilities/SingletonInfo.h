@@ -4,7 +4,7 @@ namespace LoveEngine {
 	namespace Singleton {
 
 		enum class positions {
-			SceneManager, Time, Input, ComponentFactory, Physics, Renderer, SoundManager
+			Input, ComponentFactory, Physics, Renderer, SoundManager
 		};
 
 		typedef void (*singletonIN)(void*, int);

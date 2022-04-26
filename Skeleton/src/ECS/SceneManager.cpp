@@ -13,12 +13,6 @@ namespace LoveEngine {
 
 		SceneManager* SceneManager::getInstance()
 		{
-			if (instance == nullptr) {
-				instance =
-					static_cast<SceneManager*>(
-						LoveEngine::Singleton::getElement(
-							LoveEngine::Singleton::positions::SceneManager));
-			}
 			return instance;
 		}
 
@@ -31,8 +25,8 @@ namespace LoveEngine {
 
 			persistentScene = nullptr;
 			sceneFactory = new SceneManagement::SceneFactory();
-
-			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
+			instance = this;
+			//LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::SceneManager);
 		}
 
 		SceneManager::~SceneManager()
