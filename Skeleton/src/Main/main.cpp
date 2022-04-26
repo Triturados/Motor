@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Game.h"
+#include "Engine.h"
 #include "checkML.h"
 
 int main()
@@ -10,15 +10,15 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	LoveEngine::Game g;
+	LoveEngine::Engine engine;
 
-	if (g.setup()) {
+	if (engine.setup()) {
 		return -1;
 	}
 
-	g.loop();
+	engine.loop();
 
-	g.quit();
+	engine.quit();
 
 
 	std::cout << "Bye bye!";

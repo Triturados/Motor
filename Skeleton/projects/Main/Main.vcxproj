@@ -25,13 +25,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\Main\Game.cpp" />
+    <ClCompile Include="..\..\src\Main\Engine.cpp" />
     <ClCompile Include="..\..\src\Main\LUAfunctionality.cpp" />
     <ClCompile Include="..\..\src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Main\checkML.h" />
-    <ClInclude Include="..\..\src\Main\Game.h" />
+    <ClInclude Include="..\..\src\Main\Engine.h" />
     <ClInclude Include="..\..\src\Main\LUAfunctionality.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Engine.h"
 
 #include <iostream>
 #include <Scene.h>
@@ -37,7 +37,8 @@ typedef const char* (*GameName)();
 
 using namespace std::chrono;
 namespace LoveEngine {
-	int Game::setup() {
+
+	int Engine::setup() {
 		srand(std::time(NULL)); rand();
 		GameComponentDefinition gameComponentDefinitions;
 
@@ -80,7 +81,7 @@ namespace LoveEngine {
 	}
 
 
-	void Game::loop()
+	void Engine::loop()
 	{
 		const float physicsFrameRate = 50;
 		duration pInterval = duration<double>(1.0 / physicsFrameRate);
@@ -124,7 +125,7 @@ namespace LoveEngine {
 		}
 	}
 
-	void Game::quit()
+	void Engine::quit()
 	{
 		delete compFactory;
 		delete sceneManager;
@@ -138,26 +139,17 @@ namespace LoveEngine {
 
 		lua_close(luastate);
 		FreeLibrary(game);
-		FreeLibrary(singleton);
 	}
 
 
-	int Game::initialiseDLLs(GameComponentDefinition& gcd)
+	int Engine::initialiseDLLs(GameComponentDefinition& gcd)
 	{
 
 #ifdef _DEBUG
 		game = LoadLibrary(TEXT("./Game_d.dll"));
-		singleton = LoadLibrary(TEXT("Singleton_d.dll"));
 #else
 		game = LoadLibrary(TEXT("./Game.dll"));
-		singleton = LoadLibrary(TEXT("Singleton.dll"));
 #endif
-
-
-		if (singleton == NULL) {
-			std::cout << "No se encontro la biblioteca de singletons";
-			return 1;
-		}
 
 		if (game == NULL) {
 			std::cout << "No se encontro el juego\n";
@@ -173,7 +165,7 @@ namespace LoveEngine {
 		return 0;
 	}
 
-	int Game::initialiseSceneCreator()
+	int Engine::initialiseSceneCreator()
 	{
 		luastate = luaL_newstate();
 		luaL_openlibs(luastate);
@@ -266,7 +258,7 @@ namespace LoveEngine {
 		return 0;
 	}
 
-	void Game::changeWindowTitle()
+	void Engine::changeWindowTitle()
 	{
 		std::string title = "";
 		GameName name = (GameName)GetProcAddress(game, "gameName");
@@ -279,7 +271,7 @@ namespace LoveEngine {
 		Window::getInstance()->setWindowTitle(title);
 	}
 
-	void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)
+	void Engine::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)
 	{
 		duration<float, std::milli> timeSinceStart = endFrame - appStart;
 		duration<double, std::milli> timeSinceLastFrame = endFrame - beginFrame;

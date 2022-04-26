@@ -18,7 +18,7 @@ namespace LoveEngine {
 
 			friend SceneManagement::SceneManager;
 			friend SceneManagement::SceneFactory;
-			friend class Game;
+			friend class Engine;
 			friend class Timer;
 			friend GameObject;
 
