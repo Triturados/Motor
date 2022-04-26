@@ -27,7 +27,7 @@ namespace LoveEngine {
 			delete rotation;
 			delete scale;
 
-			// Solo hay que quitar los hijos de la lista. Se destruirán cuando se destruyan sus objetos
+			// Solo hay que quitar los hijos de la lista. Se destruirï¿½n cuando se destruyan sus objetos
 			while (!children.empty())
 			{
 				auto c = *(children.begin());
@@ -62,7 +62,19 @@ namespace LoveEngine {
 			f = f.rotateX(rotation->x);
 			f = f.rotateY(rotation->y);
 			f = f.rotateZ(rotation->z);
-			
+
+			f.normalize();
+
+			return f;
+		}
+		Utilities::Vector3<float> Transform::right()
+		{
+			Utilities::Vector3<float> f(1, 0, 0);
+
+			f = f.rotateX(rotation->x);
+			f = f.rotateY(rotation->y);
+			f = f.rotateZ(rotation->z);
+
 			f.normalize();
 
 			return f;
@@ -115,7 +127,7 @@ namespace LoveEngine {
 		}
 
 		void Transform::translate(Utilities::Vector3<float> p) {
-			
+
 			position->x += p.x;
 			position->y += p.y;
 			position->z += p.z;
@@ -132,7 +144,7 @@ namespace LoveEngine {
 			rotation->y += r.y;
 			//rotateChild(0, r.z, *position);
 			rotation->z += r.z;
-			
+
 		}
 
 		void Transform::detachChildren() {
@@ -159,7 +171,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float> aux = *c->getPos() - *position;
 			c->setLocalPos(aux);
 			children.push_back(c);
-			
+
 		}
 
 		void Transform::updateChildren(int mode, Utilities::Vector3<float> p)
@@ -231,7 +243,7 @@ namespace LoveEngine {
 				c->position->z = c->localPosition->z + posP.z;
 				c->rotation->x += rotAng.x;
 			}
-			
+
 		}
 
 		void Transform::update()
@@ -254,7 +266,7 @@ namespace LoveEngine {
 
 			//sf.tryGetVector3("position", *localPosition);
 
-			
+
 		}
 		void Transform::receiveComponent(int i, Component* c)
 		{

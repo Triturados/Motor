@@ -112,7 +112,7 @@ namespace LoveEngine {
 
 		void RigidBody::stepPhysics()
 		{
-			const auto worldTransform = rigidBody->getWorldTransform();
+			const auto& worldTransform = rigidBody->getWorldTransform();
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			btScalar rotX, rotY, rotZ;
@@ -124,6 +124,19 @@ namespace LoveEngine {
 
 			tr->setPos(newPos);
 			tr->setRot(newRotToVec4);
+		}
+
+		void RigidBody::setRotation(Utilities::Vector3<int> axis,float angle)
+		{
+	
+			btTransform& rbTr = rigidBody->getWorldTransform();
+			btVector3 _axis(axis.x, axis.y, axis.z);
+
+			btQuaternion rot;
+		
+			rot.setRotation(_axis, angle);
+				 
+			rbTr.setRotation(rot);
 		}
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
@@ -256,6 +269,8 @@ namespace LoveEngine {
 		{
 			rigidBody->setLinearFactor(cvt(vect));
 		}
+
+
 
 		void RigidBody::setAngularFactor(Utilities::Vector3<float> vect)
 		{

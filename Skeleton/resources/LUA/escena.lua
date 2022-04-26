@@ -425,9 +425,9 @@ function scene3() -- Overworld
     ]])
     local mesh = player:addComponent("Mesh")
     mesh:sendMsg([[meshName: Sinbad.mesh]])
-    player:addComponent("MovimientoJugador"):sendMsg([[
+    local playerMov = player:addComponent("MovimientoJugador")
+    playerMov:sendMsg([[
         speed: 30.0
-        rotSpeed: 5.0
     ]])
 
     player:addComponent("Slider"):sendMsg([[
@@ -479,13 +479,16 @@ function scene3() -- Overworld
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
     boss:addComponent("Mesh"):sendMsg([[meshName: Boss.mesh]])
-    boss:addComponent('Rigidbody'):sendMsg([[
+    local bossRb =  boss:addComponent('Rigidbody')
+    bossRb:sendMsg([[
         state: dynamic;
         mass: 10.0;
         shape: sphere; 
         restitution: 1.0;
         colliderScale: 18,18,18;
     ]])
+
+    playerMov:sendComponent(1,bossRb)
 
     boss:addComponent("Animation"):sendMsg([[animName: idle]])
 

@@ -92,6 +92,8 @@ namespace LoveEngine {
 			{
 				T magnitud = magnitude();
 
+				if (magnitud == 0) return;
+
 				x = x / magnitud;
 				y = y / magnitud;
 				z = z / magnitud;

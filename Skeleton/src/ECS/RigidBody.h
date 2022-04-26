@@ -86,6 +86,8 @@ namespace LoveEngine {
 
 			void setAngularFactor(Utilities::Vector3<float> vect);
 
+			void setRotation(Utilities::Vector3<int> axis, float angle);
+
 			//Getters
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
