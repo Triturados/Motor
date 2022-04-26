@@ -79,17 +79,17 @@ namespace LoveEngine {
 
 		RigidBody::~RigidBody()
 		{
-			delete acc;
 			if (col) delete col;
 			col = nullptr;
-			//delete rigidBody;
+			rigidBody = nullptr;
 		}
 
 		void  RigidBody::init()
 		{
 			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
-			Utilities::Vector4<float> rot = *(tr->getRot());
+			Utilities::Vector3<float> rotvector3 = *(tr->getRot());
+			Utilities::Vector4<float> rot(rotvector3.x, rotvector3.y, rotvector3.z, 0.0);
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
 
@@ -112,7 +112,7 @@ namespace LoveEngine {
 
 		void RigidBody::stepPhysics()
 		{
-			const auto worldTransform = rigidBody->getWorldTransform();
+			const auto& worldTransform = rigidBody->getWorldTransform();
 
 			Utilities::Vector3<float> newPos = cvt(worldTransform.getOrigin());
 			btScalar rotX, rotY, rotZ;
@@ -120,10 +120,23 @@ namespace LoveEngine {
 			btVector3 rot = { rotX,rotY,rotZ };
 			Utilities::Vector3<float> newRot = cvt(rot);
 
-			Utilities::Vector4<float> newRotToVec4(newRot.x, newRot.y, newRot.z, 0);
+			Utilities::Vector3<float> newRotToVec4(newRot.x, newRot.y, newRot.z);
 
 			tr->setPos(newPos);
 			tr->setRot(newRotToVec4);
+		}
+
+		void RigidBody::setRotation(Utilities::Vector3<int> axis,float angle)
+		{
+	
+			btTransform& rbTr = rigidBody->getWorldTransform();
+			btVector3 _axis(axis.x, axis.y, axis.z);
+
+			btQuaternion rot;
+		
+			rot.setRotation(_axis, angle);
+				 
+			rbTr.setRotation(rot);
 		}
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
@@ -171,6 +184,7 @@ namespace LoveEngine {
 						rigidBody->applyImpulse(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+
 				}
 			}
 		}
@@ -256,6 +270,8 @@ namespace LoveEngine {
 			rigidBody->setLinearFactor(cvt(vect));
 		}
 
+
+
 		void RigidBody::setAngularFactor(Utilities::Vector3<float> vect)
 		{
 			rigidBody->setAngularFactor(cvt(vect));
@@ -267,13 +283,13 @@ namespace LoveEngine {
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
 
-		
+
 		bool RigidBody::onCollisionEnter(RigidBody* other)
 		{
 
 			//Devuelve true en caso de existir colision
 			if (enabled) {
-				
+
 				return collidesWithGameObject(other);
 			}
 

@@ -28,7 +28,7 @@ namespace LoveEngine {
 
 		
 		class lovexport SceneManager final {
-			friend class Game;
+			friend class Engine;
 			friend ECS::Scene;
 
 			static SceneManager* instance;

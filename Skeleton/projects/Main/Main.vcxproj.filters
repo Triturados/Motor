@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\src\Main\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Main\Game.cpp">
+    <ClCompile Include="..\..\src\Main\Engine.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Main\LUAfunctionality.cpp">
@@ -26,7 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\Main\Game.h">
+    <ClInclude Include="..\..\src\Main\Engine.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Main\checkML.h">

@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Engine.h"
 
 #include <iostream>
 #include <Scene.h>
@@ -37,7 +37,8 @@ typedef const char* (*GameName)();
 
 using namespace std::chrono;
 namespace LoveEngine {
-	int Game::setup() {
+
+	int Engine::setup() {
 		srand(std::time(NULL)); rand();
 		GameComponentDefinition gameComponentDefinitions;
 
@@ -55,7 +56,6 @@ namespace LoveEngine {
 
 		//Manager del proyecto de render
 		ogreManager = new LoveEngine::Renderer::OgreRenderer();
-		ogreManager->getSceneManager()->destroyAllCameras();
 
 		//Manager del proyecto de fisica
 		physicsManager = new LoveEngine::Physics::PhysicsManager();
@@ -81,7 +81,7 @@ namespace LoveEngine {
 	}
 
 
-	void Game::loop()
+	void Engine::loop()
 	{
 		const float physicsFrameRate = 50;
 		duration pInterval = duration<double>(1.0 / physicsFrameRate);
@@ -116,6 +116,8 @@ namespace LoveEngine {
 
 			ogreManager->update();
 
+			currentScene->removeObjects();
+
 			sceneManager->tryChangeScene();
 
 			//Calculo del tiempo
@@ -125,7 +127,7 @@ namespace LoveEngine {
 		}
 	}
 
-	void Game::quit()
+	void Engine::quit()
 	{
 		delete compFactory;
 		delete sceneManager;
@@ -139,26 +141,17 @@ namespace LoveEngine {
 
 		lua_close(luastate);
 		FreeLibrary(game);
-		FreeLibrary(singleton);
 	}
 
 
-	int Game::initialiseDLLs(GameComponentDefinition& gcd)
+	int Engine::initialiseDLLs(GameComponentDefinition& gcd)
 	{
 
 #ifdef _DEBUG
 		game = LoadLibrary(TEXT("./Game_d.dll"));
-		singleton = LoadLibrary(TEXT("Singleton_d.dll"));
 #else
 		game = LoadLibrary(TEXT("./Game.dll"));
-		singleton = LoadLibrary(TEXT("Singleton.dll"));
 #endif
-
-
-		if (singleton == NULL) {
-			std::cout << "No se encontro la biblioteca de singletons";
-			return 1;
-		}
 
 		if (game == NULL) {
 			std::cout << "No se encontro el juego\n";
@@ -174,7 +167,7 @@ namespace LoveEngine {
 		return 0;
 	}
 
-	int Game::initialiseSceneCreator()
+	int Engine::initialiseSceneCreator()
 	{
 		luastate = luaL_newstate();
 		luaL_openlibs(luastate);
@@ -204,6 +197,10 @@ namespace LoveEngine {
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
+			.addFunction("print", &(LoveEngine::print))
+			.addFunction("floor", &(LoveEngine::floor))
+			.addFunction("round", &(LoveEngine::round))
+			.addFunction("ceil", &(LoveEngine::ceil))
 			.addFunction("size", &(LoveEngine::setWindowSize))
 			.addFunction("width", &(LoveEngine::getWidth))
 			.addFunction("height", &(LoveEngine::getHeight))
@@ -228,29 +225,30 @@ namespace LoveEngine {
 			lua_setglobal(luastate, "persistentGameObject");
 
 			std::string scenestring = "scene" + std::to_string(idx);
-			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
-			populateScene();
+
+			LoveEngine::parseScene(scene, luastate, scenestring);
+			
 		};
 
 		int count = 0;
 		bool isNil = false;
 		while (!isNil) {
 			std::string scenestring = "scene" + std::to_string(count++);
-			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
-			isNil = populateScene.isNil();
+			luabridge::LuaRef scene = luabridge::getGlobal(luastate, &scenestring[0]);
+			isNil = scene.isNil();
 		}
 
 		sceneManager->numberOfScenes = count - 1;
 
 		if (count - 1 == 0) {
-			std::cout << "No hay ninguna escena para crear\n";
+			std::cout << "Error en la lectura de Lua\n";
 			return -1;
 		}
 
 		return 0;
 	}
 
-	void Game::changeWindowTitle()
+	void Engine::changeWindowTitle()
 	{
 		std::string title = "";
 		GameName name = (GameName)GetProcAddress(game, "gameName");
@@ -263,7 +261,7 @@ namespace LoveEngine {
 		Window::getInstance()->setWindowTitle(title);
 	}
 
-	void Game::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)
+	void Engine::updateTimeValues(const steady_clock::time_point& beginFrame, const steady_clock::time_point& endFrame, const steady_clock::time_point& appStart)
 	{
 		duration<float, std::milli> timeSinceStart = endFrame - appStart;
 		duration<double, std::milli> timeSinceLastFrame = endFrame - beginFrame;

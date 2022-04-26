@@ -31,15 +31,14 @@ namespace LoveEngine {
 		class OgreRenderer;
 	}
 
-	struct Game {
-
+	class Engine {
+	public:
 		int setup();
 		void loop();
 		void quit();
 
 	private:
 		HMODULE game;
-		HMODULE singleton;
 
 		Input::InputManager* inputManager;
 		Renderer::OgreRenderer* ogreManager;

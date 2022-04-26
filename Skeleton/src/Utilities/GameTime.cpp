@@ -17,13 +17,10 @@ namespace LoveEngine {
 
 		Time::instance = this;
 
-		Singleton::addElement(this, Singleton::positions::Time);
+		//Singleton::addElement(this, Singleton::positions::Time);
 	}
 
 	Time* Time::getInstance() {
-		if (instance == nullptr) {
-			instance = static_cast<Time*>(Singleton::getElement(Singleton::positions::Time));
-		}
 		return instance;
 	}
 

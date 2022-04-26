@@ -32,7 +32,7 @@ namespace LoveEngine {
 
 		void Scene::update()
 		{
-			std::list<std::list<GameObject*>::iterator> objectsToRemove;
+			objectsToRemove.clear();
 
 			for (auto it = gObjects.begin(); it != gObjects.end(); it++) {
 				GameObject* gO = *it;
@@ -42,15 +42,15 @@ namespace LoveEngine {
 				else if (gO->dead)
 					objectsToRemove.push_back(it);
 			}
+		}
 
-
+		void Scene::removeObjects() {
 			for (auto it : objectsToRemove) {
 				auto gO = *it;
 				gObjects.erase(it);
 				delete gO;
 			}
 		}
-
 
 		void Scene::stepPhysics()
 		{

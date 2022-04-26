@@ -19,11 +19,6 @@ namespace LoveEngine {
 		PhysicsManager* PhysicsManager::instance_ = nullptr;
 
 		PhysicsManager* PhysicsManager::getInstance() {
-
-			if (instance_ == nullptr) {
-				instance_ = static_cast<PhysicsManager*>(
-					LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Physics));
-			}
 			return instance_;
 		}
 
@@ -36,7 +31,6 @@ namespace LoveEngine {
 			init(Utilities::Vector3<float>(0, -10, 0));
 
 			PhysicsManager::instance_ = this;
-			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Physics);
 		}
 
 		PhysicsManager::~PhysicsManager() {

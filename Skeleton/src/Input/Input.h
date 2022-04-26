@@ -35,7 +35,6 @@ namespace LoveEngine {
 
 		enum class lovexport MouseState {
 			NONE, CLICK_L, CLICK_R, CLICK_M,
-			JUST_CLICK_L
 		};
 
 		const int controllerButtonCount = 15;
@@ -81,6 +80,7 @@ namespace LoveEngine {
 			void mouseVisibility(bool inGame);
 
 			Controller& getController();
+			bool justClicked();
 			bool controllerConected();
 			bool isControllerButtonPressed(ControllerButton b);
 			bool isControllerButtonState(ControllerButtonState s);
@@ -94,6 +94,7 @@ namespace LoveEngine {
 			int mouseX, mouseY;
 			int relmouseX, relmouseY;
 			MouseState mouseState;
+			bool clickJustPressed;
 
 			static InputManager* _instance;
 

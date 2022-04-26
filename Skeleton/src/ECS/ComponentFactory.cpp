@@ -28,12 +28,6 @@ namespace LoveEngine {
 
 		ComponentFactory* ComponentFactory::getInstance()
 		{
-			if (instance == nullptr) {
-				instance =
-					static_cast<ComponentFactory*>(
-						LoveEngine::Singleton::getElement(
-							LoveEngine::Singleton::positions::ComponentFactory));
-			}
 			return instance;
 		}
 
@@ -42,8 +36,8 @@ namespace LoveEngine {
 			if (instance != nullptr) {
 				assert(false);
 			}
+			instance = this;
 			initialiseEngineComponents();
-			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::ComponentFactory);
 		}
 
 

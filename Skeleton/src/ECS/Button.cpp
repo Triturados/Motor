@@ -32,7 +32,7 @@ namespace LoveEngine {
 			pos = new Utilities::Vector3(0, 0, 1);
 			dimensions = new Utilities::Vector2(0, 0);
 
-			sf.tryGetInt("width" , dimensions->x);
+			sf.tryGetInt("width", dimensions->x);
 			sf.tryGetInt("height", dimensions->y);
 			sf.tryGetInt("posX", pos->x);
 			sf.tryGetInt("posY", pos->y);
@@ -93,11 +93,10 @@ namespace LoveEngine {
 
 		void Button::handleInput()
 		{
-			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
-			if (inputmanager->mousePressed(Input::MouseState::JUST_CLICK_L)) {
+			if (inputmanager->justClicked()) {
+				Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
 				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
 					lambda();
-
 				}
 			}
 		}
@@ -108,11 +107,17 @@ namespace LoveEngine {
 			if (mode) button->show();
 			else button->hide();
 		}
+
 		void Button::setPos(Utilities::Vector3<int> pos_)
 		{
 			button->setPosition(pos_.x, pos_.y);
 			overlayBar->setZOrder(pos_.z);
 			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+		}
+
+		Utilities::Vector3<int> Button::getPos()
+		{
+			return *pos;
 		}
 
 		void Button::setDimensions(Utilities::Vector2<int> dimensions_)

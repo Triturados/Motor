@@ -15,9 +15,9 @@ namespace LoveEngine {
 		{
 			position = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
 			localPosition = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
-			localRotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
+			localRotation = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
 			scale = new Utilities::Vector3<float>(1.0, 1.0, 1.0);
-			rotation = new Utilities::Vector4<float>(0.0, 0.0, 0.0, 0.0);
+			rotation = new Utilities::Vector3<float>(0.0, 0.0, 0.0);
 			parent = nullptr;
 		}
 
@@ -27,7 +27,7 @@ namespace LoveEngine {
 			delete rotation;
 			delete scale;
 
-			// Solo hay que quitar los hijos de la lista. Se destruirán cuando se destruyan sus objetos
+			// Solo hay que quitar los hijos de la lista. Se destruirï¿½n cuando se destruyan sus objetos
 			while (!children.empty())
 			{
 				auto c = *(children.begin());
@@ -45,7 +45,7 @@ namespace LoveEngine {
 			return position;
 		}
 
-		Utilities::Vector4<float>* Transform::getRot()
+		Utilities::Vector3<float>* Transform::getRot()
 		{
 			return rotation;
 		}
@@ -62,13 +62,25 @@ namespace LoveEngine {
 			f = f.rotateX(rotation->x);
 			f = f.rotateY(rotation->y);
 			f = f.rotateZ(rotation->z);
-			
+
+			f.normalize();
+
+			return f;
+		}
+		Utilities::Vector3<float> Transform::right()
+		{
+			Utilities::Vector3<float> f(1, 0, 0);
+
+			f = f.rotateX(rotation->x);
+			f = f.rotateY(rotation->y);
+			f = f.rotateZ(rotation->z);
+
 			f.normalize();
 
 			return f;
 		}
 
-		void Transform::setRot(Utilities::Vector4<float> r) {
+		void Transform::setRot(Utilities::Vector3<float> r) {
 			Utilities::Vector3<float> rotchild(r.x, r.y, r.z);
 			rotchild.x -= rotation->x;
 			rotchild.y -= rotation->y;
@@ -77,7 +89,6 @@ namespace LoveEngine {
 			rotation->x = r.x;
 			rotation->y = r.y;
 			rotation->z = r.z;
-			rotation->w = r.w;
 		}
 
 		void Transform::setPos(Utilities::Vector3<float> p) {
@@ -116,14 +127,14 @@ namespace LoveEngine {
 		}
 
 		void Transform::translate(Utilities::Vector3<float> p) {
-			
+
 			position->x += p.x;
 			position->y += p.y;
 			position->z += p.z;
 			updateChildren(0, p);
 		}
 
-		void Transform::rotate(Utilities::Vector4<float> r) {
+		void Transform::rotate(Utilities::Vector3<float> r) {
 			//updateChildren(1);
 			//rotateChild(2, r.x, *position);
 			Utilities::Vector3<float> rotchild(r.x, r.y, r.z);
@@ -133,7 +144,7 @@ namespace LoveEngine {
 			rotation->y += r.y;
 			//rotateChild(0, r.z, *position);
 			rotation->z += r.z;
-			rotation->w += r.w;//??
+
 		}
 
 		void Transform::detachChildren() {
@@ -160,7 +171,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float> aux = *c->getPos() - *position;
 			c->setLocalPos(aux);
 			children.push_back(c);
-			
+
 		}
 
 		void Transform::updateChildren(int mode, Utilities::Vector3<float> p)
@@ -171,7 +182,7 @@ namespace LoveEngine {
 				switch (mode)
 				{
 				case 0: c->translate(p); break;
-				case 1: c->rotateChild(*position, p); break;
+				case 1: rotateChild(*position, p); break;
 				case 2: c->setScale(*scale, *c->scale); break;
 				default:
 					break;
@@ -190,7 +201,7 @@ namespace LoveEngine {
 			return *it;
 		}
 
-		void Transform::rotateChild(/*int modeAngule, float ang, */Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng)
+		void Transform::rotateChild(Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng)
 		{
 			if (children.empty()) return;
 
@@ -231,55 +242,8 @@ namespace LoveEngine {
 				c->position->y = c->localPosition->y + posP.y;
 				c->position->z = c->localPosition->z + posP.z;
 				c->rotation->x += rotAng.x;
-
-				//switch (modeAngule)
-				//{
-				//	//giro en ang z
-				//case 0:
-				//	
-				//	x = ((c->localPosition->x) * std::cos(ang) - (c->localPosition->y) * std::sin(ang));
-				//	y = ((c->localPosition->x) * std::sin(ang) + (c->localPosition->y) * std::cos(ang));
-
-				//	c->localPosition->x = x ;
-				//	c->localPosition->y = y ;
-				//	c->position->x = c->localPosition->x + posP.x;
-				//	c->position->y = c->localPosition->y + posP.y;
-				//	c->rotation->z += ang;
-				//	break;
-				//	//giro en ang x
-				//case 1:
-				//	
-
-				//	z = ((c->localPosition->z) * std::cos(ang) - (c->localPosition->x) * std::sin(ang));
-				//	x = ((c->localPosition->z) * std::sin(ang) + (c->localPosition->x) * std::cos(ang));
-
-				//	
-
-				//	c->localPosition->z = z;
-				//	c->localPosition->x = x;
-				//	c->position->x = c->localPosition->x + posP.x;
-				//	c->position->z = c->localPosition->z + posP.z;
-				//	c->rotation->y += ang;
-				//	break;
-				//	//giro en ang y
-				//case 2:
-				//	
-				//	y = ((c->localPosition->y) * std::cos(ang) - (c->localPosition->z) * std::sin(ang));
-				//	z = ((c->localPosition->y) * std::sin(ang) + (c->localPosition->z) * std::cos(ang));
-
-				//	c->localPosition->z = z;
-				//	c->localPosition->y = y;
-				//	c->position->y = c->localPosition->y + posP.y;
-				//	c->position->z = c->localPosition->z + posP.z;
-				//	c->rotation->x += ang;
-				//	break;
-				//default:
-				//	break;
-				//}
-
-				
 			}
-			
+
 		}
 
 		void Transform::update()
@@ -288,16 +252,29 @@ namespace LoveEngine {
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			sf.tryGetVector3("scale", *scale);
-			sf.tryGetVector4("rotation", *rotation);
-			sf.tryGetVector3("position", *position);
+			Utilities::Vector3<float> newPos = *position;
+			Utilities::Vector3<float> newRot = *rotation;
+			Utilities::Vector3<float> newScale = *scale;
+
+
+			sf.tryGetVector3("scale", newScale);
+			sf.tryGetVector3("rotation", newRot);
+			sf.tryGetVector3("position", newPos);
+			setPos(newPos);
+			setRot(newRot);
+			setScale(newScale);
+
 			//sf.tryGetVector3("position", *localPosition);
-			
+
+
 		}
 		void Transform::receiveComponent(int i, Component* c)
 		{
 			//setChild
-			if (i == 1) {
+			if (i == 0) {
+				addChild(static_cast<Transform*>(c));
+			}
+			else if (i == 1) {
 				setParent(static_cast<Transform*>(c));
 			}
 		}

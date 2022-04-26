@@ -6,6 +6,7 @@
 #include <CameraComponent.h>
 #include <GameTime.h>
 #include <StringFormatter.h>
+#include <Utils.h>
 
 void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 {
@@ -41,6 +42,8 @@ void LoveEngine::ECS::MouseTracker::update()
 		float dify = mousepos->y - newpos.y;
 
 		float dt = Time::getInstance()->deltaTime;
+		float tontetiraparaquecompileelprograma = Utilities::lerp(difx, dify, Utilities::cubicEaseOut(.5f));
+
 		if (difx != 0)
 			maincam->yaw(difx * rotationSpeed * dt);
 		else
