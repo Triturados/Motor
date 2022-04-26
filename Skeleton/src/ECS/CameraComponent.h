@@ -38,7 +38,7 @@ namespace LoveEngine {
 			Transform* tr;
 			Transform* player;
 
-			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 

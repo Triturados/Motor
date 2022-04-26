@@ -29,7 +29,7 @@ namespace LoveEngine {
 			Ogre::SceneNode* entityNode = nullptr;
 			std::string particleName = "";
 			Transform* tr = nullptr;
-			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 			bool emitting = false;

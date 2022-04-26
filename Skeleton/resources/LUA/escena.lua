@@ -33,7 +33,7 @@ function scene0() -- Main menu
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
@@ -119,7 +119,7 @@ function scene1() -- Settings
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
@@ -171,7 +171,7 @@ function scene2() -- Pause
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
@@ -264,7 +264,7 @@ function scene3() -- Overworld
     charcoTr:sendMsg([[
         scale: 10,1,10;
         position: 30,2,30;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
 
@@ -273,7 +273,7 @@ function scene3() -- Overworld
     sueloTr:sendMsg([[
         scale: 100,1,100;
         position: 0,0,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     charcoTr:sendComponent(1, sueloTr)
@@ -339,7 +339,7 @@ function scene3() -- Overworld
     compBola:sendMsg([[
         scale: 2,2,2;
         position: -20,40,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
     local compBolaMesh = bola:addComponent('Mesh'):sendMsg([[
         meshName: bolaroja.mesh;
@@ -361,7 +361,7 @@ function scene3() -- Overworld
     compBolaPesada:sendMsg([[
         scale: 4,4,4;
         position: 20,40,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
         colliderScale: 3,3,3;
     ]])
     local compBolaMesh = bolaPesada:addComponent('Mesh'):sendMsg([[
@@ -382,7 +382,7 @@ function scene3() -- Overworld
     compLuz:sendMsg([[
         scale: 1,1,1;
         position: 0,40,0;
-        rotation: -45,0,0,0;
+        rotation: -45,0,0;
     ]])
 
     local compLight = luz:addComponent('Light')
@@ -397,7 +397,7 @@ function scene3() -- Overworld
     compTrBolaHijaJug:sendMsg([[
         scale: 2,2,2;
         position: 0,10,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
     local compbolaHijaJugMesh = bolaHijaJug:addComponent('Mesh'):sendMsg([[
         meshName: sphere.mesh;
@@ -413,7 +413,7 @@ function scene3() -- Overworld
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,80,60;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
@@ -429,7 +429,7 @@ function scene3() -- Overworld
     tr:sendMsg([[
         scale: 2,2,2;
         position: 0,30,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
     player:addComponent("Rigidbody"):sendMsg([[
         shape: cube; 
@@ -440,9 +440,9 @@ function scene3() -- Overworld
     ]])
     local mesh = player:addComponent("Mesh")
     mesh:sendMsg([[meshName: Sinbad.mesh]])
-    player:addComponent("MovimientoJugador"):sendMsg([[
+    local playerMov = player:addComponent("MovimientoJugador")
+    playerMov:sendMsg([[
         speed: 30.0
-        rotSpeed: 5.0
     ]])
 
     player:addComponent("Slider"):sendMsg([[
@@ -466,7 +466,7 @@ function scene3() -- Overworld
     compLuzPlayer:sendMsg([[
         scale: 1,1,1;
         position: 0,10,0;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
     compLuzPlayer:sendComponent(1, tr)
 
@@ -478,7 +478,7 @@ function scene3() -- Overworld
 
     local dashParticles = scene:createObject("dashParticles")
     local trDash = dashParticles:addComponent("Transform")
-    trDash:sendMsg([[scale: 1,1,1; position: 0,35,0; rotation: 0,0,0,0;]])
+    trDash:sendMsg([[scale: 1,1,1; position: 0,35,0; rotation: 0,0,0;]])
     local dashSys = dashParticles:addComponent("ParticleSystem")
     dashSys:sendMsg([[particleName: dash; emitting: false]])
     trDash:sendComponent(1, tr)
@@ -489,18 +489,21 @@ function scene3() -- Overworld
     bosstr:sendMsg([[
         scale: 0.2,0.2,0.2;
         position: 50,20,-50;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
     local bossAI = boss:addComponent("ComportamientoBoss")
     bossAI:sendComponent(0, tr)
     boss:addComponent("Mesh"):sendMsg([[meshName: Boss.mesh]])
-    boss:addComponent('Rigidbody'):sendMsg([[
+    local bossRb =  boss:addComponent('Rigidbody')
+    bossRb:sendMsg([[
         state: dynamic;
         mass: 10.0;
         shape: sphere; 
         restitution: 1.0;
         colliderScale: 18,18,18;
     ]])
+
+    playerMov:sendComponent(1,bossRb)
 
     boss:addComponent("Animation"):sendMsg([[animName: idle]])
 
@@ -520,17 +523,17 @@ function scene3() -- Overworld
     rotarcam:sendGameObject(2, cam)
 
     local particleSys = scene:createObject("Bomba")
-    particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0,0;]])
+    particleSys:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,5,-20; rotation: 0,0,0;]])
     local pSys = particleSys:addComponent("ParticleSystem")
     pSys:sendMsg([[particleName: bomb; emitting: true]])
 
     local lluviaParticle = scene:createObject("Lluvia")
-    lluviaParticle:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,100,0; rotation: 0,0,0,0;]])
+    lluviaParticle:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: 0,100,0; rotation: 0,0,0;]])
     local lluviaParticleSys = lluviaParticle:addComponent("ParticleSystem")
     lluviaParticleSys:sendMsg([[particleName: lluvia; emitting: true]])
 
     local torch = scene:createObject("Lluvia")
-    torch:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: -30,10,0; rotation: 0,0,0,0;]])
+    torch:addComponent("Transform"):sendMsg([[scale: 1,1,1; position: -30,10,0; rotation: 0,0,0;]])
     local torchSys = torch:addComponent("ParticleSystem")
     torchSys:sendMsg([[particleName: torch; emitting: true]])
 
@@ -596,7 +599,7 @@ function scene6() -- Victory
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
@@ -649,7 +652,7 @@ function scene7() -- Defeat
     trcam:sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
-        rotation: 0,0,0,0;
+        rotation: 0,0,0;
     ]])
 
     local camCamera = cam:addComponent('Camera')
