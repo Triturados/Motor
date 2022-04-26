@@ -116,6 +116,8 @@ namespace LoveEngine {
 
 			ogreManager->update();
 
+			currentScene->removeObjects();
+
 			sceneManager->tryChangeScene();
 
 			//Calculo del tiempo

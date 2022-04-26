@@ -31,6 +31,7 @@ namespace LoveEngine {
 			void init();
 			void postInit();
 			void update();
+			void removeObjects();
 			void stepPhysics();
 			void render();
 
@@ -44,7 +45,7 @@ namespace LoveEngine {
 			GameObject* createGameObject(std::string name = "new game object");
 		private:
 
-
+			std::list<std::list<GameObject*>::iterator> objectsToRemove;
 			std::list<GameObject*> gObjects;
 		};
 	}
