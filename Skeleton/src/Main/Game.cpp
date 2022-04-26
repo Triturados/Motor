@@ -234,6 +234,19 @@ namespace LoveEngine {
 			std::string scenestring = "scene" + std::to_string(idx);
 			luabridge::LuaRef populateScene = luabridge::getGlobal(luastate, &scenestring[0]);
 			populateScene();
+
+			luabridge::LuaRef objeto = luabridge::getGlobal(luastate, "mapa");
+
+			//if (!objeto.isNil() && !objeto.isFunction()) {
+
+			if (!objeto.isNil())
+			{
+				auto a = objeto["objects"];
+				if (!a.isNil())
+					std::cout << a["name"] << "\n";
+			}
+
+			//}
 		};
 
 		int count = 0;

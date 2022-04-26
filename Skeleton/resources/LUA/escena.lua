@@ -10,11 +10,24 @@
 --------------
 package.path = package.path .. ";../resources/LUA/?.lua"
 
+mapa = {
+    name = "mappp",
+    objects = {
+        name = "Objeto cool", 
+        components = {
+            type = 'Button', 
+            info = [[material: Heal_bg]]
+            }
+        }
+}
+
 function scene0() -- Main menu
     --size(randomBetween(100, 1000), randomBetween(100, 1000))
     scene:name("Main menu")
     menu = require "menu";
     menu:cambiarIcono()
+
+
     local cam = scene:createObject("cam")
     local trcam = cam:addComponent('Transform')
     trcam:sendMsg([[
@@ -93,6 +106,8 @@ function createArrow(pos)
         posY: ]] .. pos .. [[ ;
         posZ: 1
     ]])
+
+    --print(mapa['objects']['name'])
     return button
 end
 
