@@ -405,7 +405,7 @@ function scene3() -- Overworld
     local compTrBolaHijaJug = bolaHijaJug:addComponent('Transform')
 
     compTrBolaHijaJug:sendMsg([[
-        scale: 2,2,2;
+        scale: 0.2,0.2,0.2;
         position: 0,10,0;
         rotation: 0,0,0;
     ]])
@@ -437,7 +437,7 @@ function scene3() -- Overworld
     local player = scene:createObject("jugador")
     local tr = player:addComponent("Transform")
     tr:sendMsg([[
-        scale: 2,2,2;
+        scale: 0.075,0.075,0.075;
         position: 0,30,0;
         rotation: 0,0,0;
     ]])
@@ -449,7 +449,7 @@ function scene3() -- Overworld
         colliderScale: 3,8,2;
     ]])
     local mesh = player:addComponent("Mesh")
-    mesh:sendMsg([[meshName: Sinbad.mesh]])
+    mesh:sendMsg([[meshName: Player.mesh]])
     local playerMov = player:addComponent("MovimientoJugador")
     playerMov:sendMsg([[
         speed: 30.0
@@ -465,9 +465,6 @@ function scene3() -- Overworld
         posY: 100;
     ]])
     player:addComponent("SaludJugador")
-
-    local animation = player:addComponent("Animation")
-    animation:sendMsg([[animName: Dance]])
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
