@@ -20,6 +20,7 @@ namespace LoveEngine {
 			friend Scene;
 			friend class RigidBody;
 			friend class SceneCreator;
+			friend class Blueprint;
 
 			GameObject(std::string name);
 			GameObject(std::string name, Scene* scene);

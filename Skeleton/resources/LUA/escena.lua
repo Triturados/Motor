@@ -10,6 +10,8 @@
 --------------
 package.path = package.path .. ";../resources/LUA/?.lua"
 
+sceneCount = 8;
+
 scene2 = {
     name = "Pause",
     objects = {
@@ -140,7 +142,7 @@ function scene0() -- Main menu
     mainmenu:sendComponent(-1, createArrow(initialHeigh + 60 * 5 + 50))
     mainmenu:sendComponent(-2, createArrow(initialHeigh - 50))
 
-    createVignette()
+    --createVignette()
 
     -- local transition = scene:createObject('Transition')
     -- transition:addComponent('Image'):sendMssg([[

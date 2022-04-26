@@ -16,6 +16,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\LuaBridge\Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LUA\LUA.vcxproj">
+      <Project>{d5b79b46-5fe1-4eb2-a6b2-cc8cc167fa1c}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

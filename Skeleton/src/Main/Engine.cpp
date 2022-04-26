@@ -31,6 +31,7 @@
 #include <Window.h>
 #include <memory>
 #include <random>
+#include <Blueprint.h>
 #include "LUAfunctionality.h"
 
 typedef const char* (*GameName)();
@@ -63,14 +64,13 @@ namespace LoveEngine {
 		//Manager del proyecto de Input
 		inputManager = new LoveEngine::Input::InputManager();
 
-
+		blueprintManager = new LoveEngine::ECS::Blueprint();
 		changeWindowTitle();
 
 
 		gameComponentDefinitions();
 
 		if (initialiseSceneCreator()) {
-			assert(("Error al inicializar las DLL.", false));
 			return -1;
 		}
 
@@ -137,7 +137,7 @@ namespace LoveEngine {
 		delete ogreManager;
 		delete inputManager;
 		delete soundManager;
-
+		delete blueprintManager;
 
 		lua_close(luastate);
 		FreeLibrary(game);
@@ -212,7 +212,11 @@ namespace LoveEngine {
 			.addFunction("random", &(LoveEngine::random))
 			.addFunction("randomBetween", &(LoveEngine::randomBetween));
 
-		int scriptloadstatus = luaL_dofile(luastate, "LUA/escena.lua");
+		if (luaL_dofile(luastate, "LUA/escena.lua")) {
+			std::cout << "No se encontro el archivo de lua";
+			return -1;
+		}
+
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
 			luabridge::push(luastate, scene);
@@ -227,20 +231,27 @@ namespace LoveEngine {
 			std::string scenestring = "scene" + std::to_string(idx);
 
 			LoveEngine::parseScene(scene, luastate, scenestring);
-			
+
 		};
 
 		int count = 0;
-		bool isNil = false;
-		while (!isNil) {
-			std::string scenestring = "scene" + std::to_string(count++);
-			luabridge::LuaRef scene = luabridge::getGlobal(luastate, &scenestring[0]);
-			isNil = scene.isNil();
+		auto scenecount = luabridge::getGlobal(luastate, "sceneCount");
+		if (scenecount.isNil() || !scenecount.isNumber())
+		{
+			bool isNil = false;
+			while (!isNil) {
+				std::string scenestring = "scene" + std::to_string(count++);
+				luabridge::LuaRef scene = luabridge::getGlobal(luastate, &scenestring[0]);
+				isNil = scene.isNil();
+			}
+			count--;
+		}
+		else {
+			count = scenecount;
 		}
 
-		sceneManager->numberOfScenes = count - 1;
-
-		if (count - 1 == 0) {
+		sceneManager->numberOfScenes = count;
+		if (count == 0) {
 			std::cout << "Error en la lectura de Lua\n";
 			return -1;
 		}

@@ -30,7 +30,10 @@ namespace LoveEngine {
 	namespace Renderer {
 		class OgreRenderer;
 	}
-
+	namespace ECS {
+		class Blueprint;
+	}
+	
 	class Engine {
 	public:
 		int setup();
@@ -40,6 +43,7 @@ namespace LoveEngine {
 	private:
 		HMODULE game;
 
+		ECS::Blueprint* blueprintManager;
 		Input::InputManager* inputManager;
 		Renderer::OgreRenderer* ogreManager;
 		Audio::SoundManager* soundManager;
