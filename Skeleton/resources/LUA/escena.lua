@@ -434,7 +434,7 @@ function scene3() -- Overworld
         zOrder: -3;
     ]])
     camCamera:sendMsg([[
-        compositor: B&W;
+        compositor: Posterize;
     ]])
 
     -- player--
