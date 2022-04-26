@@ -43,10 +43,6 @@ namespace LoveEngine {
 
 		OgreRenderer* OgreRenderer::getInstance()
 		{
-			if (instance == nullptr) {
-				instance = static_cast<OgreRenderer*>(Singleton::getElement(Singleton::positions::Renderer));
-			}
-
 			return instance;
 		}
 
@@ -67,7 +63,6 @@ namespace LoveEngine {
 
 			loadResources();
 			setupScenes();
-			Singleton::addElement(this, Singleton::positions::Renderer);
 
 			mSceneMgr->addRenderQueueListener(overlaySystem);
 			initRTShaderSystem();

@@ -12,9 +12,6 @@ namespace LoveEngine {
 
 		InputManager* InputManager::getInstance()
 		{
-			if (_instance == nullptr) {
-				_instance = static_cast<InputManager*>(LoveEngine::Singleton::getElement(LoveEngine::Singleton::positions::Input));
-			}
 			return _instance;
 		}
 
@@ -31,7 +28,7 @@ namespace LoveEngine {
 			mouseX = mouseY = 0;
 
 			InputManager::_instance = this;
-			LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
+			//LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
 
 			if (!initialiseController()) {
 				std::cout << "No se pudo inicializar ningun mando\n";
