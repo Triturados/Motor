@@ -35,7 +35,7 @@ namespace LoveEngine {
 			Ogre::SceneNode* entityNode = nullptr;
 			Ogre::Entity* entity = nullptr;
 			Transform* tr = nullptr;
-			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 

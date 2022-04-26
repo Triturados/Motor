@@ -46,7 +46,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* specular;
 			Utilities::Vector3<float>* direction;
 
-			Utilities::Vector4<float>* rot;
+			Utilities::Vector3<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 

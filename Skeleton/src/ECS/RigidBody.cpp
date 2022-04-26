@@ -88,7 +88,8 @@ namespace LoveEngine {
 		{
 			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
-			Utilities::Vector4<float> rot = *(tr->getRot());
+			Utilities::Vector3<float> rotvector3 = *(tr->getRot());
+			Utilities::Vector4<float> rot(rotvector3.x, rotvector3.y, rotvector3.z, 0.0);
 			if (rigidBody == nullptr) {
 				//Creamos un RB y se anade al PhysicsManager
 
@@ -119,7 +120,7 @@ namespace LoveEngine {
 			btVector3 rot = { rotX,rotY,rotZ };
 			Utilities::Vector3<float> newRot = cvt(rot);
 
-			Utilities::Vector4<float> newRotToVec4(newRot.x, newRot.y, newRot.z, 0);
+			Utilities::Vector3<float> newRotToVec4(newRot.x, newRot.y, newRot.z);
 
 			tr->setPos(newPos);
 			tr->setRot(newRotToVec4);
@@ -170,7 +171,7 @@ namespace LoveEngine {
 						rigidBody->applyImpulse(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
-					
+
 				}
 			}
 		}
@@ -267,13 +268,13 @@ namespace LoveEngine {
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
 
-		
+
 		bool RigidBody::onCollisionEnter(RigidBody* other)
 		{
 
 			//Devuelve true en caso de existir colision
 			if (enabled) {
-				
+
 				return collidesWithGameObject(other);
 			}
 

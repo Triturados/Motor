@@ -16,10 +16,10 @@ namespace LoveEngine {
 		{
 		private:
 			Utilities::Vector3<float>* position;
-			Utilities::Vector4<float>* rotation;
+			Utilities::Vector3<float>* rotation;
 			Utilities::Vector3<float>* scale;
 			Utilities::Vector3<float>* localPosition;
-			Utilities::Vector4<float>* localRotation;
+			Utilities::Vector3<float>* localRotation;
 			Utilities::Vector3<float>* localScale;
 
 			Transform* parent;
@@ -40,17 +40,17 @@ namespace LoveEngine {
 			void receiveComponent(int i, Component* c) override;
 
 			Utilities::Vector3<float>* getPos();
-			Utilities::Vector4<float>* getRot();
+			Utilities::Vector3<float>* getRot();
 			Utilities::Vector3<float>* getScale();
 
 			Utilities::Vector3<float> forward();
 
-			void setRot(Utilities::Vector4<float> r);
+			void setRot(Utilities::Vector3<float> r);
 			void setPos(Utilities::Vector3<float> p);
 			void setLocalPos(Utilities::Vector3<float> lP);
 			void setScale(Utilities::Vector3<float> s);
 			void translate(Utilities::Vector3<float> p);
-			void rotate(Utilities::Vector4<float> r);
+			void rotate(Utilities::Vector3<float> r);
 			void detachChildren();
 
 			void setParent(Transform* p);
