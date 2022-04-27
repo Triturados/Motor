@@ -37,7 +37,7 @@ namespace LoveEngine {
 			std::map<std::string, ObjectBlueprint*>		objects;
 			std::map<std::string, ComponentBlueprint*>	components;
 
-			void loadObject(GameObject* gameObject, std::string const& object);
+			void loadObject(GameObject* gameObject, std::string const& object, bool changename);
 		public:
 			Blueprint();
 			~Blueprint();
@@ -48,7 +48,7 @@ namespace LoveEngine {
 			Component* addComponent(GameObject* gameObject, std::string const& component);
 
 			GameObject* spawnObject(Scene* scene, std::string const& name);
-			GameObject* fillObject (GameObject* gameObject, std::string const& component);
+			GameObject* fillObject (GameObject* gameObject, std::string const& name);
 		};
 	}
 }

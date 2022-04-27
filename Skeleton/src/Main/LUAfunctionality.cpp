@@ -7,6 +7,7 @@
 #include <LuaBridge/LuaBridge.h>
 #include <GameObject.h>
 #include <Component.h>
+#include <Blueprint.h>
 
 namespace LoveEngine {
 
@@ -64,6 +65,23 @@ namespace LoveEngine {
 	int ceil(float t) {
 		return std::ceil(t);
 	}
+
+	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, std::string name)
+	{
+		return ECS::Blueprint::getInstance()->spawnObject(scene, name);
+	}
+
+	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, std::string name)
+	{
+		return ECS::Blueprint::getInstance()->fillObject(gameObject, name);
+	}
+
+	ECS::Component* BlueprintAddComponent(ECS::GameObject* gameObject, std::string cmpname)
+	{
+		return ECS::Blueprint::getInstance()->addComponent(gameObject, cmpname);
+	}
+
+
 	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename)
 	{
 		luabridge::LuaRef luascene = luabridge::getGlobal(luastate, &scenename[0]);
