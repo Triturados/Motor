@@ -232,6 +232,12 @@ namespace LoveEngine {
 			delete collisionshape;
 			delete motionstate;
 			//body = nullptr;
+			auto i = std::begin(bodies);
+			while (i != std::end(bodies)) {
+				if (*i == body) break;
+				++i;
+			}
+			if (i != std::end(bodies)) bodies.erase(i);
 		}
 
 
