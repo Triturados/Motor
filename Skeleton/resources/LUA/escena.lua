@@ -517,7 +517,8 @@ function scene3() -- Overworld
         colliderScale: 18,18,18;
     ]])
 
-    playerMov:sendComponent(1, bossRb)
+    playerMov:sendComponent(0, bossRb)
+    playerMov:sendComponent(1, trcam)
 
     boss:addComponent("Animation"):sendMsg([[animName: idle]])
 
