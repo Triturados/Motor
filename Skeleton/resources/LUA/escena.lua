@@ -127,7 +127,7 @@ function scene0() -- Main menu
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
-        local w = randomBetween(100, 200)
+        local w = 200
         local x = (width() - w) / 2;
         button:sendMsg([[
             material: Heal_bg;
@@ -175,6 +175,9 @@ function createArrow(pos, mat)
 
     local w = 50
     local x = round((width() - w) / 2);
+
+    x = 10
+
     button:sendMsg([[
         material: ]] .. mat .. [[;
         width: ]] .. w .. [[;
