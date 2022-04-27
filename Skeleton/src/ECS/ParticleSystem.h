@@ -27,6 +27,7 @@ namespace LoveEngine {
 		private:
 			Ogre::ParticleSystem* pSys = nullptr;
 			Ogre::SceneNode* entityNode = nullptr;
+			std::string templateName = "";
 			std::string particleName = "";
 			Transform* tr = nullptr;
 			Utilities::Vector3<float>* rot;

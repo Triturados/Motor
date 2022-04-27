@@ -73,7 +73,7 @@ namespace LoveEngine {
 			//UI
 			textContainer = createTextPanel("TextUIPanel");
 			textOverlay = createTextOverlay("TextUIOverlay");
-			numOfImages = numOverlays = numOfTexts = 0;
+			numOfImages = numOverlays = numOfTexts = numParticleSystems = 0;
 		}
 
 		/// <summary>
@@ -450,6 +450,11 @@ namespace LoveEngine {
 		void OgreRenderer::setTextOverlayZOrder(float zOrder)
 		{
 			textOverlay->setZOrder(zOrder);
+		}
+
+		int OgreRenderer::addParticleSystem()
+		{
+			return numParticleSystems++;
 		}
 
 		//Metodo privado para dar valor al container de todos los textos

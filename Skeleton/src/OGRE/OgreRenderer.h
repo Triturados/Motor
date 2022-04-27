@@ -69,6 +69,8 @@ namespace LoveEngine {
 			Ogre::OverlayContainer* textContainer;
 			Ogre::Overlay* textOverlay;
 
+			int numParticleSystems;
+
 			SDL_Surface* icon;
 
 			void loadResources();
@@ -128,6 +130,8 @@ namespace LoveEngine {
 			//Text UI
 			Ogre::TextAreaOverlayElement* createOverlayElement();
 			void setTextOverlayZOrder(float zOrder);
+
+			int addParticleSystem();
 
 			~OgreRenderer();
 		};
