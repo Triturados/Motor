@@ -97,6 +97,12 @@ namespace LoveEngine {
 			position->y = p.y;
 			position->z = p.z;
 			//updateChildren(0, p);
+			if (parent != nullptr) {
+				
+				localPosition->x = parent->position->x - p.x;
+				localPosition->y = parent->position->y - p.y;
+				localPosition->z = parent->position->z - p.z;
+			}
 		}
 
 		void Transform::setLocalPos(Utilities::Vector3<float> lP)
