@@ -167,6 +167,7 @@ namespace LoveEngine {
 			case SceneLoad::SWAP: {
 				eraseTopScene();
 				createScene();
+
 				break;
 			}
 			case SceneLoad::EXIT: {

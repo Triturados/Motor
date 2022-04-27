@@ -81,6 +81,8 @@ namespace LoveEngine {
 		{
 			if (col) delete col;
 			col = nullptr;
+			Physics::PhysicsManager::getInstance()->destroyRigidBody(rigidBody);
+			//delete rigidBody;
 			rigidBody = nullptr;
 		}
 
