@@ -51,9 +51,11 @@ namespace LoveEngine {
 			// El overlay, que gestiona la poscion, rotacion...
 			overlayBar = ogremanager->createOverlay();
 			overlayBar->add2D(button);
+			overlayBar->setZOrder(pos->z);
 
 			// Mostrar el overlay
 			overlayBar->show();
+
 		}
 
 		//No se llama el update 

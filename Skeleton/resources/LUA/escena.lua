@@ -91,7 +91,6 @@ scene2 = {
 }
 
 function scene0() -- Main menu
-    -- size(randomBetween(100, 1000), randomBetween(100, 1000))
     scene:name("Main menu")
     menu = require "menu";
     menu:cambiarIcono()
@@ -112,16 +111,19 @@ function scene0() -- Main menu
         compositor: B&W;
     ]])
 
+  
+
     local bg = scene:createObject("Background");
-    bg:addComponent("Transform")
     bg:addComponent("Image"):sendMsg([[
-        material: backgroundMenu; 
+        material: mainmenuBackground; 
         width: 1280;
         height : 720;
+        posZ: 0
     ]])
 
+
     local mainmenu = bg:addComponent("MainMenu");
-    local initialHeigh = 300
+    local initialHeigh = 400
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
@@ -139,8 +141,17 @@ function scene0() -- Main menu
         mainmenu:sendComponent(i, button)
     end
 
-    mainmenu:sendComponent(-1, createArrow(initialHeigh + 60 * 5 + 50))
-    mainmenu:sendComponent(-2, createArrow(initialHeigh - 50))
+    mainmenu:sendComponent(-1, createArrow(426, 'mainmenuArrow'))
+    mainmenu:sendComponent(-2, createArrow(height() - 60, 'mainmenuArrowDown'))
+
+    local fg = scene:createObject("Frontground");
+    bg:addComponent("Image"):sendMsg([[
+        material: mainmenuFrontground; 
+        width: 1280;
+        height : 720;
+        posZ : 2
+    ]])
+
 
     createVignette()
 
@@ -159,18 +170,18 @@ function scene0() -- Main menu
 
 end
 
-function createArrow(pos)
+function createArrow(pos, mat)
     local button = scene:createObject("Displacement button"):addComponent('Button');
 
     local w = 50
     local x = round((width() - w) / 2);
     button:sendMsg([[
-        material: Heal_bg;
+        material: ]] .. mat .. [[;
         width: ]] .. w .. [[;
         height: ]] .. w .. [[;
         posX: ]] .. x .. [[;
         posY: ]] .. pos .. [[ ;
-        posZ: 1
+        posZ: 3
     ]])
 
     -- print(mapa['objects']['name'])
