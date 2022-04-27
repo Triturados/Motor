@@ -26,6 +26,7 @@ namespace LoveEngine {
 			justPressedKeys = new std::unordered_set<SDL_Scancode>();
 			mouseState = MouseState::NONE;
 			mouseX = mouseY = 0;
+			_mouseWheel = 0;
 
 			InputManager::_instance = this;
 			//LoveEngine::Singleton::addElement(this, LoveEngine::Singleton::positions::Input);
@@ -52,9 +53,10 @@ namespace LoveEngine {
 		{
 			// Se vacian las teclas que fueron pulsadas justo en frame anterior
 			bool mouseclicked = false;
+			float mouseWheelValue = 0;
 			justPressedKeys->clear();
 
-
+			
 			SDL_Event sdlevent;
 			while (SDL_PollEvent(&sdlevent)) {
 				switch (sdlevent.type) {
@@ -109,7 +111,7 @@ namespace LoveEngine {
 						}
 					}
 
-					std::cout << "Boton pulsado: " << (int)sdlevent.cbutton.button << std::endl;
+					//std::cout << "Boton pulsado: " << (int)sdlevent.cbutton.button << std::endl;
 					break;
 				}
 				case SDL_JOYBUTTONUP: {
@@ -146,6 +148,9 @@ namespace LoveEngine {
 						}
 					}
 					break;
+				case SDL_MOUSEWHEEL:
+					mouseWheelValue = sdlevent.wheel.preciseY;
+					break;
 				default:
 
 					break;
@@ -153,7 +158,7 @@ namespace LoveEngine {
 			}
 
 			clickJustPressed =  mouseclicked;
-
+			_mouseWheel = mouseWheelValue;
 			return true;
 		}
 
@@ -170,6 +175,11 @@ namespace LoveEngine {
 		bool InputManager::mousePressed(MouseState state)
 		{
 			return mouseState == state;
+		}
+
+		float InputManager::mouseWheel()
+		{
+			return _mouseWheel;
 		}
 
 		Utilities::Vector2<float> InputManager::mousePosition()

@@ -35,7 +35,7 @@ void LoveEngine::ECS::MouseTracker::update()
 {
 	auto input = Input::InputManager::getInstance();
 	Utilities::Vector2 newpos = input->mousePosition();
-
+	input->mouseWheel();
 	if (input->mousePressed(Input::MouseState::CLICK_L)) {
 
 		float difx = mousepos->x - newpos.x;
