@@ -131,6 +131,11 @@ namespace LoveEngine {
 			position->x += p.x;
 			position->y += p.y;
 			position->z += p.z;
+			if (parent != nullptr) {
+				localPosition->x += p.x;
+				localPosition->y += p.y;
+				localPosition->z += p.z;
+			}
 			updateChildren(0, p);
 		}
 
@@ -248,6 +253,7 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
+
 		}
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)
@@ -263,10 +269,7 @@ namespace LoveEngine {
 			setPos(newPos);
 			setRot(newRot);
 			setScale(newScale);
-
-			//sf.tryGetVector3("position", *localPosition);
-
-
+			setLocalPos(newPos);
 		}
 		void Transform::receiveComponent(int i, Component* c)
 		{
