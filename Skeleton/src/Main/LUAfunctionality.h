@@ -2,10 +2,14 @@
 #include <string>
 
 class lua_State;
+
 namespace LoveEngine {
 	namespace ECS {
 		class Scene;
+		class Component;
+		class GameObject;
 	}
+
 	void setWindowSize(int x, int y);
 
 	int getWidth();
@@ -30,6 +34,10 @@ namespace LoveEngine {
 	int floor(float);
 	int ceil(float);
 
+
+	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, std::string name);
+	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, std::string name);
+	ECS::Component*	 BlueprintAddComponent(ECS::GameObject* gameObject, std::string cmpname);
 
 	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename);
 }

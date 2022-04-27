@@ -36,25 +36,40 @@ namespace LoveEngine {
 
 		GameObject* Blueprint::spawnObject(Scene* scene, std::string const& name) {
 			GameObject* go = scene->createGameObject(name);
-			loadObject(go, name);
+			loadObject(go, name, true);
 			go->init();
 			go->postInit();
 			return go;
 		}
 
-		void Blueprint::loadObject(GameObject* gameObject, std::string const& object) {
+		GameObject* Blueprint::fillObject(GameObject* gameObject, std::string const& name)
+		{
+			loadObject(gameObject, name, false);
+			return gameObject;
+		}
 
+		void Blueprint::loadObject(GameObject* gameObject, std::string const& object, bool changename) {
 
 			auto luaObj = luabridge::getGlobal(luastate, object.c_str());
 
-			if (luaObj.isNil()) { //Si no existe en lua buscar en el mapa en caso de que se haya creado por c++
+			if (luaObj.isNil()) { //Not defined in lua
 
+				auto obj = objects.find(object);
+				if (obj != objects.end()) {
+					ObjectBlueprint* objbp = obj->second;
 
+					if (changename)
+						gameObject->name = objbp->name;
+
+					for (auto cmp : objbp->components) {
+						addComponent(gameObject, cmp);
+					}
+				}
 				return;
 			}
 
 			auto name = luaObj["name"];
-			if (!name.isNil())
+			if (changename && !name.isNil())
 				gameObject->name = name.tostring();
 
 			auto components = luaObj["components"];
@@ -94,7 +109,17 @@ namespace LoveEngine {
 					return cmp;
 				}
 			}
-			//cmp->formatString(info);
+
+			auto cppcmp = components.find(component);
+			if (cppcmp != components.end()) { //Component defined in cpp
+				ComponentBlueprint* cmpbp = cppcmp->second;
+				Component* cmp = gameObject->createComponent(cmpbp->type);
+
+				if (cmpbp->message != "") {
+					cmp->formatString(cmpbp->message);
+				}
+				return cmp;
+			}
 
 			return nullptr;
 		}

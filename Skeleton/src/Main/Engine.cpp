@@ -197,6 +197,13 @@ namespace LoveEngine {
 			.endClass();
 
 		luabridge::getGlobalNamespace(luastate)
+			.beginNamespace("Blueprint")
+			.addFunction("spawnObject", &(LoveEngine::BlueprintSpawnObject))
+			.addFunction("fillObject", &(LoveEngine::BlueprintFillObject))
+			.addFunction("addComponent", &(LoveEngine::BlueprintAddComponent))
+			.endNamespace();
+
+		luabridge::getGlobalNamespace(luastate)
 			.addFunction("print", &(LoveEngine::print))
 			.addFunction("floor", &(LoveEngine::floor))
 			.addFunction("round", &(LoveEngine::round))
