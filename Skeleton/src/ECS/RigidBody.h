@@ -14,7 +14,8 @@ namespace LoveEngine {
 	namespace ECS {
 		enum class ForceMode {
 			FORCE, //dura un segundo la fuerza 
-			IMPULSE //impulso intantaneo en un frame
+			IMPULSE, //impulso intantaneo en un frame
+			ACCELERATION
 		};
 
 		enum class RBState {
