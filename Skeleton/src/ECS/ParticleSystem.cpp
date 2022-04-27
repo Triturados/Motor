@@ -16,8 +16,7 @@ namespace LoveEngine {
 
 		void ParticleSystem::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			sf.tryGetString("particleName", particleName);
-
+			sf.tryGetString("particleName", templateName);
 			bool isEmit;
 			if(sf.tryGetBool("emitting", isEmit)) emitting = isEmit;
 		}
@@ -40,16 +39,21 @@ namespace LoveEngine {
 
 		void ParticleSystem::init() {
 			ogremanager = Renderer::OgreRenderer::getInstance();
+
+			particleName = templateName + std::to_string(ogremanager->addParticleSystem());
 			tr = gameObject->getComponent<Transform>();
 
 			//El nombre y la referencia al transform se asignan cuando ya se ha creado el transform
-			if (particleName == "") throw new std::exception("El sistema de particulas no tiene nombre");
+			if (templateName == "") throw new std::exception("El sistema de particulas no tiene nombre");
 
 			entityNode = ogremanager->createNode();
 
 			if (pSys == nullptr)
-				pSys = ogremanager->getSceneManager()->createParticleSystem(particleName, particleName);
-			else throw new std::exception("Ya existe un sistema de particulas con ese nombre.");
+				if (!ogremanager->getSceneManager()->hasParticleSystem(templateName))
+					pSys = ogremanager->getSceneManager()->createParticleSystem(particleName, templateName);
+				else throw new std::exception("Ya existe el sistema de particulas");
+			
+			//else throw new std::exception("Ya existe un sistema de particulas con ese nombre.");
 
 			entityNode->attachObject(pSys);
 			pSys->setEmitting(emitting);
@@ -91,6 +95,7 @@ namespace LoveEngine {
 		ParticleSystem::~ParticleSystem()
 		{
 			ogremanager->removeNode(entityNode);
+			ogremanager->getSceneManager()->destroyParticleSystem(particleName);
 		}
 	}
 }
