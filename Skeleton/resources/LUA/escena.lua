@@ -631,30 +631,7 @@ function scene6() -- Victory
         height : 720;
     ]])
 
-    local restartButton = scene:createObject("Restart Button"):addComponent("Button");
-    local menuButton = scene:createObject("Menu Button"):addComponent("Button");
-
-    restartButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 300;
-		posZ: 1
-    ]])
-
-    menuButton:sendMsg([[
-        material: Heal_bg;
-        width: 100;
-        height: 50;
-        posX: 500;
-        posY: 360;
-		posZ: 1
-    ]])
-
-    local mainmenu = bg:addComponent("DeadMenu");
-    mainmenu:sendComponent(0, restartButton);
-    mainmenu:sendComponent(1, menuButton);
+    local victorymenu = bg:addComponent("DeadMenu");
     createVignette()
 end
 
