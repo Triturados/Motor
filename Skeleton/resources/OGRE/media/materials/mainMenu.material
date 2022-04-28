@@ -55,6 +55,35 @@ material mainmenuArrowDown{
 	}
 }
 
+material mainmenuContent{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture MainMenuContent.png
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material mainmenuBackgroundScroll{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture BackgroundScroll.png
+				colour_op modulate
+				scroll_anim 0.05 0
+			}
+		}
+	}
+}
+
 material pauseMenu{
 	technique{
 		pass{

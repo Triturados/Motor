@@ -112,7 +112,7 @@ function scene0() -- Main menu
     ]])
 
   
-
+    
     local bg = scene:createObject("Background");
     bg:addComponent("Image"):sendMsg([[
         material: mainmenuBackground; 
@@ -121,9 +121,10 @@ function scene0() -- Main menu
         posZ: 0
     ]])
 
+   
 
     local mainmenu = bg:addComponent("MainMenu");
-    local initialHeigh = 400
+    local initialHeigh = 430
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
@@ -135,7 +136,7 @@ function scene0() -- Main menu
             height: 50;
             posX: ]] .. round(x) .. [[;
             posY: ]] .. (initialHeigh + 60 * i) .. [[ ;
-            posZ: 1
+            posZ: 2
         ]])
 
         mainmenu:sendComponent(i, button)
@@ -144,14 +145,27 @@ function scene0() -- Main menu
     mainmenu:sendComponent(-1, createArrow(426, 'mainmenuArrow'))
     mainmenu:sendComponent(-2, createArrow(height() - 60, 'mainmenuArrowDown'))
 
-    local fg = scene:createObject("Frontground");
-    bg:addComponent("Image"):sendMsg([[
+    scene:createObject("Frontground"):addComponent("Image"):sendMsg([[
         material: mainmenuFrontground; 
         width: 1280;
         height : 720;
-        posZ : 2
+        posZ : 3
     ]])
 
+    scene:createObject("scrollBackground"):addComponent("Image"):sendMsg([[
+        material: mainmenuBackgroundScroll; 
+        width: 1427;
+        height : 352;
+        posY: 70
+        posZ: 4
+    ]])
+
+    scene:createObject("Content"):addComponent("Image"):sendMsg([[
+        material: mainmenuContent; 
+        width: 1280;
+        height : 720;
+        posZ : 5
+    ]])
 
     Blueprint.spawnObject(scene, "Vignette")
 
@@ -184,7 +198,7 @@ function createArrow(pos, mat)
         height: ]] .. w .. [[;
         posX: ]] .. x .. [[;
         posY: ]] .. pos .. [[ ;
-        posZ: 3
+        posZ: 6
     ]])
 
     -- print(mapa['objects']['name'])
