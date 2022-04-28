@@ -586,19 +586,19 @@ function scene3() -- Overworld
         posY: 100;
     ]])
 
-    local sliderOver = player:addComponent("Slider"):sendMsg([[
-        materialBar: Heal;
-        materialBarBg: Heal_bg;
-        materialButton: CircleButton;
-        width: 300;
-        height: 50;
-        posX: 100;
-        posY: 130;
-    ]])
+    --local sliderOver = player:addComponent("Slider"):sendMsg([[
+    --    materialBar: Heal;
+    --    materialBarBg: Heal_bg;
+    --    materialButton: CircleButton;
+    --    width: 300;
+    --    height: 50;
+    --    posX: 100;
+    --    posY: 130;
+    --]])
 
-    local saludjugador = player:addComponent("SaludJugador")
-    saludjugador:sendComponent(0, sliderOver);
-    saludjugador:sendComponent(1, sliderBehind);
+    local saludjugador = player:addComponent("Stamina")
+    --saludjugador:sendComponent(0, sliderOver);
+    --saludjugador:sendComponent(1, sliderBehind);
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
