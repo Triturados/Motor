@@ -537,7 +537,7 @@ function scene3() -- Overworld
 
     trcam:sendMsg([[
         scale: 2,2,2;
-        position: 0,80,60;
+        position: 0,40,60;
         rotation: 0,0,0;
     ]])
 
@@ -657,7 +657,7 @@ function scene3() -- Overworld
         horiSens: 5.5
     ]])
 
-    camFollow:sendGameObject(0, player)
+    camFollow:sendComponent(0, tr)
 
     rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
