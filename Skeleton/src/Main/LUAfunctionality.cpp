@@ -125,7 +125,7 @@ namespace LoveEngine {
 				if (cmpInfo.isNil())
 					continue;
 
-				component->formatString(cmpInfo.tostring());
+				component->sendFormattedString(cmpInfo.tostring());
 			}
 		}
 

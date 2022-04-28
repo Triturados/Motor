@@ -31,25 +31,27 @@ namespace LoveEngine {
 
 		class lovexport Camera : public Component
 		{
+		private:
+
 			std::string name;
 			Ogre::Camera* mCamera;
 			Ogre::SceneNode* mCameraNode;
-
-			Ogre::Viewport* vp;
 			Transform* tr;
-			Transform* player;
+			Ogre::Viewport* vp;
 
 			Utilities::Vector3<float>* rot;
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 
 			Renderer::OgreRenderer* ogremanager;
-			int viewportZorder = 0;
+			float clipDistance;
+			int viewportZorder;
 
 			// usado solo para almacenar los compositores que se añaden antes del init
 			std::vector<std::string> compositors = std::vector<std::string>();
 
 		public:
+			Camera();
 			~Camera();
 
 			void init() override;
@@ -65,6 +67,9 @@ namespace LoveEngine {
 			void pitch(float angle);
 			void roll(float angle);
 			
+			void setClipDistance(float);
+			float getClipDistance();
+
 			void applyCompositor(std::string compositor);
 		};
 	}

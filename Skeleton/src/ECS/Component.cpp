@@ -46,7 +46,8 @@ namespace LoveEngine {
 			enabled = !enabled;
 		}
 
-		void Component::formatString(std::string msg)
+
+		void Component::sendFormattedString(std::string msg)
 		{
 			Utilities::StringFormatter sf(msg);
 			receiveMessage(sf);
@@ -54,7 +55,7 @@ namespace LoveEngine {
 
 		GameObject* Component::createObject(std::string name)
 		{
-			return gameObject->createGameObject(name);
+			return gameObject->createEmptyGameObject(name);
 		}
 	}
 }

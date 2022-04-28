@@ -51,6 +51,9 @@ namespace LoveEngine {
 
 			std::function<void()> lambda;
 		public:
+			Button();
+			~Button();
+
 			void init()override;
 			void update()override;
 			void receiveMessage(Utilities::StringFormatter& s)override;
@@ -61,11 +64,13 @@ namespace LoveEngine {
 			void handleInput();
 			void setDetectInput(bool mode);
 			Utilities::Vector3<int> getPos();
+
+			Utilities::Vector2<int> getSize();
+			void setSize(Utilities::Vector2<int>);
+
 			void setPos(Utilities::Vector3<int> pos_);
 			void setDimensions(Utilities::Vector2<int> dimensions_);
 			void onClick(std::function<void()> l);
-			Button();
-			~Button();
 
 			const int MAX_VALUE = 100;
 		};

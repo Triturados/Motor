@@ -189,7 +189,24 @@ namespace LoveEngine {
 				return A;
 			}
 
+			explicit operator Vector3<int>() {
+				Vector3<int> v = Vector3<int>();
+				v.x = (int)x;
+				v.y = (int)y;
+				v.z = (int)z;
+				return v;
+			}
+
+			explicit operator Vector3<float>() {
+				Vector3<float> v = Vector3<float>();
+				v.x = (float)x;
+				v.y = (float)y;
+				v.z = (float)z;
+				return v;
+			}
 		};
+		
+		
 
 		template <class T>
 		std::ostream& operator<<(std::ostream& os, const Vector3<T>& v)
@@ -198,4 +215,5 @@ namespace LoveEngine {
 			return os;
 		}
 	}
+
 }
