@@ -657,7 +657,7 @@ function scene3() -- Overworld
         horiSens: 5.5
     ]])
 
-    camFollow:sendComponent(0, tr)
+    camFollow:sendGameObject(0, player)
 
     rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
