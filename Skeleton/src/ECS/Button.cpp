@@ -130,13 +130,8 @@ namespace LoveEngine {
 		void Button::setSize(Utilities::Vector2<int> newsize)
 		{
 			*dimensions = newsize;
-		}
-
-		void Button::setDimensions(Utilities::Vector2<int> dimensions_)
-		{
-			button->setWidth(dimensions_.x);
-			button->setHeight(dimensions_.y);
-			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
+			button->setWidth(newsize.x);
+			button->setHeight(newsize.y);
 		}
 
 		void Button::onClick(std::function<void()> l)

@@ -60,14 +60,16 @@ namespace LoveEngine {
 
 			template <typename T>
 			requires isComponent<T>
-				T* addComponent() {
+				T* addComponent(bool init = false) {
 
 				T* c = new T();
 				c->gameObject = this;
 				c->scene = scene;
 
-				c->init();
-				c->postInit();
+				if (init) {
+					c->init();
+					c->postInit();
+				}
 				componentsList.push_back(c);
 				return c;
 			}

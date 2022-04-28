@@ -69,7 +69,6 @@ namespace LoveEngine {
 			void setSize(Utilities::Vector2<int>);
 
 			void setPos(Utilities::Vector3<int> pos_);
-			void setDimensions(Utilities::Vector2<int> dimensions_);
 			void onClick(std::function<void()> l);
 
 			const int MAX_VALUE = 100;
