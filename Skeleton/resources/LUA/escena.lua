@@ -191,6 +191,37 @@ function createArrow(pos, mat)
     return button
 end
 
+function createCharco(name, type, x,y,z)
+    local charco = scene:createObject(name);
+
+    local tr = charco:addComponent("Transform");
+
+    tr:sendMsg([[
+        scale: 10,1,10;
+        position: ]] .. x .. [[ , ]] .. y .. [[ , ]] .. z .. [[;
+        rotation: 0,0,0;
+    ]])
+
+    charco:addComponent("Mesh"):sendMsg([[
+        meshName: Charco.mesh;
+    ]])
+
+    charco:addComponent('Rigidbody'):sendMsg([[
+        trigger: true;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 10,1,10;
+    ]])
+
+    charco:addComponent('EfectoEscenario'):sendMsg([[
+        type: ]] .. type .. [[
+    ]])
+    
+    return tr;
+
+end
+
 function scene1() -- Settings
     scene:name("Settings")
 
@@ -242,7 +273,6 @@ function scene1() -- Settings
     mainmenu:sendComponent(0, startButton);
     mainmenu:sendComponent(1, exitButton);
 end
-
 
 function scene3() -- Overworld
     scene:name("Escena de Prueba")
@@ -375,23 +405,20 @@ function scene3() -- Overworld
     local sueloTr = suelo:addComponent("Transform")
 
     -- Colocamos sus hijos
-    local charco = scene:createObject("CharcoLava")
-    local charcoTr = charco:addComponent("Transform")
+    local charcoTr = createCharco("Charco1", 1, 0,2,70)
+    local charcoTr2 = createCharco("Charco2", 1, -70,2, -70)
+    local charcoTr3 =  createCharco("Charco3", 1, 70,2,-70)
 
-    charcoTr:sendMsg([[
-        scale: 10,1,10;
-        position: 30,2,30;
-        rotation: 0,0,0;
-    ]])
-   
     -- Colocamos el padre
     sueloTr:sendMsg([[
-        scale: 150,1,150;
-        position: 0,0,0;
+        scale: 4,1,4;
+        position: 0,-4,0;
         rotation: 0,0,0;
     ]])
 
     charcoTr:sendComponent(1, sueloTr)
+    charcoTr2:sendComponent(1, sueloTr)
+    charcoTr3:sendComponent(1, sueloTr)
 
      --------------------------------------------
     -- hijosmuros --
@@ -408,7 +435,7 @@ function scene3() -- Overworld
 
     local comp3 = suelo:addComponent("Mesh")
     comp3:sendMsg([[
-        meshName: cube.mesh;
+        meshName: arena.mesh;
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
     compRigidbodySuelo:sendMsg([[
@@ -417,28 +444,12 @@ function scene3() -- Overworld
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 150,1,150;
+        colliderScale: 150,3.5,150;
         ]])
 
     local material = suelo:addComponent("Material")
     material:sendMsg([[materialName: bolaroja]])
     material:sendComponent(0, comp3)
-
-    -- CHARCOS   
-    charco:addComponent("Mesh"):sendMsg([[
-        meshName: Charco.mesh;
-    ]])
-    charco:addComponent('Rigidbody'):sendMsg([[
-        trigger: true;
-        mass: 0.0;
-        shape: cube; 
-        restitution: 0.9;
-        colliderScale: 10,1,10;
-        ]])
-
-    charco:addComponent('EfectoEscenario'):sendMsg([[
-        type: 1
-    ]])
 
     -- Camara comentada por lo del splash screen
     -- local camara = scene:createObject("CamaritaGuapa")
@@ -815,3 +826,6 @@ function createVignette()
         material: splashScreen_vignette; width: 1280; height : 720; posZ: 20
     ]])
 end
+
+----------Objetos escena------------
+
