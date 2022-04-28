@@ -85,7 +85,7 @@ namespace LoveEngine {
 
 						auto info = cmp["values"];
 						if (!info.isNil())
-							component->formatString(info.tostring());
+							component->sendFormattedString(info.tostring());
 					}
 				}
 			}
@@ -104,7 +104,7 @@ namespace LoveEngine {
 					auto mssg = luacmp["info"];
 					if (!mssg.isNil())
 					{
-						cmp->formatString(mssg.tostring());
+						cmp->sendFormattedString(mssg.tostring());
 					}
 					return cmp;
 				}
@@ -116,7 +116,7 @@ namespace LoveEngine {
 				Component* cmp = gameObject->createComponent(cmpbp->type);
 
 				if (cmpbp->message != "") {
-					cmp->formatString(cmpbp->message);
+					cmp->sendFormattedString(cmpbp->message);
 				}
 				return cmp;
 			}

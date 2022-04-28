@@ -52,16 +52,6 @@ namespace LoveEngine {
 			dead = true;
 		}
 
-		void GameObject::removeGameObject(GameObject* gO)
-		{
-			gO->removeGameObject();
-		}
-
-		void GameObject::canvelRemove()
-		{
-			dead = false;
-		}
-
 
 		bool GameObject::isEnabled()
 		{
@@ -103,14 +93,6 @@ namespace LoveEngine {
 			for (Component* comp : componentsList) {
 				if (comp->enabled)
 					comp->stepPhysics();
-			}
-		}
-
-		void GameObject::preRender()
-		{
-			for (Component* comp : componentsList) {
-				if (comp->enabled)
-					comp->preRender();
 			}
 		}
 
@@ -168,17 +150,15 @@ namespace LoveEngine {
 			return scene;
 		}
 
-		GameObject* GameObject::createGameObject(std::string name)
+		GameObject* GameObject::createEmptyGameObject(std::string name)
 		{
 			auto go = scene->createGameObject(name);
-			go->init();
-			go->postInit();
 			return go;
 		}
 
 		void GameObject::sendMessage(std::string message) {
 			for (auto comp : componentsList) {
-				comp->formatString(message);
+				comp->sendFormattedString(message);
 			}
 		}
 	}

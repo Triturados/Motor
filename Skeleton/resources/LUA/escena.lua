@@ -270,16 +270,6 @@ function scene3() -- Overworld
     -- Slider--
     local testSlider = scene:createObject("miSlider")
     testSlider:addComponent("Transform")
-    -- testSlider:addComponent("Slider"):sendMsg([[
-    --     materialBar: Heal;
-    --     materialBarBg: Heal_bg;
-    --     materialButton: CircleButton;
-    --     width: 300;
-    --     height: 50;
-    --     posX: 100;
-    --     posY: 100;
-    -- ]])
-    -- testSlider:addComponent("SaludJugador")
 
     -- Suelo--
     local suelo = scene:createObject("Suelo")

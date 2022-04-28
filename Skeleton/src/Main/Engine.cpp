@@ -197,8 +197,8 @@ namespace LoveEngine {
 			.addFunction("sendComponent", &(LoveEngine::ECS::Component::receiveComponent))
 			.addFunction("sendGameObject", &(LoveEngine::ECS::Component::receiveGameObject))
 			.addFunction("sendObject", &(LoveEngine::ECS::Component::receiveGameObject))
-			.addFunction("sendMsg", &(LoveEngine::ECS::Component::formatString))
-			.addFunction("sendMssg", &(LoveEngine::ECS::Component::formatString))
+			.addFunction("sendMsg", &(LoveEngine::ECS::Component::sendFormattedString))
+			.addFunction("sendMssg", &(LoveEngine::ECS::Component::sendFormattedString))
 			.addFunction("sendString", &(LoveEngine::ECS::Component::receiveString))
 			.endClass();
 
@@ -231,10 +231,10 @@ namespace LoveEngine {
 			luabridge::push(luastate, scene);
 			lua_setglobal(luastate, "scene");
 
-			luabridge::push(luastate, sceneManager->persistentScene->gObjects.front());
+			luabridge::push(luastate, sceneManager->persistentScene->getGameObjects().front());
 			lua_setglobal(luastate, "persistentObject");
 
-			luabridge::push(luastate, sceneManager->persistentScene->gObjects.front());
+			luabridge::push(luastate, sceneManager->persistentScene->getGameObjects().front());
 			lua_setglobal(luastate, "persistentGameObject");
 
 			std::string scenestring = "scene" + std::to_string(idx);
