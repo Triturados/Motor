@@ -61,13 +61,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)..\..\libs\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)libs\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)temp\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)..\..\libs\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)libs\$(ProjectName)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)temp\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -75,7 +75,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\src\Utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\OGRE;$(SolutionDir)src\ECS;$(SolutionDir)src\Utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;__PROJECT_NAME__="$(ProjectName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\OgreBuild\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\OgreSrc\Components\Bites\include;$(ProjectDir)..\..\dependencies\OgreSrc\OgreMain\include;$(ProjectDir)..\..\src\OGRE;$(ProjectDir)..\..\src\ECS;$(ProjectDir)..\..\src\Utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\OgreBuild\include;$(SolutionDir)dependencies\OgreSrc\Components\RTShaderSystem\include;$(SolutionDir)dependencies\OgreSrc\Components\Bites\include;$(SolutionDir)dependencies\OgreSrc\OgreMain\include;$(SolutionDir)src\OGRE;$(SolutionDir)src\ECS;$(SolutionDir)src\Utilities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
