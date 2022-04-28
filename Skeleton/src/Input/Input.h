@@ -75,6 +75,9 @@ namespace LoveEngine {
 			bool isKeyPressed(InputKeys key);
 			bool keyJustPressed(InputKeys key);
 			bool mousePressed(MouseState state);
+
+			float mouseWheel();
+
 			Utilities::Vector2<float> mousePosition();
 			Utilities::Vector2<float> relativeMousePosition();
 			void mouseVisibility(bool inGame);
@@ -87,6 +90,7 @@ namespace LoveEngine {
 			//static std::unordered_map<SDL_KeyCode, tecla> teclas;
 			/*void addListener(SDL_KeyCode k, Component* c);*/
 		private:
+			static InputManager* _instance;
 
 			Controller controller;
 			std::unordered_set<SDL_Scancode>* lastPressedKeys;
@@ -96,8 +100,7 @@ namespace LoveEngine {
 			MouseState mouseState;
 			bool clickJustPressed;
 
-			static InputManager* _instance;
-
+			float _mouseWheel;
 			bool initialiseController();
 			SDL_GameController* sdlcontroller;
 			int button;

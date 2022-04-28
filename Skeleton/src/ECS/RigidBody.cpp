@@ -176,6 +176,10 @@ namespace LoveEngine {
 						rigidBody->applyCentralForce(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
 					else if (mode == ForceMode::IMPULSE)
 						rigidBody->applyCentralImpulse(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
+					else if (mode == ForceMode::ACCELERATION) {
+						force = force * mass;
+						rigidBody->applyCentralImpulse(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z)));
+					}
 				}
 				else {
 					if (mode == ForceMode::FORCE)
@@ -186,6 +190,11 @@ namespace LoveEngine {
 						rigidBody->applyImpulse(
 							(btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
 							(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+					else if (mode == ForceMode::ACCELERATION) {
+					force = force * mass;
+					rigidBody->applyImpulse((btVector3(btScalar(force.x), btScalar(force.y), btScalar(force.z))),
+						(btVector3(btScalar(relativePos.x), btScalar(relativePos.y), btScalar(relativePos.z))));
+				}
 
 				}
 			}

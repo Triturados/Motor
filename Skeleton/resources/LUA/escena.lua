@@ -153,7 +153,7 @@ function scene0() -- Main menu
     ]])
 
 
-    createVignette()
+    Blueprint.spawnObject(scene, "Vignette")
 
     -- local transition = scene:createObject('Transition')
     -- transition:addComponent('Image'):sendMssg([[
@@ -359,6 +359,8 @@ function scene3() -- Overworld
     -- ]])
 
     -- Bola--
+
+
     local bola = scene:createObject("Bola")
     local compBola = bola:addComponent('Transform')
 

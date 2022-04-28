@@ -172,6 +172,12 @@ namespace LoveEngine {
 		luastate = luaL_newstate();
 		luaL_openlibs(luastate);
 
+
+		if (luaL_dofile(luastate, "LUA/escena.lua")) {
+			std::cout << "No se encontro el archivo de lua";
+			return -1;
+		}
+
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::GameObject>("GameObject")
 			.addFunction("addComponent", &(LoveEngine::ECS::GameObject::createComponent))
@@ -219,10 +225,6 @@ namespace LoveEngine {
 			.addFunction("random", &(LoveEngine::random))
 			.addFunction("randomBetween", &(LoveEngine::randomBetween));
 
-		if (luaL_dofile(luastate, "LUA/escena.lua")) {
-			std::cout << "No se encontro el archivo de lua";
-			return -1;
-		}
 
 		sceneManager->sceneFactory->creator = [&](LoveEngine::ECS::Scene* scene, int idx) {
 
