@@ -122,6 +122,16 @@ namespace LoveEngine {
 			return *pos;
 		}
 
+		Utilities::Vector2<int> Button::getSize()
+		{
+			return *dimensions;
+		}
+
+		void Button::setSize(Utilities::Vector2<int> newsize)
+		{
+			*dimensions = newsize;
+		}
+
 		void Button::setDimensions(Utilities::Vector2<int> dimensions_)
 		{
 			button->setWidth(dimensions_.x);

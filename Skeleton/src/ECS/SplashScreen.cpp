@@ -1,9 +1,7 @@
 #include "SplashScreen.h"
 #include <Scene.h>
 #include <GameObject.h>
-#include <Transform.h>
 #include <Mesh.h>
-#include <CameraComponent.h>
 #include <Image.h>
 #include <Timer.h>
 #include <SceneManager.h>
@@ -16,21 +14,21 @@ namespace LoveEngine {
 		void populateSplashScreen(ECS::Scene* scene) {
 
 			auto camera = scene->createGameObject("Camera");
-			camera->addComponent<ECS::Transform>()->formatString("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
-			camera->addComponent<ECS::Camera>()->formatString("cameraName: escenaSplash");
+			camera->createComponent("Transform")->sendFormattedString("scale: 1,1,1; position: 0, 15, 75; rotation: 0, 0, 0, 0; ");
+			camera->createComponent("Camera")->sendFormattedString("cameraName: escenaSplash");
 
 			auto gameObject = scene->createGameObject("Background");
-			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_background; width: 1280; height : 720; posZ: 0");
+			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_background; width: 1280; height : 720; posZ: 0");
 
 			gameObject = scene->createGameObject("White");
-			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_white; width: 1280; height : 720; posY: 480; posZ: 1");
-			gameObject->addComponent<FillIcon>()->formatString("speed: -100.0");
+			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_white; width: 1280; height : 720; posY: 480; posZ: 1");
+			gameObject->addComponent<FillIcon>()->sendFormattedString("speed: -100.0");
 			
 			gameObject = scene->createGameObject("Content");
-			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_content; width: 1280; height : 720; posZ: 2");
+			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_content; width: 1280; height : 720; posZ: 2");
 
 			gameObject = scene->createGameObject("Vignette");
-			gameObject->addComponent<ECS::Image>()->formatString("material: splashScreen_vignette; width: 1280; height : 720; posZ: 20");
+			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_vignette; width: 1280; height : 720; posZ: 20");
 
 
 			ECS::Timer::invoke([&](ECS::Timer*) {
