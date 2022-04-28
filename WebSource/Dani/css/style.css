@@ -15,6 +15,13 @@
  @import url(swiper.min.css);
  @import url(slick.css);
  @import url(jquery.fancybox.min.css);
+ @import url(jquery-ui.css);
+ @import url(nice-select.css);
+/*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
+ * {
+     box-sizing: border-box !important;
+}
+ html {
      scroll-behavior: smooth;
 }
  body {
