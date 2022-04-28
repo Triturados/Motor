@@ -271,6 +271,105 @@ function scene3() -- Overworld
     local testSlider = scene:createObject("miSlider")
     testSlider:addComponent("Transform")
 
+    -- Limites mundo --
+    --MURO1
+    local muro1 = scene:createObject("muro1")
+    local muroTr1 = muro1:addComponent("Transform")
+
+    muroTr1:sendMsg([[
+        scale: 1,10,150;
+        position: -150,10,0;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM1 = muro1:addComponent("Mesh")
+    muroM1:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro1 = muro1:addComponent('Rigidbody')
+    rBMuro1:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 1,10,150;
+    ]])
+    --MURO2
+    local muro2 = scene:createObject("muro2")
+    local muroTr2 = muro2:addComponent("Transform")
+
+    muroTr2:sendMsg([[
+        scale: 1,10,150;
+        position: 150,10,0;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM2 = muro2:addComponent("Mesh")
+    muroM2:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro2 = muro2:addComponent('Rigidbody')
+    rBMuro2:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 1,10,150;
+    ]])
+
+    --MURO3
+    local muro3 = scene:createObject("muro3")
+    local muroTr3 = muro3:addComponent("Transform")
+
+    muroTr3:sendMsg([[
+        scale: 150,10,1;
+        position: 0,10,-150;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM3 = muro3:addComponent("Mesh")
+    muroM3:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro3 = muro3:addComponent('Rigidbody')
+    rBMuro3:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 150,10,1;
+    ]])
+
+    local muro4 = scene:createObject("muro4")
+    local muroTr4 = muro4:addComponent("Transform")
+
+    muroTr4:sendMsg([[
+        scale: 150,10,1;
+        position: 0,10,150;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM4 = muro4:addComponent("Mesh")
+    muroM4:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro4 = muro4:addComponent('Rigidbody')
+    rBMuro4:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 150,10,1;
+    ]])
+
     -- Suelo--
     local suelo = scene:createObject("Suelo")
     local sueloTr = suelo:addComponent("Transform")
@@ -284,15 +383,23 @@ function scene3() -- Overworld
         position: 30,2,30;
         rotation: 0,0,0;
     ]])
-
+   
     -- Colocamos el padre
     sueloTr:sendMsg([[
-        scale: 100,1,100;
+        scale: 150,1,150;
         position: 0,0,0;
         rotation: 0,0,0;
     ]])
 
     charcoTr:sendComponent(1, sueloTr)
+
+     --------------------------------------------
+    -- hijosmuros --
+    muroTr1:sendComponent(1,sueloTr)
+    muroTr2:sendComponent(1,sueloTr)
+    muroTr3:sendComponent(1,sueloTr)
+    muroTr4:sendComponent(1,sueloTr)
+    ------------------------------
     -- Volvemos a mover el escenario (si hiciese falta)
     -- sueloTr:sendMsg([[
     --     position: 0,0,0;
@@ -310,7 +417,7 @@ function scene3() -- Overworld
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 100,1,100;
+        colliderScale: 150,1,150;
         ]])
 
     local material = suelo:addComponent("Material")
