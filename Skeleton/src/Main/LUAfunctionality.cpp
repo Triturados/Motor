@@ -68,17 +68,17 @@ namespace LoveEngine {
 
 	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, std::string name)
 	{
-		return ECS::Blueprint::getInstance()->spawnObject(scene, name);
+		return ECS::Blueprint::getInstance()->spawnObject(scene, name, false);
 	}
 
 	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, std::string name)
 	{
-		return ECS::Blueprint::getInstance()->fillObject(gameObject, name);
+		return ECS::Blueprint::getInstance()->fillObject(gameObject, name, false);
 	}
 
 	ECS::Component* BlueprintAddComponent(ECS::GameObject* gameObject, std::string cmpname)
 	{
-		return ECS::Blueprint::getInstance()->addComponent(gameObject, cmpname);
+		return ECS::Blueprint::getInstance()->addComponent(gameObject, cmpname, false);
 	}
 
 

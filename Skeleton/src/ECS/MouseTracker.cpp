@@ -17,7 +17,7 @@ void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 LoveEngine::ECS::MouseTracker::MouseTracker()
 {
 	maincam = nullptr;
-	mousepos = new Utilities::Vector2();
+	mousepos = new Utilities::Vector2<int>();
 	rotationSpeed = 5;
 }
 

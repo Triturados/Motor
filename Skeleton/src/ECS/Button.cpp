@@ -96,7 +96,7 @@ namespace LoveEngine {
 		void Button::handleInput()
 		{
 			if (inputmanager->justClicked()) {
-				Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
+				Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
 					lambda();
 				}
