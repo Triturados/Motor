@@ -4,7 +4,6 @@ title Automatizacion - Proceso de reset
 echo Comenzando con el reset.
 
 rem Variables de directorio
-set WORKING_DIR=%cd%
 set OGRE_BUILD_DIR=.\Skeleton\dependencies\OgreBuild\
 set BULLET_BUILD_DIR=.\Skeleton\dependencies\BulletBuild\
 set LUABRIDGE_BUILD_DIR=.\Skeleton\dependencies\LuaBridgeBuild\
