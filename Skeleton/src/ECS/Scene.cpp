@@ -32,8 +32,6 @@ namespace LoveEngine {
 
 		void Scene::update()
 		{
-			objectsToRemove.clear();
-
 			for (auto it = gObjects.begin(); it != gObjects.end(); it++) {
 				GameObject* gO = *it;
 
@@ -50,6 +48,7 @@ namespace LoveEngine {
 				gObjects.erase(it);
 				delete gO;
 			}
+			objectsToRemove.clear();
 		}
 
 		void Scene::stepPhysics()
@@ -88,7 +87,7 @@ namespace LoveEngine {
 			return SceneManagement::SceneManager::getInstance()->persistentScene->gObjects.front();
 		}
 
-	
+
 		void Scene::setName(std::string newname) {
 			name = newname;
 		}
