@@ -43,6 +43,7 @@ namespace LoveEngine {
 		{
 			soundMngr = LoveEngine::Audio::SoundManager::getInstance();
 			soundMngr->createSound(&sound, soundRoute.c_str(), channel);
+			playSound();
 		}
 
 		void Sound::playSound()
@@ -52,12 +53,22 @@ namespace LoveEngine {
 
 		void Sound::releaseSound()
 		{
-			soundMngr->releaseSound(channel);
+			soundMngr->releaseSound(sound);
 		}
 
 		void Sound::setSpeed(float s)
 		{
-			soundMngr->setSpeed(channel, s);
+			soundMngr->setSpeed(sound, s);
+		}
+
+		void Sound::pause(bool pause)
+		{
+			soundMngr->pauseSound(sound, pause);
+		}
+
+		void Sound::setVolume(float volume)
+		{
+			soundMngr->setVolume(sound, volume);
 		}
 	}
 }

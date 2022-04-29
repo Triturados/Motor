@@ -18,6 +18,7 @@
 #include <Slider.h>
 #include <Button.h>
 #include <Skybox.h>
+#include <Sound.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -63,6 +64,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Slider>("Slider"));
 			registerComponent(new ComponentCreatorTemplate<Button>("Button"));
 			registerComponent(new ComponentCreatorTemplate<Skybox>("Skybox"));
+			registerComponent(new ComponentCreatorTemplate<Sound>("Sound"));
 		}
 
 

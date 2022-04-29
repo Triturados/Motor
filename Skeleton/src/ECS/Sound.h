@@ -35,6 +35,8 @@ namespace LoveEngine {
 			void playSound();
 			void releaseSound();
 			void setSpeed(float s);
+			void pause(bool pause);
+			void setVolume(float volume);
 		};
 	}
 }

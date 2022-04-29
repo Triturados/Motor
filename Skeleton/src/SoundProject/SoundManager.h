@@ -18,12 +18,12 @@ namespace LoveEngine {
 		{
 		private:
 			const int MaxCh = 36;
-			std::unordered_map<int, FMOD::SoundClass> soundsMap;
+			std::unordered_map<FMOD::SoundClass, int> soundsMap;
 			std::vector<FMOD::Channel*> channels;
 			std::vector<FMOD::ChannelGroup*> channelGroups;
 			FMOD::ChannelGroup* effects, * voices, * environment, * music, * master;
 
-			void setVolume(FMOD::ChannelGroup* group, float volume);
+			void changeVolume(FMOD::ChannelGroup* group, float volume);
 
 			//Errores
 			FMOD_RESULT fmod_error;
@@ -43,10 +43,12 @@ namespace LoveEngine {
 
 			void createSound(FMOD::SoundClass* pSound, const char* pFile, int channel);
 			void playSound(FMOD::SoundClass pSound, int groupChannel, bool bLoop = false);
-			void releaseSound(int channel);
-			void setSpeed(int channel, float s);
+			void releaseSound(FMOD::SoundClass sound);
+			void setSpeed(FMOD::SoundClass sound, float s);
 			void setVolumeChannel(int channelGroup, float volume);
-			void pauseSound();
+			void setVolume(FMOD::SoundClass sound, float volume);
+			void pauseSound(FMOD::SoundClass sound, bool pause);
+			void pause();
 		};
 
 	}

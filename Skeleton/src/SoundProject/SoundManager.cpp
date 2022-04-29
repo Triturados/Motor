@@ -63,7 +63,7 @@ namespace LoveEngine {
 			if (!std::ifstream(pFile)) throw std::exception("[Error en el proyecto SoundProject] : El archivo de sonido no existe o no se ha podido encontrar.");
 
 			//Añadimos al mapa de sonidos generales un tupla somido canal
-			std::pair<int, FMOD::SoundClass> sound(channel, *pSound);
+			std::pair<FMOD::SoundClass, int> sound(*pSound, channel);
 			soundsMap.insert(sound);
 		}
 
@@ -81,31 +81,31 @@ namespace LoveEngine {
 				pSound->setLoopCount(-1);
 			}
 
-			for (auto channel : channels) {
+			for (int i = 0; i < channels.size(); i++) {
 				bool isPlaying;
-				channel->isPlaying(&isPlaying);
+				channels[i]->isPlaying(&isPlaying);
 
 				if (isPlaying) continue;
 
 				switch (groupChannel)
 				{
 				case 0: {
-					fmod_error = m_pSystem->playSound(pSound, effects, false, &channel);
+					fmod_error = m_pSystem->playSound(pSound, effects, false, &channels[i]);
 					throwFMODError(fmod_error, __LINE__);
 					break;
 				}
 				case 1: {
-					m_pSystem->playSound(pSound, environment, false, &channel);
+					m_pSystem->playSound(pSound, environment, false, &channels[i]);
 					throwFMODError(fmod_error, __LINE__);
 					break;
 				}
 				case 2: {
-					m_pSystem->playSound(pSound, voices, false, &channel);
+					m_pSystem->playSound(pSound, voices, false, &channels[i]);
 					throwFMODError(fmod_error, __LINE__);
 					break;
 				}
 				case 3: {
-					m_pSystem->playSound(pSound, music, false, &channel);
+					m_pSystem->playSound(pSound, music, false, &channels[i]);
 					throwFMODError(fmod_error, __LINE__);
 					break;
 				}
@@ -113,18 +113,22 @@ namespace LoveEngine {
 					break;
 				}
 				break;
+
+				soundsMap.find(pSound)->second = i;
 			}
 		}
 
-		void SoundManager::releaseSound(int channel)
+		void SoundManager::releaseSound(FMOD::SoundClass sound)
 		{
-			fmod_error = soundsMap.find(channel)->second->release();
+			fmod_error = sound->release();
 			throwFMODError(fmod_error, __LINE__);
+			
+			soundsMap.erase(sound);
 		};
 
-		void SoundManager::setSpeed(int channel, float s)
+		void SoundManager::setSpeed(FMOD::SoundClass sound, float s)
 		{
-			fmod_error = soundsMap.find(channel)->second->setMusicSpeed(s);
+			fmod_error = sound->setMusicSpeed(s);
 			throwFMODError(fmod_error, __LINE__);
 		}
 
@@ -132,17 +136,32 @@ namespace LoveEngine {
 		{
 			switch (channelGroup)
 			{
-			case 0: setVolume(master, volume); break;
-			case 1: setVolume(effects, volume); break;
-			case 2: setVolume(environment, volume); break;
-			case 3: setVolume(voices, volume); break;
-			case 4: setVolume(music, volume); break;
+			case 0: changeVolume(master, volume); break;
+			case 1: changeVolume(effects, volume); break;
+			case 2: changeVolume(environment, volume); break;
+			case 3: changeVolume(voices, volume); break;
+			case 4: changeVolume(music, volume); break;
 			default:
 				break;
 			}
 		}
 
-		void SoundManager::pauseSound()
+		void SoundManager::setVolume(FMOD::SoundClass sound, float volume)
+		{
+			fmod_error = channels[soundsMap.find(sound)->second]->setVolume(volume);
+			throwFMODError(fmod_error, __LINE__);
+		}
+
+		void SoundManager::pauseSound(FMOD::SoundClass sound, bool pause)
+		{
+			int channel = soundsMap.find(sound)->second;
+			bool paused; fmod_error = channels[channel]->getPaused(&paused);
+			throwFMODError(fmod_error, __LINE__);
+
+			channels[channel]->setPaused(pause);
+		}
+
+		void SoundManager::pause()
 		{
 			bool paused; fmod_error = master->getPaused(&paused);
 			throwFMODError(fmod_error, __LINE__);
@@ -150,7 +169,7 @@ namespace LoveEngine {
 			paused ? master->setPaused(true) : master->setPaused(false);
 		}
 
-		void SoundManager::setVolume(FMOD::ChannelGroup* group, float volume) {
+		void SoundManager::changeVolume(FMOD::ChannelGroup* group, float volume) {
 			fmod_error = group->setVolume(volume);
 			throwFMODError(fmod_error, __LINE__);
 		}

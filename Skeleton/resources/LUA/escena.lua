@@ -602,6 +602,7 @@ function scene3() -- Overworld
     --player:addComponent("ParticleSystem")
 
     player:addComponent("Animation"):sendMsg([[animName: idle]])
+    player:addComponent("Sound"):sendMsg([[soundName: wii.mp3; channel: music; loop: true]])
 
     local sliderBehindLive = player:addComponent("Slider"):sendMsg([[
         materialBar: Heal;
