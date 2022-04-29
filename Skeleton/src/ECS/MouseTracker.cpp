@@ -7,6 +7,7 @@
 #include <GameTime.h>
 #include <StringFormatter.h>
 #include <Utils.h>
+#include "Random.h"
 
 void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 {
@@ -36,6 +37,9 @@ void LoveEngine::ECS::MouseTracker::update()
 	auto input = Input::InputManager::getInstance();
 	Utilities::Vector2 newpos = input->mousePosition();
 	input->mouseWheel();
+	int randomBetween = Utilities::Random::randomBetween(0, 19292392);
+	float random = Utilities::Random::random();
+
 	if (input->mousePressed(Input::MouseState::CLICK_L)) {
 
 		float difx = mousepos->x - newpos.x;

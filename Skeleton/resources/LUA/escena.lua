@@ -599,6 +599,8 @@ function scene3() -- Overworld
         speed: 30.0
     ]])
 
+    --player:addComponent("ParticleSystem")
+
     player:addComponent("Animation"):sendMsg([[animName: idle]])
 
     local sliderBehind = player:addComponent("Slider"):sendMsg([[
@@ -624,6 +626,8 @@ function scene3() -- Overworld
     local saludjugador = player:addComponent("Stamina")
     --saludjugador:sendComponent(0, sliderOver);
     --saludjugador:sendComponent(1, sliderBehind);
+
+    local playerAttack = player:addComponent("AtaqueJugador")
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
@@ -670,6 +674,7 @@ function scene3() -- Overworld
 
     playerMov:sendComponent(0, bossRb)
     playerMov:sendComponent(1, trcam)
+    playerAttack:sendComponent(0,bosstr)
 
     boss:addComponent("Animation"):sendMsg([[animName: idle]])
 
