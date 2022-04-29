@@ -36,7 +36,6 @@ namespace LoveEngine {
 		class lovexport Button : public Component
 		{
 		private:
-			bool detectInput = true;
 			std::string material = "";
 
 			Utilities::Vector3<int>* pos;
@@ -48,7 +47,8 @@ namespace LoveEngine {
 			bool visible = true;
 			Ogre::Overlay* overlayBar = nullptr;
 			Ogre::OverlayContainer* button = nullptr;
-
+			
+			bool interactable;
 			std::function<void()> lambda;
 		public:
 			Button();
@@ -60,9 +60,10 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
-
+			
+			void setInteractable(bool);
+			bool isInteractable();
 			void handleInput();
-			void setDetectInput(bool mode);
 			Utilities::Vector3<int> getPos();
 
 			Utilities::Vector2<int> getSize();

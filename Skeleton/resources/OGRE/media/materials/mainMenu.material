@@ -1,25 +1,56 @@
-material mainmenuFrontground{
+material mainmenuBackgroundImage{
 	technique{
 		pass{
 			lighting off
 			depth_check off
 			scene_blend alpha_blend
 			texture_unit {
-				texture MainMenu.png
+				texture Background.png
 				colour_op modulate
 			}
 		}
 	}
 }
 
-material mainmenuBackground{
+material mainmenuBlackBorder{
 	technique{
 		pass{
 			lighting off
 			depth_check off
 			scene_blend alpha_blend
 			texture_unit {
-				texture MainMenuBackground.png
+				texture Blackborder.png
+				colour_op modulate
+			}
+		}
+	}
+}
+
+
+material mainmenuBanner{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture Banner.png
+				colour_op modulate
+			}
+		}
+	}
+}
+
+
+
+material mainmenuPressKey{
+	technique{
+		pass{
+			lighting off
+			depth_check off
+			scene_blend alpha_blend
+			texture_unit {
+				texture PressAnyKey.png
 				colour_op modulate
 			}
 		}
@@ -55,34 +86,6 @@ material mainmenuArrowDown{
 	}
 }
 
-material mainmenuContent{
-	technique{
-		pass{
-			lighting off
-			depth_check off
-			scene_blend alpha_blend
-			texture_unit {
-				texture MainMenuContent.png
-				colour_op modulate
-			}
-		}
-	}
-}
-
-material mainmenuBackgroundScroll{
-	technique{
-		pass{
-			lighting off
-			depth_check off
-			scene_blend alpha_blend
-			texture_unit {
-				texture BackgroundScroll.png
-				colour_op modulate
-				scroll_anim 0.05 0
-			}
-		}
-	}
-}
 
 material pauseMenu{
 	technique{

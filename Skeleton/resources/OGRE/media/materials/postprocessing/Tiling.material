@@ -42,8 +42,8 @@ material Ogre/Compositor/Tiling
 			//DirectX 9.0 HLSL Pixel Shader ps_2_0
 			fragment_program_ref Ogre/Compositor/TilingFP
 			{
-				param_named NumTiles float 75.0
-				param_named Threshold float 0.15
+				param_named NumTiles float 300.0
+				param_named Threshold float 0.05
 			}
 
 			texture_unit RT

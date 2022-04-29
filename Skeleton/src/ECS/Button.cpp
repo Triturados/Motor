@@ -61,7 +61,7 @@ namespace LoveEngine {
 		//No se llama el update 
 		void Button::update()
 		{
-			if (detectInput) handleInput();
+			if (interactable) handleInput();
 		}
 
 		void Button::setVisibility(bool mode)
@@ -79,8 +79,6 @@ namespace LoveEngine {
 			overlayBar->show();
 		}
 
-
-
 		Button::~Button()
 		{
 			ogremanager->disableOverlay(overlayBar);
@@ -90,6 +88,7 @@ namespace LoveEngine {
 
 		Button::Button()
 		{
+			interactable = true;
 			lambda = []() {};
 		}
 
@@ -103,11 +102,12 @@ namespace LoveEngine {
 			}
 		}
 
-		void Button::setDetectInput(bool mode)
-		{
-			detectInput = mode;
-			if (mode) button->show();
-			else button->hide();
+		void Button::setInteractable(bool val) {
+			interactable = val;
+		}
+
+		bool Button::isInteractable() {
+			return interactable;
 		}
 
 		void Button::setPos(Utilities::Vector3<int> pos_)

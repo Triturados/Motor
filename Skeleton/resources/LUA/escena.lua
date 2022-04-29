@@ -84,47 +84,73 @@ scene2 = {
             posZ: 1
         ]])
 
-        local menuObj = scene:createObject("Main menu"):addComponent("PauseMenu")
+        local menuObj = scene:createObject("Pause Component"):addComponent("PauseMenu")
         menuObj:sendComponent(0, continue);
         menuObj:sendComponent(1, exitButton);
     end
 }
-
 function scene0() -- Main menu
     scene:name("Main menu")
     menu = require "menu";
     menu:cambiarIcono()
 
     local cam = scene:createObject("cam")
-    local trcam = cam:addComponent('Transform')
-    trcam:sendMsg([[
+    cam:addComponent('Transform'):sendMsg([[
         scale: 2,2,2;
         position: 0,40,80;
         rotation: 0,0,0;
     ]])
 
-    local camCamera = cam:addComponent('Camera')
-
-    camCamera:sendMsg([[
+    cam:addComponent('Camera'):sendMsg([[
         name: escenaMenu;
         zOrder: -1
-        compositor: B&W;
     ]])
-
-  
     
+    local zOrder = 0
     local bg = scene:createObject("Background");
     bg:addComponent("Image"):sendMsg([[
-        material: mainmenuBackground; 
+        material: mainmenuBackgroundImage; 
         width: 1280;
         height : 720;
-        posZ: 0
+        posZ: ]] .. zOrder ..[[
     ]])
+    zOrder = zOrder + 1
 
-   
+    local bannerxpos = 100;
+    local bannerwidth = 300;
+    local centerx = round((100 + 300) * 0.5)
+    scene:createObject("Banner"):addComponent("Image"):sendMsg([[
+        material: mainmenuBanner; 
+        width: 300;
+        height : 640;
+        posX: 100;
+        posY: 52
+        posZ: ]] .. zOrder ..[[
+    ]])
+    zOrder = zOrder + 1
+
+
+    
+    scene:createObject("Press any key"):addComponent("Image"):sendMsg([[
+        material: mainmenuPressKey; 
+        width: 381;
+        height : 29;
+        posZ: ]] .. zOrder ..[[
+    ]])
+    zOrder = zOrder + 1
+
+
+    scene:createObject("Black border"):addComponent("Image"):sendMsg([[
+        material: mainmenuBlackBorder; 
+        width: 1280;
+        height : 720;
+        posZ: ]] .. zOrder ..[[
+    ]])
+    zOrder = zOrder + 1
+
 
     local mainmenu = bg:addComponent("MainMenu");
-    local initialHeigh = 430
+    local initialHeigh = 380
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
@@ -142,45 +168,11 @@ function scene0() -- Main menu
         mainmenu:sendComponent(i, button)
     end
 
-    mainmenu:sendComponent(-1, createArrow(426, 'mainmenuArrow'))
-    mainmenu:sendComponent(-2, createArrow(height() - 60, 'mainmenuArrowDown'))
+    mainmenu:sendComponent(-1, createArrow(height() - 60, 'mainmenuArrowDown'))
+    mainmenu:sendComponent(-2, createArrow(426, 'mainmenuArrow'))
+    mainmenu:sendMssg('centerX: 250');
 
-    scene:createObject("Frontground"):addComponent("Image"):sendMsg([[
-        material: mainmenuFrontground; 
-        width: 1280;
-        height : 720;
-        posZ : 3
-    ]])
-
-    scene:createObject("scrollBackground"):addComponent("Image"):sendMsg([[
-        material: mainmenuBackgroundScroll; 
-        width: 1427;
-        height : 352;
-        posY: 70
-        posZ: 4
-    ]])
-
-    scene:createObject("Content"):addComponent("Image"):sendMsg([[
-        material: mainmenuContent; 
-        width: 1280;
-        height : 720;
-        posZ : 5
-    ]])
-
-    Blueprint.spawnObject(scene, "Vignette")
-
-    -- local transition = scene:createObject('Transition')
-    -- transition:addComponent('Image'):sendMssg([[
-    --     material: splashScreen; 
-    --     width: 1280;
-    --     height : 720;
-    --     posZ: 10
-    -- ]])
-    -- transition:addComponent('Transition'):sendMssg([[
-    --     type: fade
-    --     duration: 2.0
-    --     direction: true
-    -- ]])
+    --Blueprint.spawnObject(scene, "Vignette")
 
 end
 

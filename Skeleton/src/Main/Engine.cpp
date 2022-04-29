@@ -173,10 +173,6 @@ namespace LoveEngine {
 		luaL_openlibs(luastate);
 
 
-		if (luaL_dofile(luastate, "LUA/escena.lua")) {
-			std::cout << "No se encontro el archivo de lua";
-			return -1;
-		}
 
 		luabridge::getGlobalNamespace(luastate)
 			.beginClass<LoveEngine::ECS::GameObject>("GameObject")
@@ -242,6 +238,11 @@ namespace LoveEngine {
 			LoveEngine::parseScene(scene, luastate, scenestring);
 
 		};
+
+		if (luaL_dofile(luastate, "LUA/escena.lua")) {
+			std::cout << "No se encontro el archivo de lua";
+			return -1;
+		}
 
 		int count = 0;
 		auto scenecount = luabridge::getGlobal(luastate, "sceneCount");
