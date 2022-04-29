@@ -359,3 +359,4 @@ MigrationBackup/
 !Skeleton/build/Release/OGRE
 !Skeleton/dependencies/CMAKE/bin
 !Skeleton/dependencies/LuaBridgeSrc/third_party/gtest/googletest/cmake/internal_utils.cmake
+!Skeleton/projects/Main/Main.vcxproj.user
