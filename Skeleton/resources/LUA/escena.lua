@@ -157,7 +157,7 @@ function scene0() -- Main menu
         local w = 200
         local x = (width() - w) / 2;
         button:sendMsg([[
-            material: Heal_bg;
+            material: mainmenuButton;
             width: ]] .. w .. [[;
             height: 50;
             posX: ]] .. round(x) .. [[;
@@ -172,7 +172,7 @@ function scene0() -- Main menu
     mainmenu:sendComponent(-2, createArrow(426, 'mainmenuArrow'))
     mainmenu:sendMssg('centerX: 250');
 
-    --Blueprint.spawnObject(scene, "Vignette")
+    Blueprint.spawnObject(scene, "Vignette")
 
 end
 
