@@ -4,7 +4,7 @@ title Automatizacion - Proceso de compilacion de librerias
 echo Comenzando con la automatizacion!
 
 rem Variables de batch
-set WORKING_DIR=%cd%
+set CURRENT_DIR=%cd%
 set SCRIPTS_DIR=.\Skeleton\dependencies\Scripts\
 set SKELETON_SLN=.\Skeleton\Skeleton.sln
 set EXES_DIR=.\Skeleton\exes\
@@ -38,6 +38,6 @@ rem Compilacion de la solucion del motor
 msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142
 msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
 
-rem cd %WORKING_DIR%
+cd %CURRENT_DIR%
 
 echo Proceso terminado!
