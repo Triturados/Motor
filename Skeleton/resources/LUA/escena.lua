@@ -657,17 +657,37 @@ function scene3() -- Overworld
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
 
+    local luzPlayer2 = scene:createObject("Luz")
+    local compLuzPlayer2 = luzPlayer2:addComponent('Transform')
+
+    compLuzPlayer2:sendMsg([[
+        scale: 1,1,1;
+        position: 0,200,0;
+        rotation: 0,0,0;
+    ]])
+    compLuzPlayer2:sendComponent(1, tr)
+
     compLuzPlayer:sendMsg([[
         scale: 1,1,1;
-        position: 0,10,0;
+        position: 0,200,0;
         rotation: 0,0,0;
     ]])
     compLuzPlayer:sendComponent(1, tr)
 
     local compLightPlayer = luzPlayer:addComponent('Light')
     compLightPlayer:sendMssg([[
-        name: luz_point
-        type: point
+        name: directional_point;
+        type: directional;
+        direction: 0,-100,-50;
+        power: 10000;
+    ]])
+
+    local compLightPlayer2 = luzPlayer2:addComponent('Light')
+    compLightPlayer2:sendMssg([[
+        name: directional_point2;
+        type: directional;
+        direction: 0,-100,50;
+        power: 10000;
     ]])
 
     local dashParticles = scene:createObject("dashParticles")
