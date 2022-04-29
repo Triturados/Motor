@@ -118,7 +118,7 @@ namespace LoveEngine {
 
 		void Slider::handleInput()
 		{
-			Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
+			Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 			if (inputmanager->mousePressed(Input::MouseState::CLICK_L)) {
 				if (mousePos.x >= buttonPos->x &&
 					mousePos.x <= buttonPos->x + dimensions->x &&

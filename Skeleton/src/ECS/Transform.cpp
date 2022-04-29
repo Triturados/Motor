@@ -97,12 +97,12 @@ namespace LoveEngine {
 			position->y = p.y;
 			position->z = p.z;
 			//updateChildren(0, p);
-			if (parent != nullptr) {
+			/*if (parent != nullptr) {
 				
 				localPosition->x = parent->position->x - p.x;
 				localPosition->y = parent->position->y - p.y;
 				localPosition->z = parent->position->z - p.z;
-			}
+			}*/
 		}
 
 		void Transform::setLocalPos(Utilities::Vector3<float> lP)
@@ -137,11 +137,11 @@ namespace LoveEngine {
 			position->x += p.x;
 			position->y += p.y;
 			position->z += p.z;
-			if (parent != nullptr) {
+			/*if (parent != nullptr) {
 				localPosition->x += p.x;
 				localPosition->y += p.y;
 				localPosition->z += p.z;
-			}
+			}*/
 			updateChildren(0, p);
 		}
 
@@ -259,7 +259,7 @@ namespace LoveEngine {
 
 		void Transform::update()
 		{
-
+			
 		}
 
 		void Transform::receiveMessage(Utilities::StringFormatter& sf)

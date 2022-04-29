@@ -1,10 +1,13 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "SceneManager.h"
+#include "CameraComponent.h"
+
 namespace LoveEngine {
 	namespace ECS {
 
 		Scene::Scene(std::string name) {
+			mainCamera = nullptr;
 			this->name = name;
 		}
 
@@ -60,12 +63,6 @@ namespace LoveEngine {
 		}
 
 
-		void Scene::render()
-		{
-			//for (auto rend : renderers)
-			//	rend->update();
-		}
-
 		void Scene::onSceneUp()
 		{
 			for (auto gO : gObjects) {
@@ -92,6 +89,20 @@ namespace LoveEngine {
 			name = newname;
 		}
 
+		GameObject* Scene::find(std::string name)
+		{
+			for (auto go : gObjects) {
+				if (go->name == name)
+					return go;
+			}
+			return nullptr;
+		}
+
+		std::list<GameObject*> const& Scene::getGameObjects()
+		{
+			return gObjects;
+		}
+
 		GameObject* Scene::createGameObject(std::string name)
 		{
 			GameObject* gameObject = new GameObject(name);
@@ -100,5 +111,15 @@ namespace LoveEngine {
 			return gameObject;
 		}
 
+
+		void Scene::setMainCamera(Camera* cam)
+		{
+			mainCamera = cam;
+		}
+
+		Camera* Scene::getMainCamera()
+		{
+			return mainCamera;
+		}
 	}
 }

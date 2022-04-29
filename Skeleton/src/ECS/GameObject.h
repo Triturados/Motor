@@ -41,7 +41,6 @@ namespace LoveEngine {
 
 			void update();
 			void stepPhysics();
-			void preRender();
 
 			void activated();
 			void deActivated();
@@ -49,8 +48,8 @@ namespace LoveEngine {
 			void onSceneUp();
 			void onSceneDown();
 
-
 		public:
+			std::string name;
 			
 			void colliding(GameObject* other);
 			void enterCollision(GameObject* other);
@@ -58,18 +57,20 @@ namespace LoveEngine {
 
 			Scene* getCurrentScene();
 
-			std::string name;
 
 			template <typename T>
 			requires isComponent<T>
-				T* addComponent() {
+				T* addComponent(bool init = false) {
 
 				T* c = new T();
 				c->gameObject = this;
 				c->scene = scene;
 
+				if (init) {
+					c->init();
+					c->postInit();
+				}
 				componentsList.push_back(c);
-
 				return c;
 			}
 
@@ -141,11 +142,9 @@ namespace LoveEngine {
 
 			void activate(bool value);
 			void removeGameObject();
-			void removeGameObject(GameObject* gO);
-			void canvelRemove();
 			bool isEnabled();
 
-			GameObject* createGameObject(std::string name);
+			GameObject* createEmptyGameObject(std::string name);
 
 			void sendMessage(std::string mssg);
 		};

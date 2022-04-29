@@ -29,7 +29,7 @@ namespace LoveEngine {
 			virtual void receiveComponent(int, Component*) {};
 			virtual void receiveGameObject(int, GameObject*) {};
 
-			void formatString(std::string mssg);
+			Component* sendFormattedString(std::string mssg);
 
 			virtual void receiveString(std::string mssg) {};
 
@@ -41,7 +41,7 @@ namespace LoveEngine {
 			bool isActive();
 			void swapActive();
 
-		protected:
+		public:
 
 			// Puntero a escena
 			Scene* scene;
@@ -59,7 +59,6 @@ namespace LoveEngine {
 
 			virtual void update() {};
 			virtual void stepPhysics() {};
-			virtual void preRender() {};
 
 			virtual void activated() {};
 			virtual void deActivated() {};

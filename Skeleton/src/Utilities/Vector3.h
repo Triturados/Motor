@@ -33,27 +33,26 @@ namespace LoveEngine {
 				z = ter;
 			}
 
-			Vector3(const Vector3& other) {
+			Vector3(const Vector3<T>& other) {
 				x = other.x;
 				y = other.y;
 				z = other.z;
 			}
 
-
 			Vector3<T> operator+(Vector3<T> const& v2) const {
-				return Vector3(x + v2.x, y + v2.y, z + v2.z);
+				return Vector3<T>(x + v2.x, y + v2.y, z + v2.z);
 			}
 
 			Vector3<T> operator*(float f) const {
-				return Vector3(x * f, y * f, z * f);
+				return Vector3<T>(x * f, y * f, z * f);
 			}
 
 			Vector3<T> operator-(Vector3<T> const& v2) const {
-				return Vector3(x - v2.x, y - v2.y, z - v2.z);
+				return Vector3<T>(x - v2.x, y - v2.y, z - v2.z);
 			}
 
 			Vector3<T> operator+=(Vector3<T> const& v2) const {
-				return Vector3(x + v2.x, y + v2.y, z + v2.z);
+				return Vector3<T>(x + v2.x, y + v2.y, z + v2.z);
 			}
 
 			bool operator==(Vector3<T> const& v2) const {
@@ -63,6 +62,8 @@ namespace LoveEngine {
 			bool operator!=(Vector3<T> const& v2) const {
 				return x != v2.x || y != v2.y || z != v2.z;
 			}
+
+
 
 			void inverse()
 			{
@@ -189,7 +190,24 @@ namespace LoveEngine {
 				return A;
 			}
 
+			explicit operator Vector3<int>() {
+				Vector3<int> v = Vector3<int>();
+				v.x = (int)x;
+				v.y = (int)y;
+				v.z = (int)z;
+				return v;
+			}
+
+			explicit operator Vector3<float>() {
+				Vector3<float> v = Vector3<float>();
+				v.x = (float)x;
+				v.y = (float)y;
+				v.z = (float)z;
+				return v;
+			}
+
 		};
+
 
 		template <class T>
 		std::ostream& operator<<(std::ostream& os, const Vector3<T>& v)
@@ -198,4 +216,5 @@ namespace LoveEngine {
 			return os;
 		}
 	}
+
 }

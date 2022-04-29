@@ -11,7 +11,7 @@ namespace LoveEngine {
 		private:
 			Camera* maincam;
 			float rotationSpeed;
-			Utilities::Vector2<float>* mousepos;
+			Utilities::Vector2<int>* mousepos;
 		public:
 			void receiveComponent(int i, Component* c) override;
 

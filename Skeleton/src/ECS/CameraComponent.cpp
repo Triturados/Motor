@@ -12,10 +12,21 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <StringFormatter.h>
+#include <Scene.h>
+
 
 namespace LoveEngine {
 	namespace ECS {
-
+		Camera::Camera() {
+			vp = nullptr;
+			mCamera = nullptr;
+			mCameraNode = nullptr;
+			ogremanager = nullptr;
+			rot = pos = scale = nullptr;
+			tr = nullptr;
+			clipDistance = 5;
+			viewportZorder = 0;
+		}
 		Camera::~Camera()
 		{
 			if (mCameraNode != nullptr)
@@ -29,6 +40,9 @@ namespace LoveEngine {
 
 		void Camera::init()
 		{
+			if (scene->getMainCamera() == nullptr)
+				scene->setMainCamera(this);
+
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			tr = gameObject->getComponent<Transform>();
 			
@@ -38,7 +52,7 @@ namespace LoveEngine {
 			mCameraNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TransformSpace::TS_WORLD);
 
 			mCamera = ogremanager->getSceneManager()->createCamera(name);
-			mCamera->setNearClipDistance(5);
+			mCamera->setNearClipDistance(clipDistance);
 
 			mCameraNode->attachObject(mCamera);
 
@@ -104,6 +118,15 @@ namespace LoveEngine {
 				compositors.push_back(compositor);
 			else
 				ogremanager->applyCompositor(vp, compositor);
+		}
+		void Camera::setClipDistance(float val)
+		{
+			clipDistance = val;
+			mCamera->setNearClipDistance(clipDistance);
+		}
+		float Camera::getClipDistance()
+		{
+			return clipDistance;
 		}
 		void Camera::onSceneUp()
 		{

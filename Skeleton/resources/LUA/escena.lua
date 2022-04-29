@@ -112,7 +112,7 @@ function scene0() -- Main menu
     ]])
 
   
-
+    
     local bg = scene:createObject("Background");
     bg:addComponent("Image"):sendMsg([[
         material: mainmenuBackground; 
@@ -121,9 +121,10 @@ function scene0() -- Main menu
         posZ: 0
     ]])
 
+   
 
     local mainmenu = bg:addComponent("MainMenu");
-    local initialHeigh = 400
+    local initialHeigh = 430
     for i = 0, 5, 1 do
         local button = scene:createObject("Menu button " .. i):addComponent('Button');
 
@@ -135,7 +136,7 @@ function scene0() -- Main menu
             height: 50;
             posX: ]] .. round(x) .. [[;
             posY: ]] .. (initialHeigh + 60 * i) .. [[ ;
-            posZ: 1
+            posZ: 2
         ]])
 
         mainmenu:sendComponent(i, button)
@@ -144,14 +145,27 @@ function scene0() -- Main menu
     mainmenu:sendComponent(-1, createArrow(426, 'mainmenuArrow'))
     mainmenu:sendComponent(-2, createArrow(height() - 60, 'mainmenuArrowDown'))
 
-    local fg = scene:createObject("Frontground");
-    bg:addComponent("Image"):sendMsg([[
+    scene:createObject("Frontground"):addComponent("Image"):sendMsg([[
         material: mainmenuFrontground; 
         width: 1280;
         height : 720;
-        posZ : 2
+        posZ : 3
     ]])
 
+    scene:createObject("scrollBackground"):addComponent("Image"):sendMsg([[
+        material: mainmenuBackgroundScroll; 
+        width: 1427;
+        height : 352;
+        posY: 70
+        posZ: 4
+    ]])
+
+    scene:createObject("Content"):addComponent("Image"):sendMsg([[
+        material: mainmenuContent; 
+        width: 1280;
+        height : 720;
+        posZ : 5
+    ]])
 
     Blueprint.spawnObject(scene, "Vignette")
 
@@ -184,11 +198,42 @@ function createArrow(pos, mat)
         height: ]] .. w .. [[;
         posX: ]] .. x .. [[;
         posY: ]] .. pos .. [[ ;
-        posZ: 3
+        posZ: 6
     ]])
 
     -- print(mapa['objects']['name'])
     return button
+end
+
+function createCharco(name, type, x,y,z)
+    local charco = scene:createObject(name);
+
+    local tr = charco:addComponent("Transform");
+
+    tr:sendMsg([[
+        scale: 10,1,10;
+        position: ]] .. x .. [[ , ]] .. y .. [[ , ]] .. z .. [[;
+        rotation: 0,0,0;
+    ]])
+
+    charco:addComponent("Mesh"):sendMsg([[
+        meshName: Charco.mesh;
+    ]])
+
+    charco:addComponent('Rigidbody'):sendMsg([[
+        trigger: true;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 10,1,10;
+    ]])
+
+    charco:addComponent('EfectoEscenario'):sendMsg([[
+        type: ]] .. type .. [[
+    ]])
+    
+    return tr;
+
 end
 
 function scene1() -- Settings
@@ -243,7 +288,6 @@ function scene1() -- Settings
     mainmenu:sendComponent(1, exitButton);
 end
 
-
 function scene3() -- Overworld
     scene:name("Escena de Prueba")
 
@@ -270,39 +314,133 @@ function scene3() -- Overworld
     -- Slider--
     local testSlider = scene:createObject("miSlider")
     testSlider:addComponent("Transform")
-    -- testSlider:addComponent("Slider"):sendMsg([[
-    --     materialBar: Heal;
-    --     materialBarBg: Heal_bg;
-    --     materialButton: CircleButton;
-    --     width: 300;
-    --     height: 50;
-    --     posX: 100;
-    --     posY: 100;
-    -- ]])
-    -- testSlider:addComponent("SaludJugador")
+
+    -- Limites mundo --
+    --MURO1
+    local muro1 = scene:createObject("muro1")
+    local muroTr1 = muro1:addComponent("Transform")
+
+    muroTr1:sendMsg([[
+        scale: 1,10,150;
+        position: -150,10,0;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM1 = muro1:addComponent("Mesh")
+    muroM1:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro1 = muro1:addComponent('Rigidbody')
+    rBMuro1:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 1,10,150;
+    ]])
+    --MURO2
+    local muro2 = scene:createObject("muro2")
+    local muroTr2 = muro2:addComponent("Transform")
+
+    muroTr2:sendMsg([[
+        scale: 1,10,150;
+        position: 150,10,0;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM2 = muro2:addComponent("Mesh")
+    muroM2:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro2 = muro2:addComponent('Rigidbody')
+    rBMuro2:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 1,10,150;
+    ]])
+
+    --MURO3
+    local muro3 = scene:createObject("muro3")
+    local muroTr3 = muro3:addComponent("Transform")
+
+    muroTr3:sendMsg([[
+        scale: 150,10,1;
+        position: 0,10,-150;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM3 = muro3:addComponent("Mesh")
+    muroM3:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro3 = muro3:addComponent('Rigidbody')
+    rBMuro3:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 150,10,1;
+    ]])
+
+    local muro4 = scene:createObject("muro4")
+    local muroTr4 = muro4:addComponent("Transform")
+
+    muroTr4:sendMsg([[
+        scale: 150,10,1;
+        position: 0,10,150;
+        rotation: 0,0,0;
+    ]])
+
+    local muroM4 = muro4:addComponent("Mesh")
+    muroM4:sendMsg([[
+        meshName: cube.mesh;
+    ]])
+
+    local rBMuro4 = muro4:addComponent('Rigidbody')
+    rBMuro4:sendMsg([[
+        trigger: false;
+        state: kinematic;
+        mass: 0.0;
+        shape: cube; 
+        restitution: 0.9;
+        colliderScale: 150,10,1;
+    ]])
 
     -- Suelo--
     local suelo = scene:createObject("Suelo")
     local sueloTr = suelo:addComponent("Transform")
 
     -- Colocamos sus hijos
-    local charco = scene:createObject("CharcoLava")
-    local charcoTr = charco:addComponent("Transform")
-
-    charcoTr:sendMsg([[
-        scale: 10,1,10;
-        position: 30,2,30;
-        rotation: 0,0,0;
-    ]])
+    local charcoTr = createCharco("Charco1", 1, 0,2,70)
+    local charcoTr2 = createCharco("Charco2", 1, -70,2, -70)
+    local charcoTr3 =  createCharco("Charco3", 1, 70,2,-70)
 
     -- Colocamos el padre
     sueloTr:sendMsg([[
-        scale: 100,1,100;
-        position: 0,0,0;
+        scale: 4,1,4;
+        position: 0,-4,0;
         rotation: 0,0,0;
     ]])
 
     charcoTr:sendComponent(1, sueloTr)
+    charcoTr2:sendComponent(1, sueloTr)
+    charcoTr3:sendComponent(1, sueloTr)
+
+     --------------------------------------------
+    -- hijosmuros --
+    muroTr1:sendComponent(1,sueloTr)
+    muroTr2:sendComponent(1,sueloTr)
+    muroTr3:sendComponent(1,sueloTr)
+    muroTr4:sendComponent(1,sueloTr)
+    ------------------------------
     -- Volvemos a mover el escenario (si hiciese falta)
     -- sueloTr:sendMsg([[
     --     position: 0,0,0;
@@ -311,7 +449,7 @@ function scene3() -- Overworld
 
     local comp3 = suelo:addComponent("Mesh")
     comp3:sendMsg([[
-        meshName: cube.mesh;
+        meshName: arena.mesh;
     ]])
     local compRigidbodySuelo = suelo:addComponent('Rigidbody')
     compRigidbodySuelo:sendMsg([[
@@ -320,28 +458,12 @@ function scene3() -- Overworld
         mass: 0.0;
         shape: cube; 
         restitution: 0.9;
-        colliderScale: 100,1,100;
+        colliderScale: 150,3.5,150;
         ]])
 
     local material = suelo:addComponent("Material")
     material:sendMsg([[materialName: bolaroja]])
     material:sendComponent(0, comp3)
-
-    -- CHARCOS   
-    charco:addComponent("Mesh"):sendMsg([[
-        meshName: Charco.mesh;
-    ]])
-    charco:addComponent('Rigidbody'):sendMsg([[
-        trigger: true;
-        mass: 0.0;
-        shape: cube; 
-        restitution: 0.9;
-        colliderScale: 10,1,10;
-        ]])
-
-    charco:addComponent('EfectoEscenario'):sendMsg([[
-        type: 1
-    ]])
 
     -- Camara comentada por lo del splash screen
     -- local camara = scene:createObject("CamaritaGuapa")
@@ -440,7 +562,7 @@ function scene3() -- Overworld
 
     trcam:sendMsg([[
         scale: 2,2,2;
-        position: 0,80,60;
+        position: 0,40,60;
         rotation: 0,0,0;
     ]])
 
@@ -479,7 +601,7 @@ function scene3() -- Overworld
 
     player:addComponent("Animation"):sendMsg([[animName: idle]])
 
-    player:addComponent("Slider"):sendMsg([[
+    local sliderBehind = player:addComponent("Slider"):sendMsg([[
         materialBar: Heal;
         materialBarBg: Heal_bg;
         materialButton: CircleButton;
@@ -488,7 +610,20 @@ function scene3() -- Overworld
         posX: 100;
         posY: 100;
     ]])
-    player:addComponent("SaludJugador")
+
+    --local sliderOver = player:addComponent("Slider"):sendMsg([[
+    --    materialBar: Heal;
+    --    materialBarBg: Heal_bg;
+    --    materialButton: CircleButton;
+    --    width: 300;
+    --    height: 50;
+    --    posX: 100;
+    --    posY: 130;
+    --]])
+
+    local saludjugador = player:addComponent("Stamina")
+    --saludjugador:sendComponent(0, sliderOver);
+    --saludjugador:sendComponent(1, sliderBehind);
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
@@ -547,7 +682,7 @@ function scene3() -- Overworld
         horiSens: 5.5
     ]])
 
-    camFollow:sendGameObject(0, player)
+    camFollow:sendComponent(0, tr)
 
     rotarcam:sendGameObject(0, boss)
     rotarcam:sendGameObject(1, player)
@@ -705,3 +840,6 @@ function createVignette()
         material: splashScreen_vignette; width: 1280; height : 720; posZ: 20
     ]])
 end
+
+----------Objetos escena------------
+

@@ -5,7 +5,6 @@
 #include "Utils.h"
 
 namespace LoveEngine {
-
 	namespace Utilities
 	{
 		template<typename T = float>
@@ -31,12 +30,16 @@ namespace LoveEngine {
 				y = v.y;
 			}
 
+			Vector2<T> operator*(float v) {
+				return Vector2<T>(x * v, y * v);
+			}
+
 			Vector2<T> operator+(Vector2<T> const& v2) const {
-				return Vector3(x + v2.x, y + v2.y);
+				return Vector2<T>(x + v2.x, y + v2.y);
 			}
 
 			Vector2<T> operator-(Vector2<T> const& v2) const {
-				return Vector3(x - v2.x, y - v2.y);
+				return Vector2<T>(x - v2.x, y - v2.y);
 			}
 
 			bool operator==(Vector2<T> const& v2) const {
@@ -107,6 +110,7 @@ namespace LoveEngine {
 
 				return aux.magnitude();
 			}
+
 		};
 
 		template <class T>

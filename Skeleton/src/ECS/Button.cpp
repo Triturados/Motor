@@ -96,7 +96,7 @@ namespace LoveEngine {
 		void Button::handleInput()
 		{
 			if (inputmanager->justClicked()) {
-				Utilities::Vector2<float> mousePos = inputmanager->mousePosition();
+				Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
 					lambda();
 				}
@@ -122,11 +122,16 @@ namespace LoveEngine {
 			return *pos;
 		}
 
-		void Button::setDimensions(Utilities::Vector2<int> dimensions_)
+		Utilities::Vector2<int> Button::getSize()
 		{
-			button->setWidth(dimensions_.x);
-			button->setHeight(dimensions_.y);
-			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
+			return *dimensions;
+		}
+
+		void Button::setSize(Utilities::Vector2<int> newsize)
+		{
+			*dimensions = newsize;
+			button->setWidth(newsize.x);
+			button->setHeight(newsize.y);
 		}
 
 		void Button::onClick(std::function<void()> l)

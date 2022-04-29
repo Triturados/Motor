@@ -1,0 +1,24 @@
+material lodo
+{
+   technique
+   {
+      pass
+      {
+         lighting on
+
+         ambient 0.6 0.2 0.2 1
+         diffuse 0.6 0.2 0.2 1
+         emissive 0.6 0.2 0.2 1
+         scroll_anim 0.2 0.2
+
+         // Texture unit 0
+        texture_unit 
+        {
+            texture lava.png
+            scroll_anim 0.05 0.05
+            colour_op add
+        }
+      }
+   }
+}
+

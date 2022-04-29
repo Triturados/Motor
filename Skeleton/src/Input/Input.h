@@ -78,7 +78,7 @@ namespace LoveEngine {
 
 			float mouseWheel();
 
-			Utilities::Vector2<float> mousePosition();
+			Utilities::Vector2<int> mousePosition();
 			Utilities::Vector2<float> relativeMousePosition();
 			void mouseVisibility(bool inGame);
 

@@ -182,9 +182,9 @@ namespace LoveEngine {
 			return _mouseWheel;
 		}
 
-		Utilities::Vector2<float> InputManager::mousePosition()
+		Utilities::Vector2<int> InputManager::mousePosition()
 		{
-			return Utilities::Vector2<float>(mouseX, mouseY);
+			return Utilities::Vector2<int>(mouseX, mouseY);
 		}
 
 		Utilities::Vector2<float> InputManager::relativeMousePosition()
