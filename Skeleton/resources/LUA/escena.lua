@@ -601,7 +601,7 @@ function scene3() -- Overworld
 
     player:addComponent("Animation"):sendMsg([[animName: idle]])
 
-    local sliderBehind = player:addComponent("Slider"):sendMsg([[
+    local sliderBehindLive = player:addComponent("Slider"):sendMsg([[
         materialBar: Heal;
         materialBarBg: Heal_bg;
         materialButton: CircleButton;
@@ -611,19 +611,44 @@ function scene3() -- Overworld
         posY: 100;
     ]])
 
-    --local sliderOver = player:addComponent("Slider"):sendMsg([[
-    --    materialBar: Heal;
-    --    materialBarBg: Heal_bg;
-    --    materialButton: CircleButton;
-    --    width: 300;
-    --    height: 50;
-    --    posX: 100;
-    --    posY: 130;
-    --]])
+   local sliderOverLive = player:addComponent("Slider"):sendMsg([[
+        materialBar: Heal;
+        materialBarBg: Heal_bg;
+        materialButton: CircleButton;
+        width: 300;
+        height: 50;
+        posX: 100;
+        posY: 100;
+    ]])
 
-    local saludjugador = player:addComponent("Stamina")
-    --saludjugador:sendComponent(0, sliderOver);
-    --saludjugador:sendComponent(1, sliderBehind);
+    local saludjugador = player:addComponent("SaludJugador")
+    saludjugador:sendComponent(0, sliderOverLive);
+    saludjugador:sendComponent(1, sliderBehindLive);
+
+    local sliderBehindSta = player:addComponent("Slider"):sendMsg([[
+        materialBar: Heal;
+        materialBarBg: Heal_bg;
+        materialButton: CircleButton;
+        width: 300;
+        height: 50;
+        posX: 100;
+        posY: 160;
+    ]])
+
+   local sliderOverSta = player:addComponent("Slider"):sendMsg([[
+        materialBar: Heal;
+        materialBarBg: Heal_bg;
+        materialButton: CircleButton;
+        width: 300;
+        height: 50;
+        posX: 100;
+        posY: 160;
+    ]])
+
+    local staminajugador = player:addComponent("Stamina")
+    staminajugador:sendComponent(0, sliderOverSta);
+    staminajugador:sendComponent(1, sliderBehindSta);
+
 
     local luzPlayer = scene:createObject("Luz")
     local compLuzPlayer = luzPlayer:addComponent('Transform')
