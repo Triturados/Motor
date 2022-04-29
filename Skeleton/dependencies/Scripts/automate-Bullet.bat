@@ -22,8 +22,8 @@ echo Generando la build de Bullet y compilando la solucion...
             -S %BULLET_SRC% -B %BULLET_BUILD%
 
 rem Compilacion de la solucion en Debug y en Release
-msbuild %BULLET_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild %BULLET_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+msbuild %BULLET_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142
+msbuild %BULLET_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142
 
 echo Build y Compilacion de Bullet terminada.
 echo Automatizacion de Ogre terminada.

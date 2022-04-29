@@ -27,8 +27,8 @@ echo Generando la build de Ogre y compilando la solucion...
              -S %OGRE_SRC% -B %OGRE_BUILD%
 
 rem Compilacion de la solucion en Debug y en Release
-msbuild %OGRE_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild %OGRE_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+msbuild %OGRE_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142 
+msbuild %OGRE_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142
 
 echo Build y Compilacion de OGRE terminada.
 

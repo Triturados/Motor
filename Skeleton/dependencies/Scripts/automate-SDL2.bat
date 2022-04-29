@@ -9,8 +9,8 @@ set EXES_DIR=..\..\exes\
 echo Compilando la solucion de SDL2...
 
 rem Compilacion de la solucion en Debug y en Release
-msbuild %SDL2_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64
-msbuild %SDL2_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64
+msbuild %SDL2_SOL% /p:configuration=Debug /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142
+msbuild %SDL2_SOL% /p:configuration=Release /t:ALL_BUILD /p:Platform=x64 /p:PlatformToolset=v142
 
 echo Solucion de SDL2 compilada.
 echo Copiando .dlls...

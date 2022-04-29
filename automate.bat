@@ -35,8 +35,8 @@ call automate-FMOD.bat
 cd %WORKING_DIR%
 
 rem Compilacion de la solucion del motor
-msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64
-msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64
+msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142
+msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
 
 rem cd %WORKING_DIR%
 
