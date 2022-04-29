@@ -30,6 +30,7 @@ namespace LoveEngine {
 			setActive(false);
 			setLoop(false);
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
+			setActive(true);
 		}
 
 		void Animation::resetAnim()
