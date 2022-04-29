@@ -20,14 +20,14 @@ namespace LoveEngine {
 		void Animation::init()
 		{
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
-			setLoop(true);
-			setActive(true);
+			setLoop(false);
+			setActive(false);
 		}
 
 		void Animation::changeAnimation(std::string n)
 		{
 			name = n;
-
+			setActive(false);
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
 		}
 
@@ -59,7 +59,8 @@ namespace LoveEngine {
 
 		void Animation::update()
 		{
-			animState->addTime(LoveEngine::Time::getInstance()->deltaTime);
+			if (isActive)
+				animState->addTime(LoveEngine::Time::getInstance()->deltaTime);
 		}
 
 		bool Animation::playingAnimation(std::string animationName)
