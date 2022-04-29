@@ -5,6 +5,7 @@
     <ClCompile Include="..\..\src\Utilities\GameTime.cpp" />
     <ClCompile Include="..\..\src\Utilities\StringFormatter.cpp" />
     <ClCompile Include="..\..\src\Utilities\Utils.cpp" />
+    <ClCompile Include="..\..\src\Utilities\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\Error_handling.h" />
@@ -15,5 +16,6 @@
     <ClInclude Include="..\..\src\Utilities\Vector4.h" />
     <ClInclude Include="..\..\src\Utilities\StringFormatter.h" />
     <ClInclude Include="..\..\src\Utilities\Utils.h" />
+    <ClInclude Include="..\..\src\Utilities\Random.h" />
   </ItemGroup>
 </Project>

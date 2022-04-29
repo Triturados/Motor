@@ -31,6 +31,16 @@ namespace LoveEngine {
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
 		}
 
+		void Animation::resetAnim()
+		{
+			animState->setTimePosition(0);
+		}
+
+		float Animation::getDuration()
+		{
+			return animState->getLength();
+		}
+
 		Animation::~Animation()
 		{
 

@@ -36,6 +36,9 @@ namespace LoveEngine {
 			void setLoop(bool activated = true);
 			void changeAnimation(std::string n );
 
+			void resetAnim();
+			float getDuration();
+
 			void init() override;
 			void update() override;
 
