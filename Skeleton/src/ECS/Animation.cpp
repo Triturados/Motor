@@ -28,6 +28,7 @@ namespace LoveEngine {
 		{
 			name = n;
 			setActive(false);
+			setLoop(false);
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
 		}
 
