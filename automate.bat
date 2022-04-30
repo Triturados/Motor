@@ -39,6 +39,3 @@ msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64
 msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64
 
 echo Proceso terminado!
-
-pause
-exit
