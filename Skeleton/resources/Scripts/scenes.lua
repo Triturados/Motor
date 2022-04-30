@@ -8,7 +8,7 @@
 --  6: victory
 --  7: defeat
 --------------
-package.path = package.path .. ";../resources/LUA/?.lua"
+--package.path = package.path .. ";../resources/LUA/?.lua"
 
 sceneCount = 8;
 
@@ -91,8 +91,8 @@ scene2 = {
 }
 function scene0() -- Main menu
     scene:name("Main menu")
-    menu = require "menu";
-    menu:cambiarIcono()
+    -- menu = require "menu";
+    -- menu:cambiarIcono()
 
     local cam = scene:createObject("cam")
     cam:addComponent('Transform'):sendMsg([[

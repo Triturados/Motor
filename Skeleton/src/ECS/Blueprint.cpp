@@ -15,7 +15,7 @@ namespace LoveEngine {
 			luastate = luaL_newstate();
 			luaL_openlibs(luastate);
 
-			if (luaL_dofile(luastate, "LUA/blueprints.lua")) {
+			if (luaL_dofile(luastate, "Scripts/blueprints.lua")) {
 				lua_close(luastate);
 				luastate = nullptr;
 			}
