@@ -4,7 +4,7 @@ title Automatizacion - Proceso de compilacion de librerias
 echo Comenzando con la automatizacion!
 
 rem Variables de batch
-set CURRENT_DIR=%cd%
+set ENGINE_ROOT_DIR=%cd%
 set SCRIPTS_DIR=.\Skeleton\dependencies\Scripts\
 set SKELETON_SLN=.\Skeleton\Skeleton.sln
 set EXES_DIR=.\Skeleton\exes\
@@ -32,12 +32,13 @@ call automate-LuaBridge.bat
 rem Copia de dlls de FMOD
 call automate-FMOD.bat
 
-cd %WORKING_DIR%
+cd %ENGINE_ROOT_DIR%
 
 rem Compilacion de la solucion del motor
-msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64 /p:PlatformToolset=v142
-msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-
-cd %CURRENT_DIR%
+msbuild %SKELETON_SLN% /p:configuration=Debug /p:Platform=x64
+msbuild %SKELETON_SLN% /p:configuration=Release /p:Platform=x64
 
 echo Proceso terminado!
+
+pause
+exit
