@@ -12,7 +12,7 @@ namespace LoveEngine {
 
 		void Sound::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			soundRoute = "./Sounds/" + sf.getString("soundName");
+			soundRoute = "./resources/Sounds/" + sf.getString("soundName");
 
 			int channel;
 			if (sf.tryGetInt("channel", channel)) {

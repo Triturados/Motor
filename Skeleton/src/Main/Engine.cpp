@@ -239,7 +239,7 @@ namespace LoveEngine {
 
 		};
 
-		if (luaL_dofile(luastate, "Scripts/scenes.lua")) {
+		if (luaL_dofile(luastate, "./resources/Scripts/scenes.lua")) {
 			std::cout << "No se encontro el archivo de lua";
 			return -1;
 		}
