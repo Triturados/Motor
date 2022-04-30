@@ -81,10 +81,10 @@ namespace LoveEngine {
 		/// </summary>
 		void OgreRenderer::initRoot() {
 
-			mResourcesCfgPath = "./OGRE/resources.cfg";
-			mPluginsCfgPath = "./OGRE/plugins/plugins.cfg";
-			mLogPath = "./OGRE/Ogre.log";
-			mCfgPath = "./OGRE/ogre.cfg";
+			mResourcesCfgPath = "../config/resources.cfg";
+			mPluginsCfgPath = "../config/plugins/plugins.cfg";
+			mLogPath = "../config/Ogre.log";
+			mCfgPath = "../config/ogre.cfg";
 
 			if (!Ogre::FileSystemLayer::fileExists(mPluginsCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo plugins.cfg.");
 			if (!Ogre::FileSystemLayer::fileExists(mCfgPath)) throwOgreError(__LINE__, "No se ha encontrado el archivo ogre.cfg.");
