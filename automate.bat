@@ -12,9 +12,6 @@ set SKELETON_DIR=.\Skeleton\
 
 if not exist %EXES_DIR% mkdir %EXES_DIR%
 
-rem Se aniade el Ogre.log que se ignora
-type nul > .\Skeleton\resources\OGRE\Ogre.log
-
 cd %SCRIPTS_DIR%
 
 rem Comilacion y copia de dlls de OGRE
