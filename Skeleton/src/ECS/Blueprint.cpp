@@ -35,6 +35,9 @@ namespace LoveEngine {
 		}
 
 		GameObject* Blueprint::spawnObject(Scene* scene, std::string const& name, bool init) {
+			if (luastate == nullptr)
+				return nullptr;
+
 			GameObject* go = scene->createGameObject(name);
 			loadObject(go, name, true);
 			if (init) {
@@ -46,6 +49,9 @@ namespace LoveEngine {
 
 		GameObject* Blueprint::fillObject(GameObject* gameObject, std::string const& name, bool init)
 		{
+			if (luastate == nullptr)
+				return nullptr;
+
 			auto cmplist = loadObject(gameObject, name, false);
 
 			for (auto cmp : cmplist)
@@ -105,6 +111,9 @@ namespace LoveEngine {
 		}
 
 		Component* Blueprint::addComponent(GameObject* gameObject, std::string const& component, bool init) {
+
+			if (luastate == nullptr)
+				return nullptr;
 
 			auto luacmp = luabridge::getGlobal(luastate, component.c_str());
 
