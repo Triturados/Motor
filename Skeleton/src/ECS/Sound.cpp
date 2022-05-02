@@ -8,7 +8,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		
+
 
 		void Sound::receiveMessage(Utilities::StringFormatter& sf)
 		{
@@ -37,18 +37,29 @@ namespace LoveEngine {
 				}
 			}
 			bLoop = sf.getBool("loop");
+
+
+			int tempDec;
+			sf.tryGetInt("playNow", tempDec);
+			hasToPlay = (bool)tempDec;
+
+			int tempDec2;
+			sf.tryGetInt("needsPause", tempDec2);
+			needPause = (bool)tempDec2;
+			
 		}
 
 		void Sound::init()
 		{
 			soundMngr = LoveEngine::Audio::SoundManager::getInstance();
 			soundMngr->createSound(&sound, soundRoute.c_str(), channel);
-			playSound();
+			if (hasToPlay)playSound();
+			setVolume(volume);
 		}
 
 		void Sound::playSound()
 		{
-			soundMngr->playSound(sound, (int) groupChannel, bLoop);
+			soundMngr->playSound(sound, (int)groupChannel, bLoop);
 		}
 
 		void Sound::releaseSound()
@@ -66,9 +77,27 @@ namespace LoveEngine {
 			soundMngr->pauseSound(sound, pause);
 		}
 
-		void Sound::setVolume(float volume)
+		void Sound::setVolume(float v)
 		{
+			volume = v;
 			soundMngr->setVolume(sound, volume);
 		}
+
+		void Sound::onSceneUp()
+		{
+
+			if (needPause) pause(false);
+
+
+		}
+		void Sound::onSceneDown()
+		{
+			if (needPause)pause(true);
+
+		}
 	}
+
+
+
 }
+

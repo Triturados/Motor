@@ -7,6 +7,7 @@
 #include <Component.h>
 #include <string>
 #include <functional>
+#include <Sound.h>
 
 namespace Ogre {
 	class Overlay;
@@ -47,9 +48,11 @@ namespace LoveEngine {
 			bool visible = true;
 			Ogre::Overlay* overlayBar = nullptr;
 			Ogre::OverlayContainer* button = nullptr;
-			
+			Sound* buttonSoundRef;
+			Sound* musicRef;
 			bool interactable;
 			std::function<void()> lambda;
+	
 		public:
 			Button();
 			~Button();
@@ -64,6 +67,7 @@ namespace LoveEngine {
 			void setInteractable(bool);
 			bool isInteractable();
 			void handleInput();
+			
 			Utilities::Vector3<int> getPos();
 
 			Utilities::Vector2<int> getSize();

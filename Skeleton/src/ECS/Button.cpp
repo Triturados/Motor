@@ -12,6 +12,7 @@
 #include <iostream>
 #include <StringFormatter.h>
 
+
 #include <OgreOverlay.h>
 #include <OgreOverlayManager.h>
 #include <OgreOverlayContainer.h>
@@ -134,9 +135,13 @@ namespace LoveEngine {
 			button->setHeight(newsize.y);
 		}
 
+		
+
 		void Button::onClick(std::function<void()> l)
 		{
 			lambda = l;
 		}
+		
+		
 	}
 }

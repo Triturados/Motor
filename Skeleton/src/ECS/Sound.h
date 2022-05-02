@@ -28,6 +28,10 @@ namespace LoveEngine {
 			soundType groupChannel;
 			int channel = 0;
 			bool bLoop = false;
+			float volume = 0;
+			
+			bool needPause = false;
+			bool hasToPlay = false;
 		public:
 
 			void init() override;
@@ -37,6 +41,10 @@ namespace LoveEngine {
 			void setSpeed(float s);
 			void pause(bool pause);
 			void setVolume(float volume);
+			void onSceneUp() override;
+			void onSceneDown() override;
+			void setRelease(bool mode);
+
 		};
 	}
 }
