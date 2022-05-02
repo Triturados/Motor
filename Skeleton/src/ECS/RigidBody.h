@@ -93,6 +93,7 @@ namespace LoveEngine {
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
 			//inline btCollisionShape* getShape() const noexcept;
+			Utilities::Vector3<float>* getGravity() const;
 
 			//Collisiones
 			bool onCollisionEnter(RigidBody* other);

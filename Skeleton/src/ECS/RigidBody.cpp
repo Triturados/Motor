@@ -294,6 +294,11 @@ namespace LoveEngine {
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
 
+		Utilities::Vector3<float>* RigidBody::getGravity() const
+		{
+			return new Utilities::Vector3<float>(cvt(rigidBody->getGravity()));
+		}
+
 
 		bool RigidBody::onCollisionEnter(RigidBody* other)
 		{
