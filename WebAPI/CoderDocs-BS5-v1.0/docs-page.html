@@ -803,6 +803,83 @@ template <class t>
 					</section><!--//section-->
 
 
+					<section class="docs-section" id="item-3-4">
+						<h2 class="section-heading">Timer</h2>
+						<p>Clase que contiene el componente Timer de los objetos.</p>
+						<p>		#include  &ltTimer.h&gt</p>
+
+						<p>Funciones publicas disponibles desde este componente: </p>
+
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">static Timer* invoke(action funct, float time)</a></th>
+									    <td>Llama a la funcion funct al pasar time segundos, solo 1 vez.</td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">static Timer* repeat(action funct, float interval)</a></th>
+									    <td>Llama a la funcion funct al pasar los segundos de la variable interval.
+										</td>
+									</tr>
+
+								    <tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">static Timer* deleteGameObject(GameObject* gameObject, float time)</a></th>
+									    <td>Borra el objeto gameObject al pasar time segundos.  </td>
+									</tr>
+									<tr>
+									      <th class="theme-bg-light"><a class="theme-link" href="#">static Timer* deleteComponent(Component* component, float time)</a></th>
+									      <td>Borra el componente component al pasar time segundos.</td>
+									</tr>
+									
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void noloop()</a></th>
+									    <td>Hace que el temporizador deje de funcionar en bucle. </td>
+									</tr>
+									
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void loop()</a></th>
+									    <td>Hace que el temporizador pase a funcionar en bucle. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void resume()</a></th>
+									    <td>Permite al temporizador volver a funcionar. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void pause()</a></th>
+									    <td>Pausa el temporizador. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void restart()</a></th>
+									    <td>Reinicia el temporizador. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void stop()</a></th>
+									    <td>Para el temporizador. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setValue(action f, float t)</a></th>
+									    <td>Cambia la funcion que se ejecuta al acabar el temporizador por f y el tiempo que tarda el temporizador en ejecutar la orden con la variable t </td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+
+
+
+
+
+
+
+					</section><!--//section-->
 
 
 					
