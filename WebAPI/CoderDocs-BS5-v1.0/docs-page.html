@@ -656,11 +656,159 @@ template <class t>
 
 
 					<section class="docs-section" id="item-3-3">
-						<h2 class="section-heading">Section Item 3.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Transform</h2>
+						<p>Clase que contiene el componente Transform de los objetos.</p>
+						<p>		#include  &ltTransform.h&gt</p>
+
+						<p>Ejemplo de uso del componente en Lua:</p>
+
+						<div class="docs-code-block">
+							<pre class="shadow-lg rounded"><code class="json hljs">local trcam = cam:addComponent('Transform')
+	trcam:sendMsg([[
+	scale: 2,2,2;
+	position: 0,40,80;
+	rotation: 0,0,0;
+]])</code></pre>
+
+<div class="callout-block callout-block-info">
+                            
+	<div class="content">
+		<h4 class="callout-title">
+			<span class="callout-icon-holder me-1">
+				<i class="fas fa-info-circle"></i>
+			</span><!--//icon-holder-->
+			Nota
+		</h4>
+		<p> En el codigo mostrado se entiende que existe el objeto cam</p>
+	</div><!--//content-->
+</div><!--//callout-block-->
+
+						<p>Funciones publicas disponibles desde este componente: </p>
+
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+									    <td>Recibe la información enviada por Lua a traves de info, para posicion definir position, para escala definir scale y para rotacion definir rotation</td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void receiveComponent(int i, Component* c)</a></th>
+									    <td>Recibe infortmacion de Lua, si i = 0 el objeto que lleva el componente c pasa a ser hijo del objeto y si i = 1 el objeto que lleva el componente c pasa
+											a ser el padre del objeto actual.
+										</td>
+									</tr>
+
+								    <tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float>* getPos()</a></th>
+									    <td>Devuelve la posicion del objeto que tiene el componente. </td>
+									</tr>
+									<tr>
+									      <th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float>* getRot()</a></th>
+									      <td>Devuelve la rotacion del objeto que tiene el componente.</td>
+									</tr>
+									
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float>* getScale()</a></th>
+									    <td>Devuelve la escala del objeto que tiene el componente. </td>
+									</tr>
+									
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float> forward()</a></th>
+									    <td>Option 4 desc lorem ipsum dolor sit amet, consectetur adipiscing elit. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setRot(Utilities::Vector3<float> rot)</a></th>
+									    <td>La rotación del objeto pasa a ser la enviado por rot.</td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setPos(Utilities::Vector3<float> p)</a></th>
+									    <td>La posicion del objeto pasa a ser la enviada por pos. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setLocalPos(Utilities::Vector3<float> lP)</a></th>
+									    <td>La posicion local del objeto pasa a ser la enviada en lP. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setScale(Utilities::Vector3<float> s)</a></th>
+									    <td>La escala del objeto pasa a ser la enviada en el vector s. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void translate(Utilities::Vector3<float> p)</a></th>
+									    <td>Mueve la posicion del objeto segun el valor del vector enviado p. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void rotate(Utilities::Vector3<float> r)</a></th>
+									    <td>Rota el objeto en funcion del valor del vector enviado r. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void detachChildren()</a></th>
+									    <td>Elimina todos los hijos del gameobject. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void setParent(Transform* p)</a></th>
+									    <td>Convierte al gameobject que contiene el Transform p en padre del objeto. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Transform* getParent()</a></th>
+									    <td>Devuelve el Transform del padre del objeto. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Transform* getFirstParent()</a></th>
+									    <td>Devuelve el padre mas superior de todos. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void addChild(Transform* c)</a></th>
+									    <td>El objeto con Transform c pasa a ser hijo del objeto. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">Transform* getChild(int indx)</a></th>
+									    <td>Devuelve el Transform del hijo con posicon indx en el array de hijos. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void updateChildren(int mode, Utilities::Vector3<float> p)</a></th>
+									    <td>Actualiza segun p la posicion si mode = 0, la rotacion si mode = 1 y la escala si mode = 2. </td>
+									</tr>
+
+									<tr>
+									    <th class="theme-bg-light"><a class="theme-link" href="#">void rotateChild(Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng)</a></th>
+									    <td>NO ENTIENDO ESTE METODO</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+
+
+
+
+
+
+
 					</section><!--//section-->
+
+
+
+
+					
+
 			    </article><!--//docs-article-->
-			    
+
 			    <article class="docs-article" id="section-4">
 				    <header class="docs-header">
 					    <h1 class="docs-heading">Intergrations</h1>
