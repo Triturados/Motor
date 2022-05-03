@@ -3,11 +3,14 @@
 #include "Engine.h"
 #include "checkML.h"
 
+#ifdef _DEBUG
 int main()
 {
-
-#ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+#else
+#include <Windows.h>
+INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, int nCmdShow) {
 #endif
 
 	LoveEngine::Engine engine;
