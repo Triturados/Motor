@@ -54,6 +54,7 @@ namespace LoveEngine {
 			// Se vacian las teclas que fueron pulsadas justo en frame anterior
 			bool mouseclicked = false;
 			float mouseWheelValue = 0;
+			isAKeyPressed = false;
 			justPressedKeys->clear();
 
 			
@@ -62,6 +63,7 @@ namespace LoveEngine {
 				switch (sdlevent.type) {
 				case SDL_KEYDOWN:
 				{
+					isAKeyPressed = true;
 					if (lastPressedKeys->count(sdlevent.key.keysym.scancode) == 0)
 						justPressedKeys->insert(sdlevent.key.keysym.scancode);
 					lastPressedKeys->insert(sdlevent.key.keysym.scancode);
@@ -264,6 +266,11 @@ namespace LoveEngine {
 			}
 
 			return false;
+		}
+
+		bool InputManager::anyKeyPressed()
+		{
+			return isAKeyPressed;
 		}
 
 		void InputManager::throwINPUTError(int errorLine) {

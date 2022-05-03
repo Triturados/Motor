@@ -75,7 +75,7 @@ namespace LoveEngine {
 			bool isKeyPressed(InputKeys key);
 			bool keyJustPressed(InputKeys key);
 			bool mousePressed(MouseState state);
-
+			bool anyKeyPressed();
 			float mouseWheel();
 
 			Utilities::Vector2<int> mousePosition();
@@ -99,7 +99,7 @@ namespace LoveEngine {
 			int relmouseX, relmouseY;
 			MouseState mouseState;
 			bool clickJustPressed;
-
+			bool isAKeyPressed;
 			float _mouseWheel;
 			bool initialiseController();
 			SDL_GameController* sdlcontroller;
