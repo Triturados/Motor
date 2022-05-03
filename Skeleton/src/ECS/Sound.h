@@ -29,10 +29,12 @@ namespace LoveEngine {
 			int channel = 0;
 			bool bLoop = false;
 			float volume = 0;
+			float postVolume = 0;
 			
 			bool hasToPlay = false;
 			bool hasChannel = false;
 			bool needRelease = false;
+			bool oneVol = false;
 		public:
 
 			void init() override;

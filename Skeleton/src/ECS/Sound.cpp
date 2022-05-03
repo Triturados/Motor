@@ -51,7 +51,9 @@ namespace LoveEngine {
 		void Sound::playSound()
 		{
 			soundMngr->playSound(sound, (int)groupChannel, bLoop);
+
 			setVolume(volume);
+			
 			hasChannel = true;
 		}
 
@@ -79,8 +81,8 @@ namespace LoveEngine {
 
 		void Sound::onSceneUp()
 		{
-			if(hasChannel)
-			pause(false);
+			if (hasChannel)
+				pause(false);
 			if (needRelease)
 			{
 				releaseSound();
@@ -90,8 +92,8 @@ namespace LoveEngine {
 
 		void Sound::onSceneDown()
 		{
-			if(hasChannel)
-			pause(true);
+			if (hasChannel)
+				pause(true);
 			if (needRelease)
 			{
 				releaseSound();
