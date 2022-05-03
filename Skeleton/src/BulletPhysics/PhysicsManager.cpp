@@ -28,7 +28,7 @@ namespace LoveEngine {
 				assert("No se ha podido crear la instancia del PhysicsManager.", false);
 			}
 
-			init(Utilities::Vector3<float>(0, -10, 0));
+			init(Utilities::Vector3<float>(0, -60, 0));
 
 			PhysicsManager::instance_ = this;
 		}
