@@ -157,8 +157,8 @@ namespace LoveEngine {
 		}
 
 		void PhysicsManager::fixedUpdate(float deltaTime) {
-			checkCollision();
 			dynamicsWorld->stepSimulation(deltaTime);
+			checkCollision();
 		}
 
 		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/,
@@ -205,7 +205,6 @@ namespace LoveEngine {
 			startTransform.setRotation(quat);
 			btMotionState* myMotionState = new btDefaultMotionState(startTransform);
 
-			//btRigidBody::btRigidBodyConstructionInfo info(mass, new btDefaultMotionState(transform), groundShape);
 			btRigidBody* rb = new btRigidBody(mass, myMotionState, shapeBT, localInertia);
 
 			rb->forceActivationState(DISABLE_DEACTIVATION);
@@ -221,10 +220,6 @@ namespace LoveEngine {
 
 		void PhysicsManager::destroyRigidBody(btRigidBody* body) {
 
-			/*auto it = contacts.find(body);
-			if (it != contacts.end()) {
-				contacts.erase(it);
-			}*/
 			auto it = contacts.begin();
 			while (it != contacts.end()){
 				if ((*it).first == body) it = contacts.erase(it);
@@ -237,7 +232,6 @@ namespace LoveEngine {
 			delete body;
 			delete collisionshape;
 			delete motionstate;
-			//body = nullptr;
 			auto i = std::begin(bodies);
 			while (i != std::end(bodies)) {
 				if (*i == body) break;
@@ -245,8 +239,6 @@ namespace LoveEngine {
 			}
 			if (i != std::end(bodies)) bodies.erase(i);
 		}
-
-
 
 		void PhysicsManager::destroyWorld() {
 

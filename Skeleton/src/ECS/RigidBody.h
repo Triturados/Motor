@@ -21,7 +21,8 @@ namespace LoveEngine {
 		enum class RBState {
 			Kinematic = 0,
 			Static = 1,
-			Dynamic = 2
+			Dynamic = 2,
+			NONE = 3
 		};
 
 		enum class TipoForma {
@@ -35,10 +36,9 @@ namespace LoveEngine {
 
 		class lovexport RigidBody : public Component
 		{
-			//friend GameObject;
 		private:
 			float mass;
-			float restitution;
+			float restitution = 0;
 			bool trigger;
 			TipoForma shape;
 			btRigidBody* rigidBody = nullptr;
@@ -46,7 +46,7 @@ namespace LoveEngine {
 
 			Utilities::Vector3<float>* colliderScale;
 
-			RBState stateMode;
+			RBState stateMode = RBState::NONE;
 			bool collidesWithGameObject(RigidBody* go) const;
 
 			LoveEngine::Physics::Collider* col = nullptr;
@@ -64,7 +64,7 @@ namespace LoveEngine {
 
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, ForceMode mode);
 
-			//setters
+			//Setters
 			void setTransform(Transform* t_);
 
 			void setMass(float mass_);
@@ -76,6 +76,12 @@ namespace LoveEngine {
 			void setAngularVelocity(Utilities::Vector3<float> vel);
 
 			void setTrigger(bool trigger_);
+
+			void setKinematic(bool kin_);
+
+			void setStatic(bool static_);
+
+			void setDynamic(bool dinamic_);
 
 			void setRBGravity(Utilities::Vector3<float> newRBGrav);
 
@@ -89,9 +95,12 @@ namespace LoveEngine {
 
 			void setRotation(Utilities::Vector3<int> axis, float angle);
 
+			void setDamping(float r, float s);
+
 			//Getters
 			inline float getMass() const noexcept { return mass; };
 			Utilities::Vector3<float>* getVelocity() const noexcept;
+			Utilities::Vector4<float>* getRotation() const noexcept;
 			//inline btCollisionShape* getShape() const noexcept;
 			Utilities::Vector3<float>* getGravity() const;
 

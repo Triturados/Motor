@@ -6,6 +6,7 @@
     <ClCompile Include="..\..\src\Utilities\StringFormatter.cpp" />
     <ClCompile Include="..\..\src\Utilities\Utils.cpp" />
     <ClCompile Include="..\..\src\Utilities\Random.cpp" />
+    <ClCompile Include="..\..\src\Utilities\SaveData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Utilities\Error_handling.h" />
@@ -17,5 +18,6 @@
     <ClInclude Include="..\..\src\Utilities\StringFormatter.h" />
     <ClInclude Include="..\..\src\Utilities\Utils.h" />
     <ClInclude Include="..\..\src\Utilities\Random.h" />
+    <ClInclude Include="..\..\src\Utilities\SaveData.h" />
   </ItemGroup>
 </Project>

@@ -30,6 +30,8 @@ namespace LoveEngine {
 			INT, FLOAT, BOOL, CHAR, STRING, V3, V4
 		};
 
+		std::string rawMessage;
+
 		std::map<std::string, int>   i;
 		std::map<std::string, float> f;
 		std::map<std::string, bool>  b;
@@ -49,6 +51,7 @@ namespace LoveEngine {
 		StringFormatter(std::string message);
 
 		//=========== Getters ================
+		std::string getRawMessage() const;
 		int getInt(std::string name) const;
 		float getFloat(std::string name) const;
 		int getBool(std::string name) const;

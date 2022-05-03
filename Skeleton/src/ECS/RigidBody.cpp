@@ -73,7 +73,7 @@ namespace LoveEngine {
 
 		RigidBody::RigidBody() : tr(nullptr), rigidBody(nullptr)
 		{
-			stateMode = (RBState)0;
+			stateMode = (RBState)2;
 			mass = 1;
 		}
 
@@ -88,6 +88,15 @@ namespace LoveEngine {
 
 		void  RigidBody::init()
 		{
+			try
+			{
+				if (!gameObject->getComponent<Transform>())
+					throw "Error, el objeto con RB no tiene Tranform";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			tr = gameObject->getComponent<Transform>();
 			Utilities::Vector3<float> pos = *(tr->getPos());
 			Utilities::Vector3<float> rotvector3 = *(tr->getRot());
@@ -100,12 +109,17 @@ namespace LoveEngine {
 				rigidBody = Physics::PhysicsManager::getInstance()->createRB(pos, *(colliderScale), mass, (int)shape, rot);
 				setRestitution(restitution);
 				setTrigger(trigger);
-				/*btQuaternion q;
-				Utilities::Vector4<float> vRot = *tr->getRot();
-				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
-				rigidBody->setWorldTransform(btTransform(q, cvt(pos)));
-				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));*/
-				rigidBody->setDamping(0.5, 0.5);
+				//rigidBody->setDamping(0, 0);
+
+				if (stateMode == RBState::Static) {
+					setStatic(true);
+				}
+				else if (stateMode == RBState::Kinematic) {
+					setKinematic(true);
+				}
+				else if (stateMode == RBState::Dynamic) {
+					setDynamic(true);
+				}
 			}
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
@@ -130,7 +144,14 @@ namespace LoveEngine {
 
 		void RigidBody::setRotation(Utilities::Vector3<int> axis,float angle)
 		{
-	
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			btTransform& rbTr = rigidBody->getWorldTransform();
 			btVector3 _axis(axis.x, axis.y, axis.z);
 
@@ -139,6 +160,19 @@ namespace LoveEngine {
 			rot.setRotation(_axis, angle);
 				 
 			rbTr.setRotation(rot);
+		}
+
+		void RigidBody::setDamping(float r, float s)
+		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch(const char* e){
+				std::cout << e << std::endl;
+			}
+
+			rigidBody->setDamping(r, s);
 		}
 
 		void RigidBody::receiveMessage(Utilities::StringFormatter& sf)
@@ -159,11 +193,11 @@ namespace LoveEngine {
 				if (str == "kinematic") {
 					stateMode = RBState::Kinematic;
 				}
-				else if (str == "dynamic") {
-					stateMode = RBState::Dynamic;
-				}
 				else  if (str == "static") {
 					stateMode = RBState::Static;
+				}
+				else if (str == "dynamic") {
+					stateMode = RBState::Dynamic;
 				}
 			}
 		}
@@ -202,6 +236,7 @@ namespace LoveEngine {
 
 		void RigidBody::setTransform(Transform* t_)
 		{
+			
 			tr = t_;
 		}
 
@@ -230,16 +265,37 @@ namespace LoveEngine {
 
 		void RigidBody::setLinearVelocity(Utilities::Vector3<float> vel)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
 			rigidBody->setLinearVelocity(cvt(vel));
 		}
 
 		void RigidBody::setAngularVelocity(Utilities::Vector3<float> vel)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
 			rigidBody->setAngularVelocity(cvt(vel));
 		}
 
 		void RigidBody::setTrigger(bool trigger_)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
 			trigger = trigger_;
 			if (trigger) {
 				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
@@ -249,13 +305,83 @@ namespace LoveEngine {
 			}
 		}
 
+		void RigidBody::setKinematic(bool kin_)
+		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+			if (kin_) {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+			}
+			else {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & ~btCollisionObject::CF_KINEMATIC_OBJECT);
+			}
+		}
+
+
+		void RigidBody::setStatic(bool static_)
+		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
+			if (static_) {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
+			}
+			else {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & ~btCollisionObject::CF_STATIC_OBJECT);
+			}
+		}
+
+		void RigidBody::setDynamic(bool dinamic_)
+		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
+			if (dinamic_) {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_DYNAMIC_OBJECT);
+			}
+			else {
+				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & ~btCollisionObject::CF_DYNAMIC_OBJECT);
+			}
+		}
+
 		void RigidBody::setRBGravity(Utilities::Vector3<float> newRBGrav)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			rigidBody->setGravity(cvt(newRBGrav));
 		}
 
 		void RigidBody::setRestitution(float resti)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			if (enabled) {
 				//restricciones
 				if (resti < 0) {
@@ -271,6 +397,14 @@ namespace LoveEngine {
 
 		void RigidBody::setFriccion(float friction)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			if (enabled) {
 				rigidBody->setFriction(friction);
 			}
@@ -278,24 +412,67 @@ namespace LoveEngine {
 
 		void RigidBody::setLinearFactor(Utilities::Vector3<float> vect)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			rigidBody->setLinearFactor(cvt(vect));
 		}
 
-
-
 		void RigidBody::setAngularFactor(Utilities::Vector3<float> vect)
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			rigidBody->setAngularFactor(cvt(vect));
 		}
 
 		Utilities::Vector3<float>* RigidBody::getVelocity() const noexcept
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			auto vel = rigidBody->getLinearVelocity();
 			return new Utilities::Vector3<float>(vel.x(), vel.y(), vel.z());
 		}
 
+		Utilities::Vector4<float>* RigidBody::getRotation() const noexcept
+		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
+			return new Utilities::Vector4<float>(cvt(rigidBody->getWorldTransform().getRotation()));
+		}
+
 		Utilities::Vector3<float>* RigidBody::getGravity() const
 		{
+			try {
+				if (rigidBody == nullptr)
+					throw "El RB no esta inicializado";
+			}
+			catch (const char* e) {
+				std::cout << e << std::endl;
+			}
+
 			return new Utilities::Vector3<float>(cvt(rigidBody->getGravity()));
 		}
 
