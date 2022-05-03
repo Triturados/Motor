@@ -19,6 +19,7 @@ namespace LoveEngine {
 		public:
 			void init() override;
 			void postInit() override;
+			void removeSound();
 		};
 	}
 }

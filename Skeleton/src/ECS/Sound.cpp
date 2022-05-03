@@ -81,12 +81,22 @@ namespace LoveEngine {
 		{
 			if(hasChannel)
 			pause(false);
+			if (needRelease)
+			{
+				releaseSound();
+				remove();
+			}
 		}
 
 		void Sound::onSceneDown()
 		{
 			if(hasChannel)
 			pause(true);
+			if (needRelease)
+			{
+				releaseSound();
+				remove();
+			}
 		}
 	}
 

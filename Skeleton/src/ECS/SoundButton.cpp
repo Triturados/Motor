@@ -16,3 +16,10 @@ void LoveEngine::ECS::SoundButton::postInit()
 {
 	button->onClick([&]() {	sound->playSound(); });
 }
+
+void LoveEngine::ECS::SoundButton::removeSound()
+{	
+	sound->setRelease(true);
+	sound->remove();
+
+}
