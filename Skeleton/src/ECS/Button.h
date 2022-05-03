@@ -48,10 +48,8 @@ namespace LoveEngine {
 			bool visible = true;
 			Ogre::Overlay* overlayBar = nullptr;
 			Ogre::OverlayContainer* button = nullptr;
-			Sound* buttonSoundRef;
-			Sound* musicRef;
 			bool interactable;
-			std::function<void()> lambda;
+			std::vector<std::function<void()>> lambda;
 	
 		public:
 			Button();

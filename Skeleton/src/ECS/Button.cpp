@@ -90,7 +90,7 @@ namespace LoveEngine {
 		Button::Button()
 		{
 			interactable = true;
-			lambda = []() {};
+			lambda.push_back([]() {});
 		}
 
 		void Button::handleInput()
@@ -98,7 +98,7 @@ namespace LoveEngine {
 			if (inputmanager->justClicked()) {
 				Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
-					lambda();
+					for (auto l : lambda) l();
 				}
 			}
 		}
@@ -139,7 +139,7 @@ namespace LoveEngine {
 
 		void Button::onClick(std::function<void()> l)
 		{
-			lambda = l;
+			lambda.push_back(l);
 		}
 		
 		

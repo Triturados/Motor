@@ -110,6 +110,7 @@
     <ClCompile Include="..\..\src\ECS\Skybox.cpp" />
     <ClCompile Include="..\..\src\ECS\Slider.cpp" />
     <ClCompile Include="..\..\src\ECS\Sound.cpp" />
+    <ClCompile Include="..\..\src\ECS\SoundButton.cpp" />
     <ClCompile Include="..\..\src\ECS\SplashScreen.cpp" />
     <ClCompile Include="..\..\src\ECS\Text.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\..\src\ECS\Skybox.h" />
     <ClInclude Include="..\..\src\ECS\Slider.h" />
     <ClInclude Include="..\..\src\ECS\Sound.h" />
+    <ClInclude Include="..\..\src\ECS\SoundButton.h" />
     <ClInclude Include="..\..\src\ECS\SplashScreen.h" />
     <ClInclude Include="..\..\src\ECS\Text.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />

@@ -30,8 +30,8 @@ namespace LoveEngine {
 			bool bLoop = false;
 			float volume = 0;
 			
-			bool needPause = false;
 			bool hasToPlay = false;
+			bool hasChannel = false;
 		public:
 
 			void init() override;
@@ -43,7 +43,6 @@ namespace LoveEngine {
 			void setVolume(float volume);
 			void onSceneUp() override;
 			void onSceneDown() override;
-			void setRelease(bool mode);
 
 		};
 	}
