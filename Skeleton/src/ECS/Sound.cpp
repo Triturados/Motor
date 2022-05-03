@@ -37,34 +37,28 @@ namespace LoveEngine {
 				}
 			}
 			bLoop = sf.getBool("loop");
-
-
-			int tempDec;
-			sf.tryGetInt("playNow", tempDec);
-			hasToPlay = (bool)tempDec;
-
-			int tempDec2;
-			sf.tryGetInt("needsPause", tempDec2);
-			needPause = (bool)tempDec2;
-			
+			hasToPlay = sf.getBool("playNow");
+			sf.tryGetFloat("volume", volume);
 		}
 
 		void Sound::init()
 		{
 			soundMngr = LoveEngine::Audio::SoundManager::getInstance();
 			soundMngr->createSound(&sound, soundRoute.c_str(), channel);
-			if (hasToPlay)playSound();
-			setVolume(volume);
+			if (hasToPlay) playSound();
 		}
 
 		void Sound::playSound()
 		{
 			soundMngr->playSound(sound, (int)groupChannel, bLoop);
+			setVolume(volume);
+			hasChannel = true;
 		}
 
 		void Sound::releaseSound()
 		{
 			soundMngr->releaseSound(sound);
+			hasChannel = false;
 		}
 
 		void Sound::setSpeed(float s)
@@ -85,15 +79,14 @@ namespace LoveEngine {
 
 		void Sound::onSceneUp()
 		{
-
-			if (needPause) pause(false);
-
-
+			if(hasChannel)
+			pause(false);
 		}
+
 		void Sound::onSceneDown()
 		{
-			if (needPause)pause(true);
-
+			if(hasChannel)
+			pause(true);
 		}
 	}
 

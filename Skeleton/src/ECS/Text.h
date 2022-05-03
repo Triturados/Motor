@@ -4,7 +4,7 @@
 //#ifndef TEXT_H	
 //#define TEXT_H
 
-#include <Component.h>
+#include <UIElement.h>
 #include <string>
 
 namespace Ogre {
@@ -29,10 +29,9 @@ namespace LoveEngine {
 		class Transform;
 		enum class alignmentEnum { Left, Right, Center };
 
-		class lovexport Text : public ComponentTemplate<Text>
+		class lovexport Text : public Component
 		{
 		public:
-			Text() {};
 			~Text();
 
 			void init() override;

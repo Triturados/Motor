@@ -6,7 +6,7 @@
 
 namespace LoveEngine {
 	namespace ECS {
-		class lovexport Agent : public ComponentTemplate<Agent>
+		class lovexport Agent : public Component
 		{
 
         protected:

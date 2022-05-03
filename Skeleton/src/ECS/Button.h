@@ -4,10 +4,9 @@
 #ifndef BUTTON_H	
 #define BUTTON_H
 
-#include <Component.h>
 #include <string>
 #include <functional>
-#include <Sound.h>
+#include <UIElement.h>
 
 namespace Ogre {
 	class Overlay;
@@ -34,49 +33,48 @@ namespace LoveEngine {
 	namespace ECS {
 
 		class Transform;
-		class lovexport Button : public Component
+		class lovexport Button : public UIElement
 		{
 		private:
 			std::string material = "";
 
-			Utilities::Vector3<int>* pos;
-			Utilities::Vector2<int>* dimensions;
-
-			Renderer::OgreRenderer* ogremanager = nullptr;
-			Input::InputManager* inputmanager = nullptr;
+			Renderer::OgreRenderer* ogremanager;
+			Input::InputManager* inputmanager;
 
 			bool visible = true;
-			Ogre::Overlay* overlayBar = nullptr;
-			Ogre::OverlayContainer* button = nullptr;
-			Sound* buttonSoundRef;
-			Sound* musicRef;
+			Ogre::Overlay* overlayBar;
+			Ogre::OverlayContainer* button;
 			bool interactable;
-			std::function<void()> lambda;
+			std::vector<std::function<void()>> lambda;
 	
+			void handleInput();
+			
+			bool hovering;
+			bool hasMaterial;
+
+		protected:
+			void onMove() override;
+			void onResize() override;
 		public:
 			Button();
 			~Button();
 
 			void init()override;
 			void update()override;
+
 			void receiveMessage(Utilities::StringFormatter& s)override;
+			
 			void onSceneUp() override;
 			void onSceneDown() override;
+			
 			void setVisibility(bool mode = true);
 			
 			void setInteractable(bool);
 			bool isInteractable();
-			void handleInput();
-			
-			Utilities::Vector3<int> getPos();
 
-			Utilities::Vector2<int> getSize();
-			void setSize(Utilities::Vector2<int>);
+			bool isHovering();
 
-			void setPos(Utilities::Vector3<int> pos_);
 			void onClick(std::function<void()> l);
-
-			const int MAX_VALUE = 100;
 		};
 	}
 }

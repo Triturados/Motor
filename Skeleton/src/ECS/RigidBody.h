@@ -33,7 +33,7 @@ namespace LoveEngine {
 
 		class Transform;
 
-		class lovexport RigidBody : public ComponentTemplate<RigidBody>
+		class lovexport RigidBody : public Component
 		{
 			//friend GameObject;
 		private:
