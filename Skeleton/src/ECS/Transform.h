@@ -12,7 +12,7 @@ namespace LoveEngine {
 
 	namespace ECS {
 
-		class lovexport Transform : public ComponentTemplate<Transform>
+		class lovexport Transform : public Component
 		{
 		private:
 			Utilities::Vector3<float>* position;

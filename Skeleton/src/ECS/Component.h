@@ -81,59 +81,6 @@ namespace LoveEngine {
 			std::vector<GameObject*> collisions;
 		};
 
-
-		/// <summary>
-		/// Calcula el número de componente que le corresponde a una clase concreta de ComponentTemplate.
-		/// El número no tiene por qué ser el mismo en diferentes compilaciones, pero dentro de una misma ejecución
-		/// siempre será el mismo para todas las instancias de esa clase.
-		/// El número de componente solo tiene valor para generar la id, por lo que no tiene getter público.
-		/// 
-		/// Al ser un template, se compila una versión de esta función por cada tipo que lo llame.
-		/// </summary>
-		template<typename T>
-		inline static unsigned int calculateComponentNum() 
-		{
-			static unsigned int componentNum = Component::numOfComponentClasses++;;
-			return componentNum;
-		};
-
-
-		// Todas las clases Componentes deben heredar de esta clase, para que puedan tener IDs.
-		// Esta clase usa herencia inversa (Curiously Recurring Template Pattern), por lo que las clases que heredan
-		// de ella deben estar declaradas así:
-		// class NombreClase: public ComponentTemplate<NombreClase>
-		template <class T>
-		class lovexport ComponentTemplate : public Component
-		{
-		private:
-			friend T;
-
-			static unsigned int componentNum;
-			static size_t id;
-			
-			ComponentTemplate()
-			{
-				generateComponentID();
-			}
-
-			// Las ids se usan para comparar componentes y organizarlas en listas ordenadas
-			void generateComponentID()
-			{
-				componentNum = calculateComponentNum<T>();
-				std::hash<ComponentTemplate<T>> myComponentHash;
-				ComponentTemplate<T>::id = myComponentHash(componentNum);
-			}
-
-		public:
-			inline size_t getId() const { return id; };
-		};
-
-		//Inicialización de atributos estáticos
-		template<class T>
-		unsigned int ComponentTemplate<T>::componentNum = 0;
-
-		template<class T>
-		size_t ComponentTemplate<T>::id = 0;
 	}
 
 	namespace Utilities {
@@ -145,14 +92,5 @@ namespace LoveEngine {
 		class Vector2;
 	}
 }
-// Un hash genera un número muy grande determinista a partir de un valor
-template<class T>
-struct std::hash<LoveEngine::ECS::ComponentTemplate<T>>
-{
-	std::size_t operator()(unsigned int num) const noexcept 
-	{
-		std::size_t h = std::hash<int>{}(num);
-		return h ^ (h << 1);
-	}
-};
+
 
