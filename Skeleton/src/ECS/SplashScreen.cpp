@@ -21,7 +21,7 @@ namespace LoveEngine {
 			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_background; width: 1280; height : 720; posZ: 0");
 
 			gameObject = scene->createGameObject("White");
-			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_white; width: 1280; height : 720; posY: 480; posZ: 1");
+			gameObject->createComponent("Image")->sendFormattedString("material: splashScreen_white; width: 1280; height : 720; posY: 520; posZ: 1");
 			gameObject->addComponent<FillIcon>()->sendFormattedString("speed: -100.0");
 			
 			gameObject = scene->createGameObject("Content");
