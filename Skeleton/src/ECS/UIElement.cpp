@@ -1,10 +1,13 @@
 #include "UIElement.h"
 #include <StringFormatter.h>
 
+
 LoveEngine::ECS::UIElement::UIElement()
 {
 	position = Utilities::Vector3<int>();
 	dimensions = Utilities::Vector2<int>();
+
+	container = nullptr;
 }
 
 
@@ -44,5 +47,10 @@ void LoveEngine::ECS::UIElement::receiveMessage(LoveEngine::Utilities::StringFor
 	sf.tryGetInt("posX", position.x);
 	sf.tryGetInt("posY", position.y);
 	sf.tryGetInt("posZ", position.z);
+}
+
+LoveEngine::ECS::UIContainer* LoveEngine::ECS::UIElement::getContainer()
+{
+	return container;
 }
 

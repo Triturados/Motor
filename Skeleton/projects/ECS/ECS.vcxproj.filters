@@ -108,6 +108,9 @@
     <ClCompile Include="..\..\src\ECS\SoundButton.cpp">
       <Filter>Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ECS\UIContainer.cpp">
+      <Filter>Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ECS\ECS.h">
@@ -198,6 +201,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ECS\SoundButton.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ECS\UIContainer.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

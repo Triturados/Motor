@@ -20,6 +20,7 @@
 #include <Skybox.h>
 #include <Sound.h>
 #include <UIElement.h>
+#include <UIContainer.h>
 #include <SoundButton.h>
 
 namespace LoveEngine {
@@ -69,6 +70,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Sound>("Sound"));
 			registerComponent(new ComponentCreatorTemplate<UIElement>("UIElement"));
 			registerComponent(new ComponentCreatorTemplate<SoundButton>("SoundButton"));
+			registerComponent(new ComponentCreatorTemplate<UIContainer>("UIContainer"));
 		}
 
 

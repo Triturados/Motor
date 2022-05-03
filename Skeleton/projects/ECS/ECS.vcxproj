@@ -115,6 +115,7 @@
     <ClCompile Include="..\..\src\ECS\Text.cpp" />
     <ClCompile Include="..\..\src\ECS\Timer.cpp" />
     <ClCompile Include="..\..\src\ECS\Transform.cpp" />
+    <ClCompile Include="..\..\src\ECS\UIContainer.cpp" />
     <ClCompile Include="..\..\src\ECS\UIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="..\..\src\ECS\Text.h" />
     <ClInclude Include="..\..\src\ECS\Timer.h" />
     <ClInclude Include="..\..\src\ECS\Transform.h" />
+    <ClInclude Include="..\..\src\ECS\UIContainer.h" />
     <ClInclude Include="..\..\src\ECS\UIElement.h" />
   </ItemGroup>
   <ItemGroup>

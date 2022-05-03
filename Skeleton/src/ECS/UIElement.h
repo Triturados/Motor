@@ -8,6 +8,7 @@ namespace LoveEngine {
 
 	namespace ECS {
 
+		class UIContainer;
 		class lovexport UIElement : public Component {
 
 		protected:
@@ -18,6 +19,7 @@ namespace LoveEngine {
 			virtual void onResize() {};
 			virtual void onMove() {};
 
+			UIContainer* container;
 		public:
 
 			UIElement();
@@ -30,6 +32,8 @@ namespace LoveEngine {
 			void setPosition(Utilities::Vector3<int>);
 
 			void receiveMessage(Utilities::StringFormatter& sf);
+
+			UIContainer* getContainer();
 		};
 
 	}
