@@ -359,8 +359,8 @@ namespace LoveEngine {
 
 		void OgreRenderer::setWindowIcon(std::string path) {
 			//icon = IMG_LOAD(path.c_str());
+			path = "./resources/" + path;
 			icon = SDL_LoadBMP(path.c_str());
-			std::cout << (icon == nullptr ? "hola" : "chao") << "\n";
 
 			SDL_SetWindowIcon(native, icon);
 		}
