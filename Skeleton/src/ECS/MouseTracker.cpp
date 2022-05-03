@@ -9,6 +9,7 @@
 #include <Utils.h>
 #include "Random.h"
 #include "Image.h"
+#include "SaveData.h"
 
 void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 {
@@ -35,6 +36,9 @@ void LoveEngine::ECS::MouseTracker::init()
 
 void LoveEngine::ECS::MouseTracker::update()
 {
+	LoveEngine::Utilities::SaveData aaa;
+	aaa.readData("g");
+	aaa.saveData("a","sdfgdsf");
 	auto input = Input::InputManager::getInstance();
 	Utilities::Vector2 newpos = input->mousePosition();
 	input->mouseWheel();
@@ -58,4 +62,6 @@ void LoveEngine::ECS::MouseTracker::update()
 	UIElement* img = static_cast<Image*>(a);
 	img->setPosition(Utilities::Vector3(0, 0, 0));
 	*mousepos = newpos;
+
+	
 }

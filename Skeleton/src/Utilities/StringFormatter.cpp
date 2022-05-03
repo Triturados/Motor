@@ -20,6 +20,7 @@ namespace LoveEngine {
 
 		StringFormatter::StringFormatter(std::string message)
 		{
+			rawMessage = message;
 			processString(message);
 		}
 
@@ -168,6 +169,11 @@ namespace LoveEngine {
 		}
 
 		//============== Getters ======================
+
+		std::string StringFormatter::getRawMessage() const
+		{
+			return rawMessage;
+		}
 
 		int StringFormatter::getInt(std::string name) const
 		{
