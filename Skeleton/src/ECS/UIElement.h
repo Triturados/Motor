@@ -11,17 +11,18 @@ namespace LoveEngine {
 		class UIContainer;
 		class lovexport UIElement : public Component {
 
-		protected:
+		private:
+			friend UIContainer;
+			UIContainer* container;
 
+		protected:
 			Utilities::Vector3<int> position;
 			Utilities::Vector2<int> dimensions;
 
 			virtual void onResize() {};
 			virtual void onMove() {};
 
-			UIContainer* container;
 		public:
-
 			UIElement();
 			~UIElement();
 			Utilities::Vector2<int> getSize();

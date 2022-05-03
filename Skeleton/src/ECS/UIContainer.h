@@ -22,15 +22,16 @@ namespace LoveEngine {
 
 		protected:
 
-			void onMove();
-			void onResize();
+			void onMove() override;
+			void onResize() override;
 
 
 		public:
+			void postInit() override;
 
 			void addElement(UIElement* element);
 
-			void receiveComponent(int, Component*);
+			void receiveComponent(int, Component*) override;
 		};
 
 	}

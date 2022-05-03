@@ -37,8 +37,16 @@ void LoveEngine::ECS::UIContainer::onResize()
 	}
 }
 
+void LoveEngine::ECS::UIContainer::postInit()
+{
+	UIContainer::onMove();
+	UIContainer::onResize();
+}
+
 void LoveEngine::ECS::UIContainer::addElement(UIElement* element)
 {
+	element->container = this;
+
 	UIChild child = { element, element->getPosition(), element->getSize() };
 	uiElements.push_back(child);
 }
