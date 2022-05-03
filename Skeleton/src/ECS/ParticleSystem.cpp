@@ -87,6 +87,16 @@ namespace LoveEngine {
 			entityNode->roll(Ogre::Radian(rot->z), Ogre::Node::TS_WORLD);
 		}
 
+		void ParticleSystem::onSceneUp()
+		{
+			entityNode->setVisible(true);
+		}
+
+		void ParticleSystem::onSceneDown()
+		{
+			entityNode->setVisible(false);
+		}
+
 		Ogre::ParticleSystem* ParticleSystem::getPSys()
 		{
 			return pSys;

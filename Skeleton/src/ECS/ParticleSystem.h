@@ -46,6 +46,9 @@ namespace LoveEngine {
 			void init() override;
 			void update() override;
 
+			void onSceneUp() override;
+			void onSceneDown() override;
+
 			Ogre::ParticleSystem* getPSys();
 			~ParticleSystem();
 		};
