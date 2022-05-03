@@ -50,7 +50,7 @@ namespace LoveEngine {
 			Utilities::Vector3<float>* pos;
 			Utilities::Vector3<float>* scale;
 
-			int lightPower;
+			int lightPower = 10;
 
 			float inRange;
 			float outRange;

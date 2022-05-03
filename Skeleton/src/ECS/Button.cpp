@@ -88,7 +88,6 @@ namespace LoveEngine {
 			hasMaterial = false;
 			interactable = true;
 			hovering = false;
-			lambda = []() {};
 
 			ogremanager = nullptr;
 			inputmanager = nullptr;
@@ -101,7 +100,7 @@ namespace LoveEngine {
 			Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 			if ((hovering = mousePos.x >= position.x && mousePos.x <= position.x + dimensions.x && mousePos.y >= position.y && mousePos.y <= position.y + dimensions.y)) {
 				if (inputmanager->justClicked()) {
-					lambda();
+					for (auto l : lambda) l();
 				}
 			}
 		}
@@ -133,7 +132,7 @@ namespace LoveEngine {
 
 		void Button::onClick(std::function<void()> l)
 		{
-			lambda = l;
+			lambda.push_back(l);
 		}
 	}
 }

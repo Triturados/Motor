@@ -45,7 +45,7 @@ namespace LoveEngine {
 			Ogre::Overlay* overlayBar;
 			Ogre::OverlayContainer* button;
 			bool interactable;
-			std::function<void()> lambda;
+			std::vector<std::function<void()>> lambda;
 	
 			void handleInput();
 			

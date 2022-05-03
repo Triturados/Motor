@@ -20,6 +20,7 @@
 #include <Skybox.h>
 #include <Sound.h>
 #include <UIElement.h>
+#include <SoundButton.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -46,7 +47,7 @@ namespace LoveEngine {
 		void ComponentFactory::initialiseEngineComponents()
 		{
 			/*
-			*	Aquí se definen los componentes creados desde el propio motor para el desarrollo del juego
+			*	Aquï¿½ se definen los componentes creados desde el propio motor para el desarrollo del juego
 			*/
 
 			registerComponent(new ComponentCreatorTemplate<Timer>("Timer"));
@@ -67,6 +68,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Skybox>("Skybox"));
 			registerComponent(new ComponentCreatorTemplate<Sound>("Sound"));
 			registerComponent(new ComponentCreatorTemplate<UIElement>("UIElement"));
+			registerComponent(new ComponentCreatorTemplate<SoundButton>("SoundButton"));
 		}
 
 

@@ -104,8 +104,8 @@ namespace LoveEngine {
 				Utilities::Vector4<float> vRot = *tr->getRot();
 				q.getEulerZYX(vRot.x, vRot.y, vRot.z);
 				rigidBody->setWorldTransform(btTransform(q, cvt(pos)));
-				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));
-				rigidBody->setDamping(0.5, 0.5);*/
+				rigidBody->setMassProps(mass, btVector3(1.0, 1.0, 1.0));*/
+				rigidBody->setDamping(0.5, 0.5);
 			}
 			col = new LoveEngine::Physics::Collider();
 			col->setGO(gameObject);
