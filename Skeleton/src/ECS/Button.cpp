@@ -28,35 +28,28 @@ namespace LoveEngine {
 
 		void Button::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			material = sf.getString("material");
-
-			pos = new Utilities::Vector3(0, 0, 1);
-			dimensions = new Utilities::Vector2(0, 0);
-
-			sf.tryGetInt("width", dimensions->x);
-			sf.tryGetInt("height", dimensions->y);
-			sf.tryGetInt("posX", pos->x);
-			sf.tryGetInt("posY", pos->y);
-			sf.tryGetInt("posZ", pos->z);
+			UIElement::receiveMessage(sf);
+			if (sf.tryGetString("material", material)) {
+				hasMaterial = true;
+			}
 		}
 
 		void Button::init() {
-			ogremanager = Renderer::OgreRenderer::getInstance();
 			inputmanager = Input::InputManager::getInstance();
 
-			if (material == "") throw new std::exception("El material no tiene nombre");
+			if (!hasMaterial) return;
+			ogremanager = Renderer::OgreRenderer::getInstance();
 
-			button = ogremanager->createContainer(*pos, *dimensions);
+			button = ogremanager->createContainer(position, dimensions);
 			button->setMaterialName(material);
 
 			// El overlay, que gestiona la poscion, rotacion...
 			overlayBar = ogremanager->createOverlay();
 			overlayBar->add2D(button);
-			overlayBar->setZOrder(pos->z);
+			overlayBar->setZOrder(position.z);
 
 			// Mostrar el overlay
 			overlayBar->show();
-
 		}
 
 		//No se llama el update 
@@ -67,37 +60,47 @@ namespace LoveEngine {
 
 		void Button::setVisibility(bool mode)
 		{
+			if (!hasMaterial) return;
 			if (mode) overlayBar->show();
 			else overlayBar->hide();
 		}
 
 		void Button::onSceneDown()
 		{
-			overlayBar->hide();
+			if (hasMaterial)
+				overlayBar->hide();
 		}
 		void Button::onSceneUp()
 		{
-			overlayBar->show();
+			if (hasMaterial)
+				overlayBar->show();
 		}
 
 		Button::~Button()
 		{
-			ogremanager->disableOverlay(overlayBar);
-			delete pos;
-			delete dimensions;
+			if (hasMaterial)
+				ogremanager->disableOverlay(overlayBar);
+			hasMaterial = false;
 		}
 
 		Button::Button()
 		{
+			hasMaterial = false;
 			interactable = true;
+			hovering = false;
 			lambda = []() {};
+
+			ogremanager = nullptr;
+			inputmanager = nullptr;
+			overlayBar = nullptr;
+			button = nullptr;
 		}
 
 		void Button::handleInput()
 		{
-			if (inputmanager->justClicked()) {
-				Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
-				if (mousePos.x >= pos->x && mousePos.x <= pos->x + dimensions->x && mousePos.y >= pos->y && mousePos.y <= pos->y + dimensions->y) {
+			Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
+			if ((hovering = mousePos.x >= position.x && mousePos.x <= position.x + dimensions.x && mousePos.y >= position.y && mousePos.y <= position.y + dimensions.y)) {
+				if (inputmanager->justClicked()) {
 					lambda();
 				}
 			}
@@ -111,37 +114,26 @@ namespace LoveEngine {
 			return interactable;
 		}
 
-		void Button::setPos(Utilities::Vector3<int> pos_)
-		{
-			button->setPosition(pos_.x, pos_.y);
-			overlayBar->setZOrder(pos_.z);
-			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+		bool Button::isHovering() {
+			return hovering;
 		}
 
-		Utilities::Vector3<int> Button::getPos()
+		void Button::onMove()
 		{
-			return *pos;
+			button->setPosition(position.x, position.y);
+			overlayBar->setZOrder(position.z);
+			position.x = position.x; position.y = position.y; position.z = position.z;
 		}
 
-		Utilities::Vector2<int> Button::getSize()
+		void Button::onResize()
 		{
-			return *dimensions;
+			button->setWidth(dimensions.x);
+			button->setHeight(dimensions.y);
 		}
-
-		void Button::setSize(Utilities::Vector2<int> newsize)
-		{
-			*dimensions = newsize;
-			button->setWidth(newsize.x);
-			button->setHeight(newsize.y);
-		}
-
-		
 
 		void Button::onClick(std::function<void()> l)
 		{
 			lambda = l;
 		}
-		
-		
 	}
 }

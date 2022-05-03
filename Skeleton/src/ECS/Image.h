@@ -4,7 +4,7 @@
 #ifndef IMAGE_H	
 #define IMAGE_H
 
-#include <Component.h>
+#include "UIElement.h"
 #include <string>
 
 namespace Ogre {
@@ -25,33 +25,36 @@ namespace LoveEngine {
 	namespace ECS {
 
 
-		class lovexport Image : public Component
+		class lovexport Image : public UIElement
 		{
 		private:
 			std::string material = "";
 
-			Utilities::Vector3<int>* pos;
-			Utilities::Vector2<int>* dimensions;
 			Renderer::OgreRenderer* ogremanager;
 
-			float opacity = 1;
-			bool visible = true;
+			float opacity;
+			bool visible;
 			Ogre::Overlay* overlay;
 			Ogre::OverlayContainer* container;
+
+		protected:
+
+			void onResize() override;
+			void onMove() override;
+
 		public:
+			Image();
+			~Image();
 			void init()override;
 			void update()override;
+
 			void receiveMessage(Utilities::StringFormatter& s)override;
 			void onSceneUp() override;
 			void onSceneDown() override;
-			void setVisibility(bool mode = true);
-			Utilities::Vector3<int> getPos();
-			void setPos(Utilities::Vector3<int> pos_);
+			
 			float getOpacity();
 			void setOpacity(float fade);
-			Utilities::Vector2<int> getDimensions();
-			void setDimensions(Utilities::Vector2<int> dimensions_);
-			~Image();
+			void setVisibility(bool mode = true);
 		};
 	}
 }

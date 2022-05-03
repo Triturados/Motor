@@ -8,6 +8,7 @@
 #include <StringFormatter.h>
 #include <Utils.h>
 #include "Random.h"
+#include "Image.h"
 
 void LoveEngine::ECS::MouseTracker::receiveComponent(int i, Component* c)
 {
@@ -53,6 +54,8 @@ void LoveEngine::ECS::MouseTracker::update()
 		else
 			maincam->pitch(dify * rotationSpeed * dt);
 	}
-
+	void* a = mousepos;
+	UIElement* img = static_cast<Image*>(a);
+	img->setPosition(Utilities::Vector3(0, 0, 0));
 	*mousepos = newpos;
 }

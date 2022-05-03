@@ -24,19 +24,18 @@
 namespace LoveEngine {
 	namespace ECS {
 
+		Image::Image()
+		{
+			visible = true;
+			opacity = 1;
+			overlay = nullptr;
+			container = nullptr;
+			ogremanager = nullptr;
+		}
 		void Image::receiveMessage(Utilities::StringFormatter& sf)
 		{
+			UIElement::receiveMessage(sf);
 			material = sf.getString("material");
-
-			pos = new Utilities::Vector3(0, 0, 0);
-			dimensions = new Utilities::Vector2(0, 0);
-
-			sf.tryGetInt("width", dimensions->x);
-			sf.tryGetInt("height", dimensions->y);
-			sf.tryGetInt("posX", pos->x);
-			sf.tryGetInt("posY", pos->y);
-			sf.tryGetInt("posZ", pos->z);
-			
 		}
 
 		void Image::init() {
@@ -44,7 +43,7 @@ namespace LoveEngine {
 
 			if (material == "") throw new std::exception("El material no tiene nombre");
 
-			container = ogremanager->renderImage(*pos, *dimensions, material, overlay);
+			container = ogremanager->renderImage(position, dimensions, material, overlay);
 		}
 
 		//No se llama el update 
@@ -62,29 +61,16 @@ namespace LoveEngine {
 			else overlay->hide();
 		}
 
-		void Image::setPos(Utilities::Vector3<int> pos_)
+		void Image::onMove()
 		{
-			container->setPosition(pos_.x, pos_.y);
-			overlay->setZOrder(pos_.z);
-			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+			container->setPosition(position.x, position.y);
+			overlay->setZOrder(position.z);
 		}
 
-
-		Utilities::Vector3<int> Image::getPos()
+		void Image::onResize()
 		{
-			return *pos;
-		}
-
-		void Image::setDimensions(Utilities::Vector2<int> dimensions_)
-		{
-			container->setWidth(dimensions_.x);
-			container->setHeight(dimensions_.y);
-			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
-		}
-
-		Utilities::Vector2<int> Image::getDimensions()
-		{
-			return *dimensions;
+			container->setWidth(dimensions.x);
+			container->setHeight(dimensions.y);
 		}
 
 		float Image::getOpacity()
@@ -114,8 +100,6 @@ namespace LoveEngine {
 		{
 			ogremanager->disableOverlay(overlay);
 			ogremanager->disableContainer(container);
-			delete pos;
-			delete dimensions;
 		}
 	}
 }

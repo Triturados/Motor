@@ -40,9 +40,9 @@ namespace LoveEngine {
 	void FillIcon::update()
 	{
 		ypos += speed * Time::getInstance()->deltaTime;
-		auto pos = img->getPos();
+		auto pos = img->getPosition();
 		pos.y = round(ypos);
-		img->setPos(pos);
+		img->setPosition(pos);
 	}
 	void FillIcon::receiveMessage(Utilities::StringFormatter& sf)
 	{
@@ -51,6 +51,6 @@ namespace LoveEngine {
 	void FillIcon::init()
 	{
 		img = gameObject->getComponent<ECS::Image>();
-		ypos = img->getPos().y;
+		ypos = img->getPosition().y;
 	}
 }

@@ -19,6 +19,7 @@
 #include <Button.h>
 #include <Skybox.h>
 #include <Sound.h>
+#include <UIElement.h>
 
 namespace LoveEngine {
 	using namespace ECS;
@@ -65,6 +66,7 @@ namespace LoveEngine {
 			registerComponent(new ComponentCreatorTemplate<Button>("Button"));
 			registerComponent(new ComponentCreatorTemplate<Skybox>("Skybox"));
 			registerComponent(new ComponentCreatorTemplate<Sound>("Sound"));
+			registerComponent(new ComponentCreatorTemplate<UIElement>("UIElement"));
 		}
 
 
