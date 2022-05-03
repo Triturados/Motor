@@ -78,6 +78,7 @@ namespace LoveEngine {
 				break;
 			}
 
+			setPower(lightPower);
 			setVisibility(visible);
 		}
 
