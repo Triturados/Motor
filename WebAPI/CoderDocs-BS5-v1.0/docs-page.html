@@ -128,11 +128,6 @@
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-12-4">Vector4</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-5">Random</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-13"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Windows</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-1">StringFormatter</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-2">Vector2</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-12-3">Vector3</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-12-4">Vector4</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-5">Random</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-14"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Importación de archios</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-14-1">Fuentes</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-14-2">Audios</a></li>
@@ -582,6 +577,57 @@ namespace LoveEngine {
 		<p> Se aconseja poner override en los <a href="#item-3-2"> metodos predifinidos</a> por la clase componente</p>
 	</div><!--//content-->
 </div><!--//callout-block-->
+
+<p>Solo con esto ya hemos creado nuestro componente, aunque aún no hemos terminado. Si bien este componente ya es válido y completamente funcional, éste sólo podrá ser accedido a través de otros archivos de código en c++, pues aún no lo hemos declarado para las escenas creadas en Lua. Es recomendable crear un archivo donde definir todos los componentes del juego. El proceso de declaración de componentes en Lua es el siguiente:</p>
+							<p>	-Incluir la cabecera ComponentFactory.h</p>
+								<p>	-Acceder al singleton ‘ComponentFactory’</p>
+									<p>	-Crear un puntero a ‘ComponentCreatorTemplate’. Como argumento de plantilla recibirá como parámetro el componente creado, y de parámetro una cadena de texto la cual representará el nombre con el que queremos que se asocie este componente a Lua.</p>
+										<p>	-Registrar con el método ‘registerComponent’ mandando como parámetro el puntero de creación de componente creado.</p>
+
+
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">
+template <class t>
+	void newComponent(std::string name) {
+		inst->registerComponent(new ComponentCreatorTemplate<t>(name));
+	}
+}</code></pre>
+							<div class="callout-block callout-block-info">
+                            
+								<div class="content">
+									<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+										Nota
+									</h4>
+									<p> inst es el puntero al singleton de la factoría de componentes</p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+
+
+							<p>De esta forma, cada vez que queramos declarar un componente nuevo bastaría con llamar la función de la siguiente forma:</p>
+
+							<div class="docs-code-block">
+							<pre class="shadow-lg rounded"><code class="json hljs"> newComponent<ComponenteDePrueba>(“ComponenteDePrueba”);</code></pre>
+		
+								<div class="callout-block callout-block-info">
+                            
+									<div class="content">
+										<h4 class="callout-title">
+											<span class="callout-icon-holder me-1">
+												<i class="fas fa-info-circle"></i>
+											</span><!--//icon-holder-->
+											Nota
+										</h4>
+										<p> Es necesario haber incluido la cabecera del componente creado</p>
+									</div><!--//content-->
+								</div><!--//callout-block-->
+
+								<p> Este acercamiento a la hora de crear componentes nos dota de varias ventajas:</p>
+								<p>		 -Poder crear componentes auxiliares: Componentes que se usan únicamente en ciertas partes del código en c++ pero que no queremos hacer públicos desde Lua</p>
+								<p>		 -Poder tener variaciones de nombres entre c++ y Lua, en el caso de que tengamos algún nombre más técnico en el código fuente que no sea muy práctico de usar en Lua</p>
+								<p>	  	 -Poder asociar varios nombres al mismo componente. ¿No os decidís si llamar a un componente AudioManager o SoundManager? Prueba a ponerle ambos</p>
 						</section><!--//docs-intro-->
 				    </header>
 				   
@@ -704,60 +750,124 @@ namespace LoveEngine {
 					
 					<section class="docs-section" id="item-3-2">
 						<h2 class="section-heading">Componentes</h2>
-						<p>El proceso para crear los componentes es bastante sencillo.
-							Es recomendable crear tanto un archivo .h y un archivo .cpp para cada componente que se vaya a crear, aunque no es obligatorio.
-							Basta incluir la cabecera Component.h y crear una clase que herede de ‘Component’.</p>
+						<p><p>Clase basica de los componentes y de la cual todos tiene que heredar. </p>
+						<p>		#include  &ltComponent.h&gt</p></p>
 
-						<p>Solo con esto ya hemos creado nuestro componente, aunque aún no hemos terminado. Si bien este componente ya es válido y completamente funcional, éste sólo podrá ser accedido a través de otros archivos de código en c++, pues aún no lo hemos declarado para las escenas creadas en Lua. Es recomendable crear un archivo donde definir todos los componentes del juego. El proceso de declaración de componentes en Lua es el siguiente:</p>
-							<p>	-Incluir la cabecera ComponentFactory.h</p>
-								<p>	-Acceder al singleton ‘ComponentFactory’</p>
-									<p>	-Crear un puntero a ‘ComponentCreatorTemplate’. Como argumento de plantilla recibirá como parámetro el componente creado, y de parámetro una cadena de texto la cual representará el nombre con el que queremos que se asocie este componente a Lua.</p>
-										<p>	-Registrar con el método ‘registerComponent’ mandando como parámetro el puntero de creación de componente creado.</p>
+						<p>	Esta clase tiene una serie de metodos los cuales son comunes a todos los componentes y cada uno de estos se ejecuta en un momento diferente del juego.</p></p>
 
 
-							<div class="docs-code-block">
-								<pre class="shadow-lg rounded"><code class="json hljs">
-template <class t>
-	void newComponent(std::string name) {
-		inst->registerComponent(new ComponentCreatorTemplate<t>(name));
-	}
-}</code></pre>
-							<div class="callout-block callout-block-info">
-                            
-								<div class="content">
-									<h4 class="callout-title">
-										<span class="callout-icon-holder me-1">
-											<i class="fas fa-info-circle"></i>
-										</span><!--//icon-holder-->
-										Nota
-									</h4>
-									<p> inst es el puntero al singleton de la factoría de componentes</p>
-								</div><!--//content-->
-							</div><!--//callout-block-->
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
 
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void receiveComponent(int, Component*) </a></th>
+										<td> Recibe un int y un componente. </td>
+									</tr>
 
-							<p>De esta forma, cada vez que queramos declarar un componente nuevo bastaría con llamar la función de la siguiente forma:</p>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void receiveGameObject(int, GameObject*) </a></th>
+										<td> Recibe un int y un gameobject. </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> Component* sendFormattedString(std::string mssg)</a></th>
+										<td> AYUDA</td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> virtual void receiveString(std::string mssg)</a></th>
+										<td> Recibe un string.  </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void remove(Component* comp) </a></th>
+										<td> Borra el componente comp. </td>
+									</tr>
 
-							<div class="docs-code-block">
-							<pre class="shadow-lg rounded"><code class="json hljs"> newComponent<ComponenteDePrueba>(“ComponenteDePrueba”);</code></pre>
-		
-								<div class="callout-block callout-block-info">
-                            
-									<div class="content">
-										<h4 class="callout-title">
-											<span class="callout-icon-holder me-1">
-												<i class="fas fa-info-circle"></i>
-											</span><!--//icon-holder-->
-											Nota
-										</h4>
-										<p> Es necesario haber incluido la cabecera del componente creado</p>
-									</div><!--//content-->
-								</div><!--//callout-block-->
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> void remove(GameObject* go)</a></th>
+										<td> Borra el gameObject go. </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> void remove()</a></th>
+										<td> Borra el propio gameObject. </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> void setActive(bool val)</a></th>
+										<td>Si val es tru activa el componente, lo desactiva en caso contrario.  </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> bool isActive()</a></th>
+										<td> Devuelve true si el componente esta activo, false encaso contrario.  </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void swapActive() </a></th>
+										<td>Cambia el estado actual de componente, entre activo y inactivo. </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void init()  </a></th>
+										<td>Metodo que se llama al crearse el componente.  </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void postInit() </a></th>
+										<td>Metodo que se llama al crearse el componente despues del init.  </td>
+									</tr>
 
-								<p> Este acercamiento a la hora de crear componentes nos dota de varias ventajas:</p>
-								<p>		 -Poder crear componentes auxiliares: Componentes que se usan únicamente en ciertas partes del código en c++ pero que no queremos hacer públicos desde Lua</p>
-								<p>		 -Poder tener variaciones de nombres entre c++ y Lua, en el caso de que tengamos algún nombre más técnico en el código fuente que no sea muy práctico de usar en Lua</p>
-								<p>	  	 -Poder asociar varios nombres al mismo componente. ¿No os decidís si llamar a un componente AudioManager o SoundManager? Prueba a ponerle ambos</p>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void update() </a></th>
+										<td>Metodo que se llama cada vez que se actualiza el juego.  </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void stepPhysics() </a></th>
+										<td>Metodo que se llama cada vez que actualizan las fisicas del juego. </td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void activated() </a></th>
+										<td> Metodo que se llama cada vez que se activa el compoennte. </td>
+									</tr>
+									
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void deActivated() </a></th>
+										<td> Metodo que se llama cada vez que se desactiva el componente. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void onSceneUp() </a></th>
+										<td>Metodo que se llama cada vez que se activa la escena en la que esta el componente. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void onSceneDown() </a></th>
+										<td>Metodo que se llama cada vez que se sale de la escena en la que esta el componente. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void receiveMessage(Utilities::StringFormatter& sf) </a></th>
+										<td>Metodo que recibe el mensaje de LUA en forma de <a href="#item-12-1"> stringformatter</a>.  </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void colliding(GameObject* other )</a></th>
+										<td>Metodo que se llama cuando el gameobject del componente esta chocando con el gameobject other. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void enterCollision(GameObject* other) </a></th>
+										<td>Metodo que se llama cuando el gameobject del componente empieza a chocar con el gameobject other. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">virtual void exitCollision(GameObject* other) </a></th>
+										<td>Metodo que se llama cuando el gameobject del componente deja de chocar con el gameobject other. </td>
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">GameObject* createObject(std::string name) </a></th>
+										<td> Devuelve un puntero al gameobject que crea con nombre name.  </td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+
 					</section><!--//section-->
 
 
@@ -767,56 +877,7 @@ template <class t>
 							Es recomendable crear tanto un archivo .h y un archivo .cpp para cada componente que se vaya a crear, aunque no es obligatorio.
 							Basta incluir la cabecera Component.h y crear una clase que herede de ‘Component’.</p>
 
-						<p>Solo con esto ya hemos creado nuestro componente, aunque aún no hemos terminado. Si bien este componente ya es válido y completamente funcional, éste sólo podrá ser accedido a través de otros archivos de código en c++, pues aún no lo hemos declarado para las escenas creadas en Lua. Es recomendable crear un archivo donde definir todos los componentes del juego. El proceso de declaración de componentes en Lua es el siguiente:</p>
-							<p>	-Incluir la cabecera ComponentFactory.h</p>
-								<p>	-Acceder al singleton ‘ComponentFactory’</p>
-									<p>	-Crear un puntero a ‘ComponentCreatorTemplate’. Como argumento de plantilla recibirá como parámetro el componente creado, y de parámetro una cadena de texto la cual representará el nombre con el que queremos que se asocie este componente a Lua.</p>
-										<p>	-Registrar con el método ‘registerComponent’ mandando como parámetro el puntero de creación de componente creado.</p>
-
-
-							<div class="docs-code-block">
-								<pre class="shadow-lg rounded"><code class="json hljs">
-template <class t>
-	void newComponent(std::string name) {
-		inst->registerComponent(new ComponentCreatorTemplate<t>(name));
-	}
-}</code></pre>
-							<div class="callout-block callout-block-info">
-                            
-								<div class="content">
-									<h4 class="callout-title">
-										<span class="callout-icon-holder me-1">
-											<i class="fas fa-info-circle"></i>
-										</span><!--//icon-holder-->
-										Nota
-									</h4>
-									<p> inst es el puntero al singleton de la factoría de componentes</p>
-								</div><!--//content-->
-							</div><!--//callout-block-->
-
-
-							<p>De esta forma, cada vez que queramos declarar un componente nuevo bastaría con llamar la función de la siguiente forma:</p>
-
-							<div class="docs-code-block">
-							<pre class="shadow-lg rounded"><code class="json hljs"> newComponent<ComponenteDePrueba>(“ComponenteDePrueba”);</code></pre>
-		
-								<div class="callout-block callout-block-info">
-                            
-									<div class="content">
-										<h4 class="callout-title">
-											<span class="callout-icon-holder me-1">
-												<i class="fas fa-info-circle"></i>
-											</span><!--//icon-holder-->
-											Nota
-										</h4>
-										<p> Es necesario haber incluido la cabecera del componente creado</p>
-									</div><!--//content-->
-								</div><!--//callout-block-->
-
-								<p> Este acercamiento a la hora de crear componentes nos dota de varias ventajas:</p>
-								<p>		 -Poder crear componentes auxiliares: Componentes que se usan únicamente en ciertas partes del código en c++ pero que no queremos hacer públicos desde Lua</p>
-								<p>		 -Poder tener variaciones de nombres entre c++ y Lua, en el caso de que tengamos algún nombre más técnico en el código fuente que no sea muy práctico de usar en Lua</p>
-								<p>	  	 -Poder asociar varios nombres al mismo componente. ¿No os decidís si llamar a un componente AudioManager o SoundManager? Prueba a ponerle ambos</p>
+						
 					</section><!--//section-->
 			    </article><!--//docs-article-->
 
@@ -3667,27 +3728,114 @@ template <class t>
 				    <header class="docs-header">
 					    <h1 class="docs-heading">Window</h1>
 					    <section class="docs-intro">
-						    <p>Aqui estan todas las librerias que se encuentran incluidas en nuestro motor. </p>
+						    <p>Clase que se encarga de gestionar la ventana del juego. </p>
+
+							<p>Aqui estan todas las funcionesn que utiliza para llevarlo acabo.  </p>
+
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">static Window* getInstance()</a></th>
+											<td>Devuelve un puntero a la ventana.  </td>
+										
+										</tr>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setMouseState(MouseState value)</a></th>
+											<td> Establece si el raton esta libre (FREE), libre pero solo dentro de la pantalla (INSIDE_WINDOW) o quieto en el centro de la ventana(CENTER). </td>
+										
+										</tr>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void mouseVisibility(bool value)</a></th>
+											<td>Si value es true el raton se vera en la ventana y no se vera en caso contrario. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowTitle(std::string )</a></th>
+											<td> Cambia el titulo de la ventana al enviado en el string.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setFullScreen(bool screenmode)</a></th>
+											<td>Si screenmode es true la pantalla se vera en pantalla completa y en forma de ventana en caso contrario.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowSize(int x, int y)</a></th>
+											<td> Establece el tamaño de la ventana, con anchura x y tamaño y. Tiene una variante donde se le puede enviar un vector2 en vez de 2 int. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> std::string getWindowTitle()</a></th>
+											<td> Devuelve el nombre de la ventana. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> MouseState getMouseState()</a></th>
+											<td> Devuelve el estado del raton. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> bool isFullScreen(</a></th>
+											<td> Devuelve true si es pantalla completa, false en caso contrario </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> bool isMouseVisible()</a></th>
+											<td> Devuelve true si se ve el raton, false en caso contrario. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void repositionWindow(Utilities::Vector2<int> pos)</a></th>
+											<td> Cambia el tamaño de la ventana en funcion de pos. Tiene una variante donde se le pueden enviar 2 parametros int en vez de un vector2.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowIcon(std::string iconPath)</a></th>
+											<td> Establece de icono de ventana el que tiene de ruta iconPath. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void lockMouse()</a></th>
+											<td> Bloquea el movimiento del raton.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void freeMouse()</a></th>
+											<td> Desbloquea el movimiento del raton.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> Utilities::Vector2<int> getWindowSize()</a></th>
+											<td> Devuelve en un vector2 el tamaño de la ventana.  </td>
+										
+										</tr>
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+
 						</section><!--//docs-intro-->
+
+
+
+
 				    </header>
-				     <section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">OGRE</h2>
-						<p>Nuestro motor usa OGRE 3D...</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Bullet</h2>
-						<p>Para las fisicas del motor usamos bullet.......</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-3">
-							<h2 class="section-heading">SDL</h2>
-						<p>Para detectar el input del player tanto por mando como por teclado y raton usamos dls_input......</p>
-					</section><!--//section-->
-					<section class="docs-section" id="item-8-4">
-						<h2 class="section-heading">FMOD</h2>
-					<p>Los sonidos funcionan con....</p>
-				</section><!--//section-->
+				    
 			    </article><!--//docs-article-->
 
 				<article class="docs-article" id="section-14">
