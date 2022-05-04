@@ -141,6 +141,14 @@ namespace LoveEngine {
 				tr->setPos(newPos);
 				tr->setRot(newRotToVec4);
 			}
+			else {
+				btTransform traux = rigidBody->getWorldTransform();
+				traux.setOrigin(cvt(*tr->getPos()));
+				btVector3 rot = cvt(*tr->getRot());
+				btQuaternion rotq(rot.getX(), rot.getY(), rot.getZ());
+				traux.setRotation(rotq);
+				rigidBody->setWorldTransform(traux);
+			}
 		}
 
 		void RigidBody::setRotation(Utilities::Vector3<int> axis,float angle)
@@ -239,6 +247,12 @@ namespace LoveEngine {
 		{
 			
 			tr = t_;
+			btTransform traux = rigidBody->getWorldTransform();
+			traux.setOrigin(cvt(*tr->getPos()));
+			btVector3 rot = cvt(*tr->getRot());
+			btQuaternion rotq(rot.getX(), rot.getY(), rot.getZ());
+			traux.setRotation(rotq);
+			rigidBody->setWorldTransform(traux);
 		}
 
 		void RigidBody::setMass(float mass_)

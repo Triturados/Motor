@@ -65,6 +65,7 @@ namespace LoveEngine {
 			void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, ForceMode mode);
 
 			//Setters
+
 			void setTransform(Transform* t_);
 
 			void setMass(float mass_);
