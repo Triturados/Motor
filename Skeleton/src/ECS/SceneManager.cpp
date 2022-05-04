@@ -142,7 +142,8 @@ namespace LoveEngine {
 
 		void SceneManager::manageScene()
 		{
-			currentScene.top()->onSceneDown();
+			if (sceneChangeType != SceneLoad::UP)
+				currentScene.top()->onSceneDown();
 
 			switch (sceneChangeType)
 			{
@@ -154,6 +155,7 @@ namespace LoveEngine {
 				break;
 			}
 
+			case SceneLoad::UP:
 			case SceneLoad::PUSH: {
 				createScene();
 				break;
