@@ -111,9 +111,8 @@
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-5-2">Section Item 5.2</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-5-3">Section Item 5.3</a></li>
 				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-6"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>SceneManager</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Section Item 6.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Section Item 6.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-3">Section Item 6.3</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Formas de cambiar escenas</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Funciones</a></li>
 				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-7"><span class="theme-icon-holder me-2"><i class="fas fa-tablet-alt"></i></span>Blueprints</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-1">Section Item 7.1</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-2">Section Item 7.2</a></li>
@@ -122,10 +121,6 @@
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-10-1">Controles</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-10-2">Funciones</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-11"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Time</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">OGRE</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">BULLET</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">SDL</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">FMOD</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-12"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Utilidades</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-1">StringFormatter</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-2">Vector2</a></li>
@@ -2861,23 +2856,119 @@ template <class t>
 				    <header class="docs-header">
 					    <h1 class="docs-heading">SceneManager</h1>
 					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
+						    <p>Clase que se encarga de la gestion de escenas.</p>
 						</section><!--//docs-intro-->
 				    </header>
 				     <section class="docs-section" id="item-6-1">
-						<h2 class="section-heading">Section Item 6.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Formas de cambiar escenas</h2>
+						<p>Se pueden hacer distintas operaciones en funcion de lo que se quiera hacer con la escena gracias al enum SceneLoad.  </p>
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">PUSH </a></th>
+										<td>Añade a la pila de escenas la escena enviada.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> SWAP </a></th>
+										<td>Cambia la cima de la pila por la escena enviada.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">POP </a></th>
+										<td>Borra la cima de la pila.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">CLEAR </a></th>
+										<td>Vacia la pila de escenas y mete la enviada.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> EXIT</a></th>
+										<td>Vacia la pila de escenas y sale de la ejecución. </td>
+									
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+					
 					</section><!--//section-->
 					
 					<section class="docs-section" id="item-6-2">
-						<h2 class="section-heading">Section Item 6.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Funciones</h2>
+						<p>Lista de metodos que puede llamar el SceneManager. </p>
+
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">static  SceneManager* getInstance(); </a></th>
+										<td>Devuelve un puntero al SceneManager.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> ECS::Scene* getCurrentScene(</a></th>
+										<td>Devuelve un puntero a la escena actual. </td>
+									
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> int sceneCount()</a></th>
+										<td>Devuelve el numero de esscenas totales.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">int currentSceneIdx() </a></th>
+										<td> Devuelve la posicion en el array de escenas que le correponde a la escena actual. </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">std::string currentSceneName() </a></th>
+										<td>Devuelve el nombre de la escena actual.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">int stackedScenes() </a></th>
+										<td>Devuelve el numero de escenas que hay en la pila.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void changeScene(int SceneIdx, SceneLoad type) </a></th>
+										<td>En funcion del parametro type, hace una cosa u otra como ya esta explicado anteriormente.  </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void tryChangeScene() </a></th>
+										<td>Comprueba si la escena debe cambiar, y la actualiza </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> void initiliseScenes()</a></th>
+										<td>Finaliza la creación de escenas, para no añadir escenas en medio de la ejecución </td>
+									
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
 					</section><!--//section-->
 					
-					<section class="docs-section" id="item-6-3">
-							<h2 class="section-heading">Section Item 6.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
+					
 			    </article><!--//docs-article-->
 			    
 			    
@@ -3065,27 +3156,69 @@ template <class t>
 				    <header class="docs-header">
 					    <h1 class="docs-heading">Time</h1>
 					    <section class="docs-intro">
-						    <p>Aqui estan todas las librerias que se encuentran incluidas en nuestro motor. </p>
+						    <p>Clase que se encarga de gestionar el tiempo en el motor y tienes accesibles diversos metodos y variables.</p>
+
+
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">static Time* getInstance() </a></th>
+											<td> Metodo que devuelve un puntero al tiempo </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> float calculateFrameRate()</a></th>
+											<td>Metodo que devuelve el numero de frames por segundo. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">deltaTime </a></th>
+											<td>float que corresponde al Deltatime del motor. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">unscaledTime </a></th>
+											<td>AYUDA </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">physicsTime </a></th>
+											<td>AYUDA </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">timeSinceStart </a></th>
+											<td>Tiempo desde que se empezo a ejecutar el juego </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">timeScale </a></th>
+											<td>AYUDA </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">frameCount </a></th>
+											<td> Numero de frames desde que se empezo a ejecutar el motor. </td>
+										
+										</tr>
+	
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+
+
 						</section><!--//docs-intro-->
 				    </header>
-				     <section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">OGRE</h2>
-						<p>Nuestro motor usa OGRE 3D...</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Bullet</h2>
-						<p>Para las fisicas del motor usamos bullet.......</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-3">
-							<h2 class="section-heading">SDL</h2>
-						<p>Para detectar el input del player tanto por mando como por teclado y raton usamos dls_input......</p>
-					</section><!--//section-->
-					<section class="docs-section" id="item-8-4">
-						<h2 class="section-heading">FMOD</h2>
-					<p>Los sonidos funcionan con....</p>
-				</section><!--//section-->
+				     
 			    </article><!--//docs-article-->
 
 
