@@ -48,7 +48,7 @@ namespace LoveEngine {
 
 			RBState stateMode = RBState::NONE;
 			bool collidesWithGameObject(RigidBody* go) const;
-
+			bool isKinematic = false;
 			LoveEngine::Physics::Collider* col = nullptr;
 
 		public:

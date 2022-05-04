@@ -137,9 +137,10 @@ namespace LoveEngine {
 			Utilities::Vector3<float> newRot = cvt(rot);
 
 			Utilities::Vector3<float> newRotToVec4(newRot.x, newRot.y, newRot.z);
-
-			tr->setPos(newPos);
-			tr->setRot(newRotToVec4);
+			if (!isKinematic) {
+				tr->setPos(newPos);
+				tr->setRot(newRotToVec4);
+			}
 		}
 
 		void RigidBody::setRotation(Utilities::Vector3<int> axis,float angle)
@@ -316,9 +317,11 @@ namespace LoveEngine {
 			}
 			if (kin_) {
 				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+				isKinematic = true;
 			}
 			else {
 				rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() & ~btCollisionObject::CF_KINEMATIC_OBJECT);
+				isKinematic = false;
 			}
 		}
 
