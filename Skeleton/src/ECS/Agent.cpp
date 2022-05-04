@@ -59,7 +59,7 @@ namespace LoveEngine {
         Agent::Action::Action(Agent* agent_, float priority_)
         {
             agent = agent_;
-            priority = priority;
+            priority = priority_;
         }
 
         // Si la acción no se ha completado, tiene que seguir a pesar de las prioridades actuales
