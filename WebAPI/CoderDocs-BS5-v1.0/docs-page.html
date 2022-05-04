@@ -119,10 +119,8 @@
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-2">Section Item 7.2</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-3">Section Item 7.3</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-10"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Input</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">OGRE</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">BULLET</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">SDL</a></li>
-					<li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">FMOD</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-10-1">Controles</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-10-2">Funciones</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-11"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Time</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">OGRE</a></li>
 				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">BULLET</a></li>
@@ -2905,60 +2903,162 @@ template <class t>
 						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
 					</section><!--//section-->
 			    </article><!--//docs-article-->
-			    
-			    
-			    <article class="docs-article" id="section-10">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">Librerías</h1>
-					    <section class="docs-intro">
-						    <p>Aqui estan todas las librerias que se encuentran incluidas en nuestro motor. </p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">OGRE</h2>
-						<p>Nuestro motor usa OGRE 3D...</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Bullet</h2>
-						<p>Para las fisicas del motor usamos bullet.......</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-3">
-							<h2 class="section-heading">SDL</h2>
-						<p>Para detectar el input del player tanto por mando como por teclado y raton usamos dls_input......</p>
-					</section><!--//section-->
-					<section class="docs-section" id="item-8-4">
-						<h2 class="section-heading">FMOD</h2>
-					<p>Los sonidos funcionan con....</p>
-				</section><!--//section-->
-			    </article><!--//docs-article-->
 
 				<article class="docs-article" id="section-10">
 				    <header class="docs-header">
 					    <h1 class="docs-heading">Input</h1>
 					    <section class="docs-intro">
-						    <p>Aqui estan todas las librerias que se encuentran incluidas en nuestro motor. </p>
+						    <p>Clase que usamos para manejar el input en el motor.</p>
 						</section><!--//docs-intro-->
 				    </header>
-				     <section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">OGRE</h2>
-						<p>Nuestro motor usa OGRE 3D...</p>
+				     <section class="docs-section" id="item-10-1">
+						<h2 class="section-heading">Teclas y Botones</h2>
+						<p>Aqui estan los enum que permiten identificar las diferentes teclas y botones que se usan. </p>
+
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">InputKeys</a></th>
+										<td>A = 4, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+											RIGHT = 80, LEFT, DOWN, UP, TAB = 43, CTRL = 224, SHIFT = 225,
+											SPACE = 44, ESCAPE = 41, ENTER = 88 </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">MouseState</a></th>
+										<td> NONE, CLICK_L, CLICK_R, CLICK_M</td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">ControllerButton</a></th>
+										<td> A, B, X, Y, BACK, GUIDE, START, 
+											LSTICK, RSTICK, LS, RS,
+											DPAD_UP, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT,
+											LB, LT, RB, RT</td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">psControllerButton</a></th>
+										<td>X, CIRCLE, TRIANGLE, SQUARE, BACK, GUIDE, START,
+											LSTICK, RSTICK, LS, RS,
+											DPAD_UP, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT,
+											LB, LT, RB, RT </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">ControllerButtonState</a></th>
+										<td>UP, DOWN, HOLD, NONE </td>
+									
+									</tr>
+
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+						<div class="callout-block callout-block-info">
+								
+							<div class="content">
+									<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<i class="fas fa-info-circle"></i>
+									</span><!--//icon-holder-->
+										Nota
+									</h4>
+								<p>Las teclas de mando corresponden a un mando de XBOX. </p>
+							</div><!--//content-->
+						</div><!--//callout-block-->
+
 					</section><!--//section-->
 					
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Bullet</h2>
-						<p>Para las fisicas del motor usamos bullet.......</p>
+					<section class="docs-section" id="item-10-2">
+						<h2 class="section-heading">Funciones</h2>
+						<p>Aqui tienes una lista de metodos que comprueban el input. </p>
 					</section><!--//section-->
 					
-					<section class="docs-section" id="item-8-3">
-							<h2 class="section-heading">SDL</h2>
-						<p>Para detectar el input del player tanto por mando como por teclado y raton usamos dls_input......</p>
-					</section><!--//section-->
-					<section class="docs-section" id="item-8-4">
-						<h2 class="section-heading">FMOD</h2>
-					<p>Los sonidos funcionan con....</p>
-				</section><!--//section-->
+					<div class="table-responsive my-4">
+						<table class="table table-bordered">
+							<tbody>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool isKeyPressed(InputKeys key)</a></th>
+									<td>Devuelve true si la key esta siendo pulsada, false en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> bool keyJustPressed(InputKeys key)</a></th>
+									<td> Devuelve true si la key se ha pulsado una vez, false en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> bool mousePressed(MouseState state)</a></th>
+									<td> Devuelve true si el estado del raton correponde con state, false en caso contrario. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool anyKeyPressed() </a></th>
+									<td> Devuelve true sio se esta pulsando alguna tecla, false en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> float mouseWheel()</a></th>
+									<td>Devuelve el valor del movimiento de la rueda del raton.  </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector2<int> mousePosition() </a></th>
+									<td>Devuelve en eun vector2 la posición del raton en la pantalla.  </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> Utilities::Vector2<float> relativeMousePosition()</a></th>
+									<td>Devuelve las posiciones que se ha movido el raton respecto a la ultima actualizacion. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">void mouseVisibility(bool inGame) </a></th>
+									<td> Cambia la visibilidad del raton, si inGame es true se deja de ver y se ve en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool justClicked() </a></th>
+									<td>Devuelve true si se acaba de clickar, false en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool controllerConected() </a></th>
+									<td>Devuelve true si el mando esta conectado, false en caso contrario. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> bool isControllerButtonPressed(ControllerButton b)</a></th>
+									<td> Devuelve true si se esta pulsando de alguna forma el boton del mando b, false en caso contrario </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#"> bool isControllerButtonState(ControllerButtonState s)</a></th>
+									<td> Devuelve true si el boton que se esta pulsando lo hace de la forma s, false en caso contrario. </td>
+								
+								</tr>
+
+							</tbody>
+						</table>
+					</div><!--//table-responsive-->
+
+					
 			    </article><!--//docs-article-->
 
 				<article class="docs-article" id="section-11">
