@@ -31,16 +31,16 @@ namespace LoveEngine {
 			materialBarBg = sf.getString("materialBarBg");
 			materialButton = sf.getString("materialButton");
 
-			pos = new Utilities::Vector3(0, 0, 1);
-			buttonPos = new Utilities::Vector3(0, 0, 1);
-			dimensions = new Utilities::Vector2(0, 0);
-			buttonDimensions = new Utilities::Vector2(0, 0);
+			pos = Utilities::Vector3(0, 0, 1);
+			buttonPos = Utilities::Vector3(0, 0, 1);
+			dimensions = Utilities::Vector2(0, 0);
+			buttonDimensions = Utilities::Vector2(0, 0);
 
-			sf.tryGetInt("width", dimensions->x);
-			sf.tryGetInt("height", dimensions->y);
-			sf.tryGetInt("posX", pos->x);
-			sf.tryGetInt("posY", pos->y);
-			sf.tryGetInt("posZ", pos->z);
+			sf.tryGetInt("width", dimensions.x);
+			sf.tryGetInt("height", dimensions.y);
+			sf.tryGetInt("posX", pos.x);
+			sf.tryGetInt("posY", pos.y);
+			sf.tryGetInt("posZ", pos.z);
 		}
 
 		void Slider::init() {
@@ -51,15 +51,15 @@ namespace LoveEngine {
 			if (materialButton == "") throw new std::exception("El material no tiene nombre");
 
 			// Containers con cada elemento
-			inferiorBar = ogremanager->createContainer(*pos,* dimensions);
+			inferiorBar = ogremanager->createContainer(pos, dimensions);
 			inferiorBar->setMaterialName(materialBarBg);
-			superiorBar = ogremanager->createContainer((*pos) + Utilities::Vector3<int>(0, 0, 1), *dimensions);
+			superiorBar = ogremanager->createContainer((pos) + Utilities::Vector3<int>(0, 0, 1), dimensions);
 			superiorBar->setMaterialName(materialBar);
-			buttonPos->x = pos->x + dimensions->x - buttonWidth / 2;
-			buttonPos->y = pos->y + dimensions->y / 2 - buttonWidth / 2;
-			buttonPos->z = pos->z;
-			buttonDimensions->x = buttonDimensions->y = buttonWidth;
-			button = ogremanager->createContainer(*buttonPos, *buttonDimensions);
+			buttonPos.x = pos.x + dimensions.x - buttonWidth / 2;
+			buttonPos.y = pos.y + dimensions.y / 2 - buttonWidth / 2;
+			buttonPos.z = pos.z;
+			buttonDimensions.x = buttonDimensions.y = buttonWidth;
+			button = ogremanager->createContainer(buttonPos, buttonDimensions);
 			button->setMaterialName(materialButton);
 
 			// El overlay, que gestiona la poscion, rotacion...
@@ -68,6 +68,8 @@ namespace LoveEngine {
 			overlayBar->add2D(superiorBar);
 			overlayBar->add2D(button);
 
+
+			overlayBar->setZOrder(pos.z);
 			// Mostrar el overlay
 			overlayBar->show();
 			//setDetectInput(false);
@@ -109,7 +111,7 @@ namespace LoveEngine {
 
 		inline int Slider::getMaxBarWidth()
 		{
-			return dimensions->x;
+			return dimensions.x;
 		}
 
 		void Slider::setProgress(int progress)
@@ -118,8 +120,8 @@ namespace LoveEngine {
 			if (progress > MAX_VALUE) progress = MAX_VALUE;
 			barProgress = progress;
 
-			barWidth = barProgress * dimensions->x / MAX_VALUE;
-			button->setPosition((float)pos->x + barWidth - buttonWidth / 2, (float)pos->y + dimensions->y / 2 - buttonWidth / 2);
+			barWidth = barProgress * dimensions.x / MAX_VALUE;
+			button->setPosition((float)pos.x + barWidth - buttonWidth / 2, (float)pos.y + dimensions.y / 2 - buttonWidth / 2);
 			superiorBar->setWidth(barWidth);
 		}
 
@@ -127,10 +129,10 @@ namespace LoveEngine {
 		{
 			Utilities::Vector2<int> mousePos = inputmanager->mousePosition();
 			if (inputmanager->mousePressed(Input::MouseState::CLICK_L)) {
-				if (mousePos.x >= buttonPos->x &&
-					mousePos.x <= buttonPos->x + dimensions->x &&
-					mousePos.y >= buttonPos->y &&
-					mousePos.y <= buttonPos->y + dimensions->y
+				if (mousePos.x >= buttonPos.x &&
+					mousePos.x <= buttonPos.x + dimensions.x &&
+					mousePos.y >= buttonPos.y &&
+					mousePos.y <= buttonPos.y + dimensions.y
 					) {
 					tracking = true;
 				}
@@ -140,15 +142,15 @@ namespace LoveEngine {
 			if (tracking) {
 				//std::cout << "SLIDER SLIDEA progreso:  ";
 				float newXpos = mousePos.x;
-				if (newXpos < pos->x) newXpos = pos->x;
-				if (newXpos > pos->x + dimensions->x - buttonWidth / 2) newXpos = pos->x + dimensions->x - buttonWidth / 2;
-				button->setPosition(newXpos, pos->y);
-				barWidth = mousePos.x - pos->x;
+				if (newXpos < pos.x) newXpos = pos.x;
+				if (newXpos > pos.x + dimensions.x - buttonWidth / 2) newXpos = pos.x + dimensions.x - buttonWidth / 2;
+				button->setPosition(newXpos, pos.y);
+				barWidth = mousePos.x - pos.x;
 				if (barWidth < 0) barWidth = 0;
-				if (barWidth > dimensions->x) barWidth = dimensions->x;
+				if (barWidth > dimensions.x) barWidth = dimensions.x;
 				superiorBar->setWidth(barWidth);
 
-				barProgress = barWidth * MAX_VALUE / dimensions->x;
+				barProgress = barWidth * MAX_VALUE / dimensions.x;
 				//std::cout << barProgress << std::endl;
 			}
 		}
@@ -160,29 +162,29 @@ namespace LoveEngine {
 		}
 		void Slider::setPos(Utilities::Vector3<int> pos_)
 		{
-			pos->x = pos_.x; pos->y = pos_.y; pos->z = pos_.z;
+			pos.x = pos_.x; pos.y = pos_.y; pos.z = pos_.z;
 			superiorBar->setPosition(pos_.x, pos_.y);
 			inferiorBar->setPosition(pos_.x, pos_.y);
-			float buttonNewPos = barProgress * dimensions->x / MAX_VALUE;
-			buttonPos->x = pos->x + buttonNewPos - buttonWidth / 2;
-			buttonPos->y = pos->y + dimensions->y / 2 - buttonDimensions->x / 2;
-			buttonPos->z = pos->z;
-			button->setPosition(buttonPos->x, buttonPos->y);
+			float buttonNewPos = barProgress * dimensions.x / MAX_VALUE;
+			buttonPos.x = pos.x + buttonNewPos - buttonWidth / 2;
+			buttonPos.y = pos.y + dimensions.y / 2 - buttonDimensions.x / 2;
+			buttonPos.z = pos.z;
+			button->setPosition(buttonPos.x, buttonPos.y);
 
-			overlayBar->setZOrder(pos->z);
+			overlayBar->setZOrder(pos.z);
 		}
 
 		void Slider::setDimensions(Utilities::Vector2<int> dimensions_)
 		{
-			dimensions->x = dimensions_.x; dimensions->y = dimensions_.y;
+			dimensions.x = dimensions_.x; dimensions.y = dimensions_.y;
 			superiorBar->setWidth(dimensions_.x);
 			superiorBar->setHeight(dimensions_.y);
 			inferiorBar->setWidth(dimensions_.x);
 			inferiorBar->setHeight(dimensions_.y);
-			buttonPos->x = (float)pos->x + dimensions->x - buttonWidth / 2;
-			buttonPos->y = (float)pos->y + dimensions->y / 2 - buttonDimensions->x / 2;
-			buttonPos->z = pos->z;
-			button->setPosition(buttonPos->x, buttonPos->y);
+			buttonPos.x = (float)pos.x + dimensions.x - buttonWidth / 2;
+			buttonPos.y = (float)pos.y + dimensions.y / 2 - buttonDimensions.x / 2;
+			buttonPos.z = pos.z;
+			button->setPosition(buttonPos.x, buttonPos.y);
 		}
 	}
 }
