@@ -85,6 +85,12 @@ namespace LoveEngine {
 			else overlayBar->hide();
 		}
 
+		void Slider::setVisibilityBg(bool mode)
+		{
+			if (mode) inferiorBar->show();
+			else inferiorBar->hide();
+		}
+
 		void Slider::onSceneDown()
 		{
 			overlayBar->hide();

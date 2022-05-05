@@ -66,6 +66,7 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
+			void setVisibilityBg(bool mode = true);
 
 			inline int getProgress() { return barProgress; }
 			inline int getBarWidth() { return barWidth; }
