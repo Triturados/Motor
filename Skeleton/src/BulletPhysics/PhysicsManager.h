@@ -55,7 +55,6 @@ namespace LoveEngine {
 			std::vector<btRigidBody*> bodies;
 
 			void destroyWorld();
-			void checkCollision();
 			std::map<const btCollisionObject*, std::pair<Collider*, Collider*>> contacts;
 
 			//Errores

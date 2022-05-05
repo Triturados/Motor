@@ -38,68 +38,57 @@ namespace LoveEngine {
 			destroy();
 		}
 
-		void PhysicsManager::checkCollision() {
+		void FunctCallbackEnter(btPersistentManifold* const& manifold) {
 
-			std::map<const btCollisionObject*, std::pair< Collider*, Collider*>> newContacts;
-			if (dynamicsWorld == nullptr) return;
-			int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+			const btCollisionObject* obA = manifold->getBody0();
+			const btCollisionObject* obB = manifold->getBody1();
 
-			for (int i = 0; i < numManifolds; i++) {
-				btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
-				const btCollisionObject* obA = contactManifold->getBody0();
-				const btCollisionObject* obB = contactManifold->getBody1();
-				/*Check all contacts points*/
+			if (obA != nullptr && obB != nullptr) {
+				Collider* coA = static_cast<Collider*>(obA->getUserPointer());
+				Collider* coB = static_cast<Collider*>(obB->getUserPointer());
+				if (coB != nullptr && coA != nullptr) coA->onCollisionEnter(coB->getGO());
 
-				int numContacts = contactManifold->getNumContacts();
-				for (int j = 0; j < numContacts; j++) {
-					btManifoldPoint& pt = contactManifold->getContactPoint(j);
-					if (pt.getDistance() < 0.f)
-					{
-						Collider* coA = static_cast<Collider*>(obA->getUserPointer());
-						Collider* coB = static_cast<Collider*>(obB->getUserPointer());
+				if (coB != nullptr && coA != nullptr) coB->onCollisionEnter(coA->getGO());
+				
+			}
+		}
 
-						if (newContacts.find(obA) == newContacts.end())
-						{
-							newContacts[obA] = { coA,coB };
-							newContacts[obB] = { coB,coA };
-						}
+		void FunctCallbackExit(btPersistentManifold* const& manifold) {
 
-					}
+			// Call OnCollisionExit and OnTriggerExit of both objects
+			const btCollisionObject* obA = manifold->getBody0();
+			const btCollisionObject* obB = manifold->getBody1();
+
+			// Si son entidades llamamos a sus callbacks respectivos
+			if (obA != nullptr && obB != nullptr) {
+				Collider* coA = static_cast<Collider*>(obA->getUserPointer());
+				Collider* coB = static_cast<Collider*>(obB->getUserPointer());
+				if (coB != nullptr && coA != nullptr && coB->getGO() != nullptr && coA->getGO() != nullptr) {
+					coA->onCollisionExit(coB->getGO());
+				}
+
+				if (coB != nullptr && coA != nullptr) {
+					coB->onCollisionExit(coA->getGO());
 				}
 			}
+		}
 
-			/* Check for added contacts ... */
-			std::map<const btCollisionObject*, std::pair< Collider*, Collider*>>::iterator it;
+		bool FunctCallbackStay(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1) {
 
-			if (!newContacts.empty())
-			{
-				for (it = newContacts.begin(); it != newContacts.end(); it++)
-				{
-					if (contacts.find((*it).first) == contacts.end())
-					{
-						(*it).second.first->onCollisionEnter((*it).second.second->getGO());
-					}
-					else
-					{
-						// Remove to filter no more active contacts
-						(*it).second.first->onCollisionStay((*it).second.second->getGO());
-						contacts.erase((*it).first);
-					}
-				}
+			// Call OnCollisionStay and OnTriggerStay of both objects
+			void* obA = colObj0Wrap->getCollisionObject()->getUserPointer();
+			void* obB = colObj1Wrap->getCollisionObject()->getUserPointer();
+
+			// Si son entidades llamamos a sus callbacks respectivos
+			if (obA != nullptr && obB != nullptr) {
+				Collider* coA = static_cast<Collider*>(obA);
+				Collider* coB = static_cast<Collider*>(obB);
+				if (coA != nullptr && coB != nullptr) coB->onCollisionStay(coA->getGO());
+
+				if (coB != nullptr && coA != nullptr) coB->onCollisionStay(coA->getGO());
 			}
 
-
-			/* ... and removed contacts */
-			if (!contacts.empty())
-			{
-				for (it = contacts.begin(); it != contacts.end(); it++)
-				{
-					(*it).second.first->onCollisionExit((*it).second.second->getGO());
-				}
-				contacts.clear();
-			}
-
-			contacts = newContacts;
+			return false;
 		}
 
 		void PhysicsManager::init(const Utilities::Vector3<float> gravity) {
@@ -115,6 +104,10 @@ namespace LoveEngine {
 				constraintSolver, collConfig);
 
 			dynamicsWorld->setGravity(btVector3(gravity.x, gravity.y, gravity.z));
+
+			gContactStartedCallback = FunctCallbackEnter;
+			gContactAddedCallback = FunctCallbackStay;
+			gContactEndedCallback = FunctCallbackExit;
 
 #ifdef _DEBUG
 			debugDrawer = new OgreDebugDrawer(LoveEngine::Renderer::OgreRenderer::getInstance()->getSceneManager());
@@ -132,11 +125,6 @@ namespace LoveEngine {
 			}
 		}
 
-		/*bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap,
-			int partId1, int index1)
-		{
-			return false;
-		}*/
 
 		btDynamicsWorld* PhysicsManager::getWorld() const {
 
@@ -145,12 +133,9 @@ namespace LoveEngine {
 
 		void PhysicsManager::update(float physicsFrameRate) {
 
-			//physicsFrameRate = 1 / 60;
 			dynamicsWorld->stepSimulation(physicsFrameRate, 10);
-			checkCollision();
 
 #ifdef _DEBUG
-			//dynamicsWorld->stepSimulation(physicsFrameRate);
 
 			dynamicsWorld->debugDrawWorld();
 #endif // _DEBUG
@@ -158,7 +143,6 @@ namespace LoveEngine {
 
 		void PhysicsManager::fixedUpdate(float deltaTime) {
 			dynamicsWorld->stepSimulation(deltaTime);
-			checkCollision();
 		}
 
 		btRigidBody* PhysicsManager::createRB(Utilities::Vector3<float> pos_, Utilities::Vector3<float> scale_, float mass, int shape/*, int group = -1, int mask = -1*/,
@@ -226,12 +210,16 @@ namespace LoveEngine {
 				else ++it;
 			}
 
-			dynamicsWorld->removeCollisionObject(body);
-			btMotionState* motionstate = body->getMotionState();
-			btCollisionShape* collisionshape = body->getCollisionShape();
-			delete body;
-			delete collisionshape;
-			delete motionstate;
+			//dynamicsWorld->removeCollisionObject(body);
+			//btMotionState* motionstate = body->getMotionState();
+
+			//btCollisionShape* collisionshape = body->getCollisionShape();
+			dynamicsWorld->removeRigidBody(body);
+			if (body && body->getMotionState())
+				delete body->getMotionState();
+			//delete body;/*
+			//delete collisionshape;
+			//delete motionstate;*/
 			auto i = std::begin(bodies);
 			while (i != std::end(bodies)) {
 				if (*i == body) break;

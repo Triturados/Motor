@@ -9,11 +9,12 @@ namespace LoveEngine {
 		}
 
 		Collider::~Collider()
-		{
+		//{
 
-			collGO = nullptr; //hacer delete
-			//delete collGO; collGO = nullptr;
-		}
+		//	collGO = nullptr; //hacer delete
+		//	//delete collGO; collGO = nullptr;
+		//} 
+		= default;
 
 		void Collider::onCollisionEnter(LoveEngine::ECS::GameObject* other)
 		{
