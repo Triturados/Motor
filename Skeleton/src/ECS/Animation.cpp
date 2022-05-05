@@ -16,10 +16,9 @@ namespace LoveEngine {
 		{
 			name = sf.getString("animName");
 			sf.tryGetBool("initialState", initialState);
-			setActive(initialState);
 
-			sf.tryGetBool("initialLoopss", initialLoop);
-			setLoop(initialLoop);
+			sf.tryGetBool("initialLoop", initialLoop);
+
 		}
 
 		void Animation::init()
