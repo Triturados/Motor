@@ -40,35 +40,35 @@ namespace LoveEngine {
 		std::map<std::string, Utilities::Vector3<float>>  v3;
 		std::map<std::string, Utilities::Vector4<float>>  v4;
 
-		void processString(std::string message);
-		std::string nextWord(std::string message, int& idx);
-		void processWord(std::string name, std::string value);
+		void processString(const  std::string& message);
+		std::string nextWord(const  std::string&, int& idx);
+		void processWord(const  std::string& name, const  std::string& value);
 
 	public:
 		void clear();
-		void addString(std::string message);
+		void addString(const  std::string&  message);
 
-		StringFormatter(std::string message);
+		StringFormatter(const  std::string& message);
 
 		//=========== Getters ================
 		std::string getRawMessage() const;
-		int getInt(std::string name) const;
-		float getFloat(std::string name) const;
-		int getBool(std::string name) const;
-		char getChar(std::string name) const;
-		std::string getString(std::string name) const;
-		Utilities::Vector3<float> getVector3(std::string name) const;
-		Utilities::Vector4<float> getVector4(std::string name) const;
+		int getInt(const  std::string& name) const;
+		float getFloat(const  std::string& name) const;
+		int getBool(const  std::string& name) const;
+		char getChar(const  std::string& name) const;
+		std::string getString(const  std::string& name) const;
+		Utilities::Vector3<float> getVector3(const  std::string& name) const;
+		Utilities::Vector4<float> getVector4(const  std::string& name) const;
 
 
 		//=========== Save Getters ============
-		bool tryGetInt(std::string name, int& value) const;
-		bool tryGetFloat(std::string name, float& value) const;
-		bool tryGetBool(std::string name, bool& value) const;
-		bool tryGetChar(std::string name, char& value) const;
-		bool tryGetString(std::string name, std::string& value) const;
-		bool tryGetVector3(std::string name, Utilities::Vector3<float>& value) const;
-		bool tryGetVector4(std::string name, Utilities::Vector4<float>& value) const;
+		bool tryGetInt(const  std::string& name, int& value) const;
+		bool tryGetFloat(const  std::string& name, float& value) const;
+		bool tryGetBool(const  std::string& name, bool& value) const;
+		bool tryGetChar(const  std::string& name, char& value) const;
+		bool tryGetString(const  std::string& name,   std::string& value) const;
+		bool tryGetVector3(const  std::string& name, Utilities::Vector3<float>& value) const;
+		bool tryGetVector4(const  std::string& name, Utilities::Vector4<float>& value) const;
 	};
 	}
 

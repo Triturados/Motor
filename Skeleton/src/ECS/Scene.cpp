@@ -6,7 +6,7 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		Scene::Scene(std::string name) {
+		Scene::Scene(const  std::string& name) {
 			mainCamera = nullptr;
 			this->name = name;
 		}
@@ -85,11 +85,11 @@ namespace LoveEngine {
 		}
 
 
-		void Scene::setName(std::string newname) {
+		void Scene::setName(const  std::string& newname) {
 			name = newname;
 		}
 
-		GameObject* Scene::find(std::string name)
+		GameObject* Scene::find(const  std::string& name)
 		{
 			for (auto go : gObjects) {
 				if (go->name == name)

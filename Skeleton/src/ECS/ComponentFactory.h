@@ -28,7 +28,7 @@ namespace LoveEngine {
 
 			void registerComponent(ComponentCreator* fact);
 
-			ECS::Component* createComponent(std::string name);
+			ECS::Component* createComponent(const  std::string& name);
 		};
 
 
@@ -41,7 +41,7 @@ namespace LoveEngine {
 				return nullptr;
 			}
 		private:
-			ComponentCreator(std::string name) {
+			ComponentCreator(const  std::string& name) {
 				componentName = name;
 			}
 		};
@@ -51,7 +51,7 @@ namespace LoveEngine {
 		class lovexport ComponentCreatorTemplate : public ComponentCreator {
 
 		public:
-			ComponentCreatorTemplate(std::string name) : ComponentCreator(name) {
+			ComponentCreatorTemplate(const  std::string& name) : ComponentCreator(name) {
 			}
 
 			inline virtual ECS::Component* createComponent() override {

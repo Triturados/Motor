@@ -21,7 +21,7 @@ namespace LoveEngine {
 			friend SceneManagement::SceneManager;
 			friend SceneManagement::SceneFactory;
 
-			Scene(std::string name);
+			Scene(const  std::string& name);
 		public:
 			~Scene();
 
@@ -37,9 +37,9 @@ namespace LoveEngine {
 			void onSceneDown();
 
 			GameObject* persistentGameObject();
-			GameObject* find(std::string name);
+			GameObject* find(const  std::string& name);
 
-			void setName(std::string newname);
+			void setName(const  std::string& newname);
 
 			std::list<GameObject*> const& getGameObjects();
 			GameObject* createGameObject(std::string name = "new game object");

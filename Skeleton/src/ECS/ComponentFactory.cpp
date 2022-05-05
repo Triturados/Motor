@@ -88,7 +88,7 @@ namespace LoveEngine {
 			components.emplace(fact->componentName, fact);
 		}
 
-		Component* ComponentFactory::createComponent(std::string name)
+		Component* ComponentFactory::createComponent(const  std::string& name)
 		{
 			auto elem = components.find(name);
 

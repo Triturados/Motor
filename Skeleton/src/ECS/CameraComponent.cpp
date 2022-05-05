@@ -112,7 +112,7 @@ namespace LoveEngine {
 		{
 			mCameraNode->roll(Ogre::Radian(angle));
 		}
-		void Camera::applyCompositor(std::string compositor)
+		void Camera::applyCompositor(const  std::string& compositor)
 		{
 			if (vp == nullptr)
 				compositors.push_back(compositor);

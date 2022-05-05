@@ -10,9 +10,9 @@ namespace LoveEngine {
 		{
 		public:
 			
-			 StringFormatter readData(std::string _file);
+			 StringFormatter readData(const std::string& _file);
 
-			 void saveData(std::string _file, std::string messageToSave);
+			 void saveData(const std::string& _file, const std::string& messageToSave);
 		};
 
 	}

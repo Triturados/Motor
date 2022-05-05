@@ -41,7 +41,7 @@ namespace LoveEngine {
 
 			void setActive(bool activated = true);
 			bool isEmitting();
-			void setMaterial(std::string materialName);
+			void setMaterial(const  std::string& materialName);
 
 			void init() override;
 			void update() override;

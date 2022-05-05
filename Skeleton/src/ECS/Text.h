@@ -40,9 +40,9 @@ namespace LoveEngine {
 			void onSceneUp() override;
 			void onSceneDown() override;
 			void setVisibility(bool mode = true);
-			void receiveString(std::string mssg) override;
+			void receiveString(const  std::string& mssg) override;
 
-			void changeText(std::string mssg);
+			void changeText(const  std::string& mssg);
 			void onMove() override;
 		private:
 

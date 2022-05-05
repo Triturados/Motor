@@ -70,7 +70,7 @@ namespace LoveEngine {
 			void setClipDistance(float);
 			float getClipDistance();
 
-			void applyCompositor(std::string compositor);
+			void applyCompositor(const  std::string& compositor);
 		};
 	}
 }
