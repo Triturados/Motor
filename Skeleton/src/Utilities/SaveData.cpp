@@ -10,7 +10,8 @@ LoveEngine::Utilities::StringFormatter LoveEngine::Utilities::SaveData::readData
 
 	if (fd == NULL)
 	{
-		std::cerr << "No existe el archivo: " << dir;
+		std::cerr << "No existe el archivo: " << dir << "\n";
+		return StringFormatter("");
 	}
 
 	int size;
@@ -34,7 +35,10 @@ void LoveEngine::Utilities::SaveData::saveData(std::string _file, std::string me
 	std::string dir = "./resources/savedata/" + _file + ".bin";
 	FILE* fd;
 
-	fopen_s(&fd, dir.c_str(), "w");
+	int i = fopen_s(&fd, dir.c_str(), "w");
+	if (i != 0) {
+		return;
+	}
 
 	int lenght = messageToSave.length() + 1 ;
 	fwrite(&lenght, sizeof(int), 1, fd);
