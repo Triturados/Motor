@@ -66,23 +66,23 @@ namespace LoveEngine {
 		return std::ceil(t);
 	}
 
-	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, std::string name)
+	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, const  std::string& name)
 	{
 		return ECS::Blueprint::getInstance()->spawnObject(scene, name, false);
 	}
 
-	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, std::string name)
+	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, const  std::string& name)
 	{
 		return ECS::Blueprint::getInstance()->fillObject(gameObject, name, false);
 	}
 
-	ECS::Component* BlueprintAddComponent(ECS::GameObject* gameObject, std::string cmpname)
+	ECS::Component* BlueprintAddComponent(ECS::GameObject* gameObject, const  std::string& cmpname)
 	{
 		return ECS::Blueprint::getInstance()->addComponent(gameObject, cmpname, false);
 	}
 
 
-	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename)
+	void parseScene(ECS::Scene* scene, lua_State* luastate, const  std::string& scenename)
 	{
 		luabridge::LuaRef luascene = luabridge::getGlobal(luastate, &scenename[0]);
 

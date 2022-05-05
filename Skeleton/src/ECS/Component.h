@@ -29,9 +29,9 @@ namespace LoveEngine {
 			virtual void receiveComponent(int, Component*) {};
 			virtual void receiveGameObject(int, GameObject*) {};
 
-			Component* sendFormattedString(std::string mssg);
+			Component* sendFormattedString(const  std::string& mssg);
 
-			virtual void receiveString(std::string mssg) {};
+			virtual void receiveString(const  std::string& mssg) {};
 
 			void remove(Component* comp);
 			void remove(GameObject* go);
@@ -73,7 +73,7 @@ namespace LoveEngine {
 			virtual void exitCollision(GameObject* other) {};
 
 
-			GameObject* createObject(std::string name);
+			GameObject* createObject(const  std::string& name);
 
 		private:
 

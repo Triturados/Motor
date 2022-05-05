@@ -22,8 +22,8 @@ namespace LoveEngine {
 			friend class SceneCreator;
 			friend class Blueprint;
 
-			GameObject(std::string name);
-			GameObject(std::string name, Scene* scene);
+			GameObject(const  std::string& name);
+			GameObject(const  std::string& name, Scene* scene);
 			~GameObject();
 	
 		private:
@@ -74,7 +74,7 @@ namespace LoveEngine {
 				return c;
 			}
 
-			Component* createComponent(std::string comp);
+			Component* createComponent(const  std::string& comp);
 
 			template <typename T>
 			requires isComponent<T>
@@ -144,9 +144,9 @@ namespace LoveEngine {
 			void removeGameObject();
 			bool isEnabled();
 
-			GameObject* createEmptyGameObject(std::string name);
+			GameObject* createEmptyGameObject(const  std::string& name);
 
-			void sendMessage(std::string mssg);
+			void sendMessage(const  std::string& mssg);
 		};
 	}
 }

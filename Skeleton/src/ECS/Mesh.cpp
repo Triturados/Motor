@@ -71,7 +71,7 @@ namespace LoveEngine {
 			entityNode->setVisible(mode);
 		}
 
-		void Mesh::setMaterial(std::string materialName)
+		void Mesh::setMaterial(const  std::string& materialName)
 		{
 			entity->setMaterialName(materialName);
 		}

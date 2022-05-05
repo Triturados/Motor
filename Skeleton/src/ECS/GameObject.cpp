@@ -8,12 +8,12 @@
 namespace LoveEngine {
 	namespace ECS {
 
-		GameObject::GameObject(std::string name)
+		GameObject::GameObject(const  std::string& name)
 		{
 			this->name = name;
 		}
 
-		GameObject::GameObject(std::string name, Scene* scn)
+		GameObject::GameObject(const  std::string& name, Scene* scn)
 		{
 			this->name = name;
 			scene = scn;
@@ -31,7 +31,7 @@ namespace LoveEngine {
 		}
 
 
-		Component* GameObject::createComponent(std::string compname)
+		Component* GameObject::createComponent(const  std::string& compname)
 		{
 			Component* comp = LoveEngine::ComponentDefinitions::ComponentFactory::getInstance()->createComponent(compname);
 
@@ -150,13 +150,13 @@ namespace LoveEngine {
 			return scene;
 		}
 
-		GameObject* GameObject::createEmptyGameObject(std::string name)
+		GameObject* GameObject::createEmptyGameObject(const  std::string& name)
 		{
 			auto go = scene->createGameObject(name);
 			return go;
 		}
 
-		void GameObject::sendMessage(std::string message) {
+		void GameObject::sendMessage(const  std::string& message) {
 			for (auto comp : componentsList) {
 				comp->sendFormattedString(message);
 			}

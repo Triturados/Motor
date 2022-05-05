@@ -28,7 +28,7 @@ namespace LoveEngine {
 			setActive(initialState);
 		}
 
-		void Animation::changeAnimation(std::string n)
+		void Animation::changeAnimation(const  std::string& n)
 		{
 			name = n;
 			setActive(false);
@@ -69,7 +69,7 @@ namespace LoveEngine {
 				animState->addTime(LoveEngine::Time::getInstance()->deltaTime);
 		}
 
-		bool Animation::playingAnimation(std::string animationName)
+		bool Animation::playingAnimation(const  std::string& animationName)
 		{
 			return (isActive && animationName == name);
 		}

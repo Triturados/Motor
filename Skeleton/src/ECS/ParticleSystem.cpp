@@ -32,7 +32,7 @@ namespace LoveEngine {
 			return emitting;
 		}
 
-		void ParticleSystem::setMaterial(std::string materialName)
+		void ParticleSystem::setMaterial(const std::string&  materialName)
 		{
 			pSys->setMaterialName(materialName);
 		}

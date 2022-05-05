@@ -36,7 +36,7 @@ namespace LoveEngine {
 
 			void setActive(bool activated = true);
 			void setLoop(bool activated = true);
-			void changeAnimation(std::string n );
+			void changeAnimation(const  std::string& n );
 
 			void resetAnim();
 			float getDuration();
@@ -44,7 +44,7 @@ namespace LoveEngine {
 			void init() override;
 			void update() override;
 
-			bool playingAnimation(std::string animationName);
+			bool playingAnimation(const  std::string& animationName);
 
 			~Animation();
 		};

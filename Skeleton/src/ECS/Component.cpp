@@ -47,14 +47,14 @@ namespace LoveEngine {
 		}
 
 
-		Component* Component::sendFormattedString(std::string msg)
+		Component* Component::sendFormattedString(const  std::string& msg)
 		{
 			Utilities::StringFormatter sf(msg);
 			receiveMessage(sf);
 			return this;
 		}
 
-		GameObject* Component::createObject(std::string name)
+		GameObject* Component::createObject(const  std::string& name)
 		{
 			return gameObject->createEmptyGameObject(name);
 		}

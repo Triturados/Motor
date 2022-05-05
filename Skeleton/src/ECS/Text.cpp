@@ -33,7 +33,7 @@ namespace LoveEngine
 			alignment = (alignmentEnum) alineacion;
 		}
 
-		void Text::receiveString(std::string mssg)
+		void Text::receiveString(const  std::string& mssg)
 		{
 			textContent = mssg;
 		}
@@ -103,7 +103,7 @@ namespace LoveEngine
 			textArea->setAlignment((Ogre::TextAreaOverlayElement::Alignment)aling);
 		}
 
-		void Text::changeText(std::string mssg)
+		void Text::changeText(const  std::string& mssg)
 		{
 			textContent = mssg;
 			textArea->setCaption(textContent);

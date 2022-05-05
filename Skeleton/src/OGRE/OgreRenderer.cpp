@@ -368,7 +368,7 @@ namespace LoveEngine {
 		/// <summary>
 		/// Muestra una imagen 2D por pantalla como Ogre::Overlay
 		/// </summary>
-		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string material, Ogre::Overlay*& overlay)
+		Ogre::OverlayContainer* OgreRenderer::renderImage(Utilities::Vector3<int> pos, Utilities::Vector2<int> dimensions, std::string& material, Ogre::Overlay*& overlay)
 		{
 			Ogre::OverlayContainer* container = createContainer(pos, dimensions);
 			//material que tiene que estar definido en los recursos de Ogre. Se tiene que pasar el nombre del material, no el archivo .material

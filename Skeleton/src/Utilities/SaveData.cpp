@@ -1,7 +1,7 @@
 #include "SaveData.h"
 #include "StringFormatter.h"
 
-LoveEngine::Utilities::StringFormatter LoveEngine::Utilities::SaveData::readData(std::string _file)
+LoveEngine::Utilities::StringFormatter LoveEngine::Utilities::SaveData::readData(const std::string& _file)
 {
 	std::string dir = "./resources/savedata/" + _file + ".bin";
 	FILE* fd;
@@ -29,7 +29,7 @@ LoveEngine::Utilities::StringFormatter LoveEngine::Utilities::SaveData::readData
 	return StringFormatter(rawMessage);
 }
 
-void LoveEngine::Utilities::SaveData::saveData(std::string _file, std::string messageToSave)
+void LoveEngine::Utilities::SaveData::saveData(const std::string& _file, const std::string& messageToSave)
 {
 
 	std::string dir = "./resources/savedata/" + _file + ".bin";

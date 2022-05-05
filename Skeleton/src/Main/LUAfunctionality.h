@@ -35,9 +35,9 @@ namespace LoveEngine {
 	int ceil(float);
 
 
-	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, std::string name);
-	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, std::string name);
-	ECS::Component*	 BlueprintAddComponent(ECS::GameObject* gameObject, std::string cmpname);
+	ECS::GameObject* BlueprintSpawnObject(ECS::Scene* scene, const  std::string& name);
+	ECS::GameObject* BlueprintFillObject(ECS::GameObject* gameObject, const  std::string& name);
+	ECS::Component*	 BlueprintAddComponent(ECS::GameObject* gameObject, const  std::string& cmpname);
 
-	void parseScene(ECS::Scene* scene, lua_State* luastate, std::string scenename);
+	void parseScene(ECS::Scene* scene, lua_State* luastate, const  std::string& scenename);
 }

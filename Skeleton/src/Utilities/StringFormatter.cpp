@@ -18,14 +18,14 @@ namespace LoveEngine {
 	*/
 	namespace Utilities {
 
-		StringFormatter::StringFormatter(std::string message)
+		StringFormatter::StringFormatter(const  std::string& message)
 		{
 			rawMessage = message;
 			processString(message);
 		}
 
 
-		std::string StringFormatter::nextWord(std::string message, int& idx)
+		std::string StringFormatter::nextWord(const  std::string& message, int& idx)
 		{
 			std::string currentword = "";
 
@@ -56,7 +56,7 @@ namespace LoveEngine {
 		}
 
 
-		void StringFormatter::processString(std::string message)
+		void StringFormatter::processString(const  std::string& message)
 		{
 			std::string lastword = "";
 			
@@ -80,7 +80,7 @@ namespace LoveEngine {
 
 
 
-		void StringFormatter::processWord(std::string name, std::string value)
+		void StringFormatter::processWord(const  std::string& name, const std::string& value)
 		{
 			
 			if (value == "false") { // True y false equivalen a booleanos
@@ -158,7 +158,7 @@ namespace LoveEngine {
 			c.clear();
 		}
 
-		void StringFormatter::addString(std::string message)
+		void StringFormatter::addString(const  std::string& message)
 		{
 			processString(message);
 		}
@@ -175,43 +175,43 @@ namespace LoveEngine {
 			return rawMessage;
 		}
 
-		int StringFormatter::getInt(std::string name) const
+		int StringFormatter::getInt(const  std::string& name) const
 		{
 			return i.find(name)->second;
 		}
 
-		float StringFormatter::getFloat(std::string name) const
+		float StringFormatter::getFloat(const  std::string& name) const
 		{
 			return f.find(name)->second;
 		}
 
-		int StringFormatter::getBool(std::string name) const
+		int StringFormatter::getBool(const  std::string& name) const
 		{
 			return b.find(name)->second;
 		}
 
-		char StringFormatter::getChar(std::string name) const
+		char StringFormatter::getChar(const  std::string& name) const
 		{
 			return c.find(name)->second;
 		}
 
-		std::string StringFormatter::getString(std::string name) const
+		std::string StringFormatter::getString(const  std::string& name) const
 		{
 			return s.find(name)->second;
 		}
 
-		Utilities::Vector3<float> StringFormatter::getVector3(std::string name) const
+		Utilities::Vector3<float> StringFormatter::getVector3(const  std::string& name) const
 		{
 			return v3.find(name)->second;
 		}
 
-		Utilities::Vector4<float> StringFormatter::getVector4(std::string name) const
+		Utilities::Vector4<float> StringFormatter::getVector4(const  std::string& name) const
 		{
 			return v4.find(name)->second;
 		}
 
 
-		bool StringFormatter::tryGetInt(std::string name, int& value) const
+		bool StringFormatter::tryGetInt(const  std::string& name, int& value) const
 		{
 			auto it = i.find(name);
 
@@ -222,7 +222,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetFloat(std::string name, float& value) const
+		bool StringFormatter::tryGetFloat(const  std::string& name, float& value) const
 		{
 			auto it = f.find(name);
 
@@ -233,7 +233,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetBool(std::string name, bool& value) const
+		bool StringFormatter::tryGetBool(const  std::string& name, bool& value) const
 		{
 			auto it = b.find(name);
 
@@ -244,7 +244,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetChar(std::string name, char& value) const
+		bool StringFormatter::tryGetChar(const  std::string& name, char& value) const
 		{
 			auto it = c.find(name);
 
@@ -255,7 +255,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetString(std::string name, std::string& value) const
+		bool StringFormatter::tryGetString(const  std::string& name,   std::string& value) const
 		{
 			auto it = s.find(name);
 
@@ -266,7 +266,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetVector3(std::string name, Utilities::Vector3<float>& value) const
+		bool StringFormatter::tryGetVector3(const  std::string& name, Utilities::Vector3<float>& value) const
 		{
 			auto it = v3.find(name);
 
@@ -277,7 +277,7 @@ namespace LoveEngine {
 			}
 			return false;
 		}
-		bool StringFormatter::tryGetVector4(std::string name, Utilities::Vector4<float>& value) const
+		bool StringFormatter::tryGetVector4(const  std::string& name, Utilities::Vector4<float>& value) const
 		{
 			auto it = v4.find(name);
 
