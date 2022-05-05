@@ -46,28 +46,24 @@ namespace LoveEngine {
 			if (obA != nullptr && obB != nullptr) {
 				Collider* coA = static_cast<Collider*>(obA->getUserPointer());
 				Collider* coB = static_cast<Collider*>(obB->getUserPointer());
-				if (coB != nullptr && coA != nullptr) coA->onCollisionEnter(coB->getGO());
-
-				if (coB != nullptr && coA != nullptr) coB->onCollisionEnter(coA->getGO());
+				if (coB != nullptr && coA != nullptr) {
+					coA->onCollisionEnter(coB->getGO());
+					coB->onCollisionEnter(coA->getGO());
+				}
 				
 			}
 		}
 
 		void FunctCallbackExit(btPersistentManifold* const& manifold) {
 
-			// Call OnCollisionExit and OnTriggerExit of both objects
 			const btCollisionObject* obA = manifold->getBody0();
 			const btCollisionObject* obB = manifold->getBody1();
 
-			// Si son entidades llamamos a sus callbacks respectivos
 			if (obA != nullptr && obB != nullptr) {
 				Collider* coA = static_cast<Collider*>(obA->getUserPointer());
 				Collider* coB = static_cast<Collider*>(obB->getUserPointer());
-				if (coB != nullptr && coA != nullptr && coB->getGO() != nullptr && coA->getGO() != nullptr) {
-					coA->onCollisionExit(coB->getGO());
-				}
-
 				if (coB != nullptr && coA != nullptr) {
+					coA->onCollisionExit(coB->getGO());
 					coB->onCollisionExit(coA->getGO());
 				}
 			}
@@ -75,17 +71,16 @@ namespace LoveEngine {
 
 		bool FunctCallbackStay(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1) {
 
-			// Call OnCollisionStay and OnTriggerStay of both objects
 			void* obA = colObj0Wrap->getCollisionObject()->getUserPointer();
 			void* obB = colObj1Wrap->getCollisionObject()->getUserPointer();
 
-			// Si son entidades llamamos a sus callbacks respectivos
 			if (obA != nullptr && obB != nullptr) {
 				Collider* coA = static_cast<Collider*>(obA);
 				Collider* coB = static_cast<Collider*>(obB);
-				if (coA != nullptr && coB != nullptr) coB->onCollisionStay(coA->getGO());
-
-				if (coB != nullptr && coA != nullptr) coB->onCollisionStay(coA->getGO());
+				if (coA != nullptr && coB != nullptr) {
+					coB->onCollisionStay(coA->getGO());
+					coA->onCollisionStay(coB->getGO());
+				}
 			}
 
 			return false;
@@ -152,7 +147,6 @@ namespace LoveEngine {
 			btCollisionShape* shapeBT;
 
 			//diferentes tipos de caja de colision
-			//diferentes tipos de caja de colision
 			if (shape == 0) {
 
 				shapeBT = new btBoxShape(btVector3(scale_.x, scale_.y, scale_.z));//cubo
@@ -168,7 +162,6 @@ namespace LoveEngine {
 			}
 			else shapeBT = new btBoxShape(btVector3(scale_.x, scale_.y, scale_.z));//cubo
 
-			//collisionShapes->push_back(shapeBT);
 
 			btTransform startTransform;
 			startTransform.setIdentity();
@@ -210,16 +203,11 @@ namespace LoveEngine {
 				else ++it;
 			}
 
-			//dynamicsWorld->removeCollisionObject(body);
-			//btMotionState* motionstate = body->getMotionState();
 
-			//btCollisionShape* collisionshape = body->getCollisionShape();
 			dynamicsWorld->removeRigidBody(body);
 			if (body && body->getMotionState())
 				delete body->getMotionState();
-			//delete body;/*
-			//delete collisionshape;
-			//delete motionstate;*/
+
 			auto i = std::begin(bodies);
 			while (i != std::end(bodies)) {
 				if (*i == body) break;
