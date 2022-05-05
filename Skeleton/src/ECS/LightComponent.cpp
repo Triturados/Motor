@@ -29,57 +29,40 @@ namespace LoveEngine {
 			ogremanager = Renderer::OgreRenderer::getInstance();
 			tr = gameObject->getComponent<Transform>();
 
+			light = ogremanager->getSceneManager()->createLight();
+			light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
+			light->setSpecularColour(specular->x, specular->y, specular->z);
+
+
+			entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+			entityNode->attachObject(light);
+			entityNode->setPosition(Ogre::Vector3(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z));
+			entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
+
+
+			setPower(lightPower);
+			setVisibility(visible);
+
 			switch (type)
 			{
 			case lightType::point:
-				light = ogremanager->getSceneManager()->createLight(name);
-
-				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
-				light->setSpecularColour(specular->x, specular->y, specular->z);
 
 				light->setType(Ogre::Light::LT_POINT);
-
-
-				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-				entityNode->attachObject(light);
-				entityNode->setPosition(Ogre::Vector3(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z));
 				break;
-			case lightType::directional:
-				light = ogremanager->getSceneManager()->createLight(name);
 
-				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
-				light->setSpecularColour(specular->x, specular->y, specular->z);
+			case lightType::directional:
 
 				light->setType(Ogre::Light::LT_DIRECTIONAL);
 
-				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-				entityNode->attachObject(light);
-				entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
-
 				break;
 			case lightType::spot:
-				light = ogremanager->getSceneManager()->createLight(name);
-
-				light->setDiffuseColour(diffuse->x, diffuse->y, diffuse->z);
-				light->setSpecularColour(specular->x, specular->y, specular->z);
 
 				light->setType(Ogre::Light::LT_SPOTLIGHT);
-
-				entityNode = ogremanager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-				entityNode->attachObject(light);
-				entityNode->setDirection(Ogre::Vector3(direction->x, direction->y, direction->z));
-
-
-				entityNode->setPosition(Ogre::Vector3(tr->getPos()->x, tr->getPos()->y, tr->getPos()->z));
-
 				light->setSpotlightRange(Ogre::Degree(inRange), Ogre::Degree(outRange), fallOff);
 				break;
 			default:
 				break;
 			}
-
-			setPower(lightPower);
-			setVisibility(visible);
 		}
 
 		void Light::update()
@@ -179,7 +162,7 @@ namespace LoveEngine {
 		{
 			sf.tryGetString("name", name);
 			std::string t;
-			
+
 			if (sf.tryGetString("type", t)) {
 				if (t == "point")
 					type = lightType::point;
