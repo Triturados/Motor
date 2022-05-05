@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>LoveEngine - Componentes</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Bootstrap 4 Template For Software Startups">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+    
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+</head> 
+
+<body class="docs-page">    
+    <header class="header fixed-top">	    
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+					<button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none" type="button">
+	                    <span></span>
+	                    <span></span>
+	                    <span></span>
+	                </button>
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">LOVE <span class="text-alt">Engine</span></span></a></div>    
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+	                
+	
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+		            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk" class="btn btn-primary d-none d-lg-flex">Descargar</a>
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+    
+    
+    <div class="docs-wrapper">
+	    <div id="docs-sidebar" class="docs-sidebar">
+		    <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+            </div>
+		    <nav id="docs-nav" class="docs-nav navbar">
+			    <ul class="section-items list-unstyled nav flex-column pb-3">
+				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span class="theme-icon-holder me-2"><i class="fas fa-cogs"></i></span>LOVE Components</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-12">Mesh</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-13">Material</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-14">Light</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-15">Image</a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-pagecomponent4.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Pagina siguiente </a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-pagecomponent2.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Pagina anterior  </a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-page.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Volver a la documentación </a></li>
+			    </ul>
+
+		    </nav><!--//docs-nav-->
+	    </div><!--//docs-sidebar-->
+	    <div class="docs-content">
+		    <div class="container">
+			    
+
+
+
+			    <article class="docs-article" id="section-4">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">LOVE Components</h1>
+					    
+						<section class="docs-section" id="item-3-12">
+							<h2 class="section-heading">Mesh</h2>
+							<p>Clase que contiene el componente Mesh de los objetos.</p>
+							<p>		#include  &ltMesh.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">ejemplo:addComponent("Mesh"):sendMsg([[
+		meshName: ejemplo.mesh;
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto ejemplo. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">meshName</a></th>
+										<td>Nombre de la maya.</td>
+				
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setVisibility(bool mode)</a></th>
+											<td>Activa o desactiva la visibilidad de la malla,  por defecto el boleano mode es true.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setMaterial(std::string materialName)</a></th>
+											<td>Cambia el material de la malla por el enviado en el string materialName.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+	
+	
+	
+	
+						<section class="docs-section" id="item-3-13">
+							<h2 class="section-heading">Material</h2>
+							<p>Clase que contiene el componente Material de los objetos.</p>
+							<p>		#include  &ltMaterial.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">local material = ejemplo:addComponent("Material")
+	material:sendMsg([[
+		materialName: bolaroja
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto ejemplo. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">materialName</a></th>
+										<td>Nombre del material que se va a usar.</td>
+				
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveComponent(int i, Component* c)</a></th>
+											<td>Recibe el componente <a href="#item-3-12"> Mesh</a> si i vale 0.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setMaterial()</a></th>
+											<td> Si existe malla le establece el material a la malla.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+	
+						<section class="docs-section" id="item-3-14">
+							<h2 class="section-heading">Light</h2>
+							<p>Clase que contiene el componente Light de los objetos.</p>
+							<p>		#include  &ltLightComponent.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">local compLight = luz:addComponent('Light')
+	compLight:sendMssg([[
+		name: luz_direccional
+		type: directional
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto luz. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">name</a></th>
+										<td>Nombre interno que va a terner la luz</td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">type</a></th>
+										<td>Tipo de luz del componente mque puede ser point, directional o spot. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">diffuse</a></th>
+										<td>Componente difusa de la luz. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">specular</a></th>
+										<td>Compoennte specular de la luz. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">direction</a></th>
+										<td>Direccion a la que va dirigida la luz. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">power</a></th>
+										<td>Potencia de la luz</td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">inAngle</a></th>
+										<td>Angulo interno de la luz spot. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">outAngle</a></th>
+										<td>Angulo externo de la luz spot.</td>
+				
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">fallOff</a></th>
+										<td>Velocidad de desvanecimiento de la luz spot, 1 desvanecimineto lineal y 0 no disminiye la luz. </td>
+				
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">visibility</a></th>
+										<td>Booleano para establecer la visibilidad de la luz</td>
+				
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void specularColor(float r, float g, float b)</a></th>
+											<td>Establece la componente especular de la luz. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void diffuseColor(float r, float g, float b)</a></th>
+											<td>Establece la componente difusa de la luz. </td>
+										
+										</tr>
+										
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setDir(Utilities::Vector3<float> direction)</a></th>
+											<td>Establece la direccion de la luz. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setRange(float startAngle, float endAngle, float desvanecimiento)</a></th>
+											<td>Establece el angulo y el desvanecimiento de la la luz spot, el desvanecimiento por defecto es lineal, igual a 1.</td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setVisibility(bool active)</a></th>
+											<td>Establece la visibilidad de la luz en funcion del boleano active. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setPower(float power)</a></th>
+											<td>Establece la potencia de la luz en funcion del valor de power. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float> getDiffuseColor()</a></th>
+											<td>Devuelve un vector3 con la componente difusa de la luz. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">getSpecularColor()</a></th>
+											<td>Devuelve un vector3 con la componente especular de la luz.</td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">bool getVisibility()</a></th>
+											<td>Devuelve true si la luz es visible y false en caso contrario.</td>
+										
+										</tr>
+	
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+	
+	
+	
+						<section class="docs-section" id="item-3-15">
+							<h2 class="section-heading">Image</h2>
+							<p>Clase que contiene el componente Image de los objetos.</p>
+							<p>		#include  &ltImage.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">ejemplo:addComponent("Image"):sendMsg([[
+		material: menuDeadBackground; 
+		width: 1280;
+		height : 720;
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto ejemplo. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">material</a></th>
+										<td>Nombre del material que tendra la Imagen</td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">width</a></th>
+										<td>Ancho de la imagen, por defecto 0.</td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">height</a></th>
+										<td>Altura de la imagen, por defecto 0. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posX</a></th>
+										<td>Posicion X de la imagen, por defecto 0.</td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posY</a></th>
+										<td>Posicion Y de la imagen, por defecto 0. </td>
+				
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posZ</a></th>
+										<td>Capa en la que se encentra la imagen, por defecto 0.</td>
+				
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setPos(Utilities::Vector3<int> pos_))</a></th>
+											<td>Cambia la posicion de la imagen a la enviada en el vector3 pos_. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">float getOpacity()</a></th>
+											<td>Devuelve la opacidad de la imagen. </td>
+										
+										</tr>
+										
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setOpacity(float fade))</a></th>
+											<td>Establece la opacidad de la imagen. 0 es invisible y 1 es opaca. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector2<int> getDimensions()</a></th>
+											<td>Devuelve las dimensiones de la imagen siendo la componente x en ancho y la y el alto.</td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setVisibility(bool mode)</a></th>
+											<td>Establece la visibilidad de la luz en funcion del boleano mode. </td>
+										
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setDimensions(Utilities::Vector2<int> dimensions_)</a></th>
+											<td>Establece las dimensiones de la imagen con las dimensiones de dimensions_ </td>
+										
+										</tr>
+	
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+
+			    </article><!--//docs-article-->
+			    
+			  
+
+			    <footer class="footer">
+				    <div class="container text-center py-5">
+				        <small class="copyright">Copyright &copy; <a href="https://github.com/Triturados" target="_blank">Triturados</a></small>
+				        <ul class="social-list list-unstyled pt-4 mb-0">
+						    <li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li> 
+				            <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li> -->
+				        </ul><!--//social-list-->
+				    </div>
+			    </footer>
+		    </div> 
+	    </div>
+    </div><!--//docs-wrapper-->
+   
+       
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="assets/plugins/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script> 
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+    <script src="assets/js/docs.js"></script> 
+
+</body>
+</html> 
+
+ 
+

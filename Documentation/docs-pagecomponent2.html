@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>LoveEngine - Componentes</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Bootstrap 4 Template For Software Startups">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+    
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+</head> 
+
+<body class="docs-page">    
+    <header class="header fixed-top">	    
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+					<button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none" type="button">
+	                    <span></span>
+	                    <span></span>
+	                    <span></span>
+	                </button>
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">LOVE <span class="text-alt">Engine</span></span></a></div>    
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+	                
+	
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+		            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk" class="btn btn-primary d-none d-lg-flex">Descargar</a>
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+    
+    
+    <div class="docs-wrapper">
+	    <div id="docs-sidebar" class="docs-sidebar">
+		    <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+            </div>
+		    <nav id="docs-nav" class="docs-nav navbar">
+			    <ul class="section-items list-unstyled nav flex-column pb-3">
+				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span class="theme-icon-holder me-2"><i class="fas fa-cogs"></i></span>LOVE Components</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-7">Slider</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-8">SkyBox</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-9">RigidBody</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-10">ParticleSystem</a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-pagecomponent3.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Pagina siguiente </a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-pagecomponent.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Pagina anterior  </a></li>
+					<li class="nav-item section-title mt-3"><a  class="card-link-mask" href="docs-page.html"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Volver a la documentación </a></li>
+			    </ul>
+
+		    </nav><!--//docs-nav-->
+	    </div><!--//docs-sidebar-->
+	    <div class="docs-content">
+		    <div class="container">
+			    
+
+
+
+			    <article class="docs-article" id="section-4">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">LOVE Components</h1>
+	
+						<section class="docs-section" id="item-3-7">
+							<h2 class="section-heading">Slider</h2>
+							<p>Clase que contiene el componente Slider de los objetos.</p>
+							<p>		#include  &ltSlider.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">local sliderBehindLive = player:addComponent("Slider"):sendMsg([[
+		materialBar: Heal;
+		materialBarBg: Heal_bg;
+		materialButton: CircleButton;
+		width: 300;
+		height: 50;
+		posX: 100;
+		posY: 100;
+	]])</code></pre>
+	
+	<div class="callout-block callout-block-info">
+								
+		<div class="content">
+			<h4 class="callout-title">
+				<span class="callout-icon-holder me-1">
+					<i class="fas fa-info-circle"></i>
+				</span><!--//icon-holder-->
+				Nota
+			</h4>
+			<p> En el codigo mostrado se entiende que existe el objeto player. </p>
+		</div><!--//content-->
+	</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">materialBar</a></th>
+										<td>Material del slider. </td>
+				
+										</tr>
+	
+										<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">materialBarBg</a></th>
+											<td>Material que esta por detras del slider. 
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">materialButton</a></th>
+												<td>Material del boton que indica donde arrastrar el slider
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">width</a></th>
+												<td>Ancho del slider.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">height</a></th>
+												<td>Altura del slider
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posX</a></th>
+												<td>Posicion x del slider, por defecto 0. 
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posY</a></th>
+												<td>Posicion y del slider, por defecto 0.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">posZ</a></th>
+												<td>Posicion z del slider, por defecto 1.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setVisibility(bool mode)</a></th>
+											<td>Establece al visibilidad del slider segun el boleano mode, por defecto true.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">inline int getProgress()</a></th>
+											<td>Devuelve el progreso del slider, su valor maximo es 100.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">inline int getBarWidth()</a></th>
+											<td>Devuelve el ancho del slider.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">inline int getMaxBarWidth()</a></th>
+											<td>Devuelve el tamaño maximo del ancho de la barra.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setProgress(int progress)</a></th>
+											<td>Establece el valor del slider segun el valor de progress.
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setDetectInput(bool mode)</a></th>
+											<td>Estable si se detecta input o no segun el valor del boleano mode.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setPos(Utilities::Vector3<int> pos_)</a></th>
+											<td>Establece el valor posicion del slider.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setDimensions(Utilities::Vector2<int> dimensions_)</a></th>
+											<td>Establece las dimensiones del slider, siendo la componente x el ancho y la componente y la altura.
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+	
+						<section class="docs-section" id="item-3-8">
+							<h2 class="section-heading">SkyBox</h2>
+							<p>Clase que contiene el componente SkyBox de los objetos.</p>
+							<p>		#include  &ltSlider.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">skybox:addComponent("Skybox"):sendMsg([[
+		materialName: skyboxhell; 
+		distance: 300;
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto skybox. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">materialName</a></th>
+										<td>Nombre del material del SkyBox. </td>
+				
+										</tr>
+	
+										<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">distance</a></th>
+											<td>Distancia a la que se encontrara el SkyBox.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+						</section><!--//section-->
+	
+						<section class="docs-section" id="item-3-9">
+							<h2 class="section-heading">RigidBody</h2>
+							<p>Clase que contiene el componente Slider de los objetos.</p>
+							<p>		#include  &ltSlider.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">player:addComponent('Rigidbody'):sendMsg([[
+		trigger: true;
+		mass: 0.0;
+		shape: cube; 
+		restitution: 0.9;
+		colliderScale: 10,1,10;
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto player. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">trigger</a></th>
+										<td>Boleano para indicar si el objeto va a ser trigger o no. </td>
+				
+										</tr>
+	
+										<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">shape</a></th>
+											<td>String para decir la forma del RigidBody que puede ser cube, sphere, plane o capsule.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">restitution</a></th>
+												<td>Restitucion del objeto que tiene el componente. 
+											</td>
+										</tr>
+										
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">colliderScale</a></th>
+												<td>Vector3 para establecer el tamaño del collider.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">state</a></th>
+												<td>String que dice como puede ser el RigidBody kinematic, dynamic o static.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void addForce(Utilities::Vector3<float> vel, Utilities::Vector3<float> relativePos, ForceMode mode)</a></th>
+											<td>AYUDA
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setTransform(Transform* t_)</a></th>
+											<td>Establece el Transform correspondiente al Rigidbody.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setMass(float mass_)</a></th>
+											<td>Pone la masa del Rigidbody al valor de mass_.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setShape(std::string nameF_)</a></th>
+											<td>Establece la forma del rigidbody en funcion del string nameF_.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setLinearVelocity(Utilities::Vector3<float> vel)</a></th>
+											<td>Establece la velocidad lineal del objeto segun el vector3 vel.
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setAngularVelocity(Utilities::Vector3<float> vel)</a></th>
+											<td>Establece la velocidad angular del objeto segun el vector3 vel.
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setTrigger(bool trigger_)</a></th>
+											<td>Decide si el rigidbodyes trigger o no en funcion del boleano trigger_.
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setRBGravity(Utilities::Vector3<float> newRBGrav)</a></th>
+											<td>Estable la gravedad del objeto segun el vector3 newRBGrav.
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setRestitution(float resti)</a></th>
+											<td>Establece el valor la variable restitution.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setFriccion(float friction)</a></th>
+											<td>Establece la fricción del objeto segun el valor de friction.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setLinearFactor(Utilities::Vector3<float> vect)</a></th>
+											<td>Establece el factor lineal segun el vector3 vect.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setAngularFactor(Utilities::Vector3<float> vect)</a></th>
+											<td>Establece el factor angular segun el vector3 vect.
+											</td>
+										</tr>
+										
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setRotation(Utilities::Vector3<int> axis, float angle)</a></th>
+											<td>establece la rotacion en funcion de en que eje se quiere hacer la rotacion axis y el angulo angle.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float>* getVelocity()</a></th>
+											<td>Devuelve un vector3 con la velocidad del gameobject.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float>* gerGravity()</a></th>
+											<td>Devuelve un vector3 con la gravedad del gameobject.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">inline float getMass()</a></th>
+											<td>Devuelve la masa del objeto
+											</td>
+										</tr>
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">bool onCollisionEnter(RigidBody* other)</a></th>
+											<td>Devuelve true si ha colisionado con el RigidBody other y false en caso contrario.
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+						
+	
+						<section class="docs-section" id="item-3-10">
+							<h2 class="section-heading">ParticleSystem</h2>
+							<p>Clase que contiene el componente ParticleSystem de los objetos.</p>
+							<p>		#include  &ltParticleSystem.h&gt</p>
+	
+							<p>Ejemplo de uso del componente en Lua:</p>
+	
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">local pSys = particleSys:addComponent("ParticleSystem")
+	pSys:sendMsg([[
+		particleName: bomb; 
+		emitting: true
+	]])</code></pre>
+	
+							<div class="callout-block callout-block-info">
+								
+								<div class="content">
+										<h4 class="callout-title">
+										<span class="callout-icon-holder me-1">
+											<i class="fas fa-info-circle"></i>
+										</span><!--//icon-holder-->
+											Nota
+										</h4>
+									<p> En el codigo mostrado se entiende que existe el objeto particleSys. </p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+	
+							<p>Valores que se le pueden enviar por Lua: </p>
+	
+	
+							<div class="table-responsive my-4">	
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">particleName</a></th>
+										<td>Nombre de la particula</td>
+				
+										</tr>
+	
+										<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">emitting</a></th>
+											<td>Boleane que dice si se emiten o no las particulas.
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+	
+	
+							<p>Funciones publicas disponibles desde este componente: </p>
+	
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void receiveMessage(Utilities::StringFormatter& info))</a></th>
+											<td>Recibe la información enviada por Lua. </td>
+										
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setActive(bool activated)</a></th>
+											<td>Activa o desactiva el sistema de particulas por defecto el boleano activated es true.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">bool isEmitting()</a></th>
+											<td>Devuelve true si el sistema de particulas esta emitiendo y false en caso contrario.
+											</td>
+										</tr>
+	
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">void setMaterial(std::string materialName)</a></th>
+											<td>Cambia el material del sistema de particulas al enviado por el string materialName.
+											</td>
+										</tr>
+	
+										
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+	
+						</section><!--//section-->
+	
+
+			    </article><!--//docs-article-->
+			    
+			  
+
+			    <footer class="footer">
+				    <div class="container text-center py-5">
+				        <small class="copyright">Copyright &copy; <a href="https://github.com/Triturados" target="_blank">Triturados</a></small>
+				        <ul class="social-list list-unstyled pt-4 mb-0">
+						    <li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li> 
+				            <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li> -->
+				        </ul><!--//social-list-->
+				    </div>
+			    </footer>
+		    </div> 
+	    </div>
+    </div><!--//docs-wrapper-->
+   
+       
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="assets/plugins/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script> 
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+    <script src="assets/js/docs.js"></script> 
+
+</body>
+</html> 
+
+
+
