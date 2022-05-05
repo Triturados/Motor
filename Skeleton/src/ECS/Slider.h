@@ -6,6 +6,8 @@
 
 #include <Component.h>
 #include <string>
+#include <Vector2.h>
+#include <Vector3.h>
 
 namespace Ogre {
 	class Overlay;
@@ -13,13 +15,6 @@ namespace Ogre {
 }
 
 namespace LoveEngine {
-
-	namespace Utilities {
-		template<typename T>
-		class Vector3;
-		template<typename T>
-		class Vector2;
-	}
 
 	namespace Renderer {
 		class OgreRenderer;
@@ -42,10 +37,10 @@ namespace LoveEngine {
 			std::string materialBarBg = "";
 			std::string materialButton = "";
 
-			Utilities::Vector3<int>* pos;
-			Utilities::Vector3<int>* buttonPos;
-			Utilities::Vector2<int>* dimensions;
-			Utilities::Vector2<int>* buttonDimensions;
+			Utilities::Vector3<int> pos;
+			Utilities::Vector3<int> buttonPos;
+			Utilities::Vector2<int> dimensions;
+			Utilities::Vector2<int> buttonDimensions;
 			int barWidth = 10;
 			int buttonWidth = 30;
 
