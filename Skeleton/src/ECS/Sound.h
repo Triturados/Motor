@@ -37,6 +37,7 @@ namespace LoveEngine {
 			bool oneVol = false;
 		public:
 
+			~Sound();
 			void init() override;
 			void receiveMessage(Utilities::StringFormatter& s) override;
 			void playSound();

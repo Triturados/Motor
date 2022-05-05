@@ -67,7 +67,11 @@ namespace LoveEngine {
 		{
 			soundMngr->setSpeed(sound, s);
 		}
-
+		
+		Sound::~Sound()
+		{
+			releaseSound();
+		}
 		void Sound::pause(bool pause)
 		{
 			soundMngr->pauseSound(sound, pause);
