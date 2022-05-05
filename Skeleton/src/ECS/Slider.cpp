@@ -108,8 +108,8 @@ namespace LoveEngine {
 
 		void Slider::setProgress(int progress)
 		{
-			if (progress < 0 || progress > MAX_VALUE) throw new std::exception("setProgress(), parametro de salud invalido");;
-			barProgress = progress;
+			if (progress < 0) progress = 0;
+			if (progress > MAX_VALUE) progress = MAX_VALUE;
 
 			barWidth = barProgress * dimensions->x / MAX_VALUE;
 			button->setPosition((float)pos->x + barWidth - buttonWidth / 2, (float)pos->y + dimensions->y / 2 - buttonWidth / 2);
