@@ -42,7 +42,7 @@
 	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
 	                <div class="top-search-box d-none d-lg-flex">
 		                <form class="search-form">
-				            <input type="text" placeholder="Buscae en la documentación... " name="search" class="form-control search-input">
+				            <input type="text" placeholder="Buscar en la documentación... " name="search" class="form-control search-input">
 				            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
 				        </form>
 	                </div>
@@ -69,9 +69,6 @@
 			    <ul class="section-items list-unstyled nav flex-column pb-3">
 				    <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introdución</a></li>
 				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder me-2"><i class="fas fa-arrow-down"></i></span>Instalación</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Section Item 2.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">Section Item 2.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-3">Section Item 2.3</a></li>
 					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-create"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Crea tu propio componente</a></li>
 				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-createscene"><span class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Crea tu propia escena</a></li>
 					<li class="nav-item"><a class="nav-link scrollto" href="#item-3-1-1">Forma de tabla</a></li>
@@ -888,7 +885,7 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void rotateChild(Utilities::Vector3<float> posP, Utilities::Vector3<float> rotAng)</a></th>
-											<td>NO ENTIENDO ESTE METODO</td>
+											<td>Rota los hijos del gameobject del componente respecto al vector3 posP y con angulo rotAng.</td>
 										</tr>
 	
 									</tbody>
@@ -1036,13 +1033,13 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">bottomColor</a></th>
-												<td>AYUDA
+												<td>Color por debajo del texto.
 											</td>
 										</tr>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">topColor</a></th>
-												<td>AYUDA
+												<td>Color superior del texto.
 											</td>
 										</tr>
 	
@@ -1180,7 +1177,7 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void releaseSound()</a></th>
-											<td>AYUDA
+											<td>Borra de memoria el sonido. 
 											</td>
 										</tr>
 	
@@ -1331,7 +1328,7 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">inline int getMaxBarWidth()</a></th>
-											<td>AYUDA
+											<td>Devuelve el tamaño maximo del ancho de la barra.
 											</td>
 										</tr>
 	
@@ -1465,7 +1462,7 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">restitution</a></th>
-												<td>AYUDA
+												<td>Restitucion del objeto que tiene el componente. 
 											</td>
 										</tr>
 										
@@ -1545,7 +1542,7 @@ end</code></pre>
 										</tr>
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void setRestitution(float resti)</a></th>
-											<td>AYUDA
+											<td>Establece el valor la variable restitution.
 											</td>
 										</tr>
 	
@@ -1569,7 +1566,7 @@ end</code></pre>
 										
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void setRotation(Utilities::Vector3<int> axis, float angle)</a></th>
-											<td>AYUDA
+											<td>establece la rotacion en funcion de en que eje se quiere hacer la rotacion axis y el angulo angle.
 											</td>
 										</tr>
 	
@@ -2227,21 +2224,7 @@ end</code></pre>
 	
 							<p>Ejemplo de uso del componente en Lua:</p>
 	
-							<div class="docs-code-block">
-								<pre class="shadow-lg rounded"><code class="json hljs">AYUDA</code></pre>
-	
-							<div class="callout-block callout-block-info">
-								
-								<div class="content">
-										<h4 class="callout-title">
-										<span class="callout-icon-holder me-1">
-											<i class="fas fa-info-circle"></i>
-										</span><!--//icon-holder-->
-											Nota
-										</h4>
-									<p> En el codigo mostrado se entiende que existe el objeto ejemplo. </p>
-								</div><!--//content-->
-							</div><!--//callout-block-->
+							
 	
 							<p>Valores que se le pueden enviar por Lua: </p>
 	
@@ -2270,31 +2253,31 @@ end</code></pre>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void onCollisionEnter(ECS::GameObject* other)</a></th>
-											<td>AYUDA </td>
+											<td>Metodo que comprueba cuando inicia la colision con el gameobject other.  </td>
 										
 										</tr>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void onCollisionExit(ECS::GameObject* other)</a></th>
-											<td>AYUDA </td>
+											<td>Metodo que comprueba cuando acaba la colision con el gameobject other. </td>
 										
 										</tr>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void onCollisionStay(ECS::GameObject* other)</a></th>
-											<td>AYUDA </td>
+											<td>Metodo que comprueba cuando se mantiene la colision con el gameobject other. </td>
 										
 										</tr>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">void setGO(ECS::GameObject* ent)</a></th>
-											<td>AYUDA </td>
+											<td>Metodo que establece el gameobject del collider. </td>
 										
 										</tr>
 	
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">ECS::GameObject* getGO()</a></th>
-											<td>AYUDA </td>
+											<td>Metodo que devuelve el gameebject del collider. </td>
 										
 										</tr>
 	
@@ -2358,7 +2341,7 @@ end</code></pre>
 										</tr>
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">compositor</a></th>
-										<td>AYUDA </td>
+										<td>Compositor de la camara </td>
 				
 										</tr>
 										
@@ -3251,26 +3234,14 @@ end</code></pre>
 										</tr>
 
 										<tr>
-											<th class="theme-bg-light"><a class="theme-link" href="#">unscaledTime </a></th>
-											<td>AYUDA </td>
-										
-										</tr>
-
-										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">physicsTime </a></th>
-											<td>AYUDA </td>
+											<td>Tiempoque tarda en actualizarse las fisicas. </td>
 										
 										</tr>
 
 										<tr>
 											<th class="theme-bg-light"><a class="theme-link" href="#">timeSinceStart </a></th>
 											<td>Tiempo desde que se empezo a ejecutar el juego </td>
-										
-										</tr>
-
-										<tr>
-											<th class="theme-bg-light"><a class="theme-link" href="#">timeScale </a></th>
-											<td>AYUDA </td>
 										
 										</tr>
 
@@ -3507,13 +3478,13 @@ end</code></pre>
 	
 									<tr>
 										<th class="theme-bg-light"><a class="theme-link" href="#">void lerp(Vector2<T> b, float t)</a></th>
-										<td>AYUDA </td>
+										<td>Devuelve el vector interpolado entre el propio vector y b en funcion de la interpolacion t.  </td>
 									
 									</tr>
 	
 									<tr>
 										<th class="theme-bg-light"><a class="theme-link" href="#">Vector2<T> lerp(Vector2<T> a, Vector2<T> b, float t))</a></th>
-										<td>AYUDA </td>
+										<td>Devuelve el vector interpolado entre a y b en funcion de la interpolacion t.  </td>
 									
 									</tr>
 									<tr>
@@ -3611,7 +3582,7 @@ end</code></pre>
 	
 									<tr>
 										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> lerp(Vector3<T> a, Vector3<T> b, float t)</a></th>
-										<td>AYUDA </td>
+										<td>Devuelve el vector interpolado entre a y b en funcion de la interpolacion t.  </td>
 									
 									</tr>
 	
@@ -3910,58 +3881,6 @@ end</code></pre>
 						</section><!--//docs-intro-->
 				    </header>
 			    </article><!--//docs-article-->
-			    
-
-
-
-			    
-			    <!-- <article class="docs-article" id="section-9">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">FAQs</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. You can list all your FAQs using the format below.</p>
-						</section>
-				    </header>
-				     <section class="docs-section" id="item-9-1">
-						<h2 class="section-heading">Instalación </h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>¿Es verdad que Pablo es BATman?</h5>
-						<p>Si es.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I  bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-					</section>
-					
-					<section class="docs-section" id="item-9-2">
-						<h2 class="section-heading">Motor</h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>What's sit amet quam eget lacinia?</h5>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Can I  bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-					</section>
-					
-					<section class="docs-section" id="item-9-3">
-							<h2 class="section-heading">Otros</h2>
-						    <h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How to dapibus sollicitudin justo vel fermentum?</h5>
-							<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-							<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>How long bibendum sodales?</h5>
-							<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-							<h5 class="pt-3"><i class="fas fa-question-circle me-1"></i>Where dapibus sollicitudin?</h5>
-							<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-					</section>
-			    </article>//docs-article-->
-
-
-
-
-
-
 
 			    <footer class="footer">
 				    <div class="container text-center py-5">
