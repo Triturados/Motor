@@ -33,6 +33,13 @@
     <ClInclude Include="..\..\src\Main\checkML.h" />
     <ClInclude Include="..\..\src\Main\Engine.h" />
     <ClInclude Include="..\..\src\Main\LUAfunctionality.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Main.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="logo.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
