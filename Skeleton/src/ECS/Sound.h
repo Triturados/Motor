@@ -48,6 +48,7 @@ namespace LoveEngine {
 			void setRelease(bool mode) { needRelease = mode; }
 			void onSceneUp() override;
 			void onSceneDown() override;
+			void setAllVolumes(float volume);
 
 
 		};

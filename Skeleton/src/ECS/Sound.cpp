@@ -106,6 +106,10 @@ namespace LoveEngine {
 				remove();
 			}
 		}
+		void Sound::setAllVolumes(float volume)
+		{
+			soundMngr->setVolumeChannel(0, volume);
+		}
 	}
 
 
