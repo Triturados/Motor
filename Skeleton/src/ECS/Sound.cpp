@@ -53,13 +53,15 @@ namespace LoveEngine {
 			soundMngr->playSound(sound, (int)groupChannel, bLoop);
 
 			setVolume(volume);
-			
+
 			hasChannel = true;
 		}
 
 		void Sound::releaseSound()
 		{
-			soundMngr->releaseSound(sound);
+			if (sound != nullptr)
+				soundMngr->releaseSound(sound);
+			sound = nullptr;
 			hasChannel = false;
 		}
 
@@ -67,7 +69,7 @@ namespace LoveEngine {
 		{
 			soundMngr->setSpeed(sound, s);
 		}
-		
+
 		Sound::~Sound()
 		{
 			releaseSound();
