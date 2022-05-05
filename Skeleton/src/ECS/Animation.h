@@ -28,6 +28,8 @@ namespace LoveEngine {
 		private:
 			Ogre::AnimationState* animState = nullptr;
 			bool isActive;
+			bool initialState = false;
+			bool initialLoop = false;
 			std::string name;
 		public:
 			void receiveMessage(Utilities::StringFormatter& message) override;

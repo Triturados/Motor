@@ -15,13 +15,18 @@ namespace LoveEngine {
 		void Animation::receiveMessage(Utilities::StringFormatter& sf)
 		{
 			name = sf.getString("animName");
+			sf.tryGetBool("initialState", initialState);
+			setActive(initialState);
+
+			sf.tryGetBool("initialLoopss", initialLoop);
+			setLoop(initialLoop);
 		}
 
 		void Animation::init()
 		{
 			animState = gameObject->getComponent<Mesh>()->getEntity()->getAnimationState(name);
-			setLoop(false);
-			setActive(false);
+			setLoop(initialLoop);
+			setActive(initialState);
 		}
 
 		void Animation::changeAnimation(std::string n)
