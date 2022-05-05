@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>LoveEngine - Documentación</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Bootstrap 4 Template For Software Startups">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+    
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+</head> 
+
+<body class="docs-page">    
+    <header class="header fixed-top">	    
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+					<button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none" type="button">
+	                    <span></span>
+	                    <span></span>
+	                    <span></span>
+	                </button>
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">LOVE <span class="text-alt">Engine</span></span></a></div>    
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+	                <div class="top-search-box d-none d-lg-flex">
+		                <form class="search-form">
+				            <input type="text" placeholder="Buscar en la documentación... " name="search" class="form-control search-input">
+				            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+				        </form>
+	                </div>
+	
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+		            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk" class="btn btn-primary d-none d-lg-flex">Descargar</a>
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+    
+    
+    <div class="docs-wrapper">
+	    <div id="docs-sidebar" class="docs-sidebar">
+		    <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+            </div>
+		    <nav id="docs-nav" class="docs-nav navbar">
+			    <ul class="section-items list-unstyled nav flex-column pb-3">
+					<li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-12"><span class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Utilidades</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-1">StringFormatter</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-2">Vector2</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-12-3">Vector3</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#item-12-4">Vector4</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-12-5">Random</a></li>
+			    </ul>
+
+		    </nav><!--//docs-nav-->
+	    </div><!--//docs-sidebar-->
+	    <div class="docs-content">
+		    <div class="container">
+			  
+				<article class="docs-article" id="section-12">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">Utilidades</h1>
+					    <section class="docs-intro">
+						    <p>Libreria de ayuda que contiene elementos generales del motor.</p>
+						</section><!--//docs-intro-->
+				    </header>
+				     <section class="docs-section" id="item-12-1">
+						<h2 class="section-heading">StringFormatter</h2>
+						<p>Clase que se encarga de traducir los mensajes que se envian por LUA al formato adecuado. </p>
+
+							<div class="docs-code-block">
+								<pre class="shadow-lg rounded"><code class="json hljs">[[
+	intEjemplo: 1;
+	floatEjemplo: 1.3;
+	boolEjemplo: true;
+	charEjemplo: a;
+	StringEjemplo: Hola;
+	vector3Ejemplo: 1, 2, 3;
+	vector4Ejemplo: 1, 2, 3, 4
+]]</code></pre>
+
+					<p>Contiene estos metodos para extraer la informacion de un string ya enviado en la constructora: </p>					
+
+					<div class="table-responsive my-4">
+						<table class="table table-bordered">
+							<tbody>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">void clear()</a></th>
+									<td>Limpia la informacion del string StringFormatter. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">void addString(std::string message)</a></th>
+									<td>Añade informacion al stringFormatter. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">float getFloat(std::string name)</a></th>
+									<td>Devuelve el float con el name correspondiente, para el ejemplo anterior seria floatEjemplo.</td>
+								
+								</tr>
+								
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool getBool(std::string name)</a></th>
+									<td>Devuelve el bool con el name correspondiente, para el ejemplo anterio seria boolEjemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">int getInt(std::string name)</a></th>
+									<td>Devuelve el int con el name correspondiente, para el ejemplo anterio seria intEjemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">char getChar(std::string name)</a></th>
+									<td>Devuelve el char con el name correspondiente, para el ejemplo anterio seria charEjemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">std::string getString(std::string name)</a></th>
+									<td>Devuelve el string con el name correspondiente, para el ejemplo anterio seria stringEjemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector3<float> getVector3(std::string name)</a></th>
+									<td>Devuelve el Vector3 con el name correspondiente, para el ejemplo anterio seria vector3Ejemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">Utilities::Vector4<float> getVector4(std::string name)</a></th>
+									<td>Devuelve el vector4 con el name correspondiente, para el ejemplo anterio seria vector4Ejemplo.</td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetInt(std::string name, int& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetFloat(std::string name, float& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetBool(std::string name, bool& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetChar(std::string name, char& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool  tryGetString(std::string name, std::string& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetVector3(std::string name, Utilities::Vector3<float>& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+								<tr>
+									<th class="theme-bg-light"><a class="theme-link" href="#">bool tryGetVector4(std::string name, Utilities::Vector4<float>& value)</a></th>
+									<td>Devuelve true si no falla el name enviado y su valor pasa a ser el de value. </td>
+								
+								</tr>
+							</tbody>
+						</table>
+					</div><!--//table-responsive-->
+
+
+					<div class="callout-block callout-block-success">
+						<div class="content">
+							<h4 class="callout-title">
+								<span class="callout-icon-holder me-1">
+									<i class="fas fa-thumbs-up"></i>
+								</span><!--//icon-holder-->
+								Tip
+							</h4>
+							<p>Se aconseja usar los metodos tryeGet.</p>
+						</div><!--//content-->
+					</div><!--//callout-block-->
+
+					</section><!--//section-->
+					
+					<section class="docs-section" id="item-12-2">
+						<h2 class="section-heading">Vector2</h2>
+						<p>Clase que define un vector de 2 dimensiones. El primer valor corresponde a la variable X y el segundo a la Y.  </p>
+
+						<div class="callout-block callout-block-info">
+								
+							<div class="content">
+									<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<i class="fas fa-info-circle"></i>
+									</span><!--//icon-holder-->
+										Nota
+									</h4>
+								<p> Las componentes del vector son publicas y existen operadores de comparacion, suma, resta y multiplicación. Además, el vector es un template por lo que puede ser de cualquier tipo. </p>
+							</div><!--//content-->
+						</div><!--//callout-block-->
+						
+						<p>Aqui estan todos los metodos definidos en ella.</p>
+						
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector2()</a></th>
+										<td>Constructora que crea un vector con los valores a 0. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector2(T prim, T sec)</a></th>
+										<td>Constructora que da a x el valor de prim y a y el valor de sec. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector2(const Vector2& v)</a></th>
+										<td>Constructora que copia los valores del vector v al vector.</td>
+									
+									</tr>
+									
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void inverse()</a></th>
+										<td>Invierte los valores del vector. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void add(T sumX, T sumY)</a></th>
+										<td>Suma la cantidad sumX al componente x del vector y la cantidad sumY al componente y del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T magnitude()</a></th>
+										<td>Devuelve la magnitud del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T magnitudeSqr()</a></th>
+										<td>Devuelve la magnitud al cuadrado del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void normalize()</a></th>
+										<td>Normaliza el vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T scalarProduct(Vector2<T> b)</a></th>
+										<td>Devuelve el producto escalar del vector y del enviado como parametro.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void lerp(Vector2<T> b, float t)</a></th>
+										<td>Devuelve el vector interpolado entre el propio vector y b en funcion de la interpolacion t.  </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector2<T> lerp(Vector2<T> a, Vector2<T> b, float t))</a></th>
+										<td>Devuelve el vector interpolado entre a y b en funcion de la interpolacion t.  </td>
+									
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T getDistance(Vector2<T> b) </a></th>
+										<td>Devuelve la distancia al valor enviado como parametro. </td>
+									
+									</tr>
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+					</section><!--//section-->
+					
+					<section class="docs-section" id="item-12-3">
+						<h2 class="section-heading">Vector3</h2>
+						<p>Clase que define un vector de 3 dimensiones. El primer valor corresponde a la variable, el segundo a la Y y el tercero la Z.  </p>
+
+						<div class="callout-block callout-block-info">
+								
+							<div class="content">
+									<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<i class="fas fa-info-circle"></i>
+									</span><!--//icon-holder-->
+										Nota
+									</h4>
+								<p> Las componentes del vector son publicas y existen operadores de comparacion, suma, resta y multiplicación. Además, el vector es un template por lo que puede ser de cualquier tipo. </p>
+							</div><!--//content-->
+						</div><!--//callout-block-->
+						
+						<p>Aqui estan todos los metodos definidos en ella.</p>
+						
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3()</a></th>
+										<td>Constructora que crea un vector con los valores a 0. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3(T prim, T sec, T ter)</a></th>
+										<td>Constructora que da a x el valor de prim, a y el valor de sec y a z el valor de ter. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3(const Vector3& v)</a></th>
+										<td>Constructora que copia los valores del vector v al vector.</td>
+									
+									</tr>
+									
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void inverse()</a></th>
+										<td>Invierte los valores del vector. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void add(T sumX, T sumY, T sumZ)</a></th>
+										<td>Suma la cantidad sumX al componente x del vector, la cantidad sumY al componente y del vector y la cantidad sumZ a la compoennte z del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T magnitude()</a></th>
+										<td>Devuelve la magnitud del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T magnitudeSqr()</a></th>
+										<td>Devuelve la amgnitud al cuadrado del vector.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void normalize()</a></th>
+										<td>Normaliza el vector.</td>
+									
+									</tr>
+									
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> getNormalized()</a></th>
+										<td>Devuelve el vector3 normalizado. </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T scalarProduct(Vector3<T> b)</a></th>
+										<td>Devuelve el producto escalar del vector y del enviado como parametro.</td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> lerp(Vector3<T> a, Vector3<T> b, float t)</a></th>
+										<td>Devuelve el vector interpolado entre a y b en funcion de la interpolacion t.  </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> vectorialProduct(Vector3<T> b)</a></th>
+										<td>Devuelve el producto vectorial del vector y el enviado como parametro. </td>
+									
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">T getDistance(Vector3<T> b) </a></th>
+										<td>Devuelve la distancia al valor enviado como parametro. </td>
+									
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> rotateX(double degrees)</a></th>
+										<td>Devuelve el vector rotado sobre el eje X los grados indicados en el parametro. </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> rotateY(double degrees)</a></th>
+										<td>Devuelve el vector rotado sobre el eje Y los grados indicados en el parametro. </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3<T> rotateZ(double degrees)</a></th>
+										<td>Devuelve el vector rotado sobre el eje Z los grados indicados en el parametro. </td>
+									
+									</tr>
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+					</section><!--//section-->
+
+
+					<section class="docs-section" id="item-12-4">
+						<h2 class="section-heading">Vector4</h2>
+						<p>Clase que define un vector de 4 dimensiones. El primer valor corresponde a la variable, el segundo a la Y, el tercero la Z y el 4 a la W.  </p>
+
+						<div class="callout-block callout-block-info">
+								
+							<div class="content">
+									<h4 class="callout-title">
+									<span class="callout-icon-holder me-1">
+										<i class="fas fa-info-circle"></i>
+									</span><!--//icon-holder-->
+										Nota
+									</h4>
+								<p> Las componentes del vector son publicas y existen operadores de comparacion, suma, resta y multiplicación. Además, el vector es un template por lo que puede ser de cualquier tipo. </p>
+							</div><!--//content-->
+						</div><!--//callout-block-->
+						
+						<p>Aqui estan todos los metodos definidos en ella.</p>
+						
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector4()</a></th>
+										<td>Constructora que crea un vector con los valores a 0. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector3(T prim, T sec, T ter, T cuar)</a></th>
+										<td>Constructora que da a x el valor de prim, a y el valor de sec, la z el valor de ter y el valor w a cuar. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">Vector4(const Vector4& v)</a></th>
+										<td>Constructora que copia los valores del vector v al vector.</td>
+									
+									</tr>
+									
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">void inverse()</a></th>
+										<td>Invierte los valores del vector. </td>
+									
+									</tr>
+
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#"> Vector4<T> EulerToQuaternion(Vector3<T> v)</a></th>
+										<td>Devuelve el vector4 de pasar el vector a quaternion a partir del <a href="#item-12-3"> vector3</a> </td>
+									
+									</tr>
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+					</section><!--//section-->
+
+
+					<section class="docs-section" id="item-12-5">
+						<h2 class="section-heading">Random</h2>
+						<p>Clase donde se generan numeros aleatorios. Aqui estan todos los metodos definidos en ella. </p>
+
+						<div class="table-responsive my-4">
+							<table class="table table-bordered">
+								<tbody>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">float random()</a></th>
+										<td>Devuelve un numero aleatorio de tipo float. </td>
+									
+									</tr>
+	
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">int randomBetween(int min, int max)</a></th>
+										<td>Devuelve un numero aleatorio de tipo int entre el min y max establecidos.  </td>
+									
+									</tr>
+								</tbody>
+							</table>
+						</div><!--//table-responsive-->
+					</section><!--//section-->
+			    </article><!--//docs-article-->
+
+				<article class="docs-article" id="section-13">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">Window</h1>
+					    <section class="docs-intro">
+						    <p>Clase que se encarga de gestionar la ventana del juego. </p>
+
+							<p>Aqui estan todas las funcionesn que utiliza para llevarlo acabo.  </p>
+
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#">static Window* getInstance()</a></th>
+											<td>Devuelve un puntero a la ventana.  </td>
+										
+										</tr>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setMouseState(MouseState value)</a></th>
+											<td> Establece si el raton esta libre (FREE), libre pero solo dentro de la pantalla (INSIDE_WINDOW) o quieto en el centro de la ventana(CENTER). </td>
+										
+										</tr>
+		
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void mouseVisibility(bool value)</a></th>
+											<td>Si value es true el raton se vera en la ventana y no se vera en caso contrario. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowTitle(std::string )</a></th>
+											<td> Cambia el titulo de la ventana al enviado en el string.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setFullScreen(bool screenmode)</a></th>
+											<td>Si screenmode es true la pantalla se vera en pantalla completa y en forma de ventana en caso contrario.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowSize(int x, int y)</a></th>
+											<td> Establece el tamaño de la ventana, con anchura x y tamaño y. Tiene una variante donde se le puede enviar un vector2 en vez de 2 int. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> std::string getWindowTitle()</a></th>
+											<td> Devuelve el nombre de la ventana. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> MouseState getMouseState()</a></th>
+											<td> Devuelve el estado del raton. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> bool isFullScreen(</a></th>
+											<td> Devuelve true si es pantalla completa, false en caso contrario </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> bool isMouseVisible()</a></th>
+											<td> Devuelve true si se ve el raton, false en caso contrario. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void repositionWindow(Utilities::Vector2<int> pos)</a></th>
+											<td> Cambia el tamaño de la ventana en funcion de pos. Tiene una variante donde se le pueden enviar 2 parametros int en vez de un vector2.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void setWindowIcon(std::string iconPath)</a></th>
+											<td> Establece de icono de ventana el que tiene de ruta iconPath. </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void lockMouse()</a></th>
+											<td> Bloquea el movimiento del raton.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> void freeMouse()</a></th>
+											<td> Desbloquea el movimiento del raton.  </td>
+										
+										</tr>
+
+										<tr>
+											<th class="theme-bg-light"><a class="theme-link" href="#"> Utilities::Vector2<int> getWindowSize()</a></th>
+											<td> Devuelve en un vector2 el tamaño de la ventana.  </td>
+										
+										</tr>
+									</tbody>
+								</table>
+							</div><!--//table-responsive-->
+
+						</section><!--//docs-intro-->
+
+
+
+
+				    </header>
+				    
+			    </article><!--//docs-article-->
+
+			    <footer class="footer">
+				    <div class="container text-center py-5">
+				        <small class="copyright">Copyright &copy; <a href="https://github.com/Triturados" target="_blank">Triturados</a></small>
+				        <ul class="social-list list-unstyled pt-4 mb-0">
+						    <li class="list-inline-item"><a href="https://github.com/Triturados/Motor"><i class="fab fa-github fa-fw"></i></a></li> 
+				            <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+				            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li> -->
+				        </ul><!--//social-list-->
+				    </div>
+			    </footer>
+		    </div> 
+	    </div>
+    </div><!--//docs-wrapper-->
+   
+       
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="assets/plugins/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script> 
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+    <script src="assets/js/docs.js"></script> 
+
+</body>
+</html> 
+
