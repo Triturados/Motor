@@ -6,6 +6,7 @@
 
 #include <UIElement.h>
 #include <string>
+#include <Vector4.h>
 
 namespace Ogre {
 	class Overlay;
@@ -29,7 +30,7 @@ namespace LoveEngine {
 		class Transform;
 		enum class alignmentEnum { Left, Right, Center };
 
-		class lovexport Text : public Component
+		class lovexport Text : public UIElement
 		{
 		public:
 			~Text();
@@ -42,11 +43,12 @@ namespace LoveEngine {
 			void receiveString(std::string mssg) override;
 
 			void changeText(std::string mssg);
+			void onMove() override;
 		private:
 
 			void configText();
 
-			void setTextPosition(Utilities::Vector3<float> position);
+			void setTextPosition(Utilities::Vector3<int>& position);
 			void setTextColor(const Utilities::Vector4<float>& color);
 			void setTextBottomColor(const Utilities::Vector4<float>& color);
 			void setTextTopColor(const Utilities::Vector4<float>& color);
@@ -60,14 +62,12 @@ namespace LoveEngine {
 			Renderer::OgreRenderer* ogremanager;
 			Ogre::TextAreaOverlayElement* textArea;
 
-			Utilities::Vector3<float>* pos;
-
 			std::string textContent;
 			std::string fontName;
 
-			Utilities::Vector4<float>* mainColor;
-			Utilities::Vector4<float>* bottomColor;
-			Utilities::Vector4<float>* topColor;
+			Utilities::Vector4<float> mainColor;
+			Utilities::Vector4<float> bottomColor;
+			Utilities::Vector4<float> topColor;
 
 			alignmentEnum alignment;
 			int elemNum;

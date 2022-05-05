@@ -129,7 +129,7 @@ namespace LoveEngine {
 
 			//Text UI
 			Ogre::TextAreaOverlayElement* createOverlayElement();
-			void setTextOverlayZOrder(float zOrder);
+			void setTextOverlayZOrder(int zOrder);
 
 			int addParticleSystem();
 

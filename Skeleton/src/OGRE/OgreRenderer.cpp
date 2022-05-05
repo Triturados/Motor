@@ -447,7 +447,7 @@ namespace LoveEngine {
 			return textArea;
 		}
 
-		void OgreRenderer::setTextOverlayZOrder(float zOrder)
+		void OgreRenderer::setTextOverlayZOrder(int zOrder)
 		{
 			textOverlay->setZOrder(zOrder);
 		}
@@ -476,7 +476,6 @@ namespace LoveEngine {
 		Ogre::Overlay* OgreRenderer::createTextOverlay(const std::string& overlayName)
 		{
 			Ogre::Overlay* overlay = overlayManager->create(overlayName);
-
 			return overlay;
 		}
 

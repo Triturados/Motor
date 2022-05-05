@@ -16,18 +16,17 @@ namespace LoveEngine
 
 		void Text::receiveMessage(Utilities::StringFormatter& sf)
 		{
-			pos = new Utilities::Vector3<float>(0, 0, 0);
-			mainColor = new Utilities::Vector4<float>();
-			bottomColor = new Utilities::Vector4<float>(0,0,0,-1);
-			topColor = new Utilities::Vector4<float>(0,0,0,-1);
+			UIElement::receiveMessage(sf);
+			mainColor = Utilities::Vector4<float>();
+			bottomColor = Utilities::Vector4<float>(0,0,0,-1);
+			topColor = Utilities::Vector4<float>(0,0,0,-1);
 
 			int alineacion;
 
-			sf.tryGetVector3("position", *(pos));
 			sf.tryGetString("fontName", fontName);
-			sf.tryGetVector4("mainColor", *(mainColor));
-			sf.tryGetVector4("bottomColor", *(bottomColor));
-			sf.tryGetVector4("topColor", *(topColor));
+			sf.tryGetVector4("mainColor", mainColor);
+			sf.tryGetVector4("bottomColor", bottomColor);
+			sf.tryGetVector4("topColor", topColor);
 			sf.tryGetFloat("textScale", textScale);
 			sf.tryGetInt("alignment", alineacion);
 			sf.tryGetString("text", textContent);
@@ -50,25 +49,21 @@ namespace LoveEngine
 
 		void Text::configText()
 		{
-			auto a = *pos;
-
-			setTextPosition(a);
-			setTextColor(*(mainColor));
-			setTextBottomColor(*(bottomColor));
-			setTextBottomColor(*(topColor));
+			setTextPosition(position);
+			setTextColor(mainColor);
+			setTextBottomColor(bottomColor);
+			setTextBottomColor(topColor);
 			setTextContent(textContent);
 			setTextFont(fontName);
 			setTextScale(textScale);
 			setTextAligment(alignment);
 		}
 
-		void Text::setTextPosition(Utilities::Vector3<float> position)
+		void Text::setTextPosition(Utilities::Vector3<int>& position)
 		{
 			//Posicion
 			auto relative = pixelToRelative(position.x, position.y);
-			position.x = relative.x; position.y = relative.y;
-
-			textArea->setPosition(position.x, position.y);
+			textArea->setPosition(relative.x, relative.y);
 			ogremanager->setTextOverlayZOrder(position.z);
 		}
 
@@ -114,6 +109,12 @@ namespace LoveEngine
 			textArea->setCaption(textContent);
 		}
 
+		void Text::onMove()
+		{
+			UIElement::onMove();
+			setTextPosition(position);
+		}
+
 		Utilities::Vector2<float> Text::pixelToRelative(float x, float y)
 		{
 			Utilities::Vector2<int> windowSize = Window::getInstance()->getWindowSize();
@@ -139,7 +140,6 @@ namespace LoveEngine
 
 		Text::~Text()
 		{
-			delete pos;
 		}
 	}
 }
