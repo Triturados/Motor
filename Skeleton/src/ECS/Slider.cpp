@@ -53,7 +53,7 @@ namespace LoveEngine {
 			// Containers con cada elemento
 			inferiorBar = ogremanager->createContainer(*pos,* dimensions);
 			inferiorBar->setMaterialName(materialBarBg);
-			superiorBar = ogremanager->createContainer(*pos, *dimensions);
+			superiorBar = ogremanager->createContainer((*pos) + Utilities::Vector3<int>(0, 0, 1), *dimensions);
 			superiorBar->setMaterialName(materialBar);
 			buttonPos->x = pos->x + dimensions->x - buttonWidth / 2;
 			buttonPos->y = pos->y + dimensions->y / 2 - buttonWidth / 2;
