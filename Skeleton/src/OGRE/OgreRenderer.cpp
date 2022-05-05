@@ -385,12 +385,20 @@ namespace LoveEngine {
 			return container;
 		}
 
-		void OgreRenderer::applyCompositor(Ogre::Viewport* vp, std::string compositor)
+		void OgreRenderer::addCompositor(Ogre::Viewport* vp, std::string compositor)
 		{
-			Ogre::CompositorPtr c = Ogre::CompositorManager::getSingleton().getByName(compositor);
-			
 			Ogre::CompositorManager::getSingleton().addCompositor(vp, compositor);
 			Ogre::CompositorManager::getSingleton().setCompositorEnabled(vp, compositor, true);
+		}
+
+		void OgreRenderer::enableCompositor(Ogre::Viewport* vp, std::string compositor)
+		{
+			Ogre::CompositorManager::getSingleton().setCompositorEnabled(vp, compositor, true);
+		}
+
+		void OgreRenderer::disableCompositor(Ogre::Viewport* vp, std::string compositor)
+		{
+			Ogre::CompositorManager::getSingleton().setCompositorEnabled(vp, compositor, false);
 		}
 
 		void OgreRenderer::setImageOpacity(Ogre::OverlayContainer* container, float fade) {

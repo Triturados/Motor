@@ -114,7 +114,9 @@ namespace LoveEngine {
 
 			void exampleScene();
 
-			void applyCompositor(Ogre::Viewport* vp, std::string compositor);
+			void addCompositor(Ogre::Viewport* vp, std::string compositor);
+			void enableCompositor(Ogre::Viewport* vp, std::string compositor);
+			void disableCompositor(Ogre::Viewport* vp, std::string compositor);
 
 			//Image UI
 			SDL_Texture* createSDLTexture(const char* texName, int& width, int& height);

@@ -47,7 +47,7 @@ namespace LoveEngine {
 			float clipDistance;
 			int viewportZorder;
 
-			// usado solo para almacenar los compositores que se añaden antes del init
+			// usado solo para almacenar los compositores que se aï¿½aden antes del init
 			std::vector<std::string> compositors = std::vector<std::string>();
 
 		public:
@@ -70,7 +70,9 @@ namespace LoveEngine {
 			void setClipDistance(float);
 			float getClipDistance();
 
-			void applyCompositor(const  std::string& compositor);
+			void addCompositor(const std::string& compositor);
+			void enableCompositor(std::string compositor);
+			void disableCompositor(std::string compositor);
 		};
 	}
 }

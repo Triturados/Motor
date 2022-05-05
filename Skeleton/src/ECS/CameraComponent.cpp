@@ -65,7 +65,7 @@ namespace LoveEngine {
 				Ogre::Real(vp->getActualHeight()));
 
 			for (std::string c : compositors)
-				applyCompositor(c);
+				addCompositor(c);
 			compositors = std::vector<std::string>();
 		}
 
@@ -112,13 +112,30 @@ namespace LoveEngine {
 		{
 			mCameraNode->roll(Ogre::Radian(angle));
 		}
-		void Camera::applyCompositor(const  std::string& compositor)
+		void Camera::addCompositor(const std::string& compositor)
 		{
 			if (vp == nullptr)
 				compositors.push_back(compositor);
 			else
-				ogremanager->applyCompositor(vp, compositor);
+				ogremanager->addCompositor(vp, compositor);
 		}
+		
+		void Camera::enableCompositor(std::string compositor)
+		{
+			if (vp == nullptr)
+				compositors.push_back(compositor);
+			else
+				ogremanager->enableCompositor(vp, compositor);
+		}
+
+		void Camera::disableCompositor(std::string compositor)
+		{
+			if (vp == nullptr)
+				compositors.push_back(compositor);
+			else
+				ogremanager->disableCompositor(vp, compositor);
+		}
+		
 		void Camera::setClipDistance(float val)
 		{
 			clipDistance = val;
@@ -138,7 +155,7 @@ namespace LoveEngine {
 			std::string compositor;
 			if (sf.tryGetString("compositor", compositor))
 			{
-				applyCompositor(compositor);
+				addCompositor(compositor);
 			}
 			else
 			{
